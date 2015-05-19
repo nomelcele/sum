@@ -2,8 +2,22 @@ package dto;
 
 public class MemberVO {
 	private int memnum, memauth, memmgr, memdept;
-	private String memname, memaddr, mempwd, memprofile, memjob, memmail, meminmail;
+	private String memname, memaddr, mempwd, memprofile, memjob, memmail, meminmail, dename, mgrname;
 	
+	
+	
+	public String getMgrname() {
+		return mgrname;
+	}
+	public void setMgrname(String mgrname) {
+		this.mgrname = mgrname;
+	}
+	public String getDename() {
+		return dename;
+	}
+	public void setDename(String dename) {
+		this.dename = dename;
+	}
 	public int getMemnum() {
 		return memnum;
 	}
