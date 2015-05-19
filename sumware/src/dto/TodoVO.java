@@ -2,8 +2,15 @@ package dto;
 
 public class TodoVO {
 	private int tonum, todept, tomem;
-	private String tostdate, toendate, totitle, tocont, tofile;
+	private String tostdate, toendate, totitle, tocont, tofile,toconfirm;
 	
+	
+	public String getToconfirm() {
+		return toconfirm;
+	}
+	public void setToconfirm(String toconfirm) {
+		this.toconfirm = toconfirm;
+	}
 	public int getTonum() {
 		return tonum;
 	}

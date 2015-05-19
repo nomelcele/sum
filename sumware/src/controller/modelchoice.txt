@@ -1,0 +1,4 @@
+todo=model.TodoModel
+calendar=model.CalendarModel
+messenger=model.MessengerModel
+board=model.BoardModel
