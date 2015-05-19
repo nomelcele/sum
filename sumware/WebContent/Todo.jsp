@@ -11,6 +11,9 @@
 </head>
 <body>
 
+	${sessionScope.v.memauth }
+	
+
 	<div style="width:300px; height:700px; border:1px solid">
 		<div id=profile>
 			<table style="border:1px solid">
