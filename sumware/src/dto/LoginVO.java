@@ -1,4 +1,4 @@
-package vo;
+package dto;
 
 public class LoginVO {
 	private int lonum, lomem;

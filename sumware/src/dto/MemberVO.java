@@ -1,4 +1,4 @@
-package vo;
+package dto;
 
 public class MemberVO {
 	private int memnum, memauth, memmgr, memdept;

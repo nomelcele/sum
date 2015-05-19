@@ -1,4 +1,4 @@
-package vo;
+package dto;
 
 public class MessengerVO {
 	private int mesnum, mesmem;

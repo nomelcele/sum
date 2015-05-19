@@ -1,4 +1,4 @@
-package vo;
+package dto;
 
 public class CalendarVO {
 	private int calnum, caldiv, caldept, calmem;

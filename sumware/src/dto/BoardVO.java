@@ -1,4 +1,4 @@
-package vo;
+package dto;
 
 public class BoardVO {
 	private int bnum, bmem, bhit, bgnum;

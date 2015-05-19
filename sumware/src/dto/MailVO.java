@@ -1,4 +1,4 @@
-package vo;
+package dto;
 
 public class MailVO {
 	private int mailnum, mailmem;

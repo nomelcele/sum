@@ -1,4 +1,4 @@
-package vo;
+package dto;
 
 public class TodoVO {
 	private int tonum, todept, tomem;

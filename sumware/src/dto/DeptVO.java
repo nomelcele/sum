@@ -1,4 +1,4 @@
-package vo;
+package dto;
 
 public class DeptVO {
 	private int denum;

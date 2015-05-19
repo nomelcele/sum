@@ -1,4 +1,4 @@
-package vo;
+package dto;
 
 public class AdministerVO {
 	private int adnum, adgrade, admem;
