@@ -4,71 +4,72 @@ public class MemberVO {
 	private int memnum, memauth, memmgr, memdept;
 	private String memname, memaddr, mempwd, memprofile, memjob, memmail, meminmail;
 	
-	
-	protected int getMemnum() {
+	public int getMemnum() {
 		return memnum;
 	}
-	protected void setMemnum(int memnum) {
+	public void setMemnum(int memnum) {
 		this.memnum = memnum;
 	}
-	protected int getMemauth() {
+	public int getMemauth() {
 		return memauth;
 	}
-	protected void setMemauth(int memauth) {
+	public void setMemauth(int memauth) {
 		this.memauth = memauth;
 	}
-	protected int getMemmgr() {
+	public int getMemmgr() {
 		return memmgr;
 	}
-	protected void setMemmgr(int memmgr) {
+	public void setMemmgr(int memmgr) {
 		this.memmgr = memmgr;
 	}
-	protected int getMemdept() {
+	public int getMemdept() {
 		return memdept;
 	}
-	protected void setMemdept(int memdept) {
+	public void setMemdept(int memdept) {
 		this.memdept = memdept;
 	}
-	protected String getMemname() {
+	public String getMemname() {
 		return memname;
 	}
-	protected void setMemname(String memname) {
+	public void setMemname(String memname) {
 		this.memname = memname;
 	}
-	protected String getMemaddr() {
+	public String getMemaddr() {
 		return memaddr;
 	}
-	protected void setMemaddr(String memaddr) {
+	public void setMemaddr(String memaddr) {
 		this.memaddr = memaddr;
 	}
-	protected String getMempwd() {
+	public String getMempwd() {
 		return mempwd;
 	}
-	protected void setMempwd(String mempwd) {
+	public void setMempwd(String mempwd) {
 		this.mempwd = mempwd;
 	}
-	protected String getMemprofile() {
+	public String getMemprofile() {
 		return memprofile;
 	}
-	protected void setMemprofile(String memprofile) {
+	public void setMemprofile(String memprofile) {
 		this.memprofile = memprofile;
 	}
-	protected String getMemjob() {
+	public String getMemjob() {
 		return memjob;
 	}
-	protected void setMemjob(String memjob) {
+	public void setMemjob(String memjob) {
 		this.memjob = memjob;
 	}
-	protected String getMemmail() {
+	public String getMemmail() {
 		return memmail;
 	}
-	protected void setMemmail(String memmail) {
+	public void setMemmail(String memmail) {
 		this.memmail = memmail;
 	}
-	protected String getMeminmail() {
+	public String getMeminmail() {
 		return meminmail;
 	}
-	protected void setMeminmail(String meminmail) {
+	public void setMeminmail(String meminmail) {
 		this.meminmail = meminmail;
 	}
+	
+	
 }

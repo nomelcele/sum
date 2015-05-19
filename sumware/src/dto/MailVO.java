@@ -4,42 +4,41 @@ public class MailVO {
 	private int mailnum, mailmem;
 	private String mailtitle, mailcont, mailfile, mailreceiver;
 	
-	protected int getMailnum() {
+	public int getMailnum() {
 		return mailnum;
 	}
-	protected void setMailnum(int mailnum) {
+	public void setMailnum(int mailnum) {
 		this.mailnum = mailnum;
 	}
-	protected int getMailmem() {
+	public int getMailmem() {
 		return mailmem;
 	}
-	protected void setMailmem(int mailmem) {
+	public void setMailmem(int mailmem) {
 		this.mailmem = mailmem;
 	}
-	protected String getMailtitle() {
+	public String getMailtitle() {
 		return mailtitle;
 	}
-	protected void setMailtitle(String mailtitle) {
+	public void setMailtitle(String mailtitle) {
 		this.mailtitle = mailtitle;
 	}
-	protected String getMailcont() {
+	public String getMailcont() {
 		return mailcont;
 	}
-	protected void setMailcont(String mailcont) {
+	public void setMailcont(String mailcont) {
 		this.mailcont = mailcont;
 	}
-	protected String getMailfile() {
+	public String getMailfile() {
 		return mailfile;
 	}
-	protected void setMailfile(String mailfile) {
+	public void setMailfile(String mailfile) {
 		this.mailfile = mailfile;
 	}
-	protected String getMailreceiver() {
+	public String getMailreceiver() {
 		return mailreceiver;
 	}
-	protected void setMailreceiver(String mailreceiver) {
+	public void setMailreceiver(String mailreceiver) {
 		this.mailreceiver = mailreceiver;
 	}
-	
 	
 }

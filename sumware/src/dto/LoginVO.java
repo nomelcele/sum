@@ -4,37 +4,35 @@ public class LoginVO {
 	private int lonum, lomem;
 	private String locheck, lostdate, loendate;
 	
-	protected int getLonum() {
+	public int getLonum() {
 		return lonum;
 	}
-	protected void setLonum(int lonum) {
+	public void setLonum(int lonum) {
 		this.lonum = lonum;
 	}
-	protected int getLomem() {
+	public int getLomem() {
 		return lomem;
 	}
-	protected void setLomem(int lomem) {
+	public void setLomem(int lomem) {
 		this.lomem = lomem;
 	}
-	protected String getLocheck() {
+	public String getLocheck() {
 		return locheck;
 	}
-	protected void setLocheck(String locheck) {
+	public void setLocheck(String locheck) {
 		this.locheck = locheck;
 	}
-	protected String getLostdate() {
+	public String getLostdate() {
 		return lostdate;
 	}
-	protected void setLostdate(String lostdate) {
+	public void setLostdate(String lostdate) {
 		this.lostdate = lostdate;
 	}
-	protected String getLoendate() {
+	public String getLoendate() {
 		return loendate;
 	}
-	protected void setLoendate(String loendate) {
+	public void setLoendate(String loendate) {
 		this.loendate = loendate;
 	}
-	
-	
 	
 }

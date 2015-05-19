@@ -4,55 +4,52 @@ public class TodoVO {
 	private int tonum, todept, tomem;
 	private String tostdate, toendate, totitle, tocont, tofile;
 	
-	protected int getTonum() {
+	public int getTonum() {
 		return tonum;
 	}
-	protected void setTonum(int tonum) {
+	public void setTonum(int tonum) {
 		this.tonum = tonum;
 	}
-	protected int getTodept() {
+	public int getTodept() {
 		return todept;
 	}
-	protected void setTodept(int todept) {
+	public void setTodept(int todept) {
 		this.todept = todept;
 	}
-	protected int getTomem() {
+	public int getTomem() {
 		return tomem;
 	}
-	protected void setTomem(int tomem) {
+	public void setTomem(int tomem) {
 		this.tomem = tomem;
 	}
-	protected String getTostdate() {
+	public String getTostdate() {
 		return tostdate;
 	}
-	protected void setTostdate(String tostdate) {
+	public void setTostdate(String tostdate) {
 		this.tostdate = tostdate;
 	}
-	protected String getToendate() {
+	public String getToendate() {
 		return toendate;
 	}
-	protected void setToendate(String toendate) {
+	public void setToendate(String toendate) {
 		this.toendate = toendate;
 	}
-	protected String getTotitle() {
+	public String getTotitle() {
 		return totitle;
 	}
-	protected void setTotitle(String totitle) {
+	public void setTotitle(String totitle) {
 		this.totitle = totitle;
 	}
-	protected String getTocont() {
+	public String getTocont() {
 		return tocont;
 	}
-	protected void setTocont(String tocont) {
+	public void setTocont(String tocont) {
 		this.tocont = tocont;
 	}
-	protected String getTofile() {
+	public String getTofile() {
 		return tofile;
 	}
-	protected void setTofile(String tofile) {
+	public void setTofile(String tofile) {
 		this.tofile = tofile;
 	}
-	
-	
-
 }

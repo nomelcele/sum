@@ -4,56 +4,53 @@ public class BoardVO {
 	private int bnum, bmem, bhit, bgnum;
 	private String btitle, bcont, bimg, bdate;
 	
-	
-	protected int getBnum() {
+	public int getBnum() {
 		return bnum;
 	}
-	protected void setBnum(int bnum) {
+	public void setBnum(int bnum) {
 		this.bnum = bnum;
 	}
-	protected int getBmem() {
+	public int getBmem() {
 		return bmem;
 	}
-	protected void setBmem(int bmem) {
+	public void setBmem(int bmem) {
 		this.bmem = bmem;
 	}
-	protected int getBhit() {
+	public int getBhit() {
 		return bhit;
 	}
-	protected void setBhit(int bhit) {
+	public void setBhit(int bhit) {
 		this.bhit = bhit;
 	}
-	protected int getBgnum() {
+	public int getBgnum() {
 		return bgnum;
 	}
-	protected void setBgnum(int bgnum) {
+	public void setBgnum(int bgnum) {
 		this.bgnum = bgnum;
 	}
-	protected String getBtitle() {
+	public String getBtitle() {
 		return btitle;
 	}
-	protected void setBtitle(String btitle) {
+	public void setBtitle(String btitle) {
 		this.btitle = btitle;
 	}
-	protected String getBcont() {
+	public String getBcont() {
 		return bcont;
 	}
-	protected void setBcont(String bcont) {
+	public void setBcont(String bcont) {
 		this.bcont = bcont;
 	}
-	protected String getBimg() {
+	public String getBimg() {
 		return bimg;
 	}
-	protected void setBimg(String bimg) {
+	public void setBimg(String bimg) {
 		this.bimg = bimg;
 	}
-	protected String getBdate() {
+	public String getBdate() {
 		return bdate;
 	}
-	protected void setBdate(String bdate) {
+	public void setBdate(String bdate) {
 		this.bdate = bdate;
 	}
-	
-	
 
 }

@@ -4,7 +4,6 @@ public class DeptVO {
 	private int denum;
 	private String dename;
 	
-	
 	public int getDenum() {
 		return denum;
 	}
@@ -17,9 +16,4 @@ public class DeptVO {
 	public void setDename(String dename) {
 		this.dename = dename;
 	}
-	
-	
-
-	
-
 }
