@@ -27,16 +27,13 @@ public class SumControl extends HttpServlet {
 		System.out.println("controll mod:"+mod);
 		ModelInter model = ModelFactory.getMf().getModel(mod);
 		ModelForward mf = model.exe(request, response);
-		if(mod!=null){
-			// true 일때는 forward, false 일때는 sendRedirect
-			if(mf.isMethod()){
-				RequestDispatcher rd = request.getRequestDispatcher(mf.getUrl());
-				rd.forward(request, response);
-			}else{
-				response.sendRedirect(mf.getUrl());
-			}
+		// true 일때는 forward, false 일때는 sendRedirect
+		if(mf.isMethod()){
+			RequestDispatcher rd = request.getRequestDispatcher(mf.getUrl());
+			rd.forward(request, response);
 		}else{
-			
+			response.sendRedirect(mf.getUrl());
 		}
+			
 	}
 }
