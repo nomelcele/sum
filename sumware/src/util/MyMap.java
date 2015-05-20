@@ -16,36 +16,27 @@ public class MyMap {
 		return maps;
 	}
 public HashMap<String, String> getMapList(HttpServletRequest request){
-	// ¿äÃ»½Ã request°´Ã¼·Î ºÎÅÍ ÆÄ¶ó¹ÌÅÍ°ªÀ» ÀÚµ¿À¸·Î ¾ò¾î ¿À±â À§ÇØ¼­
-	//getParameterNames()»ç¿ëÇØ¼­ ¾ò¾î¿Â ÆÄ¶ó¹ÌÅÍ ÀÌ¸§°ªÀ» 
-	//EnumerationÀ¸·Î ÀúÀåÇÑ´Ù.
+		// ìš”ì²­ì‹œ requestê°ì²´ë¡œ ë¶€í„° íŒŒë¼ë¯¸í„°ê°’ì„ ìë™ìœ¼ë¡œ ì–»ì–´ ì˜¤ê¸° ìœ„í•´ì„œ
+		//getParameterNames()ì‚¬ìš©í•´ì„œ ì–»ì–´ì˜¨ íŒŒë¼ë¯¸í„° ì´ë¦„ê°’ì„ 
+		//Enumerationìœ¼ë¡œ ì €ì¥í•œë‹¤.
 		Enumeration<String> params = request.getParameterNames();
 		 HashMap<String, String> parms = new HashMap<>();
 	      String parmName;
 	      String parmValue;
-	      // ÀÌ¸§À» Enumeration¿¡¼­ ÇÏ³ª¾¿ »ÌÀ¸¸é¼­ HashMap¿¡
-	      // ÀÌ¸§°ú °ªÀ¸·Î ÀúÀåÇÑ´Ù.
+	   // ì´ë¦„ì„ Enumerationì—ì„œ í•˜ë‚˜ì”© ë½‘ìœ¼ë©´ì„œ HashMapì—
+	      // ì´ë¦„ê³¼ ê°’ìœ¼ë¡œ ì €ì¥í•œë‹¤.
 	     while (params.hasMoreElements())
 	      {
 	         parmName = params.nextElement();
 	         parmValue = request.getParameter(parmName);
 	         parms.put(parmName, parmValue);
 	      }
-	      System.out.println("ÀÚµ¿ ÆÄ¶ó¹ÌÅÍ ¹Ş±â ½ÃÀÛ : --------");
+	     System.out.println("ìë™ íŒŒë¼ë¯¸í„° ë°›ê¸° ì‹œì‘ : --------");
 	      for(Map.Entry<String, String> e : parms.entrySet()){
 	    	  System.out.println(e.getKey()+":"+e.getValue());
 	      }
-	      System.out.println("ÀÚµ¿ ÆÄ¶ó¹ÌÅÍ ¹Ş±â ³¡ : --------");
+	      System.out.println("ìë™ íŒŒë¼ë¯¸í„° ë°›ê¸° ë : --------");
 	      return parms;
 	}
-
-// ¸ÖÆ¼ÆÄÆ®ÀÏ°æ¿ì ÆÄÀÏ¾÷·Îµå ¼­ºí¸´ 3.0 ±â´ÉÀ» °áÇÕÇÑ ÀÚµ¿ ÆÄ¶ó¹ÌÅÍ ¹Ş±â ±¸Çö
-
-public HashMap<String, String> getMapList(){
-	return null;
-}
-
-
-
 
 }
