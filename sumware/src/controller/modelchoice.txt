@@ -3,3 +3,4 @@ calendar=model.CalendarModel
 messenger=model.MessengerModel
 board=model.BoardModel
 login=model.LoginModel
+mail=model.MailModel

@@ -2,7 +2,7 @@ package dto;
 
 public class MailVO {
 	private int mailnum, mailmem;
-	private String mailtitle, mailcont, mailfile, mailreceiver;
+	private String mailtitle, mailcont, mailfile, mailreceiver, maildate;
 	
 	public int getMailnum() {
 		return mailnum;
@@ -39,6 +39,12 @@ public class MailVO {
 	}
 	public void setMailreceiver(String mailreceiver) {
 		this.mailreceiver = mailreceiver;
+	}
+	public String getMaildate() {
+		return maildate;
+	}
+	public void setMaildate(String maildate) {
+		this.maildate = maildate;
 	}
 	
 }

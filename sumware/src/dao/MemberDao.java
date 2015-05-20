@@ -24,14 +24,14 @@ public class MemberDao {
 		   PreparedStatement pstmt = null;
 		   if(v.getMemnum() == 10000){
 			   System.out.println("상급자 없음");
-			   sql.append("select s.memnum, s.memprofile, s.memname, s.memjob , d.dename, nvl(s.memmgr,0) mgrname, s.memauth ");
+			   sql.append("select s.memnum, s.memprofile, s.memname, s.memjob , d.dename, nvl(s.memmgr,0) mgrname, s.memauth,s.meminmail ");
 			   sql.append("from member s, dept d where s.memdept=d.denum and s.memnum = ? and s.mempwd =?");
 			   con = ConUtil.getOds();
 			
 			   pstmt = con.prepareStatement(sql.toString());
 		   }else{
 			   System.out.println("상급자 있음");
-			   sql.append("select s.memnum, s.memprofile, s.memname, s.memjob, d.dename, m.memname mgrname, s.memauth ");
+			   sql.append("select s.memnum, s.memprofile, s.memname, s.memjob, d.dename, m.memname mgrname, s.memauth,s.meminmail ");
 			   sql.append("from member s, member m, dept d where s.memmgr = m.memnum and s.memdept = d.denum and s.memnum = ? and s.mempwd =?");
 			   con = ConUtil.getOds();
 			
@@ -50,6 +50,7 @@ public class MemberDao {
 			   vo.setDename(rs.getString("dename"));
 			   vo.setMgrname(rs.getString("mgrname"));
 			   vo.setMemauth(rs.getInt("memauth"));
+			   vo.setMeminmail(rs.getString("meminmail"));
 		   }else{
 			   return null;
 		   }
