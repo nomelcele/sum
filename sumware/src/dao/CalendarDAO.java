@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import conn.ConUtil;
 import util.CloseUtil;
@@ -19,21 +20,19 @@ public class CalendarDAO {
 		}
 		return dao;
 	}
-	public boolean insertCal(CalendarVO v){
+	public boolean calInsert(String sql,HashMap<String, String> map){
+		System.out.println("cal insert start");
 		boolean result = false;
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		StringBuffer sql = new StringBuffer();
-		sql.append("insert into calendar values(calendar_seq.nextVal,?,?,?,?,?,?)");
+	
 		try{
 			con = ConUtil.getOds();
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, v.getCalstart());
-			pstmt.setString(2, v.getCalend());
-			pstmt.setString(3, v.getCalcont());
-			pstmt.setInt(4, v.getCaldiv());//켈린더 분류
-			pstmt.setInt(5, v.getCaldept());
-			pstmt.setInt(6, v.getCalmem());
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, timeFomat(map.get("start")));
+			pstmt.setString(2, timeFomat(map.get("end")));
+			pstmt.setString(3, map.get("title"));
+			pstmt.setInt(4, Integer.parseInt(map.get("cal")));
 			
 			pstmt.executeUpdate();
 			result = true;
@@ -45,26 +44,26 @@ public class CalendarDAO {
 		}
 		return result;
 	}
-	private ArrayList<CalendarVO> getCalList(){
+	
+	//나중에 사원의 부서명과 사원번호를 가지고 해당 일정만 가져와야함.
+	//이걸 기준으로 부서일정만 가져오는것 개인일정만 가져오는것.
+	public ArrayList<CalendarVO> getCalList(String sql,int cal){
 		ArrayList<CalendarVO> calList = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		StringBuffer sql = new StringBuffer();
-		sql.append("select to_char(calstart,'yyyy-MM-DD') calstart,")
-			.append("nvl(to_char(calend,'yyyy-MM-DD'),'0') calend,")
-			.append("calcont,caldiv from calendar");
 		try{
 			calList = new ArrayList<CalendarVO>();
 			con = ConUtil.getOds();
-			pstmt=con.prepareStatement(sql.toString());
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, cal);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				CalendarVO v = new CalendarVO();
+				v.setCalnum(rs.getInt("calnum"));
 				v.setCalstart(rs.getString("calstart"));
 				v.setCalend(rs.getString("calend"));
 				v.setCalcont(rs.getString("calcont"));
-				v.setCaldiv(rs.getInt("caldiv"));
 				calList.add(v);
 			}
 		}catch(SQLException e){
@@ -77,25 +76,70 @@ public class CalendarDAO {
 		System.out.println("list:"+calList);
 		return calList;
 	}
-	public String makeJson(){
-		ArrayList<CalendarVO> list = getCalList();
-		
+	public boolean calDel(int num){
+		boolean result=false;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		StringBuilder sql = new StringBuilder();
+		sql.append("delete from calendar where calnum=?");
+		try{
+			con = ConUtil.getOds();
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			result=true;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			CloseUtil.close(con);
+			CloseUtil.close(pstmt);
+		}
+		return result;
+	}
+	public String makeJson(ArrayList<CalendarVO> list){
 		StringBuilder json = new StringBuilder();
 		int size=list.size();
-		json.append("[");
+		//json.append("[");
 		for(int i = 0; i<size; i++){
 			CalendarVO v = list.get(i);
 			json.append("{title:'").append(v.getCalcont()).append("',");
 			json.append("start:'").append(v.getCalstart()).append("',");
-			json.append("end:'").append(v.getCalend()).append("'}");
+			json.append("end:'").append(v.getCalend()).append("',");
+			json.append("_id:'").append(v.getCalnum()).append("'}");
 			if(!(i ==size-1)){
 				json.append(",");
 			}
 		}
-		json.append("]");
+		//json.append("]");
 		System.out.println("json:"+json.toString());
 		return json.toString();
 	}
-	
+	private String timeFomat(String time){
+		String result=null;
+		result = time.replaceAll("T", "");
+		System.out.println("timeFomat: "+result);
+		return result;
+	}
+	public String calSQL(int n){
+		StringBuffer sql = new StringBuffer();
+		if(n==0){ //부서일정
+			sql.append("select calnum,to_char(calstart,'yyyy-MM-DD')||'T'||to_char(calstart,'HH:mm:ss') calstart,")
+				.append("nvl(to_char(calend,'yyyy-MM-DD')||'T'||to_char(calend,'HH:mm:ss'),'0') calend,")
+				.append("calcont from calendar where caldept=?");
+		}else if(n==1){ //사원일정
+			sql.append("select calnum,to_char(calstart,'yyyy-MM-DD')||'T'||to_char(calstart,'HH:mm:ss') calstart,")
+			.append("nvl(to_char(calend,'yyyy-MM-DD')||'T'||to_char(calend,'HH:mm:ss'),'0') calend,")
+			.append("calcont from calendar where calmem=?");
+		}else if(n==2){
+			sql.append("insert into calendar(calnum,calstart,calend,calcont,caldept)");
+			sql.append(" values(calendar_seq.nextVal,");
+			sql.append("to_date(?,'yyyy-MM-dd-HH:mi:ss'),to_date(?,'yyyy-MM-dd-HH:mi:ss'),?,?)");
+		}else if(n==3){
+			sql.append("insert into calendar(calnum,calstart,calend,calcont,calmem)");
+			sql.append(" values(calendar_seq.nextVal,");
+			sql.append("to_date(?,'yyyy-MM-dd-HH:mi:ss'),to_date(?,'yyyy-MM-dd-HH:mi:ss'),?,?)");
+		}
+		return sql.toString();
+	}
 }
 	

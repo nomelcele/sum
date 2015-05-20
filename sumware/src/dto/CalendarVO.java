@@ -1,7 +1,7 @@
 package dto;
 
 public class CalendarVO {
-	private int calnum, caldiv, caldept, calmem;
+	private int calnum, caldept, calmem;
 	private String calstart, calend, calcont;
 	
 	public int getCalnum() {
@@ -9,12 +9,6 @@ public class CalendarVO {
 	}
 	public void setCalnum(int calnum) {
 		this.calnum = calnum;
-	}
-	public int getCaldiv() {
-		return caldiv;
-	}
-	public void setCaldiv(int caldiv) {
-		this.caldiv = caldiv;
 	}
 	public int getCaldept() {
 		return caldept;
