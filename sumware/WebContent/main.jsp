@@ -20,8 +20,9 @@
 			$('#mod').attr("value","calendar");
 			$('#submod').attr("value","calList");
 		}else if(res==4){
-			$('#mod').attr("value","board")
-			$('#submod').attr("value","boardList")
+			$('#mod').attr("value","board");
+			$('#submod').attr("value","boardList");
+			$('#page').attr("value","1");
 		}
 		$('form').submit();
 	}
@@ -31,6 +32,7 @@
 	<form action="sumware" method="post">
 		<input type="hidden" id="mod" name="mod">
 		<input type="hidden" id="submod" name="submod">
+		<input type="hidden" id="page" name="page">
 	</form>
 	<div>
 		${sessionScope.v.memname }님 로그인하셨습니다.
