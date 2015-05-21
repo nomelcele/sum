@@ -20,8 +20,6 @@
 
 		<!-- Essential jQuery Plugins
 		================================================== -->
-		<!-- Main jQuery -->
-        <script src="js/jquery-1.11.1.min.js"></script>
 		<!-- Single Page Nav -->
         <script src="js/jquery.singlePageNav.min.js"></script>
 		<!-- Twitter Bootstrap -->

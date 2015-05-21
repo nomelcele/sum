@@ -9,6 +9,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
+<%@include file="../top2.jsp" %>
 <!-- 캘린더 -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -165,5 +166,4 @@ $(function(){
 <!-- 		<input type="button" id="calMem" value="사원일정" onclick="goCal(this)"> -->
 <!-- 	</div> -->
 <!-- 	<div id='calendar'></div> -->
-</body>
-</html>
+<%@include file="../footer.jsp" %>
