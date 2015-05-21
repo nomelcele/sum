@@ -40,18 +40,19 @@ public class CalendarModel implements ModelInter{
 			int calmem = vo.getMemnum();
 			System.out.println("cal calmem:"+calmem);
 			
-			int cal = Integer.parseInt(request.getParameter("cal"));
-			if(cal==0){
+			String cal = request.getParameter("cal");
+			if(cal==null||cal.equals("0")){
 				//리스트를 불러와서 json형식으로 바꿈
-				String sql = CalendarDAO.getDao().calSQL(cal);
+				String sql = CalendarDAO.getDao().calSQL(0);
 				ArrayList<CalendarVO> list = CalendarDAO.getDao().getCalList(sql, caldept);
 				String json = CalendarDAO.getDao().makeJson(list);
 		
 				request.setAttribute("calJson", json);
 				request.setAttribute("cal", "부서");
 			}else{
+				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 				//리스트를 불러와서 json형식으로 바꿈
-				String sql = CalendarDAO.getDao().calSQL(cal);
+				String sql = CalendarDAO.getDao().calSQL(1);
 				ArrayList<CalendarVO> list = CalendarDAO.getDao().getCalList(sql, calmem);
 				String json = CalendarDAO.getDao().makeJson(list);
 		

@@ -131,6 +131,24 @@ $(function(){
 		<div class="container">
 		<div class="row">
 			<div class="col-xs-2">
+			<table class="table table-striped">
+    <thead>
+      <tr>
+        <th><img src="/profileImg/ ${sessionScope.v.memprofile }"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+      </tr>
+      <tr>
+        <td>July</td>
+      </tr>
+    </tbody>
+  </table>
 			</div>
 			<div class="col-xs-10">
 				<div style="text-align: right;padding: 10px;">

@@ -19,7 +19,6 @@
 		}else if(res==3){
 			$('#mod').attr("value","calendar");
 			$('#submod').attr("value","calList");
-			$('#cal').attr("value","0");
 		}else if(res==4){
 			$('#mod').attr("value","board")
 			$('#submod').attr("value","boardList")
@@ -32,8 +31,6 @@
 	<form action="sumware" method="post">
 		<input type="hidden" id="mod" name="mod">
 		<input type="hidden" id="submod" name="submod">
-		<intpu type="hidden" id="cal" name="cal">
-		
 	</form>
 	<div>
 		${sessionScope.v.memname }님 로그인하셨습니다.
