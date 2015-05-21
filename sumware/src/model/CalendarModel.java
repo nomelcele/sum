@@ -39,6 +39,7 @@ public class CalendarModel implements ModelInter{
 			System.out.println("cal caldept:"+caldept);
 			int calmem = vo.getMemnum();
 			System.out.println("cal calmem:"+calmem);
+			
 			int cal = Integer.parseInt(request.getParameter("cal"));
 			if(cal==0){
 				//리스트를 불러와서 json형식으로 바꿈
