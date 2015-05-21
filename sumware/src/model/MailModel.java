@@ -45,7 +45,7 @@ public class MailModel implements ModelInter{
 			boolean res = MailDao.getDao().addMail(vo); // db에 메일 정보 넣기
 			
 			if(res){
-				url = "MailMain.jsp";
+				url = "mail/MailMain.jsp";
 				method = true;
 			}
 		} else if(submod != null && submod.equals("mailList")){
@@ -62,7 +62,7 @@ public class MailModel implements ModelInter{
 			
 			request.setAttribute("list", mlist);
 			
-			url = "MailList.jsp";
+			url = "mail/MailList.jsp";
 			method = false;
 		}
 				
