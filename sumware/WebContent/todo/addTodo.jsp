@@ -23,7 +23,9 @@ $(function(){
 <body>
 	<h1>업무추가</h1>
 	<div>
-		<form action="sumware?mod=todo&submod=addTodo" method="post" name="f" id="f" enctype="multipart/form-data">
+		<form action="sumware" method="post" name="f" id="f" enctype="multipart/form-data">
+		<input type="hidden" name="mod" value="todo">
+		<input type="hidden" name="submod" value="addTodo">
 		<table>
 			<tr>
 			<td>

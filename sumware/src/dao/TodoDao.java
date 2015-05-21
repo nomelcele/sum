@@ -135,17 +135,18 @@ public class TodoDao {
 		
 		
 		// 승인했을 시 n을 y나 x로 바꿔주는 메서드
-		public void confirmTodo(int tonum, String toconfirm){
+		public void confirmTodo(int tonum,String tocomm, String toconfirm){
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			StringBuffer sql = new StringBuffer();
 			
 			try {
-				sql.append("update todo set toconfirm=? where tonum=?");
+				sql.append("update todo set toconfirm=?, tocomm=? where tonum=?");
 				con = ConUtil.getOds();
 				pstmt = con.prepareStatement(sql.toString());
 				pstmt.setString(1, toconfirm);
-				pstmt.setInt(2, tonum);
+				pstmt.setString(2, tocomm);
+				pstmt.setInt(3, tonum);
 				
 				pstmt.executeUpdate();
 				

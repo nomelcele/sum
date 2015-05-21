@@ -14,6 +14,7 @@
 <script>
 	function addTodoForm(){
 		var memnum="${sessionScope.v.memnum }";
+		// 모달로 바꺼야됨.
 			window.open("sumware?mod=todo&submod=addTodoForm&memmgr="+memnum,'업무 추가','width=532,height=520,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,left=150,top=100');
 	}
 	function checkTodoList(){

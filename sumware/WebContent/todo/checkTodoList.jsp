@@ -13,11 +13,11 @@
 
 
 	function viewDetail(res){
-		$(".title"+res).show();
+		$(".title"+res).show("slow");
 	};
 	
 	function approveTodo(res, mnum){
-		var fdata = {tonum:res,memnum:mnum};
+		var fdata = {tonum:res,memnum:mnum,tocomm:$('#tocomm').val()};
 		$.ajax({
 			type:"POST",
 			url:"sumware?mod=todo&submod=checkTodoList&childmod=approveTodo",
@@ -28,7 +28,7 @@
 		
 	}
 	function rejectTodo(res, mnum){
-		var fdata = {tonum:res,memnum:mnum};
+		var fdata = {tonum:res,memnum:mnum,tocomm:$('#tocomm').val()};
 		$.ajax({
 			type:"POST",
 			url:"sumware?mod=todo&submod=checkTodoList&childmod=rejectTodo",
@@ -63,6 +63,9 @@
 			</tr>
 			<tr class="title${tolist.tonum }"  style="border:1px dotted; display:none">
 				<td colspan="2">${tolist.tocomm }</td>
+			</tr>
+			<tr class="title${tolist.tonum }"  style="border:1px dotted; display:none">
+				<td><input type="text" id="tocomm"></td>
 			</tr>
 			<tr class="title${tolist.tonum }"  style="border:1px dotted; display:none">
 				<td><input type="button" value="승인" onclick="javascript:approveTodo(${tolist.tonum }, ${sessionScope.v.memnum })"></td><td><input type="button" value="거절" onclick="javascript:rejectTodo(${tolist.tonum }, ${sessionScope.v.memnum })"></td>

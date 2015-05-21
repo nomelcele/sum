@@ -29,7 +29,7 @@ public class TodoModel implements ModelInter{
 		
 		if(submod.equals("todoForm")){
 			url = "todo/Todo.jsp";
-			method = false;
+			method = true;
 			
 		}else if(submod.equals("addTodoForm")){
 			int memmgr = Integer.parseInt(request.getParameter("memmgr"));
@@ -60,11 +60,13 @@ public class TodoModel implements ModelInter{
 			if(childmod!=null && childmod.equals("approveTodo")){
 				// 리스트의 승인여부 n을 y로 바꿈!!!!
 				int tonum= Integer.parseInt(request.getParameter("tonum"));
-				TodoDao.getDao().confirmTodo(tonum, "y");
+				String tocomm = request.getParameter("tocomm");
+				TodoDao.getDao().confirmTodo(tonum,tocomm, "y");
 			}else if(childmod!=null && childmod.equals("rejectTodo")){
 				// 리스트의 승인여부 n을 x로 바꿈!!!!
 				int tonum= Integer.parseInt(request.getParameter("tonum"));
-				TodoDao.getDao().confirmTodo(tonum, "x");
+				String tocomm = request.getParameter("tocomm");
+				TodoDao.getDao().confirmTodo(tonum,tocomm, "x");
 			}
 			
 			url = "sumware?mod=todo&submod=checkTodoListForm";
