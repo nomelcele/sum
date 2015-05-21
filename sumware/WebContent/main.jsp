@@ -6,13 +6,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script>
+	function formGoGo(res){
+		if(res==1){
+			$('#mod').attr("value","todo");
+			$('#submod').attr("value","todoForm");
+			$('form').submit();
+		}else{
+			$('#mod').attr("value","mail");
+			$('#submod').attr("value","mailMain");
+			$('form').submit();
+		}
+	}
+</script>
 </head>
 <body>
+	<form action="sumware" method="post">
+		<input type="hidden" id="mod" name="mod">
+		<input type="hidden" id="submod" name="submod">
+	</form>
 	<div>
 		${sessionScope.v.memname }님 로그인하셨습니다.
 		<ul>
-			<li><a href="sumware?mod=todo&submod=todoForm">Todo</a></li>
-			<li><a href="sumware?mod=mail&submod=mailMain">Mail</a></li>
+			<li><a href="javaScript:formGoGo(1)">Todo</a></li>
+			<li><a href="javaScript:formGoGo(2)">Mail</a></li>
 		</ul>
 	</div>
 </body>
