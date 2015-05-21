@@ -25,7 +25,7 @@ public class MyFileUp {
 		System.out.println(header);
 		String [] elements = header.split(";");
 		
-		//elements¿¡¼­ filename¿¡ ÇØ´çÇÏ´Â µ¥ÀÌÅÍ Ã£±â
+		//elementsì—ì„œ filenameì— í•´ë‹¹í•˜ëŠ” ë°ì´í„° ì°¾ê¸°
 		for(String element : elements){
 			if(element.trim().startsWith("filename")){
 				fileName = element.substring(element.indexOf('=')+1);
@@ -35,13 +35,13 @@ public class MyFileUp {
 		}
 		return fileName;
 	}
-	public HashMap<String,String> fileUp(HttpServletRequest request) throws IOException, ServletException{
+	public HashMap<String,String> fileUp(String fname,HttpServletRequest request) throws IOException, ServletException{
 		request.setCharacterEncoding("euc-kr");
 		HashMap<String, String> result = new HashMap<>(); 
-		Part part = request.getPart("imgtitle");
+		Part part = request.getPart(fname);
 		String fileName = getFileName(part);
 		result=MyMap.getMaps().getMapList(request);
-		result.put("imgtitle", fileName);
+		result.put(fname, fileName);
 		
 		if(fileName != null && fileName.length() != 0){
 			part.write(fileName);
