@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.ModelForward;
+import dao.LoginDao;
 import dao.MemberDao;
 import dto.MemberVO;
 
@@ -32,7 +33,7 @@ public class LoginModel implements ModelInter {
 			v.setMemnum(Integer.parseInt(memnum));
 			v.setMempwd(mempwd);
 			try {
-				MemberVO vo = MemberDao.getDao().login(v);
+				MemberVO vo = LoginDao.getDao().login(v);
 
 				if (vo != null) {
 					// sessionScope에 아이디를 저장
