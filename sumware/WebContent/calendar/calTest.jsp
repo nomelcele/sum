@@ -6,32 +6,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
+<!-- 캘린더 -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <link rel='stylesheet' href='calendar/fjs/fullcalendar.min.css' />
 <script src='calendar/fjs/lib/moment.min.js'></script>
 <script src='calendar/fjs/fullcalendar.min.js'></script>
 <script src='calendar/fjs/lang-all.js'></script>
+<!-- /캘린더 -->
+<!-- Latest compiled and minified CSS -->
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script>
 function goCal(btn){
 	var s=$(btn).val();
 	if(s=="부서일정"){
 		$('#mod').attr("value","calendar");
 		$('#submod').attr("value","calList");
-		//부서 일정을 선택했기때문에 EL을 사용해서 세팅해줘야함
-		$('#caldept').attr("value","100");
-		//사원일정을 선택하지 않았으므로 0으로 세팅시킴.
-		$('#calmem').attr("value","0");
+		$('#cal').attr("value","0");
 		$('#selCal').submit();
 		
 	}else{
 		$('#mod').attr("value","calendar");
 		$('#submod').attr("value","calList");
-		$('#caldept').attr("value","0");
-		//사원 일정을 선택했기때문에 EL을 사용해서 세팅해줘야함
-		$('#calmem').attr("value","10000");
+		$('#cal').attr("value","1");
 		$('#selCal').submit();
 	}
 }
@@ -124,13 +126,25 @@ $(function(){
 	<form action="sumware" method="post" id="selCal">
 		<input type="hidden" name="mod" id="mod">
 		<input type="hidden" name="submod" id="submod">
-		<input type="hidden" name="caldept" id="caldept">
-		<input type="hidden" name="calmem" id="calmem">
+		<input type="hidden" name="cal" id="cal">
 	</form>
-	<div style="text-align: right;padding: 10px;">
-		<input type="button" id="calDept" value="부서일정" onclick="goCal(this)">
-		<input type="button" id="calMem" value="사원일정" onclick="goCal(this)">
+		<div class="container">
+		<div class="row">
+			<div class="col-xs-2">
+			</div>
+			<div class="col-xs-10">
+				<div style="text-align: right;padding: 10px;">
+					<input type="button" id="calDept" value="부서일정" onclick="goCal(this)">
+					<input type="button" id="calMem" value="사원일정" onclick="goCal(this)">
+				</div>
+				<div id='calendar'></div>
+			</div>
+		</div>
 	</div>
-	<div id='calendar'></div>
+<!-- 	<div style="text-align: right;padding: 10px;"> -->
+<!-- 		<input type="button" id="calDept" value="부서일정" onclick="goCal(this)"> -->
+<!-- 		<input type="button" id="calMem" value="사원일정" onclick="goCal(this)"> -->
+<!-- 	</div> -->
+<!-- 	<div id='calendar'></div> -->
 </body>
 </html>
