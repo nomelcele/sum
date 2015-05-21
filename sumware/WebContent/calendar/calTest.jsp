@@ -130,11 +130,12 @@ $(function(){
 	</form>
 		<div class="container">
 		<div class="row">
-			<div class="col-xs-2">
+			<div class="col-xs-4">
 			<table class="table table-striped">
     <thead>
       <tr>
-        <th><img src="/profileImg/ ${sessionScope.v.memprofile }"></th>
+      <th></th>
+        <th><img src="profileImg/${sessionScope.v.memprofile }"></th>
       </tr>
     </thead>
     <tbody>
@@ -150,12 +151,12 @@ $(function(){
     </tbody>
   </table>
 			</div>
-			<div class="col-xs-10">
+			<div class="col-xs-8">
 				<div style="text-align: right;padding: 10px;">
 					<input type="button" id="calDept" value="부서일정" onclick="goCal(this)">
 					<input type="button" id="calMem" value="사원일정" onclick="goCal(this)">
 				</div>
-				<div id='calendar'></div>
+				<div id='calendar'"></div>
 			</div>
 		</div>
 	</div>
