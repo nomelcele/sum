@@ -23,7 +23,7 @@ public class SumControl extends HttpServlet {
 		doService(request, response);
 	}
 	protected void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("================= Controller Start!");
 		request.setCharacterEncoding("utf-8");
 		// 클라이언트 요청을 받는것 부터 시작
 		String mod = request.getParameter("mod");
@@ -37,5 +37,6 @@ public class SumControl extends HttpServlet {
 		}else{
 			response.sendRedirect(mf.getUrl());
 		}
+		System.out.println("================= Controller End!");
 	}
 }

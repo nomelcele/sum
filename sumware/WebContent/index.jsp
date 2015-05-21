@@ -13,10 +13,10 @@
 	<td><input type="text" id="memnum" name="memnum"></td>
 	</tr>
 	<tr>
-	<td><input type="text" id="mempwd" name="mempwd"></td>
+	<td><input type="password" id="mempwd" name="mempwd"></td>
 	</tr>
 	<tr>
-	<td><input type="submit"></td>
+	<td><input type="submit" value="로그인"></td>
 	</tr>
 
 

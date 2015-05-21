@@ -20,6 +20,9 @@
 			$('#mod').attr("value","calendar");
 			$('#submod').attr("value","calList");
 			$('#cal').attr("value","0");
+		}else if(res==4){
+			$('#mod').attr("value","board")
+			$('#submod').attr("value","boardList")
 		}
 		$('form').submit();
 	}
@@ -38,6 +41,7 @@
 			<li><a href="javaScript:formGoGo(1)">Todo</a></li>
 			<li><a href="javaScript:formGoGo(2)">Mail</a></li>
 			<li><a href="javaScript:formGoGo(3)">Calendar</a>
+			<li><a href="javaScript:formGoGo(4)">Board</a></li>
 		</ul>
 	</div>
 </body>
