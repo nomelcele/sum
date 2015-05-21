@@ -14,11 +14,30 @@
 		border:1px dotted;
 	}
 </style>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script>
+	$(function(){
+		$('#mod').click(function(){
+			$(this).attr("value","board");
+			$('#submod').attr("value","writeForm");
+			$('form').submit();
+		})
+	});
+</script>
 </head>
 <body>
 	<div id="wrap">
 		<table>
 			<thead>
+				<tr>
+					<td style="text-align: right;" colspan="5">
+						<form action="sumware" method="post">
+							<button name="mod" id="mod">글쓰기</button>
+							<input type="hidden" name="submod" id="submod">
+						</form>
+					</td>
+				</tr>
 				<tr>
 					<td style="width:70px;">글번호</td>
 					<td style="width:200px;">글제목</td>

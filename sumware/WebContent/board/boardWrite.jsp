@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <title>Insert title here</title>
 </head>
 <style>
@@ -93,6 +95,21 @@
 	font-family: "맑은고딕";
 }
 </style>
+<script>
+	function formGo(res){
+		if(res==1){
+			$('#mod').attr('value','board');
+			$('#submod').attr('value','boardInsert');
+			$('#page').attr('value','1');
+			$('form').submit();
+		}else{
+			$('#mod').attr('value','board');
+			$('#submod').attr('value','boardList');
+			$('#page').attr('value','1');
+			$('form').submit();
+		}
+	}
+</script>
 <body>
 	<div id="content2">
 		<div id="stboardWriter">
@@ -102,8 +119,9 @@
 				</tr>
 			</table>
 			<form action="sumware" method="post">
-				<input type="hidden" name="mod" value="board"> 
-				<input type="hidden" name="submod" value="boardInsert">
+				<input type="hidden" name="mod" id="mod"> 
+				<input type="hidden" name="submod" id="submod">
+				<input type="hidden" name="page" id="page">
 				<table id="stcontent">
 					<tr>
 						<td colspan="2">스터디 게시판 작성폼</td>
@@ -116,19 +134,17 @@
 					<tr>
 						<td>작성자</td>
 						<td class="td writer"><input name="bwriter" id="bwriter" readonly="readonly"
-							class="instyle" value="${sessionScope.mvo.memname }"></td>
+							class="instyle" value="${sessionScope.v.memname }"></td>
 					</tr>
 					<tr>
 						<td>내용</td>
 						<td class="td content2"><textarea rows="10" cols="30"
 								name="bcont" id="bcont" class="instyle"></textarea></td>
 						<input type="hidden" name="bgnum" value="1">
-						<input type="hidden" name="bmem" value="${sessionScope.mvo.memnum }">
+						<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
 					</tr>
 					<tr>
-						<td colspan="2"><input type="submit" value="글작성" class="btn"
-							id="save">&nbsp; <input type="submit" value="list"
-							class="btn"></td>
+						<td colspan="2"><button onclick="javascript:formGo(1)">글작성</button>&nbsp;&nbsp;<button onclick="javascript:formGo(2)">리스트</button></td>
 					</tr>
 				</table>
 			</form>

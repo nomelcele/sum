@@ -4,14 +4,13 @@
 <c:choose>
 	<c:when test="${pageInfo.currentBlock eq 1}">&lt;&lt;</c:when>
 	<c:otherwise>
-		<a
-			href="${pageUrl}&page=${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock }">&lt;&lt;</a>
+		<a href="${pageUrl}&page=${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock }">&lt;&lt;</a>
 	</c:otherwise>
 </c:choose>
 <c:choose>
 	<c:when test="${pageInfo.currentBlock ne pageInfo.totalBlocks}">
-		<c:forEach begin="1" end="${pageInfo.pagesPerBlock}" varStatus="num">[
-			<a href="${pageUrl}&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>]
+		<c:forEach begin="1" end="${pageInfo.pagesPerBlock}" varStatus="num">
+			[<a href="${pageUrl}&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>]
         </c:forEach>
 	</c:when>
 	<c:otherwise>

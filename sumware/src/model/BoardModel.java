@@ -23,7 +23,7 @@ public class BoardModel implements ModelInter{
 		String url = "";
 		boolean method = false;
 		String submod = request.getParameter("submod");
-		System.out.println("이것은 대체 왜 ? : "+submod);
+		System.out.println("BoardModel이 말합니다.submod가 "+submod+" 입니다.");
 		if(submod.equals("boardList") && submod!=null){
 			/* Page 처리 영역 */
 			// 들어온 요청은 boardList 를 보여주는 것, 그렇다면 1페이지 부터 보여줘야 한다.
@@ -37,7 +37,10 @@ public class BoardModel implements ModelInter{
 			request.setAttribute("list", list);
 			url = "board/boardList.jsp";
 			method = true;
-		} else if(submod.equals("boardInsert") && submod!=null){
+		}else if(submod != null && submod.equals("writeForm")){
+			url="board/boardWrite.jsp";
+			method=true;
+		}else if(submod.equals("boardInsert") && submod!=null){
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			BoardDao.getDao().insert(map);
 			url = "sumware?mod=board&submod=boardList&page=1";
