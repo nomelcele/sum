@@ -2,8 +2,15 @@ package dto;
 
 public class BoardVO {
 	private int bnum, bmem, bhit, bgnum;
-	private String btitle, bcont, bimg, bdate;
+	private String btitle, bcont, bimg, bdate,bwriter;
 	
+	
+	public String getBwriter() {
+		return bwriter;
+	}
+	public void setBwriter(String bwriter) {
+		this.bwriter = bwriter;
+	}
 	public int getBnum() {
 		return bnum;
 	}
