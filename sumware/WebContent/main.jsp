@@ -13,12 +13,14 @@
 		if(res==1){
 			$('#mod').attr("value","todo");
 			$('#submod').attr("value","todoForm");
-			$('form').submit();
-		}else{
+		}else if(res==2){
 			$('#mod').attr("value","mail");
 			$('#submod').attr("value","mailMain");
-			$('form').submit();
+		}else if(res==3){
+			$('#mod').attr("value","calendar");
+			$('#submod').attr("value","calList");
 		}
+		$('form').submit();
 	}
 </script>
 </head>
@@ -32,6 +34,7 @@
 		<ul>
 			<li><a href="javaScript:formGoGo(1)">Todo</a></li>
 			<li><a href="javaScript:formGoGo(2)">Mail</a></li>
+			<li><a href="javaScript:formGoGo(3)">Calendar</a>
 		</ul>
 	</div>
 </body>
