@@ -16,16 +16,6 @@
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script>
-// 	function addTodoForm(){
-// 		var memnum="${sessionScope.v.memnum }";
-// 		// 모달로 바꺼야됨.
-// 			window.open("sumware?mod=todo&submod=addTodoForm&memmgr="+memnum,'업무 추가','width=532,height=520,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,left=150,top=100');
-// 	}
-// 	function checkTodoList(){
-// 		var memnum="${sessionScope.v.memnum }";
-// 			window.open("sumware?mod=todo&submod=checkTodoList&memnum="+memnum,'업무 리스트 확인','width=532,height=520,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,left=150,top=100');
-// 	}
-
 		$('form').submit(function(){
 			// alert안해주고 바로 클로즈하면 파라미터 안보내짐..
 			alert("추가되었습니다.");
@@ -87,7 +77,7 @@
 		<div style="width:650px; height:490px; border:1px dotted">
 		</div>
 	</div>
-	<jsp:include page="addTodo.jsp"></jsp:include>
+	<%@include file="addTodo.jsp" %>
 </div>
 </body>
 </html>

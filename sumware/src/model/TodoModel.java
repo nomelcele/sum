@@ -7,6 +7,7 @@ import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import util.MyFileUp;
@@ -17,6 +18,7 @@ import dto.MemberVO;
 import dto.TodoVO;
 
 public class TodoModel implements ModelInter{
+	MemberVO v = null;
 
 	@Override
 	public ModelForward exe(HttpServletRequest request,
@@ -29,16 +31,20 @@ public class TodoModel implements ModelInter{
 		
 		if(submod.equals("todoForm")){
 			url = "todo/Todo.jsp";
-			method = true;
 			
-		}else if(submod.equals("addTodoForm")){
-			int memmgr = Integer.parseInt(request.getParameter("memmgr"));
+			HttpSession session = request.getSession();
+			v = (MemberVO) session.getAttribute("v");
+			int memmnum = v.getMemnum();
 			
-			System.out.println("memmgr : "+memmgr);
-			ArrayList<MemberVO> list = TodoDao.getDao().getTomem(memmgr);
+			System.out.println("memmgr : "+memmnum);
+			ArrayList<MemberVO> list = TodoDao.getDao().getTomem(memmnum);
+			for(MemberVO vv: list){
+				System.out.println("::::"+vv.getMemname());
+			}
 			request.setAttribute("teamNameList", list);
-			url = "todo/addTodo.jsp";
+			
 			method = true;
+			
 		}else if(submod.equals("addTodo")){
 			System.out.println("addTodo 들어왔어");
 			String fname = request.getParameter("tofile");
