@@ -6,6 +6,7 @@ public class MemberVO {
 	
 	
 	
+	
 	public String getMgrname() {
 		return mgrname;
 	}

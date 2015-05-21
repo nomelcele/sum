@@ -8,7 +8,7 @@
 </head>
 <body>
 <form action="sumware?mod=login&submod=login" method="post">
-<table>
+<table style="border:1px solid">
 	<tr>
 	<td><input type="text" id="memnum" name="memnum"></td>
 	</tr>
@@ -21,6 +21,7 @@
 
 
 </table>
+
 
 
 </form>
