@@ -18,8 +18,8 @@ public class MemberDao {
 		return dao;
 	}
 	
-	public ArrayList<String> getInmailList(){
-		// db에서 아이디(사내메일주소) 읽어오는 부분(xml 파일 만들기 위해서)
+	public ArrayList<String> getNameList(){
+		// db에서 사원들 이름을 불러오는 메서드
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -28,12 +28,12 @@ public class MemberDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select meminmail from member");
+			sql.append("select memname from member");
 			pstmt = con.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				list.add(rs.getString("meminmail"));
+				list.add(rs.getString("memname"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

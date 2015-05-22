@@ -34,7 +34,7 @@ public class MakeXML {
 	
 	// 일단 테스트
 	public static void updateXML(){
-		ArrayList<String> list = MemberDao.getDao().getInmailList();
+		ArrayList<String> list = MemberDao.getDao().getNameList();
 
 		// 아이디가 저장된 리스트를 읽어서 root의 자식 엘리먼트로 설정
 		Element root = new Element("sumware");
@@ -57,7 +57,7 @@ public class MakeXML {
 		
 		try {
 			xo.output(doc, System.out);
-			xo.output(doc, new FileOutputStream("C:\\sumware\\project\\ws\\sumware\\WebContent\\xml\\inmailList.xml"));
+			xo.output(doc, new FileOutputStream("C:\\sumware\\project\\ws\\sumware\\WebContent\\xml\\nameList.xml"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

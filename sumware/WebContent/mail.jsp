@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="top2.jsp"%>
+<%@include file="top.jsp"%>
 <section id="features" class="features2">
 	<div class="container">
 		<div class="row">
