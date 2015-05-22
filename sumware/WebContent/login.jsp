@@ -66,7 +66,7 @@
 					<!-- service item -->
 					<div class="col-md-12 wow fadeInLeft" data-wow-duration="500ms">
 						<form class="form-inline" role="form" action="sumware" method="post">
-								<input type="hidden" name="mod" value="login">
+								<input type="hidden" name="model" value="login">
 								<input type="hidden" name="submod" value="login">
 								<div class="porm-group">
 									<label class="control-label-" for="sabun"> 사원번호 :</label> 
