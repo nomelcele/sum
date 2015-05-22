@@ -1,9 +1,9 @@
 // myckeditor.js
 function chkUpload(){
-	CKEDITOR.replace('content',{
+	CKEDITOR.replace('bcont',{
 		width:'80%',
 		height:'350px',
-		filebrowserImageUploadUrl : 'study.kosta?cmd=board&subcmd=ckBoard'
+		filebrowserImageUploadUrl : 'sumware?model=board&submod=ckBoard'
 	});
 	CKEDITOR.on('dialogDefinition', function(ev){
 		var dialogName = ev.data.name;
