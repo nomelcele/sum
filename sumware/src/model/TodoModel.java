@@ -44,8 +44,7 @@ public class TodoModel implements ModelInter{
 			}
 			request.setAttribute("teamNameList", list);
 			url="todo/addTodo.jsp";
-			method = true;
-			
+			method = true;		
 		}else if(submod.equals("addTodo")){
 			System.out.println("addTodo 들어왔어");
 			url = "sumware?mod=todo&submod=todoForm";
@@ -93,6 +92,12 @@ public class TodoModel implements ModelInter{
 		}else if(submod.equals("checkTodoListForm")){
 			url = "todo/checkTodoList.jsp";
 			method = true;
+		}else if(submod.equals("fWMana")){
+			url="todo/fWMana.jsp";
+			String memdept = request.getParameter("memdept");
+			ArrayList<TodoVO> fwList=TodoDao.getDao().getFWMana();
+			request.setAttribute("fwList", fwList);
+			method=true;
 		}
 		
 		return new ModelForward(url, method);
