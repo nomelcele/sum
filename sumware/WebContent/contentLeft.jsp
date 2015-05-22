@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--  --%>
 <c:if test="${param.model eq 'board' }">
 
@@ -62,13 +61,11 @@
 </c:if>
 <%--  --%>
 <c:if test="${param.model eq 'calendar' }">
-<div class="col-xs-2" style="width: 250px">
-   <div class="row-lg-1">
       <div class="chat-panel panel panel-default">
          <div class="panel-heading">
             <i class="fa fa-comments fa-fw"></i> <strong class="primary-font">My
                profile</strong>
-         </div>
+        
          <div class="panel-body">
             <span class="chat-img pull-left"> <img
                src="../profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
