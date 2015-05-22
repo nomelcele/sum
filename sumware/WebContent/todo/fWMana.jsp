@@ -51,15 +51,9 @@ function todoFormGo(res){
 		alert("거절이 완료되었습니다.");
 		$(".title"+res).hide("slow");
 	}
-	function hateWorking(tonum, memnum){
+	function hateWorking(tonum){
 		console.log("거절했다~!!!!");
-		var data={};
-		$.ajax({
-			
-			type:"POST",
-			url:"sumware"
-		});
-		$(".title"+tonum).toggle("slow");
+	 	$(".title"+tonum).toggle("slow");
 	}
 </script>
 </head>
@@ -162,23 +156,25 @@ function todoFormGo(res){
 											</c:when>
 											<c:otherwise>
 												<button type="button" class="btn btn-outline btn-danger"
-												onclick="javascript:hateWorking(${fw.tonum }, ${sessionScope.v.memnum })">거절</button>
+												onclick="javascript:hateWorking(${fw.tonum })">거절</button>
 											</c:otherwise>
 										</c:choose>
 										</td>
 									</tr>
 									<tr class="title${fw.tonum }" style="display: none;">
-										<tr>
 										<td>${fw.tocomm }</td>
-										</tr>
-										<tr>
-											<td>
-											<select>
-											
+									<tr class="title${fw.tonum }" style="display: none;">
+										<td>
+											<select name="tomem" class="form-control" id="inputSuccess"
+											style="width: 70%">
+												<option value="">팀장 선택</option>
+												<c:forEach var="tNameList" items="${sessionScope.teamNameList}">
+												<option value="${tNameList.memnum }">${tNameList.memname}</option>
+												</c:forEach>
 											</select>
 											<button type="button" class="btn btn-outline btn-success">전달</button>
-											</td>
-										</tr>
+										</td>
+									</tr>
 									</tr>
 								</tbody>
 							</table>

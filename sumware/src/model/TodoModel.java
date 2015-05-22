@@ -42,9 +42,10 @@ public class TodoModel implements ModelInter{
 			for(MemberVO vv: list){
 				System.out.println("::::"+vv.getMemname());
 			}
-			request.setAttribute("teamNameList", list);
+			HttpSession session = request.getSession();
+			session.setAttribute("teamNameList", list);
 			url="todo/addTodo.jsp";
-			method = true;		
+			method = false;		
 		}else if(submod.equals("addTodo")){
 			System.out.println("addTodo 들어왔어");
 			url = "sumware?model=todo&submod=todoForm";
@@ -96,11 +97,12 @@ public class TodoModel implements ModelInter{
 			method = true;
 		}else if(submod.equals("fWMana")){
 			System.out.println("fWMana 들어옴");
-			url="todo/fWMana.jsp";
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			System.out.println("memnum:"+memnum);
+
 			ArrayList<TodoVO> fwList=TodoDao.getDao().getFWMana(memnum);
 			request.setAttribute("fwList", fwList);
+			url="todo/fWMana.jsp";
 			method=true;
 		}
 		
