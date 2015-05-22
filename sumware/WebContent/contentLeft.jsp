@@ -62,7 +62,7 @@
 </c:if>
 <%--  --%>
 <c:if test="${param.model eq 'calendar' }">
-<div class="col-lg-1" style="width: 250px">
+<div class="col-xs-2" style="width: 250px">
    <div class="row-lg-1">
       <div class="chat-panel panel panel-default">
          <div class="panel-heading">
