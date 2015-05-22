@@ -93,6 +93,7 @@ public class TodoModel implements ModelInter{
 			url = "todo/checkTodoList.jsp";
 			method = true;
 		}else if(submod.equals("fWMana")){
+			System.out.println("fWMana 들어옴");
 			url="todo/fWMana.jsp";
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			ArrayList<TodoVO> fwList=TodoDao.getDao().getFWMana(memnum);

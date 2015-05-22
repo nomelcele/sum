@@ -1,10 +1,16 @@
 package dto;
 
 public class TodoVO {
-	private int tonum, todept, tomem;
+	private int torownum,tonum, todept, tomem;
 	private String tostdate, toendate, totitle, tocont, tofile,toconfirm, tocomm;
 	
 	
+	public int getTorownum() {
+		return torownum;
+	}
+	public void setTorownum(int torownum) {
+		this.torownum = torownum;
+	}
 	public String getTocomm() {
 		return tocomm;
 	}
