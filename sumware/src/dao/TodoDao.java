@@ -167,7 +167,8 @@ public class TodoDao {
 			PreparedStatement pstmt=null;
 			ResultSet rs = null;
 			StringBuilder sql = new StringBuilder();
-			sql.append("select rownum torownum, tonum,to_char(tostdate,'yyyy-MM-dd'),to_char(toendate,'yyyy-MM-dd'),totitle,tocont,tomem,tocomm,toconfirm ")
+			sql.append("select rownum torownum, tonum,to_char(tostdate,'yyyy-MM-dd') tostdate,")
+			.append("to_char(toendate,'yyyy-MM-dd') toendate,totitle,tocont,tomem,tocomm,toconfirm ")
 			.append(" from (select * from todo where todept=(select memdept from member where memnum=?) order by 1 desc)");
 			try{
 				list=new ArrayList<TodoVO>();
@@ -180,7 +181,7 @@ public class TodoDao {
 					v.setTorownum(rs.getInt("torownum"));
 					v.setTonum(rs.getInt("tonum"));
 					v.setTostdate(rs.getString("tostdate"));
-					v.setToendate(rs.getString("tostdate"));
+					v.setToendate(rs.getString("toendate"));
 					v.setTotitle(rs.getString("totitle"));
 					v.setTocont(rs.getString("tocont"));
 					v.setTomem(rs.getInt("tomem"));
