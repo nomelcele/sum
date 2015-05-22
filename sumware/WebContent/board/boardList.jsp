@@ -33,7 +33,7 @@
 				<tr>
 					<td style="text-align: right;" colspan="5">
 						<form action="sumware" method="post">
-							<button name="mod" id="mod">글쓰기</button>
+							<button name="model" id="mod">글쓰기</button>
 							<input type="hidden" name="submod" id="submod">
 						</form>
 					</td>
