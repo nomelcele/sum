@@ -130,28 +130,10 @@ $(function(){
 	</form>
 		<div class="container">
 		<div class="row">
-			<div class="col-xs-4">
-			<table class="table table-striped">
-    <thead>
-      <tr>
-      <th></th>
-        <th><img src="profileImg/${sessionScope.v.memprofile }"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-      </tr>
-      <tr>
-        <td>July</td>
-      </tr>
-    </tbody>
-  </table>
+			<div class="col-xs-3">
+			<%@include file="../contentLeft.jsp" %>
 			</div>
-			<div class="col-xs-8">
+			<div class="col-xs-9">
 				<div style="text-align: right;padding: 10px;">
 					<input type="button" id="calDept" value="부서일정" onclick="goCal(this)">
 					<input type="button" id="calMem" value="사원일정" onclick="goCal(this)">
