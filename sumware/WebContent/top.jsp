@@ -18,6 +18,9 @@
 
 
 <style>
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body { font-size: 11px; font-family: 'Nanum Gothic', serif; line-height: 1.5; color: #888;}
 .main-text {
 	position: absolute;
 	top: 50px;
@@ -91,26 +94,7 @@
 				
 			</ul>
 			<ul class="nav navbar-right navbar-nav">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
-					<ul class="dropdown-menu" style="padding: 12px;">
-						<form class="form-inline">
-							<button type="submit" class="btn btn-default pull-right">
-								<i class="glyphicon glyphicon-search"></i>
-							</button>
-							<input type="text" class="form-control pull-left"
-								placeholder="Search">
-						</form>
-					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>
-						<i class="glyphicon glyphicon-chevron-down"></i></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Login</a></li>
-						<li><a href="#">Profile</a></li>
-						<li class="divider"></li>
-						<li><a href="#">About</a></li>
-					</ul></li>
+				<li><a href="#"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
 			</ul>
 		</div>
 	</div>
