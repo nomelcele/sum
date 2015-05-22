@@ -80,7 +80,7 @@ $(function(){
 			          });
 				   }
 		   },
-	   defaultView: 'agendaWeek',//기본 뷰 - 옵션   //첫 페이지 기본 뷰 옵션
+	   defaultView: 'month',//기본 뷰 - 옵션   //첫 페이지 기본 뷰 옵션
 	   editable: false,                                             //에디터 가능 옵션
 	   selectable: true,
 	   selectHelper: true,
