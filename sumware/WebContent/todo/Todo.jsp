@@ -14,7 +14,7 @@
 <body>
 <div class="row">
 	<form action="../sumware" method="post" id="goTodo">
-	<input type="hidden" id="mod" name="mod">
+	<input type="hidden" id="model" name="model">
 	<input type="hidden" id="submod" name="submod">
 	<input type="hidden" id="memnum" name="memnum">
 	<input type="hidden" id="memmgr" name="memmgr">
@@ -37,7 +37,7 @@
 							alt="User Avatar" class="img-circle"
 							style="width: 100px; height: 100px;">
 						</span> 
-						</br> </br> </br> </br> </br>
+						<br/><br/><br/><br/><br/>
 						
 						
 						
@@ -86,10 +86,10 @@
 					<a href="#" class="list-group-item">부서 업무</a> 
 					<a href="#" class="list-group-item">팀 업무</a> 
 					<c:if test="${sessionScope.v.memauth lt 5 }">
-						<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리</a></br>
+						<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리</a><br/>
 					</c:if>
 					<c:if test="${sessionScope.v.memauth lt 4 }">
-						<a href="javascript:todoFormGo(2)" class="list-group-item">업무추가</a></br>
+						<a href="javascript:todoFormGo(2)" class="list-group-item">업무추가</a><br/>
 					</c:if>
 				
 				</div>
@@ -266,7 +266,7 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script>
 	function todoFormGo(res){
-		$('#mod').attr("value","todo");
+		$('#model').attr("value","todo");
 		
 		if(res==1){
 			

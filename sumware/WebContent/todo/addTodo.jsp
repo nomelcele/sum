@@ -14,7 +14,7 @@
 <body>
 <div class="row">
 	<form action="../sumware" method="post" id="goTodo">
-		<input type="hidden" id="mod" name="mod"> 
+		<input type="hidden" id="model" name="model"> 
 		<input type="hidden" id="submod" name="submod"> 
 		<input type="hidden" id="memnum" name="memnum"> 
 		<input type="hidden" id="memmgr" name="memmgr">
@@ -35,13 +35,7 @@
 							src="../profileImg/${sessionScope.v.memprofile }"
 							alt="User Avatar" class="img-circle"
 							style="width: 100px; height: 100px;">
-						</span> </br> </br> </br> </br> </br>
-
-
-
-
-
-
+						</span> <br/><br/><br/><br/><br/>
 						<table>
 							<tr>
 								<td><strong class="primary-font" style="margin: 10px">이름</strong></td>
@@ -70,17 +64,17 @@
 
 					<a href="#" class="list-group-item disabled"><span
 						class="glyphicon glyphicon-pencil"></span><strong
-						class="primary-font">Todo</strong></a> <a href="#"
-						class="list-group-item">부서 업무</a> <a href="#"
-						class="list-group-item">팀 업무</a>
+						class="primary-font">Todo</strong></a> 
+						<a href="#" class="list-group-item">부서 업무</a> 
+						<a href="#" class="list-group-item">팀 업무</a>
 					<c:if test="${sessionScope.v.memauth lt 5 }">
 						<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리
-							</button>
-							</br>
+							</a>
+							<br/>
 					</c:if>
 					<c:if test="${sessionScope.v.memauth lt 4 }">
 						<a href="javascript:todoFormGo(2)" class="list-group-item">업무추가</a>
-						</br>
+						<br/>
 					</c:if>
 
 				</div>
@@ -99,7 +93,7 @@
 
 						<form role="form" action="sumware" method="post" name="f" id="f"
 							enctype="multipart/form-data">
-							<input type="hidden" name="mod" value="todo"> <input
+							<input type="hidden" name="model" value="todo"> <input
 								type="hidden" name="submod" value="addTodo"> <input
 								type="hidden" name="todept" value="${sessionScope.v.memdept }">
 							<input type="hidden" name="toconfirm" value="n">
@@ -282,7 +276,7 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script>
 		function todoFormGo(res) {
-			$('#mod').attr("value", "todo");
+			$('#model').attr("value", "todo");
 
 			if (res == 1) {
 
@@ -293,6 +287,34 @@
 			}
 			$('#goTodo').submit();
 		}
+		
+		function viewDetail(res){
+			$(".title"+res).show("slow");
+		};
+		
+		function approveTodo(res, mnum){
+			var fdata = {tonum:res,memnum:mnum,tocomm:$('#tocomm').val()};
+			$.ajax({
+				type:"POST",
+				url:"sumware?model=todo&submod=checkTodoList&childmod=approveTodo",
+				data:fdata
+			});
+			alert("승인이 완료되었습니다.");
+			$(".title"+res).hide("slow");
+			
+		}
+		function rejectTodo(res, mnum){
+			var fdata = {tonum:res,memnum:mnum,tocomm:$('#tocomm').val()};
+			$.ajax({
+				type:"POST",
+				url:"sumware?model=todo&submod=checkTodoList&childmod=rejectTodo",
+				data:fdata
+			});
+			alert("거절이 완료되었습니다.");
+			$(".title"+res).hide("slow");
+		}
+		
+		
 	</script>
 	
 </body>
