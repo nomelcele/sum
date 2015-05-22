@@ -94,8 +94,8 @@ public class TodoModel implements ModelInter{
 			method = true;
 		}else if(submod.equals("fWMana")){
 			url="todo/fWMana.jsp";
-			String memdept = request.getParameter("memdept");
-			ArrayList<TodoVO> fwList=TodoDao.getDao().getFWMana();
+			int memdept = Integer.parseInt(request.getParameter("memdept"));
+			ArrayList<TodoVO> fwList=TodoDao.getDao().getFWMana(memdept);
 			request.setAttribute("fwList", fwList);
 			method=true;
 		}
