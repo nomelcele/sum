@@ -18,22 +18,26 @@ public class MemberDao {
 		return dao;
 	}
 	
-	public ArrayList<String> getNameList(){
-		// db에서 사원들 이름을 불러오는 메서드
+	public ArrayList<MemberVO> getNameMailList(){
+		// 사원의 이름과 내부 메일 주소를 가져오는 메서드
+		// (suggest 기능을 위한 xml 파일 만드는 데 사용)
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
 		
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select memname from member");
+			sql.append("select memname,meminmail from member");
 			pstmt = con.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				list.add(rs.getString("memname"));
+				MemberVO v = new MemberVO();
+				v.setMemname(rs.getString("memname"));
+				v.setMeminmail(rs.getString("meminmail"));
+				list.add(v);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -19,27 +19,41 @@ import dao.MemberDao;
 import dto.MemberVO;
 
 public class MakeXML {
-	/*
-	 * db를 읽어서 xml 파일로 생성하는 클래스
-	 * <sumware>
-	 * 		<member>김길동</member>
-	 * <sumware>
-	 * 
-	 * root는 sumware
-	 * */
-	
+	// db를 읽어서 xml 파일로 생성하는 클래스
+
 	// 어디서 호출되어야?
 	// db는 계속 갱신될 수 있기 때문에...
 	// 새로운 회원이 추가되면 xml 파일에도 적용되어야 한다.
 	
 	// 일단 테스트
 	public static void updateXML(){
-		ArrayList<String> list = MemberDao.getDao().getNameList();
+		ArrayList<MemberVO> list = MemberDao.getDao().getNameMailList();
 
-		// 아이디가 저장된 리스트를 읽어서 root의 자식 엘리먼트로 설정
+		// 사원 이름, 내부 메일 주소(아이디)가 저장된 리스트를 읽어서 
+		// root의 자식 엘리먼트로 설정
 		Element root = new Element("sumware");
-		for(String e:list){
-			root.addContent(new Element("member").setText(e));
+		for(MemberVO e:list){
+			// 엘리먼트 생성
+			Element mem = new Element("member");
+			Element name = new Element("name");
+			Element inmail = new Element("inmail");
+			
+			// 엘리먼트에 값 설정(이름, 아이디)
+			name.setText(e.getMemname());
+			inmail.setText(e.getMeminmail());
+			
+			// 구조적 배치
+			/*
+			 * <sumware>
+			 * 		<member>
+			 * 			<name>김길동</name>
+			 * 			<inmail>gildong</inmail>
+			 * 		</member>
+			 * </sumware>
+			 */
+			mem.addContent(name);
+			mem.addContent(inmail);
+			root.addContent(mem);
 		}
 		
 		// 문서 객체 생성
@@ -57,7 +71,7 @@ public class MakeXML {
 		
 		try {
 			xo.output(doc, System.out);
-			xo.output(doc, new FileOutputStream("C:\\sumware\\project\\ws\\sumware\\WebContent\\xml\\nameList.xml"));
+			xo.output(doc, new FileOutputStream("C:\\sumware\\project\\ws\\sumware\\WebContent\\xml\\nameMailList.xml"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import util.MyMap;
 import controller.ModelForward;
@@ -22,7 +23,7 @@ public class MailModel implements ModelInter{
 		boolean method = true; // forward
 		
 		if(submod != null && submod.equals("mailMain")){
-			url = "mail/mailMain.jsp";
+			url = "mail/mail.jsp";
 			method = true; // forward
 			
 		} else if(submod != null && submod.equals("mailWriteForm")){
@@ -71,6 +72,9 @@ public class MailModel implements ModelInter{
 			
 			url = "mail/mailList.jsp";
 			method = true;
+		} else if(submod != null && submod.equals("mailCk")){
+			// 체크에디터
+			
 		}
 				
 		return new ModelForward(url, method);

@@ -40,17 +40,17 @@
 		</ul>
 	</div>
 	<form method="post" action="sumware" id="mailgogo">
-		<input type="hidden" name="mod" value="mail"> 
+		<input type="hidden" name="model" value="mail"> 
 		<input type="hidden" name="submod" value="mailList">
 		<input type="hidden" id="userid" name="userid">
 	</form>
 	<form method="post" action="sumware" id="logoutForm">
-		<input type="hidden" name="mod" value="login"> 
+		<input type="hidden" name="model" value="login"> 
 		<input type="hidden" name="submod" value="logout">
 		<!-- 로그아웃 -->
 	</form>
 	<form method="post" action="sumware" id="mailwrite">
-		<input type="hidden" name="mod" value="mail">
+		<input type="hidden" name="model" value="mail">
 		<input type="hidden" name="submod" value="mailWriteForm">
 	</form>
 </body>
