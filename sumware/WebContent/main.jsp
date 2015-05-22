@@ -23,6 +23,9 @@
 			$('#mod').attr("value","board");
 			$('#submod').attr("value","boardList");
 			$('#page').attr("value","1");
+		}else if(res==5){
+			$('#mod').attr("value","messenger");
+			$('#submod').attr("value","messengerForm");
 		}
 		$('form').submit();
 	}
@@ -41,6 +44,7 @@
 			<li><a href="javaScript:formGoGo(2)">Mail</a></li>
 			<li><a href="javaScript:formGoGo(3)">Calendar</a>
 			<li><a href="javaScript:formGoGo(4)">Board</a></li>
+			<li><a href="javaScript:formGoGo(5)">Messenger</a></li>
 		</ul>
 	</div>
 </body>
