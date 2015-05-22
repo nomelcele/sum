@@ -51,6 +51,16 @@ function todoFormGo(res){
 		alert("거절이 완료되었습니다.");
 		$(".title"+res).hide("slow");
 	}
+	function hateWorking(tonum, memnum){
+		console.log("거절했다~!!!!");
+		var data={};
+		$.ajax({
+			
+			type:"POST",
+			url:"sumware"
+		});
+		$(".title"+tonum).toggle("slow");
+	}
 </script>
 </head>
 <body>
@@ -124,118 +134,60 @@ function todoFormGo(res){
 					</div>
 					<div class="panel-body">
 						<div class="column" style="overflow: auto">
-						<div class="column" style="overflow: auto">
-						
 						<c:forEach var="fw" items="${fwList }">
 						<div class="low-lg-${fw.torownum }">
 							<div class="panel panel-success">
-								<div class="panel-heading">${tolist.totitle }</div>
+								<div class="panel-heading">${fw.totitle }</div>
 								<div class="panel-body">
-									<p>${tolist.tostdate } ~ ${tolist.toendate }</p>
-									<a href="javascript:viewDetail(${tolist.tonum })"><i class="fa fa-check"></i>detail</i></a>
-									
-									
-									<p>${tolist.tocont }</p>
-									
+									<p>${fw.tostdate } ~ ${fw.toendate }</p>
+									<p>${fw.tocont }</p>
 								</div>
 								<div class="panel-footer">
-								
-								<button type="button" class="btn btn-outline btn-success"
-												onclick="javascript:approveTodo(${tolist.tonum }, ${sessionScope.v.memnum })">승인</button>
-								<button type="button" class="btn btn-outline btn-warning"
-												onclick="javascript:rejectTodo(${tolist.tonum }, ${sessionScope.v.memnum })">거절</button>			
+								<table class="table table-striped table-bordered table-hover" 
+							style="margin: auto; width: 90%; padding-left:15px; padding-right:15px;">
+								<thead>
+									<tr>
+										<th colspan="1">승인 상태</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr style="border: 1px solid">
+										<td>
+										<c:choose>
+											<c:when test="${fw.toconfirm  eq 'n' }">
+												<button type="button" class="btn btn-outline btn-warning">미승인</button>
+											</c:when>
+											<c:when test="${tolist.toconfirm eq 'y' }">
+												<button type="button" class="btn btn-outline btn-success">승인</button>
+											</c:when>
+											<c:otherwise>
+												<button type="button" class="btn btn-outline btn-danger"
+												onclick="javascript:hateWorking(${fw.tonum }, ${sessionScope.v.memnum })">거절</button>
+											</c:otherwise>
+										</c:choose>
+										</td>
+									</tr>
+									<tr class="title${fw.tonum }" style="display: none;">
+										<tr>
+										<td>${fw.tocomm }</td>
+										</tr>
+										<tr>
+											<td>
+											<select>
+											
+											</select>
+											<button type="button" class="btn btn-outline btn-success">전달</button>
+											</td>
+										</tr>
+									</tr>
+								</tbody>
+							</table>
 								</div>
 							</div>
 						</div>
 						</c:forEach>
-						
 						<!-- /.col-lg-4 -->
 					</div>
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-							<table class="table table-striped table-bordered table-hover" 
-							style="margin: auto; width: 90%; padding-left:15px; padding-right:15px">
-								<thead>
-									<tr>
-										<th>번호</th>
-										<th>업무 제목</th>
-										<th>업무 기간</th>
-										<th>승인 상태</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="tolist" items="${todoList }">
-										<tr style="border: 1px solid">
-											<td>${tolist.tonum }</td>
-											<td><a href="javascript:viewDetail(${tolist.tonum })">${tolist.totitle }</a></td>
-											<td>${tolist.tostdate } ~ ${tolist.toendate }</td>
-											
-											<td><c:if test="${tolist.toconfirm  eq 'n' }">미승인</c:if>
-												<c:if test="${tolist.toconfirm eq 'y' }">승인</c:if> <c:if
-													test="${tolist.toconfirm eq 'x' }">거절</c:if></td>
-
-										</tr>
-										
-										
-										<tr class="title${tolist.tonum }" style="display:none">
-											<td colspan="4">${tolist.tocont }</td>
-										</tr>
-										<tr class="title${tolist.tonum }" style="display:none">
-											<td colspan="4">${tolist.tocomm }</td>
-										</tr>
-										<tr class="title${tolist.tonum }" style="display:none">
-											<td colspan="4"><input type="text" id="tocomm"></td>
-										</tr>
-										<tr class="title${tolist.tonum }" style="display:none">
-											<td colspan="2"><input type="button" value="승인"
-												onclick="javascript:approveTodo(${tolist.tonum }, ${sessionScope.v.memnum })"></td>
-											<td colspan="2"><input type="button" value="거절"
-												onclick="javascript:rejectTodo(${tolist.tonum }, ${sessionScope.v.memnum })"></td>
-										</tr>
-
-									</c:forEach>
-
-
-
-
-
-
-								</tbody>
-							</table>
-							<!-- /.col-lg-4 -->
-						</div>
 					</div>
 				</div>
 			</div>
