@@ -29,14 +29,14 @@ function goCal(btn){
 		$('#mod').attr("value","calendar");
 		$('#submod').attr("value","calList");
 		$('#cal').attr("value","0");
-		$('#selCal').submit();
 		
 	}else{
 		$('#mod').attr("value","calendar");
 		$('#submod').attr("value","calList");
 		$('#cal').attr("value","1");
-		$('#selCal').submit();
+
 	}
+	$('#selCal').submit();
 }
 $(function(){
 	  var currentLangCode = 'ko';
