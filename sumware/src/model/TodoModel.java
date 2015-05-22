@@ -82,7 +82,9 @@ public class TodoModel implements ModelInter{
 			}else if(childmod!=null && childmod.equals("rejectTodo")){
 				// 리스트의 승인여부 n을 x로 바꿈!!!!
 				int tonum= Integer.parseInt(request.getParameter("tonum"));
+				System.out.println("tonum : "+tonum);
 				String tocomm = request.getParameter("tocomm");
+				System.out.println("tocomm : "+tocomm);
 				TodoDao.getDao().confirmTodo(tonum,tocomm, "x");
 			}
 			

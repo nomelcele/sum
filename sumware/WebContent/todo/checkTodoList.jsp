@@ -16,10 +16,10 @@
 <body>
 	<div class="row">
 		<form action="../sumware" method="post" id="goTodo">
-			<input type="hidden" id="model" name="model"> 
-			<input type="hidden" id="submod" name="submod"> 
-			<input type="hidden" id="memnum" name="memnum"> 
-			<input type="hidden" id="memmgr" name="memmgr">
+			<input type="hidden" id="model" name="model"> <input
+				type="hidden" id="submod" name="submod"> <input
+				type="hidden" id="memnum" name="memnum"> <input
+				type="hidden" id="memmgr" name="memmgr">
 		</form>
 
 
@@ -40,7 +40,11 @@
 								src="../profileImg/${sessionScope.v.memprofile }"
 								alt="User Avatar" class="img-circle"
 								style="width: 100px; height: 100px;">
-							</span> <br/><br/><br/><br/><br/>
+							</span> <br />
+							<br />
+							<br />
+							<br />
+							<br />
 
 							<table>
 								<tr>
@@ -95,114 +99,106 @@
 					</div>
 					<div class="panel-body">
 						<div class="column" style="overflow: auto">
-						<div class="column" style="overflow: auto">
-						
-						
-						<c:forEach var="tolist" items="${todoList }">
-						<div class="low-lg-${tolist.tonum }">
-							<div class="panel panel-success">
-								<div class="panel-heading">${tolist.totitle }</div>
-								<div class="panel-body">
-									<p>${tolist.tostdate } ~ ${tolist.toendate }</p>
-									<a href="javascript:viewDetail(${tolist.tonum })"><i class="fa fa-check"></i>detail</i></a>
-									
-									
-									<p>${tolist.tocont }</p>
-									
-								</div>
-								<div class="panel-footer">
-								
-								<button type="button" class="btn btn-outline btn-success"
-												onclick="javascript:approveTodo(${tolist.tonum }, ${sessionScope.v.memnum })">승인</button>
-								<button type="button" class="btn btn-outline btn-warning"
-												onclick="javascript:rejectTodo(${tolist.tonum }, ${sessionScope.v.memnum })">거절</button>			
-								</div>
+							<div class="column" style="overflow: auto">
+
+
+								<c:forEach var="tolist" items="${todoList }">
+									<div class="low-lg-${tolist.tonum }">
+										<div class="panel panel-success">
+											<div class="panel-heading">
+												<i class="fa fa-pencil"></i> ${tolist.totitle }
+											</div>
+											<div class="panel-body">
+												<p>
+													<i class="fa fa-calendar-o"></i> ${tolist.tostdate } ~
+													${tolist.toendate }
+												</p>
+												<p>${tolist.tocont }</p>
+
+											</div>
+											<div class="panel-footer">
+
+												<button type="button" class="btn btn-outline btn-success"
+													data-toggle="modal" data-target="#okModal">승인</button>
+
+
+												<!-- Modal -->
+												<div id="okModal" class="modal fade" role="dialog">
+													<div class="modal-dialog">
+
+														<!-- Modal content-->
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h4 class="modal-title">거절</h4>
+															</div>
+															<form action="sumware" method="post" id="okForm">
+																<input type="hidden" name="model" value="todo">
+																<input type="hidden" name="submod" value="checkTodoList">
+																<input type="hidden" name="childmod" value="approveTodo">
+																<input type="hidden" name="tonum"
+																	value="${tolist.tonum }"> <input type="hidden"
+																	name="memnum" value="${sessionScope.v.memnum }">
+																<div class="modal-body has-success">
+																	<label class="control-label">남길 말</label>
+																	<input type="text" class="inputsuccess" name="tocomm">
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-default"
+																		data-dismiss="modal"
+																		onclick="javascript:todoFormGo(3)">보내기</button>
+																</div>
+															</form>
+														</div>
+
+													</div>
+												</div>
+
+
+												<button type="button" class="btn btn-outline btn-warning"
+													data-toggle="modal" data-target="#rejectModal">거절</button>
+
+
+												<!-- Modal -->
+												<div id="rejectModal" class="modal fade" role="dialog">
+													<div class="modal-dialog">
+
+														<!-- Modal content-->
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h4 class="modal-title">거절</h4>
+															</div>
+															<form action="sumware" method="get" id="rejectForm">
+																<input type="hidden" name="model" value="todo">
+																<input type="hidden" name="submod" value="checkTodoList">
+																<input type="hidden" name="childmod" value="rejectTodo">
+																<input type="hidden" name="tonum"
+																	value="${tolist.tonum }"> <input type="hidden"
+																	name="memnum" value="${sessionScope.v.memnum }">
+																<div class="modal-body has-success">
+																	<label class="control-label">남길 말</label> 
+																	<input type="text" class="inputsuccess" name="tocomm">
+
+																</div>
+																<div class="modal-footer">
+																	<button type="submit" class="btn btn-default"
+																		data-dismiss="modal"
+																		onclick="javascript:todoFormGo(4)">보내기</button>
+																</div>
+															</form>
+														</div>
+
+													</div>
+												</div>
+												<!-- Modal -->
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+
+								<!-- /.col-lg-4 -->
 							</div>
-						</div>
-						</c:forEach>
-						
-						<!-- /.col-lg-4 -->
-					</div>
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-							<table class="table table-striped table-bordered table-hover" 
-							style="margin: auto; width: 90%; padding-left:15px; padding-right:15px">
-								<thead>
-									<tr>
-										<th>번호</th>
-										<th>업무 제목</th>
-										<th>업무 기간</th>
-										<th>승인 상태</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="tolist" items="${todoList }">
-										<tr style="border: 1px solid">
-											<td>${tolist.tonum }</td>
-											<td><a href="javascript:viewDetail(${tolist.tonum })">${tolist.totitle }</a></td>
-											<td>${tolist.tostdate } ~ ${tolist.toendate }</td>
-											
-											<td><c:if test="${tolist.toconfirm  eq 'n' }">미승인</c:if>
-												<c:if test="${tolist.toconfirm eq 'y' }">승인</c:if> <c:if
-													test="${tolist.toconfirm eq 'x' }">거절</c:if></td>
-
-										</tr>
-										
-										
-										<tr class="title${tolist.tonum }" style="display:none">
-											<td colspan="4">${tolist.tocont }</td>
-										</tr>
-										<tr class="title${tolist.tonum }" style="display:none">
-											<td colspan="4">${tolist.tocomm }</td>
-										</tr>
-										<tr class="title${tolist.tonum }" style="display:none">
-											<td colspan="4"><input type="text" id="tocomm"></td>
-										</tr>
-										<tr class="title${tolist.tonum }" style="display:none">
-											<td colspan="2"><input type="button" value="승인"
-												onclick="javascript:approveTodo(${tolist.tonum }, ${sessionScope.v.memnum })"></td>
-											<td colspan="2"><input type="button" value="거절"
-												onclick="javascript:rejectTodo(${tolist.tonum }, ${sessionScope.v.memnum })"></td>
-										</tr>
-
-									</c:forEach>
-
-
-
-
-
 
 								</tbody>
 							</table>
@@ -211,11 +207,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
-
-
 
 			<div class="col-lg-3" style="width: 40%">
 				<div class="chat-panel panel panel-default">
@@ -344,35 +335,17 @@
 			$('#submod').attr("value","addtodoForm");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 			console.log("memnum",$('#memnum').val());
+			$('#goTodo').submit();
+		}else if(res==3){
+			$('#okForm').submit();
+		}else if(res==4){
+			$('#rejectForm').submit();
 		}
-		$('#goTodo').submit();
-	}
-	
-	function viewDetail(res){
-		$(".title"+res).show("slow");
-	};
-	
-	function approveTodo(res, mnum){
-		var fdata = {tonum:res,memnum:mnum,tocomm:$('#tocomm').val()};
-		$.ajax({
-			type:"POST",
-			url:"sumware?model=todo&submod=checkTodoList&childmod=approveTodo",
-			data:fdata
-		});
-		alert("승인이 완료되었습니다.");
-		$(".title"+res).hide("slow");
 		
 	}
-	function rejectTodo(res, mnum){
-		var fdata = {tonum:res,memnum:mnum,tocomm:$('#tocomm').val()};
-		$.ajax({
-			type:"POST",
-			url:"sumware?model=todo&submod=checkTodoList&childmod=rejectTodo",
-			data:fdata
-		});
-		alert("거절이 완료되었습니다.");
-		$(".title"+res).hide("slow");
-	}
+	
+	
+
 	
 	
 	

@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+
 <%@page import="dto.CalendarVO"%>
 <%@page import="dao.CalendarDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
