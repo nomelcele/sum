@@ -160,4 +160,41 @@ public class TodoDao {
 			
 		}
 
+
+		public ArrayList<TodoVO> getFWMana(int todept) {
+			ArrayList<TodoVO> list=null;
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs = null;
+			StringBuilder sql = new StringBuilder();
+			sql.append("select rownum tonum,tostdate,toendate,totitle,tocont,tomem,tocomm,toconfirm")
+			.append(" from (select * from todo order by 1 desc) where todept=?");
+			try{
+				list=new ArrayList<TodoVO>();
+				con=ConUtil.getOds();
+				pstmt=con.prepareStatement(sql.toString());
+				pstmt.setInt(1, todept);
+				rs=pstmt.executeQuery();
+				while(rs.next()){
+					TodoVO v = new TodoVO();
+					v.setTonum(rs.getInt("tonum"));
+					v.setTostdate(rs.getString("tostdate"));
+					v.setToendate(rs.getString("tostdate"));
+					v.setTotitle(rs.getString("totitle"));
+					v.setTocont(rs.getString("tocont"));
+					v.setTomem(rs.getInt("tomem"));
+					v.setTocomm(rs.getString("tocomm"));
+					v.setToconfirm(rs.getString("toconfirm"));
+					list.add(v);
+				}
+			}catch(SQLException e){
+				e.printStackTrace();
+			}finally{
+				CloseUtil.close(rs);
+				CloseUtil.close(pstmt);
+				CloseUtil.close(con);
+			}
+			return list;
+		}
+
 }
