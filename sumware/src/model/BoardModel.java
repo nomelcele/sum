@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import util.MyMap;
 import controller.ModelForward;
@@ -53,6 +55,33 @@ public class BoardModel implements ModelInter{
 			url = "board/boardDetail.jsp";
 			method = true;
 			
+		}else if(submod != null && submod.equals("ckBoard")){
+			Part part = null;
+			try {
+				part = request.getPart("upload");
+			} catch (ServletException e) {
+				e.printStackTrace();
+			}
+			String fileName = getFileName(part);
+			// 파일이 이름이 존재 하지 않으면 업로드 하지 않는다.
+			if(fileName != null && fileName.length() != 0){
+				// 혹시 같은 이름의 파일이 있을 수 있으니, 업로드 되는 시간을 붙여서 
+				// 실제 경로에 올려준다.
+				part.write(fileName+"_"+System.currentTimeMillis());
+			}
+			// chk callback 설정 : Ajax 로 넘어온 요청을 response 해주기 위한 설정
+			// CKEditorFuncNum 은 체크에디터가 사용하는 파라미터 명.
+			// callback 에 필요한 구문들이 넘어 온다.
+			// 체크 에디터는 이런식으로 자기만의 방식으로 전달을 했기 때문에
+			// callback 을 받을때도 자기 만의 방식으로 콜백 받아야 한다. 
+			// 그렇기 때문에 callback.jsp 를 따로 작성 해 준다.
+			String callback = request.getParameter("CKEditorFuncNum");
+			String fileUrl = "/upload"+fileName;
+			HttpSession ses = request.getSession();
+			ses.setAttribute("callback", callback);
+			ses.setAttribute("fileUrl", fileUrl);
+			url = "board/callback.jsp";
+			method = false;
 		}
 		return new ModelForward(url, method);
 	}
@@ -122,4 +151,40 @@ public class BoardModel implements ModelInter{
 		map.put("end", endRow);
 		return map;
 	}
+	private String getFileName(Part part){
+		// 파일 이름을 저장할 변수 선언
+		String fileName = "";
+		String header = part.getHeader("content-disposition");
+		String[] elements = header.split(";");
+		for(String e : elements){
+			// filename으로 시작하는 elements 를 찾으면 거기에서
+			// "=" 다음의 문자열, fileName만 저장한다.
+			// 아래의 것들은 이미 ; 으로 스플릿 했다.
+			// form-data; name="file"; filename="result.PNG" 헤더정보
+			if(e.trim().startsWith("filename")){
+				// e 라는 문자열 변수에 filename 으로 시작하는 구문이 있다면
+				// = 다음의 문장만 뽑아 내기 위한 함수. substring();
+				fileName = e.substring(e.indexOf("=")+1);
+				
+				fileName = fileName.trim().replace("\"", "");
+			}
+		}
+		return fileName;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
