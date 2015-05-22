@@ -160,9 +160,4 @@ $(function(){
 			</div>
 		</div>
 	</div>
-<!-- 	<div style="text-align: right;padding: 10px;"> -->
-<!-- 		<input type="button" id="calDept" value="부서일정" onclick="goCal(this)"> -->
-<!-- 		<input type="button" id="calMem" value="사원일정" onclick="goCal(this)"> -->
-<!-- 	</div> -->
-<!-- 	<div id='calendar'></div> -->
 <%@include file="../footer.jsp" %>
