@@ -13,6 +13,7 @@ import javax.servlet.http.Part;
 import util.MyFileUp;
 import util.MyMap;
 import controller.ModelForward;
+import dao.CalendarDAO;
 import dao.TodoDao;
 import dto.MemberVO;
 import dto.TodoVO;
@@ -30,10 +31,7 @@ public class TodoModel implements ModelInter{
 		
 		if(submod.equals("todoForm")){
 			url = "todo/Todo.jsp";
-	
-			
-		
-			
+			method=false;	
 		}else if(submod.equals("addtodoForm")){
 			System.out.println("addtodoForm 들어왔어");
 			
@@ -50,14 +48,25 @@ public class TodoModel implements ModelInter{
 			
 		}else if(submod.equals("addTodo")){
 			System.out.println("addTodo 들어왔어");
-			String fname = request.getParameter("tofile");
+			url = "sumware?mod=todo&submod=todoForm";
+			String fname = "tofile";
 			try {
+				//todo 테이블에 등록.
 				HashMap<String,String> map = MyFileUp.getFup().fileUp(fname, request);
+				TodoDao.getDao().addTodo(map);
+				//캘린더에 등록
+				map.put("start",map.get("tostdate"));
+				map.put("end", map.get("toendate"));
+				map.put("title", map.get("totitle"));
+				map.put("cal", map.get("todept"));
+				String sql = CalendarDAO.getDao().calSQL(2);
+				CalendarDAO.getDao().calInsert(sql, map);
+				
 			} catch (ServletException e) {
 				
 				e.printStackTrace();
 			}
-			url = "sumware?mod=todo&submod=todoForm";
+			
 			method = false;
 			
 		}else if(submod.equals("checkTodoList")){
