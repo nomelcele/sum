@@ -12,6 +12,7 @@
 <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
+<div class="row">
 	<form action="../sumware" method="post" id="goTodo">
 	<input type="hidden" id="mod" name="mod">
 	<input type="hidden" id="submod" name="submod">
@@ -85,7 +86,7 @@
 					<a href="#" class="list-group-item">부서 업무</a> 
 					<a href="#" class="list-group-item">팀 업무</a> 
 					<c:if test="${sessionScope.v.memauth lt 5 }">
-						<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리</button></br>
+						<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리</a></br>
 					</c:if>
 					<c:if test="${sessionScope.v.memauth lt 4 }">
 						<a href="javascript:todoFormGo(2)" class="list-group-item">업무추가</a></br>
@@ -257,6 +258,7 @@
 			</div>
 			<!-- /.panel .chat-panel -->
 		</div>
+	</div>
 	</div>
 	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
