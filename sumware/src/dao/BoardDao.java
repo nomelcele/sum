@@ -165,12 +165,38 @@ public class BoardDao {
 		return res;
 	}
 	
-	public void getDetail(HashMap<String, String> map){
+	public ArrayList<BoardVO> getDetail(HashMap<String, String> map){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
 		StringBuffer sql = new StringBuffer();
-		sql.append("select b.bnum, b.btitle, ");
+		sql.append
+		("select m.memname, b.btitle, b.cont, TO_CHAR(b.bdate,'yyyy.MM.dd') bdate").append
+		(" from board b, member m where b.bmem=m.memnum and bnum=?");
+		try {
+			con = ConUtil.getOds();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, Integer.parseInt(map.get("no")));
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				BoardVO v = new BoardVO();
+				v.setBcont("bcont");
+				v.setBwriter("memname");
+				v.setBtitle("btitle");
+				v.setBdate("bdate");
+				
+				list.add(v);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		return list;
 	}
 	
 	
