@@ -18,7 +18,7 @@
 	function todoFormGo(res){
 		$('#model').attr("value","todo");
 		if(res==1){
-			$('#submod').attr("value","checkTodoList");
+			$('#submod').attr("value","fWMana");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 		}else if(res==2){
 			$('#submod').attr("value","addtodoForm");
