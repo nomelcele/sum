@@ -120,12 +120,11 @@ $(function(){
 		   events:[${calJson}]
 		  })
 	 });
-	
 </script>
 </head>
 <body>
 	<form action="sumware" method="post" id="selCal">
-		<input type="hidden" name="mod" id="mod">
+		<input type="hidden" name="model" id="mod">
 		<input type="hidden" name="submod" id="submod">
 		<input type="hidden" name="cal" id="cal">
 	</form>
