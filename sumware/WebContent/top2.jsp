@@ -88,9 +88,4 @@
             </div>
         </header>
         <!-- 슬라이드 -->
-        <section>
-        
- 
-        
-        </section>
     

@@ -19,10 +19,16 @@ public class MailModel implements ModelInter{
 			HttpServletResponse response) throws IOException {
 		String submod = request.getParameter("submod");
 		String url = "";
-		boolean method = false;
+		boolean method = true; // forward
 		
 		if(submod != null && submod.equals("mailMain")){
-			url = "MailMain.jsp";
+			url = "mail/MailMain.jsp";
+			method = true; // forward
+			
+		} else if(submod != null && submod.equals("mailWriteForm")){
+			url = "mail/MailWrite.jsp";
+			method = true;
+			
 		} else if(submod != null && submod.equals("mailWrite")){
 			// 메일 작성
 			request.setCharacterEncoding("UTF-8");
@@ -44,26 +50,27 @@ public class MailModel implements ModelInter{
 
 			boolean res = MailDao.getDao().addMail(vo); // db에 메일 정보 넣기
 			
+			System.out.println(res);
+			
 			if(res){
 				url = "mail/MailMain.jsp";
 				method = true;
 			}
 		} else if(submod != null && submod.equals("mailList")){
 			// 받은 메일함
-			System.out.println("dddddddddd");
-			HashMap<String,String> map =MyMap.getMaps().getMapList(request);
-//			String userid = request.getParameter("userid");
+			// System.out.println("dddddddddd");
+			// HashMap<String,String> map =MyMap.getMaps().getMapList(request);
+			System.out.println("??????");
+			String userid = request.getParameter("userid");
 //			System.out.println(userid+"???????");
 			
 			// 현재 로그인한 사원의 id
-			ArrayList<MailVO> mlist = MailDao.getDao().getMailList(map.get("userid"));
-			
-			
+			ArrayList<MailVO> mlist = MailDao.getDao().getMailList(userid);
 			
 			request.setAttribute("list", mlist);
 			
 			url = "mail/MailList.jsp";
-			method = false;
+			method = true;
 		}
 				
 		return new ModelForward(url, method);

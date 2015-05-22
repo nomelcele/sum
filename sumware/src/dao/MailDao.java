@@ -18,6 +18,7 @@ public class MailDao {
 	}
 	
 	public boolean addMail(MailVO vo){
+		// 전송한 메일을 db에 추가해주는 메서드
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -44,6 +45,8 @@ public class MailDao {
 	}
 	
 	public ArrayList<MailVO> getMailList(String userid){
+		// 받은 메일 리스트를 불러오는 메서드
+		// 현재 로그인되어 있는 사원이 받은 메일만 불러와야 한다.
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
