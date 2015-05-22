@@ -88,7 +88,6 @@ public class BoardModel implements ModelInter{
 	
 	private Map<String, Integer> pageProcess(HttpServletRequest request, int etc) {
 		PageVO pageInfo = new PageVO();
-
 		// 한페이지에 보일 게시글 갯수
 		int rowsPerPage = 15;
 		// 페이지 보이는 갯수
