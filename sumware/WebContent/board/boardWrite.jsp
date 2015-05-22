@@ -128,7 +128,7 @@
 				</tr>
 			</table>
 			<form action="sumware" method="post">
-				<input type="hidden" name="mod" id="mod"> 
+				<input type="hidden" name="model" id="mod"> 
 				<input type="hidden" name="submod" id="submod">
 				<input type="hidden" name="page" id="page">
 				<table id="stcontent">
