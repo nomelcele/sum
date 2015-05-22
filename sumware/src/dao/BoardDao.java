@@ -164,4 +164,19 @@ public class BoardDao {
 		}
 		return res;
 	}
+	
+	public void getDetail(HashMap<String, String> map){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("select b.bnum, b.btitle, ");
+	}
+	
+	
+	
+	
+	
+	
+	
 }

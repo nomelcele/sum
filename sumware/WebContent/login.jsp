@@ -76,7 +76,7 @@
 									<button type="submit" class="btn btn-xs btn-info">로그인</button>
 								</div>
 							</form>
-						</div>
+					</div>
 					<!-- end service item -->
 				</div>
 			</div>
