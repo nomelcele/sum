@@ -50,6 +50,9 @@ body { font-size: 11px; font-family: 'Nanum Gothic', serif; line-height: 1.5; co
 	padding-top: 30px;
 }
 .footer {
+	margin:0 auto; padding-top:80px; height:200px;
 	background-color: #0eb493;
-	padding: 30px;
 	color: #fff;}
+.form-inline{
+	padding: 30px; text-align: right;
+}
