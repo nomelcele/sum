@@ -168,7 +168,7 @@ public class TodoDao {
 			ResultSet rs = null;
 			StringBuilder sql = new StringBuilder();
 			sql.append("select rownum torownum, tonum,to_char(tostdate,'yyyy-MM-dd') tostdate,")
-			.append("to_char(toendate,'yyyy-MM-dd') toendate,totitle,tocont,tomem,tocomm,toconfirm ")
+			.append("to_char(toendate,'yyyy-MM-dd') toendate,nvl(totitle,'제목없음') totitle,tocont,tomem,tocomm,toconfirm ")
 			.append(" from (select * from todo where todept=(select memdept from member where memnum=?) order by 1 desc)");
 			try{
 				list=new ArrayList<TodoVO>();
