@@ -30,7 +30,7 @@
 </head>
 <body>
 	<form action="sumware" method="post">
-		<input type="hidden" id="mod" name="mod">
+		<input type="hidden" id="mod" name="model">
 		<input type="hidden" id="submod" name="submod">
 		<input type="hidden" id="page" name="page">
 	</form>

@@ -4,5 +4,4 @@
     pageEncoding="UTF-8"%>
 <%
 	MakeXML.updateXML();
-	
 %>

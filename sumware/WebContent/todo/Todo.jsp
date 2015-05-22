@@ -14,36 +14,24 @@
 <body>
 <div class="row">
 	<form action="../sumware" method="post" id="goTodo">
-	<input type="hidden" id="model" name="model">
-	<input type="hidden" id="submod" name="submod">
-	<input type="hidden" id="memnum" name="memnum">
-	<input type="hidden" id="memmgr" name="memmgr">
+		<input type="hidden" id="model" name="model">
+		<input type="hidden" id="submod" name="submod">
+		<input type="hidden" id="memnum" name="memnum">
+		<input type="hidden" id="memmgr" name="memmgr">
 	</form>
-	
-	
 	<div class="wrap">
 		<div class="col-lg-1" style="width: 250px">
 			<div class="row-lg-1">
 				<div class="chat-panel panel panel-default">
-
 					<div class="panel-heading">
 						<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">My profile</strong>
-
 					</div>
-
-
 					<div class="panel-body">
 						<span class="chat-img pull-left"> <img src="../profileImg/${sessionScope.v.memprofile }"
 							alt="User Avatar" class="img-circle"
 							style="width: 100px; height: 100px;">
 						</span> 
 						<br/><br/><br/><br/><br/>
-						
-						
-						
-						
-						
-						
 						<table>
 							<tr>
 								<td><strong class="primary-font" style="margin: 10px">이름</strong></td>
@@ -61,24 +49,10 @@
 								<td><strong class="primary-font" style="margin: 10px">상급자</strong></td>
 								<td>${sessionScope.v.mgrname }</td>
 							</tr>
-
 						</table>
-
-
-
-
-
-
-
 					</div>
-
-
-
 				</div>
-
-
 			</div>
-
 			<div class="row-lg-2">
 				<div class="list-group">
 					
@@ -91,12 +65,8 @@
 					<c:if test="${sessionScope.v.memauth lt 4 }">
 						<a href="javascript:todoFormGo(2)" class="list-group-item">업무추가</a><br/>
 					</c:if>
-				
 				</div>
-
 			</div>
-
-
 		</div>
 		<div class="col-lg-2" style="width: 30%">
 			<div class="chat-panel panel panel-default">
@@ -116,7 +86,6 @@
 								<div class="panel-footer">Panel Footer</div>
 							</div>
 						</div>
-
 						<div class="row-lg-2">
 							<div class="panel panel-success">
 								<div class="panel-heading">Primary Panel</div>
@@ -145,12 +114,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
-
-
 		<div class="col-lg-3" style="width: 40%">
 			<div class="chat-panel panel panel-default">
 				<div class="panel-heading">
@@ -264,13 +227,10 @@
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script>
+<script>
 	function todoFormGo(res){
 		$('#model').attr("value","todo");
-		
 		if(res==1){
-			
-			
 		}else if(res==2){
 			$('#submod').attr("value","addtodoForm");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
