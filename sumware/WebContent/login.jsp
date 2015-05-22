@@ -61,18 +61,20 @@
 				<div class="row">
 				
 					<div class="sec-title text-center mb50 wow bounceInDown animated" data-wow-duration="500ms">
-						<h2>LOING</h2>
+						<h2>LOGIN</h2>
 						<div class="devider"><i class="fa fa-heart-o fa-lg"></i></div>
 					</div>
 
 					<!-- service item -->
 					<div class="col-md-12 wow fadeInLeft" data-wow-duration="500ms">
-							<form class="form-inline" role="form">
+						<form class="form-inline" role="form" action="sumware" method="post">
+								<input type="hidden" name="mod" value="login">
+								<input type="hidden" name="submod" value="login">
 								<div class="porm-group">
 									<label class="control-label-" for="sabun"> 사원번호 :</label> 
-									<input type="text" id="sabun" placeholder="사원번호"> 
+									<input type="text" id="memnum" name="memnum" placeholder="사원번호"> 
 									<label class="control-label" for="Password"> 비밀번호 :</label> 
-									<input type="password" id="Password" placeholder="비밀번호">
+									<input type="password" id="mempwd" name="mempwd" placeholder="비밀번호">
 									<button type="submit" class="btn btn-xs btn-info">로그인</button>
 								</div>
 							</form>
