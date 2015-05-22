@@ -18,7 +18,6 @@ import dto.MemberVO;
 import dto.TodoVO;
 
 public class TodoModel implements ModelInter{
-	MemberVO v = null;
 
 	@Override
 	public ModelForward exe(HttpServletRequest request,
@@ -31,13 +30,17 @@ public class TodoModel implements ModelInter{
 		
 		if(submod.equals("todoForm")){
 			url = "todo/Todo.jsp";
+	
 			
-			HttpSession session = request.getSession();
-			v = (MemberVO) session.getAttribute("v");
-			int memmnum = v.getMemnum();
+		
 			
-			System.out.println("memmgr : "+memmnum);
-			ArrayList<MemberVO> list = TodoDao.getDao().getTomem(memmnum);
+		}else if(submod.equals("addtodoForm")){
+			System.out.println("addtodoForm 들어왔어");
+			
+			url="todo/addTodo.jsp";
+			int memnum = Integer.parseInt(request.getParameter("memnum"));
+			System.out.println("memnum : "+memnum);
+			ArrayList<MemberVO> list = TodoDao.getDao().getTomem(memnum);
 			for(MemberVO vv: list){
 				System.out.println("::::"+vv.getMemname());
 			}
