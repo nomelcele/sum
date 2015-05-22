@@ -59,12 +59,10 @@
 		<section id="features" class="features">
 			<div class="container">
 				<div class="row">
-				
 					<div class="sec-title text-center mb50 wow bounceInDown animated" data-wow-duration="500ms">
 						<h2>LOGIN</h2>
 						<div class="devider"><i class="fa fa-heart-o fa-lg"></i></div>
 					</div>
-
 					<!-- service item -->
 					<div class="col-md-12 wow fadeInLeft" data-wow-duration="500ms">
 						<form class="form-inline" role="form" action="sumware" method="post">
