@@ -10,6 +10,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
 <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+<script>
+	function todoFormGo(res){
+		$('#model').attr("value","todo");
+		if(res==1){
+			$('#submod').attr("value","checkTodoList");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
+		}else if(res==2){
+			$('#submod').attr("value","addtodoForm");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
+			console.log("memnum",$('#memnum').val());
+		}
+		$('#goTodo').submit();
+	}
+</script>
 </head>
 <body>
 <div class="row">
@@ -17,7 +35,6 @@
 		<input type="hidden" id="model" name="model">
 		<input type="hidden" id="submod" name="submod">
 		<input type="hidden" id="memnum" name="memnum">
-		<input type="hidden" id="memmgr" name="memmgr">
 	</form>
 	<div class="wrap">
 		<div class="col-lg-1" style="width: 250px">
@@ -223,23 +240,6 @@
 		</div>
 	</div>
 	</div>
-	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-<script>
-	function todoFormGo(res){
-		$('#model').attr("value","todo");
-		if(res==1){
-			$('#submod').attr("value","checkTodoList");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-		}else if(res==2){
-			$('#submod').attr("value","addtodoForm");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-			console.log("memnum",$('#memnum').val());
-		}
-		$('#goTodo').submit();
-	}
-</script>
+
 </body>
 </html>
