@@ -45,7 +45,7 @@ public class BoardModel implements ModelInter{
 		}else if(submod.equals("boardInsert") && submod!=null){
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			BoardDao.getDao().insert(map);
-			url = "sumware?mod=board&submod=boardList&page=1";
+			url = "sumware?model=board&submod=boardList&page=1";
 			method = false; // redirect
 		}else if(submod != null && submod.equals("boardDetail")){
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
@@ -90,7 +90,7 @@ public class BoardModel implements ModelInter{
 		PageVO pageInfo = new PageVO();
 
 		// 한페이지에 보일 게시글 갯수
-		int rowsPerPage = 5;
+		int rowsPerPage = 15;
 		// 페이지 보이는 갯수
 		int pagesPerBlock = 5;
 		// 외부에서 부터 페이지 값을 받아 오는것 부터 시작
