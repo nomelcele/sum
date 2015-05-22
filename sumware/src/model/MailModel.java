@@ -22,11 +22,11 @@ public class MailModel implements ModelInter{
 		boolean method = true; // forward
 		
 		if(submod != null && submod.equals("mailMain")){
-			url = "mail/MailMain.jsp";
+			url = "mail/mailMain.jsp";
 			method = true; // forward
 			
 		} else if(submod != null && submod.equals("mailWriteForm")){
-			url = "mail/MailWrite.jsp";
+			url = "mail/mailWrite.jsp";
 			method = true;
 			
 		} else if(submod != null && submod.equals("mailWrite")){
@@ -53,7 +53,7 @@ public class MailModel implements ModelInter{
 			System.out.println(res);
 			
 			if(res){
-				url = "mail/MailMain.jsp";
+				url = "mail/mailMain.jsp";
 				method = true;
 			}
 		} else if(submod != null && submod.equals("mailList")){
@@ -69,7 +69,7 @@ public class MailModel implements ModelInter{
 			
 			request.setAttribute("list", mlist);
 			
-			url = "mail/MailList.jsp";
+			url = "mail/mailList.jsp";
 			method = true;
 		}
 				

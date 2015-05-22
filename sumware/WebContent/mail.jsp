@@ -19,7 +19,7 @@
 				</div>
 			</div>
 			<!-- 이 부분에 내용이 들어감 -->
-			<div class="col-lg-8"><%@include file="mail/MailWrite.jsp"%></div>
+			<div class="col-lg-8"><%@include file="mail/mailWrite.jsp"%></div>
 		</div>
 	</div>
 </section>

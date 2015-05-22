@@ -33,13 +33,12 @@ public class MakeXML {
 	// 새로운 회원이 추가되면 xml 파일에도 적용되어야 한다.
 	
 	// 일단 테스트
-	public static void main(String[] args) {
+	public static void updateXML(){
 		ArrayList<String> list = MemberDao.getDao().getInmailList();
-		
-		/*
+
 		// 아이디가 저장된 리스트를 읽어서 root의 자식 엘리먼트로 설정
 		Element root = new Element("sumware");
-		for(String e:inmailList){
+		for(String e:list){
 			root.addContent(new Element("member").setText(e));
 		}
 		
@@ -58,11 +57,11 @@ public class MakeXML {
 		
 		try {
 			xo.output(doc, System.out);
-			xo.output(doc, new FileOutputStream("xml/InmailList.xml"));
+			xo.output(doc, new FileOutputStream("C:\\sumware\\project\\ws\\sumware\\WebContent\\xml\\inmailList.xml"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		*/
+		
 		
 	}
 	
