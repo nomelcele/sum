@@ -161,19 +161,19 @@ public class TodoDao {
 		}
 
 
-		public ArrayList<TodoVO> getFWMana(int todept) {
+		public ArrayList<TodoVO> getFWMana(int tomem) {
 			ArrayList<TodoVO> list=null;
 			Connection con=null;
 			PreparedStatement pstmt=null;
 			ResultSet rs = null;
 			StringBuilder sql = new StringBuilder();
 			sql.append("select rownum tonum,tostdate,toendate,totitle,tocont,tomem,tocomm,toconfirm")
-			.append(" from (select * from todo order by 1 desc) where todept=?");
+			.append(" from (select * from todo where todept=(select memdept from member where memnum=?) order by 1 desc)");
 			try{
 				list=new ArrayList<TodoVO>();
 				con=ConUtil.getOds();
 				pstmt=con.prepareStatement(sql.toString());
-				pstmt.setInt(1, todept);
+				pstmt.setInt(1, tomem);
 				rs=pstmt.executeQuery();
 				while(rs.next()){
 					TodoVO v = new TodoVO();
