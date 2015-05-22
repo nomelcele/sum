@@ -9,21 +9,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script>
-		$('form').submit(function(){
-			// alert안해주고 바로 클로즈하면 파라미터 안보내짐..
-			alert("추가되었습니다.");
-			window.close();
-		});
-	
+	function todoFormGo(res){
+		$('#mod').attr("value","todo");
+		
+		if(res==1){
+			
+			
+		}else if(res==2){
+			$('#submod').attr("value","addtodoForm");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
+			console.log("memnum",$('#memnum').val());
+		}
+		$('#goTodo').submit();
+	}
 </script>
 <body>
+<form action="../sumware" method="post" id="goTodo">
+	<input type="hidden" id="mod" name="mod">
+	<input type="hidden" id="submod" name="submod">
+	<input type="hidden" id="memnum" name="memnum">
+	<input type="hidden" id="memmgr" name="memmgr">
+</form>
 <div class="container">
 	${sessionScope.v.memnum }
 	<div id="left" style="width:300px; height:700px; border:1px solid; float:left">
@@ -48,10 +58,10 @@
 				<a href="">부서업무</a></br>
 				<a href="">팀 업무</a></br>
 					<c:if test="${sessionScope.v.memauth lt 5 }">
-						<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">업무관리</button></br>
+						<a href="javascript:todoFormGo(1)">업무관리</button></br>
 					</c:if>
 					<c:if test="${sessionScope.v.memauth lt 4 }">
-						<a href="javascript:addTodoForm()">업무추가</a></br>
+						<a href="javascript:todoFormGo(2)">업무추가</a></br>
 					</c:if>
 		</div>
 	</div>
@@ -77,7 +87,6 @@
 		<div style="width:650px; height:490px; border:1px dotted">
 		</div>
 	</div>
-	<%@include file="addTodo.jsp" %>
 </div>
 </body>
 </html>
