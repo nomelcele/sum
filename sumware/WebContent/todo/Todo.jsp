@@ -60,15 +60,15 @@
 					<a href="#" class="list-group-item">부서 업무</a> 
 					<a href="#" class="list-group-item">팀 업무</a> 
 					<c:if test="${sessionScope.v.memauth lt 5 }">
-						<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리</a><br/>
+						<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리</a>
 					</c:if>
 					<c:if test="${sessionScope.v.memauth lt 4 }">
-						<a href="javascript:todoFormGo(2)" class="list-group-item">업무추가</a><br/>
+						<a href="javascript:todoFormGo(2)" class="list-group-item">업무추가</a>
 					</c:if>
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-2" style="width: 30%">
+		<div class="col-lg-2" style="width: 35%">
 			<div class="chat-panel panel panel-default">
 				<div class="panel-heading">
 					<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">부서업무</strong>
@@ -231,6 +231,8 @@
 	function todoFormGo(res){
 		$('#model').attr("value","todo");
 		if(res==1){
+			$('#submod').attr("value","checkTodoList");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
 		}else if(res==2){
 			$('#submod').attr("value","addtodoForm");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");

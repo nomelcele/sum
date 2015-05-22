@@ -9,15 +9,17 @@
 <title>Bootstrap 101 Template</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
-<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="font-awesome/css/font-awesome.css" />
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
 </head>
 <body>
 	<div class="row">
 		<form action="../sumware" method="post" id="goTodo">
-			<input type="hidden" id="model" name="model"> <input
-				type="hidden" id="submod" name="submod"> <input
-				type="hidden" id="memnum" name="memnum"> <input
-				type="hidden" id="memmgr" name="memmgr">
+			<input type="hidden" id="model" name="model"> 
+			<input type="hidden" id="submod" name="submod"> 
+			<input type="hidden" id="memnum" name="memnum"> 
+			<input type="hidden" id="memmgr" name="memmgr">
 		</form>
 
 
@@ -75,11 +77,9 @@
 							class="list-group-item">팀 업무</a>
 						<c:if test="${sessionScope.v.memauth lt 5 }">
 							<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리</a>
-							<br/>
 						</c:if>
 						<c:if test="${sessionScope.v.memauth lt 4 }">
 							<a href="javascript:todoFormGo(2)" class="list-group-item">업무추가</a>
-							<br/>
 						</c:if>
 
 					</div>
@@ -88,15 +88,77 @@
 
 
 			</div>
-			<div class="col-lg-2" style="width: 30%">
+			<div class="col-lg-2" style="width: 35%">
 				<div class="chat-panel panel panel-default">
 					<div class="panel-heading">
 						<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">부서업무</strong>
 					</div>
 					<div class="panel-body">
 						<div class="column" style="overflow: auto">
-							<table class="table table-striped table-bordered table-hover"
-								style="margin: auto; width: 90%">
+						<div class="column" style="overflow: auto">
+						
+						
+						<c:forEach var="tolist" items="${todoList }">
+						<div class="low-lg-${tolist.tonum }">
+							<div class="panel panel-success">
+								<div class="panel-heading">${tolist.totitle }</div>
+								<div class="panel-body">
+									<p>${tolist.tostdate } ~ ${tolist.toendate }</p>
+									<a href="javascript:viewDetail(${tolist.tonum })"><i class="fa fa-check"></i>detail</i></a>
+									
+									
+									<p>${tolist.tocont }</p>
+									
+								</div>
+								<div class="panel-footer">
+								
+								<button type="button" class="btn btn-outline btn-success"
+												onclick="javascript:approveTodo(${tolist.tonum }, ${sessionScope.v.memnum })">승인</button>
+								<button type="button" class="btn btn-outline btn-warning"
+												onclick="javascript:rejectTodo(${tolist.tonum }, ${sessionScope.v.memnum })">거절</button>			
+								</div>
+							</div>
+						</div>
+						</c:forEach>
+						
+						<!-- /.col-lg-4 -->
+					</div>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+							<table class="table table-striped table-bordered table-hover" 
+							style="margin: auto; width: 90%; padding-left:15px; padding-right:15px">
 								<thead>
 									<tr>
 										<th>번호</th>
@@ -108,28 +170,30 @@
 								<tbody>
 									<c:forEach var="tolist" items="${todoList }">
 										<tr style="border: 1px solid">
+											<td>${tolist.tonum }</td>
 											<td><a href="javascript:viewDetail(${tolist.tonum })">${tolist.totitle }</a></td>
-											<td>${tolist.tostdate }~ ${tolist.toendate }</td>
-											<td><c:if test="${tolist.toconfirm eq 'n' }">미승인</c:if>
+											<td>${tolist.tostdate } ~ ${tolist.toendate }</td>
+											
+											<td><c:if test="${tolist.toconfirm  eq 'n' }">미승인</c:if>
 												<c:if test="${tolist.toconfirm eq 'y' }">승인</c:if> <c:if
 													test="${tolist.toconfirm eq 'x' }">거절</c:if></td>
 
 										</tr>
-
-
-										<tr class="title${tolist.tonum }">
-											<td colspan="2">${tolist.tocont }</td>
+										
+										
+										<tr class="title${tolist.tonum }" style="display:none">
+											<td colspan="4">${tolist.tocont }</td>
 										</tr>
-										<tr class="title${tolist.tonum }">
-											<td colspan="2">${tolist.tocomm }</td>
+										<tr class="title${tolist.tonum }" style="display:none">
+											<td colspan="4">${tolist.tocomm }</td>
 										</tr>
-										<tr class="title${tolist.tonum }">
-											<td><input type="text" id="tocomm"></td>
+										<tr class="title${tolist.tonum }" style="display:none">
+											<td colspan="4"><input type="text" id="tocomm"></td>
 										</tr>
-										<tr class="title${tolist.tonum }">
-											<td><input type="button" value="승인"
+										<tr class="title${tolist.tonum }" style="display:none">
+											<td colspan="2"><input type="button" value="승인"
 												onclick="javascript:approveTodo(${tolist.tonum }, ${sessionScope.v.memnum })"></td>
-											<td><input type="button" value="거절"
+											<td colspan="2"><input type="button" value="거절"
 												onclick="javascript:rejectTodo(${tolist.tonum }, ${sessionScope.v.memnum })"></td>
 										</tr>
 

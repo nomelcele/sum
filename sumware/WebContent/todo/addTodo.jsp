@@ -70,11 +70,11 @@
 					<c:if test="${sessionScope.v.memauth lt 5 }">
 						<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리
 							</a>
-							<br/>
+							
 					</c:if>
 					<c:if test="${sessionScope.v.memauth lt 4 }">
 						<a href="javascript:todoFormGo(2)" class="list-group-item">업무추가</a>
-						<br/>
+					
 					</c:if>
 
 				</div>
@@ -83,7 +83,7 @@
 
 
 		</div>
-		<div class="col-lg-2" style="width: 30%">
+		<div class="col-lg-2" style="width: 35%">
 			<div class="chat-panel panel panel-default">
 				<div class="panel-heading">
 					<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">업무 추가</strong>

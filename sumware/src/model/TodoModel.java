@@ -47,7 +47,7 @@ public class TodoModel implements ModelInter{
 			method = true;		
 		}else if(submod.equals("addTodo")){
 			System.out.println("addTodo 들어왔어");
-			url = "sumware?mod=todo&submod=todoForm";
+			url = "sumware?model=todo&submod=todoForm";
 			String fname = "tofile";
 			try {
 				//todo 테이블에 등록.
@@ -86,7 +86,7 @@ public class TodoModel implements ModelInter{
 				TodoDao.getDao().confirmTodo(tonum,tocomm, "x");
 			}
 			
-			url = "sumware?mod=todo&submod=checkTodoListForm";
+			url = "sumware?model=todo&submod=checkTodoListForm";
 			method = true;
 			
 		}else if(submod.equals("checkTodoListForm")){

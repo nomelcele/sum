@@ -115,7 +115,7 @@ public class TodoDao {
 					v.setTofile(rs.getString("tofile"));
 					v.setTodept(rs.getInt("todept"));
 					v.setTomem(rs.getInt("tomem"));
-					v.setToconfirm(rs.getString("tomem"));
+					v.setToconfirm(rs.getString("toconfirm"));
 					v.setTocomm(rs.getString("tocomm"));
 					list.add(v);
 				}
