@@ -34,12 +34,13 @@ public class LoginModel implements ModelInter {
 			v.setMempwd(mempwd);
 			try {
 				MemberVO vo = LoginDao.getDao().login(v);
-
+				
 				if (vo != null) {
 					// sessionScope에 아이디를 저장
 					HttpSession session = request.getSession();
 					session.setAttribute("v", vo);
-
+					//login 기록 저장.
+					LoginDao.getDao().enterLog(memnum);				
 				} else {
 					// 로그인 실패
 				}
