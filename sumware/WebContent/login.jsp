@@ -70,8 +70,8 @@
 	<%-- --%>
 	<div class="container">
 		<form class="form-inline" role="form" action="sumware" method="post">
-			<input type="hidden" name="model" value="login"> <input
-				type="hidden" name="submod" value="login">
+			<input type="hidden" name="model" value="login">
+			 <input	type="hidden" name="submod" value="login">
 			<div class="porm-group">
 				<label class="control-label-" for="sabun"> 사원번호 :</label> <input
 					type="text" id="memnum" name="memnum" placeholder="사원번호"> <label

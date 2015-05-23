@@ -67,7 +67,7 @@ public class BoardModel implements ModelInter{
 			if(fileName != null && fileName.length() != 0){
 				// 혹시 같은 이름의 파일이 있을 수 있으니, 업로드 되는 시간을 붙여서 
 				// 실제 경로에 올려준다.
-				part.write(fileName+"_"+System.currentTimeMillis());
+				part.write(System.currentTimeMillis()+"_"+fileName);
 			}
 			// chk callback 설정 : Ajax 로 넘어온 요청을 response 해주기 위한 설정
 			// CKEditorFuncNum 은 체크에디터가 사용하는 파라미터 명.
@@ -164,8 +164,9 @@ public class BoardModel implements ModelInter{
 				// e 라는 문자열 변수에 filename 으로 시작하는 구문이 있다면
 				// = 다음의 문장만 뽑아 내기 위한 함수. substring();
 				fileName = e.substring(e.indexOf("=")+1);
-				
+				System.out.println(fileName+"1");
 				fileName = fileName.trim().replace("\"", "");
+				System.out.println(fileName+"2");
 			}
 		}
 		return fileName;

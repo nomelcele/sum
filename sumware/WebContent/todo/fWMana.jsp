@@ -156,7 +156,7 @@ function todoFormGo(res){
 											</c:when>
 											<c:otherwise>
 												<button type="button" class="btn btn-outline btn-danger"
-												onclick="javascript:hateWorking(${fw.tonum })">거절</button>
+												onclick="hateWorking(${fw.tonum })">거절</button>
 											</c:otherwise>
 										</c:choose>
 										</td>
@@ -165,14 +165,15 @@ function todoFormGo(res){
 										<td>${fw.tocomm }</td>
 									<tr class="title${fw.tonum }" style="display: none;">
 										<td>
-											<select name="tomem" class="form-control" id="inputSuccess"
+											<select name="tomem" class="form-control" id="inputSuccess${fw.tonum }"
 											style="width: 70%">
 												<option value="">팀장 선택</option>
 												<c:forEach var="tNameList" items="${sessionScope.teamNameList}">
 												<option value="${tNameList.memnum }">${tNameList.memname}</option>
 												</c:forEach>
 											</select>
-											<button type="button" class="btn btn-outline btn-success">전달</button>
+											<button type="button" class="btn btn-outline btn-success"
+											onclick="tosend(${fw.tonum })">전달</button>
 										</td>
 									</tr>
 									</tr>
@@ -187,11 +188,6 @@ function todoFormGo(res){
 					</div>
 				</div>
 			</div>
-
-
-
-
-
 
 			<div class="col-lg-3" style="width: 40%">
 				<div class="chat-panel panel panel-default">
