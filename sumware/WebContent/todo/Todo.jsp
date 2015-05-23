@@ -2,33 +2,7 @@
 <%@page import="dto.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Bootstrap 101 Template</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap -->
-<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-<script>
-	function todoFormGo(res){
-		$('#model').attr("value","todo");
-		if(res==1){
-			$('#submod').attr("value","fWMana");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-		}else if(res==2){
-			$('#submod').attr("value","addtodoForm");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-			console.log("memnum",$('#memnum').val());
-		}
-		$('#goTodo').submit();
-	}
-</script>
-</head>
+
 <body>
 <div class="row">
 	<form action="../sumware" method="post" id="goTodo">
@@ -241,5 +215,3 @@
 	</div>
 	</div>
 
-</body>
-</html>

@@ -30,7 +30,7 @@ public class TodoModel implements ModelInter{
 		boolean method=false;
 		
 		if(submod.equals("todoForm")){
-			url = "todo/Todo.jsp";
+			url = "todo/todoMain.jsp";
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			System.out.println("memnum : "+memnum);
 			ArrayList<MemberVO> list = TodoDao.getDao().getTomem(memnum);
