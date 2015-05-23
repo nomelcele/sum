@@ -17,43 +17,28 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
-function todoFormGo(res){
-	$('#model').attr("value","todo");
-		if(res==1){
-			
-		}else if(res==2){
-			$('#submod').attr("value","addtodoForm");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-			console.log("memnum",$('#memnum').val());
-		}
-		$('#goTodo').submit();
-	}
-	function viewDetail(res){
-		$(".title"+res).show("slow");
-	};
-	function approveTodo(res, mnum){
-		var fdata = {tonum:res,memnum:mnum,tocomm:$('#tocomm').val()};
-		$.ajax({
-			type:"POST",
-			url:"sumware?model=todo&submod=checkTodoList&childmod=approveTodo",
-			data:fdata
-		});
-		alert("승인이 완료되었습니다.");
-		$(".title"+res).hide("slow");
-	}
-	function rejectTodo(res, mnum){
-		var fdata = {tonum:res,memnum:mnum,tocomm:$('#tocomm').val()};
-		$.ajax({
-			type:"POST",
-			url:"sumware?model=todo&submod=checkTodoList&childmod=rejectTodo",
-			data:fdata
-		});
-		alert("거절이 완료되었습니다.");
-		$(".title"+res).hide("slow");
+	function todoFormGo(res){
+		$('#model').attr("value","todo");
+			if(res==1){
+				
+			}else if(res==2){
+				$('#submod').attr("value","addtodoForm");
+				$('#memnum').attr("value","${sessionScope.v.memnum}");
+				console.log("memnum",$('#memnum').val());
+			}
+			$('#goTodo').submit();
 	}
 	function hateWorking(tonum){
 		console.log("거절했다~!!!!");
 	 	$(".title"+tonum).toggle("slow");
+	}
+	function tosend(tonum){
+		console.log("전달했네~~~");
+		var v = $('#inputSuccess'+tonum).val();
+		console.log("하하하하 v :::",v);
+		$('#tomem'+tonum).attr("value",v);
+		console.log("후후후후 ㅍ::::",$('#tomem').val());
+		$('#goFk'+tonum).submit();
 	}
 </script>
 </head>
@@ -151,7 +136,7 @@ function todoFormGo(res){
 											<c:when test="${fw.toconfirm  eq 'n' }">
 												<button type="button" class="btn btn-outline btn-warning">미승인</button>
 											</c:when>
-											<c:when test="${tolist.toconfirm eq 'y' }">
+											<c:when test="${fw.toconfirm eq 'y' }">
 												<button type="button" class="btn btn-outline btn-success">승인</button>
 											</c:when>
 											<c:otherwise>
@@ -163,6 +148,7 @@ function todoFormGo(res){
 									</tr>
 									<tr class="title${fw.tonum }" style="display: none;">
 										<td>${fw.tocomm }</td>
+									</tr>
 									<tr class="title${fw.tonum }" style="display: none;">
 										<td>
 											<select name="tomem" class="form-control" id="inputSuccess${fw.tonum }"
@@ -172,10 +158,31 @@ function todoFormGo(res){
 												<option value="${tNameList.memnum }">${tNameList.memname}</option>
 												</c:forEach>
 											</select>
+										</td>
+									</tr>
+									
+									
+									<tr class="title${fw.tonum }" style="display: none;">
+										
+										<td>
+										<form action="sumware" method="post" id="goFk${fw.tonum }">
+											<input type="hidden" name="model" value="todo"> 
+											<input type="hidden" name="submod" value="toUpFk"> 
+											<input type="hidden" name="memnum" value="${sessionScope.v.memnum }"> 
+											<input type="hidden" id="tomem${fw.tonum }" name="tomem"> 
+											<input type="hidden" name="toconfirm" value="n"> 
+											<input type="hidden" name="tonum" value="${fw.tonum}">
+											<textarea name="tocomm" style="width: 250px; resize:none" ></textarea>
+										</form>
+										</td>
+										
+									</tr>
+									
+									<tr class="title${fw.tonum }" style="display: none;">
+										<td>
 											<button type="button" class="btn btn-outline btn-success"
 											onclick="tosend(${fw.tonum })">전달</button>
 										</td>
-									</tr>
 									</tr>
 								</tbody>
 							</table>

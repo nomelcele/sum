@@ -199,4 +199,30 @@ public class TodoDao {
 			return list;
 		}
 
+
+		public ArrayList<TodoVO> todoUpdate(HashMap<String, String> map) {
+			ArrayList<TodoVO> list = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			StringBuffer sql = new StringBuffer();
+			sql.append("update todo set toconfirm=?, tomem=?,tocomm=? where tonum=?");
+			try{
+				con=ConUtil.getOds();
+				pstmt=con.prepareStatement(sql.toString());
+				pstmt.setString(1, map.get("toconfirm"));
+				pstmt.setString(2, map.get("tomem"));
+				pstmt.setString(3, map.get("tocomm"));
+				pstmt.setInt(4, Integer.parseInt(map.get("tonum")));
+				pstmt.executeUpdate();
+				//업데이트를 한후에 다시 todo리스트를 다시 받아서 보냄.
+				list = getFWMana(Integer.parseInt(map.get("memnum")));
+			}catch(SQLException e){
+				e.printStackTrace();
+			}finally{
+				CloseUtil.close(pstmt);
+				CloseUtil.close(con);
+			}
+			return list;
+		}
+
 }

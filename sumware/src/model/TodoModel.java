@@ -103,6 +103,16 @@ public class TodoModel implements ModelInter{
 			request.setAttribute("fwList", fwList);
 			url="todo/fWMana.jsp";
 			method=true;
+		}else if(submod.equals("toUpFk")){
+			System.out.print("toUpFk 들어옴");
+			
+			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
+			ArrayList<TodoVO> list = TodoDao.getDao().todoUpdate(map);
+			
+			request.removeAttribute("fwList");
+			request.setAttribute("fwList", list);
+			url="todo/fWMana.jsp";
+			method=true;
 		}
 		
 		return new ModelForward(url, method);
