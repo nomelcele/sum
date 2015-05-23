@@ -27,24 +27,13 @@ public class MessengerModel implements ModelInter{
 		
 			ArrayList<MemberVO> list = MessengerDao.getDao().getList();
 			request.setAttribute("list", list);
-			System.out.println("MessengerModel 입니다.");
+			System.out.println("MessengerModel 영역입니다.");
 		}else if(submod != null && submod.equals("messengerChat")){
 			url = "messengerChat.jsp";
 			method = true;
-			int tomemNum = Integer.parseInt(request.getParameter("tomemNume"));
-			int frommemNum = Integer.parseInt(request.getParameter("frommemNum"));
-			String reip = request.getRemoteAddr();
 			
-			System.out.println("tomemNum : "+tomemNum);
-			System.out.println("frommemNum : "+frommemNum);
-			System.out.println("reip : "+reip);
-			MessengerVO v = new MessengerVO();
-			v.setMesnum(tomemNum); // 보내는 사원 번호 
-			v.setMesmem(frommemNum); // 받는 사람 사원 번호
-			
-			// db에 저장
-			
-			System.out.println("MessengerChat영역");
+
+
 			
 		}
 		
