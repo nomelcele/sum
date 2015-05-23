@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 [<%
  // 모델에서 수행하도록 수정
+ 	System.out.println("mailSuggest.jsp 들어옴");
  	request.setCharacterEncoding("UTF-8");
 	String key = request.getParameter("key");
 	System.out.println("입력한 값: "+key);
