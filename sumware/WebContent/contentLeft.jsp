@@ -110,14 +110,14 @@
 	<div class="col-md-2">
 				<div>
 					<a href="javascript:mailwrite()" class="btn btn-sm btn-info"> <span
-						class="glyphicon glyphicon-pencil"></span> 메일쓰기
+						class="glyphicon glyphicon-pencil"></span> 메일 쓰기
 					</a>
 				</div>
 				<div class="list-group">
-					<a href="javascript:mailbox()" class="list-group-item">받은 메일함 </a>
-					<a href="#" class="list-group-item">보낸 메일함</a> <a href="#"
-						class="list-group-item">내게 쓴 메일함</a> <a href="#"
-						class="list-group-item">휴지통</a>
+					<a href="javascript:frommailbox()" class="list-group-item">받은 메일함 </a>
+					<a href="javascript:tomailbox()" class="list-group-item">보낸 메일함</a> 
+					<a href="#" class="list-group-item">내게 쓴 메일함</a> 
+					<a href="#" class="list-group-item">휴지통</a>
 				</div>
 			</div>
 </c:if>

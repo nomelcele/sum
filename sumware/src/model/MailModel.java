@@ -57,7 +57,7 @@ public class MailModel implements ModelInter{
 				url = "mail/mailMain.jsp";
 				method = true;
 			}
-		} else if(submod != null && submod.equals("mailList")){
+		} else if(submod != null && submod.equals("mailFromList")){
 			// 받은 메일함
 			// System.out.println("dddddddddd");
 			// HashMap<String,String> map =MyMap.getMaps().getMapList(request);
@@ -66,12 +66,26 @@ public class MailModel implements ModelInter{
 //			System.out.println(userid+"???????");
 			
 			// 현재 로그인한 사원의 id
-			ArrayList<MailVO> mlist = MailDao.getDao().getMailList(userid);
+			ArrayList<MailVO> fromlist = MailDao.getDao().getFromMailList(userid);
 			
-			request.setAttribute("list", mlist);
+			request.setAttribute("list", fromlist);
+			request.setAttribute("tofrom", 1);
 			
 			url = "mail/mailList.jsp";
 			method = true;
+		} else if(submod != null && submod.equals("mailToList")){
+			// 보낸 메일함
+			// 현재 로그인한 사원의 사원 번호
+			int usernum = Integer.parseInt(request.getParameter("usernum"));
+			ArrayList<MailVO> tolist = MailDao.getDao().getToMailList(usernum);
+			
+			request.setAttribute("list", tolist);
+			request.setAttribute("tofrom", 2);
+			
+			url = "mail/mailList.jsp";
+			method = true;
+			
+			System.out.println("aaaaaaaaaaaaaaaaaaaaa");
 		} else if(submod != null && submod.equals("mailCk")){
 			// 체크에디터
 			

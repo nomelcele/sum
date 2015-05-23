@@ -44,7 +44,7 @@ public class MailDao {
 		}
 	}
 	
-	public ArrayList<MailVO> getMailList(String userid){
+	public ArrayList<MailVO> getFromMailList(String userid){
 		// 받은 메일 리스트를 불러오는 메서드
 		// 현재 로그인되어 있는 사원이 받은 메일만 불러와야 한다.
 		Connection con = null;
@@ -57,7 +57,7 @@ public class MailDao {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
 			sql.append("select mailmem,mailtitle,maildate from mail");
-			sql.append(" where mailreceiver=?");
+			sql.append(" where mailreceiver=? order by maildate desc");
 			
 			// 현재 로그인한 사원에게 온 메일만 검색
 			pstmt = con.prepareStatement(sql.toString());
@@ -67,6 +67,39 @@ public class MailDao {
 			while(rs.next()){
 				MailVO v = new MailVO();
 				v.setMailmem(rs.getInt("mailmem"));
+				v.setMailtitle(rs.getString("mailtitle"));
+				v.setMaildate(rs.getString("maildate"));
+				list.add(v);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<MailVO> getToMailList(int usernum){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<MailVO> list = new ArrayList<MailVO>();
+		
+		try {
+			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			sql.append("select mailreceiver,mailtitle,maildate from mail");
+			sql.append(" where mailmem=? order by maildate desc");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, usernum);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				MailVO v = new MailVO();
+				v.setMailreceiver(rs.getString("mailreceiver"));
 				v.setMailtitle(rs.getString("mailtitle"));
 				v.setMaildate(rs.getString("maildate"));
 				list.add(v);

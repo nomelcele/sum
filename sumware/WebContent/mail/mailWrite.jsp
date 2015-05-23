@@ -98,7 +98,7 @@
 </script>
 
 
-<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.4.7/basic/ckeditor.js"></script>
 <script src="../js/myckeditor.js"></script>
 <script>
 	$(function(){

@@ -12,14 +12,26 @@
 		<table class="table table-condensed table-hover">
 				<tr>
 					<td>선택</td>
-					<td>보낸사람</td>
+					<!-- 받은 메일함을 클릭했을 때 -->
+					<c:if test="${tofrom eq '1' }">
+						<td>보낸 사람</td>
+					</c:if>
+					<!-- 보낸 메일함을 클릭했을 때 -->
+					<c:if test="${tofrom eq '2' }">
+						<td>받는 사람</td>
+					</c:if>
 					<td>제목</td>
-					<td>보낸날짜</td>
+					<td>보낸 날짜</td>
 				</tr>
 				<c:forEach var="mList" items="${list}">
 					<tr>
 						<td><input type="checkbox" name="num" id="num"></td>
-						<td>${mList.mailmem}</td>
+						<c:if test="${tofrom eq '1' }">
+							<td>${mList.mailmem}</td>
+						</c:if>
+						<c:if test="${tofrom eq '2' }">
+							<td>${mList.mailreceiver}</td>
+						</c:if>
 						<td>${mList.mailtitle}</td>
 						<td>${mList.maildate}</td>
 					</tr>
