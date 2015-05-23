@@ -6,17 +6,42 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>SunWare</title>
-
+<title>SumWare</title>
+<!-- 라이브러리  -->
 <link rel="stylesheet" href="font-awesome/css/font-awesome.css" />
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+<link href="css/bootstrap.min.css" rel="stylesheet"/>
+<link href="css/main.css" rel="stylesheet"/>
 
-
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/main.css" rel="stylesheet">
+<!-- 자바스크립트 -->
+<script src="js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+	function todoFormGo(res){
+		$('#model').attr("value","todo");
+		if(res==1){
+			$('#submod').attr("value","fWMana");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
+		}else if(res==2){
+			$('#submod').attr("value","addtodoForm");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
+			console.log("memnum",$('#memnum').val());
+		}
+		$('#goTodo').submit();
+	}
+	
+	
+	
+	
+</script>
 
 </head>
+
+
+
 <nav class="navbar navbar">
 	<div class="container">
 		<div class="navbar-header">
