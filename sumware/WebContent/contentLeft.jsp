@@ -6,6 +6,12 @@
 </c:if>
 <%--  --%>
 <c:if test="${param.model eq 'todo' }">
+
+<form action="../sumware" method="post" id="goTodo">
+	<input type="hidden" id="model" name="model">
+	<input type="hidden" id="submod" name="submod">
+	<input type="hidden" id="memnum" name="memnum">
+</form>
 <div class="col-lg-1" style="width: 250px">
 	<div class="row-lg-1">
 		<div class="chat-panel panel panel-default">
@@ -15,7 +21,7 @@
 			</div>
 			<div class="panel-body">
 				<span class="chat-img pull-left"> <img
-					src="../profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
+					src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
 					class="img-circle" style="width: 100px; height: 100px;">
 				</span> </br> </br> </br> </br> </br>
 				<table>
@@ -47,8 +53,12 @@
 				class="primary-font">Todo</strong></a> <a href="#"
 				class="list-group-item">부서 업무</a> <a href="#"
 				class="list-group-item">팀 업무</a>
-			<c:if test="${sessionScope.v.memauth lt 5 }">
+			<c:if test="${sessionScope.v.memauth lt 4 }">
 				<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리
+					</button> </br>
+			</c:if>
+			<c:if test="${sessionScope.v.memauth eq 4 }">
+				<a href="javascript:todoFormGo(5)" class="list-group-item">업무관리
 					</button> </br>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
@@ -58,7 +68,9 @@
 		</div>
 	</div>
 </div>
+
 </c:if>
+
 <%--  --%>
 <c:if test="${param.model eq 'calendar' }">
       <div class="chat-panel panel panel-default">
@@ -136,6 +148,7 @@
 			</table>
 		</div>
 	</div>
+
 </c:if>
 
 

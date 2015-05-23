@@ -25,17 +25,26 @@
 		if(res==1){
 			$('#submod').attr("value","fWMana");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
+			$('#goTodo').submit();
 		}else if(res==2){
 			$('#submod').attr("value","addtodoForm");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 			console.log("memnum",$('#memnum').val());
+			$('#goTodo').submit();
+		}else if(res==3){
+			// 팀장업무관리에서 승인버튼
+			$('#okForm').submit();
+		}else if(res==4){
+			// 팀장업무관리에서 거절버튼
+			$('#rejectForm').submit();
+		}else if(res==5){
+			// 팀장일때 팀장관리 버튼
+			$('#submod').attr("value","checkTodoList");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
+			$('#goTodo').submit();
 		}
-		$('#goTodo').submit();
 	}
-	
-	
-	
-	
+
 </script>
 
 </head>
