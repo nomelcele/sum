@@ -56,9 +56,10 @@ public class LoginModel implements ModelInter {
 
 		} else if (submod != null && submod.equals("logout")) {
 			url = "";
+			String memnum = request.getParameter("memnum");
 			HttpSession session = request.getSession();
-			session.removeAttribute("mymemnum");
-
+			//저장된 세션 다 날림.
+			session.invalidate();
 			method = true;
 
 		}
