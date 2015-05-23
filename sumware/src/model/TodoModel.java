@@ -31,11 +31,6 @@ public class TodoModel implements ModelInter{
 		
 		if(submod.equals("todoForm")){
 			url = "todo/Todo.jsp";
-			method=false;	
-		}else if(submod.equals("addtodoForm")){
-			System.out.println("addtodoForm 들어왔어");
-			
-			
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			System.out.println("memnum : "+memnum);
 			ArrayList<MemberVO> list = TodoDao.getDao().getTomem(memnum);
@@ -44,7 +39,11 @@ public class TodoModel implements ModelInter{
 			}
 			HttpSession session = request.getSession();
 			session.setAttribute("teamNameList", list);
+			method=false;	
+		}else if(submod.equals("addtodoForm")){
+			System.out.println("addtodoForm 들어왔어");
 			url="todo/addTodo.jsp";
+			
 			method = false;		
 		}else if(submod.equals("addTodo")){
 			System.out.println("addTodo 들어왔어");

@@ -13,6 +13,7 @@
 		if(res==1){
 			$('#mod').attr("value","todo");
 			$('#submod').attr("value","todoForm");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
 		}else if(res==2){
 			$('#mod').attr("value","mail");
 			$('#submod').attr("value","mailMain");
@@ -35,6 +36,7 @@
 	<form action="sumware" method="post">
 		<input type="hidden" id="mod" name="model">
 		<input type="hidden" id="submod" name="submod">
+		<input type="hidden" id="memnum" name="memnum">
 		<input type="hidden" id="page" name="page">
 	</form>
 	<div>
