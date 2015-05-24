@@ -86,7 +86,7 @@ public class LoginDao {
 		}
 		return res;
 	}
-	public void enterLog(int memnum) {
+	public void inLog(int memnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		StringBuffer sql = new StringBuffer();
@@ -104,5 +104,23 @@ public class LoginDao {
 			CloseUtil.close(con);
 		}
 		
+	}
+	public void outLog(int memnum){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("update login set locheck='f',loendate=sysdate where lomem=?");
+		try{
+			con=ConUtil.getOds();
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setInt(1, memnum);
+			pstmt.executeUpdate();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
 	}
 }
