@@ -24,23 +24,35 @@ public class LoginModel implements ModelInter {
 		
 		if (submod != null && submod.equals("login")) {
 
-			String memnum = request.getParameter("memnum");
+			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			String mempwd = request.getParameter("mempwd");
 			// System.out.println("memnum : "+memnum);
 			// System.out.println("mempwd : "+mempwd);
 
 			MemberVO v = new MemberVO();
-			v.setMemnum(Integer.parseInt(memnum));
+			v.setMemnum(memnum);
 			v.setMempwd(mempwd);
 			try {
 				MemberVO vo = LoginDao.getDao().login(v);
 				
 				if (vo != null) {
-					// sessionScope에 아이디를 저장
-					HttpSession session = request.getSession();
-					session.setAttribute("v", vo);
-					//login 기록 저장.
-					LoginDao.getDao().enterLog(memnum);				
+					String res = LoginDao.getDao().ckFirstLogin(memnum);
+					if(res.equals("0")){
+						
+						request.setAttribute("memnum", memnum);
+						request.setAttribute("mempwd", mempwd);
+						//회원정보입력창으로 이동.
+						//이동후에 memnum입력란에 자동으로 입력시켜주고
+						//mempwd는 유효성검사 할때 쓰기위하여 보냄.
+						url="";
+					}else{
+						url = "main.jsp";
+						// sessionScope에 아이디를 저장
+						HttpSession session = request.getSession();
+						session.setAttribute("v", vo);
+						//login 기록 저장.
+						LoginDao.getDao().enterLog(memnum);	
+					}
 				} else {
 					// 로그인 실패
 				}
@@ -49,9 +61,7 @@ public class LoginModel implements ModelInter {
 
 				e.printStackTrace();
 			}
-			url = "main.jsp";
-			// ******************
-			// url = "sumware?mod=todo&submod=todoForm";
+			
 			method = true;
 
 		} else if (submod != null && submod.equals("logout")) {
