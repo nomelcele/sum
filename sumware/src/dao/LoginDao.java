@@ -63,4 +63,24 @@ public class LoginDao {
 		   CloseUtil.close(con);
 		  return vo;
 	}
+
+	public void enterLog(String memnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("insert into login(lonum,locheck,lostdate,lomem) values(login_seq.nextVal,'t',sysdate,?)");
+		try{
+			con=ConUtil.getOds();
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setString(1, memnum);
+			pstmt.executeUpdate();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		
+	}
 }
