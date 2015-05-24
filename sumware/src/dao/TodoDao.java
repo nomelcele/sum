@@ -68,7 +68,7 @@ public class TodoDao {
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, map.get("tostdate"));
 			pstmt.setString(2, map.get("toendate"));
-			pstmt.setString(3, map.get("totile"));
+			pstmt.setString(3, map.get("totitle"));
 			pstmt.setString(4, map.get("tocont"));
 			pstmt.setString(5, map.get("tofile"));
 			pstmt.setInt(6, Integer.parseInt(map.get("todept")));
@@ -132,10 +132,9 @@ public class TodoDao {
 
 		}
 		
-		
-		
+
 		// 승인했을 시 n을 y나 x로 바꿔주는 메서드
-		public void confirmTodo(int tonum,String tocomm, String toconfirm){
+		public void confirmTodo(HashMap<String,String> map, String toconfirm){
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			StringBuffer sql = new StringBuffer();
@@ -145,8 +144,8 @@ public class TodoDao {
 				con = ConUtil.getOds();
 				pstmt = con.prepareStatement(sql.toString());
 				pstmt.setString(1, toconfirm);
-				pstmt.setString(2, tocomm);
-				pstmt.setInt(3, tonum);
+				pstmt.setString(2, map.get("tocomm"));
+				pstmt.setInt(3, Integer.parseInt(map.get("tonum")));
 				
 				pstmt.executeUpdate();
 				

@@ -11,11 +11,16 @@
 				<h4 class="modal-title">거절</h4>
 			</div>
 			<form action="sumware" method="get" id="rejectForm">
-				<input type="hidden" name="model" value="todo"> <input
-					type="hidden" name="submod" value="checkTodoList"> <input
-					type="hidden" name="childmod" value="rejectTodo"> <input
-					type="hidden" name="tonum" value="${tolist.tonum }"> <input
-					type="hidden" name="memnum" value="${sessionScope.v.memnum }">
+				<input type="hidden" name="model" value="todo"> 
+				<input type="hidden" name="submod" value="checkTodoList"> 
+				<input type="hidden" name="childmod" value="rejectTodo"> 
+				<input type="hidden" name="tonum" value="${tolist.tonum }"> 
+				<input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
+				<input type="hidden" name="tostdate" value="${tolist.tostdate }">
+				<input type="hidden" name="toendate" value="${tolist.toendate }">
+				<input type="hidden" name="totitle" value="${tolist.totitle }">
+				<input type="hidden" name="todept" value="${tolist.todept }">
+					
 				<div class="modal-body has-success">
 					<label class="control-label">남길 말</label> <input type="text"
 						class="inputsuccess" name="tocomm">
@@ -43,11 +48,16 @@
 				<h4 class="modal-title">승인</h4>
 			</div>
 			<form action="sumware" method="post" id="okForm">
-				<input type="hidden" name="model" value="todo"> <input
-					type="hidden" name="submod" value="checkTodoList"> <input
-					type="hidden" name="childmod" value="approveTodo"> <input
-					type="hidden" name="tonum" value="${tolist.tonum }"> <input
-					type="hidden" name="memnum" value="${sessionScope.v.memnum }">
+				<input type="hidden" name="model" value="todo"> 
+				<input type="hidden" name="submod" value="checkTodoList"> 
+				<input type="hidden" name="childmod" value="approveTodo"> 
+				<input type="hidden" name="tonum" value="${tolist.tonum }"> 
+				<input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
+				<input type="hidden" name="tostdate" value="${tolist.tostdate }">
+				<input type="hidden" name="toendate" value="${tolist.toendate }">
+				<input type="hidden" name="totitle" value="${tolist.totitle }">
+				<input type="hidden" name="todept" value="${tolist.todept }">
+				
 				<div class="modal-body has-success">
 					<label class="control-label">남길 말</label> <input type="text"
 						class="inputsuccess" name="tocomm">

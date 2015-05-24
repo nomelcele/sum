@@ -2,6 +2,7 @@
 <%@page import="dto.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 업무 추가 부분 뷰 -->
 <%@include file="/top.jsp"%>
 <div class="row">
@@ -23,17 +24,18 @@
 				<div class="panel-body">
 					<div class="column" style="overflow: auto">
 
-						<form role="form" action="sumware" method="post" name="f" id="f"
+						<form role="form" action="sumware" method="post" name="addTodoForm" id="addTodoForm"
 							enctype="multipart/form-data">
-							<input type="hidden" name="model" value="todo"> <input
-								type="hidden" name="submod" value="addTodo"> <input
-								type="hidden" name="todept" value="${sessionScope.v.memdept }">
-							<input type="hidden" name="toconfirm" value="n">
+							<input type="hidden" name="model" value="todo"> 
+							 <input type="hidden" name="submod" value="addTodo"> 
+							 <input type="hidden" name="todept" value="${sessionScope.v.memdept }">
+							 <input type="hidden" name="toconfirm" value="n">
+							 <input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
 
 
 							<div class="form-group has-success">
-								<label class="control-label" for="inputSuccess">업무 제목</label> <input
-									type="text" class="form-control" id="inputSuccess"
+								<label class="control-label" for="inputSuccess">업무 제목</label> 
+								<input type="text" class="form-control" id="inputSuccess" name="totitle"
 									style="width: 70%">
 							</div>
 
@@ -48,7 +50,7 @@
 
 							<div class="form-group has-success">
 								<label class="control-label" for="inputSuccess">업무 내용</label>
-								<textarea class="form-control" id="inputSuccess" rows="5"
+								<textarea class="form-control" id="inputSuccess" rows="5" name="tocont"
 									style="width: 70%"></textarea>
 							</div>
 							<div class="form-group has-success">
@@ -64,19 +66,19 @@
 							</div>
 							<div class="form-group">
 								<label class="control-label" for="inputSuccess">파일 첨부</label> <input
-									type="file" class="btn btn-outline btn-success">
+									type="file" class="btn btn-outline btn-success" name="tofile">
 							</div>
 
 
 							<div class="form-group has-warning">
 								<label class="control-label" for="inputWarning">남길 말</label> <input
-									type="text" class="form-control" id="inputWarning"
+									type="text" class="form-control" id="inputWarning" name="tocomm"
 									style="width: 70%">
 							</div>
 							<div>
-								<button type="button" class="btn btn-outline btn-success">보내기</button>
-								<button type="button" class="btn btn-outline btn-warning">다시
-									작성</button>
+								<button type="button" class="btn btn-outline btn-success" onclick="javascript:todoFormGo(6)">보내기</button>
+<!-- 								<button type="button" class="btn btn-outline btn-warning">다시 -->
+<!-- 									작성</button> -->
 							</div>
 						</form>
 					</div>
@@ -88,7 +90,5 @@
 	<%@include file="snsTodo.jsp" %>
 	</div>
 	</div>
-	
-	
 <%@include file="/footer.jsp" %>
 

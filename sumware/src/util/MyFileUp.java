@@ -42,7 +42,7 @@ public class MyFileUp {
 		String fileName = getFileName(part);
 		result=MyMap.getMaps().getMapList(request);
 		result.put(fname, fileName);
-		
+		System.out.println("fileName : "+fileName);
 		if(fileName != null && fileName.length() != 0){
 			part.write(fileName);
 		}

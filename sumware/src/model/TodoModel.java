@@ -47,26 +47,21 @@ public class TodoModel implements ModelInter{
 			method = true;		
 		}else if(submod.equals("addTodo")){
 			System.out.println("addTodo 들어왔어");
-			url = "sumware?model=todo&submod=todoForm";
+			
 			String fname = "tofile";
 			try {
 				//todo 테이블에 등록.
 				HashMap<String,String> map = MyFileUp.getFup().fileUp(fname, request);
 				TodoDao.getDao().addTodo(map);
-				//캘린더에 등록
-				map.put("start",map.get("tostdate"));
-				map.put("end", map.get("toendate"));
-				map.put("title", map.get("totitle"));
-				map.put("cal", map.get("todept"));
-				String sql = CalendarDAO.getDao().calSQL(2);
-				CalendarDAO.getDao().calInsert(sql, map);
+				
 				
 			} catch (ServletException e) {
 				
 				e.printStackTrace();
 			}
 			
-			method = false;
+			url = "sumware?model=todo&submod=todoForm";
+			method = true;
 			
 		}else if(submod.equals("checkTodoList")){
 			// 업무 관리 클릭시 보여줄 화면 , 업무 리스트
@@ -76,16 +71,22 @@ public class TodoModel implements ModelInter{
 			String childmod = request.getParameter("childmod");
 			if(childmod!=null && childmod.equals("approveTodo")){
 				// 리스트의 승인여부 n을 y로 바꿈!!!!
-				int tonum= Integer.parseInt(request.getParameter("tonum"));
-				String tocomm = request.getParameter("tocomm");
-				TodoDao.getDao().confirmTodo(tonum,tocomm, "y");
+//				int tonum= Integer.parseInt(request.getParameter("tonum"));
+//				String tocomm = request.getParameter("tocomm");
+				HashMap<String,String> map = MyMap.getMaps().getMapList(request);
+				TodoDao.getDao().confirmTodo(map, "y");
+				//캘린더에 등록
+				map.put("start",map.get("tostdate"));
+				map.put("end", map.get("toendate"));
+				map.put("title", map.get("totitle"));
+				map.put("cal", map.get("todept"));
+				String sql = CalendarDAO.getDao().calSQL(2);
+				CalendarDAO.getDao().calInsert(sql, map);
+				
 			}else if(childmod!=null && childmod.equals("rejectTodo")){
 				// 리스트의 승인여부 n을 x로 바꿈!!!!
-				int tonum= Integer.parseInt(request.getParameter("tonum"));
-				System.out.println("tonum : "+tonum);
-				String tocomm = request.getParameter("tocomm");
-				System.out.println("tocomm : "+tocomm);
-				TodoDao.getDao().confirmTodo(tonum,tocomm, "x");
+				HashMap<String,String> map = MyMap.getMaps().getMapList(request);
+				TodoDao.getDao().confirmTodo(map, "x");
 			}
 			
 			url = "sumware?model=todo&submod=checkTodoListForm";

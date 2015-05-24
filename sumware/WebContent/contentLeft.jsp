@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--  --%>
+
 <c:if test="${param.model eq 'board' }">
 
 </c:if>
@@ -54,16 +56,13 @@
 				class="list-group-item">부서 업무</a> <a href="#"
 				class="list-group-item">팀 업무</a>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
-				<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리
-					</button> </br>
+				<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리</a> </br>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth eq 4 }">
-				<a href="javascript:todoFormGo(5)" class="list-group-item">업무관리
-					</button> </br>
+				<a href="javascript:todoFormGo(5)" class="list-group-item">업무관리</a> </br>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
-				<a href="javascript:todoFormGo(2)" class="list-group-item">업무추가</a>
-				</br>
+				<a href="javascript:todoFormGo(2)" class="list-group-item">업무추가</a></br>
 			</c:if>
 		</div>
 	</div>
