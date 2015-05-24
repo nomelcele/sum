@@ -83,6 +83,7 @@ public class MailDao {
 	}
 	
 	public ArrayList<MailVO> getToMailList(int usernum){
+		// 보낸 메일 리스트를 불러오는 메서드
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -113,6 +114,36 @@ public class MailDao {
 		}
 		
 		return list;
+	}
+	
+	public MailVO getMailDetail(int mailnum){
+		// 메일 상세 보기 메서드
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MailVO v = new MailVO();
+		
+		try {
+			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			sql.append("select mailtitle,mailmem,maildate,mailcont,mailfile");
+			sql.append(" from mail where mailnum=?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, mailnum);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				v.setMailtitle(rs.getString("mailtitle"));
+				v.setMailmem(rs.getInt("mailmem"));
+				v.setMaildate(rs.getString("maildate"));
+				v.setMailcont(rs.getString("mailcont"));
+				v.setMailfile(rs.getString("mailfile"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return v;
 	}
 
 }

@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 	<div class="container">
 		<table class="table table-condensed table-hover">
 				<tr>
@@ -32,9 +25,24 @@
 						<c:if test="${tofrom eq '2' }">
 							<td>${mList.mailreceiver}</td>
 						</c:if>
-						<td>${mList.mailtitle}</td>
+						<td><a href="javascript:mailDetailGo(${mList.mailnum})">${mList.mailtitle}</a></td>
 						<td>${mList.maildate}</td>
 					</tr>
 				</c:forEach>
 		</table>
 	</div>
+<script>
+	function mailDetailGo(mailnum){
+		// 상세 보기 페이지로 이동시켜주는 함수
+		$.ajax({
+			type: "post",
+			url: "sumware",
+			data: {model: "mail",
+				submod: "mailDetail",
+				mailnum: mailnum}, // 해당 메일의 번호
+			success: function(result){
+				$("#mainContent").html(result);
+			}
+		});
+	}
+</script>

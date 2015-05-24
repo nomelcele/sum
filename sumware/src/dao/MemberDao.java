@@ -18,6 +18,36 @@ public class MemberDao {
 		return dao;
 	}
 	
+	public String getInMail(String memname){
+		// 사원 이름에 해당하는 아이디(사내 메일 주소) 가져오는 메서드
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String meminmail = "";
+		
+		try {
+			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			sql.append("select meminmail from member where memname=?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, memname);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				meminmail = rs.getString("meminmail");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		
+		return meminmail;
+	}
+	
 	public ArrayList<MemberVO> getNameMailList(){
 		// 사원의 이름과 내부 메일 주소를 가져오는 메서드
 		// (suggest 기능을 위한 xml 파일 만드는 데 사용)

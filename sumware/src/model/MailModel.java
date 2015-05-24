@@ -8,9 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+
 import util.MyMap;
+import util.Suggest;
 import controller.ModelForward;
 import dao.MailDao;
+import dao.MemberDao;
 import dto.MailVO;
 
 public class MailModel implements ModelInter{
@@ -31,7 +34,7 @@ public class MailModel implements ModelInter{
 			method = true;
 			
 		} else if(submod != null && submod.equals("mailWrite")){
-			// 메일 작성
+			// 메일 작성 => map으로
 			request.setCharacterEncoding("UTF-8");
 
 			String title = request.getParameter("title"); // 메일 제목
@@ -39,22 +42,24 @@ public class MailModel implements ModelInter{
 			String file = "test.jpg"; // 첨부 파일
 			int fromMem = Integer.parseInt(request.getParameter("fromMem")); // 메일 발신자-사원 번호(세션 통해 불러올 예정)
 			//여기서 toMem이 참조하고 있는 member table의 사내 메일 주소에 저장되어있어야함.(제약조건)
+			// 메일 수신자 이름
 			String toMem = request.getParameter("toMem");
-			// 메일 수신자-메일 주소(아이디)
+			// 메일 수신자 아이디(사내 메일)
+			String toMemMail = MemberDao.getDao().getInMail(toMem);
 			
 			MailVO vo = new MailVO();
 			vo.setMailtitle(title);
 			vo.setMailcont(content);
 			vo.setMailfile(file);
 			vo.setMailmem(fromMem);
-			vo.setMailreceiver(toMem);
+			vo.setMailreceiver(toMemMail);
 
 			boolean res = MailDao.getDao().addMail(vo); // db에 메일 정보 넣기
 			
 			System.out.println(res);
 			
 			if(res){
-				url = "mail/mailMain.jsp";
+				url = "mail/mailSend.jsp"; // 메일 전송 완료 페이지
 				method = true;
 			}
 		} else if(submod != null && submod.equals("mailFromList")){
@@ -86,6 +91,36 @@ public class MailModel implements ModelInter{
 			method = true;
 			
 			System.out.println("aaaaaaaaaaaaaaaaaaaaa");
+		} else if(submod != null && submod.equals("mailSug")){
+			// 메일 쓰기 받는 사람에서 suggest 기능
+			request.setCharacterEncoding("UTF-8");
+			String key = request.getParameter("key");
+			
+			String[] suggests = Suggest.getSuggest().getSuggest(key);
+			request.setAttribute("sugArr", suggests);
+		
+			System.out.println("????????");
+			System.out.println("key: "+key);
+			System.out.println("배열: "+suggests[0]);
+			// 여기까지는 된다
+			
+			url = "mail/mailWrite.jsp"; // ?
+			method = true;
+		} else if(submod != null && submod.equals("mailDetail")){
+			// 메일 상세 보기
+			int mailnum = Integer.parseInt(request.getParameter("mailnum"));
+			MailVO detail = MailDao.getDao().getMailDetail(mailnum);
+			
+			request.setAttribute("detail", detail);
+			
+			url = "mail/mailDetail.jsp";
+			method = true;
+			
+		} else if(submod != null && submod.equals("mailMyList")){
+			// 내게 쓴 메일함
+			url = "mail/mailList.jsp";
+			method = true;
+			
 		} else if(submod != null && submod.equals("mailCk")){
 			// 체크에디터
 			

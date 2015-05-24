@@ -11,7 +11,7 @@
 		</div>
 	</div>
 </section>
-
+ 
 <script>
 	var xhr = null;
 	function getXMLHttpRequest() {
@@ -36,7 +36,6 @@
 		xhr.send(method == 'POST' ? param : null);
 	}
 </script>
-<script src="/js/json2.js"></script>
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <style>
@@ -79,15 +78,16 @@
 		} else if(key != lastKey){
 			lastKey = key;
 			var param = "key="+encodeURIComponent(key);
-			console.log("key: "+key);
+			// console.log("key: "+key);
 			// 컨트롤러에서 처리하게 고칠 것
-			// **********************
-			// **********************
-			// **********************
-			// **********************
-			// **********************
 			sendRequest("mail/mailSuggest.jsp", param, res, "post");
-			
+			/* $.ajax({
+				type: "post",
+				url: "sumware",
+				data: {model: "mail",
+					submod: "mailSug",
+					key: key}
+			}); */
 		}
 		
 		setTimeout("sendKeyword();",500);
@@ -131,7 +131,9 @@
 		if(res==1){ // 메일 쓰기
 			$.ajax({
 				type: "post",
-				url: "sumware?model=mail&submod=mailWriteForm",
+				url: "sumware",
+				data: {model: "mail",
+					submod: "mailWriteForm"},
 				success: function(result){
 					$("#mainContent").html(result);
 				}
@@ -139,8 +141,10 @@
 		} else if(res==2){ // 받은 메일함
 			$.ajax({
 				type: "post",
-				url: "sumware?model=mail&submod=mailFromList",
-				data: {userid: "${sessionScope.v.meminmail }" },
+				url: "sumware",
+				data: {model: "mail",
+					submod: "mailFromList",
+					userid: "${sessionScope.v.meminmail }" },
 				success: function(result){
 					$("#mainContent").html(result);
 				}
@@ -148,17 +152,30 @@
 		} else if(res==3){ // 보낸 메일함
 			$.ajax({
 				type: "post",
-				url: "sumware?model=mail&submod=mailToList",
-				data: {usernum: "${sessionScope.v.memnum}"},
+				url: "sumware",
+				data: {model: "mail",
+					submod: "mailToList",
+					usernum: "${sessionScope.v.memnum}"},
 				success: function(result){
 					$("#mainContent").html(result);
 				}
 			});
 		} else if(res==4){ // 내게 쓴 메일함
-			
+			$.ajax({
+				type: "post",
+				url: "sumware",
+				data: {model: "mail",
+					submod: "mailMyList",
+					usernum: "${sessionScope.v.memnum}",
+					userid: "${sessionScope.v.meminmail }"},
+				success: function(result){
+					$("#mainContent").html(result);
+				}
+			});
 		} else if(res==5){ // 휴지통
 			
-		}
+		} 
+		
 	}
 	
 </script>
