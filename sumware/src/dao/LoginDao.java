@@ -63,8 +63,30 @@ public class LoginDao {
 		   CloseUtil.close(con);
 		  return vo;
 	}
-
-	public void enterLog(String memnum) {
+	public String ckFirstLogin(int memnum){
+		String res=null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("select nvl(memname,'0') memname from member where memnum=?");
+		try{
+			con=ConUtil.getOds();
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setInt(1, memnum);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				res=rs.getString("memname");
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		return res;
+	}
+	public void enterLog(int memnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		StringBuffer sql = new StringBuffer();
@@ -72,7 +94,7 @@ public class LoginDao {
 		try{
 			con=ConUtil.getOds();
 			pstmt=con.prepareStatement(sql.toString());
-			pstmt.setString(1, memnum);
+			pstmt.setInt(1, memnum);
 			pstmt.executeUpdate();
 			
 		}catch(SQLException e){
