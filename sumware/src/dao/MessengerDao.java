@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import util.CloseUtil;
 
@@ -12,6 +13,7 @@ import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import conn.ConUtil;
 import dto.MemberVO;
+import dto.MessengerVO;
 
 public class MessengerDao {
 	private static MessengerDao dao;
@@ -20,6 +22,66 @@ public class MessengerDao {
 		if(dao == null) dao = new MessengerDao();
 		return dao;
 	}
+	
+	public int insertCreateRoom(ArrayList<MessengerVO> list){
+		Connection con = null;		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int key = 0;	
+		
+		System.out.println(list.size());
+		
+		try {
+			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			// 방번호 얻기
+			sql.append("select mesmaster_seq.nextval from dual");
+			pstmt = con.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+			MessengerVO v = new MessengerVO();
+			v.setMasnum(rs.getInt("nextval"));
+			key = rs.getInt("NEXTVAL");			
+			}
+			System.out.println("key : "+key);
+			
+			// StrinBuffer 초기화
+			sql.setLength(0);
+
+			// 얻은 방번호로 mastertable에 정보 저장
+			sql.append("insert into mesmaster values(?,sysdate,sysdate)");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, key);			
+			pstmt.executeUpdate();
+			
+			sql.setLength(0);
+			
+			// 참여자 정보 Table에 정보 저장
+			sql.append("insert into mesentry values(?,?,?,sysdate,sysdate)");			
+			pstmt= con.prepareStatement(sql.toString());			
+			for(MessengerVO e : list){
+				pstmt.setInt(1, key);
+				pstmt.setInt(2, e.getMesmember());
+				pstmt.setString(3, e.getOpenmemberyn());
+				pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(con != null) CloseUtil.close(con);
+				if(pstmt != null) CloseUtil.close(pstmt);
+				if(rs != null) CloseUtil.close(rs);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return key;
+		
+	}
+	
 	
 	
 	
@@ -53,11 +115,10 @@ public class MessengerDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally{
-			CloseUtil cl = null;
 			try {
-				if(con != null) cl.close(con);
-				if(pstmt != null) cl.close(pstmt);
-				if(rs != null)cl.close(rs);
+				if(con != null) CloseUtil.close(con);
+				if(pstmt != null) CloseUtil.close(pstmt);
+				if(rs != null) CloseUtil.close(rs);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
 <script>
 	function formGoGo(res){
 		if(res==1){
@@ -25,15 +26,41 @@
 			$('#submod').attr("value","boardList");
 			$('#page').attr("value","1");
 		}else if(res==5){
-			$('#mod').attr("value","messenger");
-			$('#submod').attr("value","messengerForm");
+// 			$('#mod').attr("value","messenger");
+// 			$('#submod').attr("value","messengerForm");
+			openWin();
 		}
-		$('form').submit();
+		$('form').submit();	
+		
+	}	
+	function openWin(){
+		var opt= "width=700, height=1000, scrollbars=yes";
+		var f = document.frmmain;
+		f.model.value="messenger";
+		f.submod.value="messengerForm";
+		window.open("","MessengerMain",opt);
+		f.target="MessengerMain";	
+		f.submit();
 	}
+	
+	function checkmsg(toNum){
+		var requNum = toNum;
+		var userNum = ${sessionScope.v.memnum };
+		if(userNum == toNum){
+			console.log("두 사람이 같습니다.");
+			window.open("main.jsp", "");
+		}else{
+			console.log("두 사람은 다릅니다.");
+			
+		}
+	}
+	
+	
+
 </script>
 </head>
 <body>
-	<form action="sumware" method="post">
+	<form action="sumware" method="post" name="frmmain">
 		<input type="hidden" id="mod" name="model">
 		<input type="hidden" id="submod" name="submod">
 		<input type="hidden" id="memnum" name="memnum">
