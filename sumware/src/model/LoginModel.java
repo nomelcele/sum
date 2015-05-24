@@ -51,7 +51,7 @@ public class LoginModel implements ModelInter {
 						HttpSession session = request.getSession();
 						session.setAttribute("v", vo);
 						//login 기록 저장.
-						LoginDao.getDao().enterLog(memnum);	
+						LoginDao.getDao().inLog(memnum);	
 					}
 				} else {
 					// 로그인 실패
@@ -65,8 +65,10 @@ public class LoginModel implements ModelInter {
 			method = true;
 
 		} else if (submod != null && submod.equals("logout")) {
-			url = "";
-			String memnum = request.getParameter("memnum");
+			url = "index2.jsp";
+			int memnum = Integer.parseInt(request.getParameter("memnum"));
+			LoginDao.getDao().outLog(memnum);
+			
 			HttpSession session = request.getSession();
 			//저장된 세션 다 날림.
 			session.invalidate();
