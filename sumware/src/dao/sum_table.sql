@@ -248,6 +248,7 @@ create sequence mail_seq
 increment by 1
 start with 1;
 
-alter table mail add maildelete number(5);
+alter table mail add mailsdelete number(5);
+alter table mail add mailrdelete number(5);
 alter table mail drop column mailsname;
 alter table mail drop column mailrname;

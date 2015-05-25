@@ -111,9 +111,17 @@ public class MailModel implements ModelInter{
 			url = "mail/mailList.jsp";
 			method = true;
 			
-		} else if(submod != null && submod.equals("mailTrashcan")){
+		} else if(submod != null && submod.equals("mailTrash")){
 			// 휴지통
-			url = "mail/mailTrashcan.jsp";
+			// 휴지통에 들어갈 메일들의 번호(mailnum)을 저장한 배열
+			String[] mailnums = request.getParameterValues("chk");
+			int usernum = Integer.parseInt(request.getParameter("usernum"));
+			String userid = request.getParameter("userid");
+			ArrayList<MailVO> trashlist = MailDao.getDao().getTrashList(mailnums, usernum, userid);
+			
+			request.setAttribute("list", trashlist);
+			
+			url = "mail/mailList.jsp";
 			method = true;
 		}
 		

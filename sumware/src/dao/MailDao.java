@@ -27,7 +27,7 @@ public class MailDao {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
 			sql.append("insert into mail values(mail_seq.nextVal,?,?,?,?,");
-			sql.append("(select meminmail from member where memname=?),sysdate,1)");
+			sql.append("(select meminmail from member where memname=?),sysdate,1,1)");
 			pstmt = con.prepareStatement(sql.toString());
 			
 			pstmt.setString(1, map.get("mailtitle")); 
@@ -59,7 +59,7 @@ public class MailDao {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
 			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma");
-			sql.append(" where me.memnum=ma.mailmem and mailreceiver=? order by maildate desc");
+			sql.append(" where me.memnum=ma.mailmem and ma.mailreceiver=? order by ma.maildate desc");
 			
 			// 현재 로그인한 사원에게 온 메일만 검색
 			pstmt = con.prepareStatement(sql.toString());
@@ -101,7 +101,7 @@ public class MailDao {
 			StringBuffer sql = new StringBuffer();
 			
 			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma"); 
-			sql.append(" where me.meminmail=ma.mailreceiver and mailmem=? order by maildate desc");
+			sql.append(" where me.meminmail=ma.mailreceiver and ma.mailmem=? order by ma.maildate desc");
 		
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, usernum);
@@ -173,7 +173,7 @@ public class MailDao {
 			StringBuffer sql = new StringBuffer();
 			sql.append("select ma.mailtitle, me1.memname name1, me2.memname name2, ma.maildate, ma.mailcont, ma.mailfile");
 			sql.append(" from mail ma, member me1, member me2");
-			sql.append(" where me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver and mailnum=?");
+			sql.append(" where me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver and ma.mailnum=?");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, mailnum);
 			rs = pstmt.executeQuery();
@@ -196,5 +196,28 @@ public class MailDao {
 		
 		return v;
 	}
+	
+	public ArrayList<MailVO> getTrashList(String[] mailnums, int usernum, String userid){
+		// 휴지통에서 보여줄 메일 리스트
+		// 받은 메일함이나 보낸 메일함에서 체크박스로 선택 후 삭제된 메일들은 휴지통에서 보여진다.
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<MailVO> list = new ArrayList<MailVO>();
+		
+		try {
+			con = ConUtil.getOds();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		
+		return list;
+	}
+	
+	
 
 }

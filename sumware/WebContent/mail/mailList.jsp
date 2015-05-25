@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<div class="container">
-	<form name="ckform">
-	<input type="button" value="삭제" id="delBtn" name="delBtn">
+	<input type="button" value="삭제" id="delBtn" name="delBtn" 
+	onclick="javascript:mailTrashGo()">
 		<table class="table table-condensed table-hover">
 				<tr>
 					<td><input type="checkbox" name="all" onclick="checkAll(this)"></td>
@@ -21,7 +21,7 @@
 				
 				<c:forEach var="mList" items="${list}">
 					<tr>
-						<td><input type="checkbox" name="chk" id="chk"></td>
+						<td><input type="checkbox" name="chk" id="chk" value="${mList.mailnum}"></td>
 						<c:if test="${tofrom eq '1' || '3'}">
 							<td>${mList.mailsname}</td>
 						</c:if>
@@ -33,9 +33,34 @@
 					</tr>
 				</c:forEach>
 		</table>
-	</form>
 	</div>
 <script>
+	function mailTrashGo(){
+		$.ajax({
+			type: "post",
+			url: "sumware",
+			data: {model: "mail",
+				submod: "mailTrash",
+				usernum: "${sessionScope.v.memnum}",
+				userid: "${sessionScope.v.meminmail}"
+			}
+		});
+	}
+
+	function checkAll(obj){
+		// 체크박스 전체 선택(해제)을 해주는 메서드
+		var chkArr = document.getElementsByName("chk");
+		var len = chkArr.length;
+		
+		for(var i=0; i<len; i++){
+			if(obj.checked){
+				chkArr[i].checked = true;
+			} else {
+				chkArr[i].checked = false;
+			}
+		}
+	}
+	
 	function mailDetailGo(mailnum){
 		// 상세 보기 페이지로 이동시켜주는 함수
 		console.log("메일 번호: "+mailnum);
@@ -52,18 +77,5 @@
 		});
 	}
 	
-	function checkAll(obj){
-		// 체크박스 전체 선택(해제)을 해주는 메서드
-		var chkArr = document.getElementsByName("chk");
-		var len = chkArr.length;
-		
-		for(var i=0; i<len; i++){
-			if(obj.checked){
-				chkArr[i].checked = true;
-			} else {
-				chkArr[i].checked = false;
-			}
-		}
-	}
 </script>
 
