@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet"/>
 <link href="css/main.css" rel="stylesheet"/>
-
+<link href="css/boardList.css" rel="stylesheet"/>
 <!-- css board(S) -->
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 <!-- css board(E) -->
