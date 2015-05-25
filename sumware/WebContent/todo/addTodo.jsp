@@ -72,7 +72,7 @@
 									style="width: 70%">
 							</div>
 							<div>
-								<button type="button" class="btn btn-outline btn-success" onclick="javascript:todoFormGo(6)">보내기</button>
+								<button type="button" class="btn btn-outline btn-success" onclick="javascript:todoFormGo('addTodo')">보내기</button>
 <!-- 								<button type="button" class="btn btn-outline btn-warning">다시 -->
 <!-- 									작성</button> -->
 							</div>

@@ -230,3 +230,16 @@ DROP TABLE TODO;
 DESC todo;
 
 commit;
+
+
+create table todojob(
+jobnum NUMBER(11) constraint todojob_jobnum_pk primary key,
+jobtonum NUMBER(11),
+jobmemnum NUMBER(5),
+jobcont VARCHAR2(100),
+constraint todojob_jobtonum_fk foreign key(jobtonum) references todo(tonum) on delete cascade,
+constraint todojob_jobmemnum_fk foreign key(jobmemnum) references member(memnum) on delete set null
+);
+create sequence todojob_seq
+increment by 1
+start with 1;

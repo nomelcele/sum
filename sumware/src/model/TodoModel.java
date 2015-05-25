@@ -16,6 +16,7 @@ import controller.ModelForward;
 import dao.CalendarDAO;
 import dao.TodoDao;
 import dto.MemberVO;
+import dto.TodoJobVO;
 import dto.TodoVO;
 
 public class TodoModel implements ModelInter{
@@ -130,10 +131,36 @@ public class TodoModel implements ModelInter{
 			ArrayList<MemberVO> teamMemberList = TodoDao.getDao().getTomem(memmgr);
 			request.setAttribute("teamTodoList", todoList);
 			request.setAttribute("teamMemberList", teamMemberList);
-			
+			// 맨첨에 사원별 업무 분담들 보여줘야돼돼돼돼돼!!!
+//			String jobtonum = map.get("");
+//			ArrayList<TodoJobVO> membersjoblist = TodoDao.getDao().getMembersJob(jobtonum);
+//			request.setAttribute("membersjoblist", membersjoblist);
 			url = "todo/giveJob.jsp";
 			method = true;
 			
+		}else if(submod.equals("insertMemJob")){
+			
+			System.out.print("insertMemJob 들어옴");
+			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
+			TodoDao.getDao().insertMemJob(map);
+			
+			url = "sumware?model=todo&submod=showMembersJob";
+			method = true;
+			
+		}else if(submod.equals("showMembersJob")){
+			String jobtonum = request.getParameter("jobtonum");
+			ArrayList<TodoJobVO> membersjoblist = TodoDao.getDao().getMembersJob(jobtonum);
+			// todoJobVO확인
+			for(TodoJobVO v : membersjoblist){
+				System.out.println("memname : " + v.getMemname());
+				System.out.println("memprofile : " + v.getMemprofile());
+				System.out.println("jobcont : " + v.getJobcont());
+			}
+			
+			
+			request.setAttribute("membersjoblist", membersjoblist);
+			url = "todo/membersJob.jsp";
+			method = true;
 		}
 		
 		return new ModelForward(url, method);

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import util.CloseUtil;
 import conn.ConUtil;
 import dto.MemberVO;
+import dto.TodoJobVO;
 import dto.TodoVO;
 
 public class TodoDao {
@@ -308,6 +309,67 @@ public class TodoDao {
 				
 			} catch (SQLException e) {
 				
+				e.printStackTrace();
+			}finally{
+				CloseUtil.close(rs);
+				CloseUtil.close(pstmt);
+				CloseUtil.close(con);
+			}
+			return list;
+
+		}
+		
+		// 사원들에게 업무지정
+		public void insertMemJob(HashMap<String,String> map){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			StringBuffer sql = new StringBuffer();
+			
+			try {
+				sql.append("insert into todojob values(todojob_seq.nextVal,?,?,?)");
+				con = ConUtil.getOds();
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, Integer.parseInt(map.get("jobtonum")));
+				pstmt.setInt(2, Integer.parseInt(map.get("jobmemnum")));
+				pstmt.setString(3, map.get("jobcont"));
+				
+				pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}finally{
+				CloseUtil.close(pstmt);
+				CloseUtil.close(con);
+			}
+			
+		}
+		
+		// 업무별 사원들의 담당업무 뽑아옴
+		public ArrayList<TodoJobVO> getMembersJob(String jobtonum){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			StringBuffer sql = new StringBuffer();
+			ResultSet rs = null;
+			ArrayList<TodoJobVO> list = new ArrayList<>();	
+			
+			try {
+				sql.append("select j.jobnum, m.memname, m.memprofile, j.jobcont from todojob j, member m where m.memnum = j.jobmemnum and jobtonum=? order by 1 desc");
+				con = ConUtil.getOds();
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, Integer.parseInt(jobtonum));
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					TodoJobVO v = new TodoJobVO();
+					v.setMemname(rs.getString("memname"));
+					v.setMemprofile(rs.getString("memprofile"));
+					v.setJobcont(rs.getString("jobcont"));	
+					list.add(v);
+				}
+				
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally{
 				CloseUtil.close(rs);

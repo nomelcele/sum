@@ -5,28 +5,21 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 팀장이 사원들에게 업무를 부여하기 위한 뷰 -->
 <script>
-	var job = "";
-	function makeJobStr(memnum , memjob){
-		console.log("memnum:"+memnum);
-		console.log("memjob:"+memjob);
-		console.log("memjob val:"+$("#"+memjob).val());
-		
-		job += memnum+'<<'+$("#"+memjob).val()+'>>';
-		console.log(job);
-	}
-	
-	function insertJob(){
 
-		
-		console.log("1:"+$('#jobcont').val());
-		console.log("2:"+$('#inputSuccess').val());
-		
-		job = $('#job').html();
-		console.log("jobstr1:"+job);
-		job +=	$('#inputSuccess').val()+':'+ $('#jobcont').val()+'<br/>';
-		console.log("jobstr2:"+job);
-		
-		$('#job').html(job);
+	function insertJob(tonum){
+		$.ajax({
+			type : "post",
+			url : "sumware",
+			data : {model:"todo", 
+				submod:"insertMemJob", 
+				jobmemnum:$('#memjobName').val(),
+				jobtonum:tonum,
+				jobcont:$('#jobcont').val()},
+			success : function(result){
+				$("#membersjob").html(result);
+				
+			}
+		});
 	}
 </script>
 <%@include file="/top.jsp"%>
@@ -60,31 +53,21 @@
 												</p>
 												<p>${tolist.tocont }</p>
 												<label class="control-label" for="inputSuccess">사원별 업무</label>
-												<div id="job"></div>
-												<div>
-												<label class="control-label" for="inputSuccess">업무 지정</label>
+												<div id="membersjob"></div>
 												
-													<select name="tomem" class="form-control" id="inputSuccess"
-														style="width: 20%">
-														<option value="">사원 선택</option>
-														<c:forEach var="teamMemList" items="${teamMemberList }">
-														<option value="${teamMemList.memnum }">${teamMemList.memname}</option>
-														
-														</c:forEach>
-													</select>
-													<input type="text" id="jobcont">
-														<button type="button" onclick="javascript:insertJob()"><i class="fa fa-check"></i></button>
-												
-												</div>
-												
-												
-
-												
+					
 
 											</div>
 											<div class="panel-footer">
-												<button type="button" class="btn btn-outline btn-success"
-													onclick="javascript:todoFormGo(9)">업무 지정</button>
+											<label class="control-label" for="inputSuccess">업무 지정</label>
+											<select name="memjobName" class="form-control" id="memjobName" style="width: 25%">
+												<option value="">사원선택</option>
+												<c:forEach var="teamMemList" items="${teamMemberList }">
+												<option value="${teamMemList.memnum }">${teamMemList.memname}</option>
+												</c:forEach>
+											</select>
+											<input type="text" id="jobcont">
+											<button type="button" onclick="javascript:insertJob(${tolist.tonum })"><i class="fa fa-plus"></i></button>
 												
 											</div>
 										</div>

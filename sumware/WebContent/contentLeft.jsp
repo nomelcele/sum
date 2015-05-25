@@ -59,16 +59,16 @@
 				class="list-group-item">부서 업무</a> <a href="#"
 				class="list-group-item">팀 업무</a>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
-				<a href="javascript:todoFormGo(1)" class="list-group-item">업무관리</a>
+				<a href="javascript:todoFormGo('manageJob1')" class="list-group-item">업무관리</a>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth eq 4 }">
-				<a href="javascript:todoFormGo(5)" class="list-group-item">업무관리</a>
+				<a href="javascript:todoFormGo('manageJob2')" class="list-group-item">업무관리</a>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
-				<a href="javascript:todoFormGo(2)" class="list-group-item">업무부여</a>
+				<a href="javascript:todoFormGo('giveJob1')" class="list-group-item">업무부여</a>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth eq 4 }">
-				<a href="javascript:todoFormGo(8)" class="list-group-item">업무부여</a>
+				<a href="javascript:todoFormGo('giveJob2')" class="list-group-item">업무부여</a>
 			</c:if>
 		</div>
 	</div>

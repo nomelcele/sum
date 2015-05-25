@@ -41,11 +41,11 @@
 	}
 	function todoFormGo(res){
 		$('#model').attr("value","todo");
-		if(res==1){
+		if(res=='manageJob1'){
 			$('#submod').attr("value","fWMana");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 			$('#goTodo').submit();
-		}else if(res==2){
+		}else if(res=='giveJob1'){
 			$('#submod').attr("value","addtodoForm");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 			console.log("memnum",$('#memnum').val());
@@ -56,12 +56,12 @@
 		}else if(res==4){
 			// 팀장업무관리에서 거절버튼
 			$('#rejectForm').submit();
-		}else if(res==5){
+		}else if(res=='manageJob2'){
 			// 팀장일때 팀장관리 버튼
 			$('#submod').attr("value","checkTodoList");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 			$('#goTodo').submit();
-		}else if(res==6){
+		}else if(res== 'addTodo'){
 			//부장의 업무 추가 폼 작성 후 보내기버튼
 			$('#addTodoForm').submit();
 			alert("업무를 등록하였습니다.");
@@ -71,7 +71,7 @@
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 			$('#memdept').attr("value","${sessionScope.v.memdept}");
 			$('#goTodo').submit();
-		}else if(res==8){
+		}else if(res=='giveJob2'){
 			// 팀장이 사원들에게 업무를 부여하기 위한 폼
 			$('#submod').attr("value","giveJobForm");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
