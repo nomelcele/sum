@@ -1,0 +1,152 @@
+@CHARSET "UTF-8";
+
+
+/************** LAYOUT ****************/
+#wrap:after {display:block;content:"";clear:both;}
+#wrap {
+	width:1170px;
+	margin:auto;
+	padding:20px 0
+}
+/* 표준 너비 1280px 기준 */
+.lnb-area {
+	float:left;
+	width:200px;
+	margin-right:20px;margin-top:20px;
+	border:1px solid #ccc;
+
+}
+.contents {
+	float:left;
+	padding-top:20px;
+	width:950px;
+}
+
+
+
+/************** BOARD ****************/
+
+/* (board common) */
+.board {
+	
+}
+
+/* board button */
+button {
+	min-height:25px;
+	min-width:60px;
+	line-height:25px;
+	font-family:inherit;
+	background-color: #f5f5f5;
+	background-image: -moz-linear-gradient(top,#fff,#e6e6e6);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
+	background-image: -webkit-linear-gradient(top,#fff,#e6e6e6);
+	background-image: -o-linear-gradient(top,#fff,#e6e6e6);
+	background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+	background-repeat: repeat-x;
+  border-width:1px;border-radius:3px;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
+  color: #333;
+  text-shadow: 0 1px 1px rgba(255,255,255,.75);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);
+	
+}
+/* (board-form) */
+.board-form {
+	margin-bottom:10px;
+}
+.board-form .left {float:left}
+.board-form .right {float:right}
+.board-form:after {display:block;content:"";clear:both}
+/* (board-list) */
+#wrap .board-list {
+	width: 100%;
+	margin:auto;
+	font-size:13px;
+	border-spacing:0;
+	border-collapse:collapse;
+	border:1px solid #ccc;
+	color:#333;
+	/* border-radius: 11px; */
+}
+
+
+#wrap .board-list td , #wrap .board-list th {
+	padding:5px;
+}
+#wrap .board-list thead {
+	font-weight:700;
+	text-align:center;
+}
+#wrap .board-list thead th,#wrap .board-list thead td {
+	border: 1px solid #00856B;
+	background-color: #0eb493;
+	color: #fff;
+}
+#wrap .board-list tbody > tr > td:first-child,
+#wrap .board-list tbody > tr > th:first-child {
+	/* 첫번째 글번호 컬럼 */
+	font-family:Verdana, "돋움", sans-serif;
+	font-size:11px;
+	background-color: #F4F6F5;
+	text-align:center;
+	color:#666;
+}
+
+.board-list th,.board-list td {
+	border-right:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	border-color:#ccc;
+
+}
+.board-list thead td,.board-list thead th {
+
+	background-color:#f1f1f1;
+}
+
+
+
+
+
+
+
+
+
+
+/*
+.board-list {
+	color:red
+}
+.board {
+	color:blue;	
+}
+
+//위의 2가지 경우를 무시하고, 아래 CSS가 적용됨
+.board-list.board {
+	color:green;
+}
+
+*/
+
+
+/* paging */
+.paging {
+	margin-top: 15px;
+	text-align:center;
+}
+.paging ul {display:inline-block}
+.paging li, .paging ul {list-style:none;margin: 0 10px;padding: 0;}
+.paging button[class^="paging-"] {
+	display:inline-block;
+}
+.paging li {
+	display:inline-block;
+	margin: 0 2px;
+	font-size: 12px;
+	color: #333;
+	cursor:pointer;
+}
+.paging li.now a {
+	color:green;
+}
