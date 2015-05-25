@@ -73,7 +73,7 @@
 			
 			<!-- paging(S) -->
 			<div class="paging">
-			<c:set var="pageUrl" <c:set var="pageUrl" value="sumware?model=board&submod=boardList"/>/>
+			<c:set var="pageUrl" value="sumware?model=board&submod=boardList"/>
 			<%@include file="page.jsp" %>
 				<!-- <button type="button" class="paging-prev">&lt;&lt;</button>
 				<ul>
