@@ -50,22 +50,43 @@ public class MessengerDao {
 			sql.setLength(0);
 
 			// 얻은 방번호로 mastertable에 정보 저장
-			sql.append("insert into mesmaster values(?,sysdate,sysdate)");
+			sql.append("insert into mesmaster values(?,sysdate,NULL)");
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, key);			
+			pstmt.setInt(1, key) ;			
 			pstmt.executeUpdate();
 			
 			sql.setLength(0);
 			
 			// 참여자 정보 Table에 정보 저장
-			sql.append("insert into mesentry values(?,?,?,sysdate,sysdate)");			
-			pstmt= con.prepareStatement(sql.toString());			
+			
+			String openCk= null; // 참여자 사번 초기화
+			
+			
 			for(MessengerVO e : list){
-				pstmt.setInt(1, key);
-				pstmt.setInt(2, e.getMesmember());
-				pstmt.setString(3, e.getOpenmemberyn());
-				pstmt.executeUpdate();
+				openCk = e.getOpenmemberyn();
+				System.out.println("방장여부 : "+openCk);
+				if(openCk.equals("Y")){ // 방장인 경우 시작일만 지정
+					sql.append("insert into mesentry values(?,?,?,sysdate,null)");						
+					pstmt= con.prepareStatement(sql.toString());
+					
+					pstmt.setInt(1, key);
+					pstmt.setInt(2, e.getMesmember());
+					pstmt.setString(3, e.getOpenmemberyn());
+					pstmt.executeUpdate();
+					
+				}else{ // 참여자인 경우 시작, 종료일은 null값을 db에 저장
+					sql.append("insert into mesentry values(?,?,?,null,null)");
+					pstmt= con.prepareStatement(sql.toString());
+					
+					pstmt.setInt(1, key);
+					pstmt.setInt(2, e.getMesmember());
+					pstmt.setString(3, e.getOpenmemberyn());
+					pstmt.executeUpdate();
+				}
+				sql.setLength(0);
 			}
+			sql.setLength(0);
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,26 +103,29 @@ public class MessengerDao {
 		
 	}
 	
-	public ArrayList<MessengerVO> getentList(){
+	public ArrayList<MessengerVO> getentList(int userNum){
 		System.out.println("Messenger getentList 영역입니다.");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<MessengerVO> list = new ArrayList<MessengerVO>();
 		StringBuffer sql = new StringBuffer();
-		sql.append("select masnum, mesmember, openmemberyn,entstdate,entendate from mesentry");
+		// 참가자 사번, 시작일이 null인 사원만 리스트로 출력
+		sql.append("select masnum, mesmember, openmemberyn, entstdate from mesentry where mesmember=? and openmemberyn='N' and entstdate is null");
 		
 		try {
 			con = ConUtil.getOds();
 			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, userNum);
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()){
 				MessengerVO v = new MessengerVO();
 				v.setMasnum(rs.getInt("masnum"));
 				v.setMesmember(rs.getInt("mesmember"));
 				v.setOpenmemberyn(rs.getString("openmemberyn"));
 				v.setEntstdate(rs.getString("entstdate"));
-				v.setEntendate(rs.getString("entendate"));
+				System.out.println("시작일 : "+v.getEntstdate());
 				list.add(v);
 			}
 		} catch (SQLException e) {
@@ -116,6 +140,38 @@ public class MessengerDao {
 			}			
 		}return list;
 	}
+	
+	public void joinRoom(MessengerVO v){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("update mesentry set entstdate = sysdate where masnum=? and mesmember=? and openmemberyn='N'");
+		
+		try {
+			con = ConUtil.getOds();
+			pstmt = con.prepareStatement(sql.toString());
+			
+			pstmt.setInt(1, v.getMasnum());
+			
+			pstmt.setInt(2, v.getMesmember());
+			
+			System.out.println("joinroom의 방번호 : "+v.getMasnum());
+			System.out.println("joinRoom의 유저 번호 : "+v.getMesmember());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(con != null) CloseUtil.close(con);
+				if(pstmt != null) CloseUtil.close(pstmt);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		}
+	}
+	
 	
 	public ArrayList<MemberVO> getList(){
 		Connection con = null;

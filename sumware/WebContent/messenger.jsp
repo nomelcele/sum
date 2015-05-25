@@ -31,19 +31,30 @@
 		// onopen : 서버가 연결이 되었을 때 발생
 		
 		eventSource.onmessage = function(event){
-			alert("메세지가 도착했습니다.");
-// 			var opt1="width=700, height=900, scrollbars=yes";			
-// 			window.open("http://www.naver.com","네이버 새창",opt1);
-			alert("event.data : "+event.data);
-			var dataArr = event.data.split("/");
-			
-			
-// 		$("#target").html("<div style='background:orange'>"+event.data+"</div>");		
-	};
+			var edata1 = event.data;
+			regoUrl(edata1);
+			alert("메세지가 도착했습니다.");			
+		};
 	}else{
 		alert("해당 브라우저는 지원이 안됩니다.")
 	}
 	
+	function regoUrl(edata1){
+		var winopt="width=700, height=800, scrollbars=yes"
+		var f1 = document.entform;
+		var evdata = edata1;
+		
+		f1.model.value="messenger";
+		f1.submod.value="msgReceieve";		
+		f1.edata1.value = evdata;
+		f1.userNum2.value = ${sessionScope.v.memnum};
+
+		
+		f1.target="msgrecRoom";
+		window.open("","msgrecRoom",winopt);
+		f1.submit();	
+	}
+
 	
 	
 	
@@ -65,6 +76,13 @@
 					<input type="hidden" id="fromNum" name="fromNum">
 					<input type="hidden" id="toName" name="toNum">
 					<input type="hidden" name="entNum">
+				</form>
+				
+				<form action="sumware" method="post" id="entform" name="entform">
+					<input type="hidden" id="mod"    name="model"> 
+					<input type="hidden" id="submod" name="submod">
+					<input type="hidden" id="edata1" name="edata1">
+					<input type="hidden" id="userNum2" name="uerNum2">
 				</form>
 
 				<!-- 사원 사진 불러오기  -->

@@ -44,7 +44,7 @@
 	var sessionKey = "<%=request.getAttribute("key")%>";
 	alert("sessionKey " + sessionKey);
 	var msgWindow = document.getElementById("msgWindow");
-	var msgSocket = new WebSocket("ws://192.168.0.21:8080/sumware/msgSocket/"+sessionKey)
+	var msgSocket = new WebSocket("ws://192.168.0.4:80/sumware/msgSocket/"+sessionKey)
 	msgSocket.onopen = function processOpen(message) {
 		joinMsg(message);
 	}
