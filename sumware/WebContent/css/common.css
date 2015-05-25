@@ -21,6 +21,17 @@
 	padding-top:20px;
 	width:950px;
 }
+#content2.contents {width:950px!important}
+.contents.has-right {
+	width:730px;
+	margin-right:20px;
+}
+.right-area {
+	float:left;
+	width:200px;
+	margin-top:20px;
+	border:1px solid #ccc;
+}
 
 
 
@@ -50,7 +61,23 @@ button {
   color: #333;
   text-shadow: 0 1px 1px rgba(255,255,255,.75);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);
-	
+}
+
+/* (title-board) */
+.title-board {
+	position:relative;
+	padding-left:32px;
+	margin:0 0 10px -8px;
+	font-size: 15px;
+	font-weight: 700;
+	text-align: left;
+	color: #1DA0A7;
+}
+.title-board:before {
+	display:block;content:"";
+	position:absolute;top:0;left:0;
+	width:32px;height:32px;
+	background: url(../img/bul_title_board.png) 0 -7px no-repeat;
 }
 /* (board-form) */
 .board-form {
@@ -70,22 +97,21 @@ button {
 	color:#333;
 	/* border-radius: 11px; */
 }
-
-
 #wrap .board-list td , #wrap .board-list th {
 	padding:5px;
 }
-#wrap .board-list thead {
+#wrap .board-list thead, #wrap .board-write th {
 	font-weight:700;
 	text-align:center;
 }
-#wrap .board-list thead th,#wrap .board-list thead td {
+#wrap .board-list thead th,#wrap .board-list thead td,
+#wrap .board-write th {
 	border: 1px solid #00856B;
 	background-color: #0eb493;
 	color: #fff;
 }
-#wrap .board-list tbody > tr > td:first-child,
-#wrap .board-list tbody > tr > th:first-child {
+#wrap .board-list tbody > tr > td.num,
+#wrap .board-list tbody > tr > th.num {
 	/* 첫번째 글번호 컬럼 */
 	font-family:Verdana, "돋움", sans-serif;
 	font-size:11px;
@@ -93,7 +119,6 @@ button {
 	text-align:center;
 	color:#666;
 }
-
 .board-list th,.board-list td {
 	border-right:1px solid #ccc;
 	border-bottom:1px solid #ccc;
@@ -101,17 +126,14 @@ button {
 
 }
 .board-list thead td,.board-list thead th {
-
 	background-color:#f1f1f1;
 }
 
-
-
-
-
-
-
-
+/* ( board-write ) */
+.board-write th {
+	text-align:right;
+	background-color: #F4F6F5;
+}
 
 
 /*
@@ -150,3 +172,13 @@ button {
 .paging li.now a {
 	color:green;
 }
+
+
+/* button-div (left,center,right) */
+.button-div {
+	padding-top:15px;
+	
+}
+.button-div button {margin-left:8px}
+.button-div button:first-child {margin-left:0}
+.button-div:after {content:"";display:block;clear:both;}
