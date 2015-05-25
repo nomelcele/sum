@@ -10,93 +10,6 @@
 		});
 	</script>
 </c:if>
-<style>
-#content2 {
-	width: 100%;
-	text-align: center;
-}
-
-#content2 #stboardWriter {
-	width: 850px;
-	margin-left: 100px;
-}
-
-#content2 table,tbody td {
-	border-collapse: collapse;
-	border: 1px solid #7d7d7d;
-}
-
-#content2 #stTitle,#stcontent {
-	width: 100%;
-	margin-top: 30px;
-}
-
-#content2 #stTitle tr td {
-	height: 40px;
-	background-color: #007bbe;
-	color: #FFFFFF;
-	font-family: "돋움";
-	font-size: 25px;
-}
-
-#content2 #stcontent thead td {
-	height: 30px;
-	background-color: #007bbe;
-	color: #FFFFFF;
-	font-family: "돋움";
-	font-size: 15px;
-}
-
-#content2 #stcontent tbody td {
-	height: 30px;
-	background-color: #FFFFFF;
-	color: #7d7d7d;
-	font-family: "돋움";
-	font-size: 15px;
-}
-/* 스타일에서 클래스를  중복해서 정의하기 위한방법 */
-#content2 #stcontent .td {
-	text-align: left;
-	padding-left: 25px;
-}
-
-#content2 #stcontent .title input {
-	width: 350px;
-}
-
-#content2 #stcontent .instyle {
-	background-color: #0099ff;
-	height: 30px;
-	color: #fff;
-	font-weight: bold;
-	font-size: 14px;
-	font-family: "맑은고딕";
-}
-
-#content2 #stcontent .writer input {
-	width: 250px;
-}
-#content2 #stcontent .tel input {
-	width: 100px;
-}
-
-#content2 #stcontent .content textarea {
-	width: 250px;
-	height: 300px;
-	text-align: left;
-}
-
-/*btn*/
-#content2 #stcontent .btn {
-	width: 120px;
-	background-color: #f927a9;
-	height: 25px;
-	color: #fff;
-	font-weight: bold;
-	font-size: 14px;
-	font-family: "맑은고딕";
-}
-</style>
 <script>
 	function formGo(res){
 		if(res==1){
@@ -112,29 +25,17 @@
 		}
 	}
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
 <div id="wrap" class="board">
 		<!-- lnb-area(S) -->
-		<div class="lnb-area">
+	<div class="lnb-area">
 		left
-		</div>
+	</div>
 		<!-- lnb-area(E) -->
 	
 	
 		<!-- contents(S) -->
-		<div id="content2" class="contents">
-			<div id="stboardWriter">
+	<div id="content2" class="contents">
+		<div id="stboardWriter">
 			<!-- <table id="stTitle">
 				<tr>
 					<td>현재 페이지 : 스터디게시판 작성폼</td>
@@ -183,16 +84,14 @@
 				<!-- board-write(E) -->
 				
 				<!-- button-div(S) -->
-				<div class="button-div center">
-					<button onclick="javascript:formGo(1)">글작성</button>
-					<button onclick="javascript:formGo(2)">리스트</button>
-				</div>
+			<div class="button-div center">
+				<button onclick="javascript:formGo(1)">글작성</button>
+				<button onclick="javascript:formGo(2)">리스트</button>
+			</div>
 				<!-- button-div(E) -->
 			</form>
 		</div>
 	</div>
 	<!-- contents(E) -->
-	</div>
-<!-- ///////////////////////////////////////////////////////////////////////////// -->
-	
+</div>
 <%@include file="/footer.jsp" %>

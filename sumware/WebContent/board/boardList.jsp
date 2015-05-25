@@ -92,5 +92,4 @@
 		</div>
 		<!-- contents(E) -->
 	</div>
-	
 <%@include file="/footer.jsp" %>
