@@ -1,21 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>boardList</title>
-</style>
-
-<!-- css board(S) -->
-<link rel="stylesheet" type="text/css" href="css/common.css" />
-<!-- css board(E) -->
-
-
-
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<%@include file="/top.jsp" %>
 <script>
 	$(function(){
 		$('#mod').click(function(){
@@ -25,11 +10,7 @@
 		});
 	});
 </script>
-</head>
-<body>
-	<%@include file="/top.jsp" %>
 	<div id="wrap" class="board">
-	
 		<!-- lnb-area(S) -->
 		<div class="lnb-area">
 		left
@@ -77,7 +58,7 @@
 				<tbody>
 					<c:forEach items="${list }" var="vlist">
 					<tr>
-						<td>${vlist.bnum }</td>
+						<td class="num">${vlist.bnum }</td>
 						<td style="text-align: left">${vlist.btitle }</td>
 						<td>${vlist.bwriter }</td>
 						<td>${vlist.bdate }</td>
@@ -111,6 +92,5 @@
 		</div>
 		<!-- contents(E) -->
 	</div>
-	<%@include file="/footer.jsp" %>
-</body>
-</html>
+	
+<%@include file="/footer.jsp" %>

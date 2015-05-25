@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<title>Insert title here</title>
+<%@include file="/top.jsp" %>
 <c:if test="${param.submod eq 'writeForm' }">
 	<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
 	<script src="js/myckeditor.js"></script>
@@ -16,7 +10,6 @@
 		});
 	</script>
 </c:if>
-</head>
 <style>
 #content2 {
 	width: 100%;
@@ -119,45 +112,87 @@
 		}
 	}
 </script>
-<body>
-	<div id="content2">
-		<div id="stboardWriter">
-			<table id="stTitle">
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="wrap" class="board">
+		<!-- lnb-area(S) -->
+		<div class="lnb-area">
+		left
+		</div>
+		<!-- lnb-area(E) -->
+	
+	
+		<!-- contents(S) -->
+		<div id="content2" class="contents">
+			<div id="stboardWriter">
+			<!-- <table id="stTitle">
 				<tr>
 					<td>현재 페이지 : 스터디게시판 작성폼</td>
 				</tr>
-			</table>
+			</table> -->
+			
+			<!-- heading(S) -->
+			<h2 class="title-board">현재 페이지 : 스터디게시판 작성폼</h2>
+			<!-- heading(E) -->
+			
+			
 			<form action="sumware" method="post">
 				<input type="hidden" name="model" id="mod"> 
 				<input type="hidden" name="submod" id="submod">
 				<input type="hidden" name="page" id="page">
-				<table id="stcontent">
-					<tr>
+				
+				<!-- board-write(S) -->
+				<table id="stcontent" class="board-list board-write">
+					<!-- <tr>
 						<td colspan="2">스터디 게시판 작성폼</td>
+					</tr> -->
+					<colgroup>
+						<col style="width:80px" />
+						<col />
+					</colgroup>
+					<tr>
+						<th>제목</th>
+						<td class="td title">
+							<input name="btitle" id="btitle">
+						</td>
 					</tr>
 					<tr>
-						<td>제목</td>
-						<td class="td title"><input name="btitle" id="btitle"
-							class="instyle"></td>
+						<th>작성자</th>
+						<td class="td writer">
+							<input name="bwriter" id="bwriter" readonly="readonly"value="${sessionScope.v.memname }" />
+						</td>
 					</tr>
 					<tr>
-						<td>작성자</td>
-						<td class="td writer"><input name="bwriter" id="bwriter" readonly="readonly"
-							class="instyle" value="${sessionScope.v.memname }"></td>
-					</tr>
-					<tr>
-						<td>내용</td>
+						<th>내용</th>
 						<td class="td content2"><textarea rows="10" cols="30"
 								name="bcont" id="bcont" class="instyle"></textarea></td>
 						<input type="hidden" name="bgnum" value="1">
 						<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
 					</tr>
-					<tr>
-						<td colspan="2"><button onclick="javascript:formGo(1)">글작성</button>&nbsp;&nbsp;<button onclick="javascript:formGo(2)">리스트</button></td>
-					</tr>
 				</table>
+				<!-- board-write(E) -->
+				
+				<!-- button-div(S) -->
+				<div class="button-div center">
+					<button onclick="javascript:formGo(1)">글작성</button>
+					<button onclick="javascript:formGo(2)">리스트</button>
+				</div>
+				<!-- button-div(E) -->
 			</form>
 		</div>
 	</div>
-</body>
-</html>
+	<!-- contents(E) -->
+	</div>
+<!-- ///////////////////////////////////////////////////////////////////////////// -->
+	
+<%@include file="/footer.jsp" %>
