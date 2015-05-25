@@ -60,9 +60,9 @@
 					<tr>
 						<td class="num">${vlist.bnum }</td>
 						<td style="text-align: left">${vlist.btitle }</td>
-						<td>${vlist.bwriter }</td>
-						<td>${vlist.bdate }</td>
-						<td>${vlist.bhit }</td>
+						<td style="text-align: center;">${vlist.bwriter }</td>
+						<td style="text-align: center;">${vlist.bdate }</td>
+						<td style="text-align: center;">${vlist.bhit }</td>
 					</tr>
 					</c:forEach>
 				</tbody>
