@@ -59,20 +59,23 @@ public class MailDao {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
 			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma");
-			sql.append("where me.memnum=ma.mailmem and mailreceiver=? order by maildate desc");
+			sql.append(" where me.memnum=ma.mailmem and mailreceiver=? order by maildate desc");
 			
 			// 현재 로그인한 사원에게 온 메일만 검색
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, userid);
 			rs = pstmt.executeQuery();
+			System.out.println("현재 로그인한 사원 아이디: "+userid);
+			System.out.println("받은 메일 읽을 거 있니?"+rs.next());
 			
 			while(rs.next()){
 				MailVO v = new MailVO();
-				v.setMailnum(rs.getInt("ma.mailnum"));
+				v.setMailnum(rs.getInt("mailnum"));
+				System.out.println("메일 번호: "+v.getMailnum());
+				v.setMailsname(rs.getString("memname"));
 				System.out.println("보낸 사람: "+v.getMailsname());
-				v.setMailsname(rs.getString("me.memname"));
-				v.setMailtitle(rs.getString("ma.mailtitle"));
-				v.setMaildate(rs.getString("ma.maildate"));
+				v.setMailtitle(rs.getString("mailtitle"));
+				v.setMaildate(rs.getString("maildate"));
 				list.add(v);
 			}
 		} catch (SQLException e) {
@@ -96,15 +99,19 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select mailreceiver,mailtitle,maildate from mail");
-			sql.append(" where mailmem=? order by maildate desc");
+			
+			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma"); 
+			sql.append(" where me.meminmail=ma.mailreceiver and mailmem=? order by maildate desc");
+		
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, usernum);
 			rs = pstmt.executeQuery();
+			System.out.println("보낸 메일 읽을 거 있니?"+rs.next());
 			
 			while(rs.next()){
 				MailVO v = new MailVO();
-				v.setMailreceiver(rs.getString("mailreceiver"));
+				v.setMailnum(rs.getInt("mailnum"));
+				v.setMailrname(rs.getString("memname"));
 				v.setMailtitle(rs.getString("mailtitle"));
 				v.setMaildate(rs.getString("maildate"));
 				list.add(v);
@@ -164,15 +171,17 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select mailtitle,mailmem,maildate,mailcont,mailfile");
-			sql.append(" from mail where mailnum=?");
+			sql.append("select ma.mailtitle, me1.memname name1, me2.memname name2, ma.maildate, ma.mailcont, ma.mailfile");
+			sql.append(" from mail ma, member me1, member me2");
+			sql.append(" where me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver and mailnum=?");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, mailnum);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
 				v.setMailtitle(rs.getString("mailtitle"));
-				v.setMailmem(rs.getInt("mailmem"));
+				v.setMailsname(rs.getString("name1"));
+				v.setMailrname(rs.getString("name2"));
 				v.setMaildate(rs.getString("maildate"));
 				v.setMailcont(rs.getString("mailcont"));
 				v.setMailfile(rs.getString("mailfile"));

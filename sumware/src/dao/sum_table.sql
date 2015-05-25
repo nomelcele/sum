@@ -243,3 +243,11 @@ constraint todojob_jobmemnum_fk foreign key(jobmemnum) references member(memnum)
 create sequence todojob_seq
 increment by 1
 start with 1;
+
+create sequence mail_seq
+increment by 1
+start with 1;
+
+alter table mail add maildelete number(5);
+alter table mail drop column mailsname;
+alter table mail drop column mailrname;

@@ -7,10 +7,8 @@ import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 import util.MyFileUp;
-import util.MyMap;
 import util.Suggest;
 import controller.ModelForward;
 import dao.MailDao;
@@ -74,7 +72,6 @@ public class MailModel implements ModelInter{
 			url = "mail/mailList.jsp";
 			method = true;
 			
-			System.out.println("aaaaaaaaaaaaaaaaaaaaa");
 		} else if(submod != null && submod.equals("mailSug")){
 			// 메일 쓰기 받는 사람에서 suggest 기능
 			request.setCharacterEncoding("UTF-8");
@@ -94,15 +91,9 @@ public class MailModel implements ModelInter{
 			// 메일 상세 보기
 			// 메일 번호
 			int mailnum = Integer.parseInt(request.getParameter("mailnum"));
-			// 메일 보낸 사람(사원 번호)
-			int mailmem = Integer.parseInt(request.getParameter("mailmem"));
 			MailVO detail = MailDao.getDao().getMailDetail(mailnum);
 			
-			// 보낸 사람 이름
-			// String sender = MailDao.getDao().getSName(mailmem);
-					
 			request.setAttribute("detail", detail);
-			// request.setAttribute("sender", sender);
 			
 			url = "mail/mailDetail.jsp";
 			method = true;
