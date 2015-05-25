@@ -5,11 +5,7 @@
 <!-- 부서 업무 부분 뷰 -->
 
 <div class="row">
-	<form action="sumware" method="post" id="goTodo">
-		<input type="hidden" id="model" name="model">
-		<input type="hidden" id="submod" name="submod">
-		<input type="hidden" id="memnum" name="memnum">
-	</form>
+	
 	<div class="wrap">
 		<%@include file="/contentLeft.jsp" %>
 		<!-- 부서업무 부분!! -->

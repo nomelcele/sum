@@ -30,7 +30,7 @@ public class TodoDao {
 		ArrayList<MemberVO> list = new ArrayList<>();	
 		
 		try {
-			sql.append("select memname, memnum from member where memmgr=?");
+			sql.append("select memname, memnum, memprofile, memjob, memauth, memmail, meminmail, memdept from member where memmgr=?");
 			con = ConUtil.getOds();
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, memmgr);
@@ -41,6 +41,13 @@ public class TodoDao {
 				MemberVO v = new MemberVO();
 				v.setMemname(rs.getString("memname"));
 				v.setMemnum(rs.getInt("memnum"));
+				v.setMemprofile(rs.getString("memprofile"));
+				v.setMemjob(rs.getString("memjob"));
+				v.setMemauth(Integer.parseInt(rs.getString("memauth")));
+				v.setMemmail(rs.getString("memmail"));
+				v.setMeminmail(rs.getString("meminmail"));
+				v.setMemdept(Integer.parseInt(rs.getString("memdept")));
+				
 				list.add(v);
 			}
 			
@@ -223,5 +230,95 @@ public class TodoDao {
 			}
 			return list;
 		}
+		
+		public ArrayList<TodoVO> getDeptList(HashMap<String, String> map){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			StringBuffer sql = new StringBuffer();
+			ResultSet rs = null;
+			ArrayList<TodoVO> list = new ArrayList<>();	
+			
+			try {
+				sql.append("select tonum, to_char(tostdate,'yyyy-mm-dd') tostdate, to_char(toendate,'yyyy-mm-dd') toendate, totitle, tocont, tofile, todept, tomem, toconfirm, tocomm ");
+				sql.append("from todo where todept=?");
+				con = ConUtil.getOds();
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, Integer.parseInt(map.get("memdept")));
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					TodoVO v = new TodoVO();
+					v.setTonum(rs.getInt("tonum"));
+					v.setTostdate(rs.getString("tostdate"));
+					v.setToendate(rs.getString("toendate"));
+					v.setTotitle(rs.getString("totitle"));
+					v.setTocont(rs.getString("tocont"));
+					v.setTofile(rs.getString("tofile"));
+					v.setTodept(rs.getInt("todept"));
+					v.setTomem(rs.getInt("tomem"));
+					v.setToconfirm(rs.getString("toconfirm"));
+					v.setTocomm(rs.getString("tocomm"));
+					list.add(v);
+				}
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}finally{
+				CloseUtil.close(rs);
+				CloseUtil.close(pstmt);
+				CloseUtil.close(con);
+			}
+			return list;
+
+		}
+		
+		// 팀장이 승인한 업무들 쭉나열
+		public ArrayList<TodoVO> getTeamTodoList(HashMap<String, String> map){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			StringBuffer sql = new StringBuffer();
+			ResultSet rs = null;
+			ArrayList<TodoVO> list = new ArrayList<>();	
+			
+			try {
+				sql.append("select tonum, to_char(tostdate,'yyyy-mm-dd') tostdate, to_char(toendate,'yyyy-mm-dd') toendate, totitle, tocont, tofile, todept, tomem, toconfirm, tocomm ");
+				sql.append("from todo where tomem=? and toconfirm='y'");
+				con = ConUtil.getOds();
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, Integer.parseInt(map.get("memnum")));
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					TodoVO v = new TodoVO();
+					v.setTonum(rs.getInt("tonum"));
+					v.setTostdate(rs.getString("tostdate"));
+					v.setToendate(rs.getString("toendate"));
+					v.setTotitle(rs.getString("totitle"));
+					v.setTocont(rs.getString("tocont"));
+					v.setTofile(rs.getString("tofile"));
+					v.setTodept(rs.getInt("todept"));
+					v.setTomem(rs.getInt("tomem"));
+					v.setToconfirm(rs.getString("toconfirm"));
+					v.setTocomm(rs.getString("tocomm"));
+					list.add(v);
+				}
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}finally{
+				CloseUtil.close(rs);
+				CloseUtil.close(pstmt);
+				CloseUtil.close(con);
+			}
+			return list;
+
+		}
+		
+		
+		
 
 }

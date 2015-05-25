@@ -6,12 +6,7 @@
 <!-- 업무 추가 부분 뷰 -->
 <%@include file="/top.jsp"%>
 <div class="row">
-	<form action="sumware" method="post" id="goTodo">
-		<input type="hidden" id="model" name="model">
-		<input type="hidden" id="submod" name="submod">
-		<input type="hidden" id="memnum" name="memnum">
-		<input type="hidden" id="memmgr" name="memmgr">
-	</form>
+	
 	<div class="wrap">
 		<%@include file="/contentLeft.jsp" %>
 		

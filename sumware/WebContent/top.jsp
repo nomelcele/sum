@@ -49,6 +49,18 @@
 			//부장의 업무 추가 폼 작성 후 보내기버튼
 			$('#addTodoForm').submit();
 			alert("업무를 등록하였습니다.");
+		}else if(res==7){
+			// 부서의 업무리스트를 쭉 뽑아주는 버튼
+			$('#submod').attr("value","deptList");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
+			$('#memdept').attr("value","${sessionScope.v.memdept}");
+			$('#goTodo').submit();
+		}else if(res==8){
+			// 팀장이 사원들에게 업무를 부여하기 위한 폼
+			$('#submod').attr("value","giveJobForm");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
+			
+			$('#goTodo').submit();
 		}
 	}
 
@@ -56,7 +68,14 @@
 
 </head>
 
-
+<form action="sumware" method="post" id="goTodo">
+		<input type="hidden" id="model" name="model">
+		<input type="hidden" id="submod" name="submod">
+		<input type="hidden" id="memnum" name="memnum">
+		<input type="hidden" id="memmgr" name="memmgr">
+		<input type="hidden" id="memmgr" name="memdept">
+		
+</form>
 
 <nav class="navbar navbar">
 	<div class="container">
@@ -71,7 +90,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="#">메인</a></li>
 				<li><a href="#">내정보</a></li>
-				<li><a href="#">ToDo</a></li>
+				<li><a href="javascript:todoFormGo(7)">ToDo</a></li>
 				<li><a href="#">메일</a></li>
 				<li><a href="#">게시판</a></li>
 				

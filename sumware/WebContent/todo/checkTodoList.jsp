@@ -6,12 +6,7 @@
 <!-- 업무 관리(팀장일 경우) 부분 뷰 -->
 <%@include file="/top.jsp"%>
 <div class="row">
-	<form action="sumware" method="post" id="goTodo">
-		<input type="hidden" id="model" name="model">
-		<input type="hidden" id="submod" name="submod">
-		<input type="hidden" id="memnum" name="memnum">
-		<input type="hidden" id="memmgr" name="memmgr">
-	</form>
+	
 	<div class="wrap">
 		<%@include file="/contentLeft.jsp" %>
 		<!-- 팀장 업무관리 -->
@@ -36,6 +31,7 @@
 													${tolist.toendate }
 												</p>
 												<p>${tolist.tocont }</p>
+												<p>Comment : ${tolist.tocomm }</p>
 
 											</div>
 											<div class="panel-footer">

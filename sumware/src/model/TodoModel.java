@@ -65,9 +65,7 @@ public class TodoModel implements ModelInter{
 			
 		}else if(submod.equals("checkTodoList")){
 			// 업무 관리 클릭시 보여줄 화면 , 업무 리스트
-			int tomem = Integer.parseInt(request.getParameter("memnum"));
-			ArrayList<TodoVO> clist = TodoDao.getDao().checkTodoList(tomem);
-			request.setAttribute("todoList", clist);
+
 			String childmod = request.getParameter("childmod");
 			if(childmod!=null && childmod.equals("approveTodo")){
 				// 리스트의 승인여부 n을 y로 바꿈!!!!
@@ -93,6 +91,10 @@ public class TodoModel implements ModelInter{
 			method = true;
 			
 		}else if(submod.equals("checkTodoListForm")){
+			int tomem = Integer.parseInt(request.getParameter("memnum"));
+			ArrayList<TodoVO> clist = TodoDao.getDao().checkTodoList(tomem);
+			request.setAttribute("todoList", clist);
+			
 			url = "todo/checkTodoList.jsp";
 			method = true;
 		}else if(submod.equals("fWMana")){
@@ -114,6 +116,24 @@ public class TodoModel implements ModelInter{
 			request.setAttribute("fwList", list);
 			url="todo/fWMana.jsp";
 			method=true;
+		}else if(submod.equals("deptList")){
+			System.out.print("deptList 들어옴");
+			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
+			ArrayList<TodoVO> todoList = TodoDao.getDao().getDeptList(map);
+			request.setAttribute("deptList", todoList);
+			// 부서의 부서업무들 나열하기 위한 부분!!! 추가 필요!!!!!!!
+			// 필요필요필필요해해해해해해해해 만들어야돼
+		}else if(submod.equals("giveJobForm")){
+			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
+			ArrayList<TodoVO> todoList = TodoDao.getDao().getTeamTodoList(map);
+			int memmgr = Integer.parseInt(map.get("memnum"));
+			ArrayList<MemberVO> teamMemberList = TodoDao.getDao().getTomem(memmgr);
+			request.setAttribute("teamTodoList", todoList);
+			request.setAttribute("teamMemberList", teamMemberList);
+			
+			url = "todo/giveJob.jsp";
+			method = true;
+			
 		}
 		
 		return new ModelForward(url, method);
