@@ -73,7 +73,8 @@
 			
 			<!-- paging(S) -->
 			<div class="paging">
-				<button type="button" class="paging-prev">&lt;&lt;</button>
+			<%@include file="page.jsp" %>
+				<!-- <button type="button" class="paging-prev">&lt;&lt;</button>
 				<ul>
 					<li>1</li>
 					<li>2</li>
@@ -81,7 +82,7 @@
 					<li>4</li>
 					<li>5</li>
 				</ul>
-				<button type="button" class="paging-next">&gt;&gt;</button>
+				<button type="button" class="paging-next">&gt;&gt;</button> -->
 			</div>
 	<%-- 	<c:set var="pageUrl" value="sumware?mod=board&submod=boardList"/>
 			<%@include file="page.jsp" %> --%>

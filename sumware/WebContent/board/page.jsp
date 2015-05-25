@@ -4,6 +4,7 @@
 <c:choose>
 	<c:when test="${pageInfo.currentBlock eq 1}">&lt;&lt;</c:when>
 	<c:otherwise>
+		<%-- <button type="button" class="paging-prev">&lt;&lt;</button> --%>
 		<a href="${pageUrl}&page=${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock }">&lt;&lt;</a>
 	</c:otherwise>
 </c:choose>
