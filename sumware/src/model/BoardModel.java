@@ -67,7 +67,8 @@ public class BoardModel implements ModelInter{
 			if(fileName != null && fileName.length() != 0){
 				// 혹시 같은 이름의 파일이 있을 수 있으니, 업로드 되는 시간을 붙여서 
 				// 실제 경로에 올려준다.
-				part.write(System.currentTimeMillis()+"_"+fileName);
+				fileName = System.currentTimeMillis()+"_"+fileName;
+				part.write(fileName);
 			}
 			// chk callback 설정 : Ajax 로 넘어온 요청을 response 해주기 위한 설정
 			// CKEditorFuncNum 은 체크에디터가 사용하는 파라미터 명.
@@ -76,8 +77,9 @@ public class BoardModel implements ModelInter{
 			// callback 을 받을때도 자기 만의 방식으로 콜백 받아야 한다. 
 			// 그렇기 때문에 callback.jsp 를 따로 작성 해 준다.
 			String callback = request.getParameter("CKEditorFuncNum");
-			String fileUrl = "/upload"+fileName;
+			String fileUrl = "upload/"+fileName;
 			HttpSession ses = request.getSession();
+			System.out.println(callback);
 			ses.setAttribute("callback", callback);
 			ses.setAttribute("fileUrl", fileUrl);
 			url = "board/callback.jsp";
