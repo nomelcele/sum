@@ -18,66 +18,6 @@ public class MemberDao {
 		return dao;
 	}
 	
-	public MemberVO getNameMail(int memnum){
-		// 사원 번호에 해당하는 이름과 아이디 가져오는 메서드
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		MemberVO v = new MemberVO();
-		
-		try {
-			con = ConUtil.getOds();
-			StringBuffer sql = new StringBuffer();
-			sql.append("select memname,meminmail from member where memnum=?");
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, memnum);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()){
-				v.setMemname(rs.getString("memname"));
-				v.setMeminmail(rs.getString("meminmail"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			CloseUtil.close(rs);
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-		}
-		
-		return v;
-	}
-	
-	public String getInMail(String memname){
-		// 사원 이름에 해당하는 아이디(사내 메일 주소) 가져오는 메서드
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String meminmail = "";
-		
-		try {
-			con = ConUtil.getOds();
-			StringBuffer sql = new StringBuffer();
-			sql.append("select meminmail from member where memname=?");
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, memname);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()){
-				meminmail = rs.getString("meminmail");
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			CloseUtil.close(rs);
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-		}
-		
-		return meminmail;
-	}
-	
 	public ArrayList<MemberVO> getNameMailList(){
 		// 사원의 이름과 내부 메일 주소를 가져오는 메서드
 		// (suggest 기능을 위한 xml 파일 만드는 데 사용)

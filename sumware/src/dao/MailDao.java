@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import util.CloseUtil;
 import conn.ConUtil;
@@ -17,7 +18,7 @@ public class MailDao {
 		return dao;
 	}
 	
-	public boolean addMail(MailVO vo){
+	public boolean addMail(HashMap<String, String> map){
 		// 전송한 메일을 db에 추가해주는 메서드
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -25,14 +26,15 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("insert into mail values(mail_seq.nextVal,?,?,?,?,?,sysdate)");
+			sql.append("insert into mail values(mail_seq.nextVal,?,?,?,?,");
+			sql.append("(select meminmail from member where memname=?),sysdate,1)");
 			pstmt = con.prepareStatement(sql.toString());
 			
-			pstmt.setString(1, vo.getMailtitle());
-			pstmt.setString(2, vo.getMailcont());
-			pstmt.setString(3, vo.getMailfile());
-			pstmt.setInt(4, vo.getMailmem());
-			pstmt.setString(5, vo.getMailreceiver());
+			pstmt.setString(1, map.get("mailtitle")); 
+			pstmt.setString(2, map.get("mailcont"));
+			pstmt.setString(3, map.get("attach"));
+			pstmt.setInt(4, Integer.parseInt(map.get("mailmem")));
+			pstmt.setString(5, map.get("toMem"));
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -56,8 +58,8 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select mailmem,mailtitle,maildate from mail");
-			sql.append(" where mailreceiver=? order by maildate desc");
+			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma");
+			sql.append("where me.memnum=ma.mailmem and mailreceiver=? order by maildate desc");
 			
 			// 현재 로그인한 사원에게 온 메일만 검색
 			pstmt = con.prepareStatement(sql.toString());
@@ -66,9 +68,11 @@ public class MailDao {
 			
 			while(rs.next()){
 				MailVO v = new MailVO();
-				v.setMailmem(rs.getInt("mailmem"));
-				v.setMailtitle(rs.getString("mailtitle"));
-				v.setMaildate(rs.getString("maildate"));
+				v.setMailnum(rs.getInt("ma.mailnum"));
+				System.out.println("보낸 사람: "+v.getMailsname());
+				v.setMailsname(rs.getString("me.memname"));
+				v.setMailtitle(rs.getString("ma.mailtitle"));
+				v.setMaildate(rs.getString("ma.maildate"));
 				list.add(v);
 			}
 		} catch (SQLException e) {
@@ -175,6 +179,10 @@ public class MailDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
 		}
 		
 		return v;

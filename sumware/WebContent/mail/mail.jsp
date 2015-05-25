@@ -128,6 +128,7 @@
 </script>
 <script>
 	function mailFormGo(res){
+		// 인자 String으로 바꾸기
 		if(res==1){ // 메일 쓰기
 			$.ajax({
 				type: "post",
@@ -173,8 +174,37 @@
 				}
 			});
 		} else if(res==5){ // 휴지통
-			
-		} 
+			$.ajax({
+				type: "post",
+				url: "sumware",
+				data: {model: "mail",
+					submod: "mailTrashcan"
+				},
+				success: function(result){
+					$("#mainContent").html(result);
+				}
+			});
+		} else if(res==6){ // 전송 완료
+			var toMem = $("#toMem").val();
+			var mailtitle = $("#mailtitle").val();
+			var mailcont = $("#mailcont").val();
+			var attach = $("#attach").val();
+			$.ajax({
+				type: "post",
+				url: "sumware",
+				data: {model: "mail",
+					submod: "mailWrite",
+					mailmem: "${sessionScope.v.memnum}",
+					toMem: toMem,
+					mailtitle: mailtitle,
+					mailcont: mailcont,
+					attach: attach
+				},
+				success: function(result){
+					$("#mainContent").html(result);
+				}
+			});
+		}
 		
 	}
 	

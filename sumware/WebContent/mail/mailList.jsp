@@ -22,10 +22,10 @@
 					<tr>
 						<td><input type="checkbox" name="num" id="num"></td>
 						<c:if test="${tofrom eq '1' || '3'}">
-							<td>${mList.mailmem}</td>
+							<td>${mList.mailsname}</td>
 						</c:if>
 						<c:if test="${tofrom eq '2' }">
-							<td>${mList.mailreceiver}</td>
+							<td>${mList.mailrname}</td>
 						</c:if>
 						<td><a href="javascript:mailDetailGo(${mList.mailnum})">${mList.mailtitle}</a></td>
 						<td>${mList.maildate}</td>
@@ -44,7 +44,8 @@
 			url: "sumware",
 			data: {model: "mail",
 				submod: "mailDetail",
-				mailnum: mailnum}, // 해당 메일의 번호
+				mailnum: mailnum, // 해당 메일의 번호
+				mailmem: mailmem}, // 메일 보내는 사람
 			success: function(result){
 				$("#mainContent").html(result);
 			}

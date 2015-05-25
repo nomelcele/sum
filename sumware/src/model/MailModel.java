@@ -4,15 +4,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import util.MyFileUp;
 import util.MyMap;
 import util.Suggest;
 import controller.ModelForward;
 import dao.MailDao;
-import dao.MemberDao;
 import dto.MailVO;
 
 public class MailModel implements ModelInter{
@@ -33,56 +34,31 @@ public class MailModel implements ModelInter{
 			method = true;
 			
 		} else if(submod != null && submod.equals("mailWrite")){
-			// 메일 작성 => map으로
 			request.setCharacterEncoding("UTF-8");
-
-			String title = request.getParameter("title"); // 메일 제목
-			String content = request.getParameter("content"); // 메일 내용
-			String file = "test.jpg"; // 첨부 파일
-			int fromMem = Integer.parseInt(request.getParameter("fromMem")); // 메일 발신자-사원 번호(세션 통해 불러올 예정)
-			//여기서 toMem이 참조하고 있는 member table의 사내 메일 주소에 저장되어있어야함.(제약조건)
-			// 메일 수신자 이름
-			String toMem = request.getParameter("toMem");
-			// 메일 수신자 아이디(사내 메일)
-			String toMemMail = MemberDao.getDao().getInMail(toMem);
-			
-			MailVO vo = new MailVO();
-			vo.setMailtitle(title);
-			vo.setMailcont(content);
-			vo.setMailfile(file);
-			vo.setMailmem(fromMem);
-			vo.setMailreceiver(toMemMail);
-
-			boolean res = MailDao.getDao().addMail(vo); // db에 메일 정보 넣기
-			
-			System.out.println(res);
-			
-			if(res){
-				url = "mail/mailSend.jsp"; // 메일 전송 완료 페이지
-				method = true;
+			try {
+				HashMap<String, String> map = MyFileUp.getFup().fileUp("attach", request);
+				
+				boolean res = MailDao.getDao().addMail(map); // db에 메일 정보 넣기
+				System.out.println(res);
+				
+				if(res){
+					url = "mail/mailSend.jsp"; // 메일 전송 완료 페이지
+					method = true;
+				}
+			} catch (ServletException e) {
+				e.printStackTrace();
 			}
+			
 		} else if(submod != null && submod.equals("mailFromList")){
 			// 받은 메일함
-			// System.out.println("dddddddddd");
 			// HashMap<String,String> map =MyMap.getMaps().getMapList(request);
-			System.out.println("??????");
 			String userid = request.getParameter("userid");
-//			System.out.println(userid+"???????");
 			
 			// 현재 로그인한 사원의 id
 			ArrayList<MailVO> fromlist = MailDao.getDao().getFromMailList(userid);
-			// 보낸 사람 이름 리스트
-			String[] namelist = new String[fromlist.size()];
-			
-			for(int i=0; i<namelist.length; i++){
-				int memnum = fromlist.get(i).getMailmem(); // 보낸 사람 사원 번호
-				String name = MemberDao.getDao().getNameMail(memnum).getMemname();
-				namelist[i] = name;
-			}
 			
 			request.setAttribute("list", fromlist);
 			request.setAttribute("tofrom", 1);
-			request.setAttribute("name", namelist);
 			
 			url = "mail/mailList.jsp";
 			method = true;
@@ -116,14 +92,17 @@ public class MailModel implements ModelInter{
 			method = true;
 		} else if(submod != null && submod.equals("mailDetail")){
 			// 메일 상세 보기
+			// 메일 번호
 			int mailnum = Integer.parseInt(request.getParameter("mailnum"));
+			// 메일 보낸 사람(사원 번호)
+			int mailmem = Integer.parseInt(request.getParameter("mailmem"));
 			MailVO detail = MailDao.getDao().getMailDetail(mailnum);
 			
 			// 보낸 사람 이름
-			String sender = MemberDao.getDao().getNameMail(detail.getMailmem()).getMemname();
-			
+			// String sender = MailDao.getDao().getSName(mailmem);
+					
 			request.setAttribute("detail", detail);
-			request.setAttribute("sender", sender);
+			// request.setAttribute("sender", sender);
 			
 			url = "mail/mailDetail.jsp";
 			method = true;
@@ -141,11 +120,12 @@ public class MailModel implements ModelInter{
 			url = "mail/mailList.jsp";
 			method = true;
 			
-		} else if(submod != null && submod.equals("mailCk")){
-			// 체크에디터
-			
+		} else if(submod != null && submod.equals("mailTrashcan")){
+			// 휴지통
+			url = "mail/mailTrashcan.jsp";
+			method = true;
 		}
-				
+		
 		return new ModelForward(url, method);
 	}
 

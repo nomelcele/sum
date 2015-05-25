@@ -13,10 +13,10 @@
  -->
 
 	<form method="post" action="sumware" class="form-horizontal" role="form"
-	name="f" autocomplete="off">
+	name="f" autocomplete="off" enctype="multipart/form-data">
     	<input type="hidden" name= "model" value="mail">
 		<input type="hidden" name= "submod" value="mailWrite">
-		<input type="hidden" name= "fromMem" value="${sessionScope.v.memnum}">
+		<input type="hidden" name= "mailmem" value="${sessionScope.v.memnum}">
 	    <div class="form-group">
 	        <label for="receiver" class="col-sm-2 control-label">받는 사람</label>
 	        <div class="col-sm-10">
@@ -47,13 +47,13 @@
 	    <div class="form-group">
 	        <label for="title" class="col-sm-2 control-label">제목</label>
 	        <div class="col-sm-10">
-	            <input type="text" class="form-control" id="title" name="title" >
+	            <input type="text" class="form-control" id="mailtitle" name="mailtitle" >
 	        </div>
 	    </div>
 	    <div class="form-group">
 	        <label for="content" class="col-sm-2 control-label">내용</label>
 	        <div class="col-sm-10">
-	            <textarea class="form-control" rows="4" name="content" id="content" ></textarea>
+	            <textarea class="form-control" rows="4" name="mailcont" id="mailcont" ></textarea>
 	        </div>
 	    </div>
 	      <div class="form-group">
@@ -64,7 +64,7 @@
 	    </div>
 	    <div class="form-group">
 	        <div class="col-sm-10 col-sm-offset-2">
-	            <input id="submit" name="submit" type="submit" value="전송" class="btn btn-primary">
+	            <input type="submit" value="전송" class="btn btn-primary">
 	        </div>
 	    </div>
 	    <div class="form-group">
@@ -72,4 +72,4 @@
 	            <! Will be used to display an alert to the user>
 	        </div>
 	    </div>
-	</form>	
+	</form>
