@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-
 import util.MyMap;
 import util.Suggest;
 import controller.ModelForward;
@@ -72,9 +71,18 @@ public class MailModel implements ModelInter{
 			
 			// 현재 로그인한 사원의 id
 			ArrayList<MailVO> fromlist = MailDao.getDao().getFromMailList(userid);
+			// 보낸 사람 이름 리스트
+			String[] namelist = new String[fromlist.size()];
+			
+			for(int i=0; i<namelist.length; i++){
+				int memnum = fromlist.get(i).getMailmem(); // 보낸 사람 사원 번호
+				String name = MemberDao.getDao().getNameMail(memnum).getMemname();
+				namelist[i] = name;
+			}
 			
 			request.setAttribute("list", fromlist);
 			request.setAttribute("tofrom", 1);
+			request.setAttribute("name", namelist);
 			
 			url = "mail/mailList.jsp";
 			method = true;
@@ -111,13 +119,25 @@ public class MailModel implements ModelInter{
 			int mailnum = Integer.parseInt(request.getParameter("mailnum"));
 			MailVO detail = MailDao.getDao().getMailDetail(mailnum);
 			
+			// 보낸 사람 이름
+			String sender = MemberDao.getDao().getNameMail(detail.getMailmem()).getMemname();
+			
 			request.setAttribute("detail", detail);
+			request.setAttribute("sender", sender);
 			
 			url = "mail/mailDetail.jsp";
 			method = true;
 			
 		} else if(submod != null && submod.equals("mailMyList")){
 			// 내게 쓴 메일함
+			int usernum = Integer.parseInt(request.getParameter("usernum"));
+			String userid = request.getParameter("userid");
+			
+			ArrayList<MailVO> mylist = MailDao.getDao().getMyMailList(usernum, userid);
+			
+			request.setAttribute("list", mylist);
+			request.setAttribute("tofrom", 3);
+			
 			url = "mail/mailList.jsp";
 			method = true;
 			

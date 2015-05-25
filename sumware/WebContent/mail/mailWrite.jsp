@@ -57,7 +57,7 @@
 	        </div>
 	    </div>
 	      <div class="form-group">
-	        <label for="content" class="col-sm-2 control-label">첨부파일</label>
+	        <label for="content" class="col-sm-2 control-label">첨부 파일</label>
 	        <div class="col-sm-10">
 	            <input type="file" class="form-control" name="attach" id="attach" >
 	        </div>
