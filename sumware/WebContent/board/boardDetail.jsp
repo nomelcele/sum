@@ -9,18 +9,20 @@
 		<!-- lnb-area(E) -->
 		<!-- contents(S) -->
 		<div class="contents">
-			<!-- board-form(S) -->
-			<div class="board-form">
+			<!-- board-detail(S) -->
+			<div class="board-detail">
 				<div class="left">
+					<span>${sessionScope.bdate }</span>
 				</div>
 				<div class="right">
 					<form action="sumware" method="post">
-						<button name="model" id="mod">글쓰기</button>
+						<button name="model" id="mod">수정</button>
+						<button name="model" id="mod">리스트</button>
 						<input type="hidden" name="submod" id="submod">
 					</form>
 				</div>
 			</div>
-			<!-- board-form(E) -->
+			<!-- board-detail(E) -->
 			
 			<!-- board-list(S) -->
 			<table class="board-list">

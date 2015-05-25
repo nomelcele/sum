@@ -10,39 +10,39 @@
 		});
 	});
 </script>
-	<div id="wrap" class="board">
+<div id="wrap" class="board">
 		<!-- lnb-area(S) -->
-		<div class="lnb-area">
+	<div class="lnb-area">
 		left
-		</div>
+	</div>
 		<!-- lnb-area(E) -->
 	
 		<!-- contents(S) -->
-		<div class="contents">
+	<div class="contents">
 			<!-- board-form(S) -->
-			<div class="board-form">
-				<div class="left">
+		<div class="board-form">
+			<div class="left">
 					<input type="text" name="search" placeholder="search">				
-				</div>
-				<div class="right">
+			</div>
+			<div class="right">
 					<form action="sumware" method="post">
 						<button name="model" id="mod">글쓰기</button>
 						<input type="hidden" name="submod" id="submod">
 					</form>
-				</div>
 			</div>
+		</div>
 			<!-- board-form(E) -->
 			
 			<!-- board-list(S) -->
-			<table class="board-list">
+		<table class="board-list">
 				<!-- table cell width setting(S) -->
-				<colgroup>
+			<colgroup>
 					<col style="width:50px" />
 					<col />
 					<col style="width:100px" />
 					<col style="width:70px" />
 					<col style="width:50px;text-align:center" />
-				</colgroup>
+			</colgroup>
 				<!-- table cell width setting(E) -->
 				<thead>
 					<tr>
@@ -66,11 +66,11 @@
 					</c:forEach>
 				</tbody>
 				<%-- 반복 구간 끝 --%>
-			</table>
+		</table>
 			<!-- board-list(E) -->
 			
 			<!-- paging(S) -->
-			<div class="paging">
+		<div class="paging">
 			<c:set var="pageUrl" value="sumware?model=board&submod=boardList"/>
 			<%@include file="page.jsp" %>
 				<!-- <button type="button" class="paging-prev">&lt;&lt;</button>
@@ -82,9 +82,9 @@
 					<li>5</li>
 				</ul>
 				<button type="button" class="paging-next">&gt;&gt;</button> -->
-			</div>
-			<!-- paging(E) -->
 		</div>
-		<!-- contents(E) -->
+			<!-- paging(E) -->
 	</div>
+		<!-- contents(E) -->
+</div>
 <%@include file="/footer.jsp" %>
