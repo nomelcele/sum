@@ -70,14 +70,6 @@ public class BoardDao {
 			// tn(TotalNotice) 즉, 모든 게시물을 뜻함.
 			.append(" order by b.bnum desc) tn)")
 			.append(" where r_num between ? and ?");
-			/*
-			 
-			 */
-			/*
-			("select * from (select rownum r_num, a.* from ").append
-			("(select * from board order by no desc) a").append
-			(") where r_num between ? and ?");
-			*/
 			// Connection 객체 생성.
 			con = ConUtil.getOds();
 			// 생성한 con 객체를 pstmt 에 CallByReference 로 전달.
