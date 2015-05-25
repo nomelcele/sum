@@ -25,16 +25,8 @@
 			</div>
 			<!-- board-detail(E) -->
 			
-			<!-- board-list(S) -->
-			<table class="board-list">
+			<table class="board-detail">
 				<!-- table cell width setting -->
-				<colgroup>
-					<col style="width:50px" />
-					<col />
-					<col style="width:100px" />
-					<col style="width:70px" />
-					<col style="width:50px;text-align:center" />
-				</colgroup>
 				<!-- table cell width setting -->
 				<thead>
 					<tr>
@@ -45,21 +37,12 @@
 						<td>조회수</td>
 					</tr>
 				</thead>
-				<%-- 반복 구간 시작 --%>
 				<tbody>
-					<c:forEach items="${list }" var="vlist">
 					<tr>
-						<td class="num">${vlist.bnum }</td>
-						<td style="text-align: left">${vlist.btitle }</td>
-						<td>${vlist.bwriter }</td>
-						<td>${vlist.bdate }</td>
-						<td>${vlist.bhit }</td>
+						<td>${list.bcont}</td>
 					</tr>
-					</c:forEach>
 				</tbody>
-				<%-- 반복 구간 끝 --%>
 			</table>
-			<!-- board-list(E) -->
 			
 			
 			<!-- paging(S) -->

@@ -9,6 +9,9 @@
 		<!-- lnb-area(E) -->
 	
 		<!-- contents(S) -->
+<form action="sumware" method="post">
+	<input type="hidden" name="model" id="model">
+	<input type="hidden" name="submod" id="submod">
 	<div class="contents">
 			<!-- board-form(S) -->
 		<div class="board-form">
@@ -16,11 +19,7 @@
 					<input type="text" name="search" placeholder="search">				
 			</div>
 			<div class="right">
-					<form action="sumware" method="post">
 						<button onclick="javascript:formGo('write')">글쓰기</button>
-						<input type="hidden" name="model" id="model">
-						<input type="hidden" name="submod" id="submod">
-					</form>
 			</div>
 		</div>
 			<!-- board-form(E) -->
@@ -48,9 +47,10 @@
 				<%-- 반복 구간 시작 --%>
 				<tbody>
 					<c:forEach items="${list }" var="vlist">
+						<input type="hidden" name="no" value="${vlist.bnum }">
 					<tr>
 						<td class="num">${vlist.bnum }</td>
-						<td style="text-align: left">${vlist.btitle }</td>
+						<td style="text-align: left"><span onclick="javascript:formGo('detail')">${vlist.btitle }</span></td>
 						<td style="text-align: center;">${vlist.bwriter }</td>
 						<td style="text-align: center;">${vlist.bdate }</td>
 						<td style="text-align: center;">${vlist.bhit }</td>
@@ -77,6 +77,7 @@
 		</div>
 			<!-- paging(E) -->
 	</div>
+</form>
 		<!-- contents(E) -->
 </div>
 <%@include file="/footer.jsp" %>
