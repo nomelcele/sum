@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/top.jsp" %>
-<script>
-	$(function(){
-		$('#mod').click(function(){
-			$(this).attr("value","board");
-			$('#submod').attr("value","writeForm");
-			$('form').submit();
-		});
-	});
-</script>
 <div id="wrap" class="board">
 		<!-- lnb-area(S) -->
 	<div class="lnb-area">
@@ -26,7 +17,8 @@
 			</div>
 			<div class="right">
 					<form action="sumware" method="post">
-						<button name="model" id="mod">글쓰기</button>
+						<button onclick="javascript:formGo('write')">글쓰기</button>
+						<input type="hidden" name="model" id="model">
 						<input type="hidden" name="submod" id="submod">
 					</form>
 			</div>

@@ -16,8 +16,9 @@
 				</div>
 				<div class="right">
 					<form action="sumware" method="post">
-						<button name="model" id="mod">수정</button>
-						<button name="model" id="mod">리스트</button>
+						<input type="hidden" name="model" id="model">
+						<button name="submod" id="submod" value="javascript:formGo('update')">수정</button>
+						<button name="submod" id="submod" value="javascript:formGo('list')">리스트</button>
 						<input type="hidden" name="submod" id="submod">
 					</form>
 				</div>

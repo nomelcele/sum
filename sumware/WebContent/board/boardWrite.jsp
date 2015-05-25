@@ -10,21 +10,6 @@
 		});
 	</script>
 </c:if>
-<script>
-	function formGo(res){
-		if(res==1){
-			$('#mod').attr('value','board');
-			$('#submod').attr('value','boardInsert');
-			$('#page').attr('value','1');
-			$('form').submit();
-		}else{
-			$('#mod').attr('value','board');
-			$('#submod').attr('value','boardList');
-			$('#page').attr('value','1');
-			$('form').submit();
-		}
-	}
-</script>
 <div id="wrap" class="board">
 		<!-- lnb-area(S) -->
 	<div class="lnb-area">
@@ -48,7 +33,7 @@
 			
 			
 			<form action="sumware" method="post">
-				<input type="hidden" name="model" id="mod"> 
+				<input type="hidden" name="model" id="model"> 
 				<input type="hidden" name="submod" id="submod">
 				<input type="hidden" name="page" id="page">
 				
@@ -85,8 +70,8 @@
 				
 				<!-- button-div(S) -->
 			<div class="button-div center">
-				<button onclick="javascript:formGo(1)">글작성</button>
-				<button onclick="javascript:formGo(2)">리스트</button>
+				<button onclick="javascript:formGo('insert')">글작성</button>
+				<button onclick="javascript:formGo('list')">리스트</button>
 			</div>
 				<!-- button-div(E) -->
 			</form>
