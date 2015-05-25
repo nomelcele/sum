@@ -5,17 +5,15 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>SumWare</title>
-<!-- 라이브러리  -->
+<!-- CSS 라이브러리(S)  -->
 <link rel="stylesheet" href="font-awesome/css/font-awesome.css" />
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet"/>
 <link href="css/main.css" rel="stylesheet"/>
 <link href="css/boardList.css" rel="stylesheet"/>
-<!-- css board(S) -->
 <link rel="stylesheet" type="text/css" href="css/common.css" />
-<!-- css board(E) -->
+<!-- CSS 라이브러리(E)  -->
 <!-- 자바스크립트 -->
 <script src="js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -23,6 +21,21 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
+	function formGo(res){
+		$('#model').attr("value", "board");
+		if(res == 'insert'){
+			$('#submod').attr('value','boardInsert');
+			$('#page').attr('value','1');
+		}else if(res == 'list'){
+			$('#submod').attr('value','boardList');
+			$('#page').attr('value','1');
+		}else if(res == 'update'){
+			$('#submod').attr("value","boardUpdate");
+		}else if(res == 'write'){
+			$('#submod').attr("value", "writeForm");
+		}
+		$('form').submit();
+	}
 	function todoFormGo(res){
 		$('#model').attr("value","todo");
 		if(res==1){
@@ -63,20 +76,8 @@
 			$('#goTodo').submit();
 		}
 	}
-
 </script>
-
 </head>
-
-<form action="sumware" method="post" id="goTodo">
-		<input type="hidden" id="model" name="model">
-		<input type="hidden" id="submod" name="submod">
-		<input type="hidden" id="memnum" name="memnum">
-		<input type="hidden" id="memmgr" name="memmgr">
-		<input type="hidden" id="memmgr" name="memdept">
-		
-</form>
-
 <nav class="navbar navbar">
 	<div class="container">
 		<div class="navbar-header">
@@ -93,7 +94,6 @@
 				<li><a href="javascript:todoFormGo(7)">ToDo</a></li>
 				<li><a href="#">메일</a></li>
 				<li><a href="#">게시판</a></li>
-				
 			</ul>
 			<ul class="nav navbar-right navbar-nav">
 				<li><a href="#"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
@@ -101,4 +101,3 @@
 		</div>
 	</div>
 </nav>
-
