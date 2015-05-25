@@ -172,7 +172,7 @@ public class BoardDao {
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
 		StringBuffer sql = new StringBuffer();
 		sql.append
-		("select m.memname, b.btitle, b.cont, TO_CHAR(b.bdate,'yyyy.MM.dd') bdate").append
+		("select m.memname, b.btitle, b.cont, TO_CHAR(b.bdate,'yyyy.MM.dd HH:mm') bdate").append
 		(" from board b, member m where b.bmem=m.memnum and bnum=?");
 		try {
 			con = ConUtil.getOds();
