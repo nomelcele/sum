@@ -13,6 +13,9 @@
 <link href="css/bootstrap.min.css" rel="stylesheet"/>
 <link href="css/main.css" rel="stylesheet"/>
 
+<!-- css board(S) -->
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<!-- css board(E) -->
 <!-- 자바스크립트 -->
 <script src="js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
