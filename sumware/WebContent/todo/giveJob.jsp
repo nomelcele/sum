@@ -7,19 +7,26 @@
 <script>
 
 	function insertJob(tonum){
-		$.ajax({
-			type : "post",
-			url : "sumware",
-			data : {model:"todo", 
-				submod:"insertMemJob", 
-				jobmemnum:$('#memjobName').val(),
-				jobtonum:tonum,
-				jobcont:$('#jobcont').val()},
-			success : function(result){
-				$("#membersjob").html(result);
-				
-			}
-		});
+		
+		if($('#memjobName'+tonum).val()==""){
+			alert("사원을 선택해 주세요.");
+		}else{
+			$.ajax({
+				type : "post",
+				url : "sumware",
+				data : {model:"todo", 
+					submod:"insertMemJob", 
+					jobmemnum:$('#memjobName'+tonum).val(),
+					jobtonum:tonum,
+					jobcont:$('#jobcont'+tonum).val()},
+				success : function(result){
+					$("#membersjob"+tonum).html(result);
+					
+				}
+			});
+			alert("업무 지정이 완료되었습니다.");
+		}
+		
 	}
 </script>
 <%@include file="/top.jsp"%>
@@ -53,20 +60,20 @@
 												</p>
 												<p>${tolist.tocont }</p>
 												<label class="control-label" for="inputSuccess">사원별 업무</label>
-												<div id="membersjob"></div>
+												<div id="membersjob${tolist.tonum}"></div>
 												
 					
 
 											</div>
 											<div class="panel-footer">
 											<label class="control-label" for="inputSuccess">업무 지정</label>
-											<select name="memjobName" class="form-control" id="memjobName" style="width: 25%">
+											<select name="memjobName" class="form-control" id="memjobName${tolist.tonum}" style="width: 25%">
 												<option value="">사원선택</option>
 												<c:forEach var="teamMemList" items="${teamMemberList }">
 												<option value="${teamMemList.memnum }">${teamMemList.memname}</option>
 												</c:forEach>
 											</select>
-											<input type="text" id="jobcont">
+											<input type="text" id="jobcont${tolist.tonum}">
 											<button type="button" onclick="javascript:insertJob(${tolist.tonum })"><i class="fa fa-plus"></i></button>
 												
 											</div>
