@@ -54,7 +54,6 @@ public class BoardModel implements ModelInter{
 			ses.setAttribute("list", list);
 			url = "board/boardDetail.jsp";
 			method = true;
-			
 		}else if(submod != null && submod.equals("ckBoard")){
 			Part part = null;
 			try {
