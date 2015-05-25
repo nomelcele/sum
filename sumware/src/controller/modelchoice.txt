@@ -4,3 +4,4 @@ messenger=model.MessengerModel
 board=model.BoardModel
 login=model.LoginModel
 mail=model.MailModel
+sns=model.SnsModel

@@ -8,27 +8,30 @@ import java.sql.SQLException;
 public class CloseUtil {
 	public static void close(Connection con){
 		try {
-			con.close();
+			if(con!=null){
+				con.close();
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 	public static void close(PreparedStatement pstmt){
 		try {
-			pstmt.close();
+			if(pstmt!=null){
+				pstmt.close();
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 	public static void close(ResultSet rs){
 		try {
-			rs.close();
+			if(rs!=null){
+				rs.close();
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

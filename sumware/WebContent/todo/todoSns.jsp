@@ -1,0 +1,93 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert title here</title>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="font-awesome/css/font-awesome.css" />
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script src="../js/http.js"></script>
+<script>
+// push Client 설정 (받는쪽)
+console.log("typeof:"+typeof(EventSource));
+
+if(typeof(EventSource) != "undefined"){
+	var eventSource = new EventSource("sumware?model=sns&submod=pushSns&sdept=100&page=1"); // push를 받을수 있는 브라우져인지 판단.
+	// EventSource EventListener의 종류
+	// onmessage : 서버가 보낸 push메세지가 수신되면 발생
+	// onerror : 서버가 보낸 push에서 에러가 발생되었을때
+	// onopen : 서버가 연결이 되었을 때 발생
+	
+	eventSource.onmessage = function(event){
+	console.log("어디확인해볼가?::"+event.data);
+	$(".chat").html(event.data);
+	
+};
+}else{
+	$(".chat").html("해당 브라우저는 지원이 안됩니다.");
+}
+
+
+// Ajax로 사용자의 데이터를 보내는 쪽 - 어제와동일!
+$(function(){
+		$('#send').click(function(){
+			var fdata = {
+					model:"sns",
+					submod:"insertSns",
+					smem:"${v.memnum}",
+					sdept:"${v.memdept}",
+					scont:$("#btn-input").val()
+						
+				};
+			$('#smem').val("");
+			$('#scont').val("");
+			$.ajax({
+				type:"POST",
+				url:"sumware",
+				data:fdata
+			});
+		});
+		
+
+});
+</script>
+</head>
+<body>
+<div id="wrap">
+	<div class="col-lg-3" style="width: 40%">
+				<div class="chat-panel panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-bar-chart-o fa-fw"></i> <strong
+							class="primary-font">부서 SNS</strong>
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<ul class='chat'>
+						</ul>
+					</div>
+					<!-- /.panel-body -->
+					<div class="panel-footer">
+						<div class="input-group">
+							<input id="btn-input" type="text" class="form-control input-sm" placeholder="메시지를 입력해주세요">
+							<span class="input-group-btn">
+								<button class="btn btn-warning btn-sm" id="send">Send</button>
+							</span>
+						</div>
+					</div>
+					<!-- /.panel-footer -->
+				</div>
+				<!-- /.panel .chat-panel -->
+			</div>	
+</div>
+</body>
+</html>

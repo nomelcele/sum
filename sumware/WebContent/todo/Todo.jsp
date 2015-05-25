@@ -57,7 +57,7 @@
 			</div>
 		</div>
 		<!-- 부서업무 부분 끝!!! -->
-		<%@include file="snsTodo.jsp" %>
+		<%@include file="todoSns.jsp" %>
 	</div>
 	</div>
 
