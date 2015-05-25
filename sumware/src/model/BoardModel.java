@@ -33,9 +33,9 @@ public class BoardModel implements ModelInter{
 			Map<String, Integer> map = pageProcess(request, 0);
 			ArrayList<BoardVO> list = BoardDao.getDao().getList(map);
 			request.setAttribute("list", list);
-			for(BoardVO e : list){
-				System.out.println(e.getBwriter());
-			}
+//			for(BoardVO e : list){
+//				System.out.println(e.getBwriter());
+//			}
 			request.setAttribute("list", list);
 			url = "board/boardList.jsp";
 			method = true;
@@ -50,8 +50,7 @@ public class BoardModel implements ModelInter{
 		}else if(submod != null && submod.equals("boardDetail")){
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			ArrayList<BoardVO> list = BoardDao.getDao().getDetail(map);
-			HttpSession ses = request.getSession();
-			ses.setAttribute("list", list);
+			request.setAttribute("list", list);
 			url = "board/boardDetail.jsp";
 			method = true;
 		}else if(submod != null && submod.equals("ckBoard")){
