@@ -9,10 +9,13 @@
 <%--  --%>
 <c:if test="${param.model eq 'todo' }">
 
-<form action="../sumware" method="post" id="goTodo">
-	<input type="hidden" id="model" name="model">
-	<input type="hidden" id="submod" name="submod">
-	<input type="hidden" id="memnum" name="memnum">
+<form action="sumware" method="post" id="goTodo">
+		<input type="hidden" id="model" name="model">
+		<input type="hidden" id="submod" name="submod">
+		<input type="hidden" id="memnum" name="memnum">
+		<input type="hidden" id="memmgr" name="memmgr">
+		<input type="hidden" id="memmgr" name="memdept">
+		
 </form>
 <div class="col-lg-1" style="width: 250px">
 	<div class="row-lg-1">

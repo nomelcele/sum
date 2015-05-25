@@ -78,6 +78,7 @@
 	}
 </script>
 </head>
+
 <nav class="navbar navbar">
 	<div class="container">
 		<div class="navbar-header">

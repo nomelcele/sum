@@ -6,6 +6,7 @@
 
 <div class="row">
 	
+
 	<div class="wrap">
 		<%@include file="/contentLeft.jsp" %>
 		<!-- 부서업무 부분!! -->
