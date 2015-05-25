@@ -12,7 +12,6 @@
 			<!-- board-form(S) -->
 			<div class="board-form">
 				<div class="left">
-					<!-- 넣고싶은거 -->
 				</div>
 				<div class="right">
 					<form action="sumware" method="post">
@@ -61,16 +60,9 @@
 			
 			
 			<!-- paging(S) -->
-			<div class="paging">
-				<button type="button" class="paging-prev">&lt;&lt;</button>
-				<ul>
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
-					<li>4</li>
-					<li>5</li>
-				</ul>
-				<button type="button" class="paging-next">&gt;&gt;</button>
+			<div class="">
+				<button>글수정</button>
+				<button>리스트</button>
 			</div>
 	<%-- 	<c:set var="pageUrl" value="sumware?mod=board&submod=boardList"/>
 			<%@include file="page.jsp" %> --%>
@@ -80,5 +72,5 @@
 			
 		</div>
 		<!-- contents(E) -->
-	</div>
+</div>
 <%@include file="/footer.jsp" %>

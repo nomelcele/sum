@@ -17,13 +17,12 @@
 		</div>
 		<!-- lnb-area(E) -->
 	
-	
 		<!-- contents(S) -->
 		<div class="contents">
 			<!-- board-form(S) -->
 			<div class="board-form">
 				<div class="left">
-					<!-- 넣고싶은거 -->
+					<input type="text" name="search" placeholder="search">				
 				</div>
 				<div class="right">
 					<form action="sumware" method="post">
@@ -36,7 +35,7 @@
 			
 			<!-- board-list(S) -->
 			<table class="board-list">
-				<!-- table cell width setting -->
+				<!-- table cell width setting(S) -->
 				<colgroup>
 					<col style="width:50px" />
 					<col />
@@ -44,7 +43,7 @@
 					<col style="width:70px" />
 					<col style="width:50px;text-align:center" />
 				</colgroup>
-				<!-- table cell width setting -->
+				<!-- table cell width setting(E) -->
 				<thead>
 					<tr>
 						<td>글번호</td>
@@ -70,7 +69,6 @@
 			</table>
 			<!-- board-list(E) -->
 			
-			
 			<!-- paging(S) -->
 			<div class="paging">
 			<c:set var="pageUrl" value="sumware?model=board&submod=boardList"/>
@@ -85,12 +83,7 @@
 				</ul>
 				<button type="button" class="paging-next">&gt;&gt;</button> -->
 			</div>
-	<%-- 	<c:set var="pageUrl" value="sumware?mod=board&submod=boardList"/>
-			<%@include file="page.jsp" %> --%>
-			
 			<!-- paging(E) -->
-			
-			
 		</div>
 		<!-- contents(E) -->
 	</div>
