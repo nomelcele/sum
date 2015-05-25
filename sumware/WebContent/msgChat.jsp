@@ -8,26 +8,7 @@
 <title>ChatRoom</title>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<!-- <script> -->
-// 	$(function(){
-// 		$("#btnIn").click(function(){
-			
-// 			var fdata = {				
-<%-- 				toNum:<%=request.getAttribute("toNum")%>,		 --%>
-<%-- 				key:<%=request.getAttribute("key")%>, --%>
 
-// 			};
-// 			alert("초대하였습니다.");
-// 			$.ajax({
-// 				type:"POST",
-// 				url:"main.jsp",
-// 				data:fdata
-// 			});
-// 			// page이동을 방지
-// 			return false;
-// 		});
-// 	});
-<!-- </script> -->
 
 </head>
 <body>
@@ -63,7 +44,7 @@
 	var sessionKey = "<%=request.getAttribute("key")%>";
 	alert("sessionKey " + sessionKey);
 	var msgWindow = document.getElementById("msgWindow");
-	var msgSocket = new WebSocket("ws://192.168.0.4:80/sumware/msgSocket/"+sessionKey)
+	var msgSocket = new WebSocket("ws://192.168.0.21:8080/sumware/msgSocket/"+sessionKey)
 	msgSocket.onopen = function processOpen(message) {
 		joinMsg(message);
 	}

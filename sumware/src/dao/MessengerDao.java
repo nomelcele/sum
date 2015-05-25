@@ -82,8 +82,40 @@ public class MessengerDao {
 		
 	}
 	
-	
-	
+	public ArrayList<MessengerVO> getentList(){
+		System.out.println("Messenger getentList 영역입니다.");
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<MessengerVO> list = new ArrayList<MessengerVO>();
+		StringBuffer sql = new StringBuffer();
+		sql.append("select masnum, mesmember, openmemberyn,entstdate,entendate from mesentry");
+		
+		try {
+			con = ConUtil.getOds();
+			pstmt = con.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				MessengerVO v = new MessengerVO();
+				v.setMasnum(rs.getInt("masnum"));
+				v.setMesmember(rs.getInt("mesmember"));
+				v.setOpenmemberyn(rs.getString("openmemberyn"));
+				v.setEntstdate(rs.getString("entstdate"));
+				v.setEntendate(rs.getString("entendate"));
+				list.add(v);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(con != null) CloseUtil.close(con);
+				if(pstmt != null) CloseUtil.close(pstmt);
+				if(rs != null) CloseUtil.close(rs);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}			
+		}return list;
+	}
 	
 	public ArrayList<MemberVO> getList(){
 		Connection con = null;

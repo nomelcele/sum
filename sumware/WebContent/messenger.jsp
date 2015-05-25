@@ -5,10 +5,6 @@
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%request.getAttribute("toNum");
-	System.out.println("받는 사람 사번입니다. : "+request.getAttribute("toNum"));
-%>
-
 <script>
 	function mesgoUrl(res){
 		var resNum = res;
@@ -25,19 +21,29 @@
 		f.submit();	
 	}
 	
-	function loadData(){
-		/* 읽어만 오기에 param은 null */
-		sendRequest("check.jsp", null, res, "get");
-	}
-	function res(){
-		if(xhr.readyState == 4 && xhr.status == 200){
-			document.getElementById("target").innerHTML=xhr.responseText;
-		}
-	}
-	var inter = setInterval(function(){
-		loadData();
 	
-	}, 3000);
+	console.log("typeof:"+typeof(EventSource));	
+	if(typeof(EventSource) != "undefined"){
+		var eventSource = new EventSource("check.jsp"); // push를 받을수 있는 브라우져인지 판단.
+		// EventSource EventListener의 종류
+		// onmessage : 서버가 보낸 push메세지가 수신되면 발생
+		// onerror : 서버가 보낸 push에서 에러가 발생되었을때
+		// onopen : 서버가 연결이 되었을 때 발생
+		
+		eventSource.onmessage = function(event){
+			alert("메세지가 도착했습니다.");
+// 			var opt1="width=700, height=900, scrollbars=yes";			
+// 			window.open("http://www.naver.com","네이버 새창",opt1);
+			alert("event.data : "+event.data);
+			var dataArr = event.data.split("/");
+			
+			
+// 		$("#target").html("<div style='background:orange'>"+event.data+"</div>");		
+	};
+	}else{
+		alert("해당 브라우저는 지원이 안됩니다.")
+	}
+	
 	
 	
 	
@@ -48,6 +54,8 @@
 <!-- 사용자 정보(사진, 이름) -->
 <div class="container">
 	<div class="col-lg-3">
+	<div id="target">
+	</div>
 		<div class="media">
 			<div class="media-left media-middle">
 
@@ -57,8 +65,6 @@
 					<input type="hidden" id="fromNum" name="fromNum">
 					<input type="hidden" id="toName" name="toNum">
 					<input type="hidden" name="entNum">
-
-					
 				</form>
 
 				<!-- 사원 사진 불러오기  -->
