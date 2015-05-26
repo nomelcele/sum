@@ -174,10 +174,10 @@ public class BoardDao {
 			rs = pstmt.executeQuery();
 			if(rs.next()){
 				BoardVO v = new BoardVO();
-				v.setBcont("bcont");
-				v.setBwriter("memname");
-				v.setBtitle("btitle");
-				v.setBdate("bdate");
+				v.setBcont(rs.getString("bcont"));
+				v.setBwriter(rs.getString("memname"));
+				v.setBtitle(rs.getString("btitle"));
+				v.setBdate(rs.getString("bdate"));
 				
 				list.add(v);
 			}
