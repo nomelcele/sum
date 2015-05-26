@@ -26,6 +26,9 @@ public class SumControl extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		// 클라이언트 요청을 받는것 부터 시작
 		String mod = request.getParameter("model");
+		if(mod == null){
+			mod="index";
+		}
 		System.out.println("Controller[model] : "+mod);
 		ModelInter model = ModelFactory.getMf().getModel(mod);
 		ModelForward mf = model.exe(request, response);
