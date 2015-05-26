@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import util.CloseUtil;
 import conn.ConUtil;
@@ -50,6 +51,34 @@ public class MemberDao {
 		
 		return list;
 	}
+	public int ckid(String meminmail ){
+		int result=0;
+	   Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StringBuilder sql = new StringBuilder();
+		sql.append("select COUNT(*) cnt from member where meminmail=?");
+		try{
+			con=ConUtil.getOds();
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setString(1,meminmail);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				result=rs.getInt("cnt");
+				System.out.println("result:"+result);
+			
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+			
+		}
+		return result;
+	}
+	
 	
 	
 }
