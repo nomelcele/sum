@@ -16,7 +16,7 @@ public class MyPage {
 		}
 		return mp;
 	}
-	public Map<String,Integer> pageProcess(HttpServletRequest request,int rowsPerPage,int etc,int totalCount,int commTotalCount){
+	public Map<String,Integer> pageProcess(HttpServletRequest request,int rowsPerPage,int pagesPerBlock,int etc,int totalCount,int commTotalCount){
 		/*Page 처리 영역 */
 		PageVO pageInfo = new PageVO();
 		
@@ -24,7 +24,7 @@ public class MyPage {
 		//페이지당 보여질 줄수.(행)
 //		int rowsPerPage = 5;
 		//나눌 페이지수  
-		int pagesPerBlock = 5;
+//		int pagesPerBlock = 5;
 		
 		int currentPage = Integer.parseInt(request.getParameter("page"));
 		
