@@ -174,7 +174,7 @@
 										style="position: relative; overflow: hidden; padding-top: 10px;">
 										<input type="file" id="memimg" name="memimg"
 											style="position: absolute; right: 0px; top: 0px; opacity: 0; cursor: pointer;" />
-										<img src="../img/ion.JPG">
+										<img src="img/ion.JPG">
 									</div>
 								</div>
 							</div>
@@ -182,9 +182,10 @@
 					</div>
 
 					<div class="bs-callout bs-callout-danger">
-						<form class="form-horizontal" role="form" method="post" 
+						<form class="form-horizontal" role="form" method="post" action="sumware"
 							name="myform">
-							<input type="hidden" name="model" value="">
+							<input type="hidden" name="model" value="join">
+							<input type="hidden" name="submod" value="join1">
 							<h2>필수 입력 사항</h2>
 							<hr>
 
@@ -275,7 +276,7 @@
 							<div class="form-group">
 								<div class="col-sm-offset-5 col-sm-10">
 
-									<button type="submit" class="btn btn-primary" id="btn">
+									<button type="submit" class="btn btn-primary">
 										<i class="fa fa-floppy-o"></i>
 									</button>
 

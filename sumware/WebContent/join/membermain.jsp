@@ -24,7 +24,7 @@
 								<div class="col-xs-12 col-sm-4">
 									<figure>
 										<img class="img-circle img-responsive" alt=""
-											src="http://placehold.it/300x300">
+											src="http://placehold.it/200x200"style="width: 200px; height: 200px;">
 									</figure>
 
 									<div class="row">
@@ -35,38 +35,6 @@
 													<i class="fa fa-google"></i>
 												</a>
 											</div>
-
-											<div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-												<a href="#" class="btn btn-social btn-block btn-facebook">
-													<i class="fa fa-facebook"></i>
-												</a>
-											</div>
-
-											<div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-												<a href="#" class="btn btn-social btn-block btn-twitter">
-													<i class="fa fa-twitter"></i>
-												</a>
-											</div>
-
-											<div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-												<a href="#" class="btn btn-social btn-block btn-linkedin">
-													<i class="fa fa-linkedin"></i>
-												</a>
-											</div>
-
-											<div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-												<a href="#" class="btn btn-social btn-block btn-github">
-													<i class="fa fa-github"></i>
-												</a>
-											</div>
-
-											<div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-												<a href="#"
-													class="btn btn-social btn-block btn-stackoverflow"> <i
-													class="fa fa-stack-overflow"></i>
-												</a>
-											</div>
-
 										</div>
 									</div>
 
@@ -95,7 +63,6 @@
 										</div>
 									</div>
 								</div>
-					
 					</div>
 
 				</div>

@@ -19,6 +19,10 @@ public class JoinModel implements ModelInter{
 		if(submod !=null && submod.equals("memberForm")){
 			url ="join/member.jsp";
 			method=true;
+			
+		}else if(submod !=null && submod.equals("join1")){
+			url="join/membermain.jsp";
+			method=true;
 		}
 					
 		return new ModelForward(url, method);
