@@ -57,6 +57,9 @@ public class SnsDao {
 			snsList=new ArrayList<>();
 			con = ConUtil.getOds();
 			pstmt = con.prepareStatement(sql.toString());
+			System.out.println("~~~~~~~~~"+map.get("sdept"));
+			System.out.println("~~~~~~~~~"+map.get("begin"));
+			System.out.println("~~~~~~~~~"+map.get("end"));
 			pstmt.setInt(1, map.get("sdept"));
 			pstmt.setInt(2, map.get("begin"));
 			pstmt.setInt(3, map.get("end"));
