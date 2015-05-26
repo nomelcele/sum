@@ -172,7 +172,7 @@ public class TodoModel implements ModelInter{
 			url = "todo/membersJob.jsp";
 			method = true;
 		}else if(submod.equals("showmemlist")){
-			// 부서업무부분에서 자세히보기 하면 정보들이 나옴
+			// 부서업무부분, 팀업무부분에서 자세히보기 하면 정보들이 나옴
 			System.out.println("showmemlist들어옴");
 			int jobtonum = Integer.parseInt(request.getParameter("jobtonum"));
 			System.out.println("jobtonum : "+jobtonum);

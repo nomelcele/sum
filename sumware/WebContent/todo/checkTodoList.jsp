@@ -6,8 +6,6 @@
 <!-- 업무 관리(팀장일 경우) 부분 뷰 -->
 <%@include file="/top.jsp"%>
 <div class="row">
-	
-
 	<div class="wrap">
 		<%@include file="/contentLeft.jsp" %>
 		<!-- 팀장 업무관리 -->
@@ -56,7 +54,6 @@
 				</div>
 			</div>
 		<!-- 팀장 업무관리 끝!!! -->
-		
 	<%@include file="todoSns.jsp" %>
 	</div>
 	</div>
