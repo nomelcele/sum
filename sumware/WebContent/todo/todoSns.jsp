@@ -81,7 +81,6 @@ $(function(){
 </style>
 </head>
 <body>
-<div id="wrap">
 	<div class="col-lg-3" style="width: 40%">
 				<div class="chat-panel panel panel-default">
 					<div class="panel-heading">
@@ -110,6 +109,5 @@ $(function(){
 				</div>
 				<!-- /.panel .chat-panel -->
 			</div>	
-</div>
 </body>
 </html>
