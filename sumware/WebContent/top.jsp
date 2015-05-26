@@ -7,12 +7,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SumWare</title>
 <!-- CSS 라이브러리(S)  -->
-<link rel="stylesheet" href="font-awesome/css/font-awesome.css" />
-<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+<link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
 <link href="css/bootstrap.min.css" rel="stylesheet"/>
 <link href="css/main.css" rel="stylesheet"/>
 <link href="css/boardList.css" rel="stylesheet"/>
-<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link type="text/css" href="css/common.css" rel="stylesheet"  />
 <!-- CSS 라이브러리(E)  -->
 <!-- 자바스크립트 -->
 <script src="js/bootstrap.min.js"></script>
@@ -33,11 +33,6 @@
 			$('#submod').attr("value","boardUpdate");
 		}else if(res == 'write'){
 			$('#submod').attr("value", "writeForm");
-		}else if(res == 'detail'){
-			alert("yo");
-			$('#model').attr("value", "board");
-			$('#submod').attr("value", "boardDetail");
-			$('form').submit();
 		}
 		$('form').submit();
 	}
