@@ -37,11 +37,9 @@ public class SnsModel implements ModelInter{
 			int commTotalCount=0;
 			
 			int sdept = Integer.parseInt(request.getParameter("sdept"));
-			int smem = Integer.parseInt(request.getParameter("smem"));
 			totalCount=SnsDao.getDao().snsTotalCount(sdept);
 			Map<String, Integer> map = MyPage.getMp().pageProcess(request,rowsPerPage,pagesPerBlock,etc, totalCount, commTotalCount);
 			map.put("sdept", sdept);
-			map.put("smem", smem);
 			
 			ArrayList<SnsVO> snsList = SnsDao.getDao().getList(map);
 			StringBuffer outs = new StringBuffer();
