@@ -50,9 +50,9 @@ public class SnsDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		StringBuffer sql = new StringBuffer();
-		sql.append("select rownum srnum ,s.snum,s.scont,to_char(s.sdate,'MM')||'월'||to_char(s.sdate,'dd')||'일'||to_char(s.sdate,'hh:mm') sdate,s.sdept,s.smem");
-		sql.append(" from (select * from sns where sdept=? order by 1 desc) s");
-		sql.append(" where rownum between ? and ?");
+		sql.append("select rownum srnum,m.memname,m.memprofile ,s.snum,s.scont,to_char(s.sdate,'MM')||'월'||to_char(s.sdate,'dd')||'일'||to_char(s.sdate,'hh:mm') sdate,s.sdept,s.smem");
+		sql.append(" from (select * from sns s where s.sdept=? order by 1 desc) s,member m");
+		sql.append(" where m.memnum=s.smem and s.smem=? and rownum between ? and ?");
 		try {
 			snsList=new ArrayList<>();
 			con = ConUtil.getOds();
@@ -61,12 +61,15 @@ public class SnsDao {
 			System.out.println("~~~~~~~~~"+map.get("begin"));
 			System.out.println("~~~~~~~~~"+map.get("end"));
 			pstmt.setInt(1, map.get("sdept"));
-			pstmt.setInt(2, map.get("begin"));
-			pstmt.setInt(3, map.get("end"));
+			pstmt.setInt(2,map.get("smem"));
+			pstmt.setInt(3, map.get("begin"));
+			pstmt.setInt(4, map.get("end"));
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				SnsVO v = new SnsVO();
 				v.setSrnum(rs.getInt("srnum"));
+				v.setSmemname(rs.getString("memname"));
+				v.setSmemprofile(rs.getString("memprofile"));
 				v.setSnum(rs.getInt("snum"));
 				v.setScont(rs.getString("scont"));
 				v.setSdate(rs.getString("sdate"));

@@ -2,7 +2,7 @@ package dto;
 
 public class SnsVO {
 	private int srnum,snum,sdept,smem;
-	private String scont,simg,sdate;
+	private String smemname,smemprofile,scont,simg,sdate;
 	
 	public int getSrnum() {
 		return srnum;
@@ -45,6 +45,18 @@ public class SnsVO {
 	}
 	public void setSmem(int smem) {
 		this.smem = smem;
+	}
+	public String getSmemname() {
+		return smemname;
+	}
+	public void setSmemname(String smemname) {
+		this.smemname = smemname;
+	}
+	public String getSmemprofile() {
+		return smemprofile;
+	}
+	public void setSmemprofile(String smemprofile) {
+		this.smemprofile = smemprofile;
 	}
 	
 	

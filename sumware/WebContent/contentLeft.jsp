@@ -26,8 +26,8 @@
 			<div class="panel-body">
 				<span class="chat-img pull-left"> <img
 					src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
-					class="img-circle" style="width: 100px; height: 100px;">
-				</span> </br> </br> </br> </br> </br>
+					class="img-circle" style="width: 100px; height: 130px;">
+				</span> </br> </br> </br> </br> </br> </br> </br>
 				<table>
 					<tr>
 						<td><strong class="primary-font" style="margin: 10px">이름</strong></td>
@@ -84,9 +84,9 @@
         
          <div class="panel-body">
             <span class="chat-img pull-left"> <img
-               src="../profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
-               class="img-circle" style="width: 100px; height: 100px;">
-            </span> </br> </br> </br> </br> </br>
+               src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
+               class="img-circle" style="width: 100px; height: 130px;">
+            </span> </br> </br> </br> </br> </br></br> </br> </br>
             <table>
                <tr>
                   <td><strong class="primary-font" style="margin: 10px">이름</strong></td>
@@ -105,6 +105,8 @@
                   <td>${sessionScope.v.mgrname }</td>
                </tr>
             </table>
+            </br> </br> </br> </br> </br></br> </br> </br> </br> </br></br> </br> </br>
+            </br> </br> </br> </br> </br></br> </br> </br> </br> </br></br>
          </div>
       </div>
    </div>

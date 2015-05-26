@@ -37,9 +37,11 @@ public class SnsModel implements ModelInter{
 			int commTotalCount=0;
 			
 			int sdept = Integer.parseInt(request.getParameter("sdept"));
+			int smem = Integer.parseInt(request.getParameter("smem"));
 			totalCount=SnsDao.getDao().snsTotalCount(sdept);
 			Map<String, Integer> map = MyPage.getMp().pageProcess(request,rowsPerPage,pagesPerBlock,etc, totalCount, commTotalCount);
 			map.put("sdept", sdept);
+			map.put("smem", smem);
 			
 			ArrayList<SnsVO> snsList = SnsDao.getDao().getList(map);
 			StringBuffer outs = new StringBuffer();
@@ -48,12 +50,14 @@ public class SnsModel implements ModelInter{
 			for(SnsVO v : snsList){
 				outs.append("<li class='left clearfix'>");
 				outs.append("<span class='chat-img pull-left'>");
-				outs.append("<img src='http://placehold.it/50/FA6F57/fff' alt='User Avatar' class='img-circle'>");
+				outs.append("<img src='profileImg/");
+				outs.append(v.getSmemprofile());
+				outs.append("' alt='User Avatar' class='img-circle' style='width: 60px; height: 70px;'>");
 				outs.append("</span>");
 				outs.append("<div class='chat-body clearfix' style='height:100px;'>");
 				outs.append("<div class='header'>");
 				outs.append("<strong class='primary-font'>");
-				outs.append(v.getSmem());
+				outs.append(v.getSmemname());
 				outs.append("</strong>");				
 				outs.append("<small	class='pull-right text-muted'> <i class='fa fa-clock-o fa-fw'></i>");
 				outs.append(v.getSdate());

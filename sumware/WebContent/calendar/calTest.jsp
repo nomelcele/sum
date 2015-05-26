@@ -128,7 +128,7 @@ $(function(){
 		<input type="hidden" name="submod" id="submod">
 		<input type="hidden" name="cal" id="cal">
 	</form>
-		<div class="container">
+		<div class="container" style="margin-top:50px; ">
 		<div class="row">
 			<div class="col-xs-3">
 			<%@include file="../contentLeft.jsp" %>
