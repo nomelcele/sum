@@ -75,6 +75,15 @@
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 			
 			$('#goTodo').submit();
+		}else if(res=='todoForm'){
+			// 부서업무 버튼
+			$('#submod').attr("value","todoForm");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
+			$('#memdept').attr("value","${sessionScope.v.memdept}");
+			$('#goTodo').submit();
+			
+		}else if(res=='teamTodoForm'){
+			// 팀업무 버튼
 		}
 	}
 </script>

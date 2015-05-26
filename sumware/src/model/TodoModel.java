@@ -132,10 +132,14 @@ public class TodoModel implements ModelInter{
 			// 부서의 부서업무들 나열하기 위한 부분!!! 추가 필요!!!!!!!
 			// 필요필요필필요해해해해해해해해 만들어야돼
 		}else if(submod.equals("giveJobForm")){
+			System.out.println("giveJobForm들어옴");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
+			System.out.println("request받아옴");
 			ArrayList<TodoVO> todoList = TodoDao.getDao().getTeamTodoList(map);
+			System.out.println("todolist받아옴");
 			int memmgr = Integer.parseInt(map.get("memnum"));
 			ArrayList<MemberVO> teamMemberList = TodoDao.getDao().getTomem(memmgr);
+			System.out.println("teammembers받아옴");
 			request.setAttribute("teamTodoList", todoList);
 			request.setAttribute("teamMemberList", teamMemberList);
 
@@ -152,7 +156,9 @@ public class TodoModel implements ModelInter{
 			method = true;
 			
 		}else if(submod.equals("showMembersJob")){
+			System.out.println("showMembersJob들어옴");
 			int jobtonum = Integer.parseInt(request.getParameter("jobtonum"));
+			System.out.println("jobtonum : "+jobtonum);
 			ArrayList<TodoJobVO> membersjoblist = TodoDao.getDao().getMembersJob(jobtonum);
 			// todoJobVO확인
 			for(TodoJobVO v : membersjoblist){

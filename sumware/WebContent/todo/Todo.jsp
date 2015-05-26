@@ -59,7 +59,7 @@ function getJobDetail(tonum){
 									
 									<a class="fa fa-align-justify" 
 									onclick="javascript:getJobDetail(${deptjoblist.tonum })"
-									style="cursor:pointer">detail</a>
+									style="cursor:pointer"> detail</a>
 									<div id="memlisttarget${deptjoblist.tonum }" style="display:none"></div>
 									<div id="detail${deptjoblist.tonum }" style="display:none">
 									<br/>

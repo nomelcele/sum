@@ -284,15 +284,16 @@ public class TodoDao {
 			ArrayList<TodoVO> list = new ArrayList<>();	
 			
 			try {
-				sql.append("select t.tonum, to_char(t.tostdate,'yyyy-mm-dd') tostdate, to_char(t.toendate,'yyyy-mm-dd') t.toendate, t.totitle, t.tocont, t.tofile, t.todept, t.tomem, t.toconfirm, t.tocomm, m.memname ");
-				sql.append("from todo t, member m where t.tomem = m.memnum and tomem=? and toconfirm='y' order by 1 desc");
+				sql.append("select t.tonum, to_char(t.tostdate,'yyyy-mm-dd') tostdate, to_char(t.toendate,'yyyy-mm-dd') toendate, t.totitle, t.tocont, t.tofile, t.todept, t.tomem, t.toconfirm, t.tocomm, m.memname ");
+				sql.append("from todo t, member m where t.tomem = m.memnum and t.tomem=? and t.toconfirm='y' order by 1 desc");
 				con = ConUtil.getOds();
 				pstmt = con.prepareStatement(sql.toString());
 				pstmt.setInt(1, Integer.parseInt(map.get("memnum")));
-				
+				System.out.println("memnummm::"+map.get("memnum"));
 				rs = pstmt.executeQuery();
 				
 				while(rs.next()){
+					System.out.println("검색값있음");
 					TodoVO v = new TodoVO();
 					v.setTonum(rs.getInt("tonum"));
 					v.setTostdate(rs.getString("tostdate"));
@@ -355,7 +356,7 @@ public class TodoDao {
 			ArrayList<TodoJobVO> list = new ArrayList<>();	
 			
 			try {
-				sql.append("select j.jobnum, m.memname, m.memprofile, j.jobcont from todojob j, member m where m.memnum = j.jobmemnum and jobtonum=? order by 1 desc");
+				sql.append("select j.jobnum, m.memname, m.memprofile, j.jobcont from todojob j, member m where m.memnum = j.jobmemnum and j.jobtonum=? order by 1 desc");
 				con = ConUtil.getOds();
 				pstmt = con.prepareStatement(sql.toString());
 				pstmt.setInt(1, jobtonum);
@@ -391,7 +392,7 @@ public class TodoDao {
 			
 			try {
 				sql.append("select t.tonum, to_char(t.tostdate,'yyyy-mm-dd') tostdate, to_char(t.toendate,'yyyy-mm-dd') toendate, t.totitle, t.tocont, t.tofile, t.todept, t.tomem, t.toconfirm, t.tocomm,m.memname ");
-				sql.append("from todo t, member m where t.tomem = m.memnum and todept=? and toconfirm='y' order by 1 desc");
+				sql.append("from todo t, member m where t.tomem = m.memnum and t.todept=? and t.toconfirm='y' order by 1 desc");
 				con = ConUtil.getOds();
 				pstmt = con.prepareStatement(sql.toString());
 				pstmt.setInt(1, todept);

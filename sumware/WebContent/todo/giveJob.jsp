@@ -29,6 +29,26 @@
 		}
 		
 	}
+	
+	function getDetail(tonum){
+
+		$("#detail"+tonum).toggle("slow");
+		
+		$.ajax({
+			type : "post",
+			url : "sumware",
+			data : {model:"todo", 
+				submod:"showMembersJob", 
+				jobtonum:tonum,
+				},
+			success : function(result){
+					$("#membersjob"+tonum).html(result);
+					
+				}
+			});
+	
+		
+	}
 </script>
 <%@include file="/top.jsp"%>
 
@@ -49,7 +69,7 @@
 							<div class="column" style="overflow: auto">
 
 								<c:forEach var="tolist" items="${teamTodoList }">
-									<div class="low-lg-${tolist.tonum }">
+									<div class="low-lg-1">
 										<div class="panel panel-success">
 											<div class="panel-heading">
 												<i class="fa fa-pencil"></i> ${tolist.totitle }
@@ -60,25 +80,33 @@
 													${tolist.toendate }
 												</p>
 												<p>${tolist.tocont }</p>
-												<label class="control-label" for="inputSuccess">사원별 업무</label>
-												<div id="membersjob${tolist.tonum}"></div>
+												
 												
 					
 
 											</div>
 											<div class="panel-footer">
-											<label class="control-label" for="inputSuccess">업무 지정</label>
-											<select name="memjobName" class="form-control" id="memjobName${tolist.tonum}" style="width: 25%">
-												<option value="">사원선택</option>
-												<c:forEach var="teamMemList" items="${teamMemberList }">
-												<option value="${teamMemList.memnum }">${teamMemList.memname}</option>
-												</c:forEach>
-											</select>
-											<input type="text" id="jobcont${tolist.tonum}">
-											<button type="button" onclick="javascript:insertJob(${tolist.tonum })"><i class="fa fa-plus"></i></button>
+											<a class="fa fa-align-justify" 
+											onclick="javascript:getDetail(${tolist.tonum })"
+											style="cursor:pointer"> detail</a>
+											
+											<div id="detail${tolist.tonum }" style="display:none">
+												<label class="control-label" for="inputSuccess">사원별 업무</label>
+												<div id="membersjob${tolist.tonum}"></div>
+												<label class="control-label" for="inputSuccess">업무 지정</label>
+											
+												<select name="memjobName" class="form-control" id="memjobName${tolist.tonum}" style="width: 30%">
+													<option value="">사원선택</option>
+													<c:forEach var="teamMemList" items="${teamMemberList }">
+													<option value="${teamMemList.memnum }">${teamMemList.memname}</option>
+													</c:forEach>
+												</select>
+												<input type="text" id="jobcont${tolist.tonum}">
+												<button type="button" onclick="javascript:insertJob(${tolist.tonum })"><i class="fa fa-plus"></i></button>
 												
 											</div>
 										</div>
+									</div>
 									</div>
 								</c:forEach>
 							</div>

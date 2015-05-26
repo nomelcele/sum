@@ -13,7 +13,7 @@
 		<input type="hidden" id="submod" name="submod">
 		<input type="hidden" id="memnum" name="memnum">
 		<input type="hidden" id="memmgr" name="memmgr">
-		<input type="hidden" id="memmgr" name="memdept">
+		<input type="hidden" id="memdept" name="memdept">
 		
 </form>
 <div class="col-lg-1" style="width: 250px">
@@ -54,9 +54,9 @@
 
 			<a href="#" class="list-group-item disabled"><span
 				class="glyphicon glyphicon-pencil"></span><strong
-				class="primary-font">Todo</strong></a> <a href="#"
-				class="list-group-item">부서 업무</a> <a href="#"
-				class="list-group-item">팀 업무</a>
+				class="primary-font">Todo</strong></a> 
+				<a href="javascript:todoFormGo('todoForm')" class="list-group-item">부서 업무</a> 
+				<a href="javascript:todoFormGo('teamTodoForm')" class="list-group-item">팀 업무</a>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
 				<a href="javascript:todoFormGo('manageJob1')" class="list-group-item">업무관리</a>
 			</c:if>
