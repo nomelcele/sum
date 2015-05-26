@@ -27,8 +27,6 @@ public class LoginModel implements ModelInter {
 			MemberVO vo = null;
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			String mempwd = request.getParameter("mempwd");
-			// System.out.println("memnum : "+memnum);
-			// System.out.println("mempwd : "+mempwd);
 
 			MemberVO v = new MemberVO();
 			v.setMemnum(memnum);
@@ -45,9 +43,7 @@ public class LoginModel implements ModelInter {
 						//회원정보입력창으로 이동.
 						//이동후에 memnum입력란에 자동으로 입력시켜주고
 						//mempwd는 유효성검사 할때 쓰기위하여 보냄.
-						url="";
 					}else{
-						url = "main.jsp";
 						// sessionScope에 아이디를 저장
 						HttpSession session = request.getSession();
 						session.setAttribute("v", vo);
@@ -71,8 +67,9 @@ public class LoginModel implements ModelInter {
 			
 			HttpSession session = request.getSession();
 			//저장된 세션 다 날림.
-			session.invalidate();
-			method = true;
+			session.removeAttribute("v");
+			session.removeAttribute("teamNameList");
+			method = false;
 
 		}
 		System.out.println("url : " + url + "method : " + method);

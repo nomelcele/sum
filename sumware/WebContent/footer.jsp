@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+
+<form action="sumware" method="post" name="frmmain" id="frmmain">
+	<input type="hidden" id="mod" name="model">
+	<input type="hidden" id="submod" name="submod">
+	<input type="hidden" id="memnum" name="memnum">
+	<input type="hidden" id="page" name="page">
+	<input type="hidden" id="memdept" name="memdept">
+</form>    
 <footer id="footer" class="footer">
 	<div class="container">
 		<div class="row">

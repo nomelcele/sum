@@ -21,6 +21,68 @@
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<!-- 메인 스크립트 -->
+<script>
+	function formGoGo(res){
+		alert("res:"+res);
+		if(res==1){
+			// 부서의 업무리스트를 쭉 뽑아주는 버튼
+			$('#mod').attr("value","todo");
+			$('#submod').attr("value","todoForm");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
+			$('#memdept').attr("value","${sessionScope.v.memdept}");
+		}else if(res==2){
+			$('#mod').attr("value","mail");
+			$('#submod').attr("value","mailMain");
+		}else if(res==3){
+			$('#mod').attr("value","calendar");
+			$('#submod').attr("value","calList");
+		}else if(res==4){
+			$('#mod').attr("value","board");
+			$('#submod').attr("value","boardList");
+			$('#page').attr("value","1");
+			alert("page:"+$('#page').val());
+		}else if(res==5){
+// 			$('#mod').attr("value","messenger");
+// 			$('#submod').attr("value","messengerForm");
+			openWin();
+		}else if(res==6){
+			$('#mod').attr("value","join");
+			$('#submod').attr("value","memberForm");
+		}else if(res=7){
+			$('#mod').attr("value","login");
+			$('#submod').attr("value","logout");
+			$('#memnum').attr("value","${sessionScope.v.memnum}");
+		}
+		alert("mod:"+$('#mod').val());
+		alert("submod:"+$('#submod').val());
+		$('#frmmain').submit();	
+		
+	}	
+	function openWin(){
+		var opt= "width=700, height=1000, scrollbars=yes";
+		var f = document.frmmain;
+		f.model.value="messenger";
+		f.submod.value="messengerForm";
+		window.open("","MessengerMain",opt);
+		f.target="MessengerMain";	
+		f.submit();
+	}
+	
+	function checkmsg(toNum){
+		var requNum = toNum;
+		var userNum = ${sessionScope.v.memnum };
+		if(userNum == toNum){
+			console.log("두 사람이 같습니다.");
+			window.open("main.jsp", "");
+		}else{
+			console.log("두 사람은 다릅니다.");
+			
+		}
+	}
+</script>
+<!-- /메인 스크립트 -->
+
 <script>
 	function formGo(res){
 		$('#model').attr("value", "board");
@@ -63,12 +125,6 @@
 			//부장의 업무 추가 폼 작성 후 보내기버튼
 			$('#addTodoForm').submit();
 			alert("업무를 등록하였습니다.");
-		}else if(res==7){
-			// 부서의 업무리스트를 쭉 뽑아주는 버튼
-			$('#submod').attr("value","deptList");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-			$('#memdept').attr("value","${sessionScope.v.memdept}");
-			$('#goTodo').submit();
 		}else if(res=='giveJob2'){
 			// 팀장이 사원들에게 업무를 부여하기 위한 폼
 			$('#submod').attr("value","giveJobForm");
@@ -104,13 +160,15 @@
 		<div class="nav navbar-right">
 			<ul class="nav navbar-nav">
 				<li><a href="#">메인</a></li>
-				<li><a href="#">내정보</a></li>
-				<li><a href="javascript:todoFormGo(7)">ToDo</a></li>
-				<li><a href="#">메일</a></li>
-				<li><a href="#">게시판</a></li>
+				<li><a href="javascript:formGoGo(1)">Todo</a></li>
+				<li><a href="javascript:formGoGo(2)">Mail</a></li>
+				<li><a href="javascript:formGoGo(3)">Calendar</a>
+				<li><a href="javascript:formGoGo(4)">Board</a></li>
+				<li><a href="javascript:formGoGo(6)">join</a></li>
+				<li><a href="javascript:formGoGo(5)">Messenger</a></li>
 			</ul>
 			<ul class="nav navbar-right navbar-nav">
-				<li><a href="#"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
+				<li><a href="javaScript:formGoGo(7)"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
 			</ul>
 		</div>
 	</div>

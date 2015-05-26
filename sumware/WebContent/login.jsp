@@ -9,11 +9,7 @@
             <img alt="Bootstrap template" src="img/slide_01.jpg">
             <div class="carousel-caption">
                <h3 style="font-size: 39pt;">Sum Ware</h3>
-               <p>Founded in 1892 and headquartered in Fairfield, CT, General
-                  Electric Company (LSE; NYSE: GE) is a technology and financial
-                  services company. The company offers products and services ranging
-                  from aircraft engines, power generation, water processing, and
-                  household appliances, among others.</p>
+               <p></p>
             </div>
          </div>
          <div class="item">
@@ -34,8 +30,7 @@
             <img alt="Bootstrap template" src="img/slide_03.jpg">
             <div class="carousel-caption">
                <h3>Portfolio</h3>
-               <p>This is a list of some of the work done by the company over
-                  the past quarter.</p>
+               <p></p>
             </div>
          </div>
       </div>
@@ -48,18 +43,28 @@
          </li>
       </ul>
    </div>
-
+	
    <div class="container">
+   <c:choose>
+   <c:when test="${empty sessionScope.v.memnum}">
       <form class="form-inline" role="form" action="sumware" method="post">
-         <input type="hidden" name="model" value="login"> <input
-            type="hidden" name="submod" value="login">
+         <input type="hidden" name="model" value="login"> 
+         <input type="hidden" name="submod" value="login">
          <div class="porm-group">
-            <label class="control-label-" for="sabun"> 사원번호 :</label> <input
-               type="text" id="memnum" name="memnum" placeholder="사원번호"> <label
-               class="control-label" for="Password"> 비밀번호 :</label> <input
-               type="password" id="mempwd" name="mempwd" placeholder="비밀번호">
+         
+            <label class="control-label-" for="sabun"> 사원번호 :</label> 
+            <input type="text" id="memnum" name="memnum" placeholder="사원번호"> 
+            <label class="control-label" for="Password"> 비밀번호 :</label> 
+            <input type="password" id="mempwd" name="mempwd" placeholder="비밀번호">
             <button type="submit" class="btn btn-xs btn-info">로그인</button>
          </div>
       </form>
+   </c:when>
+   <c:otherwise>
+   	<div class="porm-group">
+            <label class="control-label-" for="sabun"> ${sessionScope.v.memname} 님 환영합니다.</label>
+         </div>
+   </c:otherwise>
+   </c:choose>
    </div>
 </div>

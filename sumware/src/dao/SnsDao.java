@@ -109,5 +109,28 @@ public class SnsDao {
 		}
 		return result;
 	}
-	
+	public int snsCommTotalCount(int commsns){
+		int result= 0;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("select count(*) cnt from comm where commsns=?");
+		try {
+			con = ConUtil.getOds();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, commsns);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				result =rs.getInt("cnt");
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		return result;
+	}
 }
