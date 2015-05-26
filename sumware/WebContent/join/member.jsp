@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-
+<link href="../css/join.css" rel="stylesheet"/>
 <%--아이디 중복체크 --%>
 <script>
 	$(function() {
@@ -64,7 +64,7 @@
 								// createObjectURL()을 사용해야 한다.
 
 								$('#targetimg').attr('src', blobURL).css(
-										'width', '200').css('height','200');
+										'width', '200').css('height', '200');
 								// attr() src 속성에  blobURL을 넣는다.
 							}
 						});
@@ -73,9 +73,6 @@
 	function resetFromElement($obj) { // 자바스크립트
 		$obj.val("");
 	}
-	
-	
-	
 </script>
 <%--이건 자바스크립트 --%>
 <script>
@@ -146,109 +143,6 @@
 	}
 </script>
 
-
-
-
-<style>
-
-/* 아이콘  */
-@import
-	url(http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css)
-	;
-
-.page-header {
-	text-align: center;
-}
-
-/*social buttons*/
-.btn-social {
-	color: white;
-	opacity: 0.9;
-}
-
-.btn-social:hover {
-	color: white;
-	opacity: 1;
-}
-
-.btn-linkedin {
-	background-color: #0e76a8;
-	opacity: 0.9;
-}
-
-.btn-github {
-	background-color: #000000;
-	opacity: 0.9;
-}
-
-.btn-google {
-	background-color: #c32f10;
-	opacity: 0.9;
-}
-
-.btn-stackoverflow {
-	background-color: #D38B28;
-	opacity: 0.9;
-}
-
-/* resume stuff */
-.bs-callout {
-	-moz-border-bottom-colors: none;
-	-moz-border-left-colors: none;
-	-moz-border-right-colors: none;
-	-moz-border-top-colors: none;
-	border-color: #eee;
-	border-image: none;
-	border-radius: 3px;
-	border-style: solid;
-	border-width: 1px 1px 1px 5px;
-	margin-bottom: 5px;
-	padding: 20px;
-}
-
-.bs-callout:last-child {
-	margin-bottom: 0px;
-}
-
-.bs-callout h4 {
-	margin-bottom: 10px;
-	margin-top: 0;
-}
-
-.bs-callout-danger {
-	border-left-color: #d9534f;
-}
-
-.bs-callout-danger h4 {
-	color: #d9534f;
-}
-
-.resume .list-group-item:first-child, .resume .list-group-item:last-child
-	{
-	border-radius: 0;
-}
-
-/*makes an anchor inactive(not clickable)*/
-.inactive-link {
-	pointer-events: none;
-	cursor: default;
-}
-
-.resume-heading .social-btns {
-	margin-top: 15px; 
-}
-
-
-
-@media ( max-width : 992px) {
-	.resume-heading .social-btn-holder {
-		padding: 5px;
-	}
-}
-
-
-</style>
-
 <div>
 	<%@include file="../top.jsp"%>
 </div>
@@ -271,15 +165,15 @@
 						<div class="row">
 							<div class="col-lg-12 col-lg-offset-4">
 								<div class="col-xs-10 col-sm-4">
-
 									<figure>
 										<img class="img-circle img-responsive" alt="프로필 사진 "
-											id="targetimg" src="http://placehold.it/200x200">
+											id="targetimg" src="http://placehold.it/200x200"
+											style="width: 200px; height: 200px;">
 									</figure>
 									<div class="btn-group col-sm-offset-5"
 										style="position: relative; overflow: hidden; padding-top: 10px;">
 										<input type="file" id="memimg" name="memimg"
-											style="position: absolute; right: 0px; top: 0px; opacity: 0; cursor: pointer;"/>
+											style="position: absolute; right: 0px; top: 0px; opacity: 0; cursor: pointer;" />
 										<img src="../img/ion.JPG">
 									</div>
 								</div>
@@ -290,11 +184,8 @@
 					<div class="bs-callout bs-callout-danger">
 						<form class="form-horizontal" role="form" method="post"
 							name="myform">
-							<input type="hidden" name="model" value="join"> <input
-								type="hidden" name="confirm" value="확인"> <input
-								type="hidden" name="cancel" value="취소"> <input
-								type="hidden" id="address" name="address">
-
+							<input type="hidden" name="model" value="확인"> <input
+								type="hidden" name="cancel" value="취소">
 							<h2>필수 입력 사항</h2>
 							<hr>
 
@@ -353,9 +244,9 @@
 									<input type="text" class="form-control" id="sample6_postcode2">
 								</div>
 
-									<input type="button" class="btn btn-default"
-										onclick="sample6_execDaumPostcode()" value="우편번호 찾기" />
-					
+								<input type="button" class="btn btn-default"
+									onclick="sample6_execDaumPostcode()" value="우편번호 찾기" />
+
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label" for="textinput">주소</label>
@@ -384,14 +275,14 @@
 
 							<div class="form-group">
 								<div class="col-sm-offset-5 col-sm-10">
-									
-										<button type="submit" class="btn btn-default">
-											<i class="fa fa-undo"></i>
-										</button>
-										<button type="button" class="btn btn-primary" id="btn">
-											<i class="fa fa-floppy-o"></i>
-										</button>
-								
+
+									<button type="submit" class="btn btn-default">
+										<i class="fa fa-undo"></i>
+									</button>
+									<button type="submit" class="btn btn-primary" id="btn">
+										<i class="fa fa-floppy-o"></i>
+									</button>
+
 								</div>
 							</div>
 						</form>
