@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import util.CloseUtil;
+import util.MyMap;
 import conn.ConUtil;
 import dto.MemberVO;
 
@@ -76,6 +77,31 @@ public class MemberDao {
 			
 		}
 		return result;
+	}
+	
+	public void insert(HashMap<String,String> map){
+		Connection con=null;
+		PreparedStatement pstmt=null;	
+		try {
+			con=ConUtil.getOds();
+			StringBuffer sql=new StringBuffer();
+			sql.append("");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1,map.get("memaddr"));
+			pstmt.setString(2,map.get("mempwd"));
+			pstmt.setString(3,map.get("memprofile"));
+			pstmt.setString(4,map.get("memmail"));
+			pstmt.setString(5,map.get("meminmail"));
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally{
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+			
+		}
 	}
 	
 }

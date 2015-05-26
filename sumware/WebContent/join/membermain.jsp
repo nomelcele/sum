@@ -24,13 +24,14 @@
 								<div class="col-xs-12 col-sm-4">
 									<figure>
 										<img class="img-circle img-responsive" alt=""
-											src="http://placehold.it/200x200"style="width: 200px; height: 200px;">
+											src="http://placehold.it/200x200"
+											style="width: 200px; height: 200px;">
 									</figure>
 
 									<div class="row">
 										<div class="col-xs-12 social-btns">
 
-											<div class="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
+											<div class="btn-group col-sm-offset-5">
 												<a href="#" class="btn btn-social btn-block btn-google">
 													<i class="fa fa-google"></i>
 												</a>
@@ -47,22 +48,26 @@
 										<li class="list-group-item">주소</li>
 										<li class="list-group-item"><i class="fa fa-phone"></i>
 											이메일</li>
-		
+
 									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="bs-callout bs-callout-danger">
-					
+
 						<div class="form-group">
-									<div class="">
-										<div class="pull-right">
-											
-											<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i></button>
-										</div>
-									</div>
+							<div class="">
+								<div class="pull-right">
+									<button type="submit" class="btn btn-primary">
+										<i class="fa fa-undo"></i>
+									</button>
+									<button type="submit" class="btn btn-primary">
+										<i class="fa fa-floppy-o"></i>
+									</button>
 								</div>
+							</div>
+						</div>
 					</div>
 
 				</div>

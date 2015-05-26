@@ -1,11 +1,14 @@
 package model;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import util.MyMap;
 import controller.ModelForward;
+import dao.MemberDao;
 
 public class JoinModel implements ModelInter{
 
@@ -21,6 +24,10 @@ public class JoinModel implements ModelInter{
 			method=true;
 			
 		}else if(submod !=null && submod.equals("join1")){
+			HashMap<String, String> map= MyMap.getMaps().getMapList(request);
+			MemberDao.getDao().insert(map);
+			
+			
 			url="join/membermain.jsp";
 			method=true;
 		}

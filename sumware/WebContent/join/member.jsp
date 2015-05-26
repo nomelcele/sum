@@ -10,7 +10,6 @@
 
 		$('#meminmail').keyup(
 				function() {
-					console.log("keyupㅎㅎㅎ");
 					setTimeout(function() {
 						$('#target').load(
 								"join/joinck.jsp?meminmail="
