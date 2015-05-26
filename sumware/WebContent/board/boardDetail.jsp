@@ -102,6 +102,7 @@
 			<%@include file="page.jsp" %> --%>
 			
 			<!-- paging(E) -->
+		<%@include file="/board/boardComm.jsp" %>
 		</div>
 		<!-- contents(E) -->
 </div>
