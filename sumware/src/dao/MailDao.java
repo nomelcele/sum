@@ -67,7 +67,6 @@ public class MailDao {
 			pstmt.setString(1, userid);
 			rs = pstmt.executeQuery();
 			System.out.println("현재 로그인한 사원 아이디: "+userid);
-			System.out.println("받은 메일 읽을 거 있니?"+rs.next());
 			
 			while(rs.next()){
 				MailVO v = new MailVO();
@@ -108,7 +107,6 @@ public class MailDao {
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, usernum);
 			rs = pstmt.executeQuery();
-			System.out.println("보낸 메일 읽을 거 있니?"+rs.next());
 			
 			while(rs.next()){
 				MailVO v = new MailVO();
