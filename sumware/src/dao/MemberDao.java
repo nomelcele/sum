@@ -48,7 +48,6 @@ public class MemberDao {
 			CloseUtil.close(pstmt);
 			CloseUtil.close(con);
 		}
-		
 		return list;
 	}
 	public int ckid(String meminmail ){
@@ -78,7 +77,5 @@ public class MemberDao {
 		}
 		return result;
 	}
-	
-	
 	
 }
