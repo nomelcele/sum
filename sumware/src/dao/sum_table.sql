@@ -267,3 +267,7 @@ alter table mail add mailrdelete number(5);
 -- 3: 받은 사람이 메일 영구 삭제
 alter table mail drop column mailsname;
 alter table mail drop column mailrname;
+
+--comm 제약조건 추가
+alter table comm add commsns number(10);
+alter table comm add constraint comm_sns_fk foreign key(commsns) REFERENCES sns(snum) on delete cascade;
