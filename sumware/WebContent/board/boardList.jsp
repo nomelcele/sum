@@ -50,7 +50,7 @@
 						<input type="hidden" name="no" value="${vlist.bnum }">
 					<tr>
 						<td class="num">${vlist.bnum }</td>
-						<td style="text-align: left"><span onclick="javascript:formGo('detail')">${vlist.btitle }</span></td>
+						<td style="text-align: left"><a href="" onclick="javascript:formGo('detail')">${vlist.btitle }</a></td>
 						<td style="text-align: center;">${vlist.bwriter }</td>
 						<td style="text-align: center;">${vlist.bdate }</td>
 						<td style="text-align: center;">${vlist.bhit }</td>
