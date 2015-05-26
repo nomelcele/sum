@@ -7,9 +7,8 @@
 		left
 	</div>
 		<!-- lnb-area(E) -->
-	
 		<!-- contents(S) -->
-<form action="sumware" method="post">
+									<form action="sumware" method="post">
 	<input type="hidden" name="model" id="model">
 	<input type="hidden" name="submod" id="submod">
 	<div class="contents">
@@ -47,10 +46,9 @@
 				<%-- 반복 구간 시작 --%>
 				<tbody>
 					<c:forEach items="${list }" var="vlist">
-						<input type="hidden" name="no" value="${vlist.bnum }">
 					<tr>
 						<td class="num">${vlist.bnum }</td>
-						<td style="text-align: left"><a href="#" onclick="javascript:formGo('detail')">${vlist.btitle }</a></td>
+						<td style="text-align: left"><a href="sumware?model=board&submod=boardDetail&no=${vlist.bnum }">${vlist.btitle }</a></td>
 						<td style="text-align: center;">${vlist.bwriter }</td>
 						<td style="text-align: center;">${vlist.bdate }</td>
 						<td style="text-align: center;">${vlist.bhit }</td>
@@ -77,7 +75,7 @@
 		</div>
 			<!-- paging(E) -->
 	</div>
-</form>
+														</form>
 		<!-- contents(E) -->
 </div>
 <%@include file="/footer.jsp" %>
