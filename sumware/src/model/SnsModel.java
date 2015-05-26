@@ -29,13 +29,14 @@ public class SnsModel implements ModelInter{
 			HashMap<String,String> map =MyMap.getMaps().getMapList(request);
 			SnsDao.getDao().insertSns(map);
 		}else if(submod!=null&&submod.equals("pushSns")){
+			int rowsPerPage=8;
 			int totalCount=0;
 			int etc = 0;
 			int commTotalCount=0;
 			
 			int sdept = Integer.parseInt(request.getParameter("sdept"));
 			totalCount=SnsDao.getDao().snsTotalCount(sdept);
-			Map<String, Integer> map = MyPage.getMp().pageProcess(request, etc, totalCount, commTotalCount);
+			Map<String, Integer> map = MyPage.getMp().pageProcess(request,rowsPerPage,etc, totalCount, commTotalCount);
 			map.put("sdept", sdept);
 			
 			ArrayList<SnsVO> snsList = SnsDao.getDao().getList(map);
