@@ -63,7 +63,7 @@ $(function(){
 				   alert("eventid:"+calEvent._id);
 				   	//삭제할 ajax
 				    $.ajax({
-			              url: "sumware?mod=calendar&submod=calDelete",
+			              url: "sumware?model=calendar&submod=calDelete",
 			              type: "POST",
 			              data: {
 			                  calnum:calEvent._id,
