@@ -1,4 +1,4 @@
--- 20150524 까지 DB 테이블
+-- 20150526 까지 DB 테이블
 
 CREATE TABLE dept(
 	denum NUMBER(3),
@@ -162,15 +162,24 @@ CREATE TABLE comm(
 	conum NUMBER(11),
     cocont VARCHAR2(600),
     codate DATE,
-    coicon VARCHAR2(40),
+    -- coicon VARCHAR2(40), 2015.05.26 에 칼럼 삭제함.
     comem NUMBER(5), -- fk member.memnum
     coboard NUMBER(11), -- fk board.bnum
     CONSTRAINT comm_conum_pk PRIMARY KEY(conum),
     CONSTRAINT comm_comem_fk FOREIGN KEY(comem) REFERENCES MEMBER(memnum),
-    CONSTRAINT comm_coboard_fk FOREIGN KEY(coboard) REFERENCES board(bnum)
+    CONSTRAINT comm_coboard_fk FOREIGN KEY(coboard) REFERENCES board(bnum),
 );
-
-
+-- 0526 추가함. ---------------------------------------------------------------------
+create sequence comm_seq INCREMENT BY 1 START WITH 1; .
+INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment',SYSDATE, 10000, 67);
+INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment2',SYSDATE, 10001, 67);
+INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment3',SYSDATE, 10002, 67);
+INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment4',SYSDATE, 10003, 67);
+INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment5',SYSDATE, 10004, 67);
+INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment6',SYSDATE, 10002, 50);
+INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment7',SYSDATE, 10002, 50);
+INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment8',SYSDATE, 10001, 50);
+------------------------------------------------------------------------------------
 
 CREATE TABLE sns(
 	snum number(10), -- pk
