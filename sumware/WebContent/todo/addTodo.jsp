@@ -83,7 +83,7 @@
 		</div>
 		<!-- 업무 추가부분 끝 -->
 
-	<%@include file="snsTodo.jsp" %>
+	<%@include file="todoSns.jsp" %>
 	</div>
 	</div>
 <%@include file="/footer.jsp" %>

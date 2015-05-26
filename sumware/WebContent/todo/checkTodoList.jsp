@@ -57,7 +57,7 @@
 			</div>
 		<!-- 팀장 업무관리 끝!!! -->
 		
-	<%@include file="snsTodo.jsp" %>
+	<%@include file="todoSns.jsp" %>
 	</div>
 	</div>
 <%@include file="/footer.jsp" %>
