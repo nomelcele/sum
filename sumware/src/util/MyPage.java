@@ -16,13 +16,13 @@ public class MyPage {
 		}
 		return mp;
 	}
-	public Map<String,Integer> pageProcess(HttpServletRequest request,int etc,int totalCount,int commTotalCount){
+	public Map<String,Integer> pageProcess(HttpServletRequest request,int rowsPerPage,int etc,int totalCount,int commTotalCount){
 		/*Page 처리 영역 */
 		PageVO pageInfo = new PageVO();
 		
 		//외부에서 페이지값을 받아 오는것 부터 시작.
 		//페이지당 보여질 줄수.(행)
-		int rowsPerPage = 5;
+//		int rowsPerPage = 5;
 		//나눌 페이지수  
 		int pagesPerBlock = 5;
 		
