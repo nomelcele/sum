@@ -59,7 +59,7 @@ $(function(){
 		push();
 		
 		$('#send').click(function(){
-			$(".chat").scrollTop($(".chat")[0].scrollHeight);
+			$(".chat").scrollTop(0);
 			var fdata = {
 					model:"sns",
 					submod:"insertSns",
