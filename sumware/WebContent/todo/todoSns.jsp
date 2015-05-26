@@ -22,7 +22,7 @@ console.log("typeof:"+typeof(EventSource));
 	var cheight=$('.chat').height();
 	function push(){
 		if(typeof(EventSource) != "undefined"){
-			eventSource = new EventSource("sumware?model=sns&submod=pushSns&sdept=${v.memdept}&smem=${v.memnum}&page=1&rowsPerPage="+rowsPerPage); // push를 받을수 있는 브라우져인지 판단.
+			eventSource = new EventSource("sumware?model=sns&submod=pushSns&sdept=${v.memdept}&page=1&rowsPerPage="+rowsPerPage); // push를 받을수 있는 브라우져인지 판단.
 			// EventSource EventListener의 종류
 			// onmessage : 서버가 보낸 push메세지가 수신되면 발생
 			// onerror : 서버가 보낸 push에서 에러가 발생되었을때
