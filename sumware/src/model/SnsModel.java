@@ -29,25 +29,28 @@ public class SnsModel implements ModelInter{
 			HashMap<String,String> map =MyMap.getMaps().getMapList(request);
 			SnsDao.getDao().insertSns(map);
 		}else if(submod!=null&&submod.equals("pushSns")){
-			int rowsPerPage=8;
+			int rowsPerPage=Integer.parseInt(request.getParameter("rowsPerPage"));
+			int pagesPerBlock=1;
+			System.out.println("rowperpage::::::::::"+rowsPerPage);
 			int totalCount=0;
 			int etc = 0;
 			int commTotalCount=0;
 			
 			int sdept = Integer.parseInt(request.getParameter("sdept"));
 			totalCount=SnsDao.getDao().snsTotalCount(sdept);
-			Map<String, Integer> map = MyPage.getMp().pageProcess(request,rowsPerPage,etc, totalCount, commTotalCount);
+			Map<String, Integer> map = MyPage.getMp().pageProcess(request,rowsPerPage,pagesPerBlock,etc, totalCount, commTotalCount);
 			map.put("sdept", sdept);
 			
 			ArrayList<SnsVO> snsList = SnsDao.getDao().getList(map);
 			StringBuffer outs = new StringBuffer();
+			outs.append("retry:2000\n");
 			outs.append("data:");
 			for(SnsVO v : snsList){
 				outs.append("<li class='left clearfix'>");
 				outs.append("<span class='chat-img pull-left'>");
 				outs.append("<img src='http://placehold.it/50/FA6F57/fff' alt='User Avatar' class='img-circle'>");
 				outs.append("</span>");
-				outs.append("<div class='chat-body clearfix'>");
+				outs.append("<div class='chat-body clearfix' style='height:100px;'>");
 				outs.append("<div class='header'>");
 				outs.append("<strong class='primary-font'>");
 				outs.append(v.getSmem());
