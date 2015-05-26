@@ -6,3 +6,4 @@ login=model.LoginModel
 mail=model.MailModel
 sns=model.SnsModel
 index=model.IndexModel
+join=model.JoinModel
