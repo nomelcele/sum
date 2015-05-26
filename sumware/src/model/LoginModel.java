@@ -3,6 +3,7 @@ package model;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,7 +24,7 @@ public class LoginModel implements ModelInter {
 		boolean method = false;
 		
 		if (submod != null && submod.equals("login")) {
-
+			MemberVO vo = null;
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			String mempwd = request.getParameter("mempwd");
 			// System.out.println("memnum : "+memnum);
@@ -33,7 +34,7 @@ public class LoginModel implements ModelInter {
 			v.setMemnum(memnum);
 			v.setMempwd(mempwd);
 			try {
-				MemberVO vo = LoginDao.getDao().login(v);
+				vo = LoginDao.getDao().login(v);
 				
 				if (vo != null) {
 					String res = LoginDao.getDao().ckFirstLogin(memnum);
@@ -61,11 +62,10 @@ public class LoginModel implements ModelInter {
 
 				e.printStackTrace();
 			}
-			
 			method = true;
 
 		} else if (submod != null && submod.equals("logout")) {
-			url = "index2.jsp";
+			url = "index.jsp";
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			LoginDao.getDao().outLog(memnum);
 			
