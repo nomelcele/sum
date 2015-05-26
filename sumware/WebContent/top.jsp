@@ -35,7 +35,9 @@
 			$('#submod').attr("value", "writeForm");
 		}else if(res == 'detail'){
 			alert("yo");
+			$('#model').attr("value", "board");
 			$('#submod').attr("value", "boardDetail");
+			$('form').submit();
 		}
 		$('form').submit();
 	}
