@@ -2,9 +2,15 @@ package dto;
 
 public class TodoVO {
 	private int torownum,tonum, todept, tomem;
-	private String tostdate, toendate, totitle, tocont, tofile,toconfirm, tocomm;
+	private String memname, tostdate, toendate, totitle, tocont, tofile,toconfirm, tocomm;
 	
 	
+	public synchronized String getMemname() {
+		return memname;
+	}
+	public synchronized void setMemname(String memname) {
+		this.memname = memname;
+	}
 	public int getTorownum() {
 		return torownum;
 	}

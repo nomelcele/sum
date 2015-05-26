@@ -5,23 +5,23 @@
 <!-- 부서 업무 부분 뷰 -->
 
 <script>
-$(function(){
+
+function getJobDetail(tonum){
+	$("#memlisttarget"+tonum).toggle("slow");
+	$("#detail"+tonum).toggle("slow");
 	$.ajax({
 		type : "post",
 		url : "sumware",
 		data : {model:"todo", 
 			submod:"showmemlist", 
-			tonum:$('#memjobName'+tonum).val(),
+			jobtonum:tonum,
 			},
 		success : function(result){
-			$("#membersjob"+tonum).html(result);
-				
+			$("#memlisttarget"+tonum).html(result);
+		
 		}
-
-		
-		
 	});
-});
+}
 
 </script>
 
@@ -49,16 +49,24 @@ $(function(){
 								${deptjoblist.totitle }
 								</div>
 								<div class="panel-body">
-									<p><i class="fa fa-user"></i>manager : ${deptjoblist.tomem }
-									<p><i class="fa fa-calendar-o"></i> ${deptjoblist.tostdate } ~
+									<p><i class="fa fa-user"></i> manager : ${deptjoblist.memname }
+									<p><i class="fa fa-calendar-o"></i> date : ${deptjoblist.tostdate } ~
 													${deptjoblist.toendate }</p>
-									<p>${deptjoblist.tocont }</p>
+		
 									
 								</div>
 								<div class="panel-footer">
-									<i class="fa fa-angle-double-down"></i>
-									<div id="memlisttarget">
+									
+									<a class="fa fa-align-justify" 
+									onclick="javascript:getJobDetail(${deptjoblist.tonum })"
+									style="cursor:pointer">detail</a>
+									<div id="memlisttarget${deptjoblist.tonum }" style="display:none"></div>
+									<div id="detail${deptjoblist.tonum }" style="display:none">
+									<br/>
+									<p>${deptjoblist.tocont }</p>
+									<p>첨부파일 다운로드 부분</p>
 									</div>
+									
 								</div>
 								
 							</div>

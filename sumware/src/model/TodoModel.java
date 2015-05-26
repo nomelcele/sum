@@ -138,10 +138,7 @@ public class TodoModel implements ModelInter{
 			ArrayList<MemberVO> teamMemberList = TodoDao.getDao().getTomem(memmgr);
 			request.setAttribute("teamTodoList", todoList);
 			request.setAttribute("teamMemberList", teamMemberList);
-			// 맨첨에 사원별 업무 분담들 보여줘야돼돼돼돼돼!!!
-//			String jobtonum = map.get("");
-//			ArrayList<TodoJobVO> membersjoblist = TodoDao.getDao().getMembersJob(jobtonum);
-//			request.setAttribute("membersjoblist", membersjoblist);
+
 			url = "todo/giveJob.jsp";
 			method = true;
 			
@@ -155,7 +152,7 @@ public class TodoModel implements ModelInter{
 			method = true;
 			
 		}else if(submod.equals("showMembersJob")){
-			String jobtonum = request.getParameter("jobtonum");
+			int jobtonum = Integer.parseInt(request.getParameter("jobtonum"));
 			ArrayList<TodoJobVO> membersjoblist = TodoDao.getDao().getMembersJob(jobtonum);
 			// todoJobVO확인
 			for(TodoJobVO v : membersjoblist){
@@ -168,13 +165,15 @@ public class TodoModel implements ModelInter{
 			request.setAttribute("membersjoblist", membersjoblist);
 			url = "todo/membersJob.jsp";
 			method = true;
-		}else if(submod.equals("showDeptJob")){
-			int todept = Integer.parseInt(request.getParameter("memdept"));
-			ArrayList<TodoVO> deptJobList = TodoDao.getDao().getDeptJob(todept);
-			request.setAttribute("deptJobList", deptJobList);
-			
-			//url = "sumware?model=todo&submod="
-			
+		}else if(submod.equals("showmemlist")){
+			// 부서업무부분에서 자세히보기 하면 정보들이 나옴
+			System.out.println("showmemlist들어옴");
+			int jobtonum = Integer.parseInt(request.getParameter("jobtonum"));
+			System.out.println("jobtonum : "+jobtonum);
+			ArrayList<TodoJobVO> list = TodoDao.getDao().getMembersJob(jobtonum);
+			request.setAttribute("memberjoblist", list);
+			url = "todo/jobDetail.jsp";
+			method = true;
 		}
 		
 		return new ModelForward(url, method);

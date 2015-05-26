@@ -284,8 +284,8 @@ public class TodoDao {
 			ArrayList<TodoVO> list = new ArrayList<>();	
 			
 			try {
-				sql.append("select tonum, to_char(tostdate,'yyyy-mm-dd') tostdate, to_char(toendate,'yyyy-mm-dd') toendate, totitle, tocont, tofile, todept, tomem, toconfirm, tocomm ");
-				sql.append("from todo where tomem=? and toconfirm='y' order by 1 desc");
+				sql.append("select t.tonum, to_char(t.tostdate,'yyyy-mm-dd') tostdate, to_char(t.toendate,'yyyy-mm-dd') t.toendate, t.totitle, t.tocont, t.tofile, t.todept, t.tomem, t.toconfirm, t.tocomm, m.memname ");
+				sql.append("from todo t, member m where t.tomem = m.memnum and tomem=? and toconfirm='y' order by 1 desc");
 				con = ConUtil.getOds();
 				pstmt = con.prepareStatement(sql.toString());
 				pstmt.setInt(1, Integer.parseInt(map.get("memnum")));
@@ -304,6 +304,7 @@ public class TodoDao {
 					v.setTomem(rs.getInt("tomem"));
 					v.setToconfirm(rs.getString("toconfirm"));
 					v.setTocomm(rs.getString("tocomm"));
+					v.setMemname(rs.getString("memname"));
 					list.add(v);
 				}
 				
@@ -346,7 +347,7 @@ public class TodoDao {
 		}
 		
 		// 업무별 사원들의 담당업무 뽑아옴
-		public ArrayList<TodoJobVO> getMembersJob(String jobtonum){
+		public ArrayList<TodoJobVO> getMembersJob(int jobtonum){
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			StringBuffer sql = new StringBuffer();
@@ -357,7 +358,7 @@ public class TodoDao {
 				sql.append("select j.jobnum, m.memname, m.memprofile, j.jobcont from todojob j, member m where m.memnum = j.jobmemnum and jobtonum=? order by 1 desc");
 				con = ConUtil.getOds();
 				pstmt = con.prepareStatement(sql.toString());
-				pstmt.setInt(1, Integer.parseInt(jobtonum));
+				pstmt.setInt(1, jobtonum);
 				
 				rs = pstmt.executeQuery();
 				
@@ -377,7 +378,6 @@ public class TodoDao {
 				CloseUtil.close(con);
 			}
 			return list;
-
 		}
 		
 		
@@ -390,8 +390,8 @@ public class TodoDao {
 			ArrayList<TodoVO> list = new ArrayList<>();	
 			
 			try {
-				sql.append("select tonum, to_char(tostdate,'yyyy-mm-dd') tostdate, to_char(toendate,'yyyy-mm-dd') toendate, totitle, tocont, tofile, todept, tomem, toconfirm, tocomm ");
-				sql.append("from todo where todept=? and toconfirm='y' order by 1 desc");
+				sql.append("select t.tonum, to_char(t.tostdate,'yyyy-mm-dd') tostdate, to_char(t.toendate,'yyyy-mm-dd') toendate, t.totitle, t.tocont, t.tofile, t.todept, t.tomem, t.toconfirm, t.tocomm,m.memname ");
+				sql.append("from todo t, member m where t.tomem = m.memnum and todept=? and toconfirm='y' order by 1 desc");
 				con = ConUtil.getOds();
 				pstmt = con.prepareStatement(sql.toString());
 				pstmt.setInt(1, todept);
@@ -410,7 +410,7 @@ public class TodoDao {
 					v.setTomem(rs.getInt("tomem"));
 					v.setToconfirm(rs.getString("toconfirm"));
 					v.setTocomm(rs.getString("tocomm"));
-					
+					v.setMemname(rs.getString("memname"));
 					list.add(v);
 			
 				}
