@@ -250,3 +250,95 @@ a {
 .button-div .right {float:right}
 .button-div button {margin-left:8px}
 .button-div button:first-child {margin-left:0}
+
+
+
+
+
+/**************** ( COMMENT ) ****************/
+.tit-comment {
+	margin-top:40px;
+	font-size:17px;
+	font-weight:700;
+}
+/* comment-list */
+.comment-list {
+	margin: 20px 0;
+	padding: 0;
+	font-family:Verdana,"맑은고딕",MalgunGothic,"돋움",Dotum,sans-serif;
+	font-size: 12px;
+	border-bottom: 1px solid #ccc;
+}
+.comment-list,.comment-list li {list-style:none}
+.comment-list li {
+	position:relative;
+	padding: 15px 0;
+	border-top: 1px solid #E3E3E3;
+}
+.comment-list li:nth-child(even) {background-color: #E8EFEE;}
+.comment-list li:after {display:block;content:"";clear:both}
+.comment-list li:first-child {margin:0}
+.comment-list li > div {
+	padding-left: 85px;
+	box-sizing:border-box;
+}
+.comment-list .comment-img {
+	position:absolute;
+	top: 50%;
+	left: 15px;
+	width: 55px;
+	margin-top: -27.5px;
+	border-radius:100px;
+	border: 2px solid #08AB8B;
+	height: 55px;
+	overflow: hidden;
+}
+.comment-list strong {
+	display:block;
+	width:100%;
+	margin-bottom: 5px;
+	float: left;
+}
+.comment-list p {
+	float: left;
+	max-width: 85%;
+}
+.comment-list .date {
+	position:absolute;right:10px;
+	top: 9px;
+	font-size: 11px;
+	color: #A4A4A4;
+}
+/* comment-write */
+.comment-write textarea {
+    float:left;
+    width: 88.5%;
+	
+    padding: 10px;
+    border-color: #9CC3BB;
+    border-top: 2px solid #00856B;
+    box-sizing: border-box;
+    height: 90px;
+}
+.btn-comm {
+	float:right;
+	width:10%;
+	height:90px;
+	font-weight: 700;
+	font-size: 15px;
+}
+.comment-btn {
+	position:absolute;
+	top: 32px;
+	right: 5px;
+	font-size:11px;	
+}
+.comment-btn button {
+    min-width: 0;
+	
+    min-height: 0;
+    line-height: 18px;
+    padding-bottom: 2px;
+}
+
+
