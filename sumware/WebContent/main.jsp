@@ -15,6 +15,7 @@
 			$('#mod').attr("value","todo");
 			$('#submod').attr("value","todoForm");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
+			$('#memdept').attr("value","${sessionScope.v.memdept}");
 		}else if(res==2){
 			$('#mod').attr("value","mail");
 			$('#submod').attr("value","mailMain");
@@ -65,6 +66,7 @@
 		<input type="hidden" id="submod" name="submod">
 		<input type="hidden" id="memnum" name="memnum">
 		<input type="hidden" id="page" name="page">
+		<input type="hidden" id="memdept" name="memdept">
 	</form>
 	<div>
 		${sessionScope.v.memname }님 로그인하셨습니다.

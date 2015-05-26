@@ -4,6 +4,28 @@
 	pageEncoding="UTF-8"%>
 <!-- 부서 업무 부분 뷰 -->
 
+<script>
+$(function(){
+	$.ajax({
+		type : "post",
+		url : "sumware",
+		data : {model:"todo", 
+			submod:"showmemlist", 
+			tonum:$('#memjobName'+tonum).val(),
+			},
+		success : function(result){
+			$("#membersjob"+tonum).html(result);
+				
+		}
+
+		
+		
+	});
+});
+
+</script>
+
+
 <div class="row">
 	
 
@@ -17,40 +39,35 @@
 				</div>
 				<div class="panel-body">
 					<div class="column" style="overflow: auto">
-						<div class="low-lg-1">
+					<c:forEach var="deptjoblist" items="${deptJobList }">
+						
+						
+						<div class="low-lg-${deptjoblist.tonum }">
 							<div class="panel panel-success">
-								<div class="panel-heading">Primary Panel</div>
-								<div class="panel-body">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Vestibulum tincidunt est vitae ultrices accumsan. Aliquam
-										ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+								<div class="panel-heading">
+								<i class="fa fa-pencil"></i>
+								${deptjoblist.totitle }
 								</div>
-								<div class="panel-footer">Panel Footer</div>
+								<div class="panel-body">
+									<p><i class="fa fa-user"></i>manager : ${deptjoblist.tomem }
+									<p><i class="fa fa-calendar-o"></i> ${deptjoblist.tostdate } ~
+													${deptjoblist.toendate }</p>
+									<p>${deptjoblist.tocont }</p>
+									
+								</div>
+								<div class="panel-footer">
+									<i class="fa fa-angle-double-down"></i>
+									<div id="memlisttarget">
+									</div>
+								</div>
+								
 							</div>
 						</div>
-						<div class="row-lg-2">
-							<div class="panel panel-success">
-								<div class="panel-heading">Primary Panel</div>
-								<div class="panel-body">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Vestibulum tincidunt est vitae ultrices accumsan. Aliquam
-										ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-								</div>
-								<div class="panel-footer">Panel Footer</div>
-							</div>
-						</div>
-						<!-- /.col-lg-4 -->
-						<div class="row-lg-3">
-							<div class="panel panel-success">
-								<div class="panel-heading">Success Panel</div>
-								<div class="panel-body">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Vestibulum tincidunt est vitae ultrices accumsan. Aliquam
-										ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-								</div>
-								<div class="panel-footer">Panel Footer</div>
-							</div>
-						</div>
+					
+					
+					</c:forEach>
+						
+						
 						<!-- /.col-lg-4 -->
 					</div>
 				</div>

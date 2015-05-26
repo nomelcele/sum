@@ -27,19 +27,26 @@ public class TodoModel implements ModelInter{
 		
 		String submod = request.getParameter("submod");
 		System.out.println("submod:"+submod);
-		String url ="index.jsp";
+		String url ="todo/todoMain.jsp";
 		boolean method=false;
 		
 		if(submod.equals("todoForm")){
-			url = "todo/todoMain.jsp";
+			
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
+			int todept = Integer.parseInt(request.getParameter("memdept"));
+			System.out.println("memdept : "+todept);
 			System.out.println("memnum : "+memnum);
 			ArrayList<MemberVO> list = TodoDao.getDao().getTomem(memnum);
-			for(MemberVO vv: list){
-				System.out.println("::::"+vv.getMemname());
-			}
+
 			HttpSession session = request.getSession();
 			session.setAttribute("teamNameList", list);
+			
+			//부서업무 리스트 뽑아줌
+			
+			ArrayList<TodoVO> deptJobList = TodoDao.getDao().getDeptJob(todept);
+			request.setAttribute("deptJobList", deptJobList);
+			
+			url = "todo/todoMain.jsp";
 			method=true;	
 		}else if(submod.equals("addtodoForm")){
 			System.out.println("addtodoForm 들어왔어");
@@ -85,7 +92,7 @@ public class TodoModel implements ModelInter{
 			}else if(childmod!=null && childmod.equals("rejectTodo")){
 				// 리스트의 승인여부 n을 x로 바꿈!!!!
 				HashMap<String,String> map = MyMap.getMaps().getMapList(request);
-				TodoDao.getDao().confirmTodo(map, "x");
+				TodoDao.getDao().confirmTodo(map, "z");
 			}
 			
 			url = "sumware?model=todo&submod=checkTodoListForm";
@@ -161,6 +168,13 @@ public class TodoModel implements ModelInter{
 			request.setAttribute("membersjoblist", membersjoblist);
 			url = "todo/membersJob.jsp";
 			method = true;
+		}else if(submod.equals("showDeptJob")){
+			int todept = Integer.parseInt(request.getParameter("memdept"));
+			ArrayList<TodoVO> deptJobList = TodoDao.getDao().getDeptJob(todept);
+			request.setAttribute("deptJobList", deptJobList);
+			
+			//url = "sumware?model=todo&submod="
+			
 		}
 		
 		return new ModelForward(url, method);

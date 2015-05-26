@@ -64,7 +64,7 @@ public class TodoDao {
 
 	}
 	
-	
+	// 부장의 업무 추가 
 	public void addTodo(HashMap<String,String> map){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -106,7 +106,7 @@ public class TodoDao {
 			
 			try {
 				sql.append("select tonum, to_char(tostdate,'yyyy-mm-dd') tostdate, to_char(toendate,'yyyy-mm-dd') toendate, totitle, tocont, tofile, todept, tomem, toconfirm, tocomm ");
-				sql.append("from todo where toconfirm = 'n' and tomem=?");
+				sql.append("from todo where toconfirm = 'n' and tomem=? order by 1 desc");
 				con = ConUtil.getOds();
 				pstmt = con.prepareStatement(sql.toString());
 				pstmt.setInt(1, tomem);
@@ -141,7 +141,7 @@ public class TodoDao {
 		}
 		
 
-		// 승인했을 시 n을 y나 x로 바꿔주는 메서드
+		// 승인했을 시 n을 y나 z로 바꿔주는 메서드
 		public void confirmTodo(HashMap<String,String> map, String toconfirm){
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -176,7 +176,7 @@ public class TodoDao {
 			StringBuilder sql = new StringBuilder();
 			sql.append("select rownum torownum, tonum,to_char(tostdate,'yyyy-MM-dd') tostdate,")
 			.append("to_char(toendate,'yyyy-MM-dd') toendate,nvl(totitle,'제목없음') totitle,tocont,tomem,tocomm,toconfirm ")
-			.append(" from (select * from todo where todept=(select memdept from member where memnum=?) order by 1 desc)");
+			.append(" from (select * from todo where todept=(select memdept from member where memnum=?) order by toconfirm desc, 1 desc)");
 			try{
 				list=new ArrayList<TodoVO>();
 				con=ConUtil.getOds();
@@ -285,7 +285,7 @@ public class TodoDao {
 			
 			try {
 				sql.append("select tonum, to_char(tostdate,'yyyy-mm-dd') tostdate, to_char(toendate,'yyyy-mm-dd') toendate, totitle, tocont, tofile, todept, tomem, toconfirm, tocomm ");
-				sql.append("from todo where tomem=? and toconfirm='y'");
+				sql.append("from todo where tomem=? and toconfirm='y' order by 1 desc");
 				con = ConUtil.getOds();
 				pstmt = con.prepareStatement(sql.toString());
 				pstmt.setInt(1, Integer.parseInt(map.get("memnum")));
@@ -381,6 +381,51 @@ public class TodoDao {
 		}
 		
 		
+		// 부서의 업무 리스트 뽑아옴
+		public ArrayList<TodoVO> getDeptJob(int todept){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			StringBuffer sql = new StringBuffer();
+			ResultSet rs = null;
+			ArrayList<TodoVO> list = new ArrayList<>();	
+			
+			try {
+				sql.append("select tonum, to_char(tostdate,'yyyy-mm-dd') tostdate, to_char(toendate,'yyyy-mm-dd') toendate, totitle, tocont, tofile, todept, tomem, toconfirm, tocomm ");
+				sql.append("from todo where todept=? and toconfirm='y' order by 1 desc");
+				con = ConUtil.getOds();
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, todept);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					TodoVO v = new TodoVO();	
+					v.setTonum(rs.getInt("tonum"));
+					v.setTostdate(rs.getString("tostdate"));
+					v.setToendate(rs.getString("toendate"));
+					v.setTotitle(rs.getString("totitle"));
+					v.setTocont(rs.getString("tocont"));
+					v.setTofile(rs.getString("tofile"));
+					v.setTodept(rs.getInt("todept"));
+					v.setTomem(rs.getInt("tomem"));
+					v.setToconfirm(rs.getString("toconfirm"));
+					v.setTocomm(rs.getString("tocomm"));
+					
+					list.add(v);
+			
+				}
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}finally{
+				CloseUtil.close(rs);
+				CloseUtil.close(pstmt);
+				CloseUtil.close(con);
+			}
+			return list;
+
+		}
 		
 
 }

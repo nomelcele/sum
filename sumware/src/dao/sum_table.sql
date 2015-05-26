@@ -231,7 +231,7 @@ DESC todo;
 
 commit;
 
-
+-----0526 업무별 사원들에게 업무부여하기 위한 테이블과 시퀀스 생성
 create table todojob(
 jobnum NUMBER(11) constraint todojob_jobnum_pk primary key,
 jobtonum NUMBER(11),
