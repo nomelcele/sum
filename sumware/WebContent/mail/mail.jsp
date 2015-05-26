@@ -178,7 +178,9 @@
 				type: "post",
 				url: "sumware",
 				data: {model: "mail",
-					submod: "mailTrashcan"
+					submod: "mailTrash",
+					usernum: "${sessionScope.v.memnum}",
+					userid: "${sessionScope.v.meminmail }"
 				},
 				success: function(result){
 					$("#mainContent").html(result);

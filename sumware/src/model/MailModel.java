@@ -115,21 +115,24 @@ public class MailModel implements ModelInter{
 			// 휴지통
 			// 휴지통에 들어갈 메일들의 번호(mailnum)을 저장한 배열
 			System.out.println("mailTrash 모델 들어옴");
-			String chkArr = request.getParameter("chkArr");
-			String[] mailnums = chkArr.split("&");
-			for(int i=0; i<mailnums.length; i++){
-				mailnums[i] = mailnums[i].substring(4);
-			}
-			
 			int usernum = Integer.parseInt(request.getParameter("usernum"));
 			String userid = request.getParameter("userid");
+			String chkArr = request.getParameter("chkArr");
 			
-			// 메일 테이블의 delete 속성 설정
-			MailDao.getDao().updateTrash(mailnums, usernum, userid);
+			if(chkArr != null){
+				String[] mailnums = chkArr.split("&");
+				for(int i=0; i<mailnums.length; i++){
+					mailnums[i] = mailnums[i].substring(4);
+				}
+				// 메일 테이블의 delete 속성 설정
+				MailDao.getDao().updateTrash(mailnums, usernum, userid);
+			}
+			
 			// 휴지통에서 보여줄 메일 리스트
 			ArrayList<MailVO> trashlist = MailDao.getDao().getTrashList(usernum, userid);
 			
 			request.setAttribute("list", trashlist);
+			request.setAttribute("tofrom",3);
 			
 			url = "mail/mailList.jsp";
 			method = true;

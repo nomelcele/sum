@@ -102,7 +102,8 @@ public class MailDao {
 			StringBuffer sql = new StringBuffer();
 			
 			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma"); 
-			sql.append(" where me.meminmail=ma.mailreceiver and ma.mailmem=? order by ma.maildate desc");
+			sql.append(" where me.meminmail=ma.mailreceiver and ma.mailmem=? and ma.mailsdelete=1");
+			sql.append(" order by ma.maildate desc");
 		
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, usernum);

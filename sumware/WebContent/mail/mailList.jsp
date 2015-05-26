@@ -51,9 +51,9 @@
 				userid: "${sessionScope.v.meminmail}",
 				chkArr: $("#chk:checked").serialize()
 			},
-			success: function(result){
-				$("#mainContent").html(result);
-			}
+			// success: function(result){
+			//	$("#mainContent").html(result);
+			//}
 		});	
 	}
 	
