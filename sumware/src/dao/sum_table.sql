@@ -248,7 +248,13 @@ create sequence mail_seq
 increment by 1
 start with 1;
 
+-- 0526 변경
+-- 메일 삭제 여부를 확인하기 위한 컬럼
 alter table mail add mailsdelete number(5);
+-- 1: 기본값, 2: 보낸 사람이 메일 삭제(메일이 보낸 사람의 휴지통으로 이동),
+-- 3: 보낸 사람이 메일 영구 삭제
 alter table mail add mailrdelete number(5);
+-- 1: 기본값, 2: 받은 사람이 메일 삭제(메일이 받은 사람의 휴지통으로 이동),
+-- 3: 받은 사람이 메일 영구 삭제
 alter table mail drop column mailsname;
 alter table mail drop column mailrname;
