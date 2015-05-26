@@ -84,6 +84,9 @@
 			
 		}else if(res=='teamTodoForm'){
 			// 팀업무 버튼
+			$('#submod').attr("value","teamTodoForm");
+			$('#memmgr').attr("value","${sessionScope.v.memmgr}");
+			$('#goTodo').submit();
 		}
 	}
 </script>

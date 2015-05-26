@@ -180,6 +180,15 @@ public class TodoModel implements ModelInter{
 			request.setAttribute("memberjoblist", list);
 			url = "todo/jobDetail.jsp";
 			method = true;
+		}else if(submod.equals("teamTodoForm")){
+			// 팀별 업무 리스트 뽑아오기
+			int memmgr = Integer.parseInt(request.getParameter("memmgr"));
+			ArrayList<TodoVO> list = TodoDao.getDao().getTeamJob(memmgr);
+			request.setAttribute("teamJobList", list);
+			
+			url = "todo/teamTodoForm.jsp";
+			method = true;
+			
 		}
 		
 		return new ModelForward(url, method);

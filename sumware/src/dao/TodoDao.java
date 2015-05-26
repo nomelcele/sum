@@ -428,5 +428,52 @@ public class TodoDao {
 
 		}
 		
+		
+		public ArrayList<TodoVO> getTeamJob(int memmgr){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			StringBuffer sql = new StringBuffer();
+			ResultSet rs = null;
+			ArrayList<TodoVO> list = new ArrayList<>();	
+			
+			try {
+				sql.append("select t.tonum, to_char(t.tostdate,'yyyy-mm-dd') tostdate, to_char(t.toendate,'yyyy-mm-dd') toendate, t.totitle, t.tocont, t.tofile, t.todept, t.tomem, t.toconfirm, t.tocomm,m.memname ");
+				sql.append("from todo t, member m where t.tomem = m.memnum and t.toconfirm='y' and (m.memnum = ? or m.memmgr = ?) order by 1 desc");
+				con = ConUtil.getOds();
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, memmgr);
+				pstmt.setInt(2, memmgr);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					TodoVO v = new TodoVO();	
+					v.setTonum(rs.getInt("tonum"));
+					v.setTostdate(rs.getString("tostdate"));
+					v.setToendate(rs.getString("toendate"));
+					v.setTotitle(rs.getString("totitle"));
+					v.setTocont(rs.getString("tocont"));
+					v.setTofile(rs.getString("tofile"));
+					v.setTodept(rs.getInt("todept"));
+					v.setTomem(rs.getInt("tomem"));
+					v.setToconfirm(rs.getString("toconfirm"));
+					v.setTocomm(rs.getString("tocomm"));
+					v.setMemname(rs.getString("memname"));
+					list.add(v);
+			
+				}
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}finally{
+				CloseUtil.close(rs);
+				CloseUtil.close(pstmt);
+				CloseUtil.close(con);
+			}
+			return list;
+
+		}
+		
 
 }
