@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--  --%>
-
+<%-- board left --%>
 <c:if test="${param.model eq 'board' }">
 
 </c:if>
-<%--  --%>
-<c:if test="${param.model eq 'todo' }">
 
+<%-- todo left --%>
+<c:if test="${param.model eq 'todo' }">
 <form action="sumware" method="post" id="goTodo">
 		<input type="hidden" id="model" name="model">
 		<input type="hidden" id="submod" name="submod">
@@ -76,7 +75,7 @@
 
 </c:if>
 
-<%--  --%>
+<%-- calendar left --%>
 <c:if test="${param.model eq 'calendar' }">
       <div class="chat-panel panel panel-default">
          <div class="panel-heading">
@@ -110,50 +109,22 @@
       </div>
    </div>
 </c:if>
-<%--  --%>
+
+<%-- mail left --%>
 <c:if test="${param.model eq 'mail' }">
 	<div class="col-md-2">
-				<div>
-					<a href="javascript:mailFormGo(1)" class="btn btn-sm btn-info"> <span
-						class="glyphicon glyphicon-pencil"></span> 메일 쓰기
-					</a>
-				</div>
-				<div class="list-group">
-					<a href="javascript:mailFormGo(2)" class="list-group-item">받은 메일함 </a>
-					<a href="javascript:mailFormGo(3)" class="list-group-item">보낸 메일함</a> 
-					<a href="javascript:mailFormGo(4)" class="list-group-item">내게 쓴 메일함</a> 
-					<a href="javascript:mailFormGo(5)" class="list-group-item">휴지통</a>
-				</div>
-			</div>
-</c:if>
-<%--  --%>
-<c:if test="${param.model eq 'messenger' }">
-<div class="col-lg-2">
-		<div class="media">
-			<div class="media-left media-middle">
-			
-				<!-- 사원 사진 불러오기  -->
-				<a href="#"> <img class="media-object" src="..." alt="...">
-				</a>
-			</div>
-			<div class="media-body">
-			
-				<!-- 로그인 사원 이름 불러오기 -->
-				<a href="#">${sessionScope.v.memname }님</a>
-			</div>
+		<div>
+			<a href="javascript:mailFormGo(1)" class="btn btn-sm btn-info"> <span
+				class="glyphicon glyphicon-pencil"></span> 메일 쓰기
+			</a>
 		</div>
-		
-		<!-- 친구 리스트 jstl을 통해 출력화면 -->
-
 		<div class="list-group">
-			<c:forEach var="memList" items="${list}">
-				<a href="#" class="list-group-item">${memList.memname}</a>
-			</c:forEach>
-			
-			</table>
+			<a href="javascript:mailFormGo(2)" class="list-group-item">받은 메일함 </a>
+			<a href="javascript:mailFormGo(3)" class="list-group-item">보낸 메일함</a> 
+			<a href="javascript:mailFormGo(4)" class="list-group-item">내게 쓴 메일함</a> 
+			<a href="javascript:mailFormGo(5)" class="list-group-item">휴지통</a>
 		</div>
 	</div>
-
 </c:if>
 
 
