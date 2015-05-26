@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@include file="/top.jsp" %>
 <div id="wrap" class="board">
+		<form action="sumware">
+			<input type="hidden" name="model" id="model">
+			<input type="hidden" name="submod" id="submod">
+			<input type="hidden" name="page" id="page">
+		</form>
 		<!-- lnb-area(S) -->
 		<div class="lnb-area">
 		left
@@ -88,8 +93,8 @@
 				</div>
 				<div class="right">
 					<button type="button">수정</button>
-					<button type="button">목록</button>
-					<button type="button">새글쓰기</button>
+					<button type="button" onclick="javascript:formGo('list')">목록</button>
+					<button type="button" onclick="javascript:formGo('write')">새글쓰기</button>
 				</div>
 			</div>
 			

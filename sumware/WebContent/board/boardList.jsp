@@ -8,7 +8,7 @@
 	</div>
 		<!-- lnb-area(E) -->
 		<!-- contents(S) -->
-									<form action="sumware" method="post">
+<form action="sumware" method="post">
 	<input type="hidden" name="model" id="model">
 	<input type="hidden" name="submod" id="submod">
 	<div class="contents">
@@ -75,7 +75,7 @@
 		</div>
 			<!-- paging(E) -->
 	</div>
-														</form>
+</form>
 		<!-- contents(E) -->
 </div>
 <%@include file="/footer.jsp" %>
