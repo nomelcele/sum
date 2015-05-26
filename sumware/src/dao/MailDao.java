@@ -59,7 +59,7 @@ public class MailDao {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
 			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma");
-			sql.append(" where me.memnum=ma.mailmem and ma.mailreceiver=? and ma.mailrdelete=1");
+			sql.append(" where me.meminmail=ma.mailreceiver and ma.mailreceiver=? and ma.mailrdelete=1");
 			sql.append(" order by ma.maildate desc");
 			
 			// 현재 로그인한 사원에게 온 메일만 검색
@@ -137,8 +137,8 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select mailtitle,maildate from mail");
-			sql.append(" where mailnum=? and mailreceiver=?");
+			sql.append("select ma.mailnum, ma.mailtitle, ma.maildate, me.memname from member me, mail ma");
+			sql.append(" where me.memnum=ma.mailmem and mailmem=? and mailreceiver=?");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, usernum);
 			pstmt.setString(2, userid);
@@ -146,6 +146,8 @@ public class MailDao {
 			
 			while(rs.next()){
 				MailVO v = new MailVO();
+				v.setMailnum(rs.getInt("mailnum"));
+				v.setMailsname(rs.getString("memname"));
 				v.setMailtitle(rs.getString("mailtitle"));
 				v.setMaildate(rs.getString("maildate"));
 				list.add(v);
@@ -171,7 +173,7 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select ma.mailtitle, me1.memname name1, me2.memname name2, ma.maildate, ma.mailcont, ma.mailfile");
+			sql.append("select ma.mailtitle, me1.memname mailsname, me2.memname mailrname, ma.maildate, ma.mailcont, ma.mailfile");
 			sql.append(" from mail ma, member me1, member me2");
 			sql.append(" where me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver and ma.mailnum=?");
 			pstmt = con.prepareStatement(sql.toString());
@@ -180,8 +182,8 @@ public class MailDao {
 			
 			if(rs.next()){
 				v.setMailtitle(rs.getString("mailtitle"));
-				v.setMailsname(rs.getString("name1"));
-				v.setMailrname(rs.getString("name2"));
+				v.setMailsname(rs.getString("mailsname"));
+				v.setMailrname(rs.getString("mailrname"));
 				v.setMaildate(rs.getString("maildate"));
 				v.setMailcont(rs.getString("mailcont"));
 				v.setMailfile(rs.getString("mailfile"));

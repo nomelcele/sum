@@ -7,10 +7,14 @@
 		<table class="table table-condensed table-hover">
 				<tr>
 					<td><input type="checkbox" name="all" onclick="checkAll(this)"></td>
-					<c:if test="${tofrom eq '1' || '3'}"> 
+					<c:if test="${tofrom eq '1'}"> 
 						<td>보낸 사람</td>
 					</c:if>
 					<c:if test="${tofrom eq '2' }">
+						<td>받는 사람</td>
+					</c:if>
+					<c:if test="${tofrom eq '3' }">
+						<td>보낸 사람</td>
 						<td>받는 사람</td>
 					</c:if>
 					<td>제목</td>
@@ -20,10 +24,14 @@
 				<c:forEach var="mList" items="${list}">
 					<tr>
 						<td><input type="checkbox" name="chk" id="chk" value="${mList.mailnum}"></td>
-						<c:if test="${tofrom eq '1' || '3'}">
+						<c:if test="${tofrom eq '1'}">
 							<td>${mList.mailsname}</td>
 						</c:if>
 						<c:if test="${tofrom eq '2' }">
+							<td>${mList.mailrname}</td>
+						</c:if>
+						<c:if test="${tofrom eq '3' }">
+							<td>${mList.mailsname}</td>
 							<td>${mList.mailrname}</td>
 						</c:if>
 						<td><a href="javascript:mailDetailGo(${mList.mailnum})">${mList.mailtitle}</a></td>

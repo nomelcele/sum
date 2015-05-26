@@ -106,7 +106,7 @@ public class MailModel implements ModelInter{
 			ArrayList<MailVO> mylist = MailDao.getDao().getMyMailList(usernum, userid);
 			
 			request.setAttribute("list", mylist);
-			request.setAttribute("tofrom", 3);
+			request.setAttribute("tofrom", 1);
 			
 			url = "mail/mailList.jsp";
 			method = true;
