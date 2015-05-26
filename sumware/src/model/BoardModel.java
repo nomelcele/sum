@@ -49,7 +49,9 @@ public class BoardModel implements ModelInter{
 			method = false; // redirect
 		}else if(submod != null && submod.equals("boardDetail")){
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
-			ArrayList<BoardVO> list = BoardDao.getDao().getDetail(map);
+			BoardVO list = BoardDao.getDao().getDetail(map);
+			System.out.println(list.getBdate()+" / "+ list.getBcont()+" / "+map.get("no"));
+			
 			request.setAttribute("list", list);
 			url = "board/boardDetail.jsp";
 			method = true;
