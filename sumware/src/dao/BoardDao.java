@@ -164,20 +164,22 @@ public class BoardDao {
 		BoardVO v = null;
 		StringBuffer sql = new StringBuffer();
 		sql.append
-		("select b.bnum,m.memname, b.btitle, b.bcont, TO_CHAR(b.bdate,'yyyy.MM.dd HH:mm') bdate").append
+		("select b.bhit,b.bnum,m.memname, b.btitle, b.bcont, TO_CHAR(b.bdate,'yyyy.MM.dd HH:mm') bdate").append
 		(" from board b, member m where b.bmem=m.memnum and bnum=?");
 		try {
 			con = ConUtil.getOds();
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, Integer.parseInt(map.get("no")));
 			rs = pstmt.executeQuery();
-			while(rs.next()){
+			if(rs.next()){
 				v = new BoardVO();
 				v.setBnum(rs.getInt("bnum"));
 				v.setBcont(rs.getString("bcont"));
 				v.setBwriter(rs.getString("memname"));
 				v.setBtitle(rs.getString("btitle"));
 				v.setBdate(rs.getString("bdate"));
+				v.setBhit(rs.getInt("bhit"));
+				hitUp(rs.getInt("bhit"), rs.getInt("bnum"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -187,6 +189,27 @@ public class BoardDao {
 			CloseUtil.close(con);
 		}
 		return v;
+	}
+	private void hitUp(int i,int j){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+		i += 1;
+		try {
+			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			sql.append("update board set bhit=? where bnum=?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, i);
+			pstmt.setInt(2, j);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+//			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
 	}
 	
 	
