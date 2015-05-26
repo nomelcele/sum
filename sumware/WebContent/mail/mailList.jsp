@@ -7,11 +7,9 @@
 		<table class="table table-condensed table-hover">
 				<tr>
 					<td><input type="checkbox" name="all" onclick="checkAll(this)"></td>
-					<!-- 받은 메일함을 클릭했을 때 -->
-					<c:if test="${tofrom eq '1' || '3'}">
+					<c:if test="${tofrom eq '1' || '3'}"> 
 						<td>보낸 사람</td>
 					</c:if>
-					<!-- 보낸 메일함을 클릭했을 때 -->
 					<c:if test="${tofrom eq '2' }">
 						<td>받는 사람</td>
 					</c:if>
@@ -36,17 +34,29 @@
 	</div>
 <script>
 	function mailTrashGo(){
+		// var chkArr = $([]);
+		// $("#chk:checked").each(function(){
+		//	chkArr.add($(this).val());
+		// });
+		
+		// var chkArr = document.getElementsByName("chk");
+		// console.log("휴지통 가는 함수");
+		
 		$.ajax({
 			type: "post",
 			url: "sumware",
 			data: {model: "mail",
 				submod: "mailTrash",
 				usernum: "${sessionScope.v.memnum}",
-				userid: "${sessionScope.v.meminmail}"
-			}
-		});
+				userid: "${sessionScope.v.meminmail}",
+				chkArr: $("#chk:checked").serialize()
+			},
+			//success: function(result){
+			//	$("#mainContent").html(result);
+			//}
+		});	
 	}
-
+	
 	function checkAll(obj){
 		// 체크박스 전체 선택(해제)을 해주는 메서드
 		var chkArr = document.getElementsByName("chk");
@@ -76,6 +86,5 @@
 			}
 		});
 	}
-	
 </script>
 
