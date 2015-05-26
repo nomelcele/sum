@@ -209,7 +209,7 @@ create table mesentry(
   openmemberyn varchar(10) default 'N',
   entstdate date,
   entendate date,
-  primary key(masnum,mesmember)
+  constraint mesentry_masnum_mesmember_pk primary key(masnum, mesmember)
   );
 
   -- constraint mesentry_masnum_mesmember_pk primary key(masnum, mesmember);
