@@ -238,9 +238,7 @@
 	margin-top: 15px; 
 }
 
-.resume-heading .social-btns i.fa {
-	margin-left: -5px;
-}
+
 
 @media ( max-width : 992px) {
 	.resume-heading .social-btn-holder {
@@ -282,7 +280,7 @@
 										style="position: relative; overflow: hidden; padding-top: 10px;">
 										<input type="file" id="memimg" name="memimg"
 											style="position: absolute; right: 0px; top: 0px; opacity: 0; cursor: pointer;"/>
-										<img src="img/ion.JPG">
+										<img src="../img/ion.JPG">
 									</div>
 								</div>
 							</div>
