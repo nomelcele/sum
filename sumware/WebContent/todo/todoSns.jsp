@@ -52,6 +52,18 @@ console.log("typeof:"+typeof(EventSource));
 				
 			}, 1000);	
 					
+		}else if($('.chat').scrollTop()==0){
+			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
+			setTimeout(function(){
+				rowsPerPage=7;
+				cheight=350;
+				console.log("rowsPerPage:"+rowsPerPage);
+				console.log("cheight:"+cheight);
+				eventSource.close();
+				$("#loading img").remove();
+				push();
+				
+			}, 1000);
 		}
 	}
 // Ajax로 사용자의 데이터를 보내는 쪽 - 어제와동일!
