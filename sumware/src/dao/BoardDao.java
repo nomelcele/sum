@@ -137,7 +137,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		StringBuffer sql = new StringBuffer();
-		sql.append("select count(*) cnt from comm where code=?");
+		sql.append("select count(*) cnt from comm where coboard=?");
 		int res = 0;
 		try {
 			con = ConUtil.getOds();
@@ -190,6 +190,7 @@ public class BoardDao {
 		}
 		return v;
 	}
+	// 조회수 증가 시켜주는 메서드.
 	private void hitUp(int i,int j){
 		Connection con = null;
 		PreparedStatement pstmt = null;
