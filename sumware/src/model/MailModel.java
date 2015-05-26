@@ -114,10 +114,20 @@ public class MailModel implements ModelInter{
 		} else if(submod != null && submod.equals("mailTrash")){
 			// 휴지통
 			// 휴지통에 들어갈 메일들의 번호(mailnum)을 저장한 배열
-			String[] mailnums = request.getParameterValues("chk");
+			System.out.println("mailTrash 모델 들어옴");
+			String chkArr = request.getParameter("chkArr");
+			String[] mailnums = chkArr.split("&");
+			for(int i=0; i<mailnums.length; i++){
+				mailnums[i] = mailnums[i].substring(4);
+			}
+			
 			int usernum = Integer.parseInt(request.getParameter("usernum"));
 			String userid = request.getParameter("userid");
-			ArrayList<MailVO> trashlist = MailDao.getDao().getTrashList(mailnums, usernum, userid);
+			
+			// 메일 테이블의 delete 속성 설정
+			MailDao.getDao().updateTrash(mailnums, usernum, userid);
+			// 휴지통에서 보여줄 메일 리스트
+			ArrayList<MailVO> trashlist = MailDao.getDao().getTrashList(usernum, userid);
 			
 			request.setAttribute("list", trashlist);
 			

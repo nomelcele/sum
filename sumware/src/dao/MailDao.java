@@ -59,7 +59,8 @@ public class MailDao {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
 			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma");
-			sql.append(" where me.memnum=ma.mailmem and ma.mailreceiver=? order by ma.maildate desc");
+			sql.append(" where me.memnum=ma.mailmem and ma.mailreceiver=? and ma.mailrdelete=1");
+			sql.append(" order by ma.maildate desc");
 			
 			// 현재 로그인한 사원에게 온 메일만 검색
 			pstmt = con.prepareStatement(sql.toString());
@@ -197,9 +198,60 @@ public class MailDao {
 		return v;
 	}
 	
-	public ArrayList<MailVO> getTrashList(String[] mailnums, int usernum, String userid){
+	public void updateTrash(String[] mailnums, int usernum, String userid){
 		// 휴지통에서 보여줄 메일 리스트
 		// 받은 메일함이나 보낸 메일함에서 체크박스로 선택 후 삭제된 메일들은 휴지통에서 보여진다.
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			int mailmem = 0;
+			String mailreceiver = "";
+			
+			for(String e:mailnums){
+				sql.append("select mailmem,mailreceiver from mail where mailnum=?");
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, Integer.parseInt(e)); // 검색할 메일의 번호
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){ 
+					mailmem = rs.getInt("mailmem");
+					mailreceiver = rs.getString("mailreceiver");
+					
+					if(mailmem == usernum){ // 로그인한 사원이 보낸 메일일 경우
+						sql.setLength(0); // 스트링버퍼 비우기
+						sql.append("update mail set mailsdelete=2 where mailnum=?");
+					}
+					
+					if(mailreceiver.equals(userid)){ // 로그인한 사원이 받은 메일일 경우
+						sql.setLength(0); // 스트링버퍼 비우기
+						sql.append("update mail set mailrdelete=2 where mailnum=?");
+					}
+					
+					CloseUtil.close(rs);
+					CloseUtil.close(pstmt);
+					pstmt = con.prepareStatement(sql.toString());
+					pstmt.setInt(1, Integer.parseInt(e));
+					pstmt.executeUpdate();		
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		
+	}
+	
+	public ArrayList<MailVO> getTrashList(int usernum, String userid){
+		// 휴지통에서 보여줄 메일 리스트를 리턴하는 메서드
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -207,6 +259,28 @@ public class MailDao {
 		
 		try {
 			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			sql.append("select ma.mailnum, me1.memname mailsname, me2.memname mailrname, ma.mailtitle, ma.maildate");
+			sql.append(" from member me1, member me2, mail ma");
+			sql.append(" where (me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver) and");
+			sql.append(" ((ma.mailmem=? and ma.mailsdelete=2) or (ma.mailreceiver=? and ma.mailrdelete=2))");
+			sql.append(" order by ma.maildate desc");
+ 
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, usernum);
+			pstmt.setString(2, userid);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				MailVO v = new MailVO();
+				v.setMailnum(rs.getInt("mailnum"));
+				v.setMailsname(rs.getString("mailsname"));
+				v.setMailrname(rs.getString("mailrname"));
+				v.setMailtitle(rs.getString("mailtitle"));
+				v.setMaildate(rs.getString("maildate"));
+				list.add(v);
+			}
+					
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
