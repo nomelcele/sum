@@ -30,6 +30,9 @@
 // 			$('#mod').attr("value","messenger");
 // 			$('#submod').attr("value","messengerForm");
 			openWin();
+		}else if(res==6){
+			$('#mod').attr("value","join");
+			$('#submod').attr("value","memberForm");
 		}
 		$('form').submit();	
 		
@@ -76,6 +79,7 @@
 			<li><a href="javaScript:formGoGo(3)">Calendar</a>
 			<li><a href="javaScript:formGoGo(4)">Board</a></li>
 			<li><a href="javaScript:formGoGo(5)">Messenger</a></li>
+			<li><a href="javaScript:formGoGo(6)">join</a></li>
 		</ul>
 	</div>
 </body>

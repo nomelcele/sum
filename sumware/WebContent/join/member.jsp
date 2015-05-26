@@ -182,10 +182,9 @@
 					</div>
 
 					<div class="bs-callout bs-callout-danger">
-						<form class="form-horizontal" role="form" method="post"
+						<form class="form-horizontal" role="form" method="post" 
 							name="myform">
-							<input type="hidden" name="model" value="확인"> <input
-								type="hidden" name="cancel" value="취소">
+							<input type="hidden" name="model" value="">
 							<h2>필수 입력 사항</h2>
 							<hr>
 
@@ -276,9 +275,6 @@
 							<div class="form-group">
 								<div class="col-sm-offset-5 col-sm-10">
 
-									<button type="submit" class="btn btn-default">
-										<i class="fa fa-undo"></i>
-									</button>
 									<button type="submit" class="btn btn-primary" id="btn">
 										<i class="fa fa-floppy-o"></i>
 									</button>
