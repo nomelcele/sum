@@ -88,14 +88,14 @@ public class LoginDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
 		StringBuffer sql = new StringBuffer();
-		sql.append("select nvl(memname,'0') memname from member where memnum=?");
+		sql.append("select nvl(memprofile,'0') memprofile from member where memnum=?");
 		try{
 			con=ConUtil.getOds();
 			pstmt=con.prepareStatement(sql.toString());
 			pstmt.setInt(1, memnum);
 			rs=pstmt.executeQuery();
 			if(rs.next()){
-				res=rs.getString("memname");
+				res=rs.getString("memprofile");
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
