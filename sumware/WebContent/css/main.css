@@ -1,6 +1,13 @@
-<
-style
->
+
+/* reset */
+html,body,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,caption,tr,td,th,p,form,fieldset,legend,label,button,input,select,textarea,figure,figcaption,b{margin:0; padding:0; font:normal 14px NanumGothic,arial; color:#222}
+ul,ol{list-style:none}
+a:link,a:visited,a:active{text-decoration:none; color:#222}
+fieldset,img{border:0}
+legend,caption{display:none}
+a{display:block}
+
+
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 body {
