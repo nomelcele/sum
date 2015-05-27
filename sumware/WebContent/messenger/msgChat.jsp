@@ -10,15 +10,46 @@
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
 
+<script>
+	function closeWindow(){
+		if(confirm("대화를 종료 하시겠습니까?") == true){			
+			
+			window.open('about:blank', '_self').close()
+				var f = document.closeFrom;
+				f.model.value="messenger";
+				f.submod.value="closeRoom";
+				f.roomKey.value="${key}";
+				f.userNum.value="${userNum}";
+				f.submit();
+			
+		}else{
+			return;
+		}
+	}
+	
+
+
+
+</script>
+
+
 </head>
-<body>
+<body onbeforeunload="closeWindow()">
 
 <div class="container">
 	<div class="col-lg-9">
+	<form action="sumware" method="post" id="closeForm" name="closeForm">
+		<input type="hidden" name="model">
+		<input type="hidden" name="submod">
+		<input type="hidden" name="userNum">
+		<input type="hidden" name="roomKey">	
+	</form>
+	
+	
 
 <!-- 		db에 저장된 내용 출력 -->
 		<div class="col-lg-7">
-			<span><%=request.getAttribute("toNum")%>받는 사람 이름 출력</span>
+			<span>${key} 받는 사람 이름 출력</span>
 		</div>
 			
 		<div class="col-lg-10" style="height: 450px; width: 500px;">
@@ -33,36 +64,43 @@
 				<span class="input-group-btn">			
 					<button class="btn btn-default" type="button" onclick="sendMsg()">전송</button>
 					<button class="btn btn-default" type="button" onclick="closeWindow()">나가기</button>					
-					<button class="btn btn-default" type="button" id="btnIn">초대</button>
 				</span>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
-	//var sessionKey = Math.random();
-	var sessionKey = "<%=request.getAttribute("key")%>";
+	
+// 	var reip="${ipAdd}";	
+// 	var webs = "ws://192.168.7.234:80/sumware/msgSocket/";
+// 	var msgSocket = new WebSocket("ws://192.168.7.234:80/sumware/msgSocket/"+sessionKey);
+	
+	var sessionKey = "${key}";
+	var userNum="${userNum}";
 	alert("sessionKey " + sessionKey);
-	var msgWindow = document.getElementById("msgWindow");
-	var msgSocket = new WebSocket("ws://192.168.0.4:80/sumware/msgSocket/"+sessionKey)
+	var msgWindow = document.getElementById("msgWindow");	
+	var msgSocket = new WebSocket("ws://localhost:80/sumware/msgSocket/"+sessionKey);
+	
 	msgSocket.onopen = function processOpen(message) {
 		joinMsg(message);
+
 	}
 	msgSocket.onmessage = function processMessage(message) {
 		processMsg(message);
 	}
 	msgSocket.onclose = function processClose(message) {
 		proccessClose(message);
+		
 	}
 	msgSocket.onerror = function processError(message) {
 		proccessError(message);
 	}
 	function joinMsg(message) {
-
+		
 	}
 	function processMsg(message) {
 		alert("msgWindow"+msgWindow);
-		msgWindow.value += "${sessionScope.v.memname } 님 : "+message.data + "\n";
+		msgWindow.value += message.data + "\n";
 		
 	}
 	function proccessClose(message) {
@@ -73,9 +111,18 @@
 	}
 	function sendMsg() {
 		var msg = document.getElementById("msgText");
-		msgSocket.send(msg.value);
+		var sendCont = "${sessionScope.v.memname } : "+msg.value+"\n";
+		console.log("보낸 메세지 : "+sendCont);
+		
+		msgSocket.send(sendCont);
 		msg.value = "";
+		senCont = "";
 	}
+	
+
+	
+	
+	
 </script>
 
 

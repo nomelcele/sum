@@ -24,25 +24,8 @@
 <!-- 메인 -->
 <script>
 	function openWin(){
-		var opt= "width=700, height=1000, scrollbars=yes";
-		var f = document.frmmain;
-		f.model.value="messenger";
-		f.submod.value="messengerForm";
-		window.open("","MessengerMain",opt);
-		f.target="MessengerMain";	
-		f.submit();
-	}
-	
-	function checkmsg(toNum){
-		var requNum = toNum;
-		var userNum = ${sessionScope.v.memnum };
-		if(userNum == toNum){
-			console.log("두 사람이 같습니다.");
-			window.open("main.jsp", "");
-		}else{
-			console.log("두 사람은 다릅니다.");
-			
-		}
+		var opt= "width=700, height=800, scrollbars=yes";	
+		window.open("sumware?model=messenger&submod=messengerForm","MessengerMain",opt);
 	}
 </script>
 <!-- /메인 -->

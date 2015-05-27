@@ -8,7 +8,7 @@
 <%
 	response.setHeader("cache-control", "no-cache");
 	response.setContentType("text/event-stream");
-// 	retry: 10000;
+	
 	System.out.println("서버 푸시 영역");
 	
 	MemberVO v = (MemberVO)session.getAttribute("v");
@@ -22,20 +22,22 @@
 	outs.append("data:");
 	for(MessengerVO e : list){
 		
-		memberNum=e.getMesmember();
+		memberNum=e.getMesmember(); // 사용자가 userNum인 경우만 참가자 목록 조회
 
 		openyn = e.getOpenmemberyn();
 		System.out.println("openyn : "+openyn);
 		System.out.println("memberNum : "+memberNum);		
 		System.out.println("userNum : "+userNum);
 
-		stdate = e.getEntstdate();		
+		stdate = e.getEntstdate();
 		
-		if(memberNum == userNum && openyn.equals("N") && stdate == null ){
-			System.out.println("방번호는 : "+e.getMasnum());
-			outs.append(e.getMasnum());
+		if(memberNum == userNum && openyn.equals("N") && stdate == null ){ // 받는 사람 
+			System.out.println("방번호는 : "+e.getMesnum());
+			outs.append(e.getMesnum()); // 방번호
 			outs.append("/");
-			outs.append(e.getMesmember()); // userNum을 보내고 있으나 추가적으로 IP주소를 전송하도록
+			outs.append(e.getMesreip()); // 방장 ip
+			outs.append("/");
+			outs.append(e.getMesmember());
 			outs.append("\n\n");
 %><%=outs %> <%	
 		 } 		

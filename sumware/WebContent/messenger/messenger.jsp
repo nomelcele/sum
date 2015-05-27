@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="top.jsp"%>
+<%@include file="/top.jsp"%>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -8,7 +8,7 @@
 <script>
 	function mesgoUrl(res){
 		var resNum = res;
-		var opt="width=700, height=900, scrollbars=yes";
+		var opt="width=700, height=800, scrollbars=yes";
 		var f = document.mesform;
 		f.model.value="messenger";
 		f.submod.value="messengerChat";		
@@ -24,7 +24,7 @@
 	
 	console.log("typeof:"+typeof(EventSource));	
 	if(typeof(EventSource) != "undefined"){
-		var eventSource = new EventSource("check.jsp"); // push를 받을수 있는 브라우져인지 판단.
+		var eventSource = new EventSource("messenger/check.jsp"); // push를 받을수 있는 브라우져인지 판단.
 		// EventSource EventListener의 종류
 		// onmessage : 서버가 보낸 push메세지가 수신되면 발생
 		// onerror : 서버가 보낸 push에서 에러가 발생되었을때
@@ -33,7 +33,8 @@
 		eventSource.onmessage = function(event){
 			var edata1 = event.data;
 			regoUrl(edata1);
-			alert("메세지가 도착했습니다.");			
+			alert("메세지가 도착했습니다.");	
+				
 		};
 	}else{
 		alert("해당 브라우저는 지원이 안됩니다.")
@@ -46,7 +47,7 @@
 		
 		f1.model.value="messenger";
 		f1.submod.value="msgReceieve";		
-		f1.edata1.value = evdata;
+		f1.edata1.value = evdata; // 방번호, IP, 유저사번
 		f1.userNum2.value = ${sessionScope.v.memnum};
 
 		
