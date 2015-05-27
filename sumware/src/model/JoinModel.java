@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import util.MyMap;
 import controller.ModelForward;
 import dao.MemberDao;
+import dto.MemberVO;
 
 public class JoinModel implements ModelInter{
 
@@ -20,6 +21,7 @@ public class JoinModel implements ModelInter{
 		String url="";
 		boolean method = false;
 		if(submod !=null && submod.equals("memberForm")){
+			
 			url ="join/member.jsp";
 			method=true;
 			

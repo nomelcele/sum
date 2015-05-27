@@ -85,13 +85,10 @@ public class MemberDao {
 		try {
 			con=ConUtil.getOds();
 			StringBuffer sql=new StringBuffer();
-			sql.append("");
+			sql.append("update member set mempwd=? where memnum=?");
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1,map.get("memaddr"));
-			pstmt.setString(2,map.get("mempwd"));
-			pstmt.setString(3,map.get("memprofile"));
-			pstmt.setString(4,map.get("memmail"));
-			pstmt.setString(5,map.get("meminmail"));
+			pstmt.setString(1,map.get("mempwd"));
+
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -102,6 +99,8 @@ public class MemberDao {
 			CloseUtil.close(con);
 			
 		}
+		
+		
 	}
 	
 }
