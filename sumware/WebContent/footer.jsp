@@ -4,10 +4,10 @@
 <footer id="footer" class="footer">
 	<div class="container">
 		<div class="row">
-	
+	<hr>
 			<div class="col-lg-3 wow fadeInUp animated" data-wow-duration="500ms">
 				<div class="footer-single">
-					<img src="img/sum2.png" alt="로고">
+					<img src="img/sum.png" alt="로고">
 				</div>
 			</div>
 			<div class="col-lg-7">	
