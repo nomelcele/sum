@@ -15,6 +15,7 @@ import util.MyMap;
 import controller.ModelForward;
 import dao.BoardDao;
 import dto.BoardVO;
+import dto.CommVO;
 import dto.PageVO;
 
 public class BoardModel implements ModelInter{
@@ -53,6 +54,13 @@ public class BoardModel implements ModelInter{
 			System.out.println(list.getBdate()+" / "+ list.getBcont()+" / "+map.get("no"));
 			
 			request.setAttribute("list", list);
+			// 댓글 불러오는 로직.
+			String childcmd = request.getParameter("childcmd");
+			if(childcmd != null && childcmd.equals("commInsert")){
+				HashMap<String, String> commmap = MyMap.getMaps().getMapList(request);
+				
+			}
+			ArrayList<CommVO> clist = BoardDao.getDao().getCommList(map);
 			url = "board/boardDetail.jsp";
 			method = true;
 		}else if(submod != null && submod.equals("ckBoard")){
