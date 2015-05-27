@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+<title>SumWare</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -67,26 +67,56 @@ console.log("typeof:"+typeof(EventSource));
 		}
 	}
 // Ajax로 사용자의 데이터를 보내는 쪽 - 어제와동일!
-$(function(){
-		push();
-		
-		$('#send').click(function(){
-			$(".chat").scrollTop(0);
-			var fdata = {
-					model:"sns",
-					submod:"insertSns",
-					smem:"${v.memnum}",
-					sdept:"${v.memdept}",
-					scont:$("#btn-input").val()
-				};
-			$('#btn-input').val("");
-			$.ajax({
-				type:"POST",
-				url:"sumware",
-				data:fdata
+	$(function(){
+			push();
+			$('#send').click(function(){
+				eventSource.close();
+				push();
+				$(".chat").scrollTop(0);
+				var fdata = {
+						model:"sns",
+						submod:"insertSns",
+						smem:"${v.memnum}",
+						sdept:"${v.memdept}",
+						scont:$("#btn-input").val()
+					};
+				$('#btn-input').val("");
+				$.ajax({
+					type:"POST",
+					url:"sumware",
+					data:fdata
+				});
 			});
+	});
+	function snsComm(snum,p){
+		var page=p;
+		alert("snum:"+snum+" page:"+p);
+		var data={
+			model:"sns",
+			submod:"snsComm",
+			page:page,
+			snum:snum
+		};
+		$.ajax({
+			type:"POST",
+			url:"sumware",
+			data:data,
+			success: function(result){
+				eventSource.close();
+				$("#wrap2").html(result);
+			}
 		});
-});
+	}
+	function snsInsertComm(snum){
+		var commsns=snum;
+		var data={
+				model:"sns",
+				submod:"snsCommInset",
+				comem:"${v.memnum}",
+				page:"1",
+				commsns:commsns
+			};
+	}
 </script>
 <style>
 	#loading img{float:none; width:40px;}
