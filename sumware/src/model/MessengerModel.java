@@ -20,7 +20,7 @@ public class MessengerModel implements ModelInter{
 			HttpServletResponse response) throws IOException {
 		String submod = request.getParameter("submod");
 		System.out.println("submod : "+submod);
-		String url = "main.jsp";
+		String url = "login.jsp";
 		boolean method = true;
 		
 		if(submod != null && submod.equals("messengerForm")){
@@ -92,7 +92,7 @@ public class MessengerModel implements ModelInter{
 			
 			request.setAttribute("ipAdd", ipAdd.toString());
 			request.setAttribute("userNum", fromNum); // 보낸 사람, 방장
-			request.setAttribute("toNum", toNum);
+			request.setAttribute("toNum", toNum); // 받는 사람
 			request.setAttribute("key", keynum);
 			url = "messenger/msgChat.jsp";
 			method = true;
@@ -122,6 +122,7 @@ public class MessengerModel implements ModelInter{
 			v.setMesnum(keyNum);
 			v.setMesmember(userNum);
 			v.setMesreip(reip);
+			// 요청자 사번을 받아올수 있음.
 			MessengerDao.getDao().joinRoom(v);
 			
 			ArrayList<MemberVO> memList = MessengerDao.getDao().getList();
@@ -143,10 +144,55 @@ public class MessengerModel implements ModelInter{
 			url = "messenger/msgChat.jsp";
 			method = true;
 			
-			// 참가자가 방을 나간 경우
-		}else if(submod != null && submod.equals("closeRoom")){
+			// 참가자가 방을 나간 경우, 방번호와 참여자 사번을 가지고 DB의 종료일자를 수정
+		}else if(submod != null && submod.equals("closeChat")){
 			System.out.println("여기는 model의 closeRoom 입니다.============");
 			
+			// msgChat영역에서 넘어온 파라미터 처리
+			// 상태 여부 확인 chState : room 과 mesMain으로 구분
+			int userNum = Integer.parseInt(request.getParameter("userNum"));
+			int roomkey = Integer.parseInt(request.getParameter("roomKey"));			
+			String roomstate = request.getParameter("resState");
+			System.out.println("Closechat userNum : "+userNum);
+			System.out.println("Closechat roomkey : "+roomkey);
+			System.out.println("Closechat roomstate : "+roomstate);
+			
+			MessengerVO v = new MessengerVO();
+			v.setMesmember(userNum);
+			v.setMesnum(roomkey);
+			MessengerDao.getDao().closeRoom(v, roomstate);
+				
+			
+			// messenger Main에서 넘어온 경우
+			
+			url = "";
+			method = true;
+			
+		// messenger main에서 넘어온 경우 요청 거부 시
+		}else if(submod != null && submod.equals("refuseChat")){
+			// messenger.jsp에서 넘어온 파라미터 처리
+			System.out.println("refuseChat 영역입니다.==========");
+			String mainstate = request.getParameter("stateMain");
+			String struserNum = request.getParameter("userNum2"); // 이상하게 null값이
+																	// 출력 확인 필요
+			System.out.println("msgReceive userNum : " + struserNum);
+
+			String[] edate = request.getParameter("edata1").split("/");
+			for (String e : edate) {
+				System.out.println("대화 거절 시 푸쉬를 통해 넘어온 param : " + e);
+			}
+			// push를 통해 방번호, 송신자 ip, 참가자(수신자 사번) 순으로 전송하기에 split으로 각 data를 배열
+			// 형식으로 저장
+			int keyNum = Integer.parseInt(edate[0]);
+			String reip = edate[1];
+			int reciuserNum = Integer.parseInt(edate[2]);			
+			
+			MessengerVO v = new MessengerVO();
+			v.setMesmember(reciuserNum);
+			v.setMesnum(keyNum);
+			MessengerDao.getDao().closeRoom(v, mainstate);	
+			url="sumware?model=messenger&submod=messengerForm";
+			method=true;
 		}
 		
 		

@@ -12,14 +12,14 @@
 		var f = document.mesform;
 		f.model.value="messenger";
 		f.submod.value="messengerChat";		
-		f.entNum.value = resNum+","+${sessionScope.v.memnum};
-		f.fromNum.value = ${sessionScope.v.memnum};
+		f.entNum.value = resNum+","+"${sessionScope.v.memnum}";
+		f.fromNum.value = "${sessionScope.v.memnum}";
 		f.toNum.value = resNum;
 		
 		f.target="messengerChatroom";
 		window.open("","messengerChatroom",opt);
 		f.submit();	
-	}
+	};
 	
 	
 	console.log("typeof:"+typeof(EventSource));	
@@ -32,33 +32,48 @@
 		
 		eventSource.onmessage = function(event){
 			var edata1 = event.data;
-			regoUrl(edata1);
 			alert("메세지가 도착했습니다.");	
-				
+			regoUrl(edata1);
+			
 		};
 	}else{
 		alert("해당 브라우저는 지원이 안됩니다.")
-	}
+	};
 	
 	function regoUrl(edata1){
-		var winopt="width=700, height=800, scrollbars=yes"
+		
+		var message = "대화를 수락하시겠습니까?";
+		var resMessage = confirm(message);
 		var f1 = document.entform;
 		var evdata = edata1;
 		
-		f1.model.value="messenger";
-		f1.submod.value="msgReceieve";		
-		f1.edata1.value = evdata; // 방번호, IP, 유저사번
-		f1.userNum2.value = ${sessionScope.v.memnum};
+		if(resMessage == true){
+			alert("대화를 수락하였습니다.");
+			var winopt="width=700, height=800, scrollbars=yes";
+			f1.model.value="messenger";
+			f1.submod.value="msgReceieve";		
+			f1.edata1.value = evdata; // 방번호, IP, 유저사번
+			f1.userNum2.value = "${sessionScope.v.memnum}";
+					
+			f1.target="msgrecRoom";
+			window.open("","msgrecRoom",winopt);
+			f1.submit();
+			
+		} else if(resMessage == false){
+			alert("대화를 거부합니다.");
+			$('#model1').attr('value','messenger');
+			$('#submod99').attr('value','refuseChat');
+			$('#edata2').attr('value',evdata);
+			$('#userNum3').attr('value',"${sessionScope.v.memnum}");
+			$('#stateMain').attr('value','mesMain');
+			$('#disform').submit();
+			return;
 
-		
-		f1.target="msgrecRoom";
-		window.open("","msgrecRoom",winopt);
-		f1.submit();	
-	}
-
-	
-	
-	
+		} else{
+			alert("해당사항이 없습니다.");
+			return;
+		};
+	};
 	
 </script>
 
@@ -80,12 +95,20 @@
 				</form>
 				
 				<form action="sumware" method="post" id="entform" name="entform">
-					<input type="hidden" id="mod"    name="model"> 
+					<input type="hidden" id="model" name="model"> 
 					<input type="hidden" id="submod" name="submod">
 					<input type="hidden" id="edata1" name="edata1">
 					<input type="hidden" id="userNum2" name="uerNum2">
 				</form>
-
+				
+				<form action="sumware" method="post" id="disform" name="disform">
+					<input type="hidden" id="model1" name="model"> 
+					<input type="hidden" id="submod99" name="submod">
+					<input type="hidden" id="edata2" name="edata1">
+					<input type="hidden" id="userNum3" name="uerNum2">
+					<input type="hidden" id="stateMain" name="stateMain">
+				</form>
+				
 				<!-- 사원 사진 불러오기  -->
 				<a href="#"> <img class="media-object" src="${sessionScope.v.memprofile }" alt="..."></a>
 			</div>

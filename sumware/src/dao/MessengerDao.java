@@ -127,6 +127,8 @@ public class MessengerDao {
 		
 	}
 	
+	// 방이 종료 되었을 경우를 추가하기 
+	// 방은 요청자가 신청 후 그냥 나간 경우
 	public ArrayList<MessengerVO> getentList(int userNum){
 		System.out.println("Messenger getentList 영역입니다.");
 		Connection con = null;
@@ -195,6 +197,48 @@ public class MessengerDao {
 			}
 		
 		}
+	}
+	// VO와 main과 room에서 넘어온 data인지 확인
+	public void closeRoom(MessengerVO v, String resState){
+		System.out.println("Dao의 CloseRoom 영역입니다.");
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		StringBuffer sql = new StringBuffer();
+		
+		// 채팅창에서 넘어온 data : 종료일만 변경
+		if(resState.equals("room")){
+			sql.append("update mesentry set entendate = sysdate where mesnum=? and mesmember=?");			
+			System.out.println("room의 if문");			
+			// messenger main에서 넘어온 data, 시작과 종료일을 변경
+		}else if(resState.equals("mesMain")){
+			sql.append("update mesentry set entstdate = sysdate, entendate = sysdate where mesnum=? and mesmember=?");
+			System.out.println("mesMain의 if문");
+		}else{
+			System.out.println("이게 출력되면 망한거임!!");
+		}
+		try {
+			con = ConUtil.getOds();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, v.getMesnum());
+			pstmt.setInt(2, v.getMesmember());
+			pstmt.executeUpdate();
+			
+			System.out.println("Dao의 방번호 : "+v.getMesnum());
+			System.out.println("Dao의 사용자 번호 : "+v.getMesmember());
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally{
+			try {
+				if(con != null) CloseUtil.close(con);
+				if(pstmt != null) CloseUtil.close(pstmt);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		}
+		
 	}
 	
 	

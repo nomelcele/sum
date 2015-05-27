@@ -9,19 +9,25 @@
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-
+<!--  
+<input type="hidden" id="chatmodel"name="model">
+		<input type="hidden" id="chatsubmod"name="submod">
+		<input type="hidden" id="chatuserNum"name="userNum">
+		<input type="hidden" id="roomKey" name="roomKey"
+-->
 <script>
 	function closeWindow(){
-		if(confirm("대화를 종료 하시겠습니까?") == true){			
-			
-			window.open('about:blank', '_self').close()
-				var f = document.closeFrom;
-				f.model.value="messenger";
-				f.submod.value="closeRoom";
-				f.roomKey.value="${key}";
-				f.userNum.value="${userNum}";
-				f.submit();
-			
+		if(confirm("대화를 종료 하시겠습니까?") == true){	
+			alert("대화창이 닫힙니다.")
+			$('#chatmodel').attr('value','messenger');
+			$('#chatsubmod').attr('value','closeChat');
+			$('#chatuserNum').attr('value',"${userNum}");
+			$('#roomKey').attr('value',"${key}");
+			$('#resState').attr('value',"room");			
+			$('#closeForm').submit();
+			setTimeout("window.close()", 10);
+			alert("창이 닫혀여~~");
+		
 		}else{
 			return;
 		}
@@ -34,15 +40,16 @@
 
 
 </head>
-<body onbeforeunload="closeWindow()">
+<body>
 
 <div class="container">
 	<div class="col-lg-9">
 	<form action="sumware" method="post" id="closeForm" name="closeForm">
-		<input type="hidden" name="model">
-		<input type="hidden" name="submod">
-		<input type="hidden" name="userNum">
-		<input type="hidden" name="roomKey">	
+		<input type="hidden" id="chatmodel"name="model">
+		<input type="hidden" id="chatsubmod"name="submod">
+		<input type="hidden" id="chatuserNum"name="userNum">
+		<input type="hidden" id="roomKey" name="roomKey">
+		<input type="hidden" id="resState" name="resState">		
 	</form>
 	
 	
@@ -83,7 +90,7 @@
 	
 	msgSocket.onopen = function processOpen(message) {
 		joinMsg(message);
-
+		
 	}
 	msgSocket.onmessage = function processMessage(message) {
 		processMsg(message);
@@ -96,7 +103,7 @@
 		proccessError(message);
 	}
 	function joinMsg(message) {
-		
+		alert("상대방이 입장하였습니다.");
 	}
 	function processMsg(message) {
 		alert("msgWindow"+msgWindow);
@@ -112,7 +119,7 @@
 	function sendMsg() {
 		var msg = document.getElementById("msgText");
 		var sendCont = "${sessionScope.v.memname } : "+msg.value+"\n";
-		console.log("보낸 메세지 : "+sendCont);
+// 		console.log("보낸 메세지 : "+sendCont);
 		
 		msgSocket.send(sendCont);
 		msg.value = "";
