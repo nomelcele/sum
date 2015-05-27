@@ -16,6 +16,7 @@
 	int memberNum = 0;
 	String openyn = null;
 	String stdate = "default";
+	int mesendNum = 0;
 	
 	// DB에서 userNum(받는 사람 사번)인 경우만 조회해서 list에 저장
 	ArrayList<MessengerVO> list = MessengerDao.getDao().getentList(userNum);
@@ -38,7 +39,9 @@
 			outs.append("/");
 			outs.append(e.getMesreip()); // 방장 ip
 			outs.append("/");
-			outs.append(e.getMesmember()); 
+			outs.append(e.getMesmember()); // 수신자 사번
+			outs.append("/");
+			outs.append(e.getMesendnum()); // 송신자 사번			
 			outs.append("\n\n");
 %><%=outs %> <%	
 		 } 		

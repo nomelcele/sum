@@ -61,6 +61,21 @@
 			
 		} else if(resMessage == false){
 			alert("대화를 거부합니다.");
+// 			$.ajax({
+// 				type : "post";
+// 				url : "sumware";
+// 				date : {
+// 					model : "messenger",
+// 					submode : "refuseChat",
+// 					edata1 : evdata,
+// 					uerNum2 : "${sessionScope.v.memnum}",
+// 					stateMain : "mesMain"
+// 				},
+// 				success : function(){
+					
+// 				}
+// 			});			
+			
 			$('#model1').attr('value','messenger');
 			$('#submod99').attr('value','refuseChat');
 			$('#edata2').attr('value',evdata);

@@ -259,7 +259,8 @@ start with 1;
   openmemberyn varchar2(10) default 'N',
   entstdate date,
   entendate date,
-  mesreip varchar2(15),
+  mesreip varchar2 (15),
+  mesendnum number (10), -- 보낸 사람 사번
   primary key(mesnum,mesmember)
   );
   

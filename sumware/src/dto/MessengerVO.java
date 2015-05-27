@@ -1,9 +1,15 @@
 package dto;
 
 public class MessengerVO {
-	private int mesmember, mesnum, conum, mesconum, meswriternum;
+	private int mesmember, mesnum, conum, mesconum, meswriternum, mesendnum;
 	private String openmemberyn, entstdate, entendate, mescont, mesreip;
 
+	public int getMesendnum() {
+		return mesendnum;
+	}
+	public void setMesendnum(int mesendnum) {
+		this.mesendnum = mesendnum;
+	}
 	public int getMesmember() {
 		return mesmember;
 	}

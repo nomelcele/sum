@@ -73,12 +73,12 @@ public class MessengerModel implements ModelInter{
 			}
 			System.out.println(list.size());
 			
-			int keynum = MessengerDao.getDao().insertCreateRoom(list, rv);
+			int keynum = MessengerDao.getDao().insertCreateRoom(list, rv, fromNum);
 			System.out.println("keynum : "+keynum);
 			
 			// 친구찾기 기능을 위해 List 객체를 가져옴
-			ArrayList<MemberVO> memList = MessengerDao.getDao().getList();			
-			request.setAttribute("memList", memList);
+//			ArrayList<MemberVO> memList = MessengerDao.getDao().getList();			
+//			request.setAttribute("memList", memList);
 			
 			
 			
@@ -116,6 +116,7 @@ public class MessengerModel implements ModelInter{
 			int keyNum = Integer.parseInt(edate[0]); 
 			String reip = edate[1];
 			int userNum = Integer.parseInt(edate[2]);
+			int mesendNum = Integer.parseInt(edate[3]);
 			
 			System.out.println("Model에서의 IP : "+reip);
 			MessengerVO v = new MessengerVO();
@@ -125,7 +126,7 @@ public class MessengerModel implements ModelInter{
 			// 요청자 사번을 받아올수 있음.
 			MessengerDao.getDao().joinRoom(v);
 			
-			ArrayList<MemberVO> memList = MessengerDao.getDao().getList();
+//			ArrayList<MemberVO> memList = MessengerDao.getDao().getList();
 			
 			StringBuffer ipAdd = new StringBuffer();
 			ipAdd.append("ws://");
@@ -134,9 +135,10 @@ public class MessengerModel implements ModelInter{
 			
 			
 			System.out.println("IP Adress : "+ipAdd);
-			request.setAttribute("memList", memList);
+//			request.setAttribute("memList", memList);
 			request.setAttribute("userNum", userNum);
 			request.setAttribute("key", keyNum);
+			request.setAttribute("mesendNum", mesendNum);
 			request.setAttribute("ipAdd", ipAdd.toString());
 			
 			// DB 정보 업데이트 : entryTable의 시작일을 수정해줘야함
@@ -144,7 +146,8 @@ public class MessengerModel implements ModelInter{
 			url = "messenger/msgChat.jsp";
 			method = true;
 			
-			// 참가자가 방을 나간 경우, 방번호와 참여자 사번을 가지고 DB의 종료일자를 수정
+			// 참가자가 채팅방에서 나간 경우(창이 종료됨)
+			// 방번호와 참여자 사번을 가지고 DB의 종료일자를 수정
 		}else if(submod != null && submod.equals("closeChat")){
 			System.out.println("여기는 model의 closeRoom 입니다.============");
 			
@@ -161,10 +164,8 @@ public class MessengerModel implements ModelInter{
 			v.setMesmember(userNum);
 			v.setMesnum(roomkey);
 			MessengerDao.getDao().closeRoom(v, roomstate);
-				
 			
-			// messenger Main에서 넘어온 경우
-			
+			// 창을 닫기 때문에 url 주소는 없어도 무관함
 			url = "";
 			method = true;
 			
@@ -185,13 +186,14 @@ public class MessengerModel implements ModelInter{
 			// 형식으로 저장
 			int keyNum = Integer.parseInt(edate[0]);
 			String reip = edate[1];
-			int reciuserNum = Integer.parseInt(edate[2]);			
+			int reciuserNum = Integer.parseInt(edate[2]);
+			int mesendNum = Integer.parseInt(edate[3]); // 채팅창 종료이기 때문에 해당 파라미터는 없어도 무관함
 			
 			MessengerVO v = new MessengerVO();
 			v.setMesmember(reciuserNum);
 			v.setMesnum(keyNum);
 			MessengerDao.getDao().closeRoom(v, mainstate);	
-			url="sumware?model=messenger&submod=messengerForm";
+			url="messenger/messenger.jsp";
 			method=true;
 		}
 		

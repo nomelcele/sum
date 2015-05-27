@@ -15,29 +15,6 @@
 		<input type="hidden" id="chatuserNum"name="userNum">
 		<input type="hidden" id="roomKey" name="roomKey"
 -->
-<script>
-	function closeWindow(){
-		if(confirm("대화를 종료 하시겠습니까?") == true){	
-			alert("대화창이 닫힙니다.")
-			$('#chatmodel').attr('value','messenger');
-			$('#chatsubmod').attr('value','closeChat');
-			$('#chatuserNum').attr('value',"${userNum}");
-			$('#roomKey').attr('value',"${key}");
-			$('#resState').attr('value',"room");			
-			$('#closeForm').submit();
-			setTimeout("window.close()", 10);
-			alert("창이 닫혀여~~");
-		
-		}else{
-			return;
-		}
-	}
-	
-
-
-
-</script>
-
 
 </head>
 <body>
@@ -85,8 +62,8 @@
 	var sessionKey = "${key}";
 	var userNum="${userNum}";
 	alert("sessionKey " + sessionKey);
-	var msgWindow = document.getElementById("msgWindow");	
-	var msgSocket = new WebSocket("ws://localhost:80/sumware/msgSocket/"+sessionKey);
+	var msgWindow = document.getElementById("msgWindow");
+	var msgSocket = new WebSocket("ws://192.168.0.4:80/sumware/msgSocket/"+sessionKey);
 	
 	msgSocket.onopen = function processOpen(message) {
 		joinMsg(message);
@@ -103,15 +80,15 @@
 		proccessError(message);
 	}
 	function joinMsg(message) {
-		alert("상대방이 입장하였습니다.");
+		sendjoinMsg();
 	}
 	function processMsg(message) {
-		alert("msgWindow"+msgWindow);
+// 		alert("msgWindow"+msgWindow);
 		msgWindow.value += message.data + "\n";
 		
 	}
 	function proccessClose(message) {
-
+		sendcloseMsg();
 	}
 	function proccessError(message) {
 
@@ -125,8 +102,40 @@
 		msg.value = "";
 		senCont = "";
 	}
+	function sendjoinMsg(){
+		var sendjoinmsg = document.getElementById("msgText");
+		var joinMsg = "${sessionScope.v.memname }님이 입장하였습니다."+sendjoinmsg.value+"\n";
+		
+		msgSocket.send(joinMsg);
+		sendjoinmsg.value = "";
+		joinMsg = "";
+	}
+	function sendcloseMsg(){
+		var sendclosemsg = document.getElementById("msgText");
+		var closeMsg = "${sessionScope.v.memname }님이 퇴장하였습니다."+sendclosemsg.value+"\n";
+		
+		msgSocket.send(closeMsg);
+		closeMsg.value = "";
+		sendclosemsg = "";
+	}
+	function closeWindow(){
+		if(confirm("대화를 종료 하시겠습니까?") == true){	
+			alert("대화창이 닫힙니다.")
+			sendcloseMsg();
+			$('#chatmodel').attr('value','messenger');
+			$('#chatsubmod').attr('value','closeChat');
+			$('#chatuserNum').attr('value',"${userNum}");
+			$('#roomKey').attr('value',"${key}");
+			$('#resState').attr('value',"room");			
+			$('#closeForm').submit();
+			setTimeout("window.close()", 20);
+			alert("창이 닫혀여~~");
+		
+		}else{
+			return;
+		}
+	}
 	
-
 	
 	
 	
