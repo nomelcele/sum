@@ -74,6 +74,32 @@ button, input, select, option, textarea, a {
 	padding: 20px 20px 60px 20px;
 	box-sizing: border-box;
 }
+/* header */
+.navbar-nav {
+    position: relative;
+    top: 10px;
+    background-color: #FFF;
+	border-radius: 5px;
+    box-shadow: inset 1px 1px 0px #CDCDCD;\
+}
+.navbar-nav li:before {
+	position:absolute;top:50%;
+	display:block;content:"";
+	width: 1px;height:10px;
+	margin-top:-5px;
+	background-color: #087761;
+}
+.navbar-nav li:first-child:before {display:none}
+.navbar-nav li a {
+	font-size:11px;line-height:12px;
+	letter-spacing: -.2px;
+	font-weight:700;
+	color: #535353;
+}
+.navbar-nav li a:hover {
+	background-color:transparent!important;
+	color: #027C5D;
+}
 /* 표준 너비 1280px 기준 */
 .lnb-area {
 	float:left;
@@ -153,8 +179,6 @@ button, input, select, option, textarea, a {
 	margin: 0 auto;
 	padding-top: 80px;
 	height: 200px;
-	background-color: #0eb493;
-	color: #fff;
 }
 .form-inline {
 	padding: 30px;
@@ -373,7 +397,6 @@ button {
 	text-align: left;
 	padding-left: 25px;
 }
-
 #content2 #stcontent .title input {width: 350px;}
 #content2 #stcontent .instyle {
 	background-color: #0099ff;
@@ -387,13 +410,33 @@ button {
 	width: 250px;height: 300px;
 	text-align: left;
 }
-
 /* btn */
 #content2 #stcontent .btn {
 	height: 25px;width: 120px;
 	font-weight:700;
 	background-color: #f927a9;
 	color: #fff;
+}
+/* paging */
+.paging {
+    text-align: center;
+
+    padding: 15px 0;
+    color: #6D6D6D;
+}
+.paging a {
+    display: inline-block;
+    padding: 1px 6px;
+    margin: 0 3px;
+    font-size: 11px;
+    background-color: #F0F0F0;
+    border-radius: 100px;
+    color: #4C4C4C;
+}
+.paging a.now {
+	font-weight:700;
+	background-color: #30CEAF;
+	color: #0D3E34;
 }
 /* ( board - detail ) */
 #wrap .board-detail {
