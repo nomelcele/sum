@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="/top.jsp" %>
 <div id="wrap" class="board">
-		<form action="sumware">
+		<form action="sumware" id="bform">
 			<input type="hidden" name="model" id="model">
 			<input type="hidden" name="submod" id="submod">
 			<input type="hidden" name="page" id="page">
