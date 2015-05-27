@@ -177,7 +177,8 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select ma.mailtitle, me1.memname mailsname, me2.memname mailrname, ma.maildate, ma.mailcont, ma.mailfile");
+			sql.append("select ma.mailtitle, me1.memname mailsname, me2.memname mailrname, ma.maildate,");
+			sql.append(" ma.mailcont, ma.mailfile, me1.meminmail replyid");
 			sql.append(" from mail ma, member me1, member me2");
 			sql.append(" where me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver and ma.mailnum=?");
 			pstmt = con.prepareStatement(sql.toString());
@@ -191,6 +192,7 @@ public class MailDao {
 				v.setMaildate(rs.getString("maildate"));
 				v.setMailcont(rs.getString("mailcont"));
 				v.setMailfile(rs.getString("mailfile"));
+				v.setReplyid(rs.getString("replyid"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -203,7 +205,7 @@ public class MailDao {
 		return v;
 	}
 	
-	public void updateTrash(String[] mailnums, int usernum, String userid){
+	public void deleteMail(String[] mailnums, int usernum, String userid, int delValue){
 		// 휴지통에서 보여줄 메일 리스트
 		// 받은 메일함이나 보낸 메일함에서 체크박스로 선택 후 삭제된 메일들은 휴지통에서 보여진다.
 		Connection con = null;
@@ -226,18 +228,21 @@ public class MailDao {
 					
 					if(mailmem == usernum){ // 로그인한 사원이 보낸 메일일 경우
 						sql.setLength(0); // 스트링버퍼 비우기
-						sql.append("update mail set mailsdelete=2 where mailnum=?");
+						sql.append("update mail set mailsdelete=? where mailnum=?");
 					}
 					
 					if(mailreceiver.equals(userid)){ // 로그인한 사원이 받은 메일일 경우
 						sql.setLength(0); // 스트링버퍼 비우기
-						sql.append("update mail set mailrdelete=2 where mailnum=?");
+						sql.append("update mail set mailrdelete=? where mailnum=?");
 					}
 					
 					CloseUtil.close(rs);
 					CloseUtil.close(pstmt);
 					pstmt = con.prepareStatement(sql.toString());
-					pstmt.setInt(1, Integer.parseInt(e));
+					pstmt.setInt(1, delValue);
+					// 삭제(메일함에서 휴지통으로 이동)는 2
+					// 영구 삭제(휴지통에서도 보이지 않게 함)는 3
+					pstmt.setInt(2, Integer.parseInt(e));
 					pstmt.executeUpdate();		
 				}
 				
@@ -295,6 +300,4 @@ public class MailDao {
 		return list;
 	}
 	
-	
-
 }

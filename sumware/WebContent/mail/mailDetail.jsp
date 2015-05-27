@@ -7,14 +7,14 @@
 			<%@include file="/contentLeft.jsp"%>
 			<div class="col-lg-8" id="mainContent">
 				<div>
-					<input type="button" value="답장" onclick="javascript:replyFormGo()">
-					<input type="button" value="삭제"><br />
+					<input type="button" value="답장" onclick="replyFormGo()">
+					<input type="button" value="삭제" onclick=""><br />
 					제목: ${detail.mailtitle}<br /> 
 					보낸 사람: ${detail.mailsname}<br /> 
 					받는 사람: ${detail.mailrname}<br /> 
 					보낸 날짜: ${detail.maildate}<br /> 
 					내용:${detail.mailcont}<br /> 
-					첨부 파일: ${detail.mailfile}
+					첨부 파일: <a href="upload/${detail.mailfile}">${detail.mailfile}</a>
 				</div>
 			</div>
 		</div>
@@ -35,7 +35,8 @@
 			},
 			success : function(result) {
 				$("#mainContent").html(result);
-				$("#toMem").attr("value", "${detail.mailsname}"); // 받는 사람 자동으로
+				$("#toMem").attr("value", 
+						"${detail.mailsname} <${detail.replyid}@sumware.com>"); // 받는 사람 자동으로
 				$("#mailtitle").attr("value", "re: ${detail.mailtitle}") // 제목 (re:...) 형태로
 			}
 		});

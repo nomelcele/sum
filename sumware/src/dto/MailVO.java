@@ -3,7 +3,7 @@ package dto;
 public class MailVO {
 	private int mailnum, mailmem;
 	private String mailtitle, mailcont, mailfile, mailreceiver, 
-	maildate, mailsname, mailrname;
+	maildate, mailsname, mailrname, replyid;
 	
 	public int getMailnum() {
 		return mailnum;
@@ -58,6 +58,12 @@ public class MailVO {
 	}
 	public void setMailrname(String mailrname) {
 		this.mailrname = mailrname;
+	}
+	public String getReplyid() {
+		return replyid;
+	}
+	public void setReplyid(String replyid) {
+		this.replyid = replyid;
 	}
 	
 }

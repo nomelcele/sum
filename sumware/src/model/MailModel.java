@@ -122,7 +122,7 @@ public class MailModel implements ModelInter{
 			int tofrom = Integer.parseInt(request.getParameter("tofrom"));
 			System.out.println("tofrom: "+tofrom);
 			
-			MailDao.getDao().updateTrash(mailnums, usernum, userid);
+			MailDao.getDao().deleteMail(mailnums, usernum, userid, 2);
 			
 			ArrayList<MailVO> list = new ArrayList<MailVO>();
 			
@@ -154,6 +154,22 @@ public class MailModel implements ModelInter{
 			request.setAttribute("tofrom", 3);
 			
 			url = "mail/mailList.jsp";
+			method = true;
+		} else if(submod != null && submod.equals("mailDelete")){
+			// 휴지통에서 메일 영구 삭제
+			int usernum = Integer.parseInt(request.getParameter("usernum"));
+			String userid = request.getParameter("userid");
+			String[] mailnums = request.getParameterValues("chk");
+			int tofrom = Integer.parseInt(request.getParameter("tofrom"));
+			
+			MailDao.getDao().deleteMail(mailnums, usernum, userid, 3);
+			
+			ArrayList<MailVO> list = MailDao.getDao().getTrashList(usernum, userid);
+			
+			request.setAttribute("list", list);
+			request.setAttribute("tofrom", 3);
+			
+			url = "mail/mail.jsp";
 			method = true;
 		}
 		

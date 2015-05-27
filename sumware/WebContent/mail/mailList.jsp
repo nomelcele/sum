@@ -11,10 +11,10 @@
 		<input type="hidden" id="mailnum" name="mailnum">
 		<c:choose>
 			<c:when test="${tofrom eq '3'}">
-			<input type="button" value="영구 삭제" id="delBtn" name="delBtn" onclick="mailTrashGo()">
+			<input type="button" value="영구 삭제" onclick="maildeleteGo()">
 			</c:when>
 			<c:otherwise>
-			<input type="button" value="삭제" id="delBtn" name="delBtn" onclick="mailTrashGo()">
+			<input type="button" value="삭제" onclick="mailTrashGo()">
 			</c:otherwise>
 		</c:choose>
 		<table class="table table-condensed table-hover">
@@ -58,6 +58,7 @@
 	</div>
 <script>
 	function mailTrashGo(){
+		// 체크박스에서 선택된 메일을 삭제
 		$("#model").attr("value","mail");
 		$("#submod").attr("value","mailGoTrash");
 		$("#usernum").attr("value","${sessionScope.v.memnum}");
@@ -86,6 +87,16 @@
 // 				$("#mainContent").html(result);
 // 			}
 // 		});	
+	}
+	
+	function maildeleteGo(){
+		// 휴지통에서 체크된 메일들을 영구 삭제
+		$("#model").attr("value","mail");
+		$("#submod").attr("value","mailDelete");
+		$("#usernum").attr("value","${sessionScope.v.memnum}");
+		$("#userid").attr("value","${sessionScope.v.meminmail}");
+		$("#tofrom").attr("value","${tofrom}")
+		$("#f").submit();
 	}
 	
 	function checkAll(obj){
