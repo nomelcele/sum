@@ -26,15 +26,19 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("insert into mail values(mail_seq.nextVal,?,?,?,?,");
-			sql.append("(select meminmail from member where memname=?),sysdate,1,1)");
+			sql.append("insert into mail values(mail_seq.nextVal,?,?,?,?,?,sysdate,1,1)");
 			pstmt = con.prepareStatement(sql.toString());
 			
 			pstmt.setString(1, map.get("mailtitle")); 
 			pstmt.setString(2, map.get("mailcont"));
 			pstmt.setString(3, map.get("attach"));
 			pstmt.setInt(4, Integer.parseInt(map.get("mailmem")));
-			pstmt.setString(5, map.get("toMem"));
+			
+			int startidx = map.get("toMem").indexOf("<")+1;
+			int endidx = map.get("toMem").indexOf("@");
+			String mailreceiver = map.get("toMem").substring(startidx, endidx); 
+			pstmt.setString(5, mailreceiver);
+			System.out.println("받는 사람 아이디: "+mailreceiver);
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
@@ -59,7 +63,7 @@ public class MailDao {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
 			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma");
-			sql.append(" where me.meminmail=ma.mailreceiver and ma.mailreceiver=? and ma.mailrdelete=1");
+			sql.append(" where me.memnum=ma.mailmem and ma.mailreceiver=? and ma.mailrdelete=1");
 			sql.append(" order by ma.maildate desc");
 			
 			// 현재 로그인한 사원에게 온 메일만 검색
@@ -209,8 +213,6 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			int mailmem = 0;
-			String mailreceiver = "";
 			
 			for(String e:mailnums){
 				sql.append("select mailmem,mailreceiver from mail where mailnum=?");
@@ -219,8 +221,8 @@ public class MailDao {
 				rs = pstmt.executeQuery();
 				
 				if(rs.next()){ 
-					mailmem = rs.getInt("mailmem");
-					mailreceiver = rs.getString("mailreceiver");
+					int mailmem = rs.getInt("mailmem");
+					String mailreceiver = rs.getString("mailreceiver");
 					
 					if(mailmem == usernum){ // 로그인한 사원이 보낸 메일일 경우
 						sql.setLength(0); // 스트링버퍼 비우기

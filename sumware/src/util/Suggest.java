@@ -42,11 +42,15 @@ public class Suggest {
 		// key는 한글->메일 쓰기에서 받는 사람에 사원 이름을 입력하니까
 		// toLowerCase 메서드 쓸 필요 없음
 		while(it.hasNext()){
-			String result = it.next().getChild("name").getText();
-			
+			Element el = it.next();
+			String name = el.getChild("name").getText();
+			String inmail = el.getChild("inmail").getText();
+				
 			// 사용자가 입력한 값으로 시작하는 것인지 판별하는 조건문
-			if(result.startsWith(key)){
-				sugList.add(result);
+			if(name.startsWith(key)){
+				System.out.println("이름: "+name);
+				System.out.println("메일: "+inmail);
+				sugList.add(name+" <"+inmail+"@sumware.com>");
 			}
 		}
 		

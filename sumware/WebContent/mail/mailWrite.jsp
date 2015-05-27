@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+	#view {
+		width: 200px;
+		border: 1px solid gray;
+		border-top: 0px;
+		margin-top: -1px;
+		display: none;
+		font-family: NanumGothic;
+		font-size: 10px;
+	}
+</style>
 	
 <!-- ckeditor
 <script src="//cdn.ckeditor.com/4.4.7/basic/ckeditor.js"></script>

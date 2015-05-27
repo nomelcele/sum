@@ -2,8 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<div class="container">
-	<input type="button" value="삭제" id="delBtn" name="delBtn" 
-	onclick="javascript:mailTrashGo()">
+	<form name="trashForm" method="post" action="sumware">
+		<input type="hidden" id="model" name="model">
+		<input type="hidden" id="submod" name="submod">
+		<input type="hidden" id="usernum" name="usernum">
+		<input type="hidden" id="userid" name="userid">
+		<input type="hidden" id="tofrom" name="tofrom">
+		<input type="button" value="삭제" id="delBtn" name="delBtn" onclick="mailTrashGo()">
 		<table class="table table-condensed table-hover">
 				<tr>
 					<td><input type="checkbox" name="all" onclick="checkAll(this)"></td>
@@ -39,30 +44,38 @@
 					</tr>
 				</c:forEach>
 		</table>
+		</form>
 	</div>
 <script>
 	function mailTrashGo(){
-		// var chkArr = $([]);
-		// $("#chk:checked").each(function(){
-		//	chkArr.add($(this).val());
-		// });
+		$("#model").attr("value","mail");
+		$("#submod").attr("value","mailGoTrash");
+		$("#usernum").attr("value","${sessionScope.v.memnum}");
+		$("#userid").attr("value","${sessionScope.v.meminmail}");
+		$("#tofrom").attr("value","${tofrom}")
+		$("#trashForm").submit();
 		
-		// var chkArr = document.getElementsByName("chk");
-		// console.log("휴지통 가는 함수");
+// 		var chkArr = $([]);
+// 		$("#chk:checked").each(function(){
+// 			chkArr.add($(this).val());
+// 		});
 		
-		$.ajax({
-			type: "post",
-			url: "sumware",
-			data: {model: "mail",
-				submod: "mailTrash",
-				usernum: "${sessionScope.v.memnum}",
-				userid: "${sessionScope.v.meminmail}",
-				chkArr: $("#chk:checked").serialize()
-			},
-			// success: function(result){
-			//	$("#mainContent").html(result);
-			//}
-		});	
+// 		var chkArr = document.getElementsByName("chk");
+// 		console.log("휴지통 가는 함수");
+		
+// 		$.ajax({
+// 			type: "post",
+// 			url: "sumware",
+// 			data: {model: "mail",
+// 				submod: "mailTrash",
+// 				usernum: "${sessionScope.v.memnum}",
+// 				userid: "${sessionScope.v.meminmail}",
+// 				chkArr: $("#chk:checked").serialize()
+// 			},
+// 			success: function(result){
+// 				$("#mainContent").html(result);
+// 			}
+// 		});	
 	}
 	
 	function checkAll(obj){

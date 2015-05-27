@@ -116,15 +116,15 @@
 <c:if test="${param.model eq 'mail' }">
 	<div class="col-md-2">
 		<div>
-			<a href="javascript:mailFormGo(1)" class="btn btn-sm btn-info"> <span
+			<a href="javascript:mailFormGo('write')" class="btn btn-sm btn-info"> <span
 				class="glyphicon glyphicon-pencil"></span> 메일 쓰기
 			</a>
 		</div>
 		<div class="list-group">
-			<a href="javascript:mailFormGo(2)" class="list-group-item">받은 메일함 </a>
-			<a href="javascript:mailFormGo(3)" class="list-group-item">보낸 메일함</a> 
-			<a href="javascript:mailFormGo(4)" class="list-group-item">내게 쓴 메일함</a> 
-			<a href="javascript:mailFormGo(5)" class="list-group-item">휴지통</a>
+			<a href="javascript:mailFormGo('fromlist')" class="list-group-item">받은 메일함 </a>
+			<a href="javascript:mailFormGo('tolist')" class="list-group-item">보낸 메일함</a> 
+			<a href="javascript:mailFormGo('mylist')" class="list-group-item">내게 쓴 메일함</a> 
+			<a href="javascript:mailFormGo('trashcan')" class="list-group-item">휴지통</a>
 		</div>
 	</div>
 </c:if>
