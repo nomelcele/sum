@@ -2,7 +2,7 @@ package dto;
 
 public class CommVO {
 	private String cocont,codate,coname,coimg;
-	private int conum, comem, coboard;
+	private int conum, comem, coboard,commsns;
 	
 	public String getCocont() {
 		return cocont;
@@ -46,4 +46,11 @@ public class CommVO {
 	public void setCoboard(int coboard) {
 		this.coboard = coboard;
 	}
+	public int getCommsns() {
+		return commsns;
+	}
+	public void setCommsns(int commsns) {
+		this.commsns = commsns;
+	}
+	
 }
