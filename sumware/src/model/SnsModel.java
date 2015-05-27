@@ -63,13 +63,30 @@ public class SnsModel implements ModelInter{
 				outs.append("</div>");
 				outs.append("<div>");
 				outs.append("<p>").append(v.getScont()).append("</p>");
+				outs.append("<a href='javascript:snsComm(");
+				outs.append(v.getSnum());
+				outs.append(",1)'>댓글</a>");
+				outs.append("<hr/>");
+				outs.append("<div id='wrap2'");
 				outs.append("</div>");
 				outs.append("</li>");
 			}
 			outs.append("\n\n");
 			request.setAttribute("outs", outs);
+			
 			url="todo/snsLoad_push.jsp";
 			method=true;
+			
+		}else if(submod!=null&&submod.equals("snsComm")){
+			System.out.println("댓글보려구???");
+			int rowsPerPage=5;
+			int pagesPerBlock=5;
+			int etc = 1;
+			int commTotalCount=0;
+			
+			int snum = Integer.parseInt(request.getParameter("snum"));
+			commTotalCount = SnsDao.getDao().snsCommTotalCount(snum);
+			Map<String,Integer> map = MyPage.getMp().pageProcess(request, rowsPerPage, pagesPerBlock, etc, 0, commTotalCount);
 			
 		}
 		
