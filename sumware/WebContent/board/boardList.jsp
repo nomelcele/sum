@@ -4,13 +4,10 @@
 <div id="wrap" class="board">
 		<!-- lnb-area(S) -->
 	<div class="lnb-area">
-		left
+		<%@include file="/contentLeft.jsp" %>
 	</div>
 		<!-- lnb-area(E) -->
 		<!-- contents(S) -->
-<!-- <form id= "bform"action="sumware" method="post"> -->
-<!-- 	<input type="hidden" name="model" id="model"> -->
-<!-- 	<input type="hidden" name="submod" id="submod"> -->
 	<div class="contents">
 			<!-- board-form(S) -->
 		<div class="board-form">
@@ -18,7 +15,7 @@
 					<input type="text" name="search" placeholder="search">				
 			</div>
 			<div class="right">
-						<button onclick="javascript:formGo('write')">글쓰기</button>
+					<button onclick="location='sumware?model=board&submod=writeForm'">글쓰기</button>
 			</div>
 		</div>
 			<!-- board-form(E) -->
@@ -75,7 +72,6 @@
 				<button type="button" class="paging-next">&gt;&gt;</button> -->
 			<!-- paging(E) -->
 	</div>
-<!-- </form> -->
 		<!-- contents(E) -->
 </div>
 <%@include file="/footer.jsp" %>

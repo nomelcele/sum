@@ -4,28 +4,14 @@
 <div id="wrap" class="board">
 		<!-- lnb-area(S) -->
 		<div class="lnb-area">
-		left
+		<%@include file="/contentLeft.jsp" %>
 		</div>
 		<!-- lnb-area(E) -->
 		
 		<!-- contents(S) -->
 		<div class="contents">
 			<%-- <!-- board-detail(S) -->
-			<div class="board-list board-detail">
-				<div class="left">
-					<span>${list.bdate }</span>
-				</div>
-				<div class="right">
-					<form action="sumware" method="post">
-						<input type="hidden" name="model" id="model">
-						<button name="submod" id="submod" value="javascript:formGo('update')">수정</button>
-						<button name="submod" id="submod" value="javascript:formGo('list')">목록</button>
-						<input type="hidden" name="submod" id="submod">
-					</form>
-				</div>
-			</div>
 			<!-- board-detail(E) --> --%>
-			
 			
 			<!-- heading-page(S) -->
 			<h2 class="heading-page">게시글 보기</h2>
@@ -33,6 +19,7 @@
 			
 			<!-- board-detail(S) -->
 			<table class="board-detail board-list">
+				<!-- table cell width setting -->
 				<colgroup>
 					<col style="width:80px">
 					<col>
@@ -44,17 +31,6 @@
 					<col style="width:100px">
 				</colgroup>
 				<!-- table cell width setting -->
-				<!-- table cell width setting -->
-				<!-- <thead>
-					<tr>
-						<td>글제목</td>
-						<td>작성자</td>
-						
-						<td>글번호</td>
-						<td>작성일</td>
-						<td>조회수</td>
-					</tr>
-				</thead> -->
 				<tbody class="info">
 					<tr>
 						<th>작성자</th>
@@ -81,7 +57,6 @@
 			</table>
 			
 			
-			<!-- paging(S) -->
 			<div class="button-div">
 				<div class="left">
 					<button type="button">글삭제</button>
@@ -93,11 +68,7 @@
 				</div>
 			</div>
 			
-	<%-- 	<c:set var="pageUrl" value="sumware?mod=board&submod=boardList"/>
-			<%@include file="page.jsp" %> --%>
-			
-			<!-- paging(E) -->
-<!-- comment(S)******************************************************* -->
+<!-- comment(S) -->
 			<div class="wrap2">
 				<h2 class="tit-comment">댓글 작성하기</h2>
 				<!-- comment-list(S) -->
@@ -124,11 +95,11 @@
 				<!-- comment-list(E) -->
 				
 				<!-- comment-write(S) -->
-			<form action="sumware" id="bform">
-				<input type="hidden" name="model" id="model">
-				<input type="hidden" name="submod" id="submod">
-				<input type="hidden" name="childmod" id="childmod">
-				<input type="hidden" name="page" id="page">
+			<form action="sumware" id="bform" method="post">
+				<input type="hidden" name="model" id="model" value="">
+				<input type="hidden" name="submod" id="submod" value="">
+				<input type="hidden" name="childmod" id="childmod" value="">
+				<input type="hidden" name="page" id="page" value="">
 				<input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
 				<input type="hidden" name="bnum" value="${list.bnum }">
 				<input type="hidden" name="no" value="${list.bnum }">
@@ -139,8 +110,7 @@
 			</form>
 				<!-- comment-write(E) -->
 			</div>
-<!-- comment(E)******************************************************* -->
-<%-- 		<%@include file="/board/boardComm.jsp" %> --%>
+<!-- comment(E) -->
 		</div>
 		<!-- contents(E) -->
 </div>
