@@ -1,30 +1,56 @@
-
 /* reset */
-html,body,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,caption,tr,td,th,p,form,fieldset,legend,label,button,input,select,textarea,figure,figcaption,b{margin:0; padding:0; font:normal 14px NanumGothic,arial; color:#222}
-ul,ol{list-style:none}
-a:link,a:visited,a:active{text-decoration:none; color:#222}
-fieldset,img{border:0}
-legend,caption{display:none}
-a{display:block}
+html, body, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table,
+	caption, tr, td, th, p, form, fieldset, legend, label, button, input,
+	select, textarea, figure, figcaption, b {
+	margin: 0;
+	padding: 0;
+	font: normal 14px NanumGothic, arial;
+	color: #222
+}
 
+ul, ol {
+	list-style: none
+}
+
+a:link, a:visited, a:active {
+	text-decoration: none;
+	color: #222
+}
+
+fieldset, img {
+	border: 0
+}
+
+legend, caption {
+	display: none
+}
+
+a {
+	display: block
+}
 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
-body {
-	font-size: 11px;
+* {
+	margin: 0;
+}
+
+html, body {
+	height: 100% font-size: 11px;
 	font-family: 'Nanum Gothic', serif;
 	line-height: 1.5;
 	color: #888;
-	
 }
-.bmg{
-   background-image: url('img/bag.jpg'); 
-   background-repeat: repeat-y; 
-   background-position: top left, top right; 
-   width: 600px; 
-   height: 200px; 
-   border: 3px solid #000000; 
-} 
+
+.bmg {
+	background-image: url('img/bag.jpg');
+	background-repeat: repeat-y;
+	background-position: top left, top right;
+	width: 600px;
+	height: 200px;
+	border: 3px solid #000000;
+}
+
 }
 .main-text {
 	position: absolute;
@@ -70,13 +96,16 @@ body {
 }
 
 .main {
-	padding-top: 30px;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto 12em;
 }
 
 .footer {
 	margin: 0 auto;
-	padding-top: 80px;
-	height: 200px;
+	padding-top:4em;
+	height: 12em;
 	background-color: #0eb493;
 	color: #fff;
 }
