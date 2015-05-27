@@ -87,9 +87,9 @@ public class MemberDao {
 			StringBuffer sql=new StringBuffer();
 			sql.append("update member set memaddr=?,mempwd=?, memprofile=?,meminmail=? where memnum=?");
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, map.get("memaddr"));
-			pstmt.setString(1, map.get("mempwd"));
-			pstmt.setString(3, map.get("memprofile"));
+			pstmt.setString(1, map.get("address"));
+			pstmt.setString(2, map.get("mempwd2"));
+			pstmt.setString(3, map.get("memimg"));
 			pstmt.setString(4, map.get("meminmail"));
             pstmt.setInt(5, Integer.parseInt(map.get("memnum")));
 			pstmt.executeUpdate();

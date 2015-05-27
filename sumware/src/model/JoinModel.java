@@ -30,7 +30,6 @@ public class JoinModel implements ModelInter{
 			HashMap<String, String> map= MyMap.getMaps().getMapList(request);
 			MemberDao.getDao().update(map);
 			
-			
 			url="index.jsp";
 			method=true;
 		}

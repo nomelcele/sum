@@ -79,13 +79,6 @@
 </script>
 <%--이건 자바스크립트 --%>
 <script>
-	function formgogo(res) {
-		if (res == 1) {
-
-		} else {
-
-		}
-	}
 
 	function pwc() {
 		if (document.myform.mempwd1.value != document.myform.mempwd2.value) {
@@ -93,6 +86,7 @@
 			document.mempwd1.focus();
 		}
 	}
+	
 </script>
 
 <%--우편번호 찾기 --%>
@@ -156,7 +150,7 @@
 			<small> <i class="fa fa-clock-o"></i> Last Updated on: <time>Sunday,
 					October 05, 2015</time></small>
 		</div>
-		<form class="form-horizontal" role="form" method="post" action="sumware" id="myform">
+		<form class="form-horizontal" role="form" method="post" action="sumware" id="myform" name="myform">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
 					<div class="panel panel-default">
@@ -165,6 +159,7 @@
 								<div class="col-lg-12 col-lg-offset-4">
 									<div class="col-xs-10 col-sm-4">
 										<figure>
+										
 											<img class="img-circle img-responsive" alt="프로필 사진 "
 												id="targetimg" src="http://placehold.it/200x200"
 												style="width: 200px; height: 200px;">
@@ -193,7 +188,7 @@
 								<label class="col-sm-3 control-label" for="textinput">아이디</label>
 								<div class="col-sm-6">
 									<input type="text" id="meminmail" name="meminmail"
-										placeholder="사내 이메일 @" class="form-control">
+										placeholder="사내 이메일" class="form-control">
 									<div id="target"></div>
 								</div>
 
@@ -204,10 +199,10 @@
 									비밀번호</label>
 								<div class="col-sm-6">
 									<input type="password" placeholder="기존 비밀번호" 
-										class="form-control" id="mempwd" name="mempwd">
+										class="form-control" id="mempwd">
 								</div>
 								<input type="button" class="btn btn-default" value="비밀번호 변경"
-									id="chbtn" name="chbtn" />
+									id="chbtn" name="chbtn">
 							</div>
 
 							<div class="dhpwd">
@@ -216,17 +211,15 @@
 										비밀번호 </label>
 									<div class="col-sm-6">
 										<input type="password" placeholder="새 비밀번호"
-											class="form-control" id="mempwd1" name="mempwd1">
+											class="form-control" id="mempwd1">
 									</div>
 								</div>
 
 								<div class="form-group">
-									<label class="col-sm-3 control-label" for="textinput"
-										id="password" name="password">새 비밀번호 재 확인 </label>
+									<label class="col-sm-3 control-label" for="textinput">새 비밀번호 재 확인 </label>
 									<div class="col-sm-6">
 										<input type="password" placeholder="새 비밀번호 확인"
-											class="form-control" id="mempwd2" name="mempwd2"
-											onBlur="pwc()">
+											class="form-control" id="mempwd2" name="mempwd2" onBlur="pwc()">
 										<div id="targetpwd"></div>
 									</div>
 
@@ -245,7 +238,7 @@
 								</div>
 
 								<input type="button" class="btn btn-default"
-									onclick="sample6_execDaumPostcode()" value="우편번호 찾기" />
+									onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 
 							</div>
 							<div class="form-group">
