@@ -229,7 +229,7 @@ public class BoardDao {
 			sql.append("select c.cocont, TO_CHAR(c.codate,'yyyy.MM.dd HH:mm') codate, m.memname,m.memprofile")
 			.append(" from comm c, member m where c.comem = m.memnum and coboard=?");
 			pstmt = con.prepareStatement(sql.toString());
-			int code = Integer.parseInt(map.get("code"));
+			int code = Integer.parseInt(map.get("no"));
 			pstmt.setInt(1, code);
 			rs = pstmt.executeQuery();
 
