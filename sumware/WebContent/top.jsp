@@ -60,7 +60,7 @@
 		}else if(res == 'write'){
 			$('#submod').attr("value", "writeForm");
 		}
-		$('form').submit();
+		$('#bform').submit();
 	}
 	function todoFormGo(res){
 		$('#model').attr("value","todo");
