@@ -27,31 +27,33 @@ public class LoginModel implements ModelInter {
 			MemberVO vo = null;
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			String mempwd = request.getParameter("mempwd");
-
+			System.out.println("memnum:"+memnum);
+			System.out.println("mempwd:"+mempwd);
 			MemberVO v = new MemberVO();
 			v.setMemnum(memnum);
 			v.setMempwd(mempwd);
 			try {
-				vo = LoginDao.getDao().login(v);
-				
-				if (vo != null) {
-					String res = LoginDao.getDao().ckFirstLogin(memnum);
-					if(res.equals("0")){
-						
-						request.setAttribute("memnum", memnum);
-						request.setAttribute("mempwd", mempwd);
-						//회원정보입력창으로 이동.
-						//이동후에 memnum입력란에 자동으로 입력시켜주고
-						//mempwd는 유효성검사 할때 쓰기위하여 보냄.
-					}else{
-						// sessionScope에 아이디를 저장
-						HttpSession session = request.getSession();
-						session.setAttribute("v", vo);
-						//login 기록 저장.
-						LoginDao.getDao().inLog(memnum);	
-					}
-				} else {
-					// 로그인 실패
+				String res = LoginDao.getDao().ckFirstLogin(memnum);
+				System.out.println("res:::"+res);		
+				if (res.equals("0")) {
+					
+					System.out.println("첫번째 이용자다!!!!");
+					request.setAttribute("memnum", memnum);
+					request.setAttribute("mempwd", mempwd);
+					url="join/member.jsp";
+					//회원정보입력창으로 이동.
+					//이동후에 memnum입력란에 자동으로 입력시켜주고
+					//mempwd는 유효성검사 할때 쓰기위하여 보냄.
+		
+				} else if(!res.equals("0")){
+					vo = LoginDao.getDao().login(v);
+					// sessionScope에 아이디를 저장
+					HttpSession session = request.getSession();
+					session.setAttribute("v", vo);
+					//login 기록 저장.
+					LoginDao.getDao().inLog(memnum);	
+				}else{
+					//로그인실패
 				}
 
 			} catch (SQLException e) {
