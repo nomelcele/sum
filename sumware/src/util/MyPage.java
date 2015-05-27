@@ -44,7 +44,7 @@ public class MyPage {
 		if(etc ==0){
 			totalRows = totalCount;
 		}else if(etc == 1){
-			int no = Integer.parseInt(request.getParameter("no"));
+//			int no = Integer.parseInt(request.getParameter("no"));
 			totalRows = commTotalCount;
 		}
 		
