@@ -226,8 +226,8 @@ public class BoardDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select c.cocont, TO_CHAR(c.codate,'yyyy.MM.dd HH:mm') codate, m.memname,m.memprofile")
-			.append(" from comm c, member m where c.comem = m.memnum and coboard=?");
+			sql.append("select c.cocont, TO_CHAR(c.codate,'yyyy.MM.dd HH:mm') codate, m.memname,m.memprofile,c.coboard")
+			.append(" from comm c, member m where c.comem = m.memnum and coboard=? order by conum desc");
 			pstmt = con.prepareStatement(sql.toString());
 			int code = Integer.parseInt(map.get("no"));
 			pstmt.setInt(1, code);
@@ -239,7 +239,7 @@ public class BoardDao {
 				v.setCodate(rs.getString(2));
 				v.setConame(rs.getString(3));
 				v.setCoimg(rs.getString(4));
-				
+				v.setCoboard(rs.getInt(5));
 				list.add(v);
 			}
 		} catch (SQLException e) {
@@ -251,7 +251,30 @@ public class BoardDao {
 		}
 		return list;
 	}
-	
+	// 댓글 입력 메서드.
+	public void commInsert(HashMap<String, String> map){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			sql.append("insert into comm(conum,cocont,codate,comem,coboard) ").
+			append("values(comm_seq.nextval,?,sysdate,?,?)");
+			pstmt = con.prepareStatement(sql.toString());
+			int memnum = Integer.parseInt(map.get("memnum"));
+			int bnum = Integer.parseInt(map.get("bnum"));;
+			pstmt.setString(1, map.get("comment"));
+			pstmt.setInt(2, memnum);
+			pstmt.setInt(3, bnum);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+	}
 	
 }
 
