@@ -33,38 +33,41 @@ public class BoardModel implements ModelInter{
 			// 두번쨰 인자값은 게시물인지, 댓글인지를 구별 해주는 인자. 0이면 게시물~
 			Map<String, Integer> map = pageProcess(request, 0);
 			ArrayList<BoardVO> list = BoardDao.getDao().getList(map);
-			request.setAttribute("list", list);
 //			for(BoardVO e : list){
 //				System.out.println(e.getBwriter());
 //			}
 			request.setAttribute("list", list);
 			url = "board/boardList.jsp";
 			method = true;
-		}else if(submod != null && submod.equals("writeForm")){
+		}
+		else if(submod != null && submod.equals("writeForm")){
 			url="board/boardWrite.jsp";
 			method=true;
-		}else if(submod.equals("boardInsert") && submod!=null){
+		}
+		else if(submod.equals("boardInsert") && submod!=null){
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			BoardDao.getDao().insert(map);
 			url = "sumware?model=board&submod=boardList&page=1";
 			method = false; // redirect
-		}else if(submod != null && submod.equals("boardDetail")){
+		}
+		else if(submod != null && submod.equals("boardDetail")){
 			int no = Integer.parseInt(request.getParameter("no"));
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			BoardVO list = BoardDao.getDao().getDetail(no);
-			System.out.println(list.getBdate()+" / "+ list.getBcont()+" / "+map.get("no"));
+//			System.out.println(list.getBdate()+" / "+ list.getBcont()+" / "+map.get("no"));
 			request.setAttribute("list", list);
 			// 댓글 불러오는 로직.
-			String childcmd = request.getParameter("childcmd");
-			if(childcmd != null && childcmd.equals("commInsert")){
+			String childmod = request.getParameter("childmod");
+			if(childmod != null && childmod.equals("commInsert")){
 				HashMap<String, String> commmap = MyMap.getMaps().getMapList(request);
-				
+				BoardDao.getDao().commInsert(commmap);
 			}
 			ArrayList<CommVO> clist = BoardDao.getDao().getCommList(map);
 			request.setAttribute("clist", clist);
 			url = "board/boardDetail.jsp";
 			method = true;
-		}else if(submod != null && submod.equals("ckBoard")){
+		}
+		else if(submod != null && submod.equals("ckBoard")){
 			Part part = null;
 			try {
 				part = request.getPart("upload");
