@@ -7,6 +7,10 @@
 <%--아이디 중복체크 --%>
 <script>
 	$(function() {
+		
+		$( "#chbtn" ).click(function() {
+			  $( ".dhpwd" ).show( "slow" );
+			});
 
 		$('#meminmail').keyup(
 				function() {
@@ -193,7 +197,7 @@
 								<label class="col-sm-3 control-label" for="textinput">아이디</label>
 								<div class="col-sm-6">
 									<input type="text" id="meminmail" name="meminmail"
-										placeholder="아이디" class="form-control">
+										placeholder="사내 이메일 @" class="form-control">
 									<div id="target"></div>
 								</div>
 
@@ -206,10 +210,10 @@
 									<input type="password" placeholder="기존 비밀번호"
 										class="form-control">
 								</div>
-								<input type="button" class="btn btn-default" value="비밀번호 변경" />
+								<input type="button" class="btn btn-default" value="비밀번호 변경" id="chbtn" name="chbtn"/>
 							</div>
 
-							<div>
+							<div class="dhpwd">
 								<div class="form-group">
 									<label class="col-sm-3 control-label" for="textinput">새
 										비밀번호 </label>
@@ -259,16 +263,6 @@
 								<div class="col-sm-6">
 									<input type="text" placeholder="상세주소" class="form-control"
 										id="sample6_address2">
-								</div>
-							</div>
-
-
-							<!-- Text input-->
-							<div class="form-group">
-								<label class="col-sm-3 control-label" for="textinput">이메일</label>
-								<div class="col-sm-6">
-									<input type="text" class="form-control" id="memmail"
-										name="memmail" placeholder="이메일@">
 								</div>
 							</div>
 
