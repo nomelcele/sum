@@ -13,8 +13,8 @@
 					보낸 사람: ${detail.mailsname}<br /> 
 					받는 사람: ${detail.mailrname}<br /> 
 					보낸 날짜: ${detail.maildate}<br /> 
-					내용:${detail.mailcont}<br /> 
-					첨부 파일: <a href="upload/${detail.mailfile}">${detail.mailfile}</a>
+					내용: ${detail.mailcont}<br /> 
+					첨부 파일: <a href="upload/${detail.mailfile}" target="_blank">${detail.mailfile}</a>
 				</div>
 			</div>
 		</div>

@@ -112,6 +112,7 @@
 				url: "sumware",
 				data: {model: "mail",
 					submod: "mailFromList",
+					usernum: "${sessionScope.v.memnum}",
 					userid: "${sessionScope.v.meminmail }" },
 				success: function(result){
 					$("#mainContent").html(result);
@@ -123,7 +124,8 @@
 				url: "sumware",
 				data: {model: "mail",
 					submod: "mailToList",
-					usernum: "${sessionScope.v.memnum}"},
+					usernum: "${sessionScope.v.memnum}",
+					userid: "${sessionScope.v.meminmail }"},
 				success: function(result){
 					$("#mainContent").html(result);
 				}

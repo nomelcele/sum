@@ -50,10 +50,11 @@ public class MailModel implements ModelInter{
 		} else if(submod != null && submod.equals("mailFromList")){
 			// 받은 메일함
 			// HashMap<String,String> map =MyMap.getMaps().getMapList(request);
+			int usernum = Integer.parseInt(request.getParameter("usernum"));
 			String userid = request.getParameter("userid");
 			
 			// 현재 로그인한 사원의 id
-			ArrayList<MailVO> fromlist = MailDao.getDao().getFromMailList(userid);
+			ArrayList<MailVO> fromlist = MailDao.getDao().getFromMailList(usernum,userid);
 			
 			request.setAttribute("list", fromlist);
 			request.setAttribute("tofrom", 1);
@@ -64,7 +65,8 @@ public class MailModel implements ModelInter{
 			// 보낸 메일함
 			// 현재 로그인한 사원의 사원 번호
 			int usernum = Integer.parseInt(request.getParameter("usernum"));
-			ArrayList<MailVO> tolist = MailDao.getDao().getToMailList(usernum);
+			String userid = request.getParameter("userid");
+			ArrayList<MailVO> tolist = MailDao.getDao().getToMailList(usernum,userid);
 			
 			request.setAttribute("list", tolist);
 			request.setAttribute("tofrom", 2);
@@ -128,10 +130,10 @@ public class MailModel implements ModelInter{
 			
 			switch(tofrom){
 				case '1':{ // 받은 메일함에서 삭제했을 때
-					list = MailDao.getDao().getFromMailList(userid);
+					list = MailDao.getDao().getFromMailList(usernum, userid);
 				}
 				case '2':{ // 보낸 메일함에서 삭제했을 때
-					list = MailDao.getDao().getToMailList(usernum);
+					list = MailDao.getDao().getToMailList(usernum, userid);
 				}
 				case '3':{ // 내게 쓴 메일함에서 삭제했을 때
 					list = MailDao.getDao().getMyMailList(usernum, userid);

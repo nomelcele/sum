@@ -50,7 +50,7 @@ public class MailDao {
 		}
 	}
 	
-	public ArrayList<MailVO> getFromMailList(String userid){
+	public ArrayList<MailVO> getFromMailList(int usernum, String userid){
 		// 받은 메일 리스트를 불러오는 메서드
 		// 현재 로그인되어 있는 사원이 받은 메일만 불러와야 한다.
 		Connection con = null;
@@ -64,11 +64,12 @@ public class MailDao {
 			StringBuffer sql = new StringBuffer();
 			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma");
 			sql.append(" where me.memnum=ma.mailmem and ma.mailreceiver=? and ma.mailrdelete=1");
-			sql.append(" order by ma.maildate desc");
+			sql.append(" and not ma.mailmem=? order by ma.maildate desc");
 			
 			// 현재 로그인한 사원에게 온 메일만 검색
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, userid);
+			pstmt.setInt(2, usernum);
 			rs = pstmt.executeQuery();
 			System.out.println("현재 로그인한 사원 아이디: "+userid);
 			
@@ -93,7 +94,7 @@ public class MailDao {
 		return list;
 	}
 	
-	public ArrayList<MailVO> getToMailList(int usernum){
+	public ArrayList<MailVO> getToMailList(int usernum, String userid){
 		// 보낸 메일 리스트를 불러오는 메서드
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -106,10 +107,11 @@ public class MailDao {
 			
 			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma"); 
 			sql.append(" where me.meminmail=ma.mailreceiver and ma.mailmem=? and ma.mailsdelete=1");
-			sql.append(" order by ma.maildate desc");
+			sql.append(" and not ma.mailreceiver=? order by ma.maildate desc");
 		
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, usernum);
+			pstmt.setString(2, userid);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -142,7 +144,8 @@ public class MailDao {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
 			sql.append("select ma.mailnum, ma.mailtitle, ma.maildate, me.memname from member me, mail ma");
-			sql.append(" where me.memnum=ma.mailmem and mailmem=? and mailreceiver=?");
+			sql.append(" where me.memnum=ma.mailmem and ma.mailmem=? and ma.mailreceiver=? ");
+			sql.append(" and ma.mailsdelete=1 and ma.mailrdelete=1 order by ma.maildate desc");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, usernum);
 			pstmt.setString(2, userid);
@@ -217,6 +220,7 @@ public class MailDao {
 			StringBuffer sql = new StringBuffer();
 			
 			for(String e:mailnums){
+				sql.setLength(0);
 				sql.append("select mailmem,mailreceiver from mail where mailnum=?");
 				pstmt = con.prepareStatement(sql.toString());
 				pstmt.setInt(1, Integer.parseInt(e)); // 검색할 메일의 번호
@@ -243,7 +247,9 @@ public class MailDao {
 					// 삭제(메일함에서 휴지통으로 이동)는 2
 					// 영구 삭제(휴지통에서도 보이지 않게 함)는 3
 					pstmt.setInt(2, Integer.parseInt(e));
-					pstmt.executeUpdate();		
+					pstmt.executeUpdate();	
+					
+					System.out.println("delete 속성 업데이트");
 				}
 				
 			}
