@@ -112,25 +112,39 @@ public class MailModel implements ModelInter{
 			method = true;
 			
 		} else if(submod != null && submod.equals("mailGoTrash")){
-			// 휴지통
+			// 메일함에서 체크박스로 삭제할 메일들 선택 후 삭제 버튼을 클릭했을 때
+			// 삭제 관련 속성(mailsdelete, mailrdelete)을 변경한다.
+			
 			// 휴지통에 들어갈 메일들의 번호(mailnum)을 저장한 배열
 			int usernum = Integer.parseInt(request.getParameter("usernum"));
 			String userid = request.getParameter("userid");
 			String[] mailnums = request.getParameterValues("chk");
 			int tofrom = Integer.parseInt(request.getParameter("tofrom"));
-			
-			// String chkArr = request.getParameter("chkArr");
+			System.out.println("tofrom: "+tofrom);
 			
 			MailDao.getDao().updateTrash(mailnums, usernum, userid);
 			
+			ArrayList<MailVO> list = new ArrayList<MailVO>();
 			
+			switch(tofrom){
+				case '1':{ // 받은 메일함에서 삭제했을 때
+					list = MailDao.getDao().getFromMailList(userid);
+				}
+				case '2':{ // 보낸 메일함에서 삭제했을 때
+					list = MailDao.getDao().getToMailList(usernum);
+				}
+				case '3':{ // 내게 쓴 메일함에서 삭제했을 때
+					list = MailDao.getDao().getMyMailList(usernum, userid);
+				}
+			}
 			
-			// request.setAttribute("list", list);
+			request.setAttribute("list", list);
 			request.setAttribute("tofrom",tofrom);
 			
-			url = "mail/mailList.jsp";
+			url = "mail/mail.jsp";
 			method = true;
 		} else if(submod != null && submod.equals("mailTrashcan")){
+			// 메뉴에서 휴지통을 클릭했을 때
 			int usernum = Integer.parseInt(request.getParameter("usernum"));
 			String userid = request.getParameter("userid");
 			
