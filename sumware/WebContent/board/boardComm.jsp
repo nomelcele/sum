@@ -3,6 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- CommentPage(S) --%>
 <div class="wrap2">
+	<input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
+	<input type="hidden" name="bnum" value="${clist.coboard }">
 	<h2 class="tit-comment">댓글 작성하기</h2>
 	<!-- comment-list(S) -->
 	<ul class="comment-list">
@@ -29,8 +31,8 @@
 	
 	<!-- comment-write(S) -->
 	<div class="comment-write">
-		<textarea rows="10" cols="10" placeholder="댓글 내용을 입력해 주세요."></textarea>
-		<button type="button" class="btn-comm">댓글 등록</button>
+		<textarea name = "comment"rows="10" cols="10" placeholder="댓글 내용을 입력해 주세요."></textarea>
+		<button type="submit" class="btn-comm">댓글 등록</button>
 	</div>
 	<!-- comment-write(E) -->
 </div>

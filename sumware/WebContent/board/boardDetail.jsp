@@ -2,11 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@include file="/top.jsp" %>
 <div id="wrap" class="board">
-		<form action="sumware" id="bform">
-			<input type="hidden" name="model" id="model">
-			<input type="hidden" name="submod" id="submod">
-			<input type="hidden" name="page" id="page">
-		</form>
 		<!-- lnb-area(S) -->
 		<div class="lnb-area">
 		left
@@ -102,7 +97,50 @@
 			<%@include file="page.jsp" %> --%>
 			
 			<!-- paging(E) -->
-		<%@include file="/board/boardComm.jsp" %>
+<!-- comment(S)******************************************************* -->
+			<div class="wrap2">
+				<h2 class="tit-comment">댓글 작성하기</h2>
+				<!-- comment-list(S) -->
+				<ul class="comment-list">
+				<c:forEach var="clist" items="${clist }">
+					<li>
+						<img class="comment-img" src="profileImg/${clist.coimg }" alt="" />
+						<div>
+							<strong>${clist.coname }</strong>
+							<p>${clist.cocont }</p>
+							<span class="date">${clist.codate }</span>
+						</div>
+						<!-- 작성자일 경우에만 노출 됨  -->
+						<c:if test="${sessionScope.v.memname eq clist.coname }">
+						<span class="comment-btn">
+							<button type="button">수정</button>
+							<button type="button">삭제</button>
+						</span>
+						</c:if>
+						<!-- 작성자일 경우에만 노출 됨  -->
+					</li>
+				</c:forEach>
+				</ul>
+				<!-- comment-list(E) -->
+				
+				<!-- comment-write(S) -->
+			<form action="sumware" id="bform">
+				<input type="hidden" name="model" id="model">
+				<input type="hidden" name="submod" id="submod">
+				<input type="hidden" name="childmod" id="childmod">
+				<input type="hidden" name="page" id="page">
+				<input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
+				<input type="hidden" name="bnum" value="${list.bnum }">
+				<input type="hidden" name="no" value="${list.bnum }">
+				<div class="comment-write">
+					<textarea name="comment"rows="10" cols="10" placeholder="댓글 내용을 입력해 주세요."></textarea>
+					<button type="button" class="btn-comm" onclick="javascript:formGo('commInsert')">댓글 등록</button>
+				</div>
+			</form>
+				<!-- comment-write(E) -->
+			</div>
+<!-- comment(E)******************************************************* -->
+<%-- 		<%@include file="/board/boardComm.jsp" %> --%>
 		</div>
 		<!-- contents(E) -->
 </div>

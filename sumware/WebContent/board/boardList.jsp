@@ -29,9 +29,9 @@
 			<colgroup>
 					<col style="width:50px" />
 					<col />
-					<col style="width:100px" />
-					<col style="width:70px" />
-					<col style="width:50px;text-align:center" />
+					<col style="width:80px" />
+					<col style="width:80px" />
+					<col style="width:50px;" />
 			</colgroup>
 				<!-- table cell width setting(E) -->
 				<thead>
@@ -63,6 +63,7 @@
 		<div class="paging">
 			<c:set var="pageUrl" value="sumware?model=board&submod=boardList"/>
 			<%@include file="page.jsp" %>
+		</div>
 				<!-- <button type="button" class="paging-prev">&lt;&lt;</button>
 				<ul>
 					<li>1</li>
@@ -72,7 +73,6 @@
 					<li>5</li>
 				</ul>
 				<button type="button" class="paging-next">&gt;&gt;</button> -->
-		</div>
 			<!-- paging(E) -->
 	</div>
 <!-- </form> -->
