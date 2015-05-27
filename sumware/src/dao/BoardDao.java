@@ -11,6 +11,7 @@ import java.util.Map;
 import util.CloseUtil;
 import conn.ConUtil;
 import dto.BoardVO;
+import dto.CommVO;
 
 public class BoardDao {
 	private static BoardDao dao;
@@ -157,7 +158,8 @@ public class BoardDao {
 		return res;
 	}
 	
-	public BoardVO getDetail(HashMap<String, String> map){
+	// 게시글 상세보기 메서드.
+	public BoardVO getDetail(int no){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -169,7 +171,7 @@ public class BoardDao {
 		try {
 			con = ConUtil.getOds();
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, Integer.parseInt(map.get("no")));
+			pstmt.setInt(1, no);
 			rs = pstmt.executeQuery();
 			if(rs.next()){
 				v = new BoardVO();
@@ -213,10 +215,62 @@ public class BoardDao {
 		}
 	}
 	
-	
-	
-	
-	
+	// 게시글에 대한 댓글 불러오는 메서드.
+	public ArrayList<CommVO> getCommList(HashMap<String, String> map){
+		// SELECT c.cocont,c.codate,m.memname,c.CODATE,m.MEMPROFILE FROM COMM c, MEMBER m
+		// WHERE c.comem = m.memnum AND coboard = 67;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<CommVO> list = new ArrayList<CommVO>();
+		try {
+			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			sql.append("select c.cocont, TO_CHAR(c.codate,'yyyy.MM.dd HH:mm') codate, m.memname,m.memprofile")
+			.append(" from comm c, member m where c.comem = m.memnum and coboard=?");
+			pstmt = con.prepareStatement(sql.toString());
+			int code = Integer.parseInt(map.get("code"));
+			pstmt.setInt(1, code);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()){
+				CommVO v = new CommVO();
+				v.setCocont(rs.getString(1));
+				v.setCodate(rs.getString(2));
+				v.setConame(rs.getString(3));
+				v.setCoimg(rs.getString(4));
+				
+				list.add(v);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		return list;
+	}
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
