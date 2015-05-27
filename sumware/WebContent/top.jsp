@@ -10,10 +10,10 @@
 <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
 <link href="css/bootstrap.min.css" rel="stylesheet"/>
-<link href="css/main.css" rel="stylesheet"/>
-<link href="css/boardList.css" rel="stylesheet"/>
+<!-- <link href="css/main.css" rel="stylesheet"/> -->
+<!-- <link href="css/join.css" rel="stylesheet"/> -->
+<!-- <link href="css/boardList.css" rel="stylesheet"/> -->
 <link type="text/css" href="css/common.css" rel="stylesheet"  />
-<link href="css/join.css" rel="stylesheet"/>
 <!-- CSS 라이브러리(E)  -->
 <!-- 자바스크립트 -->
 <script src="js/bootstrap.min.js"></script>
@@ -59,6 +59,9 @@
 			$('#submod').attr("value","boardUpdate");
 		}else if(res == 'write'){
 			$('#submod').attr("value", "writeForm");
+		}else if(res == 'commInsert'){
+			$('#submod').attr("value","boardDetail");
+			$('#childmod').attr("value","commInsert")
 		}
 		$('#bform').submit();
 	}
