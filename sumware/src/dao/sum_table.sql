@@ -1,4 +1,5 @@
--- 20150526 까지 DB 테이블
+-- 20150527 까지 DB 테이블
+-- 20150527 : messenger table 수정 (244행 참조)
 
 CREATE TABLE dept(
 	denum NUMBER(3),
@@ -116,15 +117,6 @@ CREATE TABLE administer(
     CONSTRAINT admin_admem_fk FOREIGN KEY(admem) REFERENCES member(memnum)
 );
 
-CREATE TABLE messenger(
-	mesnum NUMBER(6), -- pk
-    mescont VARCHAR2(200) CONSTRAINT messenger_mescont_nn NOT NULL,
-    mesmem NUMBER(5), --fk
-    mesreceiver VARCHAR2(50), -- fk
-    CONSTRAINT messenger_mesnum_pk PRIMARY KEY(mesnum),
-    CONSTRAINT messenger_mesmem_fk FOREIGN KEY(mesmem) REFERENCES member(memnum),
-    CONSTRAINT messenger_mesreceiver_fk FOREIGN KEY(mesreceiver) REFERENCES member(meminmail)
-);
 
 CREATE TABLE login(
 	lonum NUMBER(11), -- 번호 pk
@@ -192,39 +184,8 @@ CREATE TABLE sns(
     CONSTRAINT sns_smem_fk FOREIGN KEY(smem) REFERENCES MEMBER(memnum),
     CONSTRAINT sns_sdept_fk FOREIGN KEY(sdept) REFERENCES DEPT(denum)
 );
+  
 
-create table mesmaster(
-  masnum number(10),
-  masstdate date,
-  masendate date,
-  constraint mesmaster_masnum_pk primary key(masnum));
-
-create sequence mesmaster_seq
-increment by 1
-start with 1;
-
-create table mesentry(
-  masnum number(10),
-  mesmember number(10),
-  openmemberyn varchar(10) default 'N',
-  entstdate date,
-  entendate date,
-  constraint mesentry_masnum_mesmember_pk primary key(masnum, mesmember)
-  );
-
-  -- constraint mesentry_masnum_mesmember_pk primary key(masnum, mesmember);
-
-  create table mescontent(
-  conum number(10),
-  masnum number(10),
-  meswriternum number(10),
-  mescont varchar2(200) constraint mescontent_mescont_nn not null,
-  constraint mescontent_conum_pk primary key(conum),
-  constraint mescontent_masnum_fk foreign key(masnum) references mesmaster(masnum));
-
-  create sequence mescontent_seq
-  increment by 1
-  start with 1;
 DROP TABLE comm;
 DROP TABLE login;
 DROP TABLE ADMINISTER;
@@ -275,3 +236,41 @@ alter table comm add constraint comm_sns_fk foreign key(commsns) REFERENCES sns(
 --member memprofile 제약조건 삭제
 alter table member drop constraint member_memprofile_nn cascade;
 alter table member drop constraint member_memaddr_nn cascade;
+
+
+
+
+
+-- 0527 기존 messenger table 삭제 후 아래 messenger table 생성 
+create table mesmaster(
+  masnum number(10),
+  masstdate date,
+  masendate date,
+  masreip varchar2(15),
+  constraint mesmaster_masnum_pk primary key(masnum));
+  
+  create sequence mesmaster_seq
+increment by 1
+start with 1;
+
+  create table mesentry(
+  mesnum number(10),
+  mesmember number(10),
+  openmemberyn varchar2(10) default 'N',
+  entstdate date,
+  entendate date,
+  mesreip varchar2(15),
+  primary key(mesnum,mesmember)
+  );
+  
+  create table mescontent(
+  conum number(10),
+  mesconum number(10), -- 방번호
+  meswriternum number(10),
+  mescont varchar2(200) constraint mescontent_mescont_nn not null,
+  constraint mescontent_conum_pk primary key(conum),
+  constraint mescontent_mesconum_fk foreign key(mesconum) references mesmaster(masnum));
+  
+  create sequence mescontent_seq
+  increment by 1
+  start with 1;
