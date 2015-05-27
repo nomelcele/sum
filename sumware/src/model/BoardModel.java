@@ -49,10 +49,10 @@ public class BoardModel implements ModelInter{
 			url = "sumware?model=board&submod=boardList&page=1";
 			method = false; // redirect
 		}else if(submod != null && submod.equals("boardDetail")){
+			int no = Integer.parseInt(request.getParameter("no"));
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
-			BoardVO list = BoardDao.getDao().getDetail(map);
+			BoardVO list = BoardDao.getDao().getDetail(no);
 			System.out.println(list.getBdate()+" / "+ list.getBcont()+" / "+map.get("no"));
-			
 			request.setAttribute("list", list);
 			// 댓글 불러오는 로직.
 			String childcmd = request.getParameter("childcmd");
@@ -61,6 +61,7 @@ public class BoardModel implements ModelInter{
 				
 			}
 			ArrayList<CommVO> clist = BoardDao.getDao().getCommList(map);
+			request.setAttribute("clist", clist);
 			url = "board/boardDetail.jsp";
 			method = true;
 		}else if(submod != null && submod.equals("ckBoard")){
