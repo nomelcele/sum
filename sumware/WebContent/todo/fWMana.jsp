@@ -16,6 +16,7 @@
 		$('#tomem'+tonum).attr("value",v);
 		console.log("후후후후 ㅍ::::",$('#tomem').val());
 		$('#goFk'+tonum).submit();
+		alert("업무를 전송하였습니다.");
 	}
 	
 	
@@ -90,6 +91,9 @@
 	
 	
 </script>
+<style>
+#loadingcenter img{float:none; width:40px;}
+</style>
 </head>
 <div class="container">
 <div class="row">
@@ -104,7 +108,7 @@
 			<div class="col-lg-4" style="width: 35%">
 				<div class="chat-panel panel panel-default">
 					<div class="panel-heading">
-						<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">부서업무</strong>
+						<i class="fa fa-pencil-square-o"></i> <strong class="primary-font">업무관리</strong>
 					</div>
 					<div class="panel-body">
 					<div class="column" style="height:450px; overflow-y:scroll;" onscroll="pageScollforcenter()">
@@ -125,38 +129,34 @@
 									<div id="detail${fw.tonum }" style="display:none">
 										<br/>
 										<p>${fw.tocont }</p>
-										
-									</div>
-								
-								<table class="table table-striped table-bordered table-hover" 
+												<table class="table table-striped table-bordered table-hover" 
 							style="margin: auto; width: 90%; padding-left:15px; padding-right:15px;">
 								<thead>
 									<tr>
-										<th colspan="1">승인 상태</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr style="border: 1px solid">
+										<td>승인 상태</td>
 										<td>
 										<c:choose>
 											<c:when test="${fw.toconfirm  eq 'n' }">
-												<button type="button" class="btn btn-outline btn-warning">미승인</button>
+												<button type="button" class="btn btn-outline btn-warning btn-xs">미승인</button>
 											</c:when>
 											<c:when test="${fw.toconfirm eq 'y' }">
-												<button type="button" class="btn btn-outline btn-success">승인</button>
+												<button type="button" class="btn btn-outline btn-success btn-xs">승인</button>
 											</c:when>
 											<c:otherwise>
-												<button type="button" class="btn btn-outline btn-danger"
+												<button type="button" class="btn btn-outline btn-danger btn-xs"
 												onclick="hateWorking(${fw.tonum })">거절</button>
 											</c:otherwise>
 										</c:choose>
 										</td>
 									</tr>
+								</thead>
+								<tbody>
+									
 									<tr class="title${fw.tonum }" style="display: none;">
-										<td>${fw.tocomm }</td>
+										<td colspan="2">${fw.tocomm }</td>
 									</tr>
 									<tr class="title${fw.tonum }" style="display: none;">
-										<td>
+										<td colspan="2">
 											<select name="tomem" class="form-control" id="inputSuccess${fw.tonum }"
 											style="width: 70%">
 												<option value="">팀장 선택</option>
@@ -168,9 +168,9 @@
 									</tr>
 									
 									
-									<tr class="title${fw.tonum }" style="display: none;">
+									<tr class="title${fw.tonum }" style="display: none;" colspan="2">
 										
-										<td>
+										<td colspan="2">
 										<form action="sumware" method="post" id="goFk${fw.tonum }">
 											<input type="hidden" name="model" value="todo"> 
 											<input type="hidden" name="submod" value="toUpFk"> 
@@ -184,14 +184,23 @@
 										
 									</tr>
 									
-									<tr class="title${fw.tonum }" style="display: none;">
-										<td>
+									<tr class="title${fw.tonum }" style="display: none;" colspan="2">
+										<td colspan="2">
 											<button type="button" class="btn btn-outline btn-success"
 											onclick="tosend(${fw.tonum })">전달</button>
 										</td>
 									</tr>
 								</tbody>
 							</table>
+										
+										
+										
+										
+										
+										
+									</div>
+								
+								
 								</div>
 							</div>
 						</div>

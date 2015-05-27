@@ -28,7 +28,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-default" data-dismiss="modal"
-						onclick="javascript:todoFormGo(4)">보내기</button>
+						onclick="javascript:todoFormGo('rejectTodo')">보내기</button>
 				</div>
 			</form>
 		</div>
@@ -64,7 +64,39 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal"
-						onclick="javascript:todoFormGo(3)">보내기</button>
+						onclick="javascript:todoFormGo('approveTodo')">보내기</button>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</div>
+<!-- Modal -->
+
+
+<!-- okModal -->
+<div id="okModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">업무 완료 처리</h4>
+			</div>
+			<form action="sumware" method="post" id="successjob">
+				<input type="hidden" name="model" value="todo"> 
+				<input type="hidden" name="submod" value="successJob"> 
+				<input type="hidden" name="tonum" value="${tolist.tonum }"> 
+		
+				
+				<div class="modal-body has-success">
+					<label class="control-label">남길 말</label> <input type="text"
+						class="inputsuccess" name="tocomm">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						onclick="javascript:successJob()">보내기</button>
 				</div>
 			</form>
 		</div>

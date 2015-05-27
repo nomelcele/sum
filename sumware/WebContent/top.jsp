@@ -59,10 +59,10 @@
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 			console.log("memnum",$('#memnum').val());
 			$('#goTodo').submit();
-		}else if(res==3){
+		}else if(res=='approveTodo'){
 			// 팀장업무관리에서 승인버튼
 			$('#okForm').submit();
-		}else if(res==4){
+		}else if(res=='rejectTodo'){
 			// 팀장업무관리에서 거절버튼
 			$('#rejectForm').submit();
 		}else if(res=='manageJob2'){

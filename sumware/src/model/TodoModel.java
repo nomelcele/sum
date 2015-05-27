@@ -180,6 +180,15 @@ public class TodoModel implements ModelInter{
 			url = "todo/teamTodoForm.jsp";
 			method = true;
 			
+		}else if(submod.equals("successJob")){
+			// 팀장의 업무 성공 처리
+			HashMap<String,String> map = MyMap.getMaps().getMapList(request);
+			TodoDao.getDao().confirmTodo(map, "o");
+			
+			url = "todo/teamTodoForm.jsp";
+			method = true;
+			
+			
 		}
 		
 		return new ModelForward(url, method);

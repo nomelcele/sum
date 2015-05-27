@@ -15,7 +15,7 @@
 			<div class="col-lg-4" style="width: 35%">
 				<div class="chat-panel panel panel-default">
 					<div class="panel-heading">
-						<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">부서업무</strong>
+						<i class="fa fa-pencil-square-o"></i> <strong class="primary-font">부서업무</strong>
 					</div>
 					<div class="panel-body">
 						<div class="column" style="overflow: auto">

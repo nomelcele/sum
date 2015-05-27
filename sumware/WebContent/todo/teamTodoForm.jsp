@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 부서 업무 부분 뷰 -->
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 팀 업무 부분 뷰 -->
 
 <script>
 
@@ -21,6 +22,16 @@ function getJobDetail(tonum){
 	});
 }
 
+function successJob(tonum){
+	$('#tonum'+tonum).attr("value", tonum);
+	$('#successjob').submit();
+	
+	
+	
+}
+
+
+
 </script>
 <div class="container">
 <div class="row">
@@ -33,7 +44,7 @@ function getJobDetail(tonum){
 		<div class="col-lg-4" style="width: 35%">
 			<div class="chat-panel panel panel-default">
 				<div class="panel-heading">
-					<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">팀 업무</strong>
+					<i class="fa fa-pencil-square-o"></i> <strong class="primary-font">팀 업무</strong>
 				</div>
 				<div class="panel-body">
 					<div class="column" style="overflow: auto">
@@ -62,7 +73,22 @@ function getJobDetail(tonum){
 									<div id="detail${teamjoblist.tonum }" style="display:none">
 										<br/>
 										<p>${teamjoblist.tocont }</p>
-										<p>첨부파일 다운로드 부분</p>
+										<p><a href="upload/${teamjoblist.tofile }">첨부파일 : ${teamjoblist.tofile }</a></p>
+										<c:if test="${sessionScope.memnum eq  teamjoblist.tomem}">
+										<p>
+										<button type="button"  class="btn btn-info-xs" 
+										data-toggle="modal" data-target="#okModal">업무 완료</button>
+										<%@include file="okTodoModal.jsp" %>
+										</p>
+										</c:if>
+										
+										
+										
+										
+										
+										
+										
+										
 									</div>
 									
 								</div>
