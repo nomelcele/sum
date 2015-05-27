@@ -87,8 +87,3 @@
 	margin-top: 15px;
 }
 
-@media ( max-width : 992px) {
-	.resume-heading .social-btn-holder {
-		padding: 5px;
-	}
-}
