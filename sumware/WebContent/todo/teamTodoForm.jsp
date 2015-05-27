@@ -22,11 +22,12 @@ function getJobDetail(tonum){
 	});
 }
 
-function successJob(tonum){
+function successJob(){
+	
 	$('#tonum'+tonum).attr("value", tonum);
 	$('#successjob').submit();
 	
-	
+	alert("업무 완료 처리 하였습니다.");
 	
 }
 
@@ -73,14 +74,16 @@ function successJob(tonum){
 									<div id="detail${teamjoblist.tonum }" style="display:none">
 										<br/>
 										<p>${teamjoblist.tocont }</p>
-										<p><a href="upload/${teamjoblist.tofile }">첨부파일 : ${teamjoblist.tofile }</a></p>
-										<c:if test="${sessionScope.memnum eq  teamjoblist.tomem}">
+										<p><a href="upload/${teamjoblist.tofile }" target="_blank">첨부파일 : ${teamjoblist.tofile }</a></p>
+										
 										<p>
+										<c:if test="${sessionScope.v.memnum eq  teamjoblist.tomem}">
 										<button type="button"  class="btn btn-info-xs" 
-										data-toggle="modal" data-target="#okModal">업무 완료</button>
+										data-toggle="modal" data-target="#successModal">업무 완료</button>
 										<%@include file="okTodoModal.jsp" %>
-										</p>
 										</c:if>
+										</p>
+										
 										
 										
 										

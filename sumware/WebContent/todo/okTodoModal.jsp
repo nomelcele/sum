@@ -75,7 +75,7 @@
 
 
 <!-- okModal -->
-<div id="okModal" class="modal fade" role="dialog">
+<div id="successModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 
 		<!-- Modal content-->

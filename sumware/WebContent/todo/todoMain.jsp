@@ -1,14 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<script>
+
+
+
+</script>	
+	
+	
 <div class="container">
-<div class="row">
-<%@include file="/top.jsp"%>
-</div>
+	<div class="row">
+		<%@include file="/top.jsp"%>
+	</div>
+
+	<div class="row">
+
+		<div class="wrap">
+			<%@include file="/contentLeft.jsp"%>
+
+			<!-- 부서업무 부분!! -->
+			<!-- menutarget 부분 -->
+			<div class="col-lg-4" style="width: 35%" id="menuTarget">
+				<div class="chat-panel panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-pencil-square-o"></i> <strong class="primary-font">부서업무</strong>
+					</div>
+					<div class="panel-body">
+						<div class="column" style="overflow: auto">
+							<c:forEach var="deptjoblist" items="${deptJobList }">
 
 
-<%@include file="Todo.jsp" %>
+								<div class="low-lg-${deptjoblist.tonum }">
+									<div class="panel panel-success">
+										<div class="panel-heading">
+											<i class="fa fa-pencil"></i> ${deptjoblist.totitle }
+										</div>
+										<div class="panel-body">
+											<p>
+												<i class="fa fa-user"></i> manager : ${deptjoblist.memname }
+											
+											<p>
+												<i class="fa fa-calendar-o"></i> date :
+												${deptjoblist.tostdate } ~ ${deptjoblist.toendate }
+											</p>
 
-<div class="row">
-<%@include file="/footer.jsp" %>
-</div>
+
+										</div>
+										<div class="panel-footer">
+
+											<a class="fa fa-align-justify"
+												onclick="javascript:getJobDetail(${deptjoblist.tonum })"
+												style="cursor: pointer"> detail</a>
+											<div id="memlisttarget${deptjoblist.tonum }"
+												style="display: none"></div>
+											<div id="detail${deptjoblist.tonum }" style="display: none">
+												<br />
+												<p>${deptjoblist.tocont }</p>
+												<p><a href="upload/${teamjoblist.tofile }">첨부파일 : ${teamjoblist.tofile }</a></p>
+											</div>
+
+										</div>
+
+									</div>
+								</div>
+
+							</c:forEach>
+
+							<!-- /.col-lg-4 -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- menu target 끝! -->
+			<!-- 부서업무 부분 끝!!! -->
+
+
+			<%@include file="todoSns.jsp"%>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<%@include file="/footer.jsp"%>
+	</div>
 </div>
