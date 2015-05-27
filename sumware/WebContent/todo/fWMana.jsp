@@ -17,6 +17,59 @@
 		console.log("후후후후 ㅍ::::",$('#tomem').val());
 		$('#goFk'+tonum).submit();
 	}
+	
+	
+	// 페이지 테스트
+	var rowsPerPage =7;
+	var eventSource;
+	var cheight=$('.chat').height();
+	function push(){
+		if(typeof(EventSource) != "undefined"){
+			eventSource = new EventSource("sumware?model=sns&submod=pushSns&sdept=${v.memdept}&page=1&rowsPerPage="+rowsPerPage); // push를 받을수 있는 브라우져인지 판단.
+			// EventSource EventListener의 종류
+			// onmessage : 서버가 보낸 push메세지가 수신되면 발생
+			// onerror : 서버가 보낸 push에서 에러가 발생되었을때
+			// onopen : 서버가 연결이 되었을 때 발생
+			eventSource.onmessage = function(event){
+				$(".chat").html(event.data);
+				
+			};
+// 			eventSource.close();
+		}else{
+			$(".chat").html("해당 브라우저는 지원이 안됩니다.");
+		}
+	}
+	function pageScollforcenter(){
+	
+		if ($('.column').scrollTop() > cheight) {
+			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
+			setTimeout(function(){
+				rowsPerPage+=5;
+				cheight+=$('.chat').scrollTop();
+				console.log("rowsPerPage:"+rowsPerPage);
+				console.log("cheight:"+cheight);
+				eventSource.close();
+				$("#loading img").remove();
+				push();
+				
+			}, 1000);	
+					
+		}else if($('.column').scrollTop()==0){
+			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
+			setTimeout(function(){
+				rowsPerPage=7;
+				cheight=350;
+				console.log("rowsPerPage:"+rowsPerPage);
+				console.log("cheight:"+cheight);
+				eventSource.close();
+				$("#loading img").remove();
+				push();
+				
+			}, 1000);
+		}
+	}
+	
+	
 </script>
 </head>
 <div class="container">
@@ -35,7 +88,9 @@
 						<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">부서업무</strong>
 					</div>
 					<div class="panel-body">
-						<div class="column" style="overflow: auto">
+					<div class="column" style="height:450px; overflow-y:scroll;" onscroll="pageScollforcenter()">
+					
+					
 						<c:forEach var="fw" items="${fwList }">
 						<div class="low-lg-${fw.torownum }">
 							<div class="panel panel-success">
@@ -114,7 +169,11 @@
 						</div>
 						</c:forEach>
 						<!-- /.col-lg-4 -->
-					</div>
+		
+						</div>
+						<div id="loading" style="width: 100%; float:left; text-align: center;">
+					
+						</div>
 					</div>
 				</div>
 			</div>

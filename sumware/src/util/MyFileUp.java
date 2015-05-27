@@ -45,6 +45,7 @@ public class MyFileUp {
 		System.out.println("fileName : "+fileName);
 		if(fileName != null && fileName.length() != 0){
 			part.write(fileName);
+	
 		}
 		return result;
 	}

@@ -40,7 +40,7 @@ function getJobDetail(tonum){
 					<c:forEach var="teamjoblist" items="${teamJobList }">
 						
 						
-						<div class="low-lg-${deptjoblist.tonum }">
+						<div class="low-lg-12">
 							<div class="panel panel-success">
 								<div class="panel-heading">
 								<i class="fa fa-pencil"></i>

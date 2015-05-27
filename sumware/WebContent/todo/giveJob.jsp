@@ -97,13 +97,13 @@
 												<div id="membersjob${tolist.tonum}"></div>
 												<label class="control-label" for="inputSuccess">업무 지정</label>
 											
-												<select name="memjobName" class="form-control" id="memjobName${tolist.tonum}" style="width: 30%">
+												<select name="memjobName" class="form-control" id="memjobName${tolist.tonum}" style="width: 45%">
 													<option value="">사원선택</option>
 													<c:forEach var="teamMemList" items="${teamMemberList }">
 													<option value="${teamMemList.memnum }">${teamMemList.memname}</option>
 													</c:forEach>
 												</select>
-												<input type="text" id="jobcont${tolist.tonum}">
+												<input type="text" id="jobcont${tolist.tonum}" style="width: 60%">
 												<button type="button" onclick="javascript:insertJob(${tolist.tonum })"><i class="fa fa-plus"></i></button>
 												
 											</div>
