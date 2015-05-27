@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%-- CommentPage(S) --%>
 <div class="wrap2">
-
 	<h2 class="tit-comment">댓글 작성하기</h2>
 	<!-- comment-list(S) -->
 	<ul class="comment-list">
+	<c:foreach var="clist" items="${clist }">
 		<li>
 			<img class="comment-img" src="img/pic.PNG" alt="" />
 			<div>
@@ -20,14 +20,7 @@
 			</span>
 			<!-- 작성자일 경우에만 노출 됨  -->
 		</li>
-		<li>
-			<img class="comment-img" src="img/pic.PNG" alt="" />
-			<div>
-				<strong>홍길동</strong>
-				<p>댓글내용입니다.</p>
-				<span class="date">2015-05-26</span>
-			</div>
-		</li>
+	</c:foreach>
 	</ul>
 	<!-- comment-list(E) -->
 	
