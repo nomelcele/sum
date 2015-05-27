@@ -12,6 +12,7 @@ import util.MyMap;
 import util.MyPage;
 import controller.ModelForward;
 import dao.SnsDao;
+import dto.CommVO;
 import dto.SnsVO;
 
 public class SnsModel implements ModelInter{
@@ -67,7 +68,7 @@ public class SnsModel implements ModelInter{
 				outs.append(v.getSnum());
 				outs.append(",1)'>댓글</a>");
 				outs.append("<hr/>");
-				outs.append("<div id='wrap2'");
+				outs.append("<div id='wrap2'>");
 				outs.append("</div>");
 				outs.append("</li>");
 			}
@@ -87,6 +88,15 @@ public class SnsModel implements ModelInter{
 			int snum = Integer.parseInt(request.getParameter("snum"));
 			commTotalCount = SnsDao.getDao().snsCommTotalCount(snum);
 			Map<String,Integer> map = MyPage.getMp().pageProcess(request, rowsPerPage, pagesPerBlock, etc, 0, commTotalCount);
+			map.put("commsns", snum);
+			ArrayList<CommVO> commSnsList = SnsDao.getDao().getCommList(map);
+		
+			request.setAttribute("commSnsList", commSnsList);
+	
+			url="todo/snsComm.jsp";
+			method=true;
+		}else if(submod!=null&&submod.equals("snsCommInset")){
+			Map<String, String> map = MyMap.getMaps().getMapList(request);
 			
 		}
 		
