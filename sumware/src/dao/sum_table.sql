@@ -271,3 +271,7 @@ alter table mail drop column mailrname;
 --comm 제약조건 추가
 alter table comm add commsns number(10);
 alter table comm add constraint comm_sns_fk foreign key(commsns) REFERENCES sns(snum) on delete cascade;
+
+--member memprofile 제약조건 삭제
+alter table member drop constraint member_memprofile_nn cascade;
+alter table member drop constraint member_memaddr_nn cascade;
