@@ -55,7 +55,8 @@
 			<a href="#" class="list-group-item disabled"><span
 				class="glyphicon glyphicon-pencil"></span><strong
 				class="primary-font">Todo</strong></a> 
-				<a href="javascript:todoFormGo('todoForm')" class="list-group-item">부서 업무</a> 
+<!-- 				<a href="javascript:todoFormGo('todoForm')" class="list-group-item">부서 업무</a>  -->
+				<a href="javascript:selectMenu('deptTodo')" class="list-group-item">부서 업무</a> 
 				<a href="javascript:todoFormGo('teamTodoForm')" class="list-group-item">팀 업무</a>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
 				<a href="javascript:todoFormGo('manageJob1')" class="list-group-item">업무관리</a>

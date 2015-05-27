@@ -23,10 +23,41 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- 메인 -->
 <script>
+	$(function() {
+		selectMenu(sel);
+	});
+
+
 	function openWin(){
 		var opt= "width=700, height=800, scrollbars=yes";	
 		window.open("sumware?model=messenger&submod=messengerForm","MessengerMain",opt);
 	}
+	
+
+	function selectMenu(sel){
+		// 메뉴 선택
+			alert("메서드호출");
+			if(sel=='deptTodo'){
+				alert("deptTodo실행");
+				
+				$.ajax({
+					type : "get",
+					url : "sumware",
+					data : {
+						model:"todo", 
+						submod:"todoForm",
+						memdept:"${sessionScope.v.memdept}"
+						},
+					success : function(result){
+							
+							$("#menuTarget").html(result);
+							alert(result);
+						}
+					});
+				
+			}
+	}
+	
 </script>
 <!-- /메인 -->
 <script>
@@ -255,6 +286,24 @@
 		check = false;
 		loopKey = false;
 	}
+	
+	function getJobDetail(tonum){
+		$("#memlisttarget"+tonum).toggle("slow");
+		$("#detail"+tonum).toggle("slow");
+		$.ajax({
+			type : "post",
+			url : "sumware",
+			data : {model:"todo", 
+				submod:"showmemlist", 
+				jobtonum:tonum,
+				},
+			success : function(result){
+				$("#memlisttarget"+tonum).html(result);
+			
+			}
+		});
+	}
+	
 </script>
 
 </head>
@@ -271,7 +320,7 @@
 		<div class="nav navbar-right">
 			<ul class="nav navbar-nav">
 				<li><a href="sumware?model=index">메인</a></li>
-				<li><a href="sumware?model=todo&submod=todoForm&memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
+				<li><a href="sumware?model=todo&submod=firsttodoForm&memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
 				<li><a href="sumware?model=mail&submod=mailMain">Mail</a></li>
 				<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
 				<li><a href="sumware?model=board&submod=boardList&page=1">Board</a></li>

@@ -31,7 +31,20 @@ public class TodoModel implements ModelInter{
 		boolean method=false;
 		
 		if(submod.equals("todoForm")){
+			System.out.println("submod todoForm들어옴");
+		
+			int todept = Integer.parseInt(request.getParameter("memdept"));
+			System.out.println("memdept : "+todept);
 			
+			
+			//부서업무 리스트 뽑아줌
+			
+			ArrayList<TodoVO> deptJobList = TodoDao.getDao().getDeptJob(todept);
+			request.setAttribute("deptJobList", deptJobList);
+			
+			url = "todo/Todo.jsp";
+			method=true;	
+		}else if(submod.equals("firsttodoForm")){
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			int todept = Integer.parseInt(request.getParameter("memdept"));
 			System.out.println("memdept : "+todept);
@@ -48,6 +61,8 @@ public class TodoModel implements ModelInter{
 			
 			url = "todo/todoMain.jsp";
 			method=true;	
+			
+			
 		}else if(submod.equals("addtodoForm")){
 			System.out.println("addtodoForm 들어왔어");
 			url="todo/addTodo.jsp";

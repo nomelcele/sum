@@ -2,37 +2,16 @@
 <%@page import="dto.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 부서 업무 부분 뷰 -->
 
 <script>
 
-function getJobDetail(tonum){
-	$("#memlisttarget"+tonum).toggle("slow");
-	$("#detail"+tonum).toggle("slow");
-	$.ajax({
-		type : "post",
-		url : "sumware",
-		data : {model:"todo", 
-			submod:"showmemlist", 
-			jobtonum:tonum,
-			},
-		success : function(result){
-			$("#memlisttarget"+tonum).html(result);
-		
-		}
-	});
-}
+
 
 </script>
 
 
-<div class="row">
-	
-
-	<div class="wrap">
-		<%@include file="/contentLeft.jsp" %>
-		<!-- 부서업무 부분!! -->
-		<div class="col-lg-4" style="width: 35%">
 			<div class="chat-panel panel panel-default">
 				<div class="panel-heading">
 					<i class="fa fa-pencil-square-o"></i> <strong class="primary-font">부서업무</strong>
@@ -80,9 +59,5 @@ function getJobDetail(tonum){
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- 부서업무 부분 끝!!! -->
-		<%@include file="todoSns.jsp" %>
-	</div>
-	</div>
+
 
