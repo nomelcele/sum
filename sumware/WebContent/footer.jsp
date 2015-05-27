@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
+    <div class="container">
 <footer id="footer" class="footer">
 	<div class="container">
 		<div class="row">
@@ -20,6 +21,6 @@
 </footer>
 
 <%-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 --%>
-
+</div>
 </body>
 </html>
