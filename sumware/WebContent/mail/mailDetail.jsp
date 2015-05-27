@@ -7,8 +7,7 @@
 			<%@include file="/contentLeft.jsp"%>
 			<div class="col-lg-8" id="mainContent">
 				<div>
-					<input type="button" value="답장" onclick="replyFormGo()">
-					<input type="button" value="삭제" onclick=""><br />
+					<input type="button" value="답장" onclick="replyFormGo()"><br />
 					제목: ${detail.mailtitle}<br /> 
 					보낸 사람: ${detail.mailsname}<br /> 
 					받는 사람: ${detail.mailrname}<br /> 

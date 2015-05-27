@@ -12,6 +12,7 @@
 		<c:choose>
 			<c:when test="${tofrom eq '3'}">
 			<input type="button" value="영구 삭제" onclick="maildeleteGo()">
+			<input type="button" value="복구" onclick="mailRecover()">
 			</c:when>
 			<c:otherwise>
 			<input type="button" value="삭제" onclick="mailTrashGo()">
@@ -97,6 +98,10 @@
 		$("#userid").attr("value","${sessionScope.v.meminmail}");
 		$("#tofrom").attr("value","${tofrom}")
 		$("#f").submit();
+	}
+	
+	function mailRecover(){
+		
 	}
 	
 	function checkAll(obj){
