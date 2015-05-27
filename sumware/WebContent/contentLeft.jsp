@@ -16,8 +16,8 @@
 		<input type="hidden" id="memdept" name="memdept">
 		
 </form>
-<div class="col-lg-1" style="width: 250px">
-	<div class="row-lg-1">
+<div class="col-lg-4" style="width: 250px">
+	<div class="row-lg-6">
 		<div class="chat-panel panel panel-default">
 			<div class="panel-heading">
 				<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">My
@@ -49,7 +49,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row-lg-2">
+	<div class="row-lg-6">
 		<div class="list-group">
 
 			<a href="#" class="list-group-item disabled"><span

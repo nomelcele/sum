@@ -4,12 +4,15 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 업무 관리(팀장일 경우) 부분 뷰 -->
-<%@include file="/top.jsp"%>
+<div class="container">
 <div class="row">
-	<div class="wrap">
+<%@include file="/top.jsp"%>
+</div>
+<div class="row">
+
 		<%@include file="/contentLeft.jsp" %>
 		<!-- 팀장 업무관리 -->
-			<div class="col-lg-2" style="width: 35%">
+			<div class="col-lg-4" style="width: 35%">
 				<div class="chat-panel panel panel-default">
 					<div class="panel-heading">
 						<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">부서업무</strong>
@@ -48,7 +51,6 @@
 									</div>
 								</c:forEach>
 							</div>
-
 						</div>
 					</div>
 				</div>
@@ -56,5 +58,8 @@
 		<!-- 팀장 업무관리 끝!!! -->
 	<%@include file="todoSns.jsp" %>
 	</div>
-	</div>
+
+<div class="row">
 <%@include file="/footer.jsp" %>
+</div>
+</div>

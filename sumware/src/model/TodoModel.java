@@ -77,8 +77,6 @@ public class TodoModel implements ModelInter{
 			String childmod = request.getParameter("childmod");
 			if(childmod!=null && childmod.equals("approveTodo")){
 				// 리스트의 승인여부 n을 y로 바꿈!!!!
-//				int tonum= Integer.parseInt(request.getParameter("tonum"));
-//				String tocomm = request.getParameter("tocomm");
 				HashMap<String,String> map = MyMap.getMaps().getMapList(request);
 				TodoDao.getDao().confirmTodo(map, "y");
 				//캘린더에 등록
@@ -124,13 +122,6 @@ public class TodoModel implements ModelInter{
 			request.setAttribute("fwList", list);
 			url="todo/fWMana.jsp";
 			method=true;
-		}else if(submod.equals("deptList")){
-			System.out.print("deptList 들어옴");
-			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
-			ArrayList<TodoVO> todoList = TodoDao.getDao().getDeptList(map);
-			request.setAttribute("deptList", todoList);
-			// 부서의 부서업무들 나열하기 위한 부분!!! 추가 필요!!!!!!!
-			// 필요필요필필요해해해해해해해해 만들어야돼
 		}else if(submod.equals("giveJobForm")){
 			System.out.println("giveJobForm들어옴");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);

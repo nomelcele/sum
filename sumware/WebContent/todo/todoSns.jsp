@@ -93,7 +93,7 @@ $(function(){
 </style>
 </head>
 <body>
-	<div class="col-lg-3" style="width: 40%">
+	<div class="col-lg-4" style="width: 40%">
 				<div class="chat-panel panel panel-default">
 					<div class="panel-heading">
 						<i class="fa fa-bar-chart-o fa-fw"></i> <strong

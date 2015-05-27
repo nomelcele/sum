@@ -22,13 +22,15 @@ function getJobDetail(tonum){
 }
 
 </script>
-
-<%@include file="/top.jsp"%>
+<div class="container">
 <div class="row">
-	<div class="wrap" style="margin-top: 50px;">
+<%@include file="/top.jsp"%>
+</div>
+<div class="row">
+	<div class="wrap">
 		<%@include file="/contentLeft.jsp" %>
-		<!-- 부서업무 부분!! -->
-		<div class="col-lg-2" style="width: 35%">
+		<!-- 팀업무 부분!! -->
+		<div class="col-lg-4" style="width: 35%">
 			<div class="chat-panel panel panel-default">
 				<div class="panel-heading">
 					<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">팀 업무</strong>
@@ -73,8 +75,11 @@ function getJobDetail(tonum){
 				</div>
 			</div>
 		</div>
-		<!-- 부서업무 부분 끝!!! -->
+		<!-- 팀업무 부분 끝!!! -->
 		<%@include file="todoSns.jsp" %>
 	</div>
-	</div>
-	<%@include file="/footer.jsp" %>
+</div>
+<div class="row">
+<%@include file="/footer.jsp" %>
+</div>
+</div>

@@ -4,15 +4,16 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 업무 추가 부분 뷰 -->
-<%@include file="/top.jsp"%>
+<div class="container">
 <div class="row">
-	
+<%@include file="/top.jsp"%>
+</div>
+<div class="row">
 
-	<div class="wrap">
 		<%@include file="/contentLeft.jsp" %>
 		
 	<!-- 업무추가  -->
-		<div class="col-lg-2" style="width: 35%">
+		<div class="col-lg-4" style="width: 35%">
 			<div class="chat-panel panel panel-default">
 				<div class="panel-heading">
 					<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">업무 추가</strong>
@@ -84,7 +85,9 @@
 		<!-- 업무 추가부분 끝 -->
 
 	<%@include file="todoSns.jsp" %>
-	</div>
-	</div>
-<%@include file="/footer.jsp" %>
 
+</div>
+<div class="row">
+<%@include file="/footer.jsp" %>
+</div>
+</div>

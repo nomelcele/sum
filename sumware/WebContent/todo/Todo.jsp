@@ -29,10 +29,10 @@ function getJobDetail(tonum){
 <div class="row">
 	
 
-	<div class="wrap" style="margin-top: 50px;">
+	<div class="wrap">
 		<%@include file="/contentLeft.jsp" %>
 		<!-- 부서업무 부분!! -->
-		<div class="col-lg-2" style="width: 35%">
+		<div class="col-lg-4" style="width: 35%">
 			<div class="chat-panel panel panel-default">
 				<div class="panel-heading">
 					<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">부서업무</strong>
