@@ -63,6 +63,7 @@ public class LoginModel implements ModelInter {
 			method = true;
 
 		} else if (submod != null && submod.equals("logout")) {
+			System.out.println("로그아웃~!");
 			url = "index.jsp";
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			LoginDao.getDao().outLog(memnum);
