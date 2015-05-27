@@ -60,9 +60,9 @@ function getJobDetail(tonum){
 									style="cursor:pointer"> detail</a>
 									<div id="memlisttarget${teamjoblist.tonum }" style="display:none"></div>
 									<div id="detail${teamjoblist.tonum }" style="display:none">
-									<br/>
-									<p>${teamjoblist.tocont }</p>
-									<p>첨부파일 다운로드 부분</p>
+										<br/>
+										<p>${teamjoblist.tocont }</p>
+										<p>첨부파일 다운로드 부분</p>
 									</div>
 									
 								</div>

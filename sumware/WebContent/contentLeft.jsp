@@ -79,7 +79,7 @@
 <c:if test="${param.model eq 'calendar' }">
       <div class="chat-panel panel panel-default">
          <div class="panel-heading">
-            <i class="fa fa-comments fa-fw"></i> <strong class="primary-font">My
+            <i class="fa fa-user"></i> <strong class="primary-font">My
                profile</strong>
         
          <div class="panel-body">

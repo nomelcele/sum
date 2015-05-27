@@ -96,7 +96,7 @@ $(function(){
 	<div class="col-lg-4" style="width: 40%">
 				<div class="chat-panel panel panel-default">
 					<div class="panel-heading">
-						<i class="fa fa-bar-chart-o fa-fw"></i> <strong
+						<i class="fa fa-comments fa-fw"></i> <strong
 							class="primary-font">부서 SNS</strong>
 					</div>
 					<!-- /.panel-heading -->

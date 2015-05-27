@@ -42,32 +42,51 @@
 	function pageScollforcenter(){
 	
 		if ($('.column').scrollTop() > cheight) {
-			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
+			$("#loadingcenter").html("<img src='img/loading.gif' alt='loading'>");
 			setTimeout(function(){
 				rowsPerPage+=5;
 				cheight+=$('.chat').scrollTop();
 				console.log("rowsPerPage:"+rowsPerPage);
 				console.log("cheight:"+cheight);
 				eventSource.close();
-				$("#loading img").remove();
+				$("#loadingcenter img").remove();
 				push();
 				
 			}, 1000);	
 					
 		}else if($('.column').scrollTop()==0){
-			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
+			$("#loadingcenter").html("<img src='img/loading.gif' alt='loading'>");
 			setTimeout(function(){
 				rowsPerPage=7;
 				cheight=350;
 				console.log("rowsPerPage:"+rowsPerPage);
 				console.log("cheight:"+cheight);
 				eventSource.close();
-				$("#loading img").remove();
+				$("#loadingcenter img").remove();
 				push();
 				
 			}, 1000);
 		}
 	}
+	
+	
+	function getJobDetail(tonum){
+		$("#memlisttarget"+tonum).toggle("slow");
+		$("#detail"+tonum).toggle("slow");
+		$.ajax({
+			type : "post",
+			url : "sumware",
+			data : {model:"todo", 
+				submod:"showmemlist", 
+				jobtonum:tonum,
+				},
+			success : function(result){
+				$("#memlisttarget"+tonum).html(result);
+			
+			}
+		});
+	}
+	
 	
 	
 </script>
@@ -96,10 +115,19 @@
 							<div class="panel panel-success">
 								<div class="panel-heading">${fw.totitle }</div>
 								<div class="panel-body">
-									<p>${fw.tostdate } ~ ${fw.toendate }</p>
+									<p><i class="fa fa-calendar-o"></i>${fw.tostdate } ~ ${fw.toendate }</p>
 									<p>${fw.tocont }</p>
 								</div>
 								<div class="panel-footer">
+									<a class="fa fa-align-justify" 
+									onclick="javascript:getJobDetail(${fw.tonum })"
+									style="cursor:pointer"> detail</a>
+									<div id="detail${fw.tonum }" style="display:none">
+										<br/>
+										<p>${fw.tocont }</p>
+										
+									</div>
+								
 								<table class="table table-striped table-bordered table-hover" 
 							style="margin: auto; width: 90%; padding-left:15px; padding-right:15px;">
 								<thead>
@@ -171,7 +199,7 @@
 						<!-- /.col-lg-4 -->
 		
 						</div>
-						<div id="loading" style="width: 100%; float:left; text-align: center;">
+						<div id="loadingcenter" style="width: 100%; float:left; text-align: center;">
 					
 						</div>
 					</div>
