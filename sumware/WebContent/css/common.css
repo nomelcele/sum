@@ -529,6 +529,17 @@ button {
 	height: 55px;
 	overflow: hidden;
 }
+.snscomment-img{
+	position:absolute;
+	top: 50%;
+	left: 15px;
+	width: 20px;
+	height: 30px;
+	margin-top: -27.5px;
+	border-radius:100px;
+	border: 1px solid #08AB8B;
+	overflow: hidden;
+}
 .comment-list strong {
 	display:block;
 	width:100%;
@@ -556,12 +567,20 @@ button {
     box-sizing: border-box;
     height: 90px;
 }
+snscomment-img
 .btn-comm {
 	float:right;
 	width:10%;
 	height:90px;
 	font-weight: 700;
 	font-size: 15px;
+}
+.btn-snscomm{
+	float:right;
+	width:10%;
+	height:30px;
+	font-weight: 500;
+	font-size: 11px;
 }
 .comment-btn {
 	position:absolute;
