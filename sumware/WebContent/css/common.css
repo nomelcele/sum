@@ -1,7 +1,72 @@
-@CHARSET "UTF-8";
+@charset "utf-8";
+/* 아이콘  */
+@import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
 
 
-/************** LAYOUT ****************/
+/************************** [ RESET(NORMALIZE) ] *********************************/
+/* 아래부터 태그가 기본적으로 가진 CSS 초기화 부분 (reset) */
+html,body,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,caption,tr,td,th,p,form,fieldset,legend,label,button,input,select,textarea,figure,figcaption,b{margin:0;padding:0}
+ul,ol{list-style:none}
+a:link,a:visited,a:active{text-decoration:none; color:#222}
+fieldset,img{border:0}
+legend,caption{display:none}
+a{display:block}
+
+
+
+
+/************************** [ INITIALIZE(PRIMARY DESIGN) ] *********************************/
+/* 아래부터 초기 디자인 셋팅 부분 (이니셜라이즈) */
+body {
+	/* Verdana,맑은고딕으로 선언했기 때문에 영문,숫자는 Verdana 폰트로, 한글은 맑은고딕으로 출력됨 */
+	font-family:Verdana,"맑은고딕",Dotum,simsun,Arial, Geneva, Helvetica, sans-serif,"Apple-Gothic","애플고딕","Droid Sans";
+	font-size: 12px;line-height: 1.5;
+	color: #888;
+}
+button, input, select, option, textarea, a {
+	/* font-family:inherit : 폰트 패밀리를 부모로부터(여기선 body) 상속(inheritance) 받게됨 */
+	font-family:inherit;
+	font-size:inherit;
+	color:inherit;
+} 
+/* ( table ) */
+#wrap table {
+	width: 100%;
+	margin:auto;
+	font-size:13px;
+	border:1px solid #ccc;
+	border-spacing:0;
+	border-collapse:collapse;
+	color:#333;
+}
+#wrap table td , #wrap table th {
+	padding:5px;
+	border-right:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	border-color:#ccc;
+}
+#wrap table th {
+}
+
+
+/************************** [ GLOBAL DESIGN ] *********************************/
+/* 아래부터 사이트 전역에서 쓰이는 디자인 클래스들 모음 */
+/* button-div (left,center,right) */
+.button-div {
+	padding-top:15px;
+}
+.button-div:after {content:"";display:block;clear:both;}
+.button-div .left {float:left}
+.button-div .right {float:right}
+.button-div button {margin-left:8px}
+.button-div button:first-child {margin-left:0}
+
+
+
+
+/************************** [ DESIGN ] *********************************/
+/* 아래부터 사용자 커스터마이징 디자인 셋팅 부분 */
+/************** { LAYOUT } ****************/
 #wrap:after {display:block;content:"";clear:both;}
 #wrap {
 	width: 1190px;
@@ -9,8 +74,6 @@
 	padding: 20px 20px 60px 20px;
 	box-sizing: border-box;
 }
-
-div#wrap {}
 /* 표준 너비 1280px 기준 */
 .lnb-area {
 	float:left;
@@ -38,14 +101,165 @@ div#wrap {}
 
 
 
-/************** BOARD ****************/
 
-/* (board common) */
-.board {
-	
+/************** { MAIN } ****************/
+.bmg {
+   background-image: url('img/bag.jpg'); 
+   background-repeat: repeat-y; 
+   background-position: top left, top right; 
+   width: 600px; 
+   height: 200px; 
+   border: 3px solid #000000; 
+} 
+.main-text {
+	position: absolute;
+	top: 50px;
+	width: 96.66666666666666%;
+	color: #FFF;
 }
 
-/* board button */
+.btn-min-block {
+	min-width: 170px;
+	line-height: 26px;
+}
+
+.btn-clear {
+	margin-right: 15px;
+	border-color: #FFF;
+	border-width: 2px;
+	color: #FFF;
+}
+
+.btn-clear:hover {
+	background-color: #6699CC;
+	color: #000;
+}
+.arrowalign {top: 50%;}
+.arrowalign:hover {vertical-align: middle;}
+.carousel-control {
+	color: #fff;
+	top: 50%;
+	bottom: auto;
+	padding-top: 0px;
+	width: 30px;
+	height: 30px;
+	text-shadow: none;
+	opacity: 0.9;
+}
+
+.main {padding-top: 30px;}
+/* ( footer ) */
+.footer {
+	margin: 0 auto;
+	padding-top: 80px;
+	height: 200px;
+	background-color: #0eb493;
+	color: #fff;
+}
+.form-inline {
+	padding: 30px;
+	text-align: right;
+}
+
+
+
+
+/************** { JOIN } ****************/
+.page-header {
+	text-align: center;
+}
+
+/*social buttons*/
+.btn-social {
+	color: white;
+	opacity: 0.9;
+}
+
+.btn-social:hover {
+	color: white;
+	opacity: 1;
+}
+
+.btn-linkedin {
+	background-color: #0e76a8;
+	opacity: 0.9;
+}
+
+.btn-github {
+	background-color: #000000;
+	opacity: 0.9;
+}
+
+.btn-google {
+	background-color: #c32f10;
+	opacity: 0.9;
+}
+
+.btn-stackoverflow {
+	background-color: #D38B28;
+	opacity: 0.9;
+}
+
+/* resume stuff */
+.bs-callout {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	border-color: #eee;
+	border-image: none;
+	border-radius: 3px;
+	border-style: solid;
+	border-width: 1px 1px 1px 5px;
+	margin-bottom: 5px;
+	padding: 20px;
+}
+
+.bs-callout:last-child {
+	margin-bottom: 0px;
+}
+
+.bs-callout h4 {
+	margin-bottom: 10px;
+	margin-top: 0;
+}
+
+.bs-callout-danger {
+	border-left-color: #d9534f;
+}
+
+.bs-callout-danger h4 {
+	color: #d9534f;
+}
+
+.resume .list-group-item:first-child, .resume .list-group-item:last-child
+	{
+	border-radius: 0;
+}
+
+/*makes an anchor inactive(not clickable)*/
+.inactive-link {
+	pointer-events: none;
+	cursor: default;
+}
+
+.resume-heading .social-btns {
+	margin-top: 15px;
+}
+
+@media ( max-width : 992px) {
+	.resume-heading .social-btn-holder {
+		padding: 5px;
+	}
+}
+
+
+
+
+
+/************** { BOARD } ****************/
+/* ( board - common ) */
+/* board buttons */
 button {
 	min-height:25px;
 	min-width:60px;
@@ -58,28 +272,25 @@ button {
 	background-image: -o-linear-gradient(top,#fff,#e6e6e6);
 	background-image: linear-gradient(to bottom,#fff,#e6e6e6);
 	background-repeat: repeat-x;
-  border-width:1px;border-radius:3px;
-  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-  border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
-  color: #333;
-  text-shadow: 0 1px 1px rgba(255,255,255,.75);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);
+	border-width:1px;border-radius:3px;
+	border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+	border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
+	text-shadow: 0 1px 1px rgba(255,255,255,.75);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);
+	color: #333;
 }
-/* (heading-page) */
+/* heading-page */
 .heading-page {
 	margin: 0 0 25px;
 	padding: 12px;
 	font-size:16px;font-weight:700;
-	font-family:Verdana,"맑은고딕",MalgunGothic,"돋움",Dotum,sans-serif;
 	/* border: 2px solid #D7EDE9; */
 	box-shadow: 2px 2px 6px #E0E0E0;
 	border-radius: 5px;
 	color: #00624F;
-	
-	
 }
 
-/* (title-board) */
+/* title-board */
 .title-board {
 	position:relative;
 	padding-left:32px;
@@ -95,24 +306,14 @@ button {
 	width:32px;height:32px;
 	background: url(../img/bul_title_board.png) 0 -7px no-repeat;
 }
-/* (board-form) */
+/* board-form */
 .board-form {
 	margin-bottom:10px;
 }
 .board-form .left {float:left}
 .board-form .right {float:right}
 .board-form:after {display:block;content:"";clear:both}
-/* (board-list) */
-#wrap .board-list {
-	width: 100%;
-	margin:auto;
-	font-size:13px;
-	border-spacing:0;
-	border-collapse:collapse;
-	border:1px solid #ccc;
-	color:#333;
-	/* border-radius: 11px; */
-}
+/* ( board - list ) */
 #wrap .board-list td , #wrap .board-list th {
 	padding:5px;
 }
@@ -129,29 +330,73 @@ button {
 #wrap .board-list tbody > tr > td.num,
 #wrap .board-list tbody > tr > th.num {
 	/* 첫번째 글번호 컬럼 */
-	font-family:Verdana, "돋움", sans-serif;
 	font-size:11px;
 	background-color: #F4F6F5;
 	text-align:center;
 	color:#666;
 }
-th {
-	border-right:1px solid #ccc;
-	border-bottom:1px solid #ccc;
-	border-color:#ccc;
-}
 .board-list thead td,.board-list thead th {
 	background-color:#f1f1f1;
 }
-
-/* ( board-write ) */
-.board-write th {
-	text-align:right;
-	background-color: #F4F6F5;
+#content2 {
+	width: 100%;
+	text-align: center;
 }
-/* ( board-detail ) */
+#content2 #stboardWriter {
+	width: 850px;
+	margin-left: 100px;
+}
+
+#content2 #stTitle,#stcontent {
+	width: 100%;
+	margin-top: 30px;
+}
+#content2 #stTitle tr td {
+	height: 40px;
+	font-size: 25px;
+	background-color: #007bbe;
+	color: #FFFFFF;
+}
+#content2 #stcontent thead td {
+	height: 30px;
+	background-color: #007bbe;
+	color: #FFFFFF;
+	font-size: 15px;
+}
+#content2 #stcontent tbody td {
+	height: 30px;
+	background-color: #FFFFFF;
+	color: #7d7d7d;
+}
+/* 스타일에서 클래스를  중복해서 정의하기 위한방법 */
+#content2 #stcontent .td {
+	text-align: left;
+	padding-left: 25px;
+}
+
+#content2 #stcontent .title input {width: 350px;}
+#content2 #stcontent .instyle {
+	background-color: #0099ff;
+	height: 30px;
+	color: #fff;
+	font-weight: bold;
+}
+#content2 #stcontent .writer input {width: 250px;}
+#content2 #stcontent .tel input {width: 100px;}
+#content2 #stcontent .content textarea {
+	width: 250px;height: 300px;
+	text-align: left;
+}
+
+/* btn */
+#content2 #stcontent .btn {
+	height: 25px;width: 120px;
+	font-weight:700;
+	background-color: #f927a9;
+	color: #fff;
+}
+/* ( board - detail ) */
 #wrap .board-detail {
-	/* margin-top:20px; */
 	font-family:Tahoma,"돋움",Dotum,sans-serif;
 	font-size:12px;
 	border: 1px solid #00856B;
@@ -188,9 +433,6 @@ th {
 	margin:0;padding:17px;
 	box-sizing: border-box;
 }
-a {
-	color : black;
-}
 #wrap .board-detail .board-detail-article div div {
 	/* 본문 높이조절 : min-height  */
 	min-height:200px;
@@ -200,62 +442,16 @@ a {
 	word-break:break-all;
 	white-space:pre-wrap;
 }
-
-
-
-/*
-.board-list {
-	color:red
-}
-.board {
-	color:blue;	
-}
-
-//위의 2가지 경우를 무시하고, 아래 CSS가 적용됨
-.board-list.board {
-	color:green;
-}
-
-*/
-
-
-/* paging */
-.paging {
-	margin-top: 15px;
-	text-align:center;
-}
-.paging ul {display:inline-block}
-.paging li, .paging ul {list-style:none;margin: 0 10px;padding: 0;}
-.paging button[class^="paging-"] {
-	display:inline-block;
-}
-.paging li {
-	display:inline-block;
-	margin: 0 2px;
-	font-size: 12px;
-	color: #333;
-	cursor:pointer;
-}
-.paging li.now a {
-	color:green;
+/* ( board - write ) */
+.board-write th {
+	text-align:right;
+	background-color: #F4F6F5;
 }
 
 
-/* button-div (left,center,right) */
-.button-div {
-	padding-top:15px;
-}
-.button-div:after {content:"";display:block;clear:both;}
-.button-div .left {float:left}
-.button-div .right {float:right}
-.button-div button {margin-left:8px}
-.button-div button:first-child {margin-left:0}
 
 
-
-
-
-/**************** ( COMMENT ) ****************/
+/*************************** { COMMENT } **********************************/
 .tit-comment {
 	margin-top:40px;
 	font-size:17px;
@@ -340,5 +536,3 @@ a {
     line-height: 18px;
     padding-bottom: 2px;
 }
-
-
