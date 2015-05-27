@@ -21,44 +21,8 @@
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<!-- 메인 스크립트 -->
+<!-- 메인 -->
 <script>
-	function formGoGo(res){
-		alert("res:"+res);
-		if(res==1){
-			// 부서의 업무리스트를 쭉 뽑아주는 버튼
-			$('#mod').attr("value","todo");
-			$('#submod').attr("value","todoForm");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-			$('#memdept').attr("value","${sessionScope.v.memdept}");
-		}else if(res==2){
-			$('#mod').attr("value","mail");
-			$('#submod').attr("value","mailMain");
-		}else if(res==3){
-			$('#mod').attr("value","calendar");
-			$('#submod').attr("value","calList");
-		}else if(res==4){
-			$('#mod').attr("value","board");
-			$('#submod').attr("value","boardList");
-			$('#page').attr("value","1");
-			alert("page:"+$('#page').val());
-		}else if(res==5){
-// 			$('#mod').attr("value","messenger");
-// 			$('#submod').attr("value","messengerForm");
-			openWin();
-		}else if(res==6){
-			$('#mod').attr("value","join");
-			$('#submod').attr("value","memberForm");
-		}else if(res=7){
-			$('#mod').attr("value","login");
-			$('#submod').attr("value","logout");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-		}
-		alert("mod:"+$('#mod').val());
-		alert("submod:"+$('#submod').val());
-		$('#frmmain').submit();	
-		
-	}	
 	function openWin(){
 		var opt= "width=700, height=1000, scrollbars=yes";
 		var f = document.frmmain;
@@ -81,8 +45,7 @@
 		}
 	}
 </script>
-<!-- /메인 스크립트 -->
-
+<!-- /메인 -->
 <script>
 	function formGo(res){
 		$('#model').attr("value", "board");
@@ -159,17 +122,18 @@
 		</div>
 		<div class="nav navbar-right">
 			<ul class="nav navbar-nav">
-				<li><a href="#">메인</a></li>
-				<li><a href="javascript:formGoGo(1)">Todo</a></li>
-				<li><a href="javascript:formGoGo(2)">Mail</a></li>
-				<li><a href="javascript:formGoGo(3)">Calendar</a>
-				<li><a href="javascript:formGoGo(4)">Board</a></li>
-				<li><a href="javascript:formGoGo(6)">join</a></li>
-				<li><a href="javascript:formGoGo(5)">Messenger</a></li>
+				<li><a href="sumware?model=index">메인</a></li>
+				<li><a href="sumware?model=todo&submod=todoForm&memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
+				<li><a href="sumware?model=mail&submod=mailMain">Mail</a></li>
+				<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
+				<li><a href="sumware?model=board&submod=boarList&page=1">Board</a></li>
+				<li><a href="javascript:openWin()">Messenger</a></li>
 			</ul>
-			<ul class="nav navbar-right navbar-nav">
-				<li><a href="javaScript:formGoGo(7)"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
-			</ul>
+			<c:if test="${!empty sessionScope.v.memnum}">
+				<ul class="nav navbar-right navbar-nav">
+					<li><a href="sumware?model=login&submod=logout&memnum=${sessionScope.v.memnum}"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
+				</ul>
+			</c:if>
 		</div>
 	</div>
 </nav>
