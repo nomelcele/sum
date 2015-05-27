@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import util.MyMap;
 import controller.ModelForward;
 import dao.MemberDao;
-import dto.MemberVO;
 
 public class JoinModel implements ModelInter{
 
@@ -18,19 +17,21 @@ public class JoinModel implements ModelInter{
 			HttpServletResponse response) throws IOException {
 	
 		String submod= request.getParameter("submod");
+		System.out.println("join submod:::::"+submod);
 		String url="";
 		boolean method = false;
 		if(submod !=null && submod.equals("memberForm")){
 			
+			
 			url ="join/member.jsp";
 			method=true;
 			
-		}else if(submod !=null && submod.equals("join1")){
+		}else if(submod !=null && submod.equals("signup")){
 			HashMap<String, String> map= MyMap.getMaps().getMapList(request);
-			MemberDao.getDao().insert(map);
+			MemberDao.getDao().update(map);
 			
 			
-			url="join/membermain.jsp";
+			url="index.jsp";
 			method=true;
 		}
 					
@@ -40,4 +41,5 @@ public class JoinModel implements ModelInter{
 	
 	
 }
+
 

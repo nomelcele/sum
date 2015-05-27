@@ -79,16 +79,19 @@ public class MemberDao {
 		return result;
 	}
 	
-	public void insert(HashMap<String,String> map){
+	public void update(HashMap<String,String> map){
 		Connection con=null;
 		PreparedStatement pstmt=null;	
 		try {
 			con=ConUtil.getOds();
 			StringBuffer sql=new StringBuffer();
-			sql.append("update member set mempwd=? where memnum=?");
+			sql.append("update member set memaddr=?,mempwd=?, memprofile=?,meminmail=? where memnum=?");
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1,map.get("mempwd"));
-
+			pstmt.setString(1, map.get("memaddr"));
+			pstmt.setString(1, map.get("mempwd"));
+			pstmt.setString(3, map.get("memprofile"));
+			pstmt.setString(4, map.get("meminmail"));
+            pstmt.setInt(5, Integer.parseInt(map.get("memnum")));
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
