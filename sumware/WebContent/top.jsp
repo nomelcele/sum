@@ -126,7 +126,7 @@
 				<li><a href="sumware?model=todo&submod=todoForm&memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
 				<li><a href="sumware?model=mail&submod=mailMain">Mail</a></li>
 				<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
-				<li><a href="sumware?model=board&submod=boarList&page=1">Board</a></li>
+				<li><a href="sumware?model=board&submod=boardList&page=1">Board</a></li>
 				<li><a href="javascript:openWin()">Messenger</a></li>
 			</ul>
 			<c:if test="${!empty sessionScope.v.memnum}">
