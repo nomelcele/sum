@@ -192,7 +192,9 @@ button, input, select, option, textarea, a {
 .page-header {
 	text-align: center;
 }
-
+.dhpwd{
+	display: none;
+}
 /*social buttons*/
 .btn-social {
 	color: white;
