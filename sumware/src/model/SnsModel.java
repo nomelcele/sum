@@ -66,10 +66,9 @@ public class SnsModel implements ModelInter{
 				outs.append("<p>").append(v.getScont()).append("</p>");
 				outs.append("<a href='javascript:snsComm(");
 				outs.append(v.getSnum());
-				outs.append(",1)'>댓글</a>");
+				outs.append(",1)'>댓글(").append(v.getStocount());
+				outs.append(")</a>");
 				outs.append("<hr/>");
-				outs.append("<div id='wrap2'>");
-				outs.append("</div>");
 				outs.append("</li>");
 			}
 			outs.append("\n\n");
@@ -92,12 +91,30 @@ public class SnsModel implements ModelInter{
 			ArrayList<CommVO> commSnsList = SnsDao.getDao().getCommList(map);
 		
 			request.setAttribute("commSnsList", commSnsList);
-	
+			request.setAttribute("cosns", snum);
 			url="todo/snsComm.jsp";
 			method=true;
 		}else if(submod!=null&&submod.equals("snsCommInset")){
+			System.out.println("댓글을 입력하자~!");
 			Map<String, String> map = MyMap.getMaps().getMapList(request);
+			SnsDao.getDao().inssertSnsComm(map);
 			
+			//--리스트 받아오기
+			int rowsPerPage=5;
+			int pagesPerBlock=5;
+			int etc = 1;
+			int commTotalCount=0;
+			
+			commTotalCount = SnsDao.getDao().snsCommTotalCount(Integer.parseInt(map.get("commsns")));
+			Map<String,Integer> map2 = MyPage.getMp().pageProcess(request, rowsPerPage, pagesPerBlock, etc, 0, commTotalCount);
+			map2.put("commsns", Integer.parseInt(map.get("commsns")));
+			ArrayList<CommVO> commSnsList = SnsDao.getDao().getCommList(map2);
+		
+			request.setAttribute("commSnsList", commSnsList);
+			request.setAttribute("cosns",Integer.parseInt(map.get("commsns")));
+			//--리스트 받아오기끝
+			url="todo/snsComm.jsp";
+			method=true;
 		}
 		
 		return new ModelForward(url, method);

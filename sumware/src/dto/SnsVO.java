@@ -1,9 +1,15 @@
 package dto;
 
 public class SnsVO {
-	private int srnum,snum,sdept,smem;
+	private int srnum,snum,sdept,smem,stocount;
 	private String smemname,smemprofile,scont,simg,sdate;
 	
+	public int getStocount() {
+		return stocount;
+	}
+	public void setStocount(int stocount) {
+		this.stocount = stocount;
+	}
 	public int getSrnum() {
 		return srnum;
 	}

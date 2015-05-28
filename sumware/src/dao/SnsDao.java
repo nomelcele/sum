@@ -52,6 +52,7 @@ public class SnsDao {
 		ResultSet rs=null;
 		StringBuffer sql = new StringBuffer();
 		sql.append("select rownum srnum,m.memname,m.memprofile ,s.snum,s.scont,to_char(s.sdate,'MM')||'월'||to_char(s.sdate,'dd')||'일'||to_char(s.sdate,'hh:mm') sdate,s.sdept,s.smem");
+		sql.append(",(select count(*) cnt from comm where commsns=s.snum) stocount");
 		sql.append(" from (select * from sns s where s.sdept=? order by 1 desc) s,member m");
 		sql.append(" where m.memnum=s.smem and rownum between ? and ?");
 		try {
@@ -75,6 +76,7 @@ public class SnsDao {
 				v.setSdate(rs.getString("sdate"));
 				v.setSdept(rs.getInt("sdept"));
 				v.setSmem(rs.getInt("smem"));
+				v.setStocount(rs.getInt("stocount"));
 				snsList.add(v);
 			}
 		}catch(SQLException e){
@@ -176,7 +178,7 @@ public class SnsDao {
 		}
 		return commSnsList;
 	}
-	public void inssertSnsComm(HashMap<String,String> map){
+	public void inssertSnsComm(Map<String,String> map){
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		StringBuffer sql =new StringBuffer();
@@ -189,6 +191,7 @@ public class SnsDao {
 			pstmt.setInt(2, Integer.parseInt(map.get("comem")));
 			pstmt.setInt(3, Integer.parseInt(map.get("commsns")));
 			pstmt.executeUpdate();
+			
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{

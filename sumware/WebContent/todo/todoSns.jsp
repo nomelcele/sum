@@ -108,9 +108,9 @@ console.log("typeof:"+typeof(EventSource));
 			url:"sumware",
 			data:data,
 			success: function(result){
-				alert(result);
 				eventSource.close();
-				$("#wrap3").html(result);
+				$("#wrapbody").html(result);
+ 				$("#snsCommBtn").click();
 			}
 		});
 	}
@@ -129,7 +129,7 @@ console.log("typeof:"+typeof(EventSource));
 			url:"sumware",
 			data:data,
 			success: function(result){
-				$("#wrap3").html(result);
+				$("#wrapbody").html(result);
 			}
 		});
 	}
@@ -167,7 +167,19 @@ console.log("typeof:"+typeof(EventSource));
 				</div>
 				<!-- /.panel .chat-panel -->
 			</div>	
-			 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#wrap3">Open Modal</button>	
-			<%@include file="snsComm.jsp" %>
+			 <button type="button" class="modal fade" id="snsCommBtn" data-toggle="modal" data-target="#wrap3"></button>	
+			<div class='modal' id='wrap3' role='dialog'>
+			<div class="modal-dialog">
+			 <div class="modal-content">
+			 	<div class="modal-header">
+			  		<button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">댓글 보기</h4>
+			    </div>
+			    <div class="modal-body" id="wrapbody">
+			
+				<!-- comment-write(E) -->
+				</div>
+			</div>
+			</div>
 </body>
 </html>

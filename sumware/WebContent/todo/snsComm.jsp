@@ -27,8 +27,12 @@
 	<!-- comment-list(E) -->
 	
 	<!-- comment-write(S) -->
-	<div class="comment-write">
-		<input style="width: 300px;"type="text" id="cocont" name="cocont" placeholder="댓글 내용을 입력해 주세요.">
-		<button type="button" class="btn-snscomm" onclick="snsInsertComm(${cosns})">등록</button>
 	</div>
+		<div class="modal-footer">
+		<!-- comment-write(S) -->
+		<div class="comment-write">
+			<input style="width: 300px;"type="text" id="cocont" name="cocont" placeholder="댓글 내용을 입력해 주세요.">
+			<button type="button" class="btn-snscomm" onclick="snsInsertComm(${cosns})">등록</button>
+		</div>
+		</div>
 	<!-- comment-write(E) -->
