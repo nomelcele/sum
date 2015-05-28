@@ -42,29 +42,6 @@
          </li>
       </ul>
    </div>
-	
    <div class="container">
-   ${sessionScope.v.memnum}
-   <c:choose>
-   <c:when test="${empty sessionScope.v.memnum}">
-      <form class="form-inline" role="form" action="sumware" method="post">
-         <input type="hidden" name="model" value="login"> 
-         <input type="hidden" name="submod" value="login">
-         <div class="porm-group">
-         
-            <label class="control-label-" for="sabun"> 사원번호 :</label> 
-            <input type="text" id="memnum" name="memnum" placeholder="사원번호"> 
-            <label class="control-label" for="Password"> 비밀번호 :</label> 
-            <input type="password" id="mempwd" name="mempwd" placeholder="비밀번호">
-            <button type="submit" class="btn btn-xs btn-info">로그인</button>
-         </div>
-      </form>
-   </c:when>
-   <c:otherwise>
-   	<div class="porm-group">
-            <label class="control-label-" for="sabun"> ${sessionScope.v.memname} 님 환영합니다.</label>
-         </div>
-   </c:otherwise>
-   </c:choose>
    </div>
 </div>
