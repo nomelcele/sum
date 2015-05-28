@@ -20,7 +20,7 @@ a{display:block}
 body {
 	/* Verdana,맑은고딕으로 선언했기 때문에 영문,숫자는 Verdana 폰트로, 한글은 맑은고딕으로 출력됨 */
 	font-family:Verdana,"맑은고딕",Dotum,simsun,Arial, Geneva, Helvetica, sans-serif,"Apple-Gothic","애플고딕","Droid Sans";
-	font-size: 12px;line-height: 1.5;
+	font-size: 12px; line-height: 1.5;
 	color: #888;
 }
 button, input, select, option, textarea, a {
@@ -68,6 +68,7 @@ button, input, select, option, textarea, a {
 /* 아래부터 사용자 커스터마이징 디자인 셋팅 부분 */
 /************** { LAYOUT } ****************/
 #wrap:after {display:block;content:"";clear:both;}
+
 #wrap {
 	width: 1190px;
 	margin:auto;
@@ -89,7 +90,7 @@ button, input, select, option, textarea, a {
 }
 .navbar-nav li:first-child:before {display:none}
 .navbar-nav li a {
-	font-size:11px;line-height:12px;
+	font-size:12px;line-height:12px;
 	letter-spacing: -.2px;
 	font-weight:700;
 	color: #535353;
@@ -111,7 +112,9 @@ button, input, select, option, textarea, a {
 	padding-top:20px;
 	width: 930px;
 }
+
 #content2.contents {width:950px!important}
+
 .contents.has-right {
 	width:730px;
 	margin-right:20px;
@@ -128,7 +131,7 @@ button, input, select, option, textarea, a {
 
 /************** { MAIN } ****************/
 .bmg {
-   background-image: url('img/bag.jpg'); 
+  
    background-repeat: repeat-y; 
    background-position: top left, top right; 
    width: 600px; 
