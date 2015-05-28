@@ -32,6 +32,9 @@
 	</script>
 </c:if>
 <script>
+// 	$(function() {
+// 		selectMenu(sel);
+// 	});
 	$(function() {
 		var sel = "";
 		selectMenu(sel);
@@ -60,7 +63,6 @@
 
 						}
 					});
-				
 			}else if(sel=='giveJob1'){
 				// 부장일 때 업무 부여 버튼
 				$.ajax({
@@ -147,24 +149,8 @@
 </script>
 <!-- /메인 -->
 <script>
-	function formGo(res){
-		$('#model').attr("value", "board");
-		if(res == 'insert'){
-			$('#submod').attr("value","boardInsert");
-			$('#page').attr("value","1");
-		}else if(res == 'list'){
-			$('#submod').attr('value','boardList');
-			$('#page').attr('value','1');
-		}else if(res == 'update'){
-			$('#submod').attr("value","boardUpdate");
-		}else if(res == 'write'){
-			$('#submod').attr("value", "writeForm");
-		}else if(res == 'commInsert'){
-			$('#submod').attr("value","boardDetail");
-			$('#childmod').attr("value","commInsert")
-		}
-		$('#bform').submit();
-	}
+
+$(function(){
 	function todoFormGo(res){
 		$('#model').attr("value","todo");
 		if(res=='approveTodo'){
@@ -353,6 +339,7 @@
 			}
 		});
 	}
+});
 	
 </script>
 
