@@ -354,6 +354,7 @@ $(function(){
 				class="glyphicon glyphicon-chevron-down"></span>
 			</a>
 		</div>
+		<c:if test="${!empty sessionScope.v.memnum}">
 		<div class="nav navbar-right">
 			<ul class="nav navbar-nav">
 				<li><a href="sumware?model=index">메인</a></li>
@@ -363,11 +364,12 @@ $(function(){
 				<li><a href="sumware?model=board&submod=boardList&page=1">Board</a></li>
 				<li><a href="javascript:openWin()">Messenger</a></li>
 			</ul>
-			<c:if test="${!empty sessionScope.v.memnum}">
+			
 				<ul class="nav navbar-right navbar-nav">
 					<li><a href="sumware?model=login&submod=logout&memnum=${sessionScope.v.memnum}"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
 				</ul>
-			</c:if>
+		
 		</div>
+			</c:if>
 	</div>
 </nav>
