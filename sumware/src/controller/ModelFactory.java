@@ -40,6 +40,7 @@ public class ModelFactory {
 			// 만약 들어온 요청의 값이 없을 경우 기본 페이지로 이동 시키는 로직
 			if(mod == null){
 				mod = "index";
+				System.out.println("alksdjfasdkjfdaslkjflasdkjflaksdjfalsdkjflsdkjf");
 				rpath = prop.getProperty(mod);
 			}
 			// 클래스명만으로 객체를 생성 해주기 위한 
