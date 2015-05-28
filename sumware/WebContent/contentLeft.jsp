@@ -11,7 +11,7 @@
 		<input type="hidden" id="memdept" name="memdept">
 		
 </form>
-<div class="" style="">
+<div>
 	<div class="row-lg-6">
 		<div class="chat-panel panel panel-default">
 			<div class="panel-heading">
@@ -42,28 +42,6 @@
 					</tr>
 				</table>
 			</div>
-		</div>
-	</div>
-	<div class="row-lg-6">
-		<div class="list-group">
-
-			<a href="#" class="list-group-item disabled"><span
-				class="glyphicon glyphicon-pencil"></span><strong
-				class="primary-font">Todo</strong></a> 
-				<a href="javascript:todoFormGo('todoForm')" class="list-group-item">부서 업무</a> 
-				<a href="javascript:todoFormGo('teamTodoForm')" class="list-group-item">팀 업무</a>
-			<c:if test="${sessionScope.v.memauth lt 4 }">
-				<a href="javascript:todoFormGo('manageJob1')" class="list-group-item">업무관리</a>
-			</c:if>
-			<c:if test="${sessionScope.v.memauth eq 4 }">
-				<a href="javascript:todoFormGo('manageJob2')" class="list-group-item">업무관리</a>
-			</c:if>
-			<c:if test="${sessionScope.v.memauth lt 4 }">
-				<a href="javascript:todoFormGo('giveJob1')" class="list-group-item">업무부여</a>
-			</c:if>
-			<c:if test="${sessionScope.v.memauth eq 4 }">
-				<a href="javascript:todoFormGo('giveJob2')" class="list-group-item">업무부여</a>
-			</c:if>
 		</div>
 	</div>
 </div>
