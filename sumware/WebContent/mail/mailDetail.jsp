@@ -20,11 +20,10 @@
 					내용: ${detail.mailcont}<br /> 
 					첨부 파일: <a href="upload/${detail.mailfile}" target="_blank">${detail.mailfile}</a>
 				</div>
-			</form>	
+				</form>
+			</div>			
 			</div>
 		</div>
-	</div>
-	
 </section>
 <%@include file="/footer.jsp"%>
 
