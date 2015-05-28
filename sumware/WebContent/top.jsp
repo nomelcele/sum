@@ -357,9 +357,9 @@
          		<input type="hidden" name="model" value="login"> 
          		<input type="hidden" name="submod" value="login">
          		<div class="porm-group">
-            		<label class="control-label-" for="sabun"> 사원번호 :</label> 
+            		<label class="control-label-" for="memnum">사원번호</label> 
             		<input type="text" id="memnum" name="memnum" placeholder="사원번호"> 
-            		<label class="control-label" for="Password"> 비밀번호 :</label> 
+            		<label class="control-label" for="mempwd">비밀번호</label> 
             		<input type="password" id="mempwd" name="mempwd" placeholder="비밀번호">
             		<button class="btn btn-xs btn-info">로그인</button>
          		</div>
@@ -377,9 +377,9 @@
 					<li><a href="sumware?model=board&submod=boardList&page=1&bname=공지사항">Board</a></li>
 					<li><a href="javascript:openWin()">Messenger</a></li>
 				</ul>
-				<ul class="nav navbar-right navbar-nav">
+				<ul class="nav navbar-right navbar-nav user-name">
+			        <li><span class="control-label-" for="sabun"> <strong>${sessionScope.v.memname}</strong> 님 환영합니다.</span></li>
 					<li><a href="sumware?model=login&submod=logout&memnum=${sessionScope.v.memnum}"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
-			        <li><span class="control-label-" for="sabun"> ${sessionScope.v.memname} 님 환영합니다.</span></li>
 				</ul>
 			</div>
    			</c:otherwise>
