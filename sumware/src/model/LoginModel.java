@@ -50,8 +50,8 @@ public class LoginModel implements ModelInter {
 					vo = LoginDao.getDao().login(v);
 					// sessionScope에 아이디를 저장
 					HttpSession session = request.getSession();
-					
 					session.setAttribute("v", vo);
+					System.out.println("memnum::"+v.getMemnum());
 					//login 기록 저장.
 					LoginDao.getDao().inLog(memnum);	
 				}else{
