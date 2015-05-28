@@ -352,7 +352,7 @@
 			</a>
 		</div>
 		<c:choose>
-   			<c:when test="${empty sessionScope.v.memnum}">
+   			<c:when test="${empty sessionScope.v.memnum && empty memnum}">
       		<form class="form-inline" role="form" action="sumware" method="post">
          		<input type="hidden" name="model" value="login"> 
          		<input type="hidden" name="submod" value="login">
