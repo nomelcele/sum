@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="/top.jsp"%>
+<%-- <%@include file="/top.jsp"%> --%>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script>
+	// 사원 list 출력 시 채팅창으로 이동
 	function mesgoUrl(res){
 		var resNum = res;
-		var opt="width=700, height=800, scrollbars=yes";
+		var opt="width=600, height=700, scrollbars=yes";
 		var f = document.mesform;
 		f.model.value="messenger";
 		f.submod.value="messengerChat";		
@@ -21,35 +22,47 @@
 		f.submit();	
 	};
 	
+	// 사원 list를 push를 사용하여 출력 하자 ~~~ 
+	if(typeof(EventSource) != "undefined"){		
+		var eventSourceList = new EventSource("messenger/listLoad.jsp");
+		eventSourceList.onmessage = function(event){
+			$('#msgList').html(event.data);	
+		};
+	}else{
+		alert("해당 브라우저는 지원이 안됩니다.")
+	} 
+	
 	
 	console.log("typeof:"+typeof(EventSource));	
 	if(typeof(EventSource) != "undefined"){
-		var eventSource = new EventSource("messenger/check.jsp"); // push를 받을수 있는 브라우져인지 판단.
-		// EventSource EventListener의 종류
-		// onmessage : 서버가 보낸 push메세지가 수신되면 발생
-		// onerror : 서버가 보낸 push에서 에러가 발생되었을때
-		// onopen : 서버가 연결이 되었을 때 발생
+		var eventSource = new EventSource("messenger/check.jsp");
 		
 		eventSource.onmessage = function(event){
 			var edata1 = event.data;
-			alert("메세지가 도착했습니다.");	
-			regoUrl(edata1);
-			
+			alert("메세지가 도착했습니다.");
+			// 도착한 push data를 가공
+			var dArr = event.data.split("/");
+			for(var i in dArr){
+				console.log("푸쉬로 넘어온 data : "+dArr[i]);
+			}
+			var mesendNum = dArr[3];
+			var mesendName = dArr[4];
+			regoUrl(edata1, mesendName);			
 		};
 	}else{
 		alert("해당 브라우저는 지원이 안됩니다.")
 	};
 	
-	function regoUrl(edata1){
+	function regoUrl(edata1, mesendName){
 		
-		var message = "대화를 수락하시겠습니까?";
+		var message = mesendName+"님의 대화가 요청되었습니다. 수락하시겠습니까?";
 		var resMessage = confirm(message);
 		var f1 = document.entform;
 		var evdata = edata1;
 		
 		if(resMessage == true){
 			alert("대화를 수락하였습니다.");
-			var winopt="width=700, height=800, scrollbars=yes";
+			var winopt="width=600, height=700, scrollbars=yes";
 			f1.model.value="messenger";
 			f1.submod.value="msgReceieve";		
 			f1.edata1.value = evdata; // 방번호, IP, 유저사번
@@ -60,29 +73,19 @@
 			f1.submit();
 			
 		} else if(resMessage == false){
-			alert("대화를 거부합니다.");
-// 			$.ajax({
-// 				type : "post";
-// 				url : "sumware";
-// 				date : {
-// 					model : "messenger",
-// 					submode : "refuseChat",
-// 					edata1 : evdata,
-// 					uerNum2 : "${sessionScope.v.memnum}",
-// 					stateMain : "mesMain"
-// 				},
-// 				success : function(){
-					
-// 				}
-// 			});			
+			alert("대화요청을 거부하였습니다.");
+			var f2 = document.disform;
+			var winopt1="width=10, height=10, scrollbars=no, menubar=no";
 			
-			$('#model1').attr('value','messenger');
-			$('#submod99').attr('value','refuseChat');
-			$('#edata2').attr('value',evdata);
-			$('#userNum3').attr('value',"${sessionScope.v.memnum}");
-			$('#stateMain').attr('value','mesMain');
-			$('#disform').submit();
-			return;
+			f2.model.value="messenger";
+			f2.submod.value="refuseChat";		
+			f2.edata1.value = evdata; // 방번호, IP, 유저사번
+			f2.uerNum2.value = "${sessionScope.v.memnum}";
+			f2.stateMain.value = "mesMain";	
+			f2.target="msgrefuse";
+			
+			window.open("","msgrefuse",winopt1);
+			f2.submit();
 
 		} else{
 			alert("해당사항이 없습니다.");
@@ -125,7 +128,7 @@
 				</form>
 				
 				<!-- 사원 사진 불러오기  -->
-				<a href="#"> <img class="media-object" src="${sessionScope.v.memprofile }" alt="..."></a>
+				<a href="#"> <img class="media-object" src="profileImg/${sessionScope.v.memprofile }" alt="..."></a>
 			</div>
 			<div class="media-body">
 
@@ -138,21 +141,22 @@
 
 		<div class="col-lg-10">
 			<div class="list-group">
-				<ul>
-				<c:forEach var="memList" items="${list}">
+				<ul id="msgList">
+				
+<%-- 				<c:forEach var="memList" items="${list}"> --%>
 					
-						<!-- 회원의 사진을 출력 -->
+<!-- <!-- 						회원의 사진을 출력 --> -->
 
-						<li>
-							<a href="javascript:mesgoUrl(${memList.memnum})"> 
-							<%-- 				<img class="media-object" src="${memList.memprofile }" alt="..." style="width: 10px; height: 10px">				 --%>
-								<img src="img/messenger.jpg" alt="..."style="width: 25px; height: 25px"> 
+<!-- 						<li> -->
+<%-- 							<a href="javascript:mesgoUrl(${memList.memnum})">  --%>
+<%-- 											<img class="media-object" src="${memList.memprofile }" alt="..." style="width: 10px; height: 10px">				 --%>
+<!-- 								<img src="img/messenger.jpg" alt="..."style="width: 25px; height: 25px">  -->
 								
-								<!-- 친구 list 출력시 본인 아이디와 같은 경우는 출력을 하지 않는 기능 추가 -->
+<!-- <!-- 								친구 list 출력시 본인 아이디와 같은 경우는 출력을 하지 않는 기능 추가 --> -->
 
-								${memList.memname} <span>(${memList.memnum})</span><span> / ${memList.dename}</span></a></li>
+<%-- 								${memList.memname} <span>(${memList.memnum})</span><span> / ${memList.dename}</span></a></li> --%>
 					
-				</c:forEach>
+<%-- 				</c:forEach> --%>
 				</ul>
 			</div>
 		</div>

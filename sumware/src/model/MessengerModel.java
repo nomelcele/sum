@@ -8,6 +8,7 @@ import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import util.SearchMem;
 import controller.ModelForward;
 import dao.MessengerDao;
 import dto.MemberVO;
@@ -24,18 +25,20 @@ public class MessengerModel implements ModelInter{
 		boolean method = true;
 		
 		if(submod != null && submod.equals("messengerForm")){
+					
 			url = "messenger/messenger.jsp";
 			method = true;
 			
-			// 여기에서 로그인 된 회원만 출력할 수 있도록 쿼리문 수정
-			ArrayList<MemberVO> list = MessengerDao.getDao().getList();
-			request.setAttribute("list", list);
+//			int userNum = Integer.parseInt(request.getParameter("userNum"));
+//			ArrayList<MemberVO> list = MessengerDao.getDao().getList(userNum);
+//			request.setAttribute("list", list);
+			
 			System.out.println("MessengerModel 영역입니다.");
 			
 			// 초기 방을 만들 경우
 		}else if(submod != null && submod.equals("messengerChat")){
 			// 보낸 사람 사번 받아오기
-			int fromNum = Integer.parseInt(request.getParameter("fromNum"));
+			int mesendNum = Integer.parseInt(request.getParameter("fromNum"));
 			// 받는 사람 사번 받아오기
 			int toNum = Integer.parseInt(request.getParameter("toNum"));
 			// 전체 참여자 사번 받아오기
@@ -57,7 +60,7 @@ public class MessengerModel implements ModelInter{
 				MessengerVO v = new MessengerVO();
 				
 				entNum = Integer.parseInt(e);
-				if(entNum==fromNum){ // 개설자인 경우
+				if(entNum==mesendNum){ // 개설자인 경우
 					ckmem = "Y";
 					v.setMesmember(entNum);
 					v.setOpenmemberyn(ckmem);
@@ -73,7 +76,7 @@ public class MessengerModel implements ModelInter{
 			}
 			System.out.println(list.size());
 			
-			int keynum = MessengerDao.getDao().insertCreateRoom(list, rv, fromNum);
+			int keynum = MessengerDao.getDao().insertCreateRoom(list, rv, mesendNum);
 			System.out.println("keynum : "+keynum);
 			
 			// 친구찾기 기능을 위해 List 객체를 가져옴
@@ -91,7 +94,10 @@ public class MessengerModel implements ModelInter{
 			System.out.println("IP Adress : "+ipAdd);
 			
 			request.setAttribute("ipAdd", ipAdd.toString());
-			request.setAttribute("userNum", fromNum); // 보낸 사람, 방장
+			
+			String userName = SearchMem.getSmem().searchMember(toNum);
+			request.setAttribute("userNum", mesendNum); // 보낸 사람, 방장
+			request.setAttribute("userName", userName);
 			request.setAttribute("toNum", toNum); // 받는 사람
 			request.setAttribute("key", keynum);
 			url = "messenger/msgChat.jsp";
@@ -115,8 +121,8 @@ public class MessengerModel implements ModelInter{
 			// push를 통해 방번호, 송신자 ip, 참가자(수신자 사번) 순으로 전송하기에 split으로 각 data를 배열 형식으로 저장
 			int keyNum = Integer.parseInt(edate[0]); 
 			String reip = edate[1];
-			int userNum = Integer.parseInt(edate[2]);
-			int mesendNum = Integer.parseInt(edate[3]);
+			int userNum = Integer.parseInt(edate[2]); // 받는 사람 userNum
+			int mesendNum = Integer.parseInt(edate[3]); // 보낸 사람 방장 mesendNum
 			
 			System.out.println("Model에서의 IP : "+reip);
 			MessengerVO v = new MessengerVO();
@@ -133,12 +139,14 @@ public class MessengerModel implements ModelInter{
 			ipAdd.append(reip);
 			ipAdd.append(":80/sumware/msgSocket/");
 			
+			String userName = SearchMem.getSmem().searchMember(mesendNum);
 			
 			System.out.println("IP Adress : "+ipAdd);
 //			request.setAttribute("memList", memList);
-			request.setAttribute("userNum", userNum);
+			request.setAttribute("userNum", userNum); // 참가자 사번, 받는 사람
 			request.setAttribute("key", keyNum);
-			request.setAttribute("mesendNum", mesendNum);
+			request.setAttribute("userName", userName);
+			request.setAttribute("mesendNum", mesendNum); // 방장 사번 , 보낸 사람
 			request.setAttribute("ipAdd", ipAdd.toString());
 			
 			// DB 정보 업데이트 : entryTable의 시작일을 수정해줘야함
@@ -166,7 +174,7 @@ public class MessengerModel implements ModelInter{
 			MessengerDao.getDao().closeRoom(v, roomstate);
 			
 			// 창을 닫기 때문에 url 주소는 없어도 무관함
-			url = "";
+			url = "sumware?model=messenger&submod=messengerForm";
 			method = true;
 			
 		// messenger main에서 넘어온 경우 요청 거부 시
@@ -193,7 +201,11 @@ public class MessengerModel implements ModelInter{
 			v.setMesmember(reciuserNum);
 			v.setMesnum(keyNum);
 			MessengerDao.getDao().closeRoom(v, mainstate);	
-			url="messenger/messenger.jsp";
+			
+			request.setAttribute("key", keyNum);
+			request.setAttribute("userNum", reciuserNum);
+			url = "messenger/refuseChat.jsp";
+//			url="sumware?model=messenger&submod=messengerForm";
 			method=true;
 		}
 		
