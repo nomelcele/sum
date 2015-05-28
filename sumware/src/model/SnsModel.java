@@ -1,6 +1,7 @@
 package model;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -72,10 +73,18 @@ public class SnsModel implements ModelInter{
 				outs.append("</li>");
 			}
 			outs.append("\n\n");
-			request.setAttribute("outs", outs);
 			
-			url="todo/snsLoad_push.jsp";
-			method=true;
+			request.setAttribute("outs", outs);
+			response.setContentType("text/html; charset=UTF-8");
+			response.setHeader("cache-control", "no-cache");
+			response.setContentType("text/event-stream");
+			PrintWriter push = response.getWriter();
+			push.write(outs.toString());
+			push.flush();
+			
+//			url="todo/snsLoad_push.jsp";
+//			method=true;
+			
 			
 		}else if(submod!=null&&submod.equals("snsComm")){
 			System.out.println("댓글보려구???");
