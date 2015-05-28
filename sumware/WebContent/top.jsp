@@ -374,7 +374,7 @@
 					<li><a href="sumware?model=todo&submod=firsttodoForm&memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
 					<li><a href="sumware?model=mail&submod=mailMain">Mail</a></li>
 					<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
-					<li><a href="sumware?model=board&submod=boardList&page=1">Board</a></li>
+					<li><a href="sumware?model=board&submod=boardList&page=1&bname=공지사항">Board</a></li>
 					<li><a href="javascript:openWin()">Messenger</a></li>
 				</ul>
 				<ul class="nav navbar-right navbar-nav">
