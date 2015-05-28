@@ -274,7 +274,7 @@
 			document.getElementById("view").style.display = "none";
 		} else if(key != lastKey){
 			lastKey = key;
-			var param = "key="+encodeURIComponent(key);
+			var param = "model=mail$submod=mailSug&key="+encodeURIComponent(key);
 			// console.log("key: "+key);
 			// 컨트롤러에서 처리하게 고칠 것
 			sendRequest("mail/mailSuggest.jsp", param, res, "post");
