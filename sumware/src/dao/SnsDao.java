@@ -189,9 +189,26 @@ public class SnsDao {
 			pstmt=con.prepareStatement(sql.toString());
 			pstmt.setString(1, map.get("cocont"));
 			pstmt.setInt(2, Integer.parseInt(map.get("comem")));
-			pstmt.setInt(3, Integer.parseInt(map.get("commsns")));
+			pstmt.setInt(3, Integer.parseInt(map.get("snum")));
 			pstmt.executeUpdate();
 			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+	}
+	public void snsCommDelete(Map<String,String> map){
+		Connection con = null;
+		PreparedStatement pstmt=null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("delete from comm where conum=?");
+		try{
+			con =ConUtil.getOds();
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setString(1, map.get("conum"));
+			pstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{

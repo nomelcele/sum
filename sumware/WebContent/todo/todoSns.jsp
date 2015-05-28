@@ -21,10 +21,15 @@ Bootstrap
 <script src="../js/http.js"></script>
 <script>
 // push Client 설정 (받는쪽)
-console.log("typeof:"+typeof(EventSource));
-	var rowsPerPage =7;
+	var rowsPerPage =7; //sns에 쓸 행수
 	var eventSource;
 	var cheight=$('.chat').height()-50;
+	var pageB=5; //snscomm에서 쓸 페이지 행수
+	
+	$(function(){
+		push();
+	});
+
 	function push(){
 		if(typeof(EventSource) != "undefined"){
 			eventSource = new EventSource("sumware?model=sns&submod=pushSns&sdept=${v.memdept}&page=1&rowsPerPage="+rowsPerPage); // push를 받을수 있는 브라우져인지 판단.
@@ -73,34 +78,30 @@ console.log("typeof:"+typeof(EventSource));
 			}, 1000);
 		}
 	}
-// Ajax로 사용자의 데이터를 보내는 쪽 - 어제와동일!
-	$(function(){
-			push();
-			$('#send').click(function(){
-				eventSource.close();
-				push();
-				$(".chat").scrollTop(0);
-				var fdata = {
-						model:"sns",
-						submod:"insertSns",
-						smem:"${v.memnum}",
-						sdept:"${v.memdept}",
-						scont:$("#btn-input").val()
-					};
-				$('#btn-input').val("");
-				$.ajax({
-					type:"POST",
-					url:"sumware",
-					data:fdata
-				});
-			});
-	});
-	function snsComm(snum,p){
-		var page=p;
+
+	function snsSend(){
+		$(".chat").scrollTop(0);
+		var fdata = {
+			model:"sns",
+			submod:"insertSns",
+			smem:"${v.memnum}",
+			sdept:"${v.memdept}",
+			scont:$("#btn-input").val()
+		};
+		$('#btn-input').val("");
+		$.ajax({
+			type:"POST",
+			url:"sumware",
+			data:fdata
+		});
+	}
+	function snsComm(snum){
+		var rowsPerPage=5;
 		var data={
 			model:"sns",
 			submod:"snsComm",
-			page:page,
+			page:"1",
+			rowsPerPage:rowsPerPage,
 			snum:snum
 		};
 		$.ajax({
@@ -108,22 +109,60 @@ console.log("typeof:"+typeof(EventSource));
 			url:"sumware",
 			data:data,
 			success: function(result){
-				eventSource.close();
 				$("#wrapbody").html(result);
  				$("#snsCommBtn").click();
 			}
 		});
 	}
 	function snsInsertComm(snum){
-		alert("cocont:"+$('#cocont').val());
 		var data={
 				model:"sns",
 				submod:"snsCommInset",
 				comem:"${v.memnum}",
 				page:"1",
-				commsns:snum,
+				rowsPerPage:pageB,
+				snum:snum,
 				cocont:$('#cocont').val()
 			};
+		$.ajax({
+			type:"POST",
+			url:"sumware",
+			data:data,
+			success: function(result){
+				$("#wrapbody").html(result);
+			}
+		});
+	}
+	function snsCommDelete(conum,commsns){
+		var data={
+				model:"sns",
+				submod:"snsCommDelete",
+				page:"1",
+				rowsPerPage:pageB,
+				snum:commsns,
+				conum:conum
+		};
+		$.ajax({
+			type:"POST",
+			url:"sumware",
+			data:data,
+			success:function(result){
+				$("#wrapbody").html(result);
+			}
+		});
+		
+	}
+	function snsCommListPlus(snum){
+		pageB +=5;
+		var page=pageB;
+		var rowsPerPage=pageB;
+		var data={
+			model:"sns",
+			submod:"snsComm",
+			page:"1",
+			rowsPerPage:rowsPerPage,
+			snum:snum
+		};
 		$.ajax({
 			type:"POST",
 			url:"sumware",
@@ -159,7 +198,7 @@ console.log("typeof:"+typeof(EventSource));
 						<div class="input-group">
 							<input id="btn-input" type="text" class="form-control input-sm" placeholder="메시지를 입력해주세요">
 							<span class="input-group-btn">
-								<button class="btn btn-warning btn-sm" id="send">Send</button>
+								<button class="btn btn-warning btn-sm" onclick="snsSend()" id="send">Send</button>
 							</span>
 						</div>
 					</div>
@@ -173,7 +212,7 @@ console.log("typeof:"+typeof(EventSource));
 			 <div class="modal-content">
 			 	<div class="modal-header">
 			  		<button type="button" class="close" data-dismiss="modal">&times;</button>
-			        <h4 class="modal-title">댓글 보기</h4>
+			        <h4 class="modal-title">댓글</h4>
 			    </div>
 			    <div class="modal-body" id="wrapbody">
 			

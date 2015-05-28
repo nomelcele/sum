@@ -66,7 +66,7 @@ public class SnsModel implements ModelInter{
 				outs.append("<p>").append(v.getScont()).append("</p>");
 				outs.append("<a href='javascript:snsComm(");
 				outs.append(v.getSnum());
-				outs.append(",1)'>댓글(").append(v.getStocount());
+				outs.append(")'>댓글(").append(v.getStocount());
 				outs.append(")</a>");
 				outs.append("<hr/>");
 				outs.append("</li>");
@@ -79,19 +79,8 @@ public class SnsModel implements ModelInter{
 			
 		}else if(submod!=null&&submod.equals("snsComm")){
 			System.out.println("댓글보려구???");
-			int rowsPerPage=5;
-			int pagesPerBlock=5;
-			int etc = 1;
-			int commTotalCount=0;
 			
-			int snum = Integer.parseInt(request.getParameter("snum"));
-			commTotalCount = SnsDao.getDao().snsCommTotalCount(snum);
-			Map<String,Integer> map = MyPage.getMp().pageProcess(request, rowsPerPage, pagesPerBlock, etc, 0, commTotalCount);
-			map.put("commsns", snum);
-			ArrayList<CommVO> commSnsList = SnsDao.getDao().getCommList(map);
-		
-			request.setAttribute("commSnsList", commSnsList);
-			request.setAttribute("cosns", snum);
+			showCommList(request);
 			url="todo/snsComm.jsp";
 			method=true;
 		}else if(submod!=null&&submod.equals("snsCommInset")){
@@ -100,24 +89,35 @@ public class SnsModel implements ModelInter{
 			SnsDao.getDao().inssertSnsComm(map);
 			
 			//--리스트 받아오기
-			int rowsPerPage=5;
-			int pagesPerBlock=5;
-			int etc = 1;
-			int commTotalCount=0;
-			
-			commTotalCount = SnsDao.getDao().snsCommTotalCount(Integer.parseInt(map.get("commsns")));
-			Map<String,Integer> map2 = MyPage.getMp().pageProcess(request, rowsPerPage, pagesPerBlock, etc, 0, commTotalCount);
-			map2.put("commsns", Integer.parseInt(map.get("commsns")));
-			ArrayList<CommVO> commSnsList = SnsDao.getDao().getCommList(map2);
-		
-			request.setAttribute("commSnsList", commSnsList);
-			request.setAttribute("cosns",Integer.parseInt(map.get("commsns")));
+			showCommList(request);
 			//--리스트 받아오기끝
+			url="todo/snsComm.jsp";
+			method=true;
+		}else if(submod!=null&&submod.equals("snsCommDelete")){
+			System.out.println("삭제를 해보자");
+			Map<String,String> map = MyMap.getMaps().getMapList(request);
+			SnsDao.getDao().snsCommDelete(map);
+			showCommList(request);
 			url="todo/snsComm.jsp";
 			method=true;
 		}
 		
 		return new ModelForward(url, method);
+	}
+	private void showCommList(HttpServletRequest request){
+		int rowsPerPage=Integer.parseInt(request.getParameter("rowsPerPage"));
+		int pagesPerBlock=1;
+		int etc = 1;
+		int commTotalCount=0;
+		
+		int snum = Integer.parseInt(request.getParameter("snum"));
+		commTotalCount = SnsDao.getDao().snsCommTotalCount(snum);
+		Map<String,Integer> map = MyPage.getMp().pageProcess(request, rowsPerPage, pagesPerBlock, etc, 0, commTotalCount);
+		map.put("commsns", snum);
+		ArrayList<CommVO> commSnsList = SnsDao.getDao().getCommList(map);
+	
+		request.setAttribute("commSnsList", commSnsList);
+		request.setAttribute("commsns", snum);
 	}
 
 }
