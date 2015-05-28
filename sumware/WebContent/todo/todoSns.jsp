@@ -5,21 +5,26 @@
 <html>
 <head>
 <title>SumWare</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+Bootstrap
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.css" />
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<!-- 모달 -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<!-- 모달 -->
 <script src="../js/http.js"></script>
 <script>
 // push Client 설정 (받는쪽)
 console.log("typeof:"+typeof(EventSource));
 	var rowsPerPage =7;
 	var eventSource;
-	var cheight=$('.chat').height()-100;
+	var cheight=$('.chat').height()-50;
 	function push(){
 		if(typeof(EventSource) != "undefined"){
 			eventSource = new EventSource("sumware?model=sns&submod=pushSns&sdept=${v.memdept}&page=1&rowsPerPage="+rowsPerPage); // push를 받을수 있는 브라우져인지 판단.
@@ -39,11 +44,13 @@ console.log("typeof:"+typeof(EventSource));
 	function pageScoll(){
 		console.log("1:::"+$('.chat').scrollTop());
 		console.log("3:::"+$('.chat').height());
-		if ($('.chat').scrollTop() > cheight) {
+		var sctop=$('.chat').scrollTop();
+		if ( sctop > cheight) {
 			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
 			setTimeout(function(){
 				rowsPerPage+=5;
 				cheight+=$('.chat').scrollTop();
+				sctop
 				console.log("rowsPerPage:"+rowsPerPage);
 				console.log("cheight:"+cheight);
 				eventSource.close();
@@ -56,7 +63,7 @@ console.log("typeof:"+typeof(EventSource));
 			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
 			setTimeout(function(){
 				rowsPerPage=7;
-				cheight=350;
+				cheight=300;
 				console.log("rowsPerPage:"+rowsPerPage);
 				console.log("cheight:"+cheight);
 				eventSource.close();
@@ -89,7 +96,6 @@ console.log("typeof:"+typeof(EventSource));
 			});
 	});
 	function snsComm(snum,p){
-// 		$("#wrap2"+snum).toggle("slow");
 		var page=p;
 		var data={
 			model:"sns",
@@ -102,12 +108,14 @@ console.log("typeof:"+typeof(EventSource));
 			url:"sumware",
 			data:data,
 			success: function(result){
+				alert(result);
 				eventSource.close();
-				$("#wrap2"+snum).html(result);
+				$("#wrap3").html(result);
 			}
 		});
 	}
 	function snsInsertComm(snum){
+		alert("cocont:"+$('#cocont').val());
 		var data={
 				model:"sns",
 				submod:"snsCommInset",
@@ -121,7 +129,7 @@ console.log("typeof:"+typeof(EventSource));
 			url:"sumware",
 			data:data,
 			success: function(result){
-				$("#wrap2"+snum).html(result);
+				$("#wrap3").html(result);
 			}
 		});
 	}
@@ -159,5 +167,7 @@ console.log("typeof:"+typeof(EventSource));
 				</div>
 				<!-- /.panel .chat-panel -->
 			</div>	
+			 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#wrap3">Open Modal</button>	
+			<%@include file="snsComm.jsp" %>
 </body>
 </html>
