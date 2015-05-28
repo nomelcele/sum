@@ -28,7 +28,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-default" data-dismiss="modal"
-						onclick="javascript:todoFormGo('rejectTodo')">보내기</button>
+						onclick="todoFormGo('rejectTodo')">보내기</button>
 				</div>
 			</form>
 		</div>
@@ -64,7 +64,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal"
-						onclick="javascript:todoFormGo('approveTodo')">보내기</button>
+						onclick="todoFormGo('approveTodo')">보내기</button>
 				</div>
 			</form>
 		</div>
@@ -96,7 +96,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal"
-						onclick="javascript:successJob()">보내기</button>
+						onclick="successJob()">보내기</button>
 				</div>
 			</form>
 		</div>

@@ -27,18 +27,19 @@
 	<script src="js/myckeditor.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			
+			chkUpload();
 		});
 	</script>
 </c:if>
 <script>
-// 	$(function() {
-// 		selectMenu(sel);
-// 	});
+
 	$(function() {
 		var sel = "";
+		var tonum = "";
 		selectMenu(sel);
-		chkUpload();
+		todoFormGo();
+		tosend(tonumval);
+		
 	});
 	function openWin(){
 		var opt= "width=700, height=800, scrollbars=yes";	
@@ -46,7 +47,6 @@
 	}
 	function selectMenu(sel){
 		// 메뉴 선택
-			
 			if(sel=='deptTodo'){
 				// 부서업무 버튼
 				$.ajax({
@@ -150,15 +150,17 @@
 <!-- /메인 -->
 <script>
 
-$(function(){
+
 	function todoFormGo(res){
 		$('#model').attr("value","todo");
 		if(res=='approveTodo'){
 			// 팀장업무관리에서 승인버튼
+			
 			$('#okForm').submit();
 		}else if(res=='rejectTodo'){
 			// 팀장업무관리에서 거절버튼
 			$('#rejectForm').submit();
+			alert("거절 완료");
 		}else if(res== 'addTodo'){
 			//부장의 업무 추가 폼 작성 후 보내기버튼
 			$('#addTodoForm').submit();
@@ -339,7 +341,7 @@ $(function(){
 			}
 		});
 	}
-});
+
 	
 </script>
 

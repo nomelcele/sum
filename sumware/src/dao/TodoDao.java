@@ -217,10 +217,11 @@ public class TodoDao {
 				con=ConUtil.getOds();
 				pstmt=con.prepareStatement(sql.toString());
 				pstmt.setString(1, map.get("toconfirm"));
-				pstmt.setString(2, map.get("tomem"));
+				pstmt.setInt(2, Integer.parseInt(map.get("tomem")));
 				pstmt.setString(3, map.get("tocomm"));
 				pstmt.setInt(4, Integer.parseInt(map.get("tonum")));
 				pstmt.executeUpdate();
+				System.out.println("업데이트완료");
 				//업데이트를 한후에 다시 todo리스트를 다시 받아서 보냄.
 				list = getFWMana(Integer.parseInt(map.get("memnum")));
 			}catch(SQLException e){

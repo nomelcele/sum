@@ -10,32 +10,28 @@
 	 	$(".title"+tonum).toggle("slow");
 	}
 	
-	function tosend(tonum){
+	function tosend(tonumval){
+		alert("샌드 메서드 호출");
 		$.ajax({
 			type : "post",
 			url : "sumware",
-			data : {model:"todo", 
+			data : {
+				model:"todo", 
 				submod:"toUpFk", 
-				jobtonum:tonum,
+				memnum:"${sessionScope.v.memnum }",
+				tomem:$('#inputSuccess'+tonumval).val(),
+				toconfirm:"n",
+				tonum:tonumval,
+				tocomm:$('#tocomm'+tonumval).val()
 				},
 			success : function(result){
-				$("#memlisttarget"+tonum).html(result);
-			
+				$("#menuTarget").html(result);
+				alert(result);
 			}
 		});
 		
-		
-		
-		
-		
-		console.log("전달했네~~~");
-		var v = $('#inputSuccess'+tonum).val();
-		console.log("하하하하 v :::",v);
-		$('#tomem'+tonum).attr("value",v);
-		console.log("후후후후 ㅍ::::",$('#tomem').val());
-		$('#goFk'+tonum).submit();
 		alert("업무를 전송하였습니다.");
-	}
+		}
 	
 	function getJobDetail(tonum){
 		$("#memlisttarget"+tonum).toggle("slow");
@@ -109,38 +105,24 @@
 											<td colspan="2">${fw.tocomm }</td>
 										</tr>
 										<tr class="title${fw.tonum }" style="display: none;">
-											<td colspan="2"><select name="tomem"
-												class="form-control" id="inputSuccess${fw.tonum }"
-												style="width: 70%">
+											<td colspan="2">
+											<select class="form-control" id="inputSuccess${fw.tonum }" style="width: 70%">
 													<option value="">팀장 선택</option>
-													<c:forEach var="tNameList"
-														items="${sessionScope.teamNameList}">
+													<c:forEach var="tNameList" items="${sessionScope.teamNameList}">
 														<option value="${tNameList.memnum }">${tNameList.memname}</option>
 													</c:forEach>
 											</select></td>
 										</tr>
-
-
-										<tr class="title${fw.tonum }" style="display: none;"
-											colspan="2">
+										<tr class="title${fw.tonum }" style="display: none;">
 
 											<td colspan="2">
-												<form action="sumware" method="post" id="goFk${fw.tonum }">
-													<input type="hidden" name="model" value="todo"> <input
-														type="hidden" name="submod" value="toUpFk"> <input
-														type="hidden" name="memnum"
-														value="${sessionScope.v.memnum }"> <input
-														type="hidden" id="tomem${fw.tonum }" name="tomem">
-													<input type="hidden" name="toconfirm" value="n"> <input
-														type="hidden" name="tonum" value="${fw.tonum}">
-													<textarea name="tocomm" style="width: 250px; resize: none"></textarea>
-												</form>
+													<textarea name="tocomm" id="tocomm${fw.tonum }" style="width: 250px; resize: none">
+													</textarea>
 											</td>
 
 										</tr>
 
-										<tr class="title${fw.tonum }" style="display: none;"
-											colspan="2">
+										<tr class="title${fw.tonum }" style="display: none;">
 											<td colspan="2">
 												<button type="button" class="btn btn-outline btn-success"
 													onclick="tosend(${fw.tonum })">전달</button>

@@ -91,6 +91,7 @@ public class TodoModel implements ModelInter{
 
 			String childmod = request.getParameter("childmod");
 			if(childmod!=null && childmod.equals("approveTodo")){
+				System.out.println("approveTodo 들어옴!!");
 				// 리스트의 승인여부 n을 y로 바꿈!!!!
 				HashMap<String,String> map = MyMap.getMaps().getMapList(request);
 				TodoDao.getDao().confirmTodo(map, "y");
@@ -103,7 +104,8 @@ public class TodoModel implements ModelInter{
 				CalendarDAO.getDao().calInsert(sql, map);
 				
 			}else if(childmod!=null && childmod.equals("rejectTodo")){
-				// 리스트의 승인여부 n을 x로 바꿈!!!!
+				// 리스트의 승인여부 n을 z로 바꿈!!!!
+				System.out.println("rejectTodo 들어옴!!");
 				HashMap<String,String> map = MyMap.getMaps().getMapList(request);
 				TodoDao.getDao().confirmTodo(map, "z");
 			}
@@ -132,9 +134,11 @@ public class TodoModel implements ModelInter{
 			
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			ArrayList<TodoVO> list = TodoDao.getDao().todoUpdate(map);
+			System.out.println("dao로 todoupdate");
 			
-			request.removeAttribute("fwList");
+			//request.removeAttribute("fwList");
 			request.setAttribute("fwList", list);
+			
 			url="todo/fWMana.jsp";
 			method=true;
 		}else if(submod.equals("giveJobForm")){
@@ -172,11 +176,11 @@ public class TodoModel implements ModelInter{
 				System.out.println("memprofile : " + v.getMemprofile());
 				System.out.println("jobcont : " + v.getJobcont());
 			}
-			
-			
+
 			request.setAttribute("membersjoblist", membersjoblist);
 			url = "todo/membersJob.jsp";
 			method = true;
+			
 		}else if(submod.equals("showmemlist")){
 			// 부서업무부분, 팀업무부분에서 자세히보기 하면 정보들이 나옴
 			System.out.println("showmemlist들어옴");
@@ -186,6 +190,7 @@ public class TodoModel implements ModelInter{
 			request.setAttribute("memberjoblist", list);
 			url = "todo/jobDetail.jsp";
 			method = true;
+			
 		}else if(submod.equals("teamTodoForm")){
 			// 팀별 업무 리스트 뽑아오기
 			System.out.println("teamTodoForm들어옴");
@@ -204,7 +209,6 @@ public class TodoModel implements ModelInter{
 			
 			url = "todo/teamTodoForm.jsp";
 			method = true;
-			
 			
 		}
 		
