@@ -46,22 +46,11 @@
 					
 				}
 			});
-	
-		
+
 	}
 </script>
-<div class="container">
-<div class="row">
-<%@include file="/top.jsp"%>
-</div>
 
-
-<div class="row">
-	
-	<div class="wrap">
-		<%@include file="/contentLeft.jsp" %>
-		<!-- 팀장 업무관리 -->
-			<div class="col-lg-4" style="width: 35%">
+		<!-- 팀장 업무부여 ajax-->
 				<div class="chat-panel panel panel-default">
 					<div class="panel-heading">
 						<i class="fa fa-plus-square-o"></i> <strong class="primary-font">업무 부여</strong>
@@ -116,13 +105,5 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		<!-- 팀장 업무관리 끝!!! -->
 		
-	<%@include file="todoSns.jsp" %>
-	</div>
-	</div>
-	<div class="row">
-<%@include file="/footer.jsp" %>
-</div>
-</div>
+		<!-- 팀장 업무부여 끝!!! -->

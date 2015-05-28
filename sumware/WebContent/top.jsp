@@ -41,12 +41,11 @@
 	}
 	function selectMenu(sel){
 		// 메뉴 선택
-			alert("메서드호출");
+			
 			if(sel=='deptTodo'){
-				alert("deptTodo실행");
-				
+				// 부서업무 버튼
 				$.ajax({
-					type : "get",
+					type : "post",
 					url : "sumware",
 					data : {
 						model:"todo", 
@@ -54,9 +53,90 @@
 						memdept:"${sessionScope.v.memdept}"
 						},
 					success : function(result){
-							
+					
 							$("#menuTarget").html(result);
-							alert(result);
+
+						}
+					});
+				
+			}else if(sel=='giveJob1'){
+				// 부장일 때 업무 부여 버튼
+				$.ajax({
+					type : "post",
+					url : "sumware",
+					data : {
+						model:"todo", 
+						submod:"addtodoForm",
+						//memnum:"${sessionScope.v.memnum}"
+						},
+					success : function(result){
+					
+							$("#menuTarget").html(result);
+
+						}
+					});
+			}else if(sel=='manageJob2'){
+				// 팀장일 때 업무 관리 버튼
+				$.ajax({
+					type : "post",
+					url : "sumware",
+					data : {
+						model:"todo", 
+						submod:"checkTodoList",
+						memnum:"${sessionScope.v.memnum}"
+						},
+					success : function(result){
+					
+							$("#menuTarget").html(result);
+
+						}
+					});
+			}else if(sel=='manageJob1'){
+				// 부장일 때 업무 관리 버튼
+				$.ajax({
+					type : "post",
+					url : "sumware",
+					data : {
+						model:"todo", 
+						submod:"fWMana",
+						memnum:"${sessionScope.v.memnum}"
+						},
+					success : function(result){
+					
+							$("#menuTarget").html(result);
+
+						}
+					});
+			}else if(sel=='giveJob2'){
+				// 팀장일 때 업무 부여
+				$.ajax({
+					type : "post",
+					url : "sumware",
+					data : {
+						model:"todo", 
+						submod:"giveJobForm",
+						memnum:"${sessionScope.v.memnum}"
+						},
+					success : function(result){
+					
+							$("#menuTarget").html(result);
+
+						}
+					});
+			}else if(sel=='teamTodoForm'){
+				// 팀 업무 버튼
+				$.ajax({
+					type : "post",
+					url : "sumware",
+					data : {
+						model:"todo", 
+						submod:"teamTodoForm",
+						memmgr:"${sessionScope.v.memmgr}"
+						},
+					success : function(result){
+					
+							$("#menuTarget").html(result);
+
 						}
 					});
 				
@@ -86,6 +166,7 @@
 	function todoFormGo(res){
 		$('#model').attr("value","todo");
 		if(res=='manageJob1'){
+			// 없애도 됨
 			$('#submod').attr("value","fWMana");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 			$('#goTodo').submit();
@@ -101,7 +182,7 @@
 			// 팀장업무관리에서 거절버튼
 			$('#rejectForm').submit();
 		}else if(res=='manageJob2'){
-			// 팀장일때 팀장관리 버튼
+			// 팀장일때 팀장관리 버튼 // 없애도 됨
 			$('#submod').attr("value","checkTodoList");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 			$('#goTodo').submit();
@@ -110,20 +191,20 @@
 			$('#addTodoForm').submit();
 			alert("업무를 등록하였습니다.");
 		}else if(res=='giveJob2'){
-			// 팀장이 사원들에게 업무를 부여하기 위한 폼
+			// 팀장이 사원들에게 업무를 부여하기 위한 폼 // 없애도 됨
 			$('#submod').attr("value","giveJobForm");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 			
 			$('#goTodo').submit();
 		}else if(res=='todoForm'){
-			// 부서업무 버튼
+			// 부서업무 버튼 // 없애도됨
 			$('#submod').attr("value","todoForm");
 			$('#memnum').attr("value","${sessionScope.v.memnum}");
 			$('#memdept').attr("value","${sessionScope.v.memdept}");
 			$('#goTodo').submit();
 			
 		}else if(res=='teamTodoForm'){
-			// 팀업무 버튼
+			// 팀업무 버튼 // 없애도 됨
 			$('#submod').attr("value","teamTodoForm");
 			$('#memmgr').attr("value","${sessionScope.v.memmgr}");
 			$('#goTodo').submit();

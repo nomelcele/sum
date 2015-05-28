@@ -3,11 +3,11 @@
 
 	
 	
-<div class="container">
+
 	<div class="row">
 		<%@include file="/top.jsp"%>
 	</div>
-
+<div class="container">
 	<div class="row">
 
 		<div class="wrap">
@@ -73,9 +73,8 @@
 			<%@include file="todoSns.jsp"%>
 </div>
 	</div>
-
+</div>
 
 	<div class="row">
 		<%@include file="/footer.jsp"%>
 	</div>
-</div>

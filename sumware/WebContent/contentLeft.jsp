@@ -120,18 +120,18 @@
 				class="primary-font">Todo</strong></a> 
 <!-- 				<a href="javascript:todoFormGo('todoForm')" class="list-group-item">부서 업무</a>  -->
 				<a href="javascript:selectMenu('deptTodo')" class="list-group-item">부서 업무</a> 
-				<a href="javascript:todoFormGo('teamTodoForm')" class="list-group-item">팀 업무</a>
+				<a href="javascript:selectMenu('teamTodoForm')" class="list-group-item">팀 업무</a>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
-				<a href="javascript:todoFormGo('manageJob1')" class="list-group-item">업무관리</a>
+				<a href="javascript:selectMenu('manageJob1')" class="list-group-item">업무관리</a>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth eq 4 }">
-				<a href="javascript:todoFormGo('manageJob2')" class="list-group-item">업무관리</a>
+				<a href="javascript:selectMenu('manageJob2')" class="list-group-item">업무관리</a>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
-				<a href="javascript:todoFormGo('giveJob1')" class="list-group-item">업무부여</a>
+				<a href="javascript:selectMenu('giveJob1')" class="list-group-item">업무부여</a>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth eq 4 }">
-				<a href="javascript:todoFormGo('giveJob2')" class="list-group-item">업무부여</a>
+				<a href="javascript:selectMenu('giveJob2')" class="list-group-item">업무부여</a>
 			</c:if>
 		</div>
 	</div>

@@ -65,8 +65,8 @@ public class TodoModel implements ModelInter{
 			
 		}else if(submod.equals("addtodoForm")){
 			System.out.println("addtodoForm 들어왔어");
-			url="todo/addTodo.jsp";
 			
+			url="todo/addTodo.jsp";
 			method = true;		
 		}else if(submod.equals("addTodo")){
 			System.out.println("addTodo 들어왔어");
@@ -188,7 +188,9 @@ public class TodoModel implements ModelInter{
 			method = true;
 		}else if(submod.equals("teamTodoForm")){
 			// 팀별 업무 리스트 뽑아오기
+			System.out.println("teamTodoForm들어옴");
 			int memmgr = Integer.parseInt(request.getParameter("memmgr"));
+			System.out.println("memmgr : "+ memmgr);
 			ArrayList<TodoVO> list = TodoDao.getDao().getTeamJob(memmgr);
 			request.setAttribute("teamJobList", list);
 			

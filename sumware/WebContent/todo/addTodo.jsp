@@ -3,17 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 업무 추가 부분 뷰 -->
-<div class="container">
-<div class="row">
-<%@include file="/top.jsp"%>
-</div>
-<div class="row">
-
-		<%@include file="/contentLeft.jsp" %>
+<!-- 업무 추가 부분 뷰 ajax-->
 		
 	<!-- 업무추가  -->
-		<div class="col-lg-4" style="width: 35%">
+
 			<div class="chat-panel panel panel-default">
 				<div class="panel-heading">
 					<i class="fa fa-plus-square-o"></i> <strong class="primary-font">업무 추가</strong>
@@ -29,7 +22,6 @@
 							 <input type="hidden" name="toconfirm" value="n">
 							 <input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
 
-
 							<div class="form-group has-success">
 								<label class="control-label" for="inputSuccess">업무 제목</label> 
 								<input type="text" class="form-control" id="inputSuccess" name="totitle"
@@ -42,8 +34,6 @@
 								~ <input type="date" name="toendate" class="form-control" style="width: 150px; display: inline;">
 
 							</div>
-
-
 
 							<div class="form-group has-success">
 								<label class="control-label" for="inputSuccess">업무 내용</label>
@@ -74,20 +64,10 @@
 							</div>
 							<div>
 								<button type="button" class="btn btn-outline btn-success" onclick="javascript:todoFormGo('addTodo')">보내기</button>
-<!-- 								<button type="button" class="btn btn-outline btn-warning">다시 -->
-<!-- 									작성</button> -->
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-		</div>
+		
 		<!-- 업무 추가부분 끝 -->
-
-	<%@include file="todoSns.jsp" %>
-
-</div>
-<div class="row">
-<%@include file="/footer.jsp" %>
-</div>
-</div>
