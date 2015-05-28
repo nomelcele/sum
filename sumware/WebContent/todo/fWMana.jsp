@@ -9,7 +9,25 @@
 		console.log("거절했다~!!!!");
 	 	$(".title"+tonum).toggle("slow");
 	}
+	
 	function tosend(tonum){
+		$.ajax({
+			type : "post",
+			url : "sumware",
+			data : {model:"todo", 
+				submod:"toUpFk", 
+				jobtonum:tonum,
+				},
+			success : function(result){
+				$("#memlisttarget"+tonum).html(result);
+			
+			}
+		});
+		
+		
+		
+		
+		
 		console.log("전달했네~~~");
 		var v = $('#inputSuccess'+tonum).val();
 		console.log("하하하하 v :::",v);

@@ -27,13 +27,15 @@
 	<script src="js/myckeditor.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			chkUpload();
+			
 		});
 	</script>
 </c:if>
 <script>
 	$(function() {
+		var sel = "";
 		selectMenu(sel);
+		chkUpload();
 	});
 	function openWin(){
 		var opt= "width=700, height=800, scrollbars=yes";	
@@ -148,8 +150,8 @@
 	function formGo(res){
 		$('#model').attr("value", "board");
 		if(res == 'insert'){
-			$('#submod').attr('value','boardInsert');
-			$('#page').attr('value','1');
+			$('#submod').attr("value","boardInsert");
+			$('#page').attr("value","1");
 		}else if(res == 'list'){
 			$('#submod').attr('value','boardList');
 			$('#page').attr('value','1');
@@ -165,49 +167,16 @@
 	}
 	function todoFormGo(res){
 		$('#model').attr("value","todo");
-		if(res=='manageJob1'){
-			// 없애도 됨
-			$('#submod').attr("value","fWMana");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-			$('#goTodo').submit();
-		}else if(res=='giveJob1'){
-			$('#submod').attr("value","addtodoForm");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-			console.log("memnum",$('#memnum').val());
-			$('#goTodo').submit();
-		}else if(res=='approveTodo'){
+		if(res=='approveTodo'){
 			// 팀장업무관리에서 승인버튼
 			$('#okForm').submit();
 		}else if(res=='rejectTodo'){
 			// 팀장업무관리에서 거절버튼
 			$('#rejectForm').submit();
-		}else if(res=='manageJob2'){
-			// 팀장일때 팀장관리 버튼 // 없애도 됨
-			$('#submod').attr("value","checkTodoList");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-			$('#goTodo').submit();
 		}else if(res== 'addTodo'){
 			//부장의 업무 추가 폼 작성 후 보내기버튼
 			$('#addTodoForm').submit();
 			alert("업무를 등록하였습니다.");
-		}else if(res=='giveJob2'){
-			// 팀장이 사원들에게 업무를 부여하기 위한 폼 // 없애도 됨
-			$('#submod').attr("value","giveJobForm");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-			
-			$('#goTodo').submit();
-		}else if(res=='todoForm'){
-			// 부서업무 버튼 // 없애도됨
-			$('#submod').attr("value","todoForm");
-			$('#memnum').attr("value","${sessionScope.v.memnum}");
-			$('#memdept').attr("value","${sessionScope.v.memdept}");
-			$('#goTodo').submit();
-			
-		}else if(res=='teamTodoForm'){
-			// 팀업무 버튼 // 없애도 됨
-			$('#submod').attr("value","teamTodoForm");
-			$('#memmgr').attr("value","${sessionScope.v.memmgr}");
-			$('#goTodo').submit();
 		}
 	}
 	function mailFormGo(res){
