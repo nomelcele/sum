@@ -1,6 +1,7 @@
 package model;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -86,9 +87,22 @@ public class MailModel implements ModelInter{
 			System.out.println("key: "+key);
 			System.out.println("배열: "+suggests[0]);
 			// 여기까지는 된다
-			
-			url = "mail/mailWrite.jsp"; // ?
-			method = true;
+			StringBuilder su = new StringBuilder();
+			su.append("[");
+			if(suggests != null){
+				for(int i=0; i<suggests.length; i++){
+					su.append(suggests[i]);
+					if(!(i == suggests.length-1)){
+						su.append(",");
+					}		
+				}
+			}
+			su.append("]");
+			PrintWriter pw = response.getWriter();
+			pw.write(su.toString());
+			pw.flush();
+//			url = "mail/mailSuggest.jsp";
+//			method = true;
 		} else if(submod != null && submod.equals("mailDetail")){
 			// 메일 상세 보기
 			// 메일 번호
@@ -139,7 +153,7 @@ public class MailModel implements ModelInter{
 			
 			url = "mail/mail.jsp";
 			method = true;
-		} 
+		}
 		
 		return new ModelForward(url, method);
 	}
