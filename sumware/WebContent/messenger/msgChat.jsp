@@ -6,13 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ChatRoom</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script src="js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
 </head>
 <body>
-<div class="container">
-	<div class="col-lg-9">
 	<form action="sumware" method="post" id="closeForm" name="closeForm">
 		<input type="hidden" id="chatmodel"name="model">
 		<input type="hidden" id="chatsubmod"name="submod">
@@ -21,26 +24,54 @@
 		<input type="hidden" id="resState" name="resState">		
 	</form>
 <!-- 		db에 저장된 내용 출력 -->
-		<div class="col-lg-7">
-			<span>${userName }님과 대화 중 입니다.</span>
+
+
+<div class="col-lg-3" style="width: 100%">
+	<div class="chat-panel panel panel-default">
+		<div class="panel-heading">
+			<i class="fa fa-bar-chart-o fa-fw"></i> <strong class="primary-font">${userName }님과 대화 중 입니다</strong>
+					
 		</div>
-			
-		<div class="col-lg-10" style="height: 450px; width: 500px;">
-			<textarea class="form-control" rows="30" id="msgWindow" style="width: 450px"></textarea>
+		
+		<div class="panel-body">
+			<textarea class="form-control" rows="30" id="msgWindow" ></textarea>
 		</div>
-<!-- 		메세지 입력  -->
-		</br>
-		<div class="col-lg-10">
+		
+		<div class="panel-footer">
 			<div class="input-group">
-				<input type="text" class="form-control" placeholder="메세지를 입력하세여" id="msgText" />
-				<span class="input-group-btn">			
-					<button class="btn btn-default" type="button" onclick="sendMsg()">전송</button>
-					<button class="btn btn-default" type="button" onclick="closeWindow()">나가기</button>					
+				<input id="btn-input" type="text" class="form-control input-sm"	placeholder="메세지를 입력하세여" id="msgText">
+				<span class="input-group-btn">
+					<button class="btn btn-warning btn-sm" onclick="sendMsg()">Send</button>
+					<button class="btn btn-warning btn-sm" onclick="closeWindow()">나가기</button>
 				</span>
 			</div>
 		</div>
+		
 	</div>
 </div>
+
+
+
+<!-- 		<div class="col-lg-7"> -->
+<%-- 			<span>${userName }님과 대화 중 입니다.</span> --%>
+<!-- 		</div> -->
+			
+<!-- 		<div class="col-lg-10" style="height: 450px; width: 500px;"> -->
+<!-- 			<textarea class="form-control" rows="30" id="msgWindow" style="width: 450px"></textarea> -->
+<!-- 		</div> -->
+<!-- <!-- 		메세지 입력  -->
+<!-- 		</br> -->
+<!-- 		<div class="col-lg-10"> -->
+<!-- 			<div class="input-group"> -->
+<!-- 				<input type="text" class="form-control" placeholder="메세지를 입력하세여" id="msgText" /> -->
+<!-- 				<span class="input-group-btn">			 -->
+<!-- 					<button class="btn btn-default" type="button" onclick="sendMsg()">전송</button> -->
+<!-- 					<button class="btn btn-default" type="button" onclick="closeWindow()">나가기</button>					 -->
+<!-- 				</span> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
 <script>
 	
 // 	var reip="${ipAdd}";	

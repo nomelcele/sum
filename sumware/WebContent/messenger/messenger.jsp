@@ -1,9 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@include file="/top.jsp"%> --%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+</head>
+
 
 <script>
 	// 사원 list 출력 시 채팅창으로 이동
@@ -95,11 +107,46 @@
 	
 </script>
 
+<body>
+	<div class="col-lg-3" style="width: 100%">
+		<div class="chat-panel panel panel-default">
+
+			<div class="panel-heading">
+				<i class="fa fa-bar-chart-o fa-fw"></i> <strong class="primary-font">Messenger</strong>
+			</div>
+			<div class="panel-body">
+					<ul class="chat" style="list-style: none">
+						<li class="left clearfix">
+							<span class="chat-img pull-left">
+								<img src="profileImg/ksh.jpg" alt="" class="img-circle" style="width: 50px; height: 50px;">
+							</span>
+							<div class="chat-body clearfix">
+								<div class="header">
+									<strong class="primary-font">김성호</strong> 
+									<strong class="primary-font">사번</strong> 
+									<strong class="primary-font">부서이름</strong> 
+								</div>
+								
+							</div>
+							</li>
+						</ul>
+			
+			
+			
+
+		</div>
+	</div>
+</div>
+
+
+
 
 <!-- 사용자 정보(사진, 이름) -->
+
 <div class="container">
 	<div class="col-lg-3">
-	<div id="target">
+	<!-- target은 메세지 거부 시 거부 메세지 송출 담당 -->
+	<div id="target"> 
 	</div>
 		<div class="media">
 			<div class="media-left media-middle">
@@ -162,7 +209,8 @@
 		</div>
 	</div>	
 </div>
+</div>
 
-
-
+</body>
+</html>
 
