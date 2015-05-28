@@ -26,7 +26,7 @@ public class BoardModel implements ModelInter{
 		String url = "";
 		boolean method = false;
 		String submod = request.getParameter("submod");
-		System.out.println("BoardModel[submod] : "+submod);
+		System.out.println("BoardModel[submod] : " + submod);
 		if(submod.equals("boardList") && submod!=null){
 			/* Page 처리 영역 */
 			// 들어온 요청은 boardList 를 보여주는 것, 그렇다면 1페이지 부터 보여줘야 한다.
@@ -58,6 +58,7 @@ public class BoardModel implements ModelInter{
 			request.setAttribute("list", list);
 			// 댓글 불러오는 로직.
 			String childmod = request.getParameter("childmod");
+			System.out.println("childmod : "+childmod);
 			if(childmod != null && childmod.equals("commInsert")){
 				HashMap<String, String> commmap = MyMap.getMaps().getMapList(request);
 				BoardDao.getDao().commInsert(commmap);
