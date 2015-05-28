@@ -35,6 +35,8 @@ public class LoginDao {
 			   System.out.println("상급자 있음");
 			   sql.append("select s.memnum, s.memprofile, s.memname, s.memjob,s.memdept,s.memmgr, d.dename, m.memname mgrname, s.memauth,s.meminmail ");
 			   sql.append("from member s, member m, dept d where s.memmgr = m.memnum and s.memdept = d.denum and s.memnum = ? and s.mempwd =?");
+			   // 부서 번호와 상급자 번호가 있어야 한다.
+			   // 부서 번호: 900, 상급자 번호: 1 (default)
 			   con = ConUtil.getOds();
 			
 			   pstmt = con.prepareStatement(sql.toString());
@@ -42,8 +44,11 @@ public class LoginDao {
 
 
 		   pstmt.setInt(1, v.getMemnum());
+		   System.out.println("로그인한 사원 번호: "+v.getMemnum());
 		   pstmt.setString(2, v.getMempwd());
+		   System.out.println("로그인한 사원 비번: "+v.getMempwd());
 		   ResultSet rs = pstmt.executeQuery();
+		   
 		   if(rs.next()){
 			   vo.setMemnum(rs.getInt("memnum"));
 			   vo.setMemprofile(rs.getString("memprofile"));

@@ -46,9 +46,11 @@ public class LoginModel implements ModelInter {
 					//mempwd는 유효성검사 할때 쓰기위하여 보냄.
 		
 				} else if(!res.equals("0")){
+					System.out.println("ddddddddd");
 					vo = LoginDao.getDao().login(v);
 					// sessionScope에 아이디를 저장
 					HttpSession session = request.getSession();
+					
 					session.setAttribute("v", vo);
 					//login 기록 저장.
 					LoginDao.getDao().inLog(memnum);	

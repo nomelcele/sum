@@ -280,3 +280,12 @@ start with 1;
 -- 컬럼 데이터 길이 수정
   alter table mail modify(mailsdelete number(1));
   alter table mail modify(mailrdelete number(1));
+  
+-- member 테이블 memmgr, memdept 컬럼 default 값 설정
+  alter table member modify (memdept number(3) default 900);
+  alter table member modify (memmgr number(5) default 1);
+  
+-- 부서, 상급자 기본값
+INSERT INTO DEPT VALUES(900,'부서기본값');
+INSERT INTO MEMBER VALUES
+(1,'회장님', '서울','1004','boss.jpg','회장',1,'boss@naver.com','boss',NULL,100);

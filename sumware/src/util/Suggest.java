@@ -65,11 +65,11 @@ public class Suggest {
 		
 	}
 	
-	public static void main(String[] args) {
-		Suggest su = new Suggest();
-		String[] re = su.getSuggest("김");
-		for(String e: re){
-			System.out.println(e);
-		}
-	}
+//	public static void main(String[] args) {
+//		Suggest su = new Suggest();
+//		String[] re = su.getSuggest("김");
+//		for(String e: re){
+//			System.out.println(e);
+//		}
+//	}
 }

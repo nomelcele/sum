@@ -44,6 +44,7 @@
    </div>
 	
    <div class="container">
+   ${sessionScope.v.memnum}
    <c:choose>
    <c:when test="${empty sessionScope.v.memnum}">
       <form class="form-inline" role="form" action="sumware" method="post">

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sumware>
  <member>
+  <name>홍길동</name>
+  <inmail>ㅂㅈㄷㄱ</inmail>
+ </member>
+ <member>
   <name>홍명표</name>
   <inmail>mphong</inmail>
  </member>
@@ -27,5 +31,9 @@
  <member>
   <name>김주상</name>
   <inmail>jskim</inmail>
+ </member>
+ <member>
+  <name>이은정</name>
+  <inmail>test</inmail>
  </member>
 </sumware>
