@@ -19,7 +19,7 @@
 console.log("typeof:"+typeof(EventSource));
 	var rowsPerPage =7;
 	var eventSource;
-	var cheight=$('.chat').height();
+	var cheight=$('.chat').height()-100;
 	function push(){
 		if(typeof(EventSource) != "undefined"){
 			eventSource = new EventSource("sumware?model=sns&submod=pushSns&sdept=${v.memdept}&page=1&rowsPerPage="+rowsPerPage); // push를 받을수 있는 브라우져인지 판단.
@@ -89,8 +89,8 @@ console.log("typeof:"+typeof(EventSource));
 			});
 	});
 	function snsComm(snum,p){
+// 		$("#wrap2"+snum).toggle("slow");
 		var page=p;
-		alert("snum:"+snum+" page:"+p);
 		var data={
 			model:"sns",
 			submod:"snsComm",
@@ -103,19 +103,27 @@ console.log("typeof:"+typeof(EventSource));
 			data:data,
 			success: function(result){
 				eventSource.close();
-				$("#wrap2").html(result);
+				$("#wrap2"+snum).html(result);
 			}
 		});
 	}
 	function snsInsertComm(snum){
-		var commsns=snum;
 		var data={
 				model:"sns",
 				submod:"snsCommInset",
 				comem:"${v.memnum}",
 				page:"1",
-				commsns:commsns
+				commsns:snum,
+				cocont:$('#cocont').val()
 			};
+		$.ajax({
+			type:"POST",
+			url:"sumware",
+			data:data,
+			success: function(result){
+				$("#wrap2"+snum).html(result);
+			}
+		});
 	}
 </script>
 <style>
