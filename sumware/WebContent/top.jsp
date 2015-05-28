@@ -39,7 +39,6 @@
 		selectMenu(sel);
 		todoFormGo();
 		tosend(tonumval);
-		
 	});
 	function openWin(){
 		var opt= "width=700, height=800, scrollbars=yes";	
@@ -149,7 +148,6 @@
 </script>
 <!-- /메인 -->
 <script>
-
 
 	function todoFormGo(res){
 		$('#model').attr("value","todo");
@@ -342,11 +340,8 @@
 		});
 	}
 
-	
 </script>
-
 </head>
-
 <nav class="navbar navbar">
 	<div class="container">
 		<div class="navbar-header">
@@ -356,22 +351,38 @@
 				class="glyphicon glyphicon-chevron-down"></span>
 			</a>
 		</div>
-		<c:if test="${!empty sessionScope.v.memnum}">
-		<div class="nav navbar-right">
-			<ul class="nav navbar-nav">
-				<li><a href="sumware?model=index">메인</a></li>
-				<li><a href="sumware?model=todo&submod=firsttodoForm&memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
-				<li><a href="sumware?model=mail&submod=mailMain">Mail</a></li>
-				<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
-				<li><a href="sumware?model=board&submod=boardList&page=1">Board</a></li>
-				<li><a href="javascript:openWin()">Messenger</a></li>
-			</ul>
-			
+		<c:choose>
+   			<c:when test="${empty sessionScope.v.memnum}">
+      		<form class="form-inline" role="form" action="sumware" method="post">
+         		<input type="hidden" name="model" value="login"> 
+         		<input type="hidden" name="submod" value="login">
+         		<div class="porm-group">
+            		<label class="control-label-" for="sabun"> 사원번호 :</label> 
+            		<input type="text" id="memnum" name="memnum" placeholder="사원번호"> 
+            		<label class="control-label" for="Password"> 비밀번호 :</label> 
+            		<input type="password" id="mempwd" name="mempwd" placeholder="비밀번호">
+            		<button class="btn btn-xs btn-info">로그인</button>
+         		</div>
+      		</form>
+   			</c:when>
+   			<c:otherwise>
+<!-- 		   	<div class="porm-group"> -->
+<!-- 		    </div> -->
+    		<div class="nav navbar-right">
+				<ul class="nav navbar-nav">
+					<li><a href="sumware?model=index">메인</a></li>
+					<li><a href="sumware?model=todo&submod=firsttodoForm&memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
+					<li><a href="sumware?model=mail&submod=mailMain">Mail</a></li>
+					<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
+					<li><a href="sumware?model=board&submod=boardList&page=1">Board</a></li>
+					<li><a href="javascript:openWin()">Messenger</a></li>
+				</ul>
 				<ul class="nav navbar-right navbar-nav">
 					<li><a href="sumware?model=login&submod=logout&memnum=${sessionScope.v.memnum}"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
+			        <li><span class="control-label-" for="sabun"> ${sessionScope.v.memname} 님 환영합니다.</span></li>
 				</ul>
-		
-		</div>
-			</c:if>
+			</div>
+   			</c:otherwise>
+   		</c:choose>
 	</div>
 </nav>
