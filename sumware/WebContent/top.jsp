@@ -22,18 +22,23 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <!-- 메인 -->
+<c:if test="${param.submod eq 'writeForm' }">
+	<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+	<script src="js/myckeditor.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			chkUpload();
+		});
+	</script>
+</c:if>
 <script>
 	$(function() {
 		selectMenu(sel);
 	});
-
-
 	function openWin(){
 		var opt= "width=700, height=800, scrollbars=yes";	
 		window.open("sumware?model=messenger&submod=messengerForm","MessengerMain",opt);
 	}
-	
-
 	function selectMenu(sel){
 		// 메뉴 선택
 			alert("메서드호출");
@@ -57,7 +62,6 @@
 				
 			}
 	}
-	
 </script>
 <!-- /메인 -->
 <script>
@@ -125,7 +129,6 @@
 			$('#goTodo').submit();
 		}
 	}
-	
 	function mailFormGo(res){
 		if(res=='write'){ // 메일 쓰기
 			$.ajax({
@@ -188,8 +191,6 @@
 			});
  		} 
 	}
-</script>
-<script> 
 	// 메일-suggest 관련 함수
 	var xhr = null;
 	function getXMLHttpRequest() {
@@ -199,7 +200,6 @@
 			xhr = new XMLHttpRequest();
 		}
 	}
-	
 	function sendRequest(url, param, callback, method) {
 		// get/post 방식 결정
 		getXMLHttpRequest();
