@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div>
-	<%@include file="/top.jsp"%>
-</div>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
 <%--우편번호 다음 링크 --%>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
@@ -44,9 +44,9 @@
 			}
 			
 		});
+		<%--이메일 중복 검사--%>
 
-		
-		<%--우편번호 합치기 --%>
+		<%--우편번호 합치기 유호성 검사 --%>
 		$('#btn').click(
 				function() {
 					var a1 = $("#sample6_postcode1").val() + "/"
@@ -54,8 +54,33 @@
 							+ $("#sample6_address").val() + "/"
 							+ $("#sample6_address2").val();
 					$('#address').attr("value", a1);
-					alert("addresss" + $('#address').val());
-					myform.submit();
+					if($('#memimg').val()==""){
+						alert("프로필 사진을 등록 해주세요!");
+					}else if($('#meminmail').val()==""){
+						alert("아이디를 입력해주세요!");
+						$('#meminmail').focus();
+						
+					}else if($('#mempwd').val()==""){
+						alert("기존 비밀번호를 입력해주요!");
+						$('#mempwd').focus();
+						
+					}else if($('#mempwd1').val==""){
+						alert("새로운 비밀번호를 입력해주요!");
+						$('#mempwd1').focus();
+					}else if($('#mempwd2').val()==""){
+						alert("비밀번호를 다시 입력해 주세요!");
+						$('#mempwd2').focus();
+					}else if($('#sample6_postcode1').val()==""){
+						alert("우편번호를 입력해 주세요!");
+						$('#sample6_postcode1').focus();
+						
+					}else if($('#sample6_address2').val()==""){
+						alert("상세 주소를 입력해 주세요!");
+						$('#sample6_address2').focus();
+					}else{
+						myform.submit();
+					}					
+					
 				});
 
 		<%--이미지 업로드 이미지 --%>
@@ -156,7 +181,7 @@
 </script>
 
 
-
+	<%@include file="/top.jsp"%>
 
 <div class="container">
 	<div class="row info">
@@ -299,6 +324,5 @@
 </div>
 
 
-<div>
+
 	<%@include file="/footer.jsp"%>
-</div>
