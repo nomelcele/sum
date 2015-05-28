@@ -9,8 +9,42 @@
 
 <%--아이디 중복체크 --%>
 <script>
+var progress = null;
+var xhr = null;
+
+
+// 파일을 업로드한다.
+function fileUpload(){
+	var uploadFile = document.getElementById("fileimg");
+	// 업로드 시작 -> xhr.download..
+	xhr.upload.onloadstart = function (e) {
+		// onloadstart: 감지
+		// display: none인 것을 보이게 한다.
+	};
+	xhr.onreadystatechange = function(){
+		// callback
+		if(xhr.readyState == 4 && xhr.status == 200){
+			alert(xhr.responseText);
+			$('#memimg').attr("value",xhr.responseText.trim());
+		}
+	};
+	
+	xhr.open("POST","http://localhost/sumware/join/joinupload.jsp",true); // 크로스 도메인으로 데이터를 보내는 것이 가능해졌다.
+	xhr.setRequestHeader("X-File-Name", // 헤더로 파일의 이름이 간다.
+			encodeURIComponent(uploadFile.files[0].name));
+	xhr.send(uploadFile.files[0]); // post 방식이니까 send로 파라미터 전송
+}
 
 	$(function() {
+		if(window.ActiveXObject){ // IE
+			xhr = new ActivexObject("Microsoft.XMLHTTP");
+		} else { // Cross
+			xhr = new XMLHttpRequest();
+		}
+		progress = document.querySelector("progress");
+		// upload 버튼을 클릭하면 파일을 업로드한다.
+		// querySelector: jQuery 타입의 selector를 만들어준다.
+		
 		
 		<%--아이디 중복검사 --%>
 		
@@ -30,7 +64,7 @@
 				
 				$('.dhpwd').show("slow");
 			} else {
-				
+					
 				alert("비밀번호가 일치 하지 않습니다.")
 			}
 	});
@@ -38,13 +72,14 @@
 		$('#mempwd2').change(function() {
 			
 			if($('#mempwd1').val() != $('#mempwd2').val()){
-				alert("패스워드가 같지 않습니다.")
+				alert("패스워드가 같지 않습니다.");
 			}else{
-				alert("패스워드가 같습니다.")
+				fileUpload();
+				alert("패스워드가 같습니다.");
+				
 			}
 			
 		});
-		<%--이메일 중복 검사--%>
 
 		<%--우편번호 합치기 유호성 검사 --%>
 		$('#btn').click(
@@ -84,8 +119,7 @@
 				});
 
 		<%--이미지 업로드 이미지 --%>
-		$('#memimg')
-				.change(
+		$('#fileimg').change(
 						function() { // 파일 박스 안에서 변화를 감지해야 한다.
 							console.log("이미지 선택했어");
 							// 변화가 있을 때 function을 호출한다.
@@ -104,6 +138,7 @@
 								// 있으면 1, 없으면 -1을 리턴
 								// inArray는 jQuery에서 제공하는 메서드
 								resetFormElement($(this)); // 폼 초기화
+								
 								window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg만 업로드 가능)');
 							} else {
 								var file = $(this).prop("files")[0];
@@ -182,7 +217,7 @@
 
 
 	<%@include file="/top.jsp"%>
-
+<%=application.getRealPath("/profileImg") %>
 <div class="container">
 	<div class="row info">
 		<div class="row">
@@ -190,10 +225,11 @@
 				<div class="resume">
 					<form class="form-horizontal" role="form" method="post"
 						action="sumware" id="myform" name="myform">
-						<input type="hidden" name="model" value="join"> <input
-							type="hidden" name="submod" value="signup"> <input
-							type="hidden" name="memnum" value="${memnum}"> <input
-							type="hidden" name="address" id="address">
+						<input type="hidden" name="model" value="join"> 
+						<input type="hidden" name="submod" value="signup"> 
+						<input type="hidden" name="memnum" value="${memnum}"> 
+						<input type="hidden" name="address" id="address">
+						<input type="hidden" name="memimg" id="memimg">
 						<header class="page-header">
 							<h1 class="page-title">회원가입</h1>
 							<small> <i class="fa fa-clock-o"></i> Last Updated on: <time>Sunday,
@@ -211,7 +247,7 @@
 
 										<div class="btn-group col-sm-offset-2"
 											style="position: relative; overflow: hidden; padding-top: 10px;">
-											<input type="file" id="memimg" name="memimg"
+											<input type="file" id="fileimg"
 												style="position: absolute; right: 0px; top: 0px; opacity: 0; cursor: pointer;" />
 											<img src="img/ion.JPG">
 										</div>
@@ -305,7 +341,6 @@
 											<button type="button" class="btn btn-primary" id="btn">
 												<i class="fa fa-floppy-o"></i>
 											</button>
-
 										</div>
 									</div>
 								</div>

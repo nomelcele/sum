@@ -38,6 +38,8 @@ public class LoginModel implements ModelInter {
 				if (res.equals("0")) {
 					
 					System.out.println("첫번째 이용자다!!!!");
+					System.out.println("사원 번호: "+memnum);
+					System.out.println("사원 비번: "+mempwd);
 					request.setAttribute("memnum", memnum);
 					request.setAttribute("mempwd", mempwd);
 					url="join/member.jsp";
