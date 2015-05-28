@@ -36,11 +36,10 @@ public class ModelFactory {
 			// 새로운 변수 rpath 에 요청온 파라미터의 값으로 properties 의 값을 
 			// 가져온다. 이 값은 곧 model 의 클래스명이 된다.
 			String rpath = prop.getProperty(mod);
-			System.out.println(rpath);
+			System.out.println("MF[rpath] : " + rpath);
 			// 만약 들어온 요청의 값이 없을 경우 기본 페이지로 이동 시키는 로직
 			if(mod == null){
 				mod = "index";
-				System.out.println("alksdjfasdkjfdaslkjflasdkjflaksdjfalsdkjflsdkjf");
 				rpath = prop.getProperty(mod);
 			}
 			// 클래스명만으로 객체를 생성 해주기 위한 
