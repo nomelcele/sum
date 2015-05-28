@@ -75,10 +75,10 @@ button, input, select, option, textarea, a {
 	box-sizing: border-box;
 }
 /* header */
+.navbar {max-height:75px}
 .navbar-nav {
     position: relative;
     top: 10px;
-
 }
 .navbar-nav li:before {
 	position:absolute;top:50%;
@@ -103,7 +103,7 @@ button, input, select, option, textarea, a {
 	float:left;
 	width:200px;
 	margin-right:20px;margin-top:20px;
-	border:1px solid #ccc;
+/* 	border:1px solid #ccc; */
 
 }
 .contents {
@@ -178,9 +178,61 @@ button, input, select, option, textarea, a {
 	padding-top: 80px;
 	height: 200px;
 }
-.form-inline {
-	padding: 30px;
-	text-align: right;
+/* ( LOGIN ) */
+.porm-group {
+    float: right;
+    position: relative;top: 11px;
+    padding: 13px;
+    border: 1px solid #A6CBCB;border-radius:5px;
+    background-color: rgba(152, 234, 230, 0.06);
+}
+.porm-group label {
+    margin-right: 4px;
+    color: #333;
+}
+.porm-group label[for="mempwd"] {margin-left:10px}
+.porm-group input {
+    height: 25px;width: 110px;
+    border: 1px solid #B3B3B3;
+    text-indent: 5px;
+}
+.porm-group button {
+    text-shadow: none;
+}
+/* ( user-name ) */
+.user-name {
+	position:relative;
+	margin-left: 10px;
+	font-size: 13px;
+	padding-left:20px;
+	border: 2px solid #95CFDB;
+	border-radius: 7px;
+	top: 8px;
+	box-shadow: 1px 1px 3px #D8D8D8;
+	color: #333;
+}
+.user-name li strong {color: #00787F;}
+.user-name li {
+	line-height:42px
+}
+.user-name li > span {
+	vertical-align:middle;
+}
+.user-name a {padding:0}
+.user-name:after {
+	display:block;content:"";
+	position:absolute;
+	top: 8px;left:0;
+	width:1px;
+	height: 25px;
+}
+.user-name:last-child {
+	padding-left: 34px;
+	background: rgba(255, 255, 255, 0.81) url(../img/ico-person.png) 12px center no-repeat;
+	background-size:20px 20px;
+}
+.user-name li:before {
+	display:none
 }
 
 /************** { JOIN } ****************/
@@ -589,7 +641,6 @@ button {
 }
 .comment-btn button {
     min-width: 0;
-	
     min-height: 0;
     line-height: 18px;
     padding-bottom: 2px;
