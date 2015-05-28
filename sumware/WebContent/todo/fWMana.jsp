@@ -63,7 +63,7 @@
 					<div class="panel panel-success">
 						<div class="panel-heading">${fw.totitle }
 						<c:if test="${fw.toconfirm  eq 'z' }">
-						
+						&nbsp<i class="fa fa-exclamation" style="color:#FF9436"></i>
 						</c:if>
 						
 						</div>
@@ -84,8 +84,8 @@
 									style="margin: auto; width: 90%; padding-left: 15px; padding-right: 15px;">
 									<thead>
 										<tr style="margin:auto">
-											<td>승인 상태</td>
-											<td><c:choose>
+											<td style="text-align:center">승인 상태</td>
+											<td style="text-align:center"><c:choose>
 													<c:when test="${fw.toconfirm  eq 'n' }">
 														<button type="button"
 															class="btn btn-outline btn-warning btn-xs">미승인</button>

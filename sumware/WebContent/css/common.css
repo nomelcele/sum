@@ -645,3 +645,65 @@ button {
     line-height: 18px;
     padding-bottom: 2px;
 }
+
+/*********** button *************/
+
+.btn-outline {
+    color: inherit;
+    background-color: transparent;
+    transition: all .5s;
+}
+
+.btn-primary.btn-outline {
+    color: #428bca;
+}
+
+.btn-success.btn-outline {
+    color: #5cb85c;
+}
+
+.btn-info.btn-outline {
+    color: #5bc0de;
+}
+
+[class^="btn"].btn-outline {
+    box-shadow: none;
+    text-shadow: none;
+    background-color:#fff;
+	
+}
+.btn-danger.btn-outline {
+    border-color: #d9534f;
+    color: #d9534f;
+}
+.btn-primary.btn-outline {
+    border-color: #204d74;
+    color: #204d74;
+}
+.btn-success.btn-outline {
+    border-color: #5cb85c;
+    color: #4cae4c;
+}
+
+
+
+.btn-warning.btn-outline {
+    border-color: #FFBB00;
+    color: #FFBB00;
+}
+
+
+
+
+
+.btn-danger.btn-outline {
+    color: #d9534f;
+}
+
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+    color: #fff;
+}

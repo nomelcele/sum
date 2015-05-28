@@ -25,13 +25,13 @@
 							 <input type="hidden" name="memdept" value="${sessionScope.v.memdept }">
 
 							<div class="form-group has-success">
-								<label class="control-label"><i class="fa fa-pencil"></i>업무 제목</label> 
+								<label class="control-label"><i class="fa fa-pencil"></i> 업무 제목</label> 
 								<input type="text" class="form-control" id="totitle" name="totitle"
 									style="width: 70%">
 							</div>
 
 							<div class="form-group has-success">
-								<label class="control-label" for="inputSuccess"><i class="fa fa-calendar-o"></i>업무 기간</label></br> 
+								<label class="control-label" for="inputSuccess"><i class="fa fa-calendar-o"></i> 업무 기간</label></br> 
 								<input type="date" id="tostdate" name="tostdate" class="form-control" style="width: 150px; display: inline;"> 
 								~ <input type="date" id="toendate" name="toendate" class="form-control" style="width: 150px; display: inline;">
 
@@ -43,7 +43,7 @@
 									style="width: 70%"></textarea>
 							</div>
 							<div class="form-group has-success">
-								<label class="control-label" for="inputSuccess"><i class="fa fa-user"></i>담당자</label>
+								<label class="control-label" for="inputSuccess"><i class="fa fa-user"></i> 담당자</label>
 								<select name="tomem" class="form-control" id="selectTomem"
 									style="width: 70%">
 									<option value="">팀장 선택</option>
@@ -54,12 +54,12 @@
 								</select>
 							</div>
 							<div class="form-group has-success">
-								<label class="control-label" for="inputSuccess"><i class="fa fa-paperclip"></i>파일 첨부</label> <input
+								<label class="control-label" for="inputSuccess"><i class="fa fa-paperclip"></i> 파일 첨부</label> <input
 									type="file" name="tofile" id="tofile">
 							</div>
 
 							<div class="form-group has-warning">
-								<label class="control-label" for="inputWarning"><i class="fa fa-thumb-tack"></i>남길 말</label> <input
+								<label class="control-label" for="inputWarning"><i class="fa fa-thumb-tack"></i> 남길 말</label> <input
 									type="text" class="form-control" id="inputWarning" id="tocomm" name="tocomm"
 									style="width: 70%">
 							</div>
