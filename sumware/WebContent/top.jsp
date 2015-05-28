@@ -345,7 +345,7 @@
 <nav class="navbar navbar">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#body"><img src="img/sum.png"
+			<a class="navbar-brand" href="sumware?model=index"><img src="img/sum.png"
 				alt="SumWare"></a> <a class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-collapse"> <span
 				class="glyphicon glyphicon-chevron-down"></span>
