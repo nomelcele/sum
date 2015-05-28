@@ -2,16 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/top.jsp"%>
 <section id="features" class="features2">
-<form method="post" action="sumware" id="detailform">
-	<input type="hidden"  name="model" value="mail">
-	<input type="hidden" name="submod" value="mailWriteForm">
-	<input type="hidden" name="toMem" value="${detail.mailsname} <${detail.replyid}@sumware.com>">
-	<input type="hidden" name="mailtitle" value="re: ${detail.mailtitle}">
-
 	<div class="container">
 		<div class="row">
 			<%@include file="/contentLeft.jsp"%>
 			<div class="col-lg-8" id="mainContent">
+			<form method="post" action="sumware" id="detailform">
+				<input type="hidden"  name="model" value="mail">
+				<input type="hidden" name="submod" value="mailWriteForm">
+				<input type="hidden" name="toMem" value="${detail.mailsname} <${detail.replyid}@sumware.com>">
+				<input type="hidden" name="mailtitle" value="re: ${detail.mailtitle}">
 				<div>
 					<input type="submit" value="답장"><br />
 					제목: ${detail.mailtitle}<br /> 
@@ -21,10 +20,11 @@
 					내용: ${detail.mailcont}<br /> 
 					첨부 파일: <a href="upload/${detail.mailfile}" target="_blank">${detail.mailfile}</a>
 				</div>
+			</form>	
 			</div>
 		</div>
 	</div>
-	</form>
+	
 </section>
 <%@include file="/footer.jsp"%>
 
