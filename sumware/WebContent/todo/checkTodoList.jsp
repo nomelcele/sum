@@ -3,6 +3,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<script>
+
+
+
+
+</script>
+
 <!-- 업무 관리(팀장일 경우) 부분 뷰 ajax-->
 
 		<!-- 팀장 업무관리 -->
@@ -11,7 +19,7 @@
 					<div class="panel-heading">
 						<i class="fa fa-pencil-square-o"></i> <strong class="primary-font">부서업무</strong>
 					</div>
-					<div class="panel-body">
+					<div class="panel-body" style="height:510px; overflow-y:scroll;">
 						<div class="column" style="overflow: auto">
 							<div class="column" style="overflow: auto">
 
@@ -27,7 +35,7 @@
 													${tolist.toendate }
 												</p>
 												<p>${tolist.tocont }</p>
-												<p>Comment : ${tolist.tocomm }</p>
+												<p><i class="fa fa-thumb-tack"></i> ${tolist.tocomm }</p>
 
 											</div>
 											<div class="panel-footer">

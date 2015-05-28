@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-	
-	
-
-	<div class="row">
 		<%@include file="/top.jsp"%>
-	</div>
+
+
 <div class="container">
 	<div class="row">
 
@@ -21,7 +18,7 @@
 					<div class="panel-heading">
 						<i class="fa fa-pencil-square-o"></i> <strong class="primary-font">부서업무</strong>
 					</div>
-					<div class="panel-body">
+					<div class="panel-body"  style="height:510px; overflow-y:scroll;">
 						<div class="column" style="overflow: auto">
 							<c:forEach var="deptjoblist" items="${deptJobList }">
 
@@ -51,7 +48,12 @@
 											<div id="detail${deptjoblist.tonum }" style="display: none">
 												<br />
 												<p>${deptjoblist.tocont }</p>
-												<p><a href="upload/${teamjoblist.tofile }">첨부파일 : ${teamjoblist.tofile }</a></p>
+												<p>
+													<a href="upload/${deptjoblist.tofile }" target="_blank">
+													<i class="fa fa-paperclip"></i> 첨부파일
+													: ${deptjoblist.tofile }</a>
+												</p>
+												
 											</div>
 
 										</div>
@@ -75,6 +77,5 @@
 	</div>
 </div>
 
-	<div class="row">
+
 		<%@include file="/footer.jsp"%>
-	</div>

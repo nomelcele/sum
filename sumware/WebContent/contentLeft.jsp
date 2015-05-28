@@ -67,8 +67,8 @@
 			<div class="panel-body">
 				<span class="chat-img pull-left"> <img
 					src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
-					class="img-circle" style="width: 100px; height: 130px;">
-				</span> </br> </br> </br> </br> </br> </br> </br>
+					class="img-circle" style="width: 82px; height: 110px;">
+				</span>
 				<table>
 					<tr>
 						<td><strong class="primary-font" style="margin: 10px">이름</strong></td>
@@ -86,6 +86,12 @@
 						<td><strong class="primary-font" style="margin: 10px">상급자</strong></td>
 						<td>${sessionScope.v.mgrname }</td>
 					</tr>
+					<tr><td colspan="2" style="color:white">             .</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align:right"><a href="#"><i class="fa fa-cog"></i>프로필수정</a></td>
+						
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -93,15 +99,17 @@
 	<div class="row-lg-6">
 		<div class="list-group">
 
-			<a href="#" class="list-group-item disabled"><span
-				class="glyphicon glyphicon-pencil"></span><strong
-				class="primary-font">Todo</strong></a> 
+			<div class="pannel-heading">
+			<span class="glyphicon glyphicon-pencil"></span>
+			<strong class="primary-font">Todo</strong>
+			</div> 
 				<a href="javascript:selectMenu('deptTodo')" class="list-group-item">부서 업무</a> 
 			<c:if test="${sessionScope.v.memauth gt 3 }">
 				<a href="javascript:selectMenu('teamTodoForm')" class="list-group-item">팀 업무</a>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
 				<a href="javascript:selectMenu('manageJob1')" class="list-group-item">업무관리</a>
+				
 			</c:if>
 			<c:if test="${sessionScope.v.memauth eq 4 }">
 				<a href="javascript:selectMenu('manageJob2')" class="list-group-item">업무관리</a>

@@ -83,7 +83,7 @@ public class TodoModel implements ModelInter{
 				e.printStackTrace();
 			}
 			
-			url = "sumware?model=todo&submod=todoForm";
+			url = "sumware?model=todo&submod=firsttodoForm";
 			method = true;
 			
 		}else if(submod.equals("checkTodoList")){
@@ -207,7 +207,7 @@ public class TodoModel implements ModelInter{
 			HashMap<String,String> map = MyMap.getMaps().getMapList(request);
 			TodoDao.getDao().confirmTodo(map, "o");
 			
-			url = "todo/teamTodoForm.jsp";
+			url = "sumware?model=todo&submod=teamTodoForm";
 			method = true;
 			
 		}

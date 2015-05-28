@@ -11,7 +11,6 @@
 	}
 	
 	function tosend(tonumval){
-		alert("샌드 메서드 호출");
 		$.ajax({
 			type : "post",
 			url : "sumware",
@@ -26,7 +25,6 @@
 				},
 			success : function(result){
 				$("#menuTarget").html(result);
-				alert(result);
 			}
 		});
 		
@@ -57,13 +55,18 @@
 	<div class="panel-heading">
 		<i class="fa fa-pencil-square-o"></i> <strong class="primary-font">업무관리</strong>
 	</div>
-	<div class="panel-body">
-		<div class="column" style="height: 450px; overflow-y: scroll;">
+	<div class="panel-body" style="height: 510px; overflow-y: scroll;">
+		<div class="column">
 
 			<c:forEach var="fw" items="${fwList }">
 				<div class="low-lg-${fw.torownum }">
 					<div class="panel panel-success">
-						<div class="panel-heading">${fw.totitle }</div>
+						<div class="panel-heading">${fw.totitle }
+						<c:if test="${fw.toconfirm  eq 'z' }">
+						
+						</c:if>
+						
+						</div>
 						<div class="panel-body">
 							<p>
 								<i class="fa fa-calendar-o"></i>${fw.tostdate } ~ ${fw.toendate }
@@ -102,7 +105,7 @@
 									<tbody>
 
 										<tr class="title${fw.tonum }" style="display: none;">
-											<td colspan="2">${fw.tocomm }</td>
+											<td colspan="2"><i class="fa fa-thumb-tack"></i>${fw.tocomm }</td>
 										</tr>
 										<tr class="title${fw.tonum }" style="display: none;">
 											<td colspan="2">
