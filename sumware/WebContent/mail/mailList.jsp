@@ -7,7 +7,7 @@
 		<input type="hidden" id="submod" name="submod">
 		<input type="hidden" id="usernum" name="usernum">
 		<input type="hidden" id="userid" name="userid">
-		<input type="hidden" id="tofrom" name="tofrom">
+		<input type="hidden" id="delvalue" name="delvalue">
 		<input type="hidden" id="mailnum" name="mailnum">
 		<c:choose>
 			<c:when test="${tofrom eq '3'}">
@@ -61,47 +61,32 @@
 	function mailTrashGo(){
 		// 체크박스에서 선택된 메일을 삭제
 		$("#model").attr("value","mail");
-		$("#submod").attr("value","mailGoTrash");
+		$("#submod").attr("value","mailSetDel");
 		$("#usernum").attr("value","${sessionScope.v.memnum}");
 		$("#userid").attr("value","${sessionScope.v.meminmail}");
-		$("#tofrom").attr("value","${tofrom}")
+		$("#delvalue").attr("value",2);
 		$("#f").submit();
-		
-// 		var chkArr = $([]);
-// 		$("#chk:checked").each(function(){
-// 			chkArr.add($(this).val());
-// 		});
-		
-// 		var chkArr = document.getElementsByName("chk");
-// 		console.log("휴지통 가는 함수");
-		
-// 		$.ajax({
-// 			type: "post",
-// 			url: "sumware",
-// 			data: {model: "mail",
-// 				submod: "mailTrash",
-// 				usernum: "${sessionScope.v.memnum}",
-// 				userid: "${sessionScope.v.meminmail}",
-// 				chkArr: $("#chk:checked").serialize()
-// 			},
-// 			success: function(result){
-// 				$("#mainContent").html(result);
-// 			}
-// 		});	
 	}
 	
 	function maildeleteGo(){
 		// 휴지통에서 체크된 메일들을 영구 삭제
 		$("#model").attr("value","mail");
-		$("#submod").attr("value","mailDelete");
+		$("#submod").attr("value","mailSetDel");
 		$("#usernum").attr("value","${sessionScope.v.memnum}");
 		$("#userid").attr("value","${sessionScope.v.meminmail}");
-		$("#tofrom").attr("value","${tofrom}")
+		$("#delvalue").attr("value",3);
 		$("#f").submit();
 	}
 	
 	function mailRecover(){
-		
+		// 휴지통에서 체크된 메일들을 복구(메일함으로 이동시킴)
+		// 체크된 메일들의 delete 속성을 1로 변경
+		$("#model").attr("value","mail");
+		$("#submod").attr("value","mailSetDel");
+		$("#usernum").attr("value","${sessionScope.v.memnum}");
+		$("#userid").attr("value","${sessionScope.v.meminmail}");
+		$("#delvalue").attr("value",1);
+		$("#f").submit();
 	}
 	
 	function checkAll(obj){

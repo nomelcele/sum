@@ -275,3 +275,8 @@ start with 1;
   create sequence mescontent_seq
   increment by 1
   start with 1;
+  
+-- 0528 변경
+-- 컬럼 데이터 길이 수정
+  alter table mail modify(mailsdelete number(1));
+  alter table mail modify(mailrdelete number(1));

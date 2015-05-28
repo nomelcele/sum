@@ -113,38 +113,6 @@ public class MailModel implements ModelInter{
 			url = "mail/mailList.jsp";
 			method = true;
 			
-		} else if(submod != null && submod.equals("mailGoTrash")){
-			// 메일함에서 체크박스로 삭제할 메일들 선택 후 삭제 버튼을 클릭했을 때
-			// 삭제 관련 속성(mailsdelete, mailrdelete)을 변경한다.
-			
-			// 휴지통에 들어갈 메일들의 번호(mailnum)을 저장한 배열
-			int usernum = Integer.parseInt(request.getParameter("usernum"));
-			String userid = request.getParameter("userid");
-			String[] mailnums = request.getParameterValues("chk");
-			int tofrom = Integer.parseInt(request.getParameter("tofrom"));
-			System.out.println("tofrom: "+tofrom);
-			
-			MailDao.getDao().deleteMail(mailnums, usernum, userid, 2);
-			
-			ArrayList<MailVO> list = new ArrayList<MailVO>();
-			
-			switch(tofrom){
-				case '1':{ // 받은 메일함에서 삭제했을 때
-					list = MailDao.getDao().getFromMailList(usernum, userid);
-				}
-				case '2':{ // 보낸 메일함에서 삭제했을 때
-					list = MailDao.getDao().getToMailList(usernum, userid);
-				}
-				case '3':{ // 내게 쓴 메일함에서 삭제했을 때
-					list = MailDao.getDao().getMyMailList(usernum, userid);
-				}
-			}
-			
-			request.setAttribute("list", list);
-			request.setAttribute("tofrom",tofrom);
-			
-			url = "mail/mail.jsp";
-			method = true;
 		} else if(submod != null && submod.equals("mailTrashcan")){
 			// 메뉴에서 휴지통을 클릭했을 때
 			int usernum = Integer.parseInt(request.getParameter("usernum"));
@@ -157,23 +125,21 @@ public class MailModel implements ModelInter{
 			
 			url = "mail/mailList.jsp";
 			method = true;
-		} else if(submod != null && submod.equals("mailDelete")){
-			// 휴지통에서 메일 영구 삭제
+		}  else if(submod != null && submod.equals("mailSetDel")){
+			// 메일 테이블의 delete 속성 설정
+			// 1:
+			// 2:
+			// 3:
 			int usernum = Integer.parseInt(request.getParameter("usernum"));
 			String userid = request.getParameter("userid");
 			String[] mailnums = request.getParameterValues("chk");
-			int tofrom = Integer.parseInt(request.getParameter("tofrom"));
+			int delvalue = Integer.parseInt(request.getParameter("delvalue"));
 			
-			MailDao.getDao().deleteMail(mailnums, usernum, userid, 3);
-			
-			ArrayList<MailVO> list = MailDao.getDao().getTrashList(usernum, userid);
-			
-			request.setAttribute("list", list);
-			request.setAttribute("tofrom", 3);
+			MailDao.getDao().setDeleteAttr(mailnums, usernum, userid, delvalue);
 			
 			url = "mail/mail.jsp";
 			method = true;
-		}
+		} 
 		
 		return new ModelForward(url, method);
 	}

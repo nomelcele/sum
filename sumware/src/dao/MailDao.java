@@ -208,9 +208,8 @@ public class MailDao {
 		return v;
 	}
 	
-	public void deleteMail(String[] mailnums, int usernum, String userid, int delValue){
-		// 휴지통에서 보여줄 메일 리스트
-		// 받은 메일함이나 보낸 메일함에서 체크박스로 선택 후 삭제된 메일들은 휴지통에서 보여진다.
+	public void setDeleteAttr(String[] mailnums, int usernum, String userid, int delvalue){
+		// 메일의 delete 속성 설정
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -243,9 +242,10 @@ public class MailDao {
 					CloseUtil.close(rs);
 					CloseUtil.close(pstmt);
 					pstmt = con.prepareStatement(sql.toString());
-					pstmt.setInt(1, delValue);
+					pstmt.setInt(1, delvalue);
 					// 삭제(메일함에서 휴지통으로 이동)는 2
 					// 영구 삭제(휴지통에서도 보이지 않게 함)는 3
+					// 복구(휴지통에서 메일함으로 이동)은 1
 					pstmt.setInt(2, Integer.parseInt(e));
 					pstmt.executeUpdate();	
 					
