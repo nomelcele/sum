@@ -308,30 +308,47 @@
 <%-- 메일 --%>
 function mailFormGo(res){
 	if(res=='write'){ // 메일 쓰기
+		$("#model").attr("value","mail");
 		$("#submod").attr("value","mailWriteForm");
 		$("#mailform").submit();
-// 		$.ajax({
-// 			type: "post",
-// 			url: "sumware",
-// 			data: {model: "mail",
-// 				submod: "mailWriteForm"},
-// 			success: function(result){
-// 				$("#mainContent").html(result);
-// 			}
-// 		});
+//			$.ajax({
+//				type: "post",
+//				url: "sumware",
+//				data: {model: "mail",
+//					submod: "mailWriteForm"},
+//				success: function(result){
+//					$("#mainContent").html(result);
+//				}
+//			});
 	} else if(res=='fromlist'){ // 받은 메일함
+		$("#model").attr("value","mail");
 		$("#submod").attr("value","mailFromList");
+		$("#usernum").attr("value","${sessionScope.v.memnum}");
+		$("#userid").attr("value","${sessionScope.v.meminmail}");
 		$("#mailform").submit();
+		
 	} else if(res=='tolist'){ // 보낸 메일함
+		$("#model").attr("value","mail");
 		$("#submod").attr("value","mailToList");
+		$("#usernum").attr("value","${sessionScope.v.memnum}");
+		$("#userid").attr("value","${sessionScope.v.meminmail}");
 		$("#mailform").submit();
+
 	} else if(res=='mylist'){ // 내게 쓴 메일함
+		$("#model").attr("value","mail");
 		$("#submod").attr("value","mailMyList");
+		$("#usernum").attr("value","${sessionScope.v.memnum}");
+		$("#userid").attr("value","${sessionScope.v.meminmail}");
 		$("#mailform").submit();
+		
 	} else if(res=='trashcan'){ // 휴지통
+		$("#model").attr("value","mail");
 		$("#submod").attr("value","mailTrashcan");
+		$("#usernum").attr("value","${sessionScope.v.memnum}");
+		$("#userid").attr("value","${sessionScope.v.meminmail}");
 		$("#mailform").submit();
-	} 
+		
+		} 
 }
 // 메일-suggest 관련 함수
 var xhr = null;

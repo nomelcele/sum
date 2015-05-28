@@ -57,7 +57,6 @@ public class MailDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<MailVO> list = new ArrayList<MailVO>();
-		System.out.println(userid);
 		
 		try {
 			con = ConUtil.getOds();
@@ -76,9 +75,7 @@ public class MailDao {
 			while(rs.next()){
 				MailVO v = new MailVO();
 				v.setMailnum(rs.getInt("mailnum"));
-				System.out.println("메일 번호: "+v.getMailnum());
 				v.setMailsname(rs.getString("memname"));
-				System.out.println("보낸 사람: "+v.getMailsname());
 				v.setMailtitle(rs.getString("mailtitle"));
 				v.setMaildate(rs.getString("maildate"));
 				list.add(v);

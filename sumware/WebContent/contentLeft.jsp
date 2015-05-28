@@ -165,6 +165,12 @@
 
 <%-- mail left --%>
 <c:if test="${param.model eq 'mail' }">
+<form method="post" action="sumware" id="mailform">
+	<input type="hidden" id="model" name="model">
+	<input type="hidden" id="submod" name="submod">
+	<input type="hidden" id="usernum" name="usernum">
+	<input type="hidden" id="userid" name="userid">
+</form>
 	<div class="col-md-2">
 		<div>
 			<a href="javascript:mailFormGo('write')" class="btn btn-sm btn-info"> 
