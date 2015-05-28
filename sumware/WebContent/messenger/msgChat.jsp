@@ -9,16 +9,8 @@
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-<!--  
-<input type="hidden" id="chatmodel"name="model">
-		<input type="hidden" id="chatsubmod"name="submod">
-		<input type="hidden" id="chatuserNum"name="userNum">
-		<input type="hidden" id="roomKey" name="roomKey"
--->
-
 </head>
 <body>
-
 <div class="container">
 	<div class="col-lg-9">
 	<form action="sumware" method="post" id="closeForm" name="closeForm">
@@ -28,18 +20,14 @@
 		<input type="hidden" id="roomKey" name="roomKey">
 		<input type="hidden" id="resState" name="resState">		
 	</form>
-	
-	
-
 <!-- 		db에 저장된 내용 출력 -->
 		<div class="col-lg-7">
-			<span>${key} 받는 사람 이름 출력</span>
+			<span>${userName }님과 대화 중 입니다.</span>
 		</div>
 			
 		<div class="col-lg-10" style="height: 450px; width: 500px;">
 			<textarea class="form-control" rows="30" id="msgWindow" style="width: 450px"></textarea>
 		</div>
-
 <!-- 		메세지 입력  -->
 		</br>
 		<div class="col-lg-10">
@@ -61,9 +49,9 @@
 	
 	var sessionKey = "${key}";
 	var userNum="${userNum}";
-	alert("sessionKey " + sessionKey);
+// 	alert("sessionKey " + sessionKey);
 	var msgWindow = document.getElementById("msgWindow");
-	var msgSocket = new WebSocket("ws://192.168.0.4:80/sumware/msgSocket/"+sessionKey);
+	var msgSocket = new WebSocket("ws://192.168.7.234:80/sumware/msgSocket/"+sessionKey);
 	
 	msgSocket.onopen = function processOpen(message) {
 		joinMsg(message);
@@ -83,7 +71,6 @@
 		sendjoinMsg();
 	}
 	function processMsg(message) {
-// 		alert("msgWindow"+msgWindow);
 		msgWindow.value += message.data + "\n";
 		
 	}
@@ -96,7 +83,6 @@
 	function sendMsg() {
 		var msg = document.getElementById("msgText");
 		var sendCont = "${sessionScope.v.memname } : "+msg.value+"\n";
-// 		console.log("보낸 메세지 : "+sendCont);
 		
 		msgSocket.send(sendCont);
 		msg.value = "";
@@ -120,7 +106,6 @@
 	}
 	function closeWindow(){
 		if(confirm("대화를 종료 하시겠습니까?") == true){	
-			alert("대화창이 닫힙니다.")
 			sendcloseMsg();
 			$('#chatmodel').attr('value','messenger');
 			$('#chatsubmod').attr('value','closeChat');
@@ -128,9 +113,8 @@
 			$('#roomKey').attr('value',"${key}");
 			$('#resState').attr('value',"room");			
 			$('#closeForm').submit();
-			setTimeout("window.close()", 20);
-			alert("창이 닫혀여~~");
-		
+			setTimeout("window.close()", 30);
+
 		}else{
 			return;
 		}

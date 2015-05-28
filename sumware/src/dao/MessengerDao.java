@@ -137,24 +137,48 @@ public class MessengerDao {
 		
 	}
 	
-	// 방이 종료 되었을 경우를 추가하기 
-	// 방은 요청자가 신청 후 그냥 나간 경우
 	public ArrayList<MessengerVO> getentList(int userNum){
 		System.out.println("Messenger getentList 영역입니다.");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<MessengerVO> list = new ArrayList<MessengerVO>();
+		ArrayList<MessengerRoomVO> rlist = new ArrayList<MessengerRoomVO>();
 		StringBuffer sql = new StringBuffer();
-		// 참가자 사번, 시작일이 null인 사원만 리스트로 출력
-		sql.append("select mesnum, mesmember, openmemberyn, entstdate, mesendnum from mesentry where mesmember=? and openmemberyn='N' and entstdate is null");
 		
+		// 참가자 사번, 시작일이 null인 사원만 리스트로 출력
+		// master table에서 방번호를 조회하여 list에 추가
+		sql.append("select masnum from mesmaster where masendate = '9999/12/31'");
 		try {
 			con = ConUtil.getOds();
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, userNum);
-			rs = pstmt.executeQuery();
+			rs=pstmt.executeQuery();
 			
+			while(rs.next()){
+				MessengerRoomVO vr = new MessengerRoomVO();
+				vr.setMasnum(rs.getInt("masnum"));
+				rlist.add(vr);
+				System.out.println("조회된 열린 방번호 : "+rs.getInt("masnum"));				
+			}
+			
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);;
+			sql.setLength(0);
+			
+			for(MessengerRoomVO e : rlist){		
+			sql.append("select mesnum, mesmember, openmemberyn, entstdate, mesendnum from mesentry ");
+			sql.append("where mesmember=? and openmemberyn='N' and entstdate is null ");
+			sql.append("and mesnum=?");	
+			
+			System.out.println("사용자 사번 : "+userNum);
+			System.out.println("해당 방번호 : "+e.getMasnum());
+			
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, userNum);
+			pstmt.setInt(2, e.getMasnum());
+			rs = pstmt.executeQuery(); // 에러 발생 
+			
+						
 			while(rs.next()){
 				MessengerVO v = new MessengerVO();
 				v.setMesnum(rs.getInt("mesnum"));
@@ -165,7 +189,12 @@ public class MessengerDao {
 				System.out.println("시작일 : "+v.getEntstdate());
 				list.add(v);
 			}
-		} catch (SQLException e) {
+			sql.setLength(0);
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+		} 
+		}
+			catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
 			try {
@@ -209,21 +238,25 @@ public class MessengerDao {
 		
 		}
 	}
+	
 	// main과 room에서 넘어온 data인지 확인
 	public void closeRoom(MessengerVO v, String resState){
 		System.out.println("Dao의 CloseRoom 영역입니다.");
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		StringBuffer sql = new StringBuffer();
 		
 		// 채팅창에서 넘어온 data : 종료일만 변경
 		if(resState.equals("room")){
 			sql.append("update mesentry set entendate = sysdate where mesnum=? and mesmember=?");			
-			System.out.println("room의 if문");			
-			// messenger main에서 넘어온 data, 시작과 종료일을 변경
+			System.out.println("room의 if문");
+			
+		// messenger main에서 넘어온 data, 시작과 종료일을 변경
 		}else if(resState.equals("mesMain")){
 			sql.append("update mesentry set entstdate = sysdate, entendate = sysdate where mesnum=? and mesmember=?");
 			System.out.println("mesMain의 if문");
+			
 		}else{
 			System.out.println("이게 출력되면 망한거임!!");
 		}
@@ -237,17 +270,85 @@ public class MessengerDao {
 			System.out.println("Dao의 방번호 : "+v.getMesnum());
 			System.out.println("Dao의 사용자 번호 : "+v.getMesmember());
 			
+			
 			// 방 종료 설정을 진행
+			sql.setLength(0);
+			CloseUtil.close(pstmt);
 			
 			
+			
+			// mesentry table에서 정상종료, 비정상 종료된 방번호를 얻어옴
+			// 먼저 mesmaster table에서 진행 중인 방번호를 얻어옴
+			
+//			sql.append("select masnum from mesmaster where masendate is not null and masendate = '9999/12/31'");
+//			pstmt=con.prepareStatement(sql.toString());
+//			rs=pstmt.executeQuery();
+//			ArrayList<MessengerRoomVO> rlist = new ArrayList<MessengerRoomVO>();
+//			while(rs.next()){
+//				MessengerRoomVO vr = new MessengerRoomVO();
+//				vr.setMasnum(rs.getInt("masnum"));
+//				rlist.add(vr);
+//			}
+			
+//			sql.setLength(0);
+//			CloseUtil.close(rs);
+//			CloseUtil.close(pstmt);
+			
+//			for(MessengerRoomVO e1 : rlist){
+//				
+//			}
+			
+			sql.append("select DISTINCT mesnum from mesentry where entendate is null or entendate != '9999/12/31'");
+			pstmt = con.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			
+			// 방번호를 vr에 저장
+			ArrayList<MessengerRoomVO> rlist = new ArrayList<MessengerRoomVO>();
+			while(rs.next()){
+				MessengerRoomVO vr = new MessengerRoomVO();
+				System.out.println("종료 에정 된 방번호 : "+rs.getInt("mesnum"));
+				vr.setMasnum(rs.getInt("mesnum"));
+				rlist.add(vr);
+				
+			}
+			
+			sql.setLength(0);
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			
+			System.out.println(rlist.size());			
+		
+			for(MessengerRoomVO e : rlist){
+				sql.append("update mesmaster set masendate = sysdate where masnum = ?");
+				pstmt = con.prepareStatement(sql.toString());
+				
+				pstmt.setInt(1, e.getMasnum());
+				pstmt.executeUpdate();
+				
+				System.out.println("master table 종료 된 방번호 : "+e.getMasnum());
+				
+				sql.setLength(0);
+				CloseUtil.close(pstmt);
+				
+				
+				sql.append("update mesentry set entstdate = sysdate, entendate = sysdate where mesnum=?");
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, e.getMasnum());
+				pstmt.executeUpdate();
+				System.out.println("mesentry에서 종료 된 방번호 : "+e.getMasnum());
+				
+				sql.setLength(0);
+				CloseUtil.close(pstmt);				
+			}
+			sql.setLength(0);
 			
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 		}finally{
 			try {
 				if(con != null) CloseUtil.close(con);
-				if(pstmt != null) CloseUtil.close(pstmt);
+				if(rs != null)CloseUtil.close(rs);
+				if(pstmt != null) CloseUtil.close(pstmt);				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -257,32 +358,36 @@ public class MessengerDao {
 	}
 	
 	
-	public ArrayList<MemberVO> getList(){
+	// 로그인한 회원, 접속자는 제외하여 출력
+	public ArrayList<MemberVO> getList(int userNum){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
 		StringBuffer sql = new StringBuffer();
-		sql.append("select m.memnum, m.memname, m.memaddr, m.memprofile, m.meminmail, d.dename from member m,");
-		sql.append(" dept d where m.memdept=d.denum order by d.dename,m.memname");
 		
+		// 로그인 된 회원만 조회하여 출력
+		sql.append("select DISTINCT m.memnum, m.memname, m.memprofile, d.dename, g.LOCHECK ");
+		sql.append("from member m, dept d, login g ");
+		sql.append("where m.memdept=d.denum and m.memnum=g.LOMEM and g.LOCHECK='t' order by d.dename,m.memname");
 		try {
 			con = ConUtil.getOds();
 			pstmt = con.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
+				if(userNum != rs.getInt("memnum")){
 				MemberVO v = new MemberVO();
 				v.setMemnum(rs.getInt("memnum"));
 				v.setMemname(rs.getString("memname"));
-				v.setMemaddr(rs.getString("memaddr"));
 				v.setMemprofile(rs.getString("memprofile"));
-				v.setMemmail(rs.getString("meminmail"));
 				v.setDename(rs.getString("dename"));
 				list.add(v);
-				System.out.println("Dao 사원 이름 : "+v.getMemname());
+				System.out.println("Dao 사원 이름 : "+v.getMemname());	
+				}else{ System.out.println("else 입니다.");}
 			}
+			System.out.println("Dao에서의 Array Size : "+list.size());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -296,5 +401,48 @@ public class MessengerDao {
 			}
 		} return list;
 	}
+	
+	// 그냥 전체 사원 List를 출력하는 메서드
+//	public ArrayList<MemberVO> getList(){
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+//		StringBuffer sql = new StringBuffer();
+//		
+//		// 로그인 된 회원만 조회하여 출력
+//		sql.append("select m.memnum, m.memname, m.memaddr, m.memprofile, m.meminmail, d.dename from member m,");
+//		sql.append(" dept d where m.memdept=d.denum order by d.dename,m.memname");
+//		
+//		try {
+//			con = ConUtil.getOds();
+//			pstmt = con.prepareStatement(sql.toString());
+//			rs = pstmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				MemberVO v = new MemberVO();
+//				v.setMemnum(rs.getInt("memnum"));
+//				v.setMemname(rs.getString("memname"));
+//				v.setMemaddr(rs.getString("memaddr"));
+//				v.setMemprofile(rs.getString("memprofile"));
+//				v.setMemmail(rs.getString("meminmail"));
+//				v.setDename(rs.getString("dename"));
+//				list.add(v);
+//				System.out.println("Dao 사원 이름 : "+v.getMemname());
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally{
+//			try {
+//				if(con != null) CloseUtil.close(con);
+//				if(pstmt != null) CloseUtil.close(pstmt);
+//				if(rs != null) CloseUtil.close(rs);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		} return list;
+//	}
 
 }
