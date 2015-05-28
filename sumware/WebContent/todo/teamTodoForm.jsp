@@ -42,8 +42,8 @@ function successJob(){
 		<i class="fa fa-pencil-square-o"></i> <strong class="primary-font">팀
 			업무</strong>
 	</div>
-	<div class="panel-body">
-		<div class="column" style="overflow: auto">
+	<div class="panel-body"   style="height:510px; overflow-y:scroll;">
+		<div class="column">
 			<c:forEach var="teamjoblist" items="${teamJobList }">
 
 				<div class="low-lg-12">
@@ -70,7 +70,8 @@ function successJob(){
 								<br />
 								<p>${teamjoblist.tocont }</p>
 								<p>
-									<a href="upload/${teamjoblist.tofile }" target="_blank">첨부파일
+									<a href="upload/${teamjoblist.tofile }" target="_blank">
+									<i class="fa fa-paperclip"></i> 첨부파일
 										: ${teamjoblist.tofile }</a>
 								</p>
 

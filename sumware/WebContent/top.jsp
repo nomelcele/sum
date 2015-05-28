@@ -36,9 +36,12 @@
 	$(function() {
 		var sel = "";
 		var tonum = "";
+		var res="";
+		var tonumval="";
 		selectMenu(sel);
-		todoFormGo();
+		todoFormGo(res);
 		tosend(tonumval);
+		addTodo();
 	});
 	function openWin(){
 		var opt= "width=700, height=800, scrollbars=yes";	
@@ -144,6 +147,82 @@
 					});
 				
 			}
+	}
+	
+	function todoConfirm(res){
+		if(res=='rejectTodo'){
+			$.ajax({
+				type : "post",
+				url : "sumware",
+				data : {
+					model:"todo", 
+					submod:"checkTodoList",
+					childmod:"rejectTodo",
+					tonum:$('#rtonum').val(),
+					memnum:"${sessionScope.v.memnum }",
+					tostdate:$('#rtostdate').val(),
+					toendate:$('#rtoendate').val(),
+					totitle:$('#rtotitle').val(),
+					todept:$('#rtodept').val(),
+					tocomm:$('#rtocomm').val()
+					
+					},
+				success : function(result){
+						setTimeout(function(){
+							$("#menuTarget").html(result);
+						}, 1000);
+						
+
+					}
+				});
+			alert("거절 완료되었습니다.");
+		}else if(res=='approveTodo'){
+			$.ajax({
+				type : "post",
+				url : "sumware",
+				data : {
+					model:"todo", 
+					submod:"checkTodoList",
+					childmod:"approveTodo",
+					tonum:$('#atonum').val(),
+					memnum:"${sessionScope.v.memnum }",
+					tostdate:$('#atostdate').val(),
+					toendate:$('#atoendate').val(),
+					totitle:$('#atotitle').val(),
+					todept:$('#atodept').val(),
+					tocomm:$('#atocomm').val()
+					
+					},
+				success : function(result){
+						setTimeout(function(){
+							$("#menuTarget").html(result);
+						}, 1000);
+						
+
+					}
+				});
+			alert("승인 완료되었습니다.");
+		}else if(res=='successTodo'){
+			$.ajax({
+				type : "post",
+				url : "sumware",
+				data : {
+					model:"todo", 
+					submod:"successJob",
+					tonum:$('#stonum').val(),
+					tocomm:$('#stocomm').val(),
+					memmgr:"${sessionScope.v.memmgr}"
+					},
+				success : function(result){
+						setTimeout(function(){
+							$("#menuTarget").html(result);
+						}, 1000);
+						
+					}
+				});
+			alert("업무 완료 처리 되었습니다.");
+		}
+		
 	}
 </script>
 <!-- /메인 -->

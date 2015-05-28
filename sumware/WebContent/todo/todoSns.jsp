@@ -7,7 +7,6 @@
 <title>SumWare</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-Bootstrap
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.css" />
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
@@ -185,8 +184,8 @@ Bootstrap
 							class="primary-font">부서 SNS</strong>
 					</div>
 					<!-- /.panel-heading -->
-					<div class="panel-body">
-						<ul class='chat' style="height:450px; overflow-y:scroll;" onscroll="pageScoll()">
+					<div class="panel-body" style="height:450px; overflow-y:scroll;" onscroll="pageScoll()">
+						<ul class='chat' style="height:450px;" >
 						</ul>
 						<div id="loading" style="width: 100%; float:left; text-align: center;">
 					

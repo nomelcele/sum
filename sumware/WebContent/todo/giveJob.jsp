@@ -51,12 +51,12 @@
 	}
 </script>
 
-		<!-- 팀장 업무부여 ajax-->
+		<!-- 팀장의 업무부여 ajax-->
 				<div class="chat-panel panel panel-default">
 					<div class="panel-heading">
 						<i class="fa fa-plus-square-o"></i> <strong class="primary-font">업무 부여</strong>
 					</div>
-					<div class="panel-body">
+					<div class="panel-body" style="height:510px; overflow-y:scroll;">
 						<div class="column" style="overflow: auto">
 							<div class="column" style="overflow: auto">
 
