@@ -13,7 +13,7 @@
 <!-- <link href="css/main.css" rel="stylesheet"/> -->
 <!-- <link href="css/join.css" rel="stylesheet"/> -->
 <!-- <link href="css/boardList.css" rel="stylesheet"/> -->
-<link type="text/css" href="css/common.css" rel="stylesheet"  />
+<link type="text/css" href="css/common.css" rel="stylesheet" />
 <!-- CSS 라이브러리(E)  -->
 <!-- 자바스크립트 -->
 <script src="js/bootstrap.min.js"></script>
@@ -385,7 +385,7 @@ function select(index){
 					<li><a href="sumware?model=todo&submod=firsttodoForm&memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
 					<li><a href="sumware?model=mail&submod=mailMain">Mail</a></li>
 					<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
-					<li><a href="sumware?model=board&submod=boardList&page=1&bname=공지사항">Board</a></li>
+					<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }">Board</a></li>
 					<li><a href="javascript:openWin()">Messenger</a></li>
 				</ul>
 				<ul class="nav navbar-right navbar-nav user-name">
