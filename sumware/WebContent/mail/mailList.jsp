@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<div class="container">
+	<div class="row">
+	<div class="col-lg-10">
 	<form id="f" method="post" action="sumware">
 		<input type="hidden" id="model" name="model">
 		<input type="hidden" id="submod" name="submod">
@@ -18,44 +20,48 @@
 			<input type="button" value="삭제" onclick="mailTrashGo()">
 			</c:otherwise>
 		</c:choose>
-		<table class="table table-condensed table-hover">
-				<tr>
-					<td><input type="checkbox" name="all" onclick="checkAll(this)"></td>
-					<c:choose>
-						<c:when test="${tofrom eq '1'}">
-							<td>보낸 사람</td>
-						</c:when>
-						<c:when test="${tofrom eq '2'}">
-							<td>받는 사람</td>
-						</c:when>
-						<c:otherwise>
-							<td>보낸 사람</td>
-							<td>받는 사람</td>
-						</c:otherwise>
-					</c:choose>
-					<td>제목</td>
-					<td>보낸 날짜</td>
-				</tr>
-				
-				<c:forEach var="mList" items="${list}">
+		<div class="row">
+			<table class="table table-condensed table-hover" id="listTable">
 					<tr>
-						<td><input type="checkbox" name="chk" id="chk" value="${mList.mailnum}"></td>
-						<c:if test="${tofrom eq '1'}">
-							<td>${mList.mailsname}</td>
-						</c:if>
-						<c:if test="${tofrom eq '2' }">
-							<td>${mList.mailrname}</td>
-						</c:if>
-						<c:if test="${tofrom eq '3' }">
-							<td>${mList.mailsname}</td>
-							<td>${mList.mailrname}</td>
-						</c:if>
-						<td><a href="javascript:mailDetailGo(${mList.mailnum})">${mList.mailtitle}</a></td>
-						<td>${mList.maildate}</td>
+						<td class="col-lg-1"><input type="checkbox" name="all" onclick="checkAll(this)"></td>
+						<c:choose>
+							<c:when test="${tofrom eq '1'}">
+								<td class="col-lg-1">보낸 사람</td>
+							</c:when>
+							<c:when test="${tofrom eq '2'}">
+								<td class="col-lg-1">받는 사람</td>
+							</c:when>
+							<c:otherwise>
+								<td class="col-lg-1">보낸 사람</td>
+								<td class="col-lg-1">받는 사람</td>
+							</c:otherwise>
+						</c:choose>
+						<td class="col-lg-6">제목</td>
+						<td class="col-lg-2">보낸 날짜</td>
 					</tr>
-				</c:forEach>
-		</table>
+					
+					<c:forEach var="mList" items="${list}">
+						<tr>
+							<td><input type="checkbox" name="chk" id="chk" value="${mList.mailnum}"></td>
+							<c:if test="${tofrom eq '1'}">
+								<td>${mList.mailsname}</td>
+							</c:if>
+							<c:if test="${tofrom eq '2' }">
+								<td>${mList.mailrname}</td>
+							</c:if>
+							<c:if test="${tofrom eq '3' }">
+								<td>${mList.mailsname}</td>
+								<td>${mList.mailrname}</td>
+							</c:if>
+							<td><a href="javascript:mailDetailGo(${mList.mailnum})">${mList.mailtitle}</a></td>
+							<td>${mList.maildate}</td>
+						</tr>
+					</c:forEach>
+			</table>
+		</div>
 		</form>
+		</div>
+		</div>
 	</div>
 <script>
 	function mailTrashGo(){

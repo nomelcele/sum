@@ -64,7 +64,8 @@
 	    <div class="form-group">
 	        <label for="content" class="col-sm-2 control-label">내용</label>
 	        <div class="col-sm-10">
-	            <textarea class="form-control" rows="4" name="mailcont" id="mailcont" ></textarea>
+	            <textarea class="form-control" rows="13" name="mailcont" id="mailcont"
+	            style="resize:none;"></textarea>
 	        </div>
 	    </div>
 	      <div class="form-group">
@@ -75,7 +76,7 @@
 	    </div>
 	    <div class="form-group">
 	        <div class="col-sm-10 col-sm-offset-2">
-	            <input type="submit" value="전송" class="btn btn-primary">
+	            <input type="submit" value="전송" class="btn btn-sm btn-info" id="sendBtn">
 	        </div>
 	    </div>
 	    <div class="form-group">

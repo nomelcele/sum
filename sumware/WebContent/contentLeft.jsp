@@ -158,8 +158,8 @@
 <c:if test="${param.model eq 'mail' }">
 	<div class="col-md-2">
 		<div>
-			<a href="javascript:mailFormGo('write')" class="btn btn-sm btn-info"> <span
-				class="glyphicon glyphicon-pencil"></span> 메일 쓰기
+			<a href="javascript:mailFormGo('write')" class="btn btn-sm btn-info"> 
+			<span class="glyphicon glyphicon-pencil"></span> 메일 쓰기
 			</a>
 		</div>
 		<div class="list-group">
