@@ -63,8 +63,8 @@
 				</div>
 				<div class="right">
 					<button type="button">수정</button>
-					<button type="button" onclick="javascript:formGo('list')">목록</button>
-					<button type="button" onclick="javascript:formGo('write')">새글쓰기</button>
+					<button type="button" onclick="location='sumware?model=board&submod=boardList&page=1'">목록</button>
+					<button type="button" onclick="location='sumware?model=board&submod=writeForm'">새글쓰기</button>
 				</div>
 			</div>
 			
@@ -95,17 +95,16 @@
 				<!-- comment-list(E) -->
 				
 				<!-- comment-write(S) -->
-			<form action="sumware" id="bform" method="post">
-				<input type="hidden" name="model" id="model" value="">
-				<input type="hidden" name="submod" id="submod" value="">
-				<input type="hidden" name="childmod" id="childmod" value="">
-				<input type="hidden" name="page" id="page" value="">
+			<form action="sumware" id="cform" method="post">
+				<input type="hidden" name="model" value="board">
+				<input type="hidden" name="submod"  value="boardDetail">
+				<input type="hidden" name="childmod" value="commInsert">
 				<input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
 				<input type="hidden" name="bnum" value="${list.bnum }">
 				<input type="hidden" name="no" value="${list.bnum }">
 				<div class="comment-write">
 					<textarea name="comment"rows="10" cols="10" placeholder="댓글 내용을 입력해 주세요."></textarea>
-					<button type="button" class="btn-comm" onclick="javascript:formGo('commInsert')">댓글 등록</button>
+					<button class="btn-comm">댓글 등록</button>
 				</div>
 			</form>
 				<!-- comment-write(E) -->

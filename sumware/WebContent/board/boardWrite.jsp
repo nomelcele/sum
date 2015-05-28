@@ -21,13 +21,13 @@
 			<!-- heading(S) -->
 			<h2 class="title-board"> 게시판 </h2>
 			<!-- heading(E) -->
-
 				<form action="sumware" method="post" id="bform">
-					<input type="hidden" name="model" id="model">
-					<input type="hidden" name="submod" id="submod">
-					<input type="hidden" name="page" id="page">
+					<input type="hidden" name="model" id="bmodel" value="board">
+					<input type="hidden" name="submod" id="bsubmod" value="boardInsert">
+					<input type="hidden" name="page" id="bpage" value="1">
 					<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
 					<input type="hidden" name="bgnum" value="1">
+				<!-- board-write(S) -->
 				<table id="stcontent" class="board-list board-write">
 					<colgroup>
 						<col style="width:80px" />
@@ -52,16 +52,13 @@
 					</tr>
 				</table>
 				<!-- board-write(E) -->
-				
 				<!-- button-div(S) -->
 				<div class="button-div center">
-				<button onclick="javascript:formGo('insert')">글작성</button>
-				<button onclick="location='sumware?model=board&submod=boardList&page=1'">리스트</button>
-			</div>
+					<button>글작성</button>
+					<button type="button"onclick="location='sumware?model=board&submod=boardList&page=1'">리스트</button>
+				</div>
 			</form>
-			
 				<!-- button-div(E) -->
-<!-- 			</form> -->
 		</div>
 	</div>
 	<!-- contents(E) -->

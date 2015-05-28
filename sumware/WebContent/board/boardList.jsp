@@ -45,7 +45,7 @@
 					<c:forEach items="${list }" var="vlist">
 					<tr>
 						<td class="num">${vlist.bnum }</td>
-						<td style="text-align: left"><a href="sumware?model=board&submod=boardDetail&no=${vlist.bnum }">${vlist.btitle }</a></td>
+						<td style="text-align: left"><a href="sumware?model=board&submod=boardDetail&no=${vlist.bnum }">${vlist.btitle }<span style="font-size: 6px;">댓글갯수</span></a></td>
 						<td style="text-align: center;">${vlist.bwriter }</td>
 						<td style="text-align: center;">${vlist.bdate }</td>
 						<td style="text-align: center;">${vlist.bhit }</td>
