@@ -1,26 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<link href="../css/join.css" rel="stylesheet" />
+<div>
+	<%@include file="/top.jsp"%>
+</div>
+<%--우편번호 다음 링크 --%>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <%--아이디 중복체크 --%>
 <script>
+
 	$(function() {
-
-		$("#chbtn").click(function() {
-			$(".dhpwd").show("slow");
-		});
-
+		
+		<%--아이디 중복검사 --%>
+		
 		$('#meminmail').keyup(
 				function() {
 					setTimeout(function() {
 						$('#target').load(
 								"join/joinck.jsp?meminmail="
 										+ $('#meminmail').val());
-					}, 1000);
+					}, 500);
 				});
 
+		<%--본래 비밀번호 비밀번호 수정시 버튼 --%>
+
+		$('#chbtn').click(function() {
+			if($('#mempwd').val() == "${mempwd}"){
+				
+				$('.dhpwd').show("slow");
+			} else {
+				
+				alert("비밀번호가 일치 하지 않습니다.")
+			}
+	});
+		<%--비밀번호 중복 검사 --%>
+		$('#mempwd2').change(function() {
+			
+			if($('#mempwd1').val() != $('#mempwd2').val()){
+				alert("패스워드가 같지 않습니다.")
+			}else{
+				alert("패스워드가 같습니다.")
+			}
+			
+		});
+
+		
+		<%--우편번호 합치기 --%>
 		$('#btn').click(
 				function() {
 					var a1 = $("#sample6_postcode1").val() + "/"
@@ -32,6 +58,7 @@
 					myform.submit();
 				});
 
+		<%--이미지 업로드 이미지 --%>
 		$('#memimg')
 				.change(
 						function() { // 파일 박스 안에서 변화를 감지해야 한다.
@@ -52,8 +79,7 @@
 								// 있으면 1, 없으면 -1을 리턴
 								// inArray는 jQuery에서 제공하는 메서드
 								resetFormElement($(this)); // 폼 초기화
-								window
-										.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg만 업로드 가능)');
+								window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg만 업로드 가능)');
 							} else {
 								var file = $(this).prop("files")[0];
 								// prop에서 files라는 속성을 가져온 것
@@ -71,27 +97,16 @@
 								// attr() src 속성에  blobURL을 넣는다.
 							}
 						});
+
 	});
 
 	function resetFromElement($obj) { // 자바스크립트
 		$obj.val("");
 	}
 </script>
-<%--이건 자바스크립트 --%>
-<script>
 
-	function pwc() {
-		if (document.myform.mempwd1.value != document.myform.mempwd2.value) {
-			$('#targetpwd').html("<p style='color:red'>비밀번호가 일치하지 않습니다</p>")
-			document.mempwd1.focus();
-		}
-	}
-	
-</script>
 
 <%--우편번호 찾기 --%>
-
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	function sample6_execDaumPostcode() {
 		new daum.Postcode(
@@ -140,142 +155,150 @@
 	}
 </script>
 
-<div>
-	<%@include file="/top.jsp"%>
-</div>
+
+
+
 <div class="container">
-	<div class="resume">
-		<div class="page-header">
-			<h1 class="page-title">프로필 입력</h1>
-			<small> <i class="fa fa-clock-o"></i> Last Updated on: <time>Sunday,
-					October 05, 2015</time></small>
-		</div>
-		<form class="form-horizontal" role="form" method="post" action="sumware" id="myform" name="myform">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-					<div class="panel panel-default">
-						<div class="panel-heading resume-heading">
-							<div class="row">
-								<div class="col-lg-12 col-lg-offset-4">
-									<div class="col-xs-10 col-sm-4">
+	<div class="row info">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="resume">
+					<form class="form-horizontal" role="form" method="post"
+						action="sumware" id="myform" name="myform">
+						<input type="hidden" name="model" value="join"> <input
+							type="hidden" name="submod" value="signup"> <input
+							type="hidden" name="memnum" value="${memnum}"> <input
+							type="hidden" name="address" id="address">
+						<header class="page-header">
+							<h1 class="page-title">회원가입</h1>
+							<small> <i class="fa fa-clock-o"></i> Last Updated on: <time>Sunday,
+									October 05, 2014</time></small>
+						</header>
+						<div class="panel panel-default">
+							<div class="panel-heading resume-heading">
+								<div class="row">
+									<div class="col-sm-offset-5">
 										<figure>
-										
 											<img class="img-circle img-responsive" alt="프로필 사진 "
 												id="targetimg" src="http://placehold.it/200x200"
 												style="width: 200px; height: 200px;">
 										</figure>
-										<div class="btn-group col-sm-offset-5"
+
+										<div class="btn-group col-sm-offset-2"
 											style="position: relative; overflow: hidden; padding-top: 10px;">
 											<input type="file" id="memimg" name="memimg"
-												style="position: absolute; right: 0px; top: 0px; opacity: 0; cursor: pointer;"/>
+												style="position: absolute; right: 0px; top: 0px; opacity: 0; cursor: pointer;" />
 											<img src="img/ion.JPG">
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="bs-callout bs-callout-danger">
+								<div class="row">
+								<div class="col-sm-8 col-sm-offset-2">
+									<h2>필수 입력 사항</h2>
+									<hr>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="textinput">아이디</label>
+										<div class="col-sm-6">
+											<input type="text" id="meminmail" name="meminmail"
+												placeholder="사내 이메일" class="form-control">
+											<div id="target"></div>
+										</div>
+
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="textinput">기존
+											비밀번호</label>
+										<div class="col-sm-6">
+											<input type="password" placeholder="기존 비밀번호"
+												class="form-control" id="mempwd">
+										</div>
+											
+										<input type="button" class="btn btn-default" value="비밀번호 변경"
+											id="chbtn" name="chbtn">
+											
+									</div>
+									<div class="dhpwd">
+										<div class="form-group">
+											<label class="col-sm-3 control-label" for="textinput">새
+												비밀번호 </label>
+											<div class="col-sm-6">
+												<input type="password" placeholder="새 비밀번호"
+													class="form-control" id="mempwd1">
+													<div id="targetpwd"></div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-sm-3 control-label" for="textinput">새
+												비밀번호 재 확인 </label>
+											<div class="col-sm-6">
+												<input type="password" placeholder="새 비밀번호 확인"
+													class="form-control" id="mempwd2" name="mempwd2"
+													>
+											</div>
+										</div>
+									</div>
+									<!-- Text input-->
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="textinput">우편번호</label>
+										<div class="col-sm-3">
+											<input type="text" class="form-control"
+												id="sample6_postcode1">
+										</div>
+										<div class="col-sm-3">
+											<input type="text" class="form-control"
+												id="sample6_postcode2">
+										</div>
+
+										<input type="button" class="btn btn-default"
+											onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="textinput">주소</label>
+										<div class="col-sm-6">
+											<input type="text" placeholder="주소" class="form-control"
+												id="sample6_address">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label" for="textinput">상세주소</label>
+										<div class="col-sm-6">
+											<input type="text" placeholder="상세주소" class="form-control"
+												id="sample6_address2">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="col-sm-offset-5">
+
+											<button type="button" class="btn btn-primary" id="btn">
+												<i class="fa fa-floppy-o"></i>
+											</button>
+
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="bs-callout bs-callout-danger">
-
-							<input type="hidden" name="model" value="join"> 
-							<input type="hidden" name="submod" value="signup"> 
-							<input type="hidden" name="memnum" value="${memnum}"> 
-							<input type="hidden" name="address" id="address">
-							<h2>필수 입력 사항</h2>
-							<hr>
-
-							<!-- Text input-->
-							<div class="form-group">
-								<label class="col-sm-3 control-label" for="textinput">아이디</label>
-								<div class="col-sm-6">
-									<input type="text" id="meminmail" name="meminmail"
-										placeholder="사내 이메일" class="form-control">
-									<div id="target"></div>
-								</div>
 
 							</div>
-
-							<div class="form-group">
-								<label class="col-sm-3 control-label" for="textinput">기존
-									비밀번호</label>
-								<div class="col-sm-6">
-									<input type="password" placeholder="기존 비밀번호" 
-										class="form-control" id="mempwd">
-								</div>
-								<input type="button" class="btn btn-default" value="비밀번호 변경"
-									id="chbtn" name="chbtn">
-							</div>
-
-							<div class="dhpwd">
-								<div class="form-group">
-									<label class="col-sm-3 control-label" for="textinput">새
-										비밀번호 </label>
-									<div class="col-sm-6">
-										<input type="password" placeholder="새 비밀번호"
-											class="form-control" id="mempwd1">
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 control-label" for="textinput">새 비밀번호 재 확인 </label>
-									<div class="col-sm-6">
-										<input type="password" placeholder="새 비밀번호 확인"
-											class="form-control" id="mempwd2" name="mempwd2" onBlur="pwc()">
-										<div id="targetpwd"></div>
-									</div>
-
-								</div>
-
-							</div>
-
-							<!-- Text input-->
-							<div class="form-group">
-								<label class="col-sm-3 control-label" for="textinput">우편번호</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control" id="sample6_postcode1">
-								</div>
-								<div class="col-sm-3">
-									<input type="text" class="form-control" id="sample6_postcode2">
-								</div>
-
-								<input type="button" class="btn btn-default"
-									onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label" for="textinput">주소</label>
-								<div class="col-sm-6">
-									<input type="text" placeholder="주소" class="form-control"
-										id="sample6_address">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label" for="textinput">상세주소</label>
-								<div class="col-sm-6">
-									<input type="text" placeholder="상세주소" class="form-control"
-										id="sample6_address2">
-								</div>
-							</div>
-
-							<div class="form-group">
-								<div class="col-sm-offset-5 col-sm-10">
-
-									<button type="button" class="btn btn-primary" id="btn">
-										<i class="fa fa-floppy-o"></i>
-									</button>
-
-								</div>
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-		</form>
-	</div>
-
 </div>
+						</div>
+
+
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div>
 	<%@include file="/footer.jsp"%>
 </div>
