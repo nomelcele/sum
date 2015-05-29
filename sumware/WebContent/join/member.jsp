@@ -246,7 +246,7 @@ function fileUpload(){
 												id="targetimg" src="img/imgx.jpg">
 										</figure>
 										<div class="btn-group">
-											<input type="file" id="fileimg" style="position: absolute; right: 0px; top: 0px; opacity: 0; cursor: pointer;"/>
+											<input type="file" id="fileimg">
 											<img src="img/ion.JPG">
 										</div>
 
