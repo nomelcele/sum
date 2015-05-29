@@ -9,14 +9,14 @@
 		<!-- lnb-area(E) -->
 		<!-- contents(S) -->
 	<div class="contents">
-		<h2 class="heading-page"></h2>
+		<h2 class="heading-page">${sessionScope.bname }</h2>
 			<!-- board-form(S) -->
 		<div class="board-form">
 			<div class="left">
 					<input type="text" name="search" placeholder="search">				
 			</div>
 			<div class="right">
-					<button type="button" onclick="location='sumware?model=board&submod=writeForm&bgnum=0'">글쓰기</button>
+					<button type="button" onclick="location='sumware?model=board&submod=writeForm&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }'">글쓰기</button>
 			</div>
 		</div>
 			<!-- board-form(E) -->
@@ -59,7 +59,7 @@
 			
 			<!-- paging(S) -->
 		<div class="paging">
-			<c:set var="pageUrl" value="sumware?model=board&submod=boardList"/>
+			<c:set var="pageUrl" value="sumware?model=board&submod=boardList&bdeptno=${sessionScope.v.memdept }&bgnum=${sessionScope.bbbgnum}"/>
 			<%@include file="page.jsp" %>
 		</div>
 			<!-- paging(E) -->
