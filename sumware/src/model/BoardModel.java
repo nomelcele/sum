@@ -36,12 +36,13 @@ public class BoardModel implements ModelInter{
 			Map<String, Integer> map = pageProcess(request, 0);
 			HashMap<String, String> hmap = MyMap.getMaps().getMapList(request);
 			// 게시판 이름을 뿌려오고
-			ArrayList<BnameVO> bname = BoardDao.getDao().bName(hmap);
+			ArrayList<BnameVO> blist = BoardDao.getDao().bName(hmap);
 			ArrayList<BoardVO> list = BoardDao.getDao().getList(map,hmap);
 			// 보드의 이름을 세션에 저장 해준다.
 			HttpSession ses = request.getSession();
+			ses.setAttribute("bname", hmap.get("bname"));
 			ses.setAttribute("bbbgnum", hmap.get("bgnum"));
-			ses.setAttribute("bname", bname);
+			ses.setAttribute("blist", blist);
 			request.setAttribute("list", list);
 			url = "board/boardList.jsp";
 			method = true;
@@ -56,8 +57,10 @@ public class BoardModel implements ModelInter{
 			System.out.println("this is what ?????????");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			BoardDao.getDao().insert(map);
-			url = "sumware?model=board&submod=boardList&page=1&bgnum="+map.get("bgnum")+"&bdeptno="+map.get("bdeptno");
-			method = false; // redirect
+			url = "sumware?model=board&submod=boardList&page=1&bgnum="
+			+map.get("bgnum")+"&bdeptno="+map.get("bdeptno")+"&bname="+map.get("bname").toString();
+			System.out.println(map.get("bname").toString());
+			method = true; // redirect
 		}
 		else if(submod != null && submod.equals("boardDetail")){
 			int no = Integer.parseInt(request.getParameter("no"));
@@ -135,7 +138,8 @@ public class BoardModel implements ModelInter{
 		// 메서드를 호출시에 etc 의 값이 0이라면 리스트의 총데이터를
 		// 1 이라면 comm 의 총데이터를 가져오는 DAO 의 메서드를 따로 받아온다.
 		if (etc == 0) {
-			totalRows = BoardDao.getDao().getTotalCount();
+			int no = Integer.parseInt(request.getParameter("bgnum"));
+			totalRows = BoardDao.getDao().getTotalCount(no);
 		} else if (etc == 1) {
 			int no = Integer.parseInt(request.getParameter("no"));
 			totalRows = BoardDao.getDao().getTotalCommCount(no);
