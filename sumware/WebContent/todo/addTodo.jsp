@@ -49,7 +49,6 @@
 									<option value="">팀장 선택</option>
 									<c:forEach var="tNameList" items="${teamNameList}">
 										<option value="${tNameList.memnum }">${tNameList.memname}</option>
-
 									</c:forEach>
 								</select>
 							</div>
