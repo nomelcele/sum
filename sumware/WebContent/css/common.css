@@ -2,6 +2,9 @@
 /* 아이콘  */
 @import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
 
+/* 웹폰트  */
+
+
 
 /************************** [ RESET(NORMALIZE) ] *********************************/
 /* 아래부터 태그가 기본적으로 가진 CSS 초기화 부분 (reset) */
@@ -11,8 +14,6 @@ a:link,a:visited,a:active{text-decoration:none; color:#222}
 fieldset,img{border:0}
 legend,caption{display:none}
 a{display:block}
-
-
 
 
 /************************** [ INITIALIZE(PRIMARY DESIGN) ] *********************************/
@@ -61,9 +62,6 @@ button, input, select, option, textarea, a {
 .button-div button {margin-left:8px}
 .button-div button:first-child {margin-left:0}
 
-
-
-
 /************************** [ DESIGN ] *********************************/
 /* 아래부터 사용자 커스터마이징 디자인 셋팅 부분 */
 /************** { LAYOUT } ****************/
@@ -76,7 +74,8 @@ button, input, select, option, textarea, a {
 	box-sizing: border-box;
 }
 /* header */
-.navbar {max-height:75px}
+.navbar {max-height:75px
+}
 .navbar-nav {
     position: relative;
     top: 10px;
@@ -90,7 +89,7 @@ button, input, select, option, textarea, a {
 }
 .navbar-nav li:first-child:before {display:none}
 .navbar-nav li a {
-	font-size:12px;line-height:12px;
+	font-size:14px; line-height:14px;
 	letter-spacing: -.2px;
 	font-weight:700;
 	color: #535353;
@@ -130,6 +129,7 @@ button, input, select, option, textarea, a {
 
 
 /************** { MAIN } ****************/
+
 .bmg {
   
    background-repeat: repeat-y; 
@@ -174,8 +174,8 @@ button, input, select, option, textarea, a {
 	opacity: 0.9;
 }
 
-.main {padding-top: 30px;}
 /* ( footer ) */
+
 .footer {
 	margin: 0 auto;
 	padding-top: 80px;
@@ -242,6 +242,8 @@ button, input, select, option, textarea, a {
 .page-header {
 	text-align: center;
 }
+
+
 .dhpwd{
 	display: none;
 }
@@ -263,20 +265,10 @@ button, input, select, option, textarea, a {
 	opacity: 0.9;
 }
 
-.btn-github {
-	background-color: #000000;
-	opacity: 0.9;
+.resume{
+	padding-top: 20px;
 }
 
-.btn-google {
-	background-color: #c32f10;
-	opacity: 0.9;
-}
-
-.btn-stackoverflow {
-	background-color: #D38B28;
-	opacity: 0.9;
-}
 
 /* resume stuff */
 .bs-callout {
@@ -330,7 +322,6 @@ button, input, select, option, textarea, a {
 	padding-top: 5px;
 	
 }
-
 
 .profileimg{
 	text-align: center;
@@ -725,3 +716,7 @@ button {
 .btn-danger.btn-outline:hover {
     color: #fff;
 }
+
+
+
+/*********** mail *************/

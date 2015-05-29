@@ -216,7 +216,6 @@ function fileUpload(){
 	}
 </script>
 
-
 	<%@include file="/top.jsp"%>
 <%--<%=application.getRealPath("/profileImg") --%>
 <div class="container">
@@ -329,22 +328,19 @@ function fileUpload(){
 												id="sample6_address2">
 										</div>
 									</div>
-
-									<div class="form-group">
-										<div class="col-sm-offset-5">
+									<div class="form-group" style="text-align: center;">
+										
 
 											<button type="button" class="btn btn-primary" id="btn">
 												<i class="fa fa-floppy-o"></i>
 											</button>
-										</div>
+								
 									</div>
 								</div>
 
 							</div>
-</div>
 						</div>
-
-
+						</div>
 					</form>
 				</div>
 
@@ -352,7 +348,5 @@ function fileUpload(){
 		</div>
 	</div>
 </div>
-
-
 
 	<%@include file="/footer.jsp"%>
