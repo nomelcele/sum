@@ -167,59 +167,6 @@
 		</div>
 	</div>
 	
-	
-	
-	
-	
-<!-- 	<div class="col-lg-3" style="width: 100%"> -->
-<!-- 		<div class="panel panel-default"> -->
-<!-- 			<div class="panel-heading"> -->
-<!-- 				<strong class="primary-font">Messenger</strong> -->
-<!-- 			</div> -->
-<!-- 			<!-- 사용자 정보 출력 --> -->
-<!-- 			<div class="panel-body"> -->
-<!-- 				<ul class="chat" style="list-style: none"> -->
-<!-- 					<li class="left clearfix"> -->
-<!-- 						<span class="chat-img pull-left"> -->
-<%-- 							<img src="profileImg/${sessionScope.v.memprofile }" alt="" class="img-circle" style="width: 50px; height: 50px;"> --%>
-<!-- 						</span> -->
-<!-- 						<div class="chat-body clearfix"> -->
-<!-- 							<div class="header"> -->
-<%-- 								<strong class="primary-font">${sessionScope.v.memname }님</strong> 								 --%>
-<!-- 							</div>								 -->
-<!-- 						</div>						 -->
-<!-- 					</li>					 -->
-<!-- 				</ul> -->
-<!-- 			</div>			 -->
-<!-- 		</div> -->
-		
-		<!-- 사원 목록 출력, Push data 출력 -->
-		
-<!-- 		<div class="panel panel-default"> -->
-		<!-- Push data id = msgList에 출력-->
-<!-- 			<div class="panel-body" id = "msgList"> -->
-			
-				<!-- Push에서 반복될 구문 -->
-<!-- 				<ul class="chat" style="list-style: none"> -->
-<!-- 					<li class='left clearfix'> -->
-<!-- 						<span class='chat-img pull-left'> -->
-<!-- 							<img src='vo에서 profile 출력' alt='' class='img-circle' style='width: 50px; height: 50px;'> -->
-<!-- 						</span> -->
-<!-- 						<div class='chat-body clearfix'> -->
-<!-- 							<div class='header'> -->
-<%-- 								<a href='javascript:mesgoUrl(${memList.memnum})' class='primary-font'> --%>
-<!-- 									<strong class='primary-font'>김성호</strong>  -->
-<!-- 									<strong class='primary-font'>사번</strong>  -->
-<!-- 									<strong class='primary-font'>부서이름</strong>  -->
-<!-- 								</a> -->
-<!-- 							</div>								 -->
-<!-- 						</div>						 -->
-<!-- 					</li>					 -->
-<!-- 				</ul> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-	
 	<!-- target은 메세지 거부 시 거부 메세지 송출 담당 -->
 	<div id="target"></div>
 
