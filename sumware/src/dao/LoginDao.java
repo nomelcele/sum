@@ -70,17 +70,18 @@ public class LoginDao {
 		  return vo;
 	}
 	
-	public String ckFirstLogin(int memnum){
-		String res=null;
+	public String ckFirstLogin(int memnum,String mempwd){
+		String res="0";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
 		StringBuffer sql = new StringBuffer();
-		sql.append("select nvl(memprofile,'0') memprofile from member where memnum=?");
+		sql.append("select nvl(memprofile,'1') memprofile from member where memnum=? and mempwd=?");
 		try{
 			con=ConUtil.getOds();
 			pstmt=con.prepareStatement(sql.toString());
 			pstmt.setInt(1, memnum);
+			pstmt.setString(2, mempwd);
 			rs=pstmt.executeQuery();
 			if(rs.next()){
 				res=rs.getString("memprofile");
