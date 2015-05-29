@@ -52,7 +52,20 @@
 		todoFormGo(res);
 		tosend(tonumval);
 		addTodo();
+
 	});
+
+	console.log("typeof:"+typeof(EventSource));	
+	if(typeof(EventSource) != "undefined"){		
+		var eventSourceList = new EventSource("messenger/countMsg.jsp");
+		eventSourceList.onmessage = function(event){
+			$('#countRoomNum').html(event.data);	
+		};
+	}else{
+		alert("해당 브라우저는 지원이 안됩니다.");
+	} 
+	
+
 	//엔터 체크
 	function enterCheck(res){
 	      if(event.keyCode == 13){
@@ -544,7 +557,7 @@ function select(index){
 					<li><a href="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}&page=1">Mail</a></li>
 					<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
 					<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=0&bname=공지사항">Board</a></li>
-					<li><a href="javascript:openWin()">Messenger</a></li>
+					<li><a href="javascript:openWin()">Messenger<span id="countRoomNum"></span></a></li>
 				</ul>
 				<ul class="nav navbar-right navbar-nav user-name">
 			        <li><span class="control-label-" for="sabun"> <strong>${sessionScope.v.memname}</strong> 님 환영합니다.</span></li>
