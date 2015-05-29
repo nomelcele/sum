@@ -10,6 +10,7 @@ import java.util.Map;
 
 import util.CloseUtil;
 import conn.ConUtil;
+import dto.BnameVO;
 import dto.BoardVO;
 import dto.CommVO;
 
@@ -31,7 +32,7 @@ public class BoardDao {
 			StringBuffer sql = new StringBuffer();
 			sql.append("insert into board values");
 			// 마지막 ? 는 게시판의 그룹 넘버. 그룹 넘버에 따라서 게시판의 종류가 달라진다.
-			sql.append("(board_seq.nextVal,?,?,?,?,sysdate,0,?)");
+			sql.append("(board_seq.nextVal,?,?,?,?,sysdate,0,?,?)");
 			con = ConUtil.getOds();
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, map.get("btitle"));
@@ -41,7 +42,7 @@ public class BoardDao {
 			// 작성자의 사원 번호를 가져와야 한다.
 			pstmt.setInt(4, Integer.parseInt(map.get("bmem")));
 			pstmt.setInt(5, Integer.parseInt(map.get("bgnum")));
-			
+			pstmt.setInt(6, Integer.parseInt(map.get("bdeptno")));
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -52,7 +53,7 @@ public class BoardDao {
 	}
 	
 	// boardList 가져오기.
-	public ArrayList<BoardVO> getList(Map<String, Integer> map) {
+	public ArrayList<BoardVO> getList(Map<String, Integer> map,HashMap<String, String> hmap) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -67,7 +68,7 @@ public class BoardDao {
 			.append(" from")
 			.append(" (select b.bnum, b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit")
 			.append(" from board b, member m")
-			.append(" where b.bmem = m.memnum")
+			.append(" where b.bmem = m.memnum and b.bgnum=? and b.bdeptno=?")
 			// tn(TotalNotice) 즉, 모든 게시물을 뜻함.
 			.append(" order by b.bnum desc) tn)")
 			.append(" where r_num between ? and ?");
@@ -75,8 +76,10 @@ public class BoardDao {
 			con = ConUtil.getOds();
 			// 생성한 con 객체를 pstmt 에 CallByReference 로 전달.
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, map.get("begin"));
-			pstmt.setInt(2, map.get("end"));
+			pstmt.setInt(1, Integer.parseInt(hmap.get("bgnum")));
+			pstmt.setInt(2, Integer.parseInt(hmap.get("bdeptno")));
+			pstmt.setInt(3, map.get("begin"));
+			pstmt.setInt(4, map.get("end"));
 			// pstmt 객체를 통해서 쿼리를 DB 에 보내고 ResultSet 객체를통해서
 			// 받아온다.
 			rs = pstmt.executeQuery();
@@ -120,7 +123,6 @@ public class BoardDao {
 				res = rs.getInt("cnt");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			CloseUtil.close(rs);
@@ -275,7 +277,36 @@ public class BoardDao {
 			CloseUtil.close(con);
 		}
 	}
-	
+	// 게시판 이름이 필요 하기 때문에 그 이름 반환 해주는 메서드.
+	public ArrayList<BnameVO> bName(HashMap<String, String> map){
+		Connection con = null;
+		ArrayList<BnameVO> list= new ArrayList<BnameVO>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			sql.append("select bname,bdeptno,bgnum from bname where bdeptno=?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, map.get("bdeptno"));
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				BnameVO v = new BnameVO();
+				v.setBname(rs.getString(1));
+				v.setBdeptno(rs.getInt(2));
+				v.setBgnum(rs.getInt(3));
+				list.add(v);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		System.out.println("이름다 뽑았다.");
+		return list;
+	}
 }
 
 
