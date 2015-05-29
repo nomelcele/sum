@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import controller.ModelForward;
 import dao.LoginDao;
 import dao.MemberDao;
@@ -42,9 +43,10 @@ public class LoginModel implements ModelInter {
 					System.out.println("첫번째 이용자다!!!!");
 					System.out.println("사원 번호: "+memnum);
 					System.out.println("사원 비번: "+mempwd);
-					request.setAttribute("memnum", memnum);
-					request.setAttribute("mempwd", mempwd);
-					url="join/member.jsp";
+					HttpSession session = request.getSession();
+					session.setAttribute("memnum", memnum);
+					session.setAttribute("mempwd", mempwd);
+					url="join/firstmember.jsp";
 					//회원정보입력창으로 이동.
 					//이동후에 memnum입력란에 자동으로 입력시켜주고
 					//mempwd는 유효성검사 할때 쓰기위하여 보냄.
@@ -81,8 +83,11 @@ public class LoginModel implements ModelInter {
 			session.removeAttribute("teamNameList");
 			method = false;
 
+		}else if(submod != null && submod.equals("firstLoginForm")){
+			url = "join/member.jsp";
+			method=true;
 		}
-		System.out.println("url : " + url + "method : " + method);
+		System.out.println("url : " + url + " method : " + method);
 		return new ModelForward(url, method);
 	}
 
