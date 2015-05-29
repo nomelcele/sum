@@ -26,7 +26,8 @@
 					<input type="hidden" name="submod" id="bsubmod" value="boardInsert">
 					<input type="hidden" name="page" id="bpage" value="1">
 					<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
-					<input type="hidden" name="bgnum" value="1">
+					<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
+					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 				<!-- board-write(S) -->
 				<table id="stcontent" class="board-list board-write">
 					<colgroup>
@@ -55,7 +56,7 @@
 				<!-- button-div(S) -->
 				<div class="button-div center">
 					<button>글작성</button>
-					<button type="button"onclick="location='sumware?model=board&submod=boardList&page=1'">리스트</button>
+					<button type="button"onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=${sessionScope.bbbgnum}'">리스트</button>
 				</div>
 			</form>
 				<!-- button-div(E) -->
