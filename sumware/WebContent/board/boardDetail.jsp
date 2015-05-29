@@ -67,12 +67,14 @@
 			</form>
 			<div class="button-div">
 				<div class="left">
-					<button type="button" onclick="javascript:formSub('d')">글삭제</button>
+					<c:if test="${sessionScope.v.memnum eq list.bmem }">
+						<button type="button" onclick="javascript:formSub('d')">글삭제</button>
+					</c:if>
 				</div>
 				<div class="right">
 					<button type="button">수정</button>
 					<button type="button" onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }'">목록</button>
-					<button type="button" onclick="location='sumware?model=board&submod=writeForm'">새글쓰기</button>
+					<button type="button" onclick="location='sumware?model=board&submod=writeForm&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }&bdeptno=${sessionScope.v.memdept }'">새글쓰기</button>
 				</div>
 			</div>
 			
