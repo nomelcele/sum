@@ -49,7 +49,6 @@ function fileUpload(){
 		} else { // Cross
 			xhr = new XMLHttpRequest();
 		}
-		progress = document.querySelector("progress");
 		// upload 버튼을 클릭하면 파일을 업로드한다.
 		// querySelector: jQuery 타입의 selector를 만들어준다.
 		
@@ -143,9 +142,11 @@ function fileUpload(){
 						alert("상세 주소를 입력해 주세요!");
 						$('#sample6_address2').focus();
 					}else{
-						alert("정보 입력이 완료되었습니다.");
 						fileUpload();
-						myform.submit();
+						setTimeout(function(){
+							myform.submit();
+						}, 2000);
+						
 					}					
 					
 				});
