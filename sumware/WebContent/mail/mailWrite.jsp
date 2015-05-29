@@ -34,7 +34,9 @@
 	name="f" autocomplete="off" enctype="multipart/form-data">
     	<input type="hidden" name="model" value="mail">
 		<input type="hidden" name="submod" value="mailWrite">
-		<input type="hidden" name="mailmem" value="${sessionScope.v.memnum}">
+		<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
+		<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
+<%-- 		<input type="hidden" name="mailmem" value="${sessionScope.v.memnum}"> --%>
 	    <div class="form-group">
 	        <label for="receiver" class="col-sm-2 control-label">받는 사람</label>
 	        <div class="col-sm-10">

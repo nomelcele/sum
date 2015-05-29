@@ -135,7 +135,8 @@
 	
 	function mailDetailGo(mailnum){
 		// 상세 보기 페이지로 이동시켜주는 함수
-		location="sumware?model=mail&submod=mailDetail&mailnum="+mailnum;
+		location="sumware?model=mail&submod=mailDetail&mailnum="+mailnum+
+				"&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}";
 		
 		
 // 		$("#submod").attr("value","mailDetail");

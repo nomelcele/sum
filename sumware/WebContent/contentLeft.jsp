@@ -178,10 +178,10 @@
 			</a>
 		</div>
 		<div class="list-group">
-			<a href="javascript:mailFormGo('fromlist')" class="list-group-item">받은 메일함 </a>
-			<a href="javascript:mailFormGo('tolist')" class="list-group-item">보낸 메일함</a> 
-			<a href="javascript:mailFormGo('mylist')" class="list-group-item">내게 쓴 메일함</a> 
-			<a href="javascript:mailFormGo('trashcan')" class="list-group-item">휴지통</a>
+			<a href="javascript:mailFormGo('fromlist')" class="list-group-item">받은 메일함 ${numArr[0]}</a>
+			<a href="javascript:mailFormGo('tolist')" class="list-group-item">보낸 메일함 ${numArr[1]}</a> 
+			<a href="javascript:mailFormGo('mylist')" class="list-group-item">내게 쓴 메일함 ${numArr[2]}</a> 
+			<a href="javascript:mailFormGo('trashcan')" class="list-group-item">휴지통 ${numArr[3]}</a>
 		</div>
 	</div>
 </c:if>
