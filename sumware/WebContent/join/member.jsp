@@ -84,13 +84,19 @@ function fileUpload(){
 	});
 		<%--비밀번호 중복 검사 --%>
 		$('#mempwd2').change(function() {
-			
 			if($('#mempwd1').val() != $('#mempwd2').val()){
 				
+				$('#mempwd1').text("");
+				$('#mempwd2').text("");
+				$('#mempwd1').focus();
+				alert("패스워드가 같지 않습니다.");
 				$('#targetpwd').html('<p style="color: red;">비밀번호가 일치 하지 않습니다.</p>');
-				
+
 			}else{
-				alert("패스워드가 같습니다.");
+				$('#targetpwd').html('<p style="color: green;">비밀번호가 일치합니다.</p>');
+				setTimeout(function(){
+					$('#targetpwd').html(' ');
+				}, 2000);
 			}
 		});
 
