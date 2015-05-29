@@ -26,14 +26,14 @@ public class LoginDao {
 		   PreparedStatement pstmt = null;
 		   if(v.getMemnum() == 10000){
 			   System.out.println("상급자 없음");
-			   sql.append("select s.memnum, s.memprofile, s.memname, s.memjob,s.memdept,s.memmgr , d.dename, nvl(s.memmgr,0) mgrname, s.memauth,s.meminmail ");
+			   sql.append("select s.memnum, s.mempwd, s.memprofile, s.memname, s.memjob,s.memdept,s.memmgr , d.dename, nvl(s.memmgr,0) mgrname, s.memauth,s.meminmail ");
 			   sql.append("from member s, dept d where s.memdept=d.denum and s.memnum = ? and s.mempwd =?");
 			   con = ConUtil.getOds();
 			
 			   pstmt = con.prepareStatement(sql.toString());
 		   }else{
 			   System.out.println("상급자 있음");
-			   sql.append("select s.memnum, s.memprofile, s.memname, s.memjob,s.memdept,s.memmgr, d.dename, m.memname mgrname, s.memauth,s.meminmail ");
+			   sql.append("select s.memnum, s.mempwd, s.memprofile, s.memname, s.memjob,s.memdept,s.memmgr, d.dename, m.memname mgrname, s.memauth,s.meminmail ");
 			   sql.append("from member s, member m, dept d where s.memmgr = m.memnum and s.memdept = d.denum and s.memnum = ? and s.mempwd =?");
 			   // 부서 번호와 상급자 번호가 있어야 한다.
 			   // 부서 번호: 900, 상급자 번호: 1 (default)
@@ -60,6 +60,7 @@ public class LoginDao {
 			   vo.setMeminmail(rs.getString("meminmail"));
 			   vo.setMemdept(rs.getInt("memdept"));
 			   vo.setMemmgr(rs.getInt("memmgr"));
+			   vo.setMempwd(rs.getString("mempwd"));
 		   }else{
 			   return null;
 		   }

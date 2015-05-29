@@ -110,5 +110,29 @@ public class MemberDao {
 		// 회원이 추가될 때마다 업데이트
 		
 	}
+	
+	/// 회원 정보 수정
+	public void modify(HashMap<String,String> map){
+		Connection con=null;
+		PreparedStatement pstmt=null;	
+		try {
+			con=ConUtil.getOds();
+			StringBuffer sql=new StringBuffer();
+			sql.append("update member set memaddr=?,mempwd=?, memprofile=? where memnum=?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, map.get("address"));
+			pstmt.setString(2, map.get("mempwd2"));
+			pstmt.setString(3, map.get("memimg"));
+            pstmt.setInt(4, Integer.parseInt(map.get("memnum")));
+			pstmt.executeUpdate();
 
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally{
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+			
+		}	
+	}
 }

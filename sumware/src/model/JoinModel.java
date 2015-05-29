@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import util.MyMap;
 import controller.ModelForward;
@@ -32,6 +33,23 @@ public class JoinModel implements ModelInter{
 			
 			url="index.jsp";
 			method=true;
+		}else if(submod !=null && submod.equals("modifyProfile")){
+			// 프로필 수정 폼
+			url="join/member.jsp";
+			method=true;
+		}else if(submod !=null && submod.equals("modify")){
+			// 수정 버튼
+			HashMap<String, String> map= MyMap.getMaps().getMapList(request);
+			MemberDao.getDao().modify(map);
+			
+			HttpSession session = request.getSession();
+			//저장된 세션 다 날림.
+			session.removeAttribute("v");
+			session.removeAttribute("teamNameList");
+
+			url="index.jsp";
+			method = false;
+
 		}
 					
 		return new ModelForward(url, method);

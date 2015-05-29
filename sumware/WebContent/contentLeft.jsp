@@ -57,14 +57,14 @@
 <%-- board left(E) --%>
 <%-- todo left --%>
 <c:if test="${param.model eq 'todo' }">
-<form action="sumware" method="post" id="goTodo">
-		<input type="hidden" id="model" name="model">
-		<input type="hidden" id="submod" name="submod">
-		<input type="hidden" id="memnum" name="memnum">
-		<input type="hidden" id="memmgr" name="memmgr">
-		<input type="hidden" id="memdept" name="memdept">
+<!-- <form action="sumware" method="post" id="goTodo"> -->
+<!-- 		<input type="hidden" id="model" name="model"> -->
+<!-- 		<input type="hidden" id="submod" name="submod"> -->
+<!-- 		<input type="hidden" id="memnum" name="memnum"> -->
+<!-- 		<input type="hidden" id="memmgr" name="memmgr"> -->
+<!-- 		<input type="hidden" id="memdept" name="memdept"> -->
 		
-</form>
+<!-- </form> -->
 <div class="col-lg-4" style="width: 250px">
 	<div class="row-lg-6">
 		<div class="chat-panel panel panel-default">
@@ -97,7 +97,7 @@
 					<tr><td colspan="2" style="color:white">             .</td>
 					</tr>
 					<tr>
-						<td colspan="2" style="text-align:right"><a href="#"><i class="fa fa-cog"></i>프로필수정</a></td>
+						<td colspan="2" style="text-align:right"><a href="sumware?model=join&submod=modifyProfile"><i class="fa fa-cog"></i>프로필수정</a></td>
 						
 					</tr>
 				</table>
@@ -136,39 +136,47 @@
 
 <%-- calendar left --%>
 <c:if test="${param.model eq 'calendar' }">
-      <div class="chat-panel panel panel-default">
-         <div class="panel-heading">
-            <i class="fa fa-user"></i> <strong class="primary-font">My
-               profile</strong>
-        
-         <div class="panel-body">
-            <span class="chat-img pull-left"> <img
-               src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
-               class="img-circle" style="width: 100px; height: 130px;">
-            </span> </br> </br> </br> </br> </br></br> </br> </br>
-            <table>
-               <tr>
-                  <td><strong class="primary-font" style="margin: 10px">이름</strong></td>
-                  <td>${sessionScope.v.memname }</td>
-               </tr>
-               <tr>
-                  <td><strong class="primary-font" style="margin: 10px">직급</strong></td>
-                  <td>${sessionScope.v.memjob }</td>
-               </tr>
-               <tr>
-                  <td><strong class="primary-font" style="margin: 10px">부서</strong></td>
-                  <td>${sessionScope.v.dename }</td>
-               </tr>
-               <tr>
-                  <td><strong class="primary-font" style="margin: 10px">상급자</strong></td>
-                  <td>${sessionScope.v.mgrname }</td>
-               </tr>
-            </table>
-            </br> </br> </br> </br> </br></br> </br> </br> </br> </br></br> </br> </br>
-            </br> </br> </br> </br> </br></br> </br> </br> </br> </br></br>
-         </div>
-      </div>
-   </div>
+      <div class="col-lg-4" style="width: 250px">
+      <br/><br/>
+	<div class="row-lg-12">
+		<div class="chat-panel panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-user"></i> <strong class="primary-font">My
+					profile</strong>
+			</div>
+			<div class="panel-body">
+				<span class="chat-img pull-left"> <img
+					src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
+					class="img-circle" style="width: 82px; height: 110px;">
+				</span>
+				<table>
+					<tr>
+						<td><strong class="primary-font" style="margin: 10px">이름</strong></td>
+						<td>${sessionScope.v.memname }</td>
+					</tr>
+					<tr>
+						<td><strong class="primary-font" style="margin: 10px">직급</strong></td>
+						<td>${sessionScope.v.memjob }</td>
+					</tr>
+					<tr>
+						<td><strong class="primary-font" style="margin: 10px">부서</strong></td>
+						<td>${sessionScope.v.dename }</td>
+					</tr>
+					<tr>
+						<td><strong class="primary-font" style="margin: 10px">상급자</strong></td>
+						<td>${sessionScope.v.mgrname }</td>
+					</tr>
+					<tr><td colspan="2" style="color:white">             .</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align:right"><a href="#"><i class="fa fa-cog"></i>프로필수정</a></td>
+						
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	</div>
 </c:if>
 
 <%-- mail left --%>

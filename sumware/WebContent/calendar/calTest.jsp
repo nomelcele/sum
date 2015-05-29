@@ -3,12 +3,8 @@
 <%@page import="dao.CalendarDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+
+
 <%@include file="../top.jsp" %>
 <!-- 캘린더 -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -19,9 +15,6 @@
 <script src='calendar/fjs/lang-all.js'></script>
 <!-- /캘린더 -->
 <!-- Latest compiled and minified CSS -->
-
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script>
 function goCal(btn){
 	var s=$(btn).val();
@@ -121,22 +114,22 @@ $(function(){
 		  })
 	 });
 </script>
-</head>
-<body>
+
+
 	<form action="sumware" method="post" id="selCal">
 		<input type="hidden" name="model" id="mod">
 		<input type="hidden" name="submod" id="submod">
 		<input type="hidden" name="cal" id="cal">
 	</form>
-		<div class="container" style="margin-top:50px; ">
+		<div class="container">
 		<div class="row">
-			<div class="col-xs-3">
+			<div class="col-lg-3">
 			<%@include file="../contentLeft.jsp" %>
 			</div>
-			<div class="col-xs-9">
+			<div class="col-lg-9">
 				<div style="text-align: right;padding: 10px;">
-					<input type="button" id="calDept" value="부서일정" onclick="goCal(this)">
-					<input type="button" id="calMem" value="사원일정" onclick="goCal(this)">
+					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calDept" value="부서일정" onclick="goCal(this)">
+					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calMem" value="사원일정" onclick="goCal(this)">
 				</div>
 				<div id='calendar'"></div>
 			</div>
