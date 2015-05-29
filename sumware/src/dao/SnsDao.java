@@ -51,10 +51,11 @@ public class SnsDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		StringBuffer sql = new StringBuffer();
-		sql.append("select rownum srnum,m.memname,m.memprofile ,s.snum,s.scont,to_char(s.sdate,'MM')||'월'||to_char(s.sdate,'dd')||'일'||to_char(s.sdate,'hh:mm') sdate,s.sdept,s.smem");
+		sql.append("select rownum srnum,b.* from(");
+		sql.append("select m.memname,m.memprofile ,s.snum,s.scont,to_char(s.sdate,'MM')||'월'||to_char(s.sdate,'dd')||'일'||to_char(s.sdate,'hh24:mm') sdate,s.sdept,s.smem");
 		sql.append(",(select count(*) cnt from comm where commsns=s.snum) stocount");
-		sql.append(" from (select * from sns s where s.sdept=?) s,member m");
-		sql.append(" where m.memnum=s.smem and rownum between ? and ? order by s.sdate desc");
+		sql.append(" from (select * from sns  where sdept=?) s ,member m");
+		sql.append(" where m.memnum=s.smem  order by sdate desc) b where rownum between ? and ?");
 		try {
 			snsList=new ArrayList<>();
 			con = ConUtil.getOds();
@@ -143,7 +144,7 @@ public class SnsDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		StringBuffer sql = new StringBuffer();
-		sql.append("select c.conum,c.commsns,m.memname coname,comem,m.memprofile coimg,c.cocont,to_char(c.codate,'MM')||'월'||to_char(c.codate,'dd')||'일'||to_char(c.codate,'hh:mm') codate");
+		sql.append("select c.conum,c.commsns,m.memname coname,comem,m.memprofile coimg,c.cocont,to_char(c.codate,'MM')||'월'||to_char(c.codate,'dd')||'일'||to_char(c.codate,'hh24:mm') codate");
 		sql.append(" from (select * from comm c where commsns=? order by 1 desc) c,member m");
 		sql.append(" where m.memnum=c.comem and rownum between ? and ?");
 		try {

@@ -20,7 +20,7 @@
 <script src="../js/http.js"></script>
 <script>
 // push Client 설정 (받는쪽)
-	var rowsPerPage =7; //sns에 쓸 행수
+	var rowsPerPage =8; //sns에 쓸 행수
 	var eventSource;
 	var cheight=$('.chat').height()-50;//sns
 	var ch ;//snsComm
@@ -44,9 +44,9 @@
 		}
 	}
 	function pageScoll(){
-		console.log("1:::"+$('.chat').scrollTop());
-		console.log("3:::"+$('.chat').height());
 		var sctop=$('.chat').scrollTop();
+		console.log("1:::"+sctop);
+		console.log("3:::"+cheight);
 		if ( sctop > cheight) {
 			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
 			setTimeout(function(){
@@ -60,19 +60,20 @@
 				
 			}, 1000);	
 					
-		}else if($('.chat').scrollTop()==0){
-			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
-			setTimeout(function(){
-				rowsPerPage=7;
-				cheight=300;
-				console.log("rowsPerPage:"+rowsPerPage);
-				console.log("cheight:"+cheight);
-				eventSource.close();
-				$("#loading img").remove();
-				push();
-				
-			}, 1000);
 		}
+// 		else if($('.chat').scrollTop()==0){
+// 			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
+// 			setTimeout(function(){
+// 				rowsPerPage=7;
+// 				cheight=300;
+// 				console.log("rowsPerPage:"+rowsPerPage);
+// 				console.log("cheight:"+cheight);
+// 				eventSource.close();
+// 				$("#loading img").remove();
+// 				push();
+				
+// 			}, 1000);
+// 		}
 	}
 
 	function snsSend(){
@@ -198,8 +199,8 @@
 							class="primary-font">부서 SNS</strong>
 					</div>
 					<!-- /.panel-heading -->
-					<div class="panel-body" style="height:450px; overflow-y:scroll;" onscroll="pageScoll()">
-						<ul class='chat' style="height:450px;" >
+					<div class="panel-body">
+						<ul class='chat' style="height:450px; overflow-y:scroll;" onscroll="pageScoll()">
 						</ul>
 						<div id="loading" style="width: 100%; float:left; text-align: center;">
 					
