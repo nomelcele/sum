@@ -123,12 +123,12 @@ public class CalendarDAO {
 	public String calSQL(int n){
 		StringBuffer sql = new StringBuffer();
 		if(n==0){ //부서일정
-			sql.append("select calnum,to_char(calstart,'yyyy-MM-DD')||'T'||to_char(calstart,'HH:mm:ss') calstart,")
-				.append("nvl(to_char(calend,'yyyy-MM-DD')||'T'||to_char(calend,'HH:mm:ss'),'0') calend,")
+			sql.append("select calnum,to_char(calstart,'yyyy-MM-DD')||'T'||to_char(calstart,'HH:mi:ss') calstart,")
+				.append("nvl(to_char(calend,'yyyy-MM-DD')||'T'||to_char(calend,'HH:mi:ss'),'0') calend,")
 				.append("calcont from calendar where caldept=?");
 		}else if(n==1){ //사원일정
-			sql.append("select calnum,to_char(calstart,'yyyy-MM-DD')||'T'||to_char(calstart,'HH:mm:ss') calstart,")
-			.append("nvl(to_char(calend,'yyyy-MM-DD')||'T'||to_char(calend,'HH:mm:ss'),'0') calend,")
+			sql.append("select calnum,to_char(calstart,'yyyy-MM-DD')||'T'||to_char(calstart,'HH:mi:ss') calstart,")
+			.append("nvl(to_char(calend,'yyyy-MM-DD')||'T'||to_char(calend,'HH:mi:ss'),'0') calend,")
 			.append("calcont from calendar where calmem=?");
 		}else if(n==2){
 			sql.append("insert into calendar(calnum,calstart,calend,calcont,caldept)");
