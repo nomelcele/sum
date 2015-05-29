@@ -300,6 +300,7 @@ function mailFormGo(res){
 		$("#submod").attr("value","mailFromList");
 		$("#usernum").attr("value","${sessionScope.v.memnum}");
 		$("#userid").attr("value","${sessionScope.v.meminmail}");
+		$("#page").attr("value",1);
 		$("#mailform").submit();
 		
 	} else if(res=='tolist'){ // 보낸 메일함
@@ -307,6 +308,7 @@ function mailFormGo(res){
 		$("#submod").attr("value","mailToList");
 		$("#usernum").attr("value","${sessionScope.v.memnum}");
 		$("#userid").attr("value","${sessionScope.v.meminmail}");
+		$("#page").attr("value",1);
 		$("#mailform").submit();
 
 	} else if(res=='mylist'){ // 내게 쓴 메일함
@@ -314,6 +316,7 @@ function mailFormGo(res){
 		$("#submod").attr("value","mailMyList");
 		$("#usernum").attr("value","${sessionScope.v.memnum}");
 		$("#userid").attr("value","${sessionScope.v.meminmail}");
+		$("#page").attr("value",1);
 		$("#mailform").submit();
 		
 	} else if(res=='trashcan'){ // 휴지통
@@ -321,6 +324,7 @@ function mailFormGo(res){
 		$("#submod").attr("value","mailTrashcan");
 		$("#usernum").attr("value","${sessionScope.v.memnum}");
 		$("#userid").attr("value","${sessionScope.v.meminmail}");
+		$("#page").attr("value",1);
 		$("#mailform").submit();
 		
 		} 
@@ -459,7 +463,7 @@ function select(index){
 				<ul class="nav navbar-nav">
 					<li><a href="sumware?model=index">메인</a></li>
 					<li><a href="sumware?model=todo&submod=firsttodoForm&memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
-					<li><a href="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}">Mail</a></li>
+					<li><a href="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}&page=1">Mail</a></li>
 					<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
 					<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=0&bname=공지사항">Board</a></li>
 					<li><a href="javascript:openWin()">Messenger</a></li>

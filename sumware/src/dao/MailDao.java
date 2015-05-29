@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import util.CloseUtil;
 import conn.ConUtil;
@@ -50,7 +51,7 @@ public class MailDao {
 		}
 	}
 	
-	public ArrayList<MailVO> getFromMailList(int usernum, String userid){
+	public ArrayList<MailVO> getFromMailList(HashMap<String, String> map, Map<String, Integer> pmap){
 		// 받은 메일 리스트를 불러오는 메서드
 		// 현재 로그인되어 있는 사원이 받은 메일만 불러와야 한다.
 		Connection con = null;
@@ -61,16 +62,24 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma");
-			sql.append(" where me.memnum=ma.mailmem and ma.mailreceiver=? and ma.mailrdelete=1");
-			sql.append(" and not ma.mailmem=? order by ma.maildate desc");
+//			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma");
+//			sql.append(" where me.memnum=ma.mailmem and ma.mailreceiver=? and ma.mailrdelete=1");
+//			sql.append(" and not ma.mailmem=? order by ma.maildate desc");
+			
+			sql.append("select * from (select rownum r_num, a.* from (");
+			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate");
+			sql.append(" from member me, mail ma where me.memnum=ma.mailmem and ma.mailreceiver=?");
+			sql.append(" and ma.mailrdelete=1 and not ma.mailmem=? order by ma.maildate desc) a)");
+			sql.append(" where r_num between ? and ?");
+			
 			
 			// 현재 로그인한 사원에게 온 메일만 검색
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, userid);
-			pstmt.setInt(2, usernum);
+			pstmt.setString(1, map.get("userid"));
+			pstmt.setInt(2, Integer.parseInt(map.get("usernum")));
+			pstmt.setInt(3, pmap.get("begin"));
+			pstmt.setInt(4, pmap.get("end"));
 			rs = pstmt.executeQuery();
-			System.out.println("현재 로그인한 사원 아이디: "+userid);
 			
 			while(rs.next()){
 				MailVO v = new MailVO();
@@ -91,7 +100,7 @@ public class MailDao {
 		return list;
 	}
 	
-	public ArrayList<MailVO> getToMailList(int usernum, String userid){
+	public ArrayList<MailVO> getToMailList(HashMap<String, String> map, Map<String, Integer> pmap){
 		// 보낸 메일 리스트를 불러오는 메서드
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -102,13 +111,22 @@ public class MailDao {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
 			
-			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma"); 
-			sql.append(" where me.meminmail=ma.mailreceiver and ma.mailmem=? and ma.mailsdelete=1");
-			sql.append(" and not ma.mailreceiver=? order by ma.maildate desc");
+//			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma"); 
+//			sql.append(" where me.meminmail=ma.mailreceiver and ma.mailmem=? and ma.mailsdelete=1");
+//			sql.append(" and not ma.mailreceiver=? order by ma.maildate desc");
+			
+			sql.append("select * from (select rownum r_num, a.* from (");
+			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate");
+			sql.append(" from member me, mail ma where me.meminmail=ma.mailreceiver and ma.mailmem=?");
+			sql.append(" and ma.mailsdelete=1 and not ma.mailreceiver=? order by ma.maildate desc) a)");
+			sql.append(" where r_num between ? and ?");
 		
+			
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, usernum);
-			pstmt.setString(2, userid);
+			pstmt.setInt(1, Integer.parseInt(map.get("usernum")));
+			pstmt.setString(2, map.get("userid"));
+			pstmt.setInt(3, pmap.get("begin"));
+			pstmt.setInt(4, pmap.get("end"));
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -130,7 +148,7 @@ public class MailDao {
 		return list;
 	}
 	
-	public ArrayList<MailVO> getMyMailList(int usernum, String userid){
+	public ArrayList<MailVO> getMyMailList(HashMap<String, String> map, Map<String, Integer> pmap){
 		// 내게 쓴 메일 리스트를 불러오는 메서드
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -140,12 +158,22 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select ma.mailnum, ma.mailtitle, ma.maildate, me.memname from member me, mail ma");
-			sql.append(" where me.memnum=ma.mailmem and ma.mailmem=? and ma.mailreceiver=? ");
-			sql.append(" and ma.mailsdelete=1 and ma.mailrdelete=1 order by ma.maildate desc");
+//			sql.append("select ma.mailnum, ma.mailtitle, ma.maildate, me.memname from member me, mail ma");
+//			sql.append(" where me.memnum=ma.mailmem and ma.mailmem=? and ma.mailreceiver=? ");
+//			sql.append(" and ma.mailsdelete=1 and ma.mailrdelete=1 order by ma.maildate desc");
+			
+			sql.append("select * from (select rownum r_num, a.* from (");
+			sql.append("select ma.mailnum, ma.mailtitle, ma.maildate, me.memname");
+			sql.append(" from member me, mail ma where me.memnum=ma.mailmem and ma.mailmem=?");
+			sql.append(" and ma.mailreceiver=? and ma.mailsdelete=1 and ma.mailrdelete=1 order by ma.maildate desc) a)");
+			sql.append(" where r_num between ? and ?");
+			
+			
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, usernum);
-			pstmt.setString(2, userid);
+			pstmt.setInt(1, Integer.parseInt(map.get("usernum")));
+			pstmt.setString(2, map.get("userid"));
+			pstmt.setInt(3, pmap.get("begin"));
+			pstmt.setInt(4, pmap.get("end"));
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -205,7 +233,7 @@ public class MailDao {
 		return v;
 	}
 	
-	public void setDeleteAttr(String[] mailnums, int usernum, String userid, int delvalue){
+	public void setDeleteAttr(String[] mailnums, HashMap<String, String> map){
 		// 메일의 delete 속성 설정
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -226,12 +254,12 @@ public class MailDao {
 					int mailmem = rs.getInt("mailmem");
 					String mailreceiver = rs.getString("mailreceiver");
 					
-					if(mailmem == usernum){ // 로그인한 사원이 보낸 메일일 경우
+					if(mailmem == Integer.parseInt(map.get("usernum"))){ // 로그인한 사원이 보낸 메일일 경우
 						sql.setLength(0); // 스트링버퍼 비우기
 						sql.append("update mail set mailsdelete=? where mailnum=?");
 					}
 					
-					if(mailreceiver.equals(userid)){ // 로그인한 사원이 받은 메일일 경우
+					if(mailreceiver.equals(map.get("userid"))){ // 로그인한 사원이 받은 메일일 경우
 						sql.setLength(0); // 스트링버퍼 비우기
 						sql.append("update mail set mailrdelete=? where mailnum=?");
 					}
@@ -239,7 +267,7 @@ public class MailDao {
 					CloseUtil.close(rs);
 					CloseUtil.close(pstmt);
 					pstmt = con.prepareStatement(sql.toString());
-					pstmt.setInt(1, delvalue);
+					pstmt.setInt(1, Integer.parseInt(map.get("delvalue")));
 					// 삭제(메일함에서 휴지통으로 이동)는 2
 					// 영구 삭제(휴지통에서도 보이지 않게 함)는 3
 					// 복구(휴지통에서 메일함으로 이동)은 1
@@ -261,7 +289,7 @@ public class MailDao {
 		
 	}
 	
-	public ArrayList<MailVO> getTrashList(int usernum, String userid){
+	public ArrayList<MailVO> getTrashList(HashMap<String, String> map, Map<String, Integer> pmap){
 		// 휴지통에서 보여줄 메일 리스트를 리턴하는 메서드
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -271,15 +299,27 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
+//			sql.append("select ma.mailnum, me1.memname mailsname, me2.memname mailrname, ma.mailtitle, ma.maildate");
+//			sql.append(" from member me1, member me2, mail ma");
+//			sql.append(" where (me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver) and");
+//			sql.append(" ((ma.mailmem=? and ma.mailsdelete=2) or (ma.mailreceiver=? and ma.mailrdelete=2))");
+//			sql.append(" order by ma.maildate desc");
+ 
+			sql.append("select * from (select rownum r_num, a.* from (");
 			sql.append("select ma.mailnum, me1.memname mailsname, me2.memname mailrname, ma.mailtitle, ma.maildate");
 			sql.append(" from member me1, member me2, mail ma");
 			sql.append(" where (me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver) and");
 			sql.append(" ((ma.mailmem=? and ma.mailsdelete=2) or (ma.mailreceiver=? and ma.mailrdelete=2))");
-			sql.append(" order by ma.maildate desc");
- 
+			sql.append(" order by ma.maildate desc) a)");
+			sql.append(" where r_num between ? and ?");
+			
+			
+			
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, usernum);
-			pstmt.setString(2, userid);
+			pstmt.setInt(1, Integer.parseInt(map.get("usernum")));
+			pstmt.setString(2, map.get("userid"));
+			pstmt.setInt(3, pmap.get("begin"));
+			pstmt.setInt(4, pmap.get("end"));
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -303,11 +343,14 @@ public class MailDao {
 		return list;
 	}
 	
-	public int[] getListNum(int usernum, String userid){
+	public int[] getListNum(HashMap<String, String> map){
 		// 각 메일함에 있는 메일의 갯수를 얻기 위한 메서드
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		String userid = map.get("userid");
+		int usernum = Integer.parseInt(map.get("usernum"));
 		int[] numArr = new int[4];
 		
 		try {

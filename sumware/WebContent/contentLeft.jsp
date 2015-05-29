@@ -251,6 +251,7 @@
 	<input type="hidden" id="submod" name="submod">
 	<input type="hidden" id="usernum" name="usernum">
 	<input type="hidden" id="userid" name="userid">
+	<input type="hidden" id="page" name="page">
 </form>
 	<div class="col-md-2">
 		<div>

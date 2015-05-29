@@ -72,6 +72,27 @@
 			</table>
 		</div>
 		</form>
+		<div id="page">
+			<c:choose>
+				<c:when test="${tofrom eq '1'}">
+					<c:set var="pageUrl" 
+					value="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+				</c:when>
+				<c:when test="${tofrom eq '2'}">
+					<c:set var="pageUrl" 
+					value="sumware?model=mail&submod=mailToList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+				</c:when>
+				<c:when test="${tofrom eq '3'}">
+					<c:set var="pageUrl" 
+					value="sumware?model=mail&submod=mailMyList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+				</c:when>
+				<c:otherwise>
+					<c:set var="pageUrl" 
+					value="sumware?model=mail&submod=mailTrashcan&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+				</c:otherwise>
+			</c:choose>
+			<%@include file="mailPage.jsp"%>
+		</div>
 		</div>
 		</div>
 	</div>
@@ -89,7 +110,7 @@
 
 		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
 				"&userid=${sessionScope.v.meminmail}&delvalue=2&tofrom=${tofrom}"+
-				"&chk="+$("#chk:checked").serialize();
+				"&page=1&chk="+$("#chk:checked").serialize();
 	}
 	
 	function maildeleteGo(){
@@ -102,7 +123,7 @@
 		
 		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
 		"&userid=${sessionScope.v.meminmail}&delvalue=3&tofrom=${tofrom}"+
-		"&chk="+$("#chk:checked").serialize();
+		"&page=1&chk="+$("#chk:checked").serialize();
 	}
 	
 	function mailRecover(){
@@ -116,7 +137,7 @@
 		
 		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
 		"&userid=${sessionScope.v.meminmail}&delvalue=1&tofrom=${tofrom}"+
-		"&chk="+$("#chk:checked").serialize();
+		"&page=1&chk="+$("#chk:checked").serialize();
 	}
 	
 	function checkAll(obj){
