@@ -227,6 +227,7 @@ alter table mail add mailsdelete number(5);
 alter table mail add mailrdelete number(5);
 -- 1: 기본값, 2: 받은 사람이 메일 삭제(메일이 받은 사람의 휴지통으로 이동),
 -- 3: 받은 사람이 메일 영구 삭제
+
 alter table mail drop column mailsname;
 alter table mail drop column mailrname;
 
@@ -275,6 +276,7 @@ start with 1;
   
   create sequence mescontent_seq
   increment by 1
+<<<<<<< .mine
   start with 1;
 -- 0528 board 테이블 변경 했습니다~ 아래의 것들 차례대로 수행 하시면 됩니다. 
 DELETE FROM COMM;
@@ -287,9 +289,23 @@ ALTER TABLE BOARD add CONSTRAINT board_bdeptno_fk FOREIGN KEY(bdeptno) REFERENCE
 ALTER TABLE BOARD MODIFY (bgnum CONSTRAINT BOARD_bgnum_nn NOT NULL);
 
   
+  --05월 28일 member 테이블 수정 
+  
+  -- 주소 테이블  글자수 추가 
+  Alter table member modify(memaddr VARCHAR2(300));
+
+  -- 사람 추가 
+  
+  INSERT INTO MEMBER(memnum,memname,mempwd,memmail) VALUES
+(member_seq.nextVal,'이은정',1004,'lee@naver.com');=======
+  start with 1;
+  
 -- 0528 변경
 -- 컬럼 데이터 길이 수정
   alter table mail modify(mailsdelete number(1));
+<<<<<<< .mine
+  alter table mail modify(mailrdelete number(1));>>>>>>> .r316
+=======
   alter table mail modify(mailrdelete number(1));
   
 -- member 테이블 memmgr, memdept 컬럼 default 값 설정
@@ -308,4 +324,4 @@ create table bname(
 	constraint bname_bgnum_pk primary key(bgnum),
 	constraint bname_bdeptno_fk foreign key(bdeptno) references dept(denum)
 );
-insert into bname values('하람게시판', 4, 200);
+insert into bname values('하람게시판', 4, 200);>>>>>>> .r403
