@@ -245,47 +245,6 @@
 		}
 	}
 	
-	function startSuggest(){
-		if(check == false){
-			setTimeout("sendKeyword();",500);
-			loopKey = true;
-		}
-		check = true;
-	}
-	
-	var jsonObj = null;
-	function res(){
-		if(xhr.readyState == 4){
-			if(xhr.status == 200){
-				var response = xhr.responseText;
-				jsonObj = JSON.parse(response);
-				viewTable();
-			} else {
-				document.getElementById("view").style.display = "none";
-				
-			}
-		}
-	}
-	
-	function viewTable(){
-		var vD = document.getElementById("view");
-		var htmlTxt = "<table>";
-		for(var i=0; i<jsonObj.length; i++){
-			htmlTxt += "<tr><td style='cursor:pointer;'onmouseover='this.style.background=\"silver\"'onmouseout='this.style.background=\"white\"' onclick='select("
-				+ i + ")'>" + jsonObj[i] +"</td></tr>";
-		}
-		htmlTxt += "</table>";
-		vD.innerHTML = htmlTxt;
-		vD.style.display = "block";
-	}
-	
-	function select(index){
-		f.toMem.value = jsonObj[index];
-		document.getElementById("view").style.display = "none";
-		check = false;
-		loopKey = false;
-	}
-	
 
 	function getJobDetail(tonum){
 		$("#memlisttarget"+tonum).toggle("slow");
@@ -369,6 +328,7 @@ function sendRequest(url, param, callback, method) {
 	if (method == 'GET' && param != null) {
 		url = url + '?' + param;
 	}
+
 	xhr.onreadystatechange = callback;
 	xhr.open(method, url, true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -400,10 +360,11 @@ function sendKeyword(){
 		document.getElementById("view").style.display = "none";
 	} else if(key != lastKey){
 		lastKey = key;
-		var param = "model=mail&submod=mailSug&key="+encodeURIComponent(key);
+		var param = "model=mail&submod=mailSug&key="+key+
+		"&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}";
 		// console.log("key: "+key);
 		// 컨트롤러에서 처리하게 고칠 것
-		sendRequest("mail/mailSuggest.jsp", param, res, "post");
+		sendRequest("sumware", param, res, "post");
 		/* $.ajax({
 			type: "post",
 			url: "sumware",
@@ -420,8 +381,11 @@ var jsonObj = null;
 function res(){
 	if(xhr.readyState == 4){
 		if(xhr.status == 200){
+			
 			var response = xhr.responseText;
-			jsonObj = JSON.parse(response);
+			
+			// alert("response:"+response.trim());
+			jsonObj = JSON.parse(response.trim());
 			viewTable();
 		} else {
 			document.getElementById("view").style.display = "none";
