@@ -14,6 +14,7 @@ import javax.servlet.http.Part;
 import util.MyMap;
 import controller.ModelForward;
 import dao.BoardDao;
+import dto.BnameVO;
 import dto.BoardVO;
 import dto.CommVO;
 import dto.PageVO;
@@ -27,27 +28,35 @@ public class BoardModel implements ModelInter{
 		boolean method = false;
 		String submod = request.getParameter("submod");
 		System.out.println("BoardModel[submod] : " + submod);
+		// boardList **********************************
 		if(submod.equals("boardList") && submod!=null){
 			/* Page 처리 영역 */
 			// 들어온 요청은 boardList 를 보여주는 것, 그렇다면 1페이지 부터 보여줘야 한다.
 			// 두번쨰 인자값은 게시물인지, 댓글인지를 구별 해주는 인자. 0이면 게시물~
 			Map<String, Integer> map = pageProcess(request, 0);
-			ArrayList<BoardVO> list = BoardDao.getDao().getList(map);
-//			for(BoardVO e : list){
-//				System.out.println(e.getBwriter());
-//			}
+			HashMap<String, String> hmap = MyMap.getMaps().getMapList(request);
+			// 게시판 이름을 뿌려오고
+			ArrayList<BnameVO> bname = BoardDao.getDao().bName(hmap);
+			ArrayList<BoardVO> list = BoardDao.getDao().getList(map,hmap);
+			// 보드의 이름을 세션에 저장 해준다.
+			HttpSession ses = request.getSession();
+			ses.setAttribute("bbbgnum", hmap.get("bgnum"));
+			ses.setAttribute("bname", bname);
 			request.setAttribute("list", list);
 			url = "board/boardList.jsp";
 			method = true;
 		}
+		// boardwrite *********************************
 		else if(submod != null && submod.equals("writeForm")){
+			System.out.println("what the fuck");
 			url="board/boardWrite.jsp";
 			method=true;
 		}
-		else if(submod.equals("boardInsert") && submod!=null){
+		else if(submod!=null && submod.equals("boardInsert")){
+			System.out.println("this is what ?????????");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			BoardDao.getDao().insert(map);
-			url = "sumware?model=board&submod=boardList&page=1";
+			url = "sumware?model=board&submod=boardList&page=1&bgnum="+map.get("bgnum")+"&bdeptno="+map.get("bdeptno");
 			method = false; // redirect
 		}
 		else if(submod != null && submod.equals("boardDetail")){
