@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- --%>
 <div class="container">
    <div id="carousel1" class="carousel slide" data-ride="carousel">
@@ -8,13 +9,22 @@
             <img alt="Bootstrap template" src="img/slide_01.jpg">
          </div>
          <div class="item">
+         <c:if test="${sessionScope.v.memnum eq null}">
             <img alt="Bootstrap template" src="img/slide_02.jpg">
+           </c:if>
+           <c:if test="${sessionScope.v.memnum ne null}">
+           <img alt="Bootstrap template" src="img/slide_02.jpg" onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=0&bname=공지사항'" style="cursor:pointer">
+           </c:if>
            
          </div>
 
          <div class="item">
-            <img alt="Bootstrap template" src="img/slide_03.jpg">
-           
+         	<c:if test="${sessionScope.v.memnum eq null}">
+         	<img alt="Bootstrap template" src="img/slide_03.jpg">
+         	</c:if>
+         	<c:if test="${sessionScope.v.memnum ne null}">
+            <img alt="Bootstrap template" src="img/slide_03.jpg" onclick="location='sumware?model=calendar&submod=calList'" style="cursor:pointer">
+            </c:if>
          </div>
       </div>
       <ul class="nav nav-justified">
