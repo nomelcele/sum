@@ -53,6 +53,14 @@ public class BoardModel implements ModelInter{
 			url="board/boardWrite.jsp";
 			method=true;
 		}
+		else if(submod !=null && submod.equals("boardDelete")){
+			System.out.println("여기는 삭제삭제삭제!!!!!!!!!!!!!!!!!!!!!~~~~~~~");
+			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
+			BoardDao.getDao().delete(map);
+			url = "sumware?model=board&submod=boardList&page=1&bgnum="
+					+map.get("bgnum")+"&bdeptno="+map.get("bdeptno")+"&bname="+map.get("bname").toString();
+			method = true; // forward
+		}
 		else if(submod!=null && submod.equals("boardInsert")){
 			System.out.println("this is what ?????????");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
@@ -60,7 +68,7 @@ public class BoardModel implements ModelInter{
 			url = "sumware?model=board&submod=boardList&page=1&bgnum="
 			+map.get("bgnum")+"&bdeptno="+map.get("bdeptno")+"&bname="+map.get("bname").toString();
 			System.out.println(map.get("bname").toString());
-			method = true; // redirect
+			method = true; // forward
 		}
 		else if(submod != null && submod.equals("boardDetail")){
 			int no = Integer.parseInt(request.getParameter("no"));
