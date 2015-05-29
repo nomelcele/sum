@@ -9,13 +9,14 @@
 		<!-- lnb-area(E) -->
 		<!-- contents(S) -->
 	<div class="contents">
+		<h2 class="heading-page"></h2>
 			<!-- board-form(S) -->
 		<div class="board-form">
 			<div class="left">
 					<input type="text" name="search" placeholder="search">				
 			</div>
 			<div class="right">
-					<button onclick="location='sumware?model=board&submod=writeForm'">글쓰기</button>
+					<button type="button" onclick="location='sumware?model=board&submod=writeForm&bgnum=0'">글쓰기</button>
 			</div>
 		</div>
 			<!-- board-form(E) -->
@@ -45,7 +46,7 @@
 					<c:forEach items="${list }" var="vlist">
 					<tr>
 						<td class="num">${vlist.bnum }</td>
-						<td style="text-align: left"><a href="sumware?model=board&submod=boardDetail&no=${vlist.bnum }">${vlist.btitle }<span style="font-size: 6px;">댓글갯수</span></a></td>
+						<td style="text-align: left"><a href="sumware?model=board&submod=boardDetail&no=${vlist.bnum }">${vlist.btitle }</a></td>
 						<td style="text-align: center;">${vlist.bwriter }</td>
 						<td style="text-align: center;">${vlist.bdate }</td>
 						<td style="text-align: center;">${vlist.bhit }</td>
@@ -61,15 +62,6 @@
 			<c:set var="pageUrl" value="sumware?model=board&submod=boardList"/>
 			<%@include file="page.jsp" %>
 		</div>
-				<!-- <button type="button" class="paging-prev">&lt;&lt;</button>
-				<ul>
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
-					<li>4</li>
-					<li>5</li>
-				</ul>
-				<button type="button" class="paging-next">&gt;&gt;</button> -->
 			<!-- paging(E) -->
 	</div>
 		<!-- contents(E) -->
