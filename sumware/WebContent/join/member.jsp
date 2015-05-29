@@ -13,7 +13,8 @@ var progress = null;
 var xhr = null;
 
 
-// 파일을 업로드한다.
+<%--파일을 업로드한다.--%>
+
 function fileUpload(){
 	var uploadFile = document.getElementById("fileimg");
 	// 업로드 시작 -> xhr.download..
@@ -217,7 +218,7 @@ function fileUpload(){
 
 
 	<%@include file="/top.jsp"%>
-<%=application.getRealPath("/profileImg") %>
+<%--<%=application.getRealPath("/profileImg") --%>
 <div class="container">
 	<div class="row info">
 		<div class="row">
@@ -231,24 +232,21 @@ function fileUpload(){
 						<input type="hidden" name="address" id="address">
 						<input type="hidden" name="memimg" id="memimg">
 						<header class="page-header">
-							<h1 class="page-title">회원가입</h1>
-							<small> <i class="fa fa-clock-o"></i> Last Updated on: <time>Sunday,
-									October 05, 2014</time></small>
+							<h1 class="page-title">Profile Modify</h1>
+							
+							<small><i class="fa fa-clock-o"></i> Last Updated on: <time>Sunday,
+									October 05, 2015</time></small>
 						</header>
 						<div class="panel panel-default">
 							<div class="panel-heading resume-heading">
 								<div class="row">
-									<div class="col-sm-offset-5">
+									<div class="profileimg">
 										<figure>
-											<img class="img-circle img-responsive" alt="프로필 사진 "
-												id="targetimg" src="http://placehold.it/200x200"
-												style="width: 200px; height: 200px;">
+											<img class="img-circle" alt="프로필 사진 "
+												id="targetimg" src="img/imgx.jpg">
 										</figure>
-
-										<div class="btn-group col-sm-offset-2"
-											style="position: relative; overflow: hidden; padding-top: 10px;">
-											<input type="file" id="fileimg"
-												style="position: absolute; right: 0px; top: 0px; opacity: 0; cursor: pointer;" />
+										<div class="btn-group">
+											<input type="file" id="fileimg" style="position: absolute; right: 0px; top: 0px; opacity: 0; cursor: pointer;"/>
 											<img src="img/ion.JPG">
 										</div>
 
@@ -258,9 +256,6 @@ function fileUpload(){
 							<div class="bs-callout bs-callout-danger">
 								<div class="row">
 								<div class="col-sm-8 col-sm-offset-2">
-									<h2>필수 입력 사항</h2>
-									<hr>
-
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="textinput">아이디</label>
 										<div class="col-sm-6">
