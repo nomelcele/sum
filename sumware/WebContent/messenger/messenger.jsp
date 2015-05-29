@@ -19,7 +19,7 @@
 	// 사원 list 출력 시 채팅창으로 이동
 	function mesgoUrl(res){
 		var resNum = res;
-		var opt="width=500, height=600, scrollbars=yes";
+		var opt="width=500, height=600, scrollbars=no";
 		var f = document.mesform;
 		f.model.value="messenger";
 		f.submod.value="messengerChat";		
@@ -39,7 +39,7 @@
 			$('#msgList').html(event.data);	
 		};
 	}else{
-		alert("해당 브라우저는 지원이 안됩니다.")
+		alert("해당 브라우저는 지원이 안됩니다.");
 	} 
 	
 	
@@ -72,7 +72,7 @@
 		
 		if(resMessage == true){
 			alert("대화를 수락하였습니다.");
-			var winopt="width=500, height=600, scrollbars=yes";
+			var winopt="width=500, height=600, scrollbars=no";
 			f1.model.value="messenger";
 			f1.submod.value="msgReceieve";		
 			f1.edata1.value = evdata; // 방번호, IP, 유저사번
@@ -88,7 +88,7 @@
 			var winopt1="width=10, height=10, scrollbars=no, menubar=no";
 			
 			f2.model.value="messenger";
-			f2.submod.value="refuseChat";		
+			f2.submod.value="refuseChat";
 			f2.edata1.value = evdata; // 방번호, IP, 유저사번
 			f2.uerNum2.value = "${sessionScope.v.memnum}";
 			f2.stateMain.value = "mesMain";	
@@ -132,49 +132,93 @@
 			<div class="panel-heading">
 				<strong class="primary-font">Messenger</strong>
 			</div>
-			<!-- 사용자 정보 출력 -->
 			<div class="panel-body">
-				<ul class="chat" style="list-style: none">
-					<li class="left clearfix">
-						<span class="chat-img pull-left">
+				<table class="table table-condensed table-hover">
+				
+				<!-- 사용자 정보 출력 -->
+					<thead>
+					<tr class="active">
+						<td>
 							<img src="profileImg/${sessionScope.v.memprofile }" alt="" class="img-circle" style="width: 50px; height: 50px;">
-						</span>
-						<div class="chat-body clearfix">
-							<div class="header">
-								<strong class="primary-font">${sessionScope.v.memname }님</strong> 								
-							</div>								
-						</div>						
-					</li>					
-				</ul>
-			</div>			
-		</div>
-		
-		<!-- 사원 목록 출력, Push data 출력 -->
-		
-		<div class="panel panel-default">
-		<!-- Push data id = msgList에 출력-->
-			<div class="panel-body" id = "msgList">
-			
-				<!-- Push에서 반복될 구문 -->
-				<ul class="chat" style="list-style: none">
-					<li class='left clearfix'>
-						<span class='chat-img pull-left'>
+							<strong class="primary-font">${sessionScope.v.memname }님</strong>						
+						</td>						
+					</tr>	
+					</thead>
+					
+					<!-- 참여자 정보 출력 -->
+					
+					<tbody id = "msgList">
+					<!-- push의 반복문 수정-->					
+					<tr>
+						<td>
 							<img src='vo에서 profile 출력' alt='' class='img-circle' style='width: 50px; height: 50px;'>
-						</span>
-						<div class='chat-body clearfix'>
-							<div class='header'>
-								<a href='javascript:mesgoUrl(${memList.memnum})' class='primary-font'>
-									<strong class='primary-font'>김성호</strong> 
-									<strong class='primary-font'>사번</strong> 
-									<strong class='primary-font'>부서이름</strong> 
-								</a>
-							</div>								
-						</div>						
-					</li>					
-				</ul>
+							<a href='javascript:mesgoUrl(${memList.memnum})' class='primary-font'>
+								<strong class='primary-font'>김성호</strong> 
+								<strong class='primary-font'>사번</strong> 
+								<strong class='primary-font'>부서이름</strong> 
+							</a>
+						</td>						
+					</tr>
+					<!-- 여기까지 반복문 -->
+					
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	
+	
+<!-- 	<div class="col-lg-3" style="width: 100%"> -->
+<!-- 		<div class="panel panel-default"> -->
+<!-- 			<div class="panel-heading"> -->
+<!-- 				<strong class="primary-font">Messenger</strong> -->
+<!-- 			</div> -->
+<!-- 			<!-- 사용자 정보 출력 --> -->
+<!-- 			<div class="panel-body"> -->
+<!-- 				<ul class="chat" style="list-style: none"> -->
+<!-- 					<li class="left clearfix"> -->
+<!-- 						<span class="chat-img pull-left"> -->
+<%-- 							<img src="profileImg/${sessionScope.v.memprofile }" alt="" class="img-circle" style="width: 50px; height: 50px;"> --%>
+<!-- 						</span> -->
+<!-- 						<div class="chat-body clearfix"> -->
+<!-- 							<div class="header"> -->
+<%-- 								<strong class="primary-font">${sessionScope.v.memname }님</strong> 								 --%>
+<!-- 							</div>								 -->
+<!-- 						</div>						 -->
+<!-- 					</li>					 -->
+<!-- 				</ul> -->
+<!-- 			</div>			 -->
+<!-- 		</div> -->
+		
+		<!-- 사원 목록 출력, Push data 출력 -->
+		
+<!-- 		<div class="panel panel-default"> -->
+		<!-- Push data id = msgList에 출력-->
+<!-- 			<div class="panel-body" id = "msgList"> -->
+			
+				<!-- Push에서 반복될 구문 -->
+<!-- 				<ul class="chat" style="list-style: none"> -->
+<!-- 					<li class='left clearfix'> -->
+<!-- 						<span class='chat-img pull-left'> -->
+<!-- 							<img src='vo에서 profile 출력' alt='' class='img-circle' style='width: 50px; height: 50px;'> -->
+<!-- 						</span> -->
+<!-- 						<div class='chat-body clearfix'> -->
+<!-- 							<div class='header'> -->
+<%-- 								<a href='javascript:mesgoUrl(${memList.memnum})' class='primary-font'> --%>
+<!-- 									<strong class='primary-font'>김성호</strong>  -->
+<!-- 									<strong class='primary-font'>사번</strong>  -->
+<!-- 									<strong class='primary-font'>부서이름</strong>  -->
+<!-- 								</a> -->
+<!-- 							</div>								 -->
+<!-- 						</div>						 -->
+<!-- 					</li>					 -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	
 	<!-- target은 메세지 거부 시 거부 메세지 송출 담당 -->
 	<div id="target"></div>
