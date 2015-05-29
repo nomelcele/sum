@@ -94,6 +94,10 @@
 														<button type="button"
 															class="btn btn-outline btn-success btn-xs">승인</button>
 													</c:when>
+													<c:when test="${fw.toconfirm eq 'o' }">
+														<button type="button"
+															class="btn btn-outline btn-primary btn-xs">업무완료</button>
+													</c:when>
 													<c:otherwise>
 														<button type="button"
 															class="btn btn-outline btn-danger btn-xs"
