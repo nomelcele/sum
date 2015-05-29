@@ -59,27 +59,44 @@ public class BoardDao {
 		ResultSet rs = null;
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
 		try {
-			// pstmt 객체에 실어 보내 줄 쿼리문.
-			StringBuffer sql = new StringBuffer();
-			sql
-			.append("select bnum,btitle,writer,bdate,bhit")
-			.append(" from")
-			.append(" (select tn.bnum,tn.btitle,tn.writer,tn.bdate,tn.bhit,rownum r_num")
-			.append(" from")
-			.append(" (select b.bnum, b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit")
-			.append(" from board b, member m")
-			.append(" where b.bmem = m.memnum and b.bgnum=? and b.bdeptno=?")
-			// tn(TotalNotice) 즉, 모든 게시물을 뜻함.
-			.append(" order by b.bnum desc) tn)")
-			.append(" where r_num between ? and ?");
 			// Connection 객체 생성.
 			con = ConUtil.getOds();
-			// 생성한 con 객체를 pstmt 에 CallByReference 로 전달.
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, Integer.parseInt(hmap.get("bgnum")));
-			pstmt.setInt(2, Integer.parseInt(hmap.get("bdeptno")));
-			pstmt.setInt(3, map.get("begin"));
-			pstmt.setInt(4, map.get("end"));
+			// pstmt 객체에 실어 보내 줄 쿼리문.
+			StringBuffer sql = new StringBuffer();
+			if(Integer.parseInt(hmap.get("bgnum")) != 0){
+				sql
+				.append("select bnum,btitle,writer,bdate,bhit")
+				.append(" from")
+				.append(" (select tn.bnum,tn.btitle,tn.writer,tn.bdate,tn.bhit,rownum r_num")
+				.append(" from")
+				.append(" (select b.bnum, b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit")
+				.append(" from board b, member m")
+				.append(" where b.bmem = m.memnum and b.bgnum=? and b.bdeptno=?")
+				// tn(TotalNotice) 즉, 모든 게시물을 뜻함.
+				.append(" order by b.bnum desc) tn)")
+				.append(" where r_num between ? and ?");
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, Integer.parseInt(hmap.get("bgnum")));
+				pstmt.setInt(2, Integer.parseInt(hmap.get("bdeptno")));
+				pstmt.setInt(3, map.get("begin"));
+				pstmt.setInt(4, map.get("end"));
+			}else{
+				sql
+				.append("select bnum,btitle,writer,bdate,bhit")
+				.append(" from")
+				.append(" (select tn.bnum,tn.btitle,tn.writer,tn.bdate,tn.bhit,rownum r_num")
+				.append(" from")
+				.append(" (select b.bnum, b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit")
+				.append(" from board b, member m")
+				.append(" where b.bmem = m.memnum and b.bgnum=?")
+				// tn(TotalNotice) 즉, 모든 게시물을 뜻함.
+				.append(" order by b.bnum desc) tn)")
+				.append(" where r_num between ? and ?");
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, Integer.parseInt(hmap.get("bgnum")));
+				pstmt.setInt(2, map.get("begin"));
+				pstmt.setInt(3, map.get("end"));
+			}
 			// pstmt 객체를 통해서 쿼리를 DB 에 보내고 ResultSet 객체를통해서
 			// 받아온다.
 			rs = pstmt.executeQuery();
@@ -168,7 +185,7 @@ public class BoardDao {
 		BoardVO v = null;
 		StringBuffer sql = new StringBuffer();
 		sql.append
-		("select b.bhit,b.bnum,m.memname, b.btitle, b.bcont, TO_CHAR(b.bdate,'yyyy.MM.dd HH:mm') bdate").append
+		("select b.bhit,b.bnum,m.memname, b.btitle, b.bcont, TO_CHAR(b.bdate,'yyyy.MM.dd HH24:mi') bdate").append
 		(" from board b, member m where b.bmem=m.memnum and bnum=?");
 		try {
 			con = ConUtil.getOds();
@@ -228,7 +245,7 @@ public class BoardDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select c.cocont, TO_CHAR(c.codate,'yyyy.MM.dd HH:mm') codate, m.memname,m.memprofile,c.coboard")
+			sql.append("select c.cocont, TO_CHAR(c.codate,'yyyy.MM.dd HH24:mi') codate, m.memname,m.memprofile,c.coboard")
 			.append(" from comm c, member m where c.comem = m.memnum and coboard=? order by conum desc");
 			pstmt = con.prepareStatement(sql.toString());
 			int code = Integer.parseInt(map.get("no"));
