@@ -66,7 +66,6 @@ function fileUpload(){
 				$('.dhpwd').show("slow");
 			}else if($('#mempwd').val() == "${sessionScope.v.mempwd }"){
 				// 사원 프로필 수정시
-				alert("${sessionScope.v.memnum}");
 				$('.dhpwd').show("slow");
 			}	else {
 				alert("비밀번호가 일치 하지 않습니다.")
@@ -124,6 +123,7 @@ function fileUpload(){
 						alert("상세 주소를 입력해 주세요!");
 						$('#sample6_address2').focus();
 					}else{
+						alert("정보 입력이 완료되었습니다.")
 						myform.submit();
 					}					
 					
