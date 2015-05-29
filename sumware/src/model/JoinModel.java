@@ -31,6 +31,7 @@ public class JoinModel implements ModelInter{
 		}else if(submod !=null && submod.equals("signup")){
 			HashMap<String, String> map= MyMap.getMaps().getMapList(request);
 			MemberDao.getDao().update(map);
+
 			HttpSession session = request.getSession();
 			session.invalidate();
 			
