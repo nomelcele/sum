@@ -32,10 +32,12 @@ public class LoginModel implements ModelInter {
 			MemberVO v = new MemberVO();
 			v.setMemnum(memnum);
 			v.setMempwd(mempwd);
+
 			try {
 				String res = LoginDao.getDao().ckFirstLogin(memnum, mempwd);
+
 				System.out.println("res:::"+res);		
-				if (res.equals("0")) {
+				if (res.equals("1")) {
 					
 					System.out.println("첫번째 이용자다!!!!");
 					System.out.println("사원 번호: "+memnum);
@@ -47,7 +49,7 @@ public class LoginModel implements ModelInter {
 					//이동후에 memnum입력란에 자동으로 입력시켜주고
 					//mempwd는 유효성검사 할때 쓰기위하여 보냄.
 		
-				} else if(!res.equals("0")){
+				} else if(!res.equals("1")&&!res.equals("0")){
 					System.out.println("ddddddddd");
 					vo = LoginDao.getDao().login(v);
 					// sessionScope에 아이디를 저장
@@ -57,7 +59,8 @@ public class LoginModel implements ModelInter {
 					//login 기록 저장.
 					LoginDao.getDao().inLog(memnum);	
 				}else{
-					//로그인실패
+					url="join/error.jsp";
+					method=true;
 				}
 
 			} catch (SQLException e) {
