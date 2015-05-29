@@ -483,7 +483,7 @@ function select(index){
 					<li><a href="sumware?model=todo&submod=firsttodoForm&memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
 					<li><a href="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}">Mail</a></li>
 					<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
-					<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }">Board</a></li>
+					<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=0">Board</a></li>
 					<li><a href="javascript:openWin()">Messenger</a></li>
 				</ul>
 				<ul class="nav navbar-right navbar-nav user-name">
