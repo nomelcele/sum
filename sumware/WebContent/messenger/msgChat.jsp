@@ -8,8 +8,9 @@
 <title>ChatRoom</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -54,10 +55,6 @@
 
 <script>
 
-
-
-// 	var objDiv = document.getElementById("scrollDiv");
-// 	objDiv.scrollTop = objDiv.scrollHeight;
 	
 	$("#scrollDiv").scrollTop($("#scrollDiv")[0].scrollHeight);
 // 	var reip="${ipAdd}";	
@@ -89,7 +86,7 @@
 	}
 	function processMsg(message) {
 		msgWindow.value += message.data + "\n";	
-		
+		$('#msgWindow').scrollTop(document.getElementById('msgWindow').scrollHeight);
 	}
 	function proccessClose(message) {
 		sendcloseMsg();
@@ -100,7 +97,7 @@
 	function sendMsg() {
 		var msgchat = document.getElementById("msgText");
 		var sendCont = "${sessionScope.v.memname } : "+msgchat.value+"\n";
-		
+		$('#msgWindow').scrollTop(document.getElementById('msgWindow').scrollHeight);
 		msgSocket.send(sendCont);
 		msgchat.value = "";
 		senCont = "";
@@ -138,16 +135,14 @@
 	function enterCheck(){
 		if(event.keyCode == 13){
 			var inputLength = $('#msgText').val().length;
-			if(inputLength > 0){
+			if(inputLength > 0){				
 				sendMsg();
-				$('#msgWindow').scrollTop(document.getElementById('msgWindow').scrollHeight);
-// 				console.log("스크롤 값 : "+ta);
-// 				console.log("스크롤 값 : "+ta1);
 				return;
 			}
 		}
 	
-	}	
+	}
+	
 </script>
 
 

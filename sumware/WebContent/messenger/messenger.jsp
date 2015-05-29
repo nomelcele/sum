@@ -8,12 +8,15 @@
 <title>Messenger Main</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+
+
 </head> 
 <script>
 	// 사원 list 출력 시 채팅창으로 이동
@@ -42,14 +45,14 @@
 		alert("해당 브라우저는 지원이 안됩니다.");
 	} 
 	
-	
+	// 
 	console.log("typeof:"+typeof(EventSource));	
 	if(typeof(EventSource) != "undefined"){
 		var eventSource = new EventSource("messenger/check.jsp");
 		
 		eventSource.onmessage = function(event){
 			var edata1 = event.data;
-			alert("메세지가 도착했습니다.");
+ 			alert("메세지가 도착했습니다.");
 			// 도착한 push data를 가공
 			var dArr = event.data.split("/");
 			for(var i in dArr){
@@ -60,16 +63,15 @@
 			regoUrl(edata1, mesendName);			
 		};
 	}else{
-		alert("해당 브라우저는 지원이 안됩니다.")
+		alert("해당 브라우저는 지원이 안됩니다.");
 	};
-	
-	function regoUrl(edata1, mesendName){
 		
+	function regoUrl(edata1, mesendName){		
 		var message = mesendName+"님의 대화가 요청되었습니다. 수락하시겠습니까?";
 		var resMessage = confirm(message);
 		var f1 = document.entform;
 		var evdata = edata1;
-		
+
 		if(resMessage == true){
 			alert("대화를 수락하였습니다.");
 			var winopt="width=500, height=600, scrollbars=no";
@@ -102,6 +104,7 @@
 			return;
 		};
 	};
+		
 	
 </script>
 <body>

@@ -12,7 +12,7 @@
 	
 	System.out.println("서버 푸시 영역");	
 	MemberVO v = (MemberVO)session.getAttribute("v");
-	int userNum = v.getMemnum();	
+	int userNum = v.getMemnum();
 	
 	// DB에서 userNum(받는 사람 사번)인 경우만 조회해서 list에 저장
 	ArrayList<MessengerVO> list = MessengerDao.getDao().getentList(userNum);
