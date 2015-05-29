@@ -20,6 +20,36 @@
 	outs.append("data:");
 	System.out.println("userNum : "+userNum);
 	for(MemberVO e : list){
+		outs.append("<tr>");
+		outs.append("<td>");		
+		outs.append("<img src='profileImg/");
+		outs.append(e.getMemprofile());
+		outs.append("' alt='' class='img-circle' style='width: 50px; height: 50px;'>");
+// 		outs.append("</span>");
+// 		outs.append("<div class='chat-body clearfix'>");
+// 		outs.append("<div class='header'>");
+		outs.append("<a href='javascript:mesgoUrl(");
+		outs.append(e.getMemnum());
+		outs.append(")' class='primary-font'>");
+		outs.append("<strong class='primary-font'>");
+		outs.append(e.getMemname());
+		outs.append("</strong>");
+		outs.append("<strong class='primary-font'>");
+		outs.append(e.getMemnum());
+		outs.append("</strong>");
+		outs.append("<strong class='primary-font'>");
+		outs.append(e.getDename());
+		outs.append("</strong>");		
+		outs.append("</a>");
+		outs.append("</td>");
+		outs.append("</tr>");
+// 		outs.append("</li>");
+// 		outs.append("</ul>");
+		
+		
+		
+		
+		
 		outs.append("<ul class='chat' style='list-style: none'>");
 		outs.append("<li class='left clearfix'>");
 		outs.append("<span class='chat-img pull-left'>");

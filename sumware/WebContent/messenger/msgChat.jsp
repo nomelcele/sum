@@ -40,7 +40,8 @@
 		
 		<div class="panel-footer">
 			<div class="input-group">
-				<input id="msgText" type="text" class="form-control input-sm"	placeholder="메세지를 입력하세여">
+				<input id="msgText" type="text" class="form-control input-sm" placeholder="메세지를 입력하세여" 
+				onkeydown="javascript:enterCheck();">
 				<span class="input-group-btn">
 					<button class="btn btn-warning btn-sm" onclick="sendMsg()">Send</button>
 					<button class="btn btn-warning btn-sm" onclick="closeWindow()">나가기</button>
@@ -59,7 +60,7 @@
 	
 	var sessionKey = "${key}";
 	var userNum="${userNum}";
-	alert("sessionKey " + sessionKey);
+// 	alert("sessionKey " + sessionKey);
 	var msgWindow = document.getElementById("msgWindow");
 	var msgSocket = new WebSocket("ws://192.168.7.234:80/sumware/msgSocket/"+sessionKey);
 	
@@ -124,15 +125,21 @@
 			$('#resState').attr('value',"room");			
 			$('#closeForm').submit();
 			setTimeout("window.close()", 30);
-
 		}else{
 			return;
 		}
+	}	
+	function enterCheck(){
+		if(event.keyCode == 13){
+			var inputLength = $('#msgText').val().length;
+			if(inputLength > 0){
+				sendMsg();
+				return;
+			}
+		}
+	
 	}
-	
-	
-	
-	
+		
 </script>
 
 
