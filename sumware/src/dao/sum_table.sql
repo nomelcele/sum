@@ -159,8 +159,8 @@ CREATE TABLE comm(
     comem NUMBER(5), -- fk member.memnum
     coboard NUMBER(11), -- fk board.bnum
     CONSTRAINT comm_conum_pk PRIMARY KEY(conum),
-    CONSTRAINT comm_comem_fk FOREIGN KEY(comem) REFERENCES MEMBER(memnum),
-    CONSTRAINT comm_coboard_fk FOREIGN KEY(coboard) REFERENCES board(bnum),
+    CONSTRAINT comm_comem_fk FOREIGN KEY(comem) REFERENCES MEMBER(memnum) on delete cascade,
+    CONSTRAINT comm_coboard_fk FOREIGN KEY(coboard) REFERENCES board(bnum) on delete cascade
 );
 -- 0526 추가함. ---------------------------------------------------------------------
 create sequence comm_seq INCREMENT BY 1 START WITH 1; .

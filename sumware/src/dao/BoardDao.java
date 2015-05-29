@@ -307,6 +307,22 @@ public class BoardDao {
 		System.out.println("이름다 뽑았다.");
 		return list;
 	}
+	// 게시글 삭제 메서드
+	public void delete(HashMap<String, String> map){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("delete from board where bnum=?");
+		try {
+			con=ConUtil.getOds();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, Integer.parseInt(map.get("no")));
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 
