@@ -12,40 +12,51 @@
 </form>
 <div>
 	<div class="row-lg-6">
-		<div class="chat-panel panel panel-default">
+		<div class="chat-panel panel panel-default left-profile">
 			<div class="panel-heading">
 				<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">My
 					profile</strong>
 			</div>
 			<div class="panel-body">
-				<span class="chat-img pull-left"> <img
+				<!-- profile-img(S) -->
+				<span class="chat-img pull-left profile-img"><img
 					src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
 					class="img-circle" style="width: 100px; height: 130px;">
-				</span> </br> </br> </br> </br> </br> </br> </br>
-				<table>
+				</span>
+				<!-- profile-img(E) -->
+				
+				<!-- profile-table(S) -->
+				<table class="profile-table">
+					<colgroup>
+					    <col style="width:60px">
+					    <col>
+					</colgroup>
 					<tr>
-						<td><strong class="primary-font" style="margin: 10px">이름</strong></td>
+						<th><strong class="primary-font">이름</strong></th>
 						<td>${sessionScope.v.memname }</td>
 					</tr>
 					<tr>
-						<td><strong class="primary-font" style="margin: 10px">직급</strong></td>
+						<th><strong class="primary-font">직급</strong></th>
 						<td>${sessionScope.v.memjob }</td>
 					</tr>
 					<tr>
-						<td><strong class="primary-font" style="margin: 10px">부서</strong></td>
+						<th><strong class="primary-font">부서</strong></th>
 						<td>${sessionScope.v.dename }</td>
 					</tr>
 					<tr>
-						<td><strong class="primary-font" style="margin: 10px">상급자</strong></td>
+						<th><strong class="primary-font">상급자</strong></th>
 						<td>${sessionScope.v.mgrname }</td>
 					</tr>
 				</table>
+				<!-- profile-table(E) -->
 			</div>
 		</div>
 	</div>
 </div>
-<hr>
-<div>
+<!-- <hr> -->
+
+<!-- left-menu(S) -->
+<div class="left-menu" id="left-menu">
 	<ul>
 <%-- 		<li><a href="sumware?model=board&submod=boardList&bgnum=0&page=1&bdeptno=${sessionScope.v.memdept }">공지사항</a></li> --%>
 	<c:forEach var="blist" items="${sessionScope.blist }">
@@ -53,6 +64,8 @@
 	</c:forEach>
 	</ul>
 </div>
+<!-- left-menu(E) -->
+
 </c:if>
 <%-- board left(E) --%>
 <%-- todo left --%>
@@ -67,40 +80,48 @@
 <!-- </form> -->
 <div class="col-lg-4" style="width: 250px">
 	<div class="row-lg-6">
-		<div class="chat-panel panel panel-default">
+		<div class="chat-panel panel panel-default left-profile">
 			<div class="panel-heading">
 				<i class="fa fa-user"></i> <strong class="primary-font">My
 					profile</strong>
 			</div>
 			<div class="panel-body">
-				<span class="chat-img pull-left"> <img
+				<!-- profile-img(S) -->
+				<span class="chat-img pull-left profile-img"><img
 					src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
 					class="img-circle" style="width: 82px; height: 110px;">
 				</span>
-				<table>
+				<!-- profile-img(E) -->
+				
+				<!-- profile-table(S) -->
+				<table class="profile-table">
+					<colgroup>
+					    <col style="width:60px">
+					    <col>
+					</colgroup>
 					<tr>
-						<td><strong class="primary-font" style="margin: 10px">이름</strong></td>
+						<td><strong class="primary-font">이름</strong></td>
 						<td>${sessionScope.v.memname }</td>
 					</tr>
 					<tr>
-						<td><strong class="primary-font" style="margin: 10px">직급</strong></td>
+						<td><strong class="primary-font">직급</strong></td>
 						<td>${sessionScope.v.memjob }</td>
 					</tr>
 					<tr>
-						<td><strong class="primary-font" style="margin: 10px">부서</strong></td>
+						<td><strong class="primary-font">부서</strong></td>
 						<td>${sessionScope.v.dename }</td>
 					</tr>
 					<tr>
-						<td><strong class="primary-font" style="margin: 10px">상급자</strong></td>
+						<td><strong class="primary-font">상급자</strong></td>
 						<td>${sessionScope.v.mgrname }</td>
 					</tr>
 					<tr><td colspan="2" style="color:white">             .</td>
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align:right"><a href="sumware?model=join&submod=modifyProfile"><i class="fa fa-cog"></i>프로필수정</a></td>
-						
 					</tr>
 				</table>
+				<!-- profile-table(E) -->
 			</div>
 		</div>
 	</div>
@@ -136,6 +157,49 @@
 
 <%-- calendar left --%>
 <c:if test="${param.model eq 'calendar' }">
+
+	  <!-- left-profile(S) -->
+      <div class="chat-panel panel panel-default left-profile">
+         <div class="panel-heading">
+            <i class="fa fa-user"></i> <strong class="primary-font">My
+               profile</strong>
+        
+         <div class="panel-body">
+         	<!-- profile-img(S) -->
+            <span class="chat-img pull-left profile-img"> <img
+               src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
+               class="img-circle" style="width: 100px; height: 130px;">
+            </span>
+            <!-- profile-img(E) -->
+            
+            <!-- profile-table(S) -->
+            <table class="profile-table">
+            	<colgroup>
+				    <col style="width:60px">
+				    <col>
+				</colgroup>
+               <tr>
+                  <td><strong class="primary-font">이름</strong></td>
+                  <td>${sessionScope.v.memname }</td>
+               </tr>
+               <tr>
+                  <td><strong class="primary-font">직급</strong></td>
+                  <td>${sessionScope.v.memjob }</td>
+               </tr>
+               <tr>
+                  <td><strong class="primary-font">부서</strong></td>
+                  <td>${sessionScope.v.dename }</td>
+               </tr>
+               <tr>
+                  <td><strong class="primary-font">상급자</strong></td>
+                  <td>${sessionScope.v.mgrname }</td>
+               </tr>
+            </table>
+            <!-- profile-table(E) -->
+            
+         </div>
+      </div>
+   </div>
       <div class="col-lg-4" style="width: 250px">
       <br/><br/>
 	<div class="row-lg-12">
@@ -177,6 +241,7 @@
 		</div>
 	</div>
 	</div>
+	  <!-- left-profile(E) -->
 </c:if>
 
 <%-- mail left --%>
