@@ -55,11 +55,19 @@
 					</tr>
 				</tbody>
 			</table>
-			
-			
+			<form action="sumware" method="post" id="dform">
+					<input type="hidden" name="model" id="bmodel" value="board">
+					<input type="hidden" name="submod" id="bsubmod" value="boardDelete">
+					<input type="hidden" name="page" id="bpage" value="1">
+					<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
+					<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
+					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
+					<input type="hidden" name="bname" value="${sessionScope.bname }">
+					<input type="hidden" name="no" value="${list.bnum }">
+			</form>
 			<div class="button-div">
 				<div class="left">
-					<button type="button">글삭제</button>
+					<button type="button" onclick="javascript:formSub('d')">글삭제</button>
 				</div>
 				<div class="right">
 					<button type="button">수정</button>
@@ -104,7 +112,7 @@
 				<input type="hidden" name="no" value="${list.bnum }">
 				<div class="comment-write">
 					<textarea name="comment"rows="10" cols="10" placeholder="댓글 내용을 입력해 주세요."></textarea>
-					<button class="btn-comm">댓글 등록</button>
+					<button class="btn-comm" type="button" onclick="javascript:formSub('c')">댓글 등록</button>
 				</div>
 			</form>
 				<!-- comment-write(E) -->
