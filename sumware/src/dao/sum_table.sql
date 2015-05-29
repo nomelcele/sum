@@ -285,14 +285,7 @@ ALTER TABLE BOARD ADD (bgnum number(4));
 ALTER TABLE BOARD ADD (bdeptno NUMBER(3));
 ALTER TABLE BOARD add CONSTRAINT board_bdeptno_fk FOREIGN KEY(bdeptno) REFERENCES dept(denum);
 ALTER TABLE BOARD MODIFY (bgnum CONSTRAINT BOARD_bgnum_nn NOT NULL);
---0529 테이블 추가
-create table bname(
-	bname varchar2(30),
-	bgnum number(4),
-	bdeptno number(3),
-	constraint bname_bgnum_pk primary key(bgnum),
-	constraint bname_bdeptno_fk foreign key(bdeptno) references dept(denum)
-);
+
   
 -- 0528 변경
 -- 컬럼 데이터 길이 수정
@@ -307,3 +300,12 @@ create table bname(
 INSERT INTO DEPT VALUES(900,'부서기본값');
 INSERT INTO MEMBER VALUES
 (1,'회장님', '서울','1004','boss.jpg','회장',1,'boss@naver.com','boss',NULL,100);>>>>>>> .r368
+--0529 테이블 추가
+create table bname(
+	bname varchar2(30),
+	bgnum number(4),
+	bdeptno number(3),
+	constraint bname_bgnum_pk primary key(bgnum),
+	constraint bname_bdeptno_fk foreign key(bdeptno) references dept(denum)
+);
+insert into bname values('하람게시판', 4, 200);
