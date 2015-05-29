@@ -107,17 +107,17 @@ public class BoardDao {
 	}
 	
 	// 게시글에 대한 총 갯수 구해주는 메서드.
-	public int getTotalCount() {
+	public int getTotalCount(int no) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		StringBuffer sql = new StringBuffer();
-		sql.append("select count(*) cnt from board");
+		sql.append("select count(*) cnt from board where bgnum=?");
 		int res = 0;
 		try {
 			con = ConUtil.getOds();
 			pstmt = con.prepareStatement(sql.toString());
-
+			pstmt.setInt(1, no);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				res = rs.getInt("cnt");
