@@ -83,6 +83,7 @@
 				mempwd:$("#mempwd").val()
 			},
 			success : function(result){
+				result = result.trim();
 				if(result==0){
 					alert(c+"회 로그인실패");
 					c++;
@@ -99,9 +100,9 @@
 								$('#capModal').modal('toggle');
 							}
 						});
-					}else{
-						return;
-					}
+				}
+					}else if(result==1){
+					location="sumware?model=login&submod=firstLoginForm";
 				}else{
 					location="index.jsp";
 				}
