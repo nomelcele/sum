@@ -13,7 +13,7 @@
 	$(function(){
 		push();
 	});
-
+	
 	function push(){
 		if(typeof(EventSource) != "undefined"){
 			eventSource = new EventSource("sumware?model=sns&submod=pushSns&sdept=${v.memdept}&page=1&rowsPerPage="+rowsPerPage); // push를 받을수 있는 브라우져인지 판단.
@@ -195,7 +195,7 @@
 					<!-- /.panel-body -->
 					<div class="panel-footer">
 						<div class="input-group">
-							<input id="btn-input" type="text" class="form-control input-sm" placeholder="메시지를 입력해주세요">
+							<input id="btn-input" type="text" class="form-control input-sm" placeholder="메시지를 입력해주세요" onkeydown="enterCheck(1)">
 							<span class="input-group-btn">
 								<button class="btn btn-warning btn-sm" onclick="snsSend()" id="send">Send</button>
 							</span>
