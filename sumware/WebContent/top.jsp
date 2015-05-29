@@ -53,7 +53,24 @@
 		tosend(tonumval);
 		addTodo();
 	});
-
+	//엔터 체크
+	function enterCheck(res){
+	      if(event.keyCode == 13){
+	         var inputLength = $(this).length;
+	         if(inputLength > 0){
+	        	if(res==1){
+	        		snsSend();
+	        	}else if(res==2){
+	        		snsInsertComm();
+	        	}else if(rse==3){
+	        		loginChk();
+	        	}
+	           
+	            return;
+	         }
+	      }
+	   
+	}
 	//로그인 3회....
 	function loginChk(){
 		$.ajax({
@@ -511,7 +528,7 @@ function select(index){
             		<label class="control-label-" for="memnum">사원번호</label> 
             		<input type="text" id="memnum" name="memnum" placeholder="사원번호"> 
             		<label class="control-label" for="mempwd">비밀번호</label> 
-            		<input type="password" id="mempwd" name="mempwd" placeholder="비밀번호">
+            		<input type="password" id="mempwd" name="mempwd" placeholder="비밀번호" onkeydown="enterCheck(3)">
             		<button type="button"class="btn btn-xs btn-info" onclick="loginChk()">로그인</button>
          		</div>
       		</form>
