@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- <script src="//code.jquery.com/jquery-1.11.2.min.js"></script> -->
+<!-- <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+<link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="../css/bootstrap.min.css" rel="stylesheet"/>
+
+<link type="text/css" href="../css/common.css" rel="stylesheet" />
+
+
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-
 <%--우편번호 다음 링크 --%>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
@@ -25,7 +33,6 @@ function fileUpload(){
 	xhr.onreadystatechange = function(){
 		// callback
 		if(xhr.readyState == 4 && xhr.status == 200){
-			alert(xhr.responseText);
 			$('#memimg').attr("value",xhr.responseText.trim());
 		}
 	};
@@ -64,27 +71,31 @@ function fileUpload(){
 			if($('#mempwd').val() == "${mempwd}" && "${sessionScope.v.mempwd }" == ""){
 				// 첫 프로필 수정시
 				$('.dhpwd').show("slow");
+				
 			}else if($('#mempwd').val() == "${sessionScope.v.mempwd }" && "${sessionScope.v.mempwd }" != ""){
 				// 사원 프로필 수정시
+				
 				$('.dhpwd').show("slow");
+				
 			}	else {
-				alert("비밀번호가 일치 하지 않습니다.")
-			}
+		
+				$('#targetpw').html('<p style="color: red;">비밀번호가 일치 하지 않습니다.</p>');
+			}  
 	});
 		<%--비밀번호 중복 검사 --%>
 		$('#mempwd2').change(function() {
 			
 			if($('#mempwd1').val() != $('#mempwd2').val()){
-				alert("패스워드가 같지 않습니다.");
-			}else{
-				fileUpload();
-				alert("패스워드가 같습니다.");
 				
+				$('#targetpwd').html('<p style="color: red;">비밀번호가 일치 하지 않습니다.</p>');
+				
+			}else{
+				alert("패스워드가 같습니다.");
 			}
-			
 		});
 
 		<%--우편번호 합치기 유호성 검사 --%>
+		
 		$('#btn').click(
 				function() {
 					var a1 = $("#sample6_postcode1").val() + "/"
@@ -124,6 +135,7 @@ function fileUpload(){
 						$('#sample6_address2').focus();
 					}else{
 						alert("정보 입력이 완료되었습니다.")
+						fileUpload();
 						myform.submit();
 					}					
 					
@@ -131,43 +143,44 @@ function fileUpload(){
 
 		<%--이미지 업로드 이미지 --%>
 		$('#fileimg').change(
-						function() { // 파일 박스 안에서 변화를 감지해야 한다.
-							console.log("이미지 선택했어");
-							// 변화가 있을 때 function을 호출한다.
-							// 확장자 . 기준으로 다음 요소를 선택해서 소문자로 변경한 후에 ext에 저장한다.
-							var ext = $(this).val().split('.').pop()
-									.toLowerCase();
-							// pop(): 배열만 취급. 
-							// 마지막 index의 value를 pop()이 리턴
-							// ex) $(this).val() => img.jpg
-							// pop()하면 jpg가 리턴됨!
-							// toLowerCase(): String을 모두 소문자로 만들어준다.
+			function() { // 파일 박스 안에서 변화를 감지해야 한다.
+			console.log("이미지 선택했어");
+			// 변화가 있을 때 function을 호출한다.
+			// 확장자 . 기준으로 다음 요소를 선택해서 소문자로 변경한 후에 ext에 저장한다.
+			var ext = $(this).val().split('.').pop()
+				.toLowerCase();
+			// pop(): 배열만 취급. 
+			// 마지막 index의 value를 pop()이 리턴
+			// ex) $(this).val() => img.jpg
+			// pop()하면 jpg가 리턴됨!
+			// toLowerCase(): String을 모두 소문자로 만들어준다.
 
-							// 추출한 확장자가 배열에 존재하는지 체크
-							if ($.inArray(ext, [ 'gif', 'png', 'jpg', 'jpeg' ]) == -1) {
-								// 첫번째에 있는 인자값이 두번째에 있는 배열에 있는지 확인 후, 
-								// 있으면 1, 없으면 -1을 리턴
-								// inArray는 jQuery에서 제공하는 메서드
-								resetFormElement($(this)); // 폼 초기화
+			// 추출한 확장자가 배열에 존재하는지 체크
+			if ($.inArray(ext, [ 'gif', 'png', 'jpg', 'jpeg' ]) == -1) {
+			// 첫번째에 있는 인자값이 두번째에 있는 배열에 있는지 확인 후, 
+			// 있으면 1, 없으면 -1을 리턴
+			// inArray는 jQuery에서 제공하는 메서드
+			resetFormElement($(this)); // 폼 초기화
 								
-								window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg만 업로드 가능)');
-							} else {
-								var file = $(this).prop("files")[0];
-								// prop에서 files라는 속성을 가져온 것
-								// 자바스크립트의 uploadfile이 제공하는 것이 files
-								// file 경로는 file:////경로 
-								// 이 경로는 이미지 태그가 표현하지 못한다.
+				window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg만 업로드 가능)');
+			} else {
+			var file = $(this).prop("files")[0];
+			// prop에서 files라는 속성을 가져온 것
+			// 자바스크립트의 uploadfile이 제공하는 것이 files
+			// file 경로는 file:////경로 
+			// 이 경로는 이미지 태그가 표현하지 못한다.
+			blobURL = window.URL.createObjectURL(file);
+			console.log("blobURL::::", blobURL);
+			// 윈도우 자체에서 파일을 불러오는 경로값을 표현하려면
+			// createObjectURL()을 사용해야 한다.
+								
 
-								blobURL = window.URL.createObjectURL(file);
-								console.log("blobURL::::", blobURL);
-								// 윈도우 자체에서 파일을 불러오는 경로값을 표현하려면
-								// createObjectURL()을 사용해야 한다.
-
-								$('#targetimg').attr('src', blobURL).css(
-										'width', '200').css('height', '200');
-								// attr() src 속성에  blobURL을 넣는다.
-							}
-						});
+			$('#targetimg').attr('src', blobURL).css(
+				'width', '200').css('height', '200');
+			// attr() src 속성에  blobURL을 넣는다.
+			
+			}
+		});
 
 	});
 
@@ -235,7 +248,7 @@ function fileUpload(){
 					<form class="form-horizontal" role="form" method="post"
 						action="sumware" id="myform" name="myform">
 						<input type="hidden" name="model" value="join"> 
-						<c:if test="${param.model eq 'login' }">
+						<c:if test="${param.model ne 'join' }">
 						<input type="hidden" name="submod" value="signup"> 
 						<input type="hidden" name="memnum" value="${memnum}"> 
 						</c:if>
@@ -257,7 +270,7 @@ function fileUpload(){
 								<div class="row">
 									<div class="profileimg">
 										<figure>
-										<c:if test="${param.model eq 'login' }">
+										<c:if test="${param.model ne 'join' }">
 											<img class="img-circle" alt="프로필 사진 "
 												id="targetimg" src="img/imgx.jpg" style="height:200px">
 										</c:if>
@@ -271,7 +284,6 @@ function fileUpload(){
 											<input type="file" id="fileimg">
 											<img src="img/ion.JPG">
 										</div>
-
 									</div>
 								</div>
 							</div>
@@ -284,20 +296,17 @@ function fileUpload(){
 										<c:if test="${param.model eq 'join' }">
 										<div class="col-sm-6">
 											<input type="text" id="meminmail" name="meminmail" readonly=readonly
-												value="${sessionScope.v.meminmail }@sumware.com" class="form-control">
+												value="${sessionScope.v.meminmail }" class="form-control">
 											<div id="target"></div>
 										</div>
 										</c:if>
-										<c:if test="${param.model eq 'login' }">
+										<c:if test="${param.model ne 'join' }">
 										<div class="col-sm-6">
 											<input type="text" id="meminmail" name="meminmail"
 												placeholder="사내 이메일" class="form-control">
 											<div id="target"></div>
 										</div>
-										
 										</c:if>
-										
-
 									</div>
 
 									<div class="form-group">
@@ -306,8 +315,8 @@ function fileUpload(){
 										<div class="col-sm-6">
 											<input type="password" placeholder="기존 비밀번호"
 												class="form-control" id="mempwd">
+												<div id="targetpw"></div>
 										</div>
-											
 										<input type="button" class="btn btn-default" value="비밀번호 변경"
 											id="chbtn" name="chbtn">
 											
@@ -319,19 +328,21 @@ function fileUpload(){
 											<div class="col-sm-6">
 												<input type="password" placeholder="새 비밀번호"
 													class="form-control" id="mempwd1">
-													<div id="targetpwd"></div>
+													
 											</div>
+											
 										</div>
-
 										<div class="form-group">
 											<label class="col-sm-3 control-label" for="textinput">새
 												비밀번호 재 확인 </label>
 											<div class="col-sm-6">
 												<input type="password" placeholder="새 비밀번호 확인"
-													class="form-control" id="mempwd2" name="mempwd2"
-													>
+													class="form-control" id="mempwd2" name="mempwd2">
+													<div id="targetpwd"></div>
 											</div>
+											
 										</div>
+										
 									</div>
 									<!-- Text input-->
 									<div class="form-group">
