@@ -333,6 +333,10 @@ button, input, select, option, textarea, a {
 	}
 }
 
+
+.btn-group col-sm-offset-2{
+	position: relative; overflow: hidden; 
+}
 .btn-group #fileimg{
 	position: absolute; right: 0px; top: 0px; opacity: 0; cursor: pointer;
 }
