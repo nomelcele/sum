@@ -1,23 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>SumWare</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link rel="stylesheet" href="font-awesome/css/font-awesome.css" />
-<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+
 <script src="http://code.jquery.com/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<!-- 모달 -->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<!-- 모달 -->
-<script src="../js/http.js"></script>
 <script>
 // push Client 설정 (받는쪽)
 	var rowsPerPage =8; //sns에 쓸 행수
@@ -190,8 +175,7 @@
 	#loading img{float:none; width:40px;}
 	#commloading img{float:none; width:40px;}
 </style>
-</head>
-<body>
+
 	<div class="col-lg-4" style="width: 40%">
 				<div class="chat-panel panel panel-default">
 					<div class="panel-heading">
@@ -234,5 +218,3 @@
 				</div>
 			</div>
 			</div>
-</body>
-</html>

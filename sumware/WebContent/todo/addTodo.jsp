@@ -54,8 +54,8 @@
 								</select>
 							</div>
 							<div class="form-group has-success">
-								<label class="control-label" for="inputSuccess"><i class="fa fa-paperclip"></i> 파일 첨부</label> <input
-									type="file" name="tofile" id="tofile">
+								<label class="control-label" for="inputSuccess"><i class="fa fa-paperclip"></i> 파일 첨부</label> 
+								<input type="file" name="tofile" id="tofile">
 							</div>
 
 							<div class="form-group has-warning">

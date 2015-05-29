@@ -61,11 +61,14 @@ function fileUpload(){
 		<%--본래 비밀번호 비밀번호 수정시 버튼 --%>
 
 		$('#chbtn').click(function() {
-			if($('#mempwd').val() == "${mempwd}"){
-				
+			if($('#mempwd').val() == "${mempwd}" && "${sessionScope.v.mempwd }" == ""){
+				// 첫 프로필 수정시
 				$('.dhpwd').show("slow");
-			} else {
-					
+			}else if($('#mempwd').val() == "${sessionScope.v.mempwd }"){
+				// 사원 프로필 수정시
+				alert("${sessionScope.v.memnum}");
+				$('.dhpwd').show("slow");
+			}	else {
 				alert("비밀번호가 일치 하지 않습니다.")
 			}
 	});
@@ -91,7 +94,14 @@ function fileUpload(){
 							+ $("#sample6_address2").val();
 					$('#address').attr("value", a1);
 					if($('#memimg').val()==""){
-						alert("프로필 사진을 등록 해주세요!");
+						if("${sessionScope.v.memprofile}" != null){
+							// 프로필 수정 시 지정해준 사진값(memimg)이 없으므로 프로필 사진을등록해달라고 함!
+							// 그래서 프로필 수정 시 memimg의 value값을 지정해 주어야 함
+							$('#memimg').val("${sessionScope.v.memprofile}");
+						}else{
+							alert("프로필 사진을 등록 해주세요!");
+						}
+						
 					}else if($('#meminmail').val()==""){
 						alert("아이디를 입력해주세요!");
 						$('#meminmail').focus();
@@ -226,7 +236,14 @@ function fileUpload(){
 					<form class="form-horizontal" role="form" method="post"
 						action="sumware" id="myform" name="myform">
 						<input type="hidden" name="model" value="join"> 
+						<c:if test="${param.model eq 'login' }">
 						<input type="hidden" name="submod" value="signup"> 
+						<input type="hidden" name="memnum" value="${memnum}"> 
+						</c:if>
+						<c:if test="${param.model eq 'join' }">
+						<input type="hidden" name="submod" value="modify"> 
+						<input type="hidden" name="memnum" value="${sessionScope.v.memnum}"> 
+						</c:if>
 						<input type="hidden" name="memnum" value="${memnum}"> 
 						<input type="hidden" name="address" id="address">
 						<input type="hidden" name="memimg" id="memimg">
@@ -241,8 +258,15 @@ function fileUpload(){
 								<div class="row">
 									<div class="profileimg">
 										<figure>
+										<c:if test="${param.model eq 'login' }">
 											<img class="img-circle" alt="프로필 사진 "
 												id="targetimg" src="img/imgx.jpg">
+										</c:if>
+										<c:if test="${param.model eq 'join' }">
+											<img class="img-circle" alt="프로필 사진 "
+												id="targetimg" src="profileImg/${sessionScope.v.memprofile }">
+												
+										</c:if>
 										</figure>
 										<div class="btn-group">
 											<input type="file" id="fileimg">
@@ -257,11 +281,22 @@ function fileUpload(){
 								<div class="col-sm-8 col-sm-offset-2">
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="textinput">아이디</label>
+										<c:if test="${param.model eq 'join' }">
+										<div class="col-sm-6">
+											<input type="text" id="meminmail" name="meminmail" readonly=readonly
+												value="${sessionScope.v.meminmail }@sumware.com" class="form-control">
+											<div id="target"></div>
+										</div>
+										</c:if>
+										<c:if test="${param.model eq 'login' }">
 										<div class="col-sm-6">
 											<input type="text" id="meminmail" name="meminmail"
 												placeholder="사내 이메일" class="form-control">
 											<div id="target"></div>
 										</div>
+										
+										</c:if>
+										
 
 									</div>
 
@@ -339,8 +374,6 @@ function fileUpload(){
 								</div>
 
 							</div>
-						</div>
-						</div>
 					</form>
 				</div>
 
