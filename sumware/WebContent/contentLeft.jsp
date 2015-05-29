@@ -68,6 +68,7 @@
 
 </c:if>
 <%-- board left(E) --%>
+
 <%-- todo left --%>
 <c:if test="${param.model eq 'todo' }">
 <!-- <form action="sumware" method="post" id="goTodo"> -->
@@ -154,6 +155,7 @@
 </div>
 
 </c:if>
+
 
 <%-- calendar left --%>
 <c:if test="${param.model eq 'calendar' }">
@@ -243,6 +245,7 @@
 	</div>
 	  <!-- left-profile(E) -->
 </c:if>
+
 
 <%-- mail left --%>
 <c:if test="${param.model eq 'mail' }">
