@@ -75,11 +75,11 @@ public class CalendarModel implements ModelInter{
 			//해당하지 않는 값을 0으로 세팅해준다.
 			//같은키로 값을 세팅. 둘이 동시에 값이 들어가는 경우가 없으므로.
 			if(selCal.equals("부서")){
-				url="sumware?mod=calendar&submod=calList&calmem=0&caldept="+vo.getMemdept();
+				url="sumware?model=calendar&submod=calList&calmem=0&caldept="+vo.getMemdept();
 				map.put("cal", String.valueOf(vo.getMemdept()));
 				sql = CalendarDAO.getDao().calSQL(2);
 			}else{
-				url="sumware?mod=calendar&submod=calList&caldept=0&calmem="+vo.getMemnum();
+				url="sumware?model=calendar&submod=calList&caldept=0&calmem="+vo.getMemnum();
 				map.put("cal", String.valueOf(vo.getMemnum()));
 				sql = CalendarDAO.getDao().calSQL(3);
 			}
@@ -100,9 +100,9 @@ public class CalendarModel implements ModelInter{
 			
 			CalendarDAO.getDao().calDel(num);
 			if(selCal.equals("부서")){
-				url="sumware?mod=calendar&submod=calList&calmem=0&caldept=100"+vo.getMemdept();
+				url="sumware?model=calendar&submod=calList&calmem=0&caldept="+vo.getMemdept();
 			}else{
-				url="sumware?mod=calendar&submod=calList&caldept=0&calmem="+vo.getMemnum();
+				url="sumware?model=calendar&submod=calList&caldept=0&calmem="+vo.getMemnum();
 			}
 			method=false;
 		}
