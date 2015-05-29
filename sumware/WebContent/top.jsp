@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="loCk" scope="session" value="0"/>
 <!DOCTYPE html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,6 +22,13 @@
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<<<<<<< .mine
+<!-- 모달 -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<!-- 모달 -->
+=======
 <!-- 모달 -->
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -35,6 +43,7 @@
 	
 	<script src="../js/http.js"></script>
 <!--  -->
+>>>>>>> .r419
 <!-- 메인 -->
 <c:if test="${param.submod eq 'writeForm' }">
 	<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
@@ -46,7 +55,7 @@
 	</script>
 </c:if>
 <script>
-
+	var c=1;//로그인 실패 횟수
 	$(function() {
 		var sel = "";
 		var tonum = "";
@@ -57,6 +66,62 @@
 		tosend(tonumval);
 		addTodo();
 	});
+
+	//로그인 3회....
+	function loginChk(){
+		$.ajax({
+			url:"sumware",
+			type:"POST",
+			data : {
+				model:"login",
+				submod:"login",
+				memnum:$("#memnum").val(),
+				mempwd:$("#mempwd").val()
+			},
+			success : function(result){
+				if(result==0){
+					alert(c+"회 로그인실패");
+					c++;
+					if(c>3){
+						$.ajax({
+							url:"sumware",
+							type:"POST",
+							data : {
+								model:"join",
+								submod:"getCap"
+							},
+							success : function(result){
+								$('#capBody').html(result);
+								$('#capModal').modal('toggle');
+							}
+						});
+					}else{
+						return;
+					}
+				}else{
+					location="index.jsp";
+				}
+			}
+		});
+	}
+	//보안문자에서의 폼전달
+	function capClick(){
+		alert("버튼 클릭");
+			$("#Captarget").load("sumware", {
+				model:"join",
+				submod:"viewCap",
+				password :$("#capPassword").val()
+			}, function() {
+				var captcha = $("#Captarget").text().trim();
+				console.log(captcha)
+				if (captcha == "ok") {
+					location="index.jsp";
+				}else{
+					alert("보안문자 확인해주세요.");
+				}
+			});
+		};
+		
 	function formSub(res){
 		if(res == 'd'){
 			$('#dform').submit();
@@ -64,6 +129,7 @@
 			$('#cform').submit();
 		}
 	}
+
 	function openWin(){
 		var opt= "width=700, height=800, scrollbars=yes";	
 		window.open("sumware?model=messenger&submod=messengerForm","MessengerMain",opt);
@@ -459,7 +525,7 @@ function select(index){
             		<input type="text" id="memnum" name="memnum" placeholder="사원번호"> 
             		<label class="control-label" for="mempwd">비밀번호</label> 
             		<input type="password" id="mempwd" name="mempwd" placeholder="비밀번호">
-            		<button class="btn btn-xs btn-info">로그인</button>
+            		<button type="button"class="btn btn-xs btn-info" onclick="loginChk()">로그인</button>
          		</div>
       		</form>
    			</c:when>
@@ -482,5 +548,20 @@ function select(index){
 			</div>
    			</c:otherwise>
    		</c:choose>
+	</div>
+	 <!-- 보안문자 모달. -->
+   <button type="button" class="modal fade" id="capBtn" data-toggle="modal" data-target="#capModal"></button>	
+	<div class='modal fade' id='capModal'>
+	<div class="modal-dialog">
+	 <div class="modal-content">
+	<div class="modal-header">
+		 <h4 class="modal-title">보안문자</h4>
+		</div>
+		<div class="modal-body" id="capBody">
+			
+		<!-- comment-write(E) -->
+	</div>
+	</div>
+	</div>
 	</div>
 </nav>
