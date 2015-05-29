@@ -31,11 +31,7 @@
 <c:if test="${param.model eq 'todo' }">
 
 </c:if>
-
-	
-	
-	<script src="../js/http.js"></script>
-<!--  -->
+<script src="/js/http.js"></script>
 <!-- 메인 -->
 <c:if test="${param.submod eq 'writeForm' }">
 	<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
