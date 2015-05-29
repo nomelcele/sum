@@ -124,7 +124,6 @@
 	}
 	//보안문자에서의 폼전달
 	function capClick(){
-		alert("버튼 클릭");
 			$("#Captarget").load("sumware", {
 				model:"join",
 				submod:"viewCap",
@@ -540,7 +539,7 @@ function select(index){
          		<input type="hidden" name="submod" value="login">
          		<div class="porm-group">
             		<label class="control-label-" for="memnum">사원번호</label> 
-            		<input type="text" id="memnum" name="memnum" placeholder="사원번호"> 
+            		<input type="text" id="memnum" name="memnum" placeholder="사원번호" onkeydown="enterCheck(3)"> 
             		<label class="control-label" for="mempwd">비밀번호</label> 
             		<input type="password" id="mempwd" name="mempwd" placeholder="비밀번호" onkeydown="enterCheck(3)">
             		<button type="button"class="btn btn-xs btn-info" onclick="loginChk()">로그인</button>
