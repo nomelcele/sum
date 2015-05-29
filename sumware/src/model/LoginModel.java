@@ -83,6 +83,7 @@ public class LoginModel implements ModelInter {
 			session.removeAttribute("teamNameList");
 			method = false;
 
+
 		}else if(submod != null && submod.equals("firstLoginForm")){
 			url = "join/member.jsp";
 			method=true;
