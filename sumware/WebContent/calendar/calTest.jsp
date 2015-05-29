@@ -94,7 +94,7 @@ $(function(){
 		    alert("selected from: " + start.format() + ", to: " + end.format());
 		   //셀렉트된 결과를 서버로 전송.
 		          $.ajax({
-		              url: "sumware?mod=calendar&submod=calInsert",
+		              url: "sumware?model=calendar&submod=calInsert",
 		              type: "POST",
 		              data: {
 		                  title:encodeURIComponent(title),
