@@ -35,7 +35,7 @@
 		</div>
 		
 		<div class="panel-body" id="scrollDiv">
-			<textarea class="form-control" rows="20" id="msgWindow" ></textarea>
+			<textarea class="form-control" rows="20" id="msgWindow" name="textrareaChat"></textarea>
 		</div>
 		
 		<div class="panel-footer">
@@ -88,7 +88,7 @@
 		sendjoinMsg();
 	}
 	function processMsg(message) {
-		msgWindow.value += message.data + "\n";
+		msgWindow.value += message.data + "\n";	
 		
 	}
 	function proccessClose(message) {
@@ -140,12 +140,14 @@
 			var inputLength = $('#msgText').val().length;
 			if(inputLength > 0){
 				sendMsg();
+				$('#msgWindow').scrollTop(document.getElementById('msgWindow').scrollHeight);
+// 				console.log("스크롤 값 : "+ta);
+// 				console.log("스크롤 값 : "+ta1);
 				return;
 			}
 		}
 	
-	}
-		
+	}	
 </script>
 
 
