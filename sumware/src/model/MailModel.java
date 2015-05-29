@@ -108,18 +108,22 @@ public class MailModel implements ModelInter{
 			su.append("[");
 			if(suggests != null){
 				for(int i=0; i<suggests.length; i++){
+					su.append("\"");
 					su.append(suggests[i]);
+					su.append("\"");
 					if(!(i == suggests.length-1)){
 						su.append(",");
 					}		
 				}
 			}
 			su.append("]");
-			PrintWriter pw = response.getWriter();
-			pw.write(su.toString());
-			pw.flush();
-//			url = "mail/mailSuggest.jsp";
-//			method = true;
+			request.setAttribute("sug", su.toString());
+//			PrintWriter pw = response.getWriter();
+//			pw.write(su.toString());
+//			pw.flush();
+			
+			url = "mail/mailSuggest.jsp";
+			method = true;
 		} else if(submod != null && submod.equals("mailDetail")){
 			// 메일 상세 보기
 			// 메일 번호
