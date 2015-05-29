@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Messenger Main</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -14,14 +14,12 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-</head>
-
-
+</head> 
 <script>
 	// 사원 list 출력 시 채팅창으로 이동
 	function mesgoUrl(res){
 		var resNum = res;
-		var opt="width=600, height=700, scrollbars=yes";
+		var opt="width=500, height=600, scrollbars=yes";
 		var f = document.mesform;
 		f.model.value="messenger";
 		f.submod.value="messengerChat";		
@@ -74,7 +72,7 @@
 		
 		if(resMessage == true){
 			alert("대화를 수락하였습니다.");
-			var winopt="width=600, height=700, scrollbars=yes";
+			var winopt="width=500, height=600, scrollbars=yes";
 			f1.model.value="messenger";
 			f1.submod.value="msgReceieve";		
 			f1.edata1.value = evdata; // 방번호, IP, 유저사번
@@ -106,110 +104,80 @@
 	};
 	
 </script>
-
 <body>
+	<form action="sumware" method="post" id="mesform" name="mesform">
+		<input type="hidden" id="mod"    name="model"> 
+		<input type="hidden" id="submod" name="submod">
+		<input type="hidden" id="fromNum" name="fromNum">
+		<input type="hidden" id="toName" name="toNum">
+		<input type="hidden" name="entNum">
+	</form>
+				
+	<form action="sumware" method="post" id="entform" name="entform">
+		<input type="hidden" id="model" name="model"> 
+		<input type="hidden" id="submod" name="submod">
+		<input type="hidden" id="edata1" name="edata1">
+		<input type="hidden" id="userNum2" name="uerNum2">
+	</form>
+				
+	<form action="sumware" method="post" id="disform" name="disform">
+		<input type="hidden" id="model1" name="model"> 
+		<input type="hidden" id="submod99" name="submod">
+		<input type="hidden" id="edata2" name="edata1">
+		<input type="hidden" id="userNum3" name="uerNum2">
+		<input type="hidden" id="stateMain" name="stateMain">
+	</form>
 	<div class="col-lg-3" style="width: 100%">
-		<div class="chat-panel panel panel-default">
-
+		<div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="fa fa-bar-chart-o fa-fw"></i> <strong class="primary-font">Messenger</strong>
+				<strong class="primary-font">Messenger</strong>
 			</div>
+			<!-- 사용자 정보 출력 -->
 			<div class="panel-body">
-					<ul class="chat" style="list-style: none">
-						<li class="left clearfix">
-							<span class="chat-img pull-left">
-								<img src="profileImg/ksh.jpg" alt="" class="img-circle" style="width: 50px; height: 50px;">
-							</span>
-							<div class="chat-body clearfix">
-								<div class="header">
-									<strong class="primary-font">김성호</strong> 
-									<strong class="primary-font">사번</strong> 
-									<strong class="primary-font">부서이름</strong> 
-								</div>
-								
-							</div>
-							</li>
-						</ul>
-			
-			
-			
-
+				<ul class="chat" style="list-style: none">
+					<li class="left clearfix">
+						<span class="chat-img pull-left">
+							<img src="profileImg/${sessionScope.v.memprofile }" alt="" class="img-circle" style="width: 50px; height: 50px;">
+						</span>
+						<div class="chat-body clearfix">
+							<div class="header">
+								<strong class="primary-font">${sessionScope.v.memname }님</strong> 								
+							</div>								
+						</div>						
+					</li>					
+				</ul>
+			</div>			
 		</div>
-	</div>
-</div>
-
-
-
-
-<!-- 사용자 정보(사진, 이름) -->
-
-<div class="container">
-	<div class="col-lg-3">
-	<!-- target은 메세지 거부 시 거부 메세지 송출 담당 -->
-	<div id="target"> 
-	</div>
-		<div class="media">
-			<div class="media-left media-middle">
-
-				<form action="sumware" method="post" id="mesform" name="mesform">
-					<input type="hidden" id="mod"    name="model"> 
-					<input type="hidden" id="submod" name="submod">
-					<input type="hidden" id="fromNum" name="fromNum">
-					<input type="hidden" id="toName" name="toNum">
-					<input type="hidden" name="entNum">
-				</form>
-				
-				<form action="sumware" method="post" id="entform" name="entform">
-					<input type="hidden" id="model" name="model"> 
-					<input type="hidden" id="submod" name="submod">
-					<input type="hidden" id="edata1" name="edata1">
-					<input type="hidden" id="userNum2" name="uerNum2">
-				</form>
-				
-				<form action="sumware" method="post" id="disform" name="disform">
-					<input type="hidden" id="model1" name="model"> 
-					<input type="hidden" id="submod99" name="submod">
-					<input type="hidden" id="edata2" name="edata1">
-					<input type="hidden" id="userNum3" name="uerNum2">
-					<input type="hidden" id="stateMain" name="stateMain">
-				</form>
-				
-				<!-- 사원 사진 불러오기  -->
-				<a href="#"> <img class="media-object" src="profileImg/${sessionScope.v.memprofile }" alt="..."></a>
-			</div>
-			<div class="media-body">
-
-				<!-- 로그인 사원 이름 불러오기 -->
-				<a href="#">${sessionScope.v.memname }님</a>
-			</div>
-		</div>
-
-		<!-- 친구 리스트 jstl을 통해 출력화면 -->
-
-		<div class="col-lg-10">
-			<div class="list-group">
-				<ul id="msgList">
-				
-<%-- 				<c:forEach var="memList" items="${list}"> --%>
-					
-<!-- <!-- 						회원의 사진을 출력 --> -->
-
-<!-- 						<li> -->
-<%-- 							<a href="javascript:mesgoUrl(${memList.memnum})">  --%>
-<%-- 											<img class="media-object" src="${memList.memprofile }" alt="..." style="width: 10px; height: 10px">				 --%>
-<!-- 								<img src="img/messenger.jpg" alt="..."style="width: 25px; height: 25px">  -->
-								
-<!-- <!-- 								친구 list 출력시 본인 아이디와 같은 경우는 출력을 하지 않는 기능 추가 --> -->
-
-<%-- 								${memList.memname} <span>(${memList.memnum})</span><span> / ${memList.dename}</span></a></li> --%>
-					
-<%-- 				</c:forEach> --%>
+		
+		<!-- 사원 목록 출력, Push data 출력 -->
+		
+		<div class="panel panel-default">
+		<!-- Push data id = msgList에 출력-->
+			<div class="panel-body" id = "msgList">
+			
+				<!-- Push에서 반복될 구문 -->
+				<ul class="chat" style="list-style: none">
+					<li class='left clearfix'>
+						<span class='chat-img pull-left'>
+							<img src='vo에서 profile 출력' alt='' class='img-circle' style='width: 50px; height: 50px;'>
+						</span>
+						<div class='chat-body clearfix'>
+							<div class='header'>
+								<a href='javascript:mesgoUrl(${memList.memnum})' class='primary-font'>
+									<strong class='primary-font'>김성호</strong> 
+									<strong class='primary-font'>사번</strong> 
+									<strong class='primary-font'>부서이름</strong> 
+								</a>
+							</div>								
+						</div>						
+					</li>					
 				</ul>
 			</div>
 		</div>
-	</div>	
-</div>
-</div>
+	</div>
+	
+	<!-- target은 메세지 거부 시 거부 메세지 송출 담당 -->
+	<div id="target"></div>
 
 </body>
 </html>

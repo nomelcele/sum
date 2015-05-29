@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +16,13 @@
 
 </head>
 <body>
+
+<!-- 		db에 저장된 내용 출력 -->
+
+
+<div class="col-lg-3" style="width: 100%">
+	<div class="chat-panel panel panel-default">
+	
 	<form action="sumware" method="post" id="closeForm" name="closeForm">
 		<input type="hidden" id="chatmodel"name="model">
 		<input type="hidden" id="chatsubmod"name="submod">
@@ -23,23 +30,17 @@
 		<input type="hidden" id="roomKey" name="roomKey">
 		<input type="hidden" id="resState" name="resState">		
 	</form>
-<!-- 		db에 저장된 내용 출력 -->
-
-
-<div class="col-lg-3" style="width: 100%">
-	<div class="chat-panel panel panel-default">
 		<div class="panel-heading">
-			<i class="fa fa-bar-chart-o fa-fw"></i> <strong class="primary-font">${userName }님과 대화 중 입니다</strong>
-					
+			<i class="fa fa-bar-chart-o fa-fw"></i> <strong class="primary-font">${userName }님과 대화 중 입니다</strong>	
 		</div>
 		
-		<div class="panel-body">
-			<textarea class="form-control" rows="30" id="msgWindow" ></textarea>
+		<div class="panel-body" style="overflow: y:scroll;">
+			<textarea class="form-control" rows="20" id="msgWindow" ></textarea>
 		</div>
 		
 		<div class="panel-footer">
 			<div class="input-group">
-				<input id="btn-input" type="text" class="form-control input-sm"	placeholder="메세지를 입력하세여" id="msgText">
+				<input id="msgText" type="text" class="form-control input-sm"	placeholder="메세지를 입력하세여">
 				<span class="input-group-btn">
 					<button class="btn btn-warning btn-sm" onclick="sendMsg()">Send</button>
 					<button class="btn btn-warning btn-sm" onclick="closeWindow()">나가기</button>
@@ -50,28 +51,6 @@
 	</div>
 </div>
 
-
-
-<!-- 		<div class="col-lg-7"> -->
-<%-- 			<span>${userName }님과 대화 중 입니다.</span> --%>
-<!-- 		</div> -->
-			
-<!-- 		<div class="col-lg-10" style="height: 450px; width: 500px;"> -->
-<!-- 			<textarea class="form-control" rows="30" id="msgWindow" style="width: 450px"></textarea> -->
-<!-- 		</div> -->
-<!-- <!-- 		메세지 입력  -->
-<!-- 		</br> -->
-<!-- 		<div class="col-lg-10"> -->
-<!-- 			<div class="input-group"> -->
-<!-- 				<input type="text" class="form-control" placeholder="메세지를 입력하세여" id="msgText" /> -->
-<!-- 				<span class="input-group-btn">			 -->
-<!-- 					<button class="btn btn-default" type="button" onclick="sendMsg()">전송</button> -->
-<!-- 					<button class="btn btn-default" type="button" onclick="closeWindow()">나가기</button>					 -->
-<!-- 				</span> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </div> -->
 <script>
 	
 // 	var reip="${ipAdd}";	
@@ -80,7 +59,7 @@
 	
 	var sessionKey = "${key}";
 	var userNum="${userNum}";
-// 	alert("sessionKey " + sessionKey);
+	alert("sessionKey " + sessionKey);
 	var msgWindow = document.getElementById("msgWindow");
 	var msgSocket = new WebSocket("ws://192.168.7.234:80/sumware/msgSocket/"+sessionKey);
 	
@@ -112,11 +91,11 @@
 
 	}
 	function sendMsg() {
-		var msg = document.getElementById("msgText");
-		var sendCont = "${sessionScope.v.memname } : "+msg.value+"\n";
+		var msgchat = document.getElementById("msgText");
+		var sendCont = "${sessionScope.v.memname } : "+msgchat.value+"\n";
 		
 		msgSocket.send(sendCont);
-		msg.value = "";
+		msgchat.value = "";
 		senCont = "";
 	}
 	function sendjoinMsg(){
