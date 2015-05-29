@@ -3,7 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<!-- comment-list(S) -->
 	<c:if test="${!empty commSnsList}">
-	<ul class="comment-list"  style="height:400px; overflow-y:scroll;">
+	<ul class="comment-list"  id="snsCommList" onscroll="snsCommScroll(${commsns})"
+	style="height: 400px; overflow-y:scroll; ">
 	<c:forEach var="csl" items="${commSnsList }">
 		<li>
 			<img class="snscomment-img" src="profileImg/${csl.coimg }" alt="" />
@@ -22,7 +23,8 @@
 		</li>
 	</c:forEach>
 	</ul>
-		<button type="button" onclick="snsCommListPlus(${commsns})" style="width: 90%; height: 50px; text-align: center; margin-left: 30px;">더 보기</button>
+		<div id="commloading" style="width: 100%; float:left; text-align: center;">
+		</div>
 	</c:if>
 
 	<!-- comment-list(E) -->
