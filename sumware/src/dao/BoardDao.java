@@ -185,7 +185,7 @@ public class BoardDao {
 		BoardVO v = null;
 		StringBuffer sql = new StringBuffer();
 		sql.append
-		("select b.bhit,b.bnum,m.memname, b.btitle, b.bcont, TO_CHAR(b.bdate,'yyyy.MM.dd HH24:mi') bdate").append
+		("select b.bhit,b.bmem,b.bnum,m.memname, b.btitle, b.bcont, TO_CHAR(b.bdate,'yyyy.MM.dd HH24:mi') bdate").append
 		(" from board b, member m where b.bmem=m.memnum and bnum=?");
 		try {
 			con = ConUtil.getOds();
@@ -195,6 +195,7 @@ public class BoardDao {
 			if(rs.next()){
 				v = new BoardVO();
 				v.setBnum(rs.getInt("bnum"));
+				v.setBmem(rs.getInt("bmem"));
 				v.setBcont(rs.getString("bcont"));
 				v.setBwriter(rs.getString("memname"));
 				v.setBtitle(rs.getString("btitle"));

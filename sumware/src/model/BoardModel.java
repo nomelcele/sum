@@ -50,6 +50,12 @@ public class BoardModel implements ModelInter{
 		// boardwrite *********************************
 		else if(submod != null && submod.equals("writeForm")){
 			System.out.println("what the fuck");
+			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
+			ArrayList<BnameVO> blist = BoardDao.getDao().bName(map);
+			HttpSession ses = request.getSession();
+			ses.setAttribute("bname", map.get("bname"));
+			ses.setAttribute("bbbgnum", map.get("bgnum"));
+			ses.setAttribute("blist", blist);
 			url="board/boardWrite.jsp";
 			method=true;
 		}
@@ -64,6 +70,11 @@ public class BoardModel implements ModelInter{
 		else if(submod!=null && submod.equals("boardInsert")){
 			System.out.println("this is what ?????????");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
+			ArrayList<BnameVO> blist = BoardDao.getDao().bName(map);
+			HttpSession ses = request.getSession();
+			ses.setAttribute("bname", map.get("bname"));
+			ses.setAttribute("bbbgnum", map.get("bgnum"));
+			ses.setAttribute("blist", blist);
 			BoardDao.getDao().insert(map);
 			url = "sumware?model=board&submod=boardList&page=1&bgnum="
 			+map.get("bgnum")+"&bdeptno="+map.get("bdeptno")+"&bname="+map.get("bname").toString();
@@ -74,7 +85,12 @@ public class BoardModel implements ModelInter{
 			int no = Integer.parseInt(request.getParameter("no"));
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			BoardVO list = BoardDao.getDao().getDetail(no);
-//			System.out.println(list.getBdate()+" / "+ list.getBcont()+" / "+map.get("no"));
+			System.out.println(list.getBdate()+" / "+ list.getBcont()+" / "+map.get("no"));
+			ArrayList<BnameVO> blist = BoardDao.getDao().bName(map);
+			HttpSession ses = request.getSession();
+			ses.setAttribute("bname", map.get("bname"));
+			ses.setAttribute("bbbgnum", map.get("bgnum"));
+			ses.setAttribute("blist", blist);
 			request.setAttribute("list", list);
 			// 댓글 불러오는 로직.
 			String childmod = request.getParameter("childmod");
