@@ -1,8 +1,11 @@
 package dto;
 
-public class BnameVO {
+import java.io.Serializable;
+
+public class BnameVO implements Serializable {
 	private String bname;
 	private int bgnum, bdeptno;
+	
 	public String getBname() {
 		return bname;
 	}
