@@ -33,7 +33,7 @@ public class LoginModel implements ModelInter {
 			v.setMemnum(memnum);
 			v.setMempwd(mempwd);
 			try {
-				String res = LoginDao.getDao().ckFirstLogin(memnum);
+				String res = LoginDao.getDao().ckFirstLogin(memnum, mempwd);
 				System.out.println("res:::"+res);		
 				if (res.equals("0")) {
 					
