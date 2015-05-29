@@ -19,7 +19,7 @@
 		<div class="row">
 			<%@include file="/contentLeft.jsp" %>
 			<!-- 이 부분에 내용이 들어감 -->
-			<div class="col-lg-8">	
+			<div class="col-lg-8" style="padding:34px;">	
 
 	<form method="post" action="sumware" class="form-horizontal" role="form"
 	name="f" autocomplete="off" enctype="multipart/form-data">

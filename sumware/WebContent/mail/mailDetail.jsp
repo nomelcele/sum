@@ -15,12 +15,13 @@
 				<input type="hidden" name="mailtitle" value="re: ${detail.mailtitle}">
 				<div id="mailDetailContent">
 					<input type="submit" class="btn btn-default btn-sm" value="답장"><br />
-					<span style="font-size:16px; font-weight:bold;">${detail.mailtitle}</span>
-					<span style="float:right;">${detail.maildate}</span> 
-					<br /> 
-					보낸 사람: ${detail.mailsname}<br /> 
-					받는 사람: ${detail.mailrname}<br /> 
-					
+					<div style="padding-top:10px;">
+						<span style="font-size:16px; font-weight:bold;">${detail.mailtitle}</span>
+						<span style="float:right;"><i class="fa fa-envelope"></i> ${detail.maildate}</span> 
+						<br /> 
+						보낸 사람: ${detail.mailsname}<br /> 
+						받는 사람: ${detail.mailrname}<br /> 
+					</div>
 					<hr/>
 					${detail.mailcont}<br /> 
 					<hr/>
