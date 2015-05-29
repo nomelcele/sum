@@ -276,7 +276,6 @@ start with 1;
   
   create sequence mescontent_seq
   increment by 1
-<<<<<<< .mine
   start with 1;
 -- 0528 board 테이블 변경 했습니다~ 아래의 것들 차례대로 수행 하시면 됩니다. 
 DELETE FROM COMM;
@@ -297,15 +296,13 @@ ALTER TABLE BOARD MODIFY (bgnum CONSTRAINT BOARD_bgnum_nn NOT NULL);
   -- 사람 추가 
   
   INSERT INTO MEMBER(memnum,memname,mempwd,memmail) VALUES
-(member_seq.nextVal,'이은정',1004,'lee@naver.com');=======
+(member_seq.nextVal,'이은정',1004,'lee@naver.com');
   start with 1;
   
 -- 0528 변경
 -- 컬럼 데이터 길이 수정
   alter table mail modify(mailsdelete number(1));
-<<<<<<< .mine
-  alter table mail modify(mailrdelete number(1));>>>>>>> .r316
-=======
+  alter table mail modify(mailrdelete number(1));
   alter table mail modify(mailrdelete number(1));
   
 -- member 테이블 memmgr, memdept 컬럼 default 값 설정
@@ -315,7 +312,7 @@ ALTER TABLE BOARD MODIFY (bgnum CONSTRAINT BOARD_bgnum_nn NOT NULL);
 -- 부서, 상급자 기본값
 INSERT INTO DEPT VALUES(900,'부서기본값');
 INSERT INTO MEMBER VALUES
-(1,'회장님', '서울','1004','boss.jpg','회장',1,'boss@naver.com','boss',NULL,100);>>>>>>> .r368
+(1,'회장님', '서울','1004','boss.jpg','회장',1,'boss@naver.com','boss',NULL,100);
 --0529 테이블 추가
 create table bname(
 	bname varchar2(30),
@@ -324,4 +321,4 @@ create table bname(
 	constraint bname_bgnum_pk primary key(bgnum),
 	constraint bname_bdeptno_fk foreign key(bdeptno) references dept(denum)
 );
-insert into bname values('하람게시판', 4, 200);>>>>>>> .r403
+insert into bname values('하람게시판', 4, 200);
