@@ -14,7 +14,7 @@
 			<!-- board-detail(E) --> --%>
 			
 			<!-- heading-page(S) -->
-			<h2 class="heading-page">게시글 보기</h2>
+			<h2 class="heading-page">${sessionScope.bname }</h2>
 			<!-- heading-page(E) -->
 			
 			<!-- board-detail(S) -->
@@ -63,7 +63,7 @@
 				</div>
 				<div class="right">
 					<button type="button">수정</button>
-					<button type="button" onclick="location='sumware?model=board&submod=boardList&page=1'">목록</button>
+					<button type="button" onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }'">목록</button>
 					<button type="button" onclick="location='sumware?model=board&submod=writeForm'">새글쓰기</button>
 				</div>
 			</div>

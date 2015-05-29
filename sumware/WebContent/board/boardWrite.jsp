@@ -28,6 +28,7 @@
 					<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
 					<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
 					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
+					<input type="hidden" name="bname" value="${sessionScope.bname }">
 				<!-- board-write(S) -->
 				<table id="stcontent" class="board-list board-write">
 					<colgroup>
@@ -56,7 +57,7 @@
 				<!-- button-div(S) -->
 				<div class="button-div center">
 					<button>글작성</button>
-					<button type="button"onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=${sessionScope.bbbgnum}'">리스트</button>
+					<button type="button"onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }'">리스트</button>
 				</div>
 			</form>
 				<!-- button-div(E) -->
