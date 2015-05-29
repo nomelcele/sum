@@ -261,15 +261,19 @@
 </form>
 	<div class="col-md-2">
 		<div>
-			<a href="javascript:mailFormGo('write')" class="btn btn-sm btn-info"> 
+			<a href="javascript:mailFormGo('write')" class="btn btn-info"> 
 			<span class="glyphicon glyphicon-pencil"></span> 메일 쓰기
 			</a>
 		</div>
-		<div class="list-group">
-			<a href="javascript:mailFormGo('fromlist')" class="list-group-item">받은 메일함 ${numArr[0]}</a>
-			<a href="javascript:mailFormGo('tolist')" class="list-group-item">보낸 메일함 ${numArr[1]}</a> 
-			<a href="javascript:mailFormGo('mylist')" class="list-group-item">내게 쓴 메일함 ${numArr[2]}</a> 
-			<a href="javascript:mailFormGo('trashcan')" class="list-group-item">휴지통 ${numArr[3]}</a>
+		<div class="list-group" id="mailmenu">
+			<a href="javascript:mailFormGo('fromlist')" class="list-group-item">받은 메일함 
+			<span>(${numArr[0]})</span></a>
+			<a href="javascript:mailFormGo('tolist')" class="list-group-item">보낸 메일함 
+			<span>(${numArr[1]})</span></a> 
+			<a href="javascript:mailFormGo('mylist')" class="list-group-item">내게 쓴 메일함 
+			<span>(${numArr[2]})</span></a> 
+			<a href="javascript:mailFormGo('trashcan')" class="list-group-item">휴지통 
+			<span>(${numArr[3]})</span></a>
 		</div>
 	</div>
 </c:if>
