@@ -64,7 +64,7 @@ function fileUpload(){
 			if($('#mempwd').val() == "${mempwd}" && "${sessionScope.v.mempwd }" == ""){
 				// 첫 프로필 수정시
 				$('.dhpwd').show("slow");
-			}else if($('#mempwd').val() == "${sessionScope.v.mempwd }"){
+			}else if($('#mempwd').val() == "${sessionScope.v.mempwd }" && "${sessionScope.v.mempwd }" != ""){
 				// 사원 프로필 수정시
 				$('.dhpwd').show("slow");
 			}	else {
@@ -259,11 +259,11 @@ function fileUpload(){
 										<figure>
 										<c:if test="${param.model eq 'login' }">
 											<img class="img-circle" alt="프로필 사진 "
-												id="targetimg" src="img/imgx.jpg">
+												id="targetimg" src="img/imgx.jpg" style="height:200px">
 										</c:if>
 										<c:if test="${param.model eq 'join' }">
 											<img class="img-circle" alt="프로필 사진 "
-												id="targetimg" src="profileImg/${sessionScope.v.memprofile }">
+												id="targetimg" src="profileImg/${sessionScope.v.memprofile }" style="height:200px">
 												
 										</c:if>
 										</figure>
@@ -274,6 +274,7 @@ function fileUpload(){
 
 									</div>
 								</div>
+							</div>
 							</div>
 							<div class="bs-callout bs-callout-danger">
 								<div class="row">
@@ -372,6 +373,7 @@ function fileUpload(){
 									</div>
 								</div>
 
+							</div>
 							</div>
 					</form>
 				</div>
