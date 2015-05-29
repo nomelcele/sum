@@ -92,7 +92,8 @@
 			data:data,
 			success: function(result){
 				$("#wrapbody").html(result);
- 				$("#wrap3").modal('toggle');
+				$("#snsCommBtn").click();
+
  				
  				ch= $('#snsCommList').height()
 			}
@@ -204,7 +205,14 @@
 				</div>
 				<!-- /.panel .chat-panel -->
 			</div>	
+<<<<<<< .mine
+			
+			<button type="button" class="modal fade" id="snsCommBtn" data-toggle="modal" data-target="#wrap3"></button>	
+			<div class='modal' id='wrap3' role='dialog'>
+=======
 			<div class='modal fade' id='wrap3' role='dialog'>
+>>>>>>> .r423
+
 			<div class="modal-dialog">
 			 <div class="modal-content">
 			 	<div class="modal-header">
