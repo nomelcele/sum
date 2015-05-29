@@ -16,7 +16,7 @@
 					<input type="text" name="search" placeholder="search">				
 			</div>
 			<div class="right">
-					<button type="button" onclick="location='sumware?model=board&submod=writeForm&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }'">글쓰기</button>
+					<button type="button" onclick="location='sumware?model=board&submod=writeForm&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }&bdeptno=${sessionScope.v.memdept }'">글쓰기</button>
 			</div>
 		</div>
 			<!-- board-form(E) -->
@@ -46,7 +46,7 @@
 					<c:forEach items="${list }" var="vlist">
 					<tr>
 						<td class="num">${vlist.bnum }</td>
-						<td style="text-align: left"><a href="sumware?model=board&submod=boardDetail&no=${vlist.bnum }">${vlist.btitle }</a></td>
+						<td style="text-align: left"><a href="sumware?model=board&submod=boardDetail&no=${vlist.bnum }&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }&bdeptno=${sessionScope.v.memdept }">${vlist.btitle }</a></td>
 						<td style="text-align: center;">${vlist.bwriter }</td>
 						<td style="text-align: center;">${vlist.bdate }</td>
 						<td style="text-align: center;">${vlist.bhit }</td>
