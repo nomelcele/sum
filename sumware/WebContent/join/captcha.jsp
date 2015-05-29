@@ -1,92 +1,103 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="http://www.casternet.com/spamfree/common.js"></script>
 <script>
-window.onload = function() { 
-	document.getElementById("zsfCode").focus();
+window.onload = function() { document.getElementById("zsfCode").focus(); }
+//공백 제거
+function _trim ( str ) { return str.replace(/(^\s*)|(\s*$)/g, ""); }
+
+	// AJAX Start
+	function getHTTPObject () {
+		var xhr = false;
+		if ( window.XMLHttpRequest ) { xhr = new XMLHttpRequest (); }
+		else if ( window.ActiveXObject ) {
+			try { xhr = new ActiveXObject ( "Msxml2.XMLHTTP" ); }
+			catch ( e ) {
+				try { xhr = new ActiveXObject ( "Microsoft.XMLHTTP" ); }
+				catch ( e ) { xhr = false; }
+			}
+		}
+		return xhr;
 	}
-// 좌우 공백 제거 함수
-function _trim ( str ) { 
-	return str.replace(/(^\s*)|(\s*$)/g, ""); 
-}
-/*
-	AJAX Start
-	여기서부터 "AJAX End"까지는 AJAX 구현을 위해 필수적인 함수들이며,
-	각 프로그램마다 각기 조금씩 다른 코드들로 구성되어 있음
-*/
-// AJAX 구현을 위해 (빌어머글) IE와 타 브라우저간의 작동 동일화
-function getHTTPObject () {
-	var xhr = false;
-	if ( window.XMLHttpRequest ) { xhr = new XMLHttpRequest (); }
-	else if ( window.ActiveXObject ) {
-		try { xhr = new ActiveXObject ( "Msxml2.XMLHTTP" ); }
-		catch ( e ) {
-			try { xhr = new ActiveXObject ( "Microsoft.XMLHTTP" ); }
-			catch ( e ) { xhr = false; }
+	function grabFile ( file, func ) {
+		var req = getHTTPObject ();
+		if ( req ) {
+			req.onreadystatechange = function () { eval(func+"(req)"); };
+			req.open ( "GET", file, true );
+			req.send(null);
 		}
 	}
-	return xhr;
-}
-// 해당 파일 호출
-function grabFile ( file, func ) {
-	var req = getHTTPObject ();
-	if ( req ) {
-		req.onreadystatechange = function () { eval(func+"(req)"); };
-		req.open ( "GET", file, true );
-		req.send(null);
-	}
-}
-// 파일 호출시 응답의 status중 필요한 status 발생시 return
-	function ajaxOk ( req ) {	
-	if ( req.readyState==4 && (req.status==200 || req.status==304) ) { 
-		return true; 
-	} else { 
-		return false;
-		} 
-	}
-/*
-	AJAX End
-*/
+	function axOk ( req ) {	if ( req.readyState==4 && (req.status==200 || req.status==304) ) { return true; } else { return false; } }
+	// AJAX End
 
-// // 스팸방지코드 이미지를 새로운 문제로 바꿈
-function changeZsfImg() {
-	document.getElementById("zsfImg").src="zmSpamFree/zmSpamFree.php?re&zsfimg="+new Date().getTime();
-}
-
-// AJAX를 이용한 스팸방지코드 검사
-function checkZsfCode(obj) {
-	var zsfCode = _trim(obj.value);	// 입력된 스팸방지코드의 값중 좌우 공백을 뺀 값
-	if ( zsfCode.length > 0 ) {	// 스팸방지코드값이 입력된 경우
-	grabFile ( "zmSpamFree/zmSpamFree.php?zsfCode="+zsfCode, "resultZsfCode" );	// 스팸방지코드값을 검증하여 결과값을 resultZsfCode 함수로 넘김
+	// 설정에 따라 스팸방지이미지 변경
+	function changeImgConfig() {
+		var img_size = document.getElementById("img_size").value;
+		var img_distortion = document.getElementById("img_distortion").checked ? "D" : "";
+		var qKind = document.getElementById("qKind").value ? "&q_kind="+document.getElementById("qKind").value : "";
+		var cfg = img_size[0]!="0" ? "&cfg=zsfCfg_"+img_size + img_distortion + qKind : "";
+		document.getElementById("zsfImg").src="zmSpamFree/zmSpamFree.php?re"+cfg+"&zsfimg="+new Date().getTime();
 	}
-}
-// 스팸방지코드 검사결과를 hidden 폼에 입력시킴
+	// AJAX를 이용한 스팸방지코드 검증
+	function checkZsfCode(obj) {
+		var zsfCode = _trim(obj.value);
+		if ( zsfCode.length > 0 ) {
+		grabFile ( "zmSpamFree/zmSpamFree.php?zsfCode="+zsfCode, "resultZsfCode" );
+		}
+	}
 	function resultZsfCode(req) {
-		if ( ajaxOk(req) ) {
-			var ret = req.responseText*1;	// AJAX 결과물값을 숫자 데이터로 변환
-			document.getElementById("zsfCodeResult").value = ret;	// hidden 폼에 입력
-			if ( !ret ) { changeZsfImg(); }	// AJAX 결과물값이 0일 경우 캅차 이미지 바꿈
+		if ( axOk(req) ) {
+			var ret = req.responseText*1;
+			document.getElementById("zsfCodeResult").value = ret;
+			if ( !ret ) { changeImgConfig(); }
 		}
 	}
-	function checkFrm() {
-		var zsfCode = _trim(document.getElementById("zsfCode").value);	// 스팸방지코드값에서 공백 제거
-		if ( !zsfCode ) {	// 스팸방지코드값이 없을 경우
-			alert ("스팸방지코드(Captcha Code)를 입력해 주세요.");
-			document.getElementById("zsfCode").focus();	// 스팸방지코드 입력폼에 focus
+
+	function checkZsfFrm() {
+		var zsfCode = _trim(document.getElementById("zsfCode").value);
+		if ( !zsfCode ) { alert ("스팸방지코드(Captcha Code)를 입력해 주세요."); document.getElementById("zsfCode").select(); return false; }
+		var memo_nick = _trim(document.getElementById("memo_nick").value);
+		if ( !memo_nick ) { alert ("별명(Nick)을 입력해 주세요."); document.getElementById("memo_nick").select(); return false; }
+		var memo = _trim(document.getElementById("memo_txt").value);
+		if ( !memo ) { alert ("코멘트(Comment)를 입력해 주세요."); document.getElementById("memo_txt").select(); return false; }
+		if ( document.getElementById("memo_txt").value.length > 140 ) {
+			alert ("코멘트(Comment) 길이를 140자 이내로 맞춰 주세요.");
+			document.getElementById("memo_txt").focus();
 			return false;
 		}
-		if ( document.getElementById("zsfCodeResult").value*1 < 1 ) {	// 검사결과값이 거짓(0)일 경우
+			if ( document.getElementById("zsfCodeResult").value*1 < 1 ) {
 			alert ("스팸방지코드(Captcha Code)가 틀렸습니다. 다시 입력해 주세요.");
-			changeZsfImg();	// 캅챠 이미지 새로 바꿈 (생략 가능)
-			document.getElementById("zsfCode").value="";	// 스팸방지코드 입력폼 값 제거
-			document.getElementById("zsfCode").focus();		// 스팸방지코드 입력폼에 focus
+			changeImgConfig();
+			document.getElementById("zsfCode").value="";
+			document.getElementById("zsfCode").focus();
 			return false;
 		}
 	}
+	/* textarea의 문자 수 세기 시작 (2009-11-20) */
+	var tmr = null;	// TiMeR
+	preVal = 140;	// 이전 글자수 값
+	function calcLen() {
+		var obj = document.getElementById("memo_len");	// textarea 객체
+		var remain = 140-document.getElementById("memo_txt").value.length;	// 140에서 현재 글자수 뺀 값
+		if ( preVal != remain ) {	// 이전 글자수 값과 현재 글자수 값이 다를 경우
+			obj.innerHTML = remain;	// 현재 글자수 값 출력
+			if ( remain < 0 )	{ obj.style.color = "#dd0000"; }
+						else	{ obj.style.color = "#ffffff"; }
+			preVal = remain;	// 현재 글자수 값을 이전 값에 대입
+		}
+		tmr = window.setTimeout('calcLen()',100);	// 0.1초에 한 번씩 반복
+	}
+	function stopCalcLen() {
+		clearTimeout(tmr);
+		tmr = null;
+	}
+	/* textarea의 문자 수 세기 끝 */
+//]]>
 </script>
 </head>
 <body>
