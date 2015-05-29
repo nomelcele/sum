@@ -310,6 +310,8 @@ function mailFormGo(res){
 	if(res=='write'){ // 메일 쓰기
 		$("#model").attr("value","mail");
 		$("#submod").attr("value","mailWriteForm");
+		$("#usernum").attr("value","${sessionScope.v.memnum}");
+		$("#userid").attr("value","${sessionScope.v.meminmail}");
 		$("#mailform").submit();
 //			$.ajax({
 //				type: "post",
@@ -479,7 +481,7 @@ function select(index){
 				<ul class="nav navbar-nav">
 					<li><a href="sumware?model=index">메인</a></li>
 					<li><a href="sumware?model=todo&submod=firsttodoForm&memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
-					<li><a href="sumware?model=mail&submod=mailMain">Mail</a></li>
+					<li><a href="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}">Mail</a></li>
 					<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
 					<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }">Board</a></li>
 					<li><a href="javascript:openWin()">Messenger</a></li>

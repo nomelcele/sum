@@ -9,6 +9,8 @@
 			<form method="post" action="sumware" id="detailform">
 				<input type="hidden"  name="model" value="mail">
 				<input type="hidden" name="submod" value="mailWriteForm">
+				<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
+				<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
 				<input type="hidden" name="toMem" value="${detail.mailsname} <${detail.replyid}@sumware.com>">
 				<input type="hidden" name="mailtitle" value="re: ${detail.mailtitle}">
 				<div>

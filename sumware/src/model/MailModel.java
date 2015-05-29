@@ -25,11 +25,15 @@ public class MailModel implements ModelInter{
 		String url = "";
 		boolean method = true; // forward
 		
-		if(submod != null && submod.equals("mailMain")){
-			url = "mail/mail.jsp";
-			method = true; // forward
-			
-		} else if(submod != null && submod.equals("mailWriteForm")){
+		// 로그인한 사원의 사원 번호와 아이디(사내 메일)
+		int usernum = Integer.parseInt(request.getParameter("usernum"));
+		String userid = request.getParameter("userid");
+				
+//		if(submod != null && submod.equals("mailMain")){
+//			url = "sumware?model=mail&submod=mailFromList";
+//			method = true; // forward
+//			
+	    if(submod != null && submod.equals("mailWriteForm")){
 			String toMem = request.getParameter("toMem");
 			String mailtitle = request.getParameter("mailtitle");
 			
@@ -63,15 +67,14 @@ public class MailModel implements ModelInter{
 			System.out.println("현재 submod: mailFromList");
 			// 받은 메일함
 			// HashMap<String,String> map =MyMap.getMaps().getMapList(request);
-			int usernum = Integer.parseInt(request.getParameter("usernum"));
-			String userid = request.getParameter("userid");
+//			int usernum = Integer.parseInt(request.getParameter("usernum"));
+//			String userid = request.getParameter("userid");
 			
 			// 현재 로그인한 사원의 id
 			ArrayList<MailVO> fromlist = MailDao.getDao().getFromMailList(usernum,userid);
 			
 			request.setAttribute("list", fromlist);
 			request.setAttribute("tofrom", 1);
-			request.setAttribute("frommailnum", fromlist.size());
 			
 			url = "mail/mailList.jsp";
 			method = true;
@@ -79,13 +82,12 @@ public class MailModel implements ModelInter{
 			System.out.println("현재 submod: mailToList");
 			// 보낸 메일함
 			// 현재 로그인한 사원의 사원 번호
-			int usernum = Integer.parseInt(request.getParameter("usernum"));
-			String userid = request.getParameter("userid");
+//			int usernum = Integer.parseInt(request.getParameter("usernum"));
+//			String userid = request.getParameter("userid");
 			ArrayList<MailVO> tolist = MailDao.getDao().getToMailList(usernum,userid);
 			
 			request.setAttribute("list", tolist);
 			request.setAttribute("tofrom", 2);
-			request.setAttribute("tomailnum", tolist.size());
 			
 			url = "mail/mailList.jsp";
 			method = true;
@@ -134,14 +136,13 @@ public class MailModel implements ModelInter{
 		} else if(submod != null && submod.equals("mailMyList")){
 			System.out.println("현재 submod: mailMyList");
 			// 내게 쓴 메일함
-			int usernum = Integer.parseInt(request.getParameter("usernum"));
-			String userid = request.getParameter("userid");
+//			int usernum = Integer.parseInt(request.getParameter("usernum"));
+//			String userid = request.getParameter("userid");
 			
 			ArrayList<MailVO> mylist = MailDao.getDao().getMyMailList(usernum, userid);
 			
 			request.setAttribute("list", mylist);
 			request.setAttribute("tofrom", 3);
-			request.setAttribute("mymailnum", mylist.size());
 			
 			url = "mail/mailList.jsp";
 			method = true;
@@ -149,22 +150,21 @@ public class MailModel implements ModelInter{
 		} else if(submod != null && submod.equals("mailTrashcan")){
 			System.out.println("현재 submod: mailTrashList");
 			// 메뉴에서 휴지통을 클릭했을 때
-			int usernum = Integer.parseInt(request.getParameter("usernum"));
-			String userid = request.getParameter("userid");
+//			int usernum = Integer.parseInt(request.getParameter("usernum"));
+//			String userid = request.getParameter("userid");
 			
 			// 휴지통에서 보여줄 메일 리스트
 			ArrayList<MailVO> trashlist = MailDao.getDao().getTrashList(usernum, userid);
 			request.setAttribute("list", trashlist);
 			request.setAttribute("tofrom", 4);
-			request.setAttribute("trashmailnum", trashlist.size());
 			
 			url = "mail/mailList.jsp";
 			method = true;
 		}  else if(submod != null && submod.equals("mailSetDel")){
 			// 메일 테이블의 delete 속성 설정
 			System.out.println("현재 submod: mailSetDel");
-			int usernum = Integer.parseInt(request.getParameter("usernum"));
-			String userid = request.getParameter("userid");
+//			int usernum = Integer.parseInt(request.getParameter("usernum"));
+//			String userid = request.getParameter("userid");
 			String[] mailnums = request.getParameterValues("chk");
 			mailnums[0]=mailnums[0].substring(mailnums[0].indexOf("=")+1);
 			for(String e:mailnums){
@@ -176,6 +176,8 @@ public class MailModel implements ModelInter{
 			System.out.println("mailSetDel=="+tofrom);
 			
 			MailDao.getDao().setDeleteAttr(mailnums, usernum, userid, delvalue);
+			// 받은 사람과 보낸 사람이 모두 영구 삭제한 메일을 db에서 삭제하기 위한 메서드
+			// MailDao.getDao().delMailFromDB(); 
 			ArrayList<MailVO> list = new ArrayList<MailVO>();
 			
 			switch(tofrom){
@@ -184,12 +186,15 @@ public class MailModel implements ModelInter{
 					list = MailDao.getDao().getFromMailList(usernum,userid);
 					break;
 				case 2: // 보낸 메일함
+					System.out.println("보낸메일함 고고");
 					list = MailDao.getDao().getToMailList(usernum,userid);
 					break;
 				case 3: // 내게 쓴 메일함
+					System.out.println("내게쓴메일함 고고");
 					list = MailDao.getDao().getMyMailList(usernum, userid);
 					break;
 				case 4: // 휴지통
+					System.out.println("휴지통 고고");
 					list = MailDao.getDao().getTrashList(usernum, userid);
 					break;
 			}
@@ -200,6 +205,13 @@ public class MailModel implements ModelInter{
 			url = "mail/mailList.jsp";
 			method = true;
 		}
+	    
+	    // 왼쪽 메뉴에서 각 메일함에 있는 메일의 갯수를 보여주기 위한 메서드 호출
+	 	int[] numArr = MailDao.getDao().getListNum(usernum, userid);
+	 	for(int e:numArr){
+	 		System.out.println("메일 갯수: "+e);
+	 	}
+	 	request.setAttribute("numArr", numArr);
 		
 		return new ModelForward(url, method);
 	}

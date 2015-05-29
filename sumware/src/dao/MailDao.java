@@ -32,7 +32,7 @@ public class MailDao {
 			pstmt.setString(1, map.get("mailtitle")); 
 			pstmt.setString(2, map.get("mailcont"));
 			pstmt.setString(3, map.get("attach"));
-			pstmt.setInt(4, Integer.parseInt(map.get("mailmem")));
+			pstmt.setInt(4, Integer.parseInt(map.get("usernum")));
 			
 			int startidx = map.get("toMem").indexOf("<")+1;
 			int endidx = map.get("toMem").indexOf("@");
@@ -301,6 +301,71 @@ public class MailDao {
 		}
 		
 		return list;
+	}
+	
+	public int[] getListNum(int usernum, String userid){
+		// 각 메일함에 있는 메일의 갯수를 얻기 위한 메서드
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int[] numArr = new int[4];
+		
+		try {
+			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			sql.append("select (select count(*) from mail where mailreceiver=? and mailrdelete=1 and not mailmem=?) fromnum,");
+			sql.append(" (select count(*) from mail where mailmem=? and mailsdelete=1 and not mailreceiver=?) tonum,");
+			sql.append(" (select count(*) from mail where mailmem=? and mailreceiver=? and mailsdelete=1 and mailrdelete=1) mynum,");
+			sql.append(" (select count(*) from mail where (mailmem=? and mailsdelete=2) or (mailreceiver=? and mailrdelete=2)) trashnum from dual");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, userid);
+			pstmt.setInt(2, usernum);
+			pstmt.setInt(3, usernum);
+			pstmt.setString(4, userid);
+			pstmt.setInt(5, usernum);
+			pstmt.setString(6, userid);
+			pstmt.setInt(7, usernum);
+			pstmt.setString(8, userid);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				numArr[0] = rs.getInt("fromnum");
+				numArr[1] = rs.getInt("tonum");
+				numArr[2] = rs.getInt("mynum");
+				numArr[3] = rs.getInt("trashnum");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		
+		return numArr;
+		
+	}
+	
+	public void delMailFromDB(){
+		// mailsdelete, mailrdelete 속성이 모두 3인 메일을 db에서 삭제하는 메서드
+		// (받은 사람과 보낸 사람이 모두 메일을 영구 삭제했을 경우)
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			sql.append("delete from mail where mailsdelete=3 and mailrdelete=3");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.executeUpdate(); 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		
 	}
 	
 }
