@@ -34,7 +34,7 @@
 			<i class="fa fa-bar-chart-o fa-fw"></i> <strong class="primary-font">${userName }님과 대화 중 입니다</strong>	
 		</div>
 		
-		<div class="panel-body" style="overflow: y:scroll;">
+		<div class="panel-body" id="scrollDiv">
 			<textarea class="form-control" rows="20" id="msgWindow" ></textarea>
 		</div>
 		
@@ -53,7 +53,13 @@
 </div>
 
 <script>
+
+
+
+// 	var objDiv = document.getElementById("scrollDiv");
+// 	objDiv.scrollTop = objDiv.scrollHeight;
 	
+	$("#scrollDiv").scrollTop($("#scrollDiv")[0].scrollHeight);
 // 	var reip="${ipAdd}";	
 // 	var webs = "ws://192.168.7.234:80/sumware/msgSocket/";
 // 	var msgSocket = new WebSocket("ws://192.168.7.234:80/sumware/msgSocket/"+sessionKey);
