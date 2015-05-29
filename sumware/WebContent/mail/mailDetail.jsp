@@ -3,7 +3,7 @@
 <%@include file="/top.jsp"%>
 <section id="features" class="features2">
 	<div class="container">
-		<div class="row">
+		<div class="row" style="height:400px;">
 			<%@include file="/contentLeft.jsp"%>
 			<div class="col-lg-8" id="mainContent">
 			<form method="post" action="sumware" id="detailform">
@@ -13,14 +13,19 @@
 				<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
 				<input type="hidden" name="toMem" value="${detail.mailsname} <${detail.replyid}@sumware.com>">
 				<input type="hidden" name="mailtitle" value="re: ${detail.mailtitle}">
-				<div>
-					<input type="submit" value="답장"><br />
-					제목: ${detail.mailtitle}<br /> 
+				<div id="mailDetailContent">
+					<input type="submit" class="btn btn-default btn-sm" value="답장"><br />
+					<span style="font-size:16px; font-weight:bold;">${detail.mailtitle}</span>
+					<span style="float:right;">${detail.maildate}</span> 
+					<br /> 
 					보낸 사람: ${detail.mailsname}<br /> 
 					받는 사람: ${detail.mailrname}<br /> 
-					보낸 날짜: ${detail.maildate}<br /> 
-					내용: ${detail.mailcont}<br /> 
-					첨부 파일: <a href="upload/${detail.mailfile}" target="_blank">${detail.mailfile}</a>
+					
+					<hr/>
+					${detail.mailcont}<br /> 
+					<hr/>
+					<span style="font-weight:bold;"><i class="fa fa-paperclip"></i> 첨부 파일 </span>
+					<a href="upload/${detail.mailfile}" target="_blank">${detail.mailfile}</a>
 				</div>
 				</form>
 			</div>			

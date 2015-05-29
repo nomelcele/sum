@@ -19,16 +19,7 @@
 		<div class="row">
 			<%@include file="/contentLeft.jsp" %>
 			<!-- 이 부분에 내용이 들어감 -->
-			<div class="col-lg-8" id="mainContent">	
-<!-- ckeditor
-<script src="//cdn.ckeditor.com/4.4.7/basic/ckeditor.js"></script>
-<script src="../js/myckeditor.js"></script>
-<script>
-	$(function(){
-		mailChkUpload();
-	})
-</script>
- -->
+			<div class="col-lg-8">	
 
 	<form method="post" action="sumware" class="form-horizontal" role="form"
 	name="f" autocomplete="off" enctype="multipart/form-data">
@@ -43,24 +34,6 @@
 	            <input type="text" class="form-control" 
 	            id="toMem" name="toMem" onkeydown="startSuggest()" value="${toMem }">
 	            <div id="view">
-	            <!--  
-	            <c:choose>
-	            	<c:when test="${!empty sugArr}">
-	            	배열 넘어온 게 있을 때 
-	            	viewtable() 함수 변형
-		            	<table>
-			            	<c:forEach items="${sugArr}" var="sugRes" varStatus="status">
-			            		<tr><td style='cursor:pointer;'onmouseover='this.style.background="silver"'
-			            		onmouseout='this.style.background="white"' 
-			            		onclick='select(${sugArr})'>${sugArr }</td></tr>
-			            	</c:forEach>
-		            	</table>
-	            	</c:when>
-	            	<c:otherwise>
-	            		view의 display 속성을 none으로 설정
-	            	</c:otherwise>
-	            </c:choose>
-	            -->
 	            </div>
 	        </div>
 	    </div>

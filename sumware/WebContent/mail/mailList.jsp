@@ -4,7 +4,7 @@
 <%@include file="/top.jsp"%>
 <section id="features" class="features2">
 	<div class="container">
-	<div class="row">
+	<div class="row" style="height:400px;">
 	<%@include file="/contentLeft.jsp" %>
 	<div class="col-lg-10">
 	<form method="post" action="sumware" id="listform">
@@ -17,14 +17,14 @@
 		<input type="hidden" id="tofrom" name="tofrom">
 		<c:choose>
 			<c:when test="${tofrom eq '4'}">
-			<input type="button" value="영구 삭제" onclick="maildeleteGo()">
-			<input type="button" value="복구" onclick="mailRecover()">
+			<input type="button" class="btn btn-default btn-sm" value="영구 삭제" onclick="maildeleteGo()">
+			<input type="button" class="btn btn-default btn-sm" value="복구" onclick="mailRecover()">
 			</c:when>
 			<c:otherwise>
-			<input type="button" value="삭제" onclick="mailTrashGo()">
+			<input type="button" class="btn btn-default btn-sm" value="삭제" onclick="mailTrashGo()">
 			</c:otherwise>
 		</c:choose>
-		<div class="row">
+		<div class="row" style="padding:7px;">
 			<table class="table table-condensed table-hover" id="listTable">
 					<tr>
 						<td class="col-lg-1"><input type="checkbox" name="all" onclick="checkAll(this)"></td>
@@ -71,8 +71,10 @@
 					</c:forEach>
 			</table>
 		</div>
+		
 		</form>
-		<div id="page">
+		<%-- 원래 위치 --%>
+		<div class="paging">
 			<c:choose>
 				<c:when test="${tofrom eq '1'}">
 					<c:set var="pageUrl" 
@@ -91,16 +93,16 @@
 					value="sumware?model=mail&submod=mailTrashcan&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
 				</c:otherwise>
 			</c:choose>
-			<%@include file="mailPage.jsp"%>
+			<%@include file="../board/page.jsp"%>
 		</div>
 		</div>
+		
 		</div>
 	</div>
 	</section>
 	<%@include file="/footer.jsp"%>
 <script>
 	function mailTrashGo(){
-		alert("들어왓어");	
 // 		$("#model").attr("value","mail");
 // 		$("#submod").attr("value","mailSetDel");
 // 		$("#usernum").attr("value","${sessionScope.v.memnum}");
@@ -120,10 +122,13 @@
 // 		$("#userid").attr("value","${sessionScope.v.meminmail}");
 // 		$("#delvalue").attr("value",3);
 // 		$("#f").submit();
-		
-		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
-		"&userid=${sessionScope.v.meminmail}&delvalue=3&tofrom=${tofrom}"+
-		"&page=1&chk="+$("#chk:checked").serialize();
+		if(!confirm("선택한 메일을 영구 삭제하겠습니까?")){
+			return; // 취소를 할 경우 삭제되지 않는다.
+		} else { // 확인 버튼을 누르면 메일 삭제
+			location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
+			"&userid=${sessionScope.v.meminmail}&delvalue=3&tofrom=${tofrom}"+
+			"&page=1&chk="+$("#chk:checked").serialize();
+		}
 	}
 	
 	function mailRecover(){

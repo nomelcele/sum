@@ -803,4 +803,28 @@ button {
 
 
 
-/*********** mail *************/>>>>>>> .r397
+/*********** mail *************/
+
+#mailmenu span{
+	font-weight: bold;
+	color: #31B0D5;
+}
+
+#mailContent span{
+	font-weight: bold;
+	font-size: 15pt;
+}
+
+#mailDetailContent{
+	width: 970px;
+}
+
+#mailDetailContent hr{
+	size: 2;
+	width: 970px;
+	align: left;
+	
+}
+
+
+

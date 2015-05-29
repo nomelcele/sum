@@ -70,7 +70,7 @@ public class MailModel implements ModelInter{
 			// 받은 메일함에 있는 메일의 수
 			int totalCount = MailDao.getDao().getListNum(map)[0];
 			System.out.println("받은 메일함 메일 갯수: "+totalCount);
-			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 20, 5, 0, totalCount, 0);
+			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
 			
 			System.out.println("로그인한 사원 번호: "+map.get("usernum"));
 			System.out.println("로그인한 사원 아이디: "+map.get("userid"));
@@ -91,7 +91,7 @@ public class MailModel implements ModelInter{
 			
 			// 보낸 메일함에 있는 메일의 수
 			int totalCount = MailDao.getDao().getListNum(map)[1];
-			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 20, 5, 0, totalCount, 0);
+			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
 						
 			ArrayList<MailVO> tolist = MailDao.getDao().getToMailList(map,pmap);
 			
@@ -160,7 +160,7 @@ public class MailModel implements ModelInter{
 			
 			// 내게 쓴 메일함에 있는 메일의 수
 			int totalCount = MailDao.getDao().getListNum(map)[2];
-			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 20, 5, 0, totalCount, 0);
+			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
 			
 			ArrayList<MailVO> mylist = MailDao.getDao().getMyMailList(map, pmap);
 			
@@ -178,7 +178,7 @@ public class MailModel implements ModelInter{
 			
 			// 휴지통에 있는 메일의 수
 			int totalCount = MailDao.getDao().getListNum(map)[3];
-			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 20, 5, 0, totalCount, 0);
+			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
 			
 			// 휴지통에서 보여줄 메일 리스트
 			ArrayList<MailVO> trashlist = MailDao.getDao().getTrashList(map,pmap);
@@ -217,25 +217,25 @@ public class MailModel implements ModelInter{
 				case 1: // 받은 메일함
 					System.out.println("받은메일함 갈꺼야");
 					totalCount = MailDao.getDao().getListNum(map)[0];
-					pmap = MyPage.getMp().pageProcess(request, 20, 5, 0, totalCount, 0);
+					pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
 					list = MailDao.getDao().getFromMailList(map, pmap);
 					break;
 				case 2: // 보낸 메일함
 					System.out.println("보낸메일함 고고");
 					totalCount = MailDao.getDao().getListNum(map)[1];
-					pmap = MyPage.getMp().pageProcess(request, 20, 5, 0, totalCount, 0);
+					pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
 					list = MailDao.getDao().getToMailList(map, pmap);
 					break;
 				case 3: // 내게 쓴 메일함
 					System.out.println("내게쓴메일함 고고");
 					totalCount = MailDao.getDao().getListNum(map)[2];
-					pmap = MyPage.getMp().pageProcess(request, 20, 5, 0, totalCount, 0);
+					pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
 					list = MailDao.getDao().getMyMailList(map, pmap);
 					break;
 				case 4: // 휴지통
 					System.out.println("휴지통 고고");
 					totalCount = MailDao.getDao().getListNum(map)[3];
-					pmap = MyPage.getMp().pageProcess(request, 20, 5, 0, totalCount, 0);
+					pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
 					list = MailDao.getDao().getTrashList(map, pmap);
 					break;
 			}
