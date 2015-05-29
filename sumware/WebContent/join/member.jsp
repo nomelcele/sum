@@ -37,7 +37,7 @@ function fileUpload(){
 		}
 	};
 	
-	xhr.open("POST","http://localhost/sumware/join/joinupload.jsp",true); // 크로스 도메인으로 데이터를 보내는 것이 가능해졌다.
+	xhr.open("POST","http://localhost:8080/sumware/join/joinupload.jsp",true); // 크로스 도메인으로 데이터를 보내는 것이 가능해졌다.
 	xhr.setRequestHeader("X-File-Name", // 헤더로 파일의 이름이 간다.
 			encodeURIComponent(uploadFile.files[0].name));
 	xhr.send(uploadFile.files[0]); // post 방식이니까 send로 파라미터 전송
@@ -74,22 +74,23 @@ function fileUpload(){
 				
 			}else if($('#mempwd').val() == "${sessionScope.v.mempwd }" && "${sessionScope.v.mempwd }" != ""){
 				// 사원 프로필 수정시
-				
 				$('.dhpwd').show("slow");
 				
 			}	else {
 		
 				$('#targetpw').html('<p style="color: red;">비밀번호가 일치 하지 않습니다.</p>');
+				setTimeout(function(){
+					$('#targetpw').html(' ');
+				}, 2000);
 			}  
 	});
 		<%--비밀번호 중복 검사 --%>
 		$('#mempwd2').change(function() {
 			if($('#mempwd1').val() != $('#mempwd2').val()){
 				
-				$('#mempwd1').text("");
-				$('#mempwd2').text("");
+				$('#mempwd1').val("");
+				$('#mempwd2').val("");
 				$('#mempwd1').focus();
-				alert("패스워드가 같지 않습니다.");
 				$('#targetpwd').html('<p style="color: red;">비밀번호가 일치 하지 않습니다.</p>');
 
 			}else{
@@ -104,21 +105,23 @@ function fileUpload(){
 		
 		$('#btn').click(
 				function() {
+					alert("전송 버튼 클릭했어");
 					var a1 = $("#sample6_postcode1").val() + "/"
 							+ $("#sample6_postcode2").val() + "/"
 							+ $("#sample6_address").val() + "/"
 							+ $("#sample6_address2").val();
 					$('#address').attr("value", a1);
-					if($('#memimg').val()==""){
-						if("${sessionScope.v.memprofile}" != null){
-							// 프로필 수정 시 지정해준 사진값(memimg)이 없으므로 프로필 사진을등록해달라고 함!
-							// 그래서 프로필 수정 시 memimg의 value값을 지정해 주어야 함
-							$('#memimg').val("${sessionScope.v.memprofile}");
-						}else{
-							alert("프로필 사진을 등록 해주세요!");
-						}
+// 					if($('#memimg').val()==""){
+// 						if("${sessionScope.v.memprofile}" != null){
+// 							// 프로필 수정 시 지정해준 사진값(memimg)이 없으므로 프로필 사진을등록해달라고 함!
+// 							// 그래서 프로필 수정 시 memimg의 value값을 지정해 주어야 함
+// 							$('#memimg').val("${sessionScope.v.memprofile}");
+// 						}else{
+// 							alert("프로필 사진을 등록 해주세요!");
+// 						}
 						
-					}else if($('#meminmail').val()==""){
+// 					}else 
+						if($('#meminmail').val()==""){
 						alert("아이디를 입력해주세요!");
 						$('#meminmail').focus();
 						
@@ -140,7 +143,7 @@ function fileUpload(){
 						alert("상세 주소를 입력해 주세요!");
 						$('#sample6_address2').focus();
 					}else{
-						alert("정보 입력이 완료되었습니다.")
+						alert("정보 입력이 완료되었습니다.");
 						fileUpload();
 						myform.submit();
 					}					
