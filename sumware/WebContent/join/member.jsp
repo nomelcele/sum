@@ -261,7 +261,7 @@ function fileUpload(){
 						<input type="hidden" name="memimg" id="memimg">
 						<header class="page-header">
 							<h1 class="page-title">Profile Modify</h1>
-							
+
 							<small><i class="fa fa-clock-o"></i> Last Updated on: <time>Sunday,
 									October 05, 2015</time></small>
 						</header>
@@ -276,8 +276,7 @@ function fileUpload(){
 										</c:if>
 										<c:if test="${param.model eq 'join' }">
 											<img class="img-circle" alt="프로필 사진 "
-												id="targetimg" src="profileImg/${sessionScope.v.memprofile }" style="height:200px">
-												
+												id="targetimg" src="profileImg/${sessionScope.v.memprofile }" style="height:200px;">
 										</c:if>
 										</figure>
 										<div class="btn-group">
@@ -308,7 +307,6 @@ function fileUpload(){
 										</div>
 										</c:if>
 									</div>
-
 									<div class="form-group">
 										<label class="col-sm-3 control-label" for="textinput">기존
 											비밀번호</label>
