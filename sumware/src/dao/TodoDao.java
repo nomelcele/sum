@@ -44,10 +44,10 @@ public class TodoDao {
 				v.setMemnum(rs.getInt("memnum"));
 				v.setMemprofile(rs.getString("memprofile"));
 				v.setMemjob(rs.getString("memjob"));
-				v.setMemauth(Integer.parseInt(rs.getString("memauth")));
+				v.setMemauth(rs.getInt("memauth"));
 				v.setMemmail(rs.getString("memmail"));
 				v.setMeminmail(rs.getString("meminmail"));
-				v.setMemdept(Integer.parseInt(rs.getString("memdept")));
+				v.setMemdept(rs.getInt("memdept"));
 				
 				list.add(v);
 			}
