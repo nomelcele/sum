@@ -53,8 +53,8 @@ public class SnsDao {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select rownum srnum,m.memname,m.memprofile ,s.snum,s.scont,to_char(s.sdate,'MM')||'월'||to_char(s.sdate,'dd')||'일'||to_char(s.sdate,'hh:mm') sdate,s.sdept,s.smem");
 		sql.append(",(select count(*) cnt from comm where commsns=s.snum) stocount");
-		sql.append(" from (select * from sns s where s.sdept=? order by 1 desc) s,member m");
-		sql.append(" where m.memnum=s.smem and rownum between ? and ?");
+		sql.append(" from (select * from sns s where s.sdept=?) s,member m");
+		sql.append(" where m.memnum=s.smem and rownum between ? and ? order by s.sdate desc");
 		try {
 			snsList=new ArrayList<>();
 			con = ConUtil.getOds();
