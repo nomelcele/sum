@@ -1,6 +1,7 @@
 package model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import util.CaptchasDotNet;
 import util.MyMap;
 import controller.ModelForward;
 import dao.MemberDao;
+import dto.MemberVO;
 
 public class JoinModel implements ModelInter{
 
@@ -23,7 +25,6 @@ public class JoinModel implements ModelInter{
 		String url="";
 		boolean method = false;
 		if(submod !=null && submod.equals("memberForm")){
-			
 			
 			url ="join/member.jsp";
 			method=true;
@@ -102,6 +103,22 @@ public class JoinModel implements ModelInter{
 			url="index.jsp";
 			method = false;
 
+		}else if(submod !=null && submod.equals("addMember")) {
+			HashMap<String, String> map= MyMap.getMaps().getMapList(request);
+			// 추가 dao만들어야댐
+			
+		}else if(submod !=null && submod.equals("getMemMgr")){
+			System.out.println("addMemberForm들어옴");
+			// 부서선택하면 부서에 대한 팀장들 리스트가져옴
+			int memdept = Integer.parseInt(request.getParameter("memdept"));
+			ArrayList<MemberVO> memmgrlist = MemberDao.getDao().getMemMgr(memdept);
+			request.setAttribute("mgrList", memmgrlist);
+			url="admin/getMgrListCallback.jsp";
+			method = true;
+			
+		}else if(submod !=null && submod.equals("addMemberForm")){
+			url="admin/admin.jsp";
+			method = true;
 		}
 		System.out.println("url:"+url+" method:"+method);
 		return new ModelForward(url, method);

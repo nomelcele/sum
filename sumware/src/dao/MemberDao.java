@@ -135,4 +135,68 @@ public class MemberDao {
 			
 		}	
 	}
+	// 수정해야함!!!!!!!!!!!!!!!!!!!!!!!!1
+	public void addMember(HashMap<String,String> map){
+		Connection con = null;
+		PreparedStatement pstmt=null;	
+		try {
+			con=ConUtil.getOds();
+			StringBuffer sql=new StringBuffer();
+			sql.append("insert into member values(member_seq.nextVal, ?, null, ?, null, ?, ?, ?, null,?,?  )");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, map.get("newname"));
+			pstmt.setString(2, map.get("newpwd"));
+			pstmt.setString(3, map.get("newjob"));
+			pstmt.setInt(4, Integer.parseInt(map.get("newauth")));
+			pstmt.setString(5, map.get("newmail"));
+			pstmt.setInt(6,  Integer.parseInt(map.get("newmgr")));
+			pstmt.setInt(7,  Integer.parseInt(map.get("newdept")));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		
+	}
+	
+	public ArrayList<MemberVO> getMemMgr(int memdept){
+		// 팀장정보들 가져옴
+		System.out.println("memdept : "+memdept);
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+		
+		try {
+			con = ConUtil.getOds();
+			StringBuffer sql = new StringBuffer();
+			sql.append("select memnum, memname from member where memauth=4 and memdept=?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, memdept);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				MemberVO v = new MemberVO();
+				v.setMemnum(Integer.parseInt(rs.getString("memnum")));
+				v.setMemname(rs.getString("memname"));
+				System.out.println("----------------------");
+				System.out.println("memnum : "+rs.getString("memnum"));
+				System.out.println("memname : "+rs.getString("memname"));
+				System.out.println("----------------------");
+				list.add(v);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+		return list;
+	}
+	
+	
 }

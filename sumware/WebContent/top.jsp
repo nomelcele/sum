@@ -166,7 +166,7 @@
 					success : function(result){
 					
 							$("#menuTarget").html(result);
-
+							
 						}
 					});
 			}else if(sel=='giveJob1'){
@@ -346,6 +346,19 @@
 			//부장의 업무 추가 폼 작성 후 보내기버튼
 			$('#addTodoForm').submit();
 			alert("업무를 등록하였습니다.");
+		}else if(res=='addMem'){
+			alert("newmgr : "+$('#newmgr').val());
+
+			if($('#newjob').val() == '부장'){
+				$('#newauth').attr("value", "3");
+			}else if($('#newjob').val() == '팀장'){
+				$('#newauth').attr("value", "4");
+			}else if($('#newjob').val() == '사원'){
+				$('#newauth').attr("value", "5");
+			}
+			alert("newauth:"+$('#newauth').val());
+			
+			$('#addMemForm').submit();
 		}
 	}
 	
