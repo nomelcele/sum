@@ -26,25 +26,25 @@
 		</c:choose>
 		<div class="row" style="padding:7px;">
 			<table class="table table-condensed table-hover" id="listTable">
-					<tr>
+					<tr style="background-color: #F5F5F5;">
 						<td class="col-lg-1"><input type="checkbox" name="all" onclick="checkAll(this)"></td>
 							<c:choose>
 							<c:when test="${tofrom eq '1'}">
-								<td class="col-lg-1">보낸 사람</td>
+								<td class="col-lg-1"><span>보낸 사람</span></td>
 							</c:when>
 							<c:when test="${tofrom eq '2'}">
-								<td class="col-lg-1">받는 사람</td>
+								<td class="col-lg-1"><span>받는 사람</span></td>
 							</c:when>
 							<c:when test="${tofrom eq '3'}">
-								<td class="col-lg-1">보낸 사람</td>
+								<td class="col-lg-1"><span>보낸 사람</span></td>
 							</c:when>
 							<c:otherwise>
-								<td class="col-lg-1">보낸 사람</td>
-								<td class="col-lg-1">받는 사람</td>
+								<td class="col-lg-1"><span>보낸 사람</span></td>
+								<td class="col-lg-1"><span>받는 사람</span></td>
 							</c:otherwise>
 							</c:choose>
-						<td class="col-lg-6">제목</td>
-						<td class="col-lg-2">보낸 날짜</td>
+						<td class="col-lg-6"><span>제목</span></td>
+						<td class="col-lg-2"><span>보낸 날짜</span></td>
 					</tr>
 					
 					<c:forEach var="mList" items="${list}">

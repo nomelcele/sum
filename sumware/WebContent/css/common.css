@@ -827,5 +827,9 @@ button {
 	
 }
 
+#listTable tr td span{
+	font-weight: bold;
+}
+
 
 

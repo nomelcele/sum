@@ -3,7 +3,7 @@
 <%@include file="/top.jsp"%>
 <section id="features" class="features2">
 	<div class="container">
-		<div class="row">
+		<div class="row" style="height:400px;">
 			<%@include file="/contentLeft.jsp" %>
 			<div class="col-lg-8" id="mailContent" style="text-align:center; padding:30px;">
 				<span>메일 전송이 완료되었습니다.</span><br/><br/>
