@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- board left --%>
+<%-- board left(S) --%>
 <c:if test="${param.model eq 'board' }">
 <form action="sumware" method="post" id="goTodo">
 		<input type="hidden" id="model" name="model">
@@ -9,7 +9,6 @@
 		<input type="hidden" id="memnum" name="memnum">
 		<input type="hidden" id="memmgr" name="memmgr">
 		<input type="hidden" id="memdept" name="memdept">
-		
 </form>
 <div>
 	<div class="row-lg-6">
@@ -45,8 +44,17 @@
 		</div>
 	</div>
 </div>
+<hr>
+<div>
+	<ul>
+		<li><a href="sumware?model=board&submod=boardList&bgnum=0&page=1&bdeptno=${sessionScope.v.memdept }">공지사항</a></li>
+	<c:forEach var="bname" items="${sessionScope.bname }">
+		<li><a href="sumware?model=board&submod=boardList&bgnum=${bname.bgnum }&page=1&bdeptno=${sessionScope.v.memdept }">${bname.bname }</a></li>
+	</c:forEach>
+	</ul>
+</div>
 </c:if>
-
+<%-- board left(E) --%>
 <%-- todo left --%>
 <c:if test="${param.model eq 'todo' }">
 <form action="sumware" method="post" id="goTodo">
