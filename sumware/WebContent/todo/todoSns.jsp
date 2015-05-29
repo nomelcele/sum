@@ -22,9 +22,9 @@
 // push Client 설정 (받는쪽)
 	var rowsPerPage =7; //sns에 쓸 행수
 	var eventSource;
-	var cheight=$('.chat').height()-50;
+	var cheight=$('.chat').height()-50;//sns
+	var ch ;//snsComm
 	var pageB=5; //snscomm에서 쓸 페이지 행수
-	
 	$(function(){
 		push();
 	});
@@ -38,9 +38,7 @@
 			// onopen : 서버가 연결이 되었을 때 발생
 			eventSource.onmessage = function(event){
 				$(".chat").html(event.data);
-				
 			};
-// 			eventSource.close();
 		}else{
 			$(".chat").html("해당 브라우저는 지원이 안됩니다.");
 		}
@@ -53,8 +51,7 @@
 			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
 			setTimeout(function(){
 				rowsPerPage+=5;
-				cheight+=$('.chat').scrollTop();
-				sctop
+				cheight+=($('.chat').scrollTop()+100);
 				console.log("rowsPerPage:"+rowsPerPage);
 				console.log("cheight:"+cheight);
 				eventSource.close();
@@ -95,7 +92,7 @@
 		});
 	}
 	function snsComm(snum){
-		var rowsPerPage=5;
+		var rowsPerPage=10;
 		var data={
 			model:"sns",
 			submod:"snsComm",
@@ -110,6 +107,8 @@
 			success: function(result){
 				$("#wrapbody").html(result);
  				$("#snsCommBtn").click();
+ 				
+ 				ch= $('#snsCommList').height()
 			}
 		});
 	}
@@ -151,29 +150,44 @@
 		});
 		
 	}
-	function snsCommListPlus(snum){
-		pageB +=5;
-		var page=pageB;
-		var rowsPerPage=pageB;
-		var data={
-			model:"sns",
-			submod:"snsComm",
-			page:"1",
-			rowsPerPage:rowsPerPage,
-			snum:snum
-		};
-		$.ajax({
-			type:"POST",
-			url:"sumware",
-			data:data,
-			success: function(result){
-				$("#wrapbody").html(result);
-			}
-		});
+	function snsCommScroll(snum){
+		var st = $('#snsCommList').scrollTop();
+		console.log("st:"+st);
+		console.log("ch:"+ch);
+	
+		if ( st >= ch ){
+			$("#commloading").html("<img src='img/loading.gif' alt='loading'>");
+			setTimeout(function(){
+				ch+=$('#snsCommList').height()-200;
+				$("#commloading img").remove();
+				
+				pageB +=5;
+				var page=pageB;
+				var rowsPerPage=pageB;
+				var data={
+					model:"sns",
+					submod:"snsComm",
+					page:"1",
+					rowsPerPage:rowsPerPage,
+					snum:snum
+				};
+				$.ajax({
+					type:"POST",
+					url:"sumware",
+					data:data,
+					success: function(result){
+						$("#wrapbody").html(result);
+						$('#snsCommList').scrollTop(st);
+					}
+				});
+			}, 1000);
+		}
+		
 	}
 </script>
 <style>
 	#loading img{float:none; width:40px;}
+	#commloading img{float:none; width:40px;}
 </style>
 </head>
 <body>
