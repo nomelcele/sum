@@ -286,7 +286,7 @@ public class BoardDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select bname,bdeptno,bgnum from bname where bdeptno=?");
+			sql.append("select bname,bdeptno,bgnum from bname where bdeptno=? order by bgnum asc");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, map.get("bdeptno"));
 			rs = pstmt.executeQuery();
