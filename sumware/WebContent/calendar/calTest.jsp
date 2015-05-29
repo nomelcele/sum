@@ -3,8 +3,6 @@
 <%@page import="dao.CalendarDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-
 <%@include file="../top.jsp" %>
 <!-- 캘린더 -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -114,25 +112,25 @@ $(function(){
 		  })
 	 });
 </script>
-
-
+<div id="wrap2">
 	<form action="sumware" method="post" id="selCal">
 		<input type="hidden" name="model" id="mod">
 		<input type="hidden" name="submod" id="submod">
 		<input type="hidden" name="cal" id="cal">
 	</form>
-		<div class="container">
+	<div class="lnb-area">
+		<%@include file="/contentLeft.jsp" %>
+	</div>
+	<div class="contents">
 		<div class="row">
-			<div class="col-lg-3">
-			<%@include file="../contentLeft.jsp" %>
-			</div>
-			<div class="col-lg-9">
+			<div class="">
 				<div style="text-align: right;padding: 10px;">
 					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calDept" value="부서일정" onclick="goCal(this)">
 					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calMem" value="사원일정" onclick="goCal(this)">
 				</div>
-				<div id='calendar'"></div>
+				<div id='calendar'></div>
 			</div>
 		</div>
 	</div>
+</div>
 <%@include file="../footer.jsp" %>
