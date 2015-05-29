@@ -47,9 +47,9 @@
 <hr>
 <div>
 	<ul>
-		<li><a href="sumware?model=board&submod=boardList&bgnum=0&page=1&bdeptno=${sessionScope.v.memdept }">공지사항</a></li>
-	<c:forEach var="bname" items="${sessionScope.bname }">
-		<li><a href="sumware?model=board&submod=boardList&bgnum=${bname.bgnum }&page=1&bdeptno=${sessionScope.v.memdept }">${bname.bname }</a></li>
+<%-- 		<li><a href="sumware?model=board&submod=boardList&bgnum=0&page=1&bdeptno=${sessionScope.v.memdept }">공지사항</a></li> --%>
+	<c:forEach var="blist" items="${sessionScope.blist }">
+		<li><a href="sumware?model=board&submod=boardList&bgnum=${blist.bgnum }&page=1&bdeptno=${sessionScope.v.memdept }&bname=${blist.bname }">${blist.bname }</a></li>
 	</c:forEach>
 	</ul>
 </div>
