@@ -19,15 +19,17 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- 모달 -->
+<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+<!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
+<!-- <!-- 모달 -->
+<!-- todo일 때 sns부분 -->
 <!-- 모달 -->
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<!-- 모달 -->
-todo일 때 sns부분
-<c:if test="${param.model eq 'todo' }">
-
-</c:if>
 <script src="/js/http.js"></script>
 <!-- 메인 -->
 <c:if test="${param.submod eq 'writeForm' }">
@@ -581,11 +583,11 @@ function select(index){
 				</ul>
 				<ul class="nav navbar-right navbar-nav user-name">
 				<c:if test="${empty sessionScope.v.memname}">
-			        <li><span class="control-label-" for="sabun"> <strong>${sessionScope.memnum}</strong> 님 환영합니다.</span></li>
+			        <li><span class="control-label-" > <strong>${sessionScope.memnum}</strong> 님 환영합니다.</span></li>
 					<li><a href="sumware?model=login&submod=logout&memnum=${sessionScope.memnum}"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
 				</c:if>
 				<c:if test="${!empty sessionScope.v.memname}">
-			        <li><span class="control-label-" for="sabun"> <strong>${sessionScope.v.memname}</strong> 님 환영합니다.</span></li>
+			        <li><span class="control-label-" > <strong>${sessionScope.v.memname}</strong> 님 환영합니다.</span></li>
 					<li><a href="sumware?model=login&submod=logout&memnum=${sessionScope.v.memnum}"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
 				</c:if>
 				
