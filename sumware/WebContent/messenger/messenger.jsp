@@ -20,7 +20,11 @@
 </head> 
 <script>
 	// 사원 list 출력 시 채팅창으로 이동
+	// 새창이름 1씩 증가
+	var i = 0;
 	function mesgoUrl(res){
+		// 새창이름 1씩 증가
+		i++;
 		var resNum = res;
 		var opt="width=500, height=600, scrollbars=no";
 		var f = document.mesform;
@@ -30,8 +34,8 @@
 		f.fromNum.value = "${sessionScope.v.memnum}";
 		f.toNum.value = resNum;
 		
-		f.target="messengerChatroom";
-		window.open("","messengerChatroom",opt);
+		f.target="messengerChatroom"+i;
+		window.open("","messengerChatroom"+i,opt);
 		f.submit();	
 	};
 	
@@ -71,7 +75,8 @@
 		var resMessage = confirm(message);
 		var f1 = document.entform;
 		var evdata = edata1;
-
+		// 새창이름 1씩 증가
+		i++;
 		if(resMessage == true){
 			alert("대화를 수락하였습니다.");
 			var winopt="width=500, height=600, scrollbars=no";
@@ -80,8 +85,8 @@
 			f1.edata1.value = evdata; // 방번호, IP, 유저사번
 			f1.userNum2.value = "${sessionScope.v.memnum}";
 					
-			f1.target="msgrecRoom";
-			window.open("","msgrecRoom",winopt);
+			f1.target="msgrecRoom"+i;
+			window.open("","msgrecRoom"+i,winopt);
 			f1.submit();
 			
 		} else if(resMessage == false){
@@ -94,9 +99,9 @@
 			f2.edata1.value = evdata; // 방번호, IP, 유저사번
 			f2.uerNum2.value = "${sessionScope.v.memnum}";
 			f2.stateMain.value = "mesMain";	
-			f2.target="msgrefuse";
+			f2.target="msgrefuse"+i;
 			
-			window.open("","msgrefuse",winopt1);
+			window.open("","msgrefuse"+i,winopt1);
 			f2.submit();
 
 		} else{
