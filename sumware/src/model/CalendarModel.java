@@ -67,6 +67,14 @@ public class CalendarModel implements ModelInter{
 			String title = URLDecoder.decode(request.getParameter("title"),"UTF-8");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			map.put("title", title);
+			String end=map.get("end");
+			if(end.length()<11){
+				end=end.replaceAll("-", "");
+				end=String.valueOf((Integer.parseInt(end)-100));
+				map.put("end", end);
+				
+			}
+			
 			HttpSession session = request.getSession();
 			vo = (MemberVO) session.getAttribute("v");
 			
