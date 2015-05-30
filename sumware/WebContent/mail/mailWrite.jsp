@@ -1,18 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<style>
-	#view {
-		width: 200px;
-		border: 1px solid gray;
-		border-top: 0px;
-		margin-top: -1px;
-		display: none;
-		font-family: NanumGothic;
-		font-size: 10px;
-	}
-</style>
 <%@include file="/top.jsp"%>
 <section id="features" class="features2">
 	<div class="container">
@@ -22,7 +10,7 @@
 			<div class="col-lg-8" style="padding:34px;">	
 
 	<form method="post" action="sumware" class="form-horizontal" role="form"
-	name="f" autocomplete="off" enctype="multipart/form-data">
+	name="f" id="mailWriteF" autocomplete="off" enctype="multipart/form-data">
     	<input type="hidden" name="model" value="mail">
 		<input type="hidden" name="submod" value="mailWrite">
 		<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
@@ -58,7 +46,8 @@
 	    </div>
 	    <div class="form-group">
 	        <div class="col-sm-10 col-sm-offset-2">
-	            <input type="submit" value="전송" class="btn btn-sm btn-info" id="sendBtn">
+	            <input type="button" value="전송" class="btn btn-sm btn-info" id="sendBtn"
+	            onclick="mailSendFunc()">
 	        </div>
 	    </div>
 	    <div class="form-group">

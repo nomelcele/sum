@@ -431,6 +431,10 @@ function mailFormGo(res){
 		
 		} 
 }
+
+function mailSendFunc(){
+	$("#mailWriteF").submit();
+}
 // 메일-suggest 관련 함수
 var xhr = null;
 function getXMLHttpRequest() {

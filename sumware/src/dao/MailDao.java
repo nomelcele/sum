@@ -206,7 +206,7 @@ public class MailDao {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
 			sql.append("select ma.mailtitle, me1.memname mailsname, me2.memname mailrname, ma.maildate,");
-			sql.append(" ma.mailcont, ma.mailfile, me1.meminmail replyid");
+			sql.append(" ma.mailcont, ma.mailfile, me1.meminmail replyid, ma.mailreceiver");
 			sql.append(" from mail ma, member me1, member me2");
 			sql.append(" where me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver and ma.mailnum=?");
 			pstmt = con.prepareStatement(sql.toString());
@@ -221,6 +221,7 @@ public class MailDao {
 				v.setMailcont(rs.getString("mailcont"));
 				v.setMailfile(rs.getString("mailfile"));
 				v.setReplyid(rs.getString("replyid"));
+				v.setMailreceiver(rs.getString("mailreceiver"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
