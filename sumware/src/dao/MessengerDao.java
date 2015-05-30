@@ -279,8 +279,8 @@ public class MessengerDao {
 			pstmt.setInt(2, v.getMesmember());
 			pstmt.executeUpdate();
 			
-			System.out.println("Dao의 방번호 : "+v.getMesnum());
-			System.out.println("Dao의 사용자 번호 : "+v.getMesmember());
+//			System.out.println("Dao의 방번호 : "+v.getMesnum());
+//			System.out.println("Dao의 사용자 번호 : "+v.getMesmember());
 			
 			
 			// 방 종료 설정을 진행
@@ -295,7 +295,7 @@ public class MessengerDao {
 			ArrayList<MessengerRoomVO> rlist = new ArrayList<MessengerRoomVO>();
 			while(rs.next()){
 				MessengerRoomVO vr = new MessengerRoomVO();
-				System.out.println("종료 에정 된 방번호 : "+rs.getInt("mesnum"));
+//				System.out.println("종료 에정 된 방번호 : "+rs.getInt("mesnum"));
 				vr.setMasnum(rs.getInt("mesnum"));
 				rlist.add(vr);
 				
@@ -314,7 +314,7 @@ public class MessengerDao {
 				pstmt.setInt(1, e.getMasnum());
 				pstmt.executeUpdate();
 				
-				System.out.println("master table 종료 된 방번호 : "+e.getMasnum());
+//				System.out.println("master table 종료 된 방번호 : "+e.getMasnum());
 				
 				sql.setLength(0);
 				CloseUtil.close(pstmt);
@@ -324,7 +324,7 @@ public class MessengerDao {
 				pstmt = con.prepareStatement(sql.toString());
 				pstmt.setInt(1, e.getMasnum());
 				pstmt.executeUpdate();
-				System.out.println("mesentry에서 종료 된 방번호 : "+e.getMasnum());
+//				System.out.println("mesentry에서 종료 된 방번호 : "+e.getMasnum());
 				
 				sql.setLength(0);
 				CloseUtil.close(pstmt);				
