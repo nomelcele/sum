@@ -70,7 +70,7 @@ public class CalendarModel implements ModelInter{
 			String end=map.get("end");
 			if(end.length()<11){
 				end=end.replaceAll("-", "");
-				end=String.valueOf((Integer.parseInt(end)-100));
+				end=String.valueOf((Integer.parseInt(end)-1));
 				map.put("end", end);
 				
 			}
