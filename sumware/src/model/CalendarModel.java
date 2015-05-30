@@ -50,7 +50,6 @@ public class CalendarModel implements ModelInter{
 				request.setAttribute("calJson", json);
 				request.setAttribute("cal", "부서");
 			}else{
-				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 				//리스트를 불러와서 json형식으로 바꿈
 				String sql = CalendarDAO.getDao().calSQL(1);
 				ArrayList<CalendarVO> list = CalendarDAO.getDao().getCalList(sql, calmem);
@@ -68,7 +67,8 @@ public class CalendarModel implements ModelInter{
 			String title = URLDecoder.decode(request.getParameter("title"),"UTF-8");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			map.put("title", title);
-			
+			String end=String.valueOf((Integer.parseInt(map.get("end").replaceAll("-", ""))-100));
+			map.put("end",end);
 			HttpSession session = request.getSession();
 			vo = (MemberVO) session.getAttribute("v");
 			
