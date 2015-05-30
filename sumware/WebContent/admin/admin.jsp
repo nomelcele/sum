@@ -33,7 +33,6 @@ function getMemMgr(){
 				<input type="hidden" name="model" value="join">
 				<input type="hidden" name="submod" value="addMember">
 				<input type="hidden" name="newauth" value="" id="newauth">
-				<input type="hidden" name="newmgr" value="" id="newmgr">
 				
 				<div class="chat-panel panel panel-default" style="width: 60%">
 					<div class="panel-heading">
@@ -53,7 +52,7 @@ function getMemMgr(){
 
 						<div class="form-group has-success">
 							<label class="control-label">비밀번호</label> 
-							<input type="text" class="form-control" id="newpwd" name="newpwd" style="width: 120px">
+							<input type="password" class="form-control" id="newpwd" name="newpwd" style="width: 120px">
 						</div>
 
 						<div class="form-group has-success">
@@ -78,10 +77,7 @@ function getMemMgr(){
 										<option value="사원">사 원</option>
 								</select>
 						</div>
-						
-						
-						
-						
+
 						<div class="form-group has-success">
 							<button type="button" class="btn btn-outline btn-success" onclick="javascript:todoFormGo('addMem')" id = "sendFormToAdd">추 가</button>
 						</div>
