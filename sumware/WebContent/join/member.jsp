@@ -271,7 +271,6 @@ function fileUpload(){
 						<input type="hidden" name="memimg" id="memimg">
 						<header class="page-header">
 							<h1 class="page-title">Profile Modify</h1>
-
 							<small><i class="fa fa-clock-o"></i> Last Updated on: <time>Sunday,
 									October 05, 2015</time></small>
 						</header>
@@ -282,11 +281,11 @@ function fileUpload(){
 										<figure>
 										<c:if test="${param.model ne 'join' }">
 											<img class="img-circle" alt="프로필 사진 "
-												id="targetimg" src="img/imgx.jpg" style="height:200px">
+												id="targetimg" src="img/imgx.jpg">
 										</c:if>
 										<c:if test="${param.model eq 'join' }">
 											<img class="img-circle" alt="프로필 사진 "
-												id="targetimg" src="profileImg/${sessionScope.v.memprofile }" style="height:200px;">
+												id="targetimg" src="profileImg/${sessionScope.v.memprofile }">
 										</c:if>
 										</figure>
 										<div class="btn-group">
@@ -296,6 +295,9 @@ function fileUpload(){
 									</div>
 								</div>
 							</div>
+							</div>
+							<div style="margin: 0;">
+							<h3 class="page-title2">Detailed Matters</h3>
 							</div>
 							<div class="bs-callout bs-callout-danger">
 								<div class="row">

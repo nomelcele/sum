@@ -243,11 +243,18 @@ button, input, select, option, textarea, a {
 	text-align: center;
 }
 
-
+.page-title {
+	text-align: center;
+}
 .dhpwd{
 	display: none;
 }
+#targetimg{height:200px;}
 
+
+.page-title2{
+		text-align: center;
+}
 
 /*social buttons*/
 .btn-social {
