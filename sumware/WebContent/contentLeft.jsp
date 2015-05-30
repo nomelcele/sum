@@ -360,6 +360,63 @@
 	</div>
 </c:if>
 
+<!-- 사원추가 left -->
+<c:if test="${param.model eq 'join' }">
+<div>
+	<div class="row-lg-6">
+		<div class="chat-panel panel panel-default left-profile">
+			<div class="panel-heading">
+				<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">My
+					profile</strong>
+			</div>
+			<div class="panel-body">
+				<!-- profile-img(S) -->
+				<span class="chat-img pull-left profile-img"><img
+					src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
+					class="img-circle" style="width: 100px; height: 130px;">
+				</span>
+				<!-- profile-img(E) -->
+				
+				<!-- profile-table(S) -->
+				<table class="profile-table">
+					<colgroup>
+					    <col style="width:60px">
+					    <col>
+					</colgroup>
+					<tr>
+						<th><strong class="primary-font">이름</strong></th>
+						<td>${sessionScope.v.memname }</td>
+					</tr>
+					<tr>
+						<th><strong class="primary-font">직급</strong></th>
+						<td>${sessionScope.v.memjob }</td>
+					</tr>
+					<tr>
+						<th><strong class="primary-font">부서</strong></th>
+						<td>${sessionScope.v.dename }</td>
+					</tr>
+					<tr>
+						<th><strong class="primary-font">상급자</strong></th>
+						<td>${sessionScope.v.mgrname }</td>
+					</tr>
+				</table>
+				<!-- profile-table(E) -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <hr> -->
+
+<!-- left-menu(S) -->
+<div class="left-menu" id="left-menu">
+	<ul>
+		<li><a href="#">사원 추가</a></li>
+		<li><a href="#">게시판 추가</a></li>
+	</ul>
+</div>
+<!-- left-menu(E) -->
+
+</c:if>
 
 
 
