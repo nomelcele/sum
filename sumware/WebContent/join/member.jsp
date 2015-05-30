@@ -104,23 +104,22 @@ function fileUpload(){
 		
 		$('#btn').click(
 				function() {
-					alert("전송 버튼 클릭했어");
 					var a1 = $("#sample6_postcode1").val() + "/"
 							+ $("#sample6_postcode2").val() + "/"
 							+ $("#sample6_address").val() + "/"
 							+ $("#sample6_address2").val();
 					$('#address').attr("value", a1);
-// 					if($('#memimg').val()==""){
-// 						if("${sessionScope.v.memprofile}" != null){
-// 							// 프로필 수정 시 지정해준 사진값(memimg)이 없으므로 프로필 사진을등록해달라고 함!
-// 							// 그래서 프로필 수정 시 memimg의 value값을 지정해 주어야 함
-// 							$('#memimg').val("${sessionScope.v.memprofile}");
-// 						}else{
-// 							alert("프로필 사진을 등록 해주세요!");
-// 						}
+					if($('#targetimg').attr("src")=="img/imgx.jpg"){
+						if("${sessionScope.v.memprofile}"!=""){
+							alert("사진잇음??"+"${sessionScope.v.memprofile}");
+							// 프로필 수정 시 지정해준 사진값(memimg)이 없으므로 프로필 사진을등록해달라고 함!
+							// 그래서 프로필 수정 시 memimg의 value값을 지정해 주어야 함
+							$('#memimg').val("${sessionScope.v.memprofile}");
+						}else{
+							alert("프로필 사진을 등록 해주세요!");
+						}
 						
-// 					}else 
-						if($('#meminmail').val()==""){
+					}else if($('#meminmail').val()==""){
 						alert("아이디를 입력해주세요!");
 						$('#meminmail').focus();
 						
