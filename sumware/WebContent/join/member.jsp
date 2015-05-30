@@ -34,6 +34,7 @@ function fileUpload(){
 		// callback
 		if(xhr.readyState == 4 && xhr.status == 200){
 			$('#memimg').attr("value",xhr.responseText.trim());
+			alert("입력이 성공하였습니다.");
 			myform.submit();
 			
 		}
@@ -293,7 +294,7 @@ function fileUpload(){
 								</div>
 							</div>
 							</div>
-							<div style="margin: 0;">
+							<div style="padding-top:10px;">
 							<h3 class="page-title2">Detailed Matters</h3>
 							</div>
 							<div class="bs-callout bs-callout-danger">
