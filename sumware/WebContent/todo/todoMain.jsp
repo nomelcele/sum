@@ -10,7 +10,7 @@
 			</div>
 			<!-- 부서업무 부분!! -->
 			<!-- menutarget 부분 -->
-			<div class="contents">
+			<div class="contents" style="padding-left:50px">
 			<div class="col-lg-4" style="width: 35%"  id="menuTarget">
 				
 				<div class="chat-panel panel panel-default">
