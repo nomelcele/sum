@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<label class="control-label">담당자(팀)</label>
+<label class="control-label">상급자</label>
 <select name="newmgr" class="form-control" id="newmgr" style="width: 120px">
 		<option value="">팀장 선택</option>
 	<c:forEach var="mgrlist" items="${mgrList }">

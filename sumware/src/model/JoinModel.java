@@ -107,8 +107,12 @@ public class JoinModel implements ModelInter{
 			// 신입사원 추가 버튼 클릭시 추가 기능
 			HashMap<String, String> map= MyMap.getMaps().getMapList(request);
 			MemberDao.getDao().addMember(map);
-			url = "admin/admin.jsp";
-			method = false;
+			
+			String memmail = map.get("newmail");
+			MemberVO vo = MemberDao.getDao().getNewMemInfo(memmail);
+			request.setAttribute("newmemVo", vo);
+			url = "admin/sendEmailUser.jsp";
+			method = true;
 			
 		}else if(submod !=null && submod.equals("getMemMgr")){
 			System.out.println("addMemberForm들어옴");
@@ -116,6 +120,7 @@ public class JoinModel implements ModelInter{
 			int memdept = Integer.parseInt(request.getParameter("memdept"));
 			ArrayList<MemberVO> memmgrlist = MemberDao.getDao().getMemMgr(memdept);
 			request.setAttribute("mgrList", memmgrlist);
+			
 			url="admin/getMgrListCallback.jsp";
 			method = true;
 			

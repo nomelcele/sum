@@ -200,5 +200,36 @@ public class MemberDao {
 		return list;
 	}
 	
-	
+	// 신입사원 정보 뽑아옴
+	public MemberVO getNewMemInfo(String memmail ){
+		int result=0;
+	   Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StringBuilder sql = new StringBuilder();
+		MemberVO v = new MemberVO();
+		sql.append("select s.memnum,s.memname, d.dename, s.mempwd, m.memname mgrname, s.memmail from member s, dept d, member m where s.memmgr = m.memnum and s.memdept= d.denum and s.memmail=?");
+		try{
+			con=ConUtil.getOds();
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setString(1,memmail);
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				v.setMemnum(rs.getInt(1));
+				v.setMemname(rs.getString(2));
+				v.setDename(rs.getString(3));
+				v.setMempwd(rs.getString(4));
+				v.setMgrname(rs.getString(5));
+				v.setMemmail(rs.getString(6));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			CloseUtil.close(rs);
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+			
+		}
+	return v;
+	}
 }

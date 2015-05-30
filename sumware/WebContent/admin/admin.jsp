@@ -47,12 +47,12 @@ function getMemMgr(){
 
 						<div class="form-group has-success">
 							<label class="control-label">메 일</label> 
-							<input type="text" class="form-control" id="newmail" name="newmail" style="width: 200px">
+							<input type="text" class="form-control" id="newmail" name="newmail" autocomplete="off" style="width: 200px; ">
 						</div>
 
 						<div class="form-group has-success">
 							<label class="control-label">비밀번호</label> 
-							<input type="password" class="form-control" id="newpwd" name="newpwd" style="width: 120px">
+							<input type="password" class="form-control" id="newpwd" name="newpwd" style="width: 120px; autocomplete:off">
 						</div>
 
 						<div class="form-group has-success">
