@@ -20,8 +20,13 @@ CREATE TABLE member(
     memprofile VARCHAR2(30),-- 사원사진 nn
     memjob VARCHAR2(20) DEFAULT '일반',
     memauth NUMBER(1), -- 사원권한
+<<<<<<< .mine
+    memmail VARCHAR2(50)  CONSTRAINT member_meminmail_nn NOT NULL, -- 사원 외부 메일 uq
+    meminmail VARCHAR2(50),
+=======
     memmail VARCHAR2(50) CONSTRAINT member_meminmail_nn NOT NULL, -- 사원 외부 메일 uq
     meminmail VARCHAR2(50),
+>>>>>>> .r455
     memmgr NUMBER(5), -- 사원상급자 fk
     memdept NUMBER(3), -- 부서 번호 fk
     CONSTRAINT member_memnum_pk PRIMARY KEY(memnum),
