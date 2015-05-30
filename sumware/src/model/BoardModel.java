@@ -98,6 +98,10 @@ public class BoardModel implements ModelInter{
 			if(childmod != null && childmod.equals("commInsert")){
 				HashMap<String, String> commmap = MyMap.getMaps().getMapList(request);
 				BoardDao.getDao().commInsert(commmap);
+//				HttpSession sses = request.getSession();
+//				sses.setAttribute("bname", map.get("bname"));
+//				sses.setAttribute("bbbgnum", map.get("bgnum"));
+//				sses.setAttribute("blist", blist);
 			}
 			ArrayList<CommVO> clist = BoardDao.getDao().getCommList(map);
 			request.setAttribute("clist", clist);

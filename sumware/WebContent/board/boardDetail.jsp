@@ -112,6 +112,9 @@
 				<input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
 				<input type="hidden" name="bnum" value="${list.bnum }">
 				<input type="hidden" name="no" value="${list.bnum }">
+				<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
+				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
+				<input type="hidden" name="bname" value="${sessionScope.bname }">
 				<div class="comment-write">
 					<textarea name="comment"rows="10" cols="10" placeholder="댓글 내용을 입력해 주세요."></textarea>
 					<button class="btn-comm" type="button" onclick="javascript:formSub('c')">댓글 등록</button>
