@@ -94,8 +94,8 @@
 				$("#wrapbody").html(result);
 				$("#snsCommBtn").click();
 
- 				
- 				ch= $('#snsCommList').height()
+ 				//이거좀 이상한데?
+ 				ch= $('#snsCommList').height()-100;
 			}
 		});
 	}
