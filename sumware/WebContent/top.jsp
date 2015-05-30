@@ -347,8 +347,7 @@
 			$('#addTodoForm').submit();
 			alert("업무를 등록하였습니다.");
 		}else if(res=='addMem'){
-			alert("newmgr : "+$('#newmgr').val());
-
+			alert($('#newmgr').val());
 			if($('#newjob').val() == '부장'){
 				$('#newauth').attr("value", "3");
 			}else if($('#newjob').val() == '팀장'){
@@ -356,9 +355,9 @@
 			}else if($('#newjob').val() == '사원'){
 				$('#newauth').attr("value", "5");
 			}
-			alert("newauth:"+$('#newauth').val());
-			
 			$('#addMemForm').submit();
+			alert("사원 추가가 완료되었습니다.");
+			
 		}
 	}
 	

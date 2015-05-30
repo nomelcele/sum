@@ -104,8 +104,11 @@ public class JoinModel implements ModelInter{
 			method = false;
 
 		}else if(submod !=null && submod.equals("addMember")) {
+			// 신입사원 추가 버튼 클릭시 추가 기능
 			HashMap<String, String> map= MyMap.getMaps().getMapList(request);
-			// 추가 dao만들어야댐
+			MemberDao.getDao().addMember(map);
+			url = "admin/admin.jsp";
+			method = false;
 			
 		}else if(submod !=null && submod.equals("getMemMgr")){
 			System.out.println("addMemberForm들어옴");

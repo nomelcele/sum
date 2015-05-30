@@ -135,7 +135,8 @@ public class MemberDao {
 			
 		}	
 	}
-	// 수정해야함!!!!!!!!!!!!!!!!!!!!!!!!1
+	
+	// 신입 사원 디비에 추가
 	public void addMember(HashMap<String,String> map){
 		Connection con = null;
 		PreparedStatement pstmt=null;	
@@ -152,6 +153,7 @@ public class MemberDao {
 			pstmt.setInt(6,  Integer.parseInt(map.get("newmgr")));
 			pstmt.setInt(7,  Integer.parseInt(map.get("newdept")));
 			
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
