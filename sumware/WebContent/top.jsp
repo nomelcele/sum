@@ -571,8 +571,15 @@ function select(index){
 					<li><a href="javascript:openWin()">Messenger<span id="countRoomNum"></span></a></li>
 				</ul>
 				<ul class="nav navbar-right navbar-nav user-name">
+				<c:if test="${empty sessionScope.v.memname}">
+			        <li><span class="control-label-" for="sabun"> <strong>${memnum}</strong> 님 환영합니다.</span></li>
+					<li><a href="sumware?model=login&submod=logout&memnum=${memnum}"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
+				</c:if>
+				<c:if test="${!empty sessionScope.v.memname}">
 			        <li><span class="control-label-" for="sabun"> <strong>${sessionScope.v.memname}</strong> 님 환영합니다.</span></li>
 					<li><a href="sumware?model=login&submod=logout&memnum=${sessionScope.v.memnum}"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
+				</c:if>
+				
 				</ul>
 			</div>
    			</c:otherwise>
