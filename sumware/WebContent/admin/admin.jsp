@@ -22,18 +22,19 @@ function getMemMgr(){
 
 
 </script>
-<div class="container">
-	<div class="row">
 
-		<div class="wrap">
 
+
+		<div id="wrap" class="board">
+			<div class="lnb-area">
 			<%@include file="/contentLeft.jsp"%>
+			</div>
 
 			<form action="sumware" method="post" id="addMemForm">
 				<input type="hidden" name="model" value="join">
 				<input type="hidden" name="submod" value="addMember">
 				<input type="hidden" name="newauth" value="" id="newauth">
-				
+				<div class="contents">
 				<div class="chat-panel panel panel-default" style="width: 60%">
 					<div class="panel-heading">
 						<i class="fa fa-plus-square-o"></i> <strong class="primary-font">
@@ -84,9 +85,10 @@ function getMemMgr(){
 
 					</div>
 				</div>
+				</div>
 			</form>
 		</div>
-	</div>
-</div>
+
+
 
 <%@include file="/footer.jsp"%>
