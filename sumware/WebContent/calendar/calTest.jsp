@@ -77,6 +77,7 @@ $(function(){
 	   selectHelper: true,
 	   //캘린더 셀렉트 된 값을 컬럼에 표시
 	   select: function(start, end,event) {
+		   console.log("end"+(end-start));
 			var title = prompt('Event Title:');
 		    var eventData;
 		    if (title) {
