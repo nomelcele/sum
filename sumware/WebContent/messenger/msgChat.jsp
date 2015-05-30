@@ -65,7 +65,7 @@
 	var userNum="${userNum}";
 	alert("sessionKey " + sessionKey);
 	var msgWindow = document.getElementById("msgWindow");
-	var msgSocket = new WebSocket("ws://localhost:80/sumware/msgSocket/"+sessionKey);
+	var msgSocket = new WebSocket("ws://192.168.7.199:80/sumware/msgSocket/"+sessionKey);
 	alert(msgSocket);
 	msgSocket.onopen = function processOpen(message) {
 		joinMsg(message);
