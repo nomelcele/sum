@@ -339,6 +339,31 @@ public class BoardDao {
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
+		}
+	}
+	
+	// 게시판 추가 하는 메서드
+	public void addBoard(HashMap<String, String> map){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("insert into bname values(?,bname_seq.nextVal,?)");
+		try {
+			con = ConUtil.getOds();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, map.get("bname"));
+			int bdeptno = Integer.parseInt(map.get("bdeptno"));
+			pstmt.setInt(1, bdeptno);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(pstmt);
+			CloseUtil.close(con);
 		}
 	}
 }
