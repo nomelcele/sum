@@ -12,15 +12,15 @@
 				<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
 				<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
 				<input type="hidden" name="toMem" value="${detail.mailsname} <${detail.replyid}@sumware.com>">
-				<input type="hidden" name="mailtitle" value="re: ${detail.mailtitle}">
+				<input type="hidden" name="mailtitle" value="RE: ${detail.mailtitle}">
 				<div id="mailDetailContent">
 					<input type="submit" class="btn btn-default btn-sm" value="답장"><br />
 					<div style="padding-top:10px;">
 						<span style="font-size:16px; font-weight:bold;">${detail.mailtitle}</span>
 						<span style="float:right;"><i class="fa fa-envelope"></i> ${detail.maildate}</span> 
 						<br /> 
-						보낸 사람: ${detail.mailsname}<br /> 
-						받는 사람: ${detail.mailrname}<br /> 
+						보낸 사람: ${detail.mailsname} &lt;${detail.replyid}@sumware.com&gt;<br /> 
+						받는 사람: ${detail.mailrname} &lt;${detail.mailreceiver}@sumware.com&gt;<br /> 
 					</div>
 					<hr/>
 					${detail.mailcont}<br /> 

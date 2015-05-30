@@ -226,7 +226,52 @@
 	<input type="hidden" id="userid" name="userid">
 	<input type="hidden" id="page" name="page">
 </form>
+
 	<div class="col-md-2">
+	<div>
+	<div class="row-lg-6">
+		<div class="chat-panel panel panel-default left-profile">
+			<div class="panel-heading">
+				<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">My
+					profile</strong>
+			</div>
+			<div class="panel-body">
+				<!-- profile-img(S) -->
+				<span class="chat-img pull-left profile-img"><img
+					src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
+					class="img-circle" style="width: 100px; height: 130px;">
+				</span>
+				<!-- profile-img(E) -->
+				
+				<!-- profile-table(S) -->
+				<table class="profile-table">
+					<colgroup>
+					    <col style="width:60px">
+					    <col>
+					</colgroup>
+					<tr>
+						<th><strong class="primary-font">이름</strong></th>
+						<td>${sessionScope.v.memname }</td>
+					</tr>
+					<tr>
+						<th><strong class="primary-font">직급</strong></th>
+						<td>${sessionScope.v.memjob }</td>
+					</tr>
+					<tr>
+						<th><strong class="primary-font">부서</strong></th>
+						<td>${sessionScope.v.dename }</td>
+					</tr>
+					<tr>
+						<th><strong class="primary-font">상급자</strong></th>
+						<td>${sessionScope.v.mgrname }</td>
+					</tr>
+				</table>
+				<!-- profile-table(E) -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <hr> -->
 		<div>
 			<a href="javascript:mailFormGo('write')" class="btn btn-info"> 
 			<span class="glyphicon glyphicon-pencil"></span> 메일 쓰기
