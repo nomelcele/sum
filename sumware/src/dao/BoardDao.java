@@ -356,7 +356,7 @@ public class BoardDao {
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, map.get("bname"));
 			int bdeptno = Integer.parseInt(map.get("bdeptno"));
-			pstmt.setInt(1, bdeptno);
+			pstmt.setInt(2, bdeptno);
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

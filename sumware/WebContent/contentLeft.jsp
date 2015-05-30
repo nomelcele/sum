@@ -361,7 +361,7 @@
 </c:if>
 
 <!-- 사원추가 left -->
-<c:if test="${param.model eq 'join' }">
+<c:if test="${(param.model eq 'join')}">
 <div>
 	<div class="row-lg-6">
 		<div class="chat-panel panel panel-default left-profile">
@@ -410,8 +410,8 @@
 <!-- left-menu(S) -->
 <div class="left-menu" id="left-menu">
 	<ul>
-		<li><a href="#">사원 추가</a></li>
-		<li><a href="#">게시판 추가</a></li>
+		<li><a href="sumware?model=join&submod=addMemberForm">사원 추가</a></li>
+		<li><a href="sumware?model=join&submod=addBoardForm">게시판 추가</a></li>
 	</ul>
 </div>
 <!-- left-menu(E) -->
