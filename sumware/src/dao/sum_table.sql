@@ -1,5 +1,4 @@
--- 20150527 까지 DB 테이블
--- 20150527 : messenger table 수정 (244행 참조)
+-- 0530 까지 쿼리
 
 CREATE TABLE dept(
 	denum NUMBER(3),
@@ -16,13 +15,13 @@ INSERT INTO DEPT VALUES(500,'기획부');
 CREATE TABLE member(
 	memnum NUMBER(5), -- 사원번호 pk
     memname VARCHAR2(30), -- 사원이름 nn
-    memaddr VARCHAR2(50), -- 사원주소 nn
+    memaddr VARCHAR2(300), -- 사원주소 nn
     mempwd VARCHAR2(20),
     memprofile VARCHAR2(30),-- 사원사진 nn
     memjob VARCHAR2(20) DEFAULT '일반',
     memauth NUMBER(1), -- 사원권한
-    memmail VARCHAR2(50), -- 사원 외부 메일 uq
-    meminmail VARCHAR2(50) CONSTRAINT member_meminmail_nn NOT NULL,
+    memmail VARCHAR2(50) CONSTRAINT member_meminmail_nn NOT NULL, -- 사원 외부 메일 uq
+    meminmail VARCHAR2(50),
     memmgr NUMBER(5), -- 사원상급자 fk
     memdept NUMBER(3), -- 부서 번호 fk
     CONSTRAINT member_memnum_pk PRIMARY KEY(memnum),
@@ -77,7 +76,14 @@ CREATE TABLE board(
     CONSTRAINT board_bmem_fk FOREIGN KEY(bmem) REFERENCES member(memnum) on delete set null,
     constraint board_bdeptno_fk foreign key(bdeptno) references dept(denum)
 );
-
+--0529 테이블 추가
+create table bname(
+	bname varchar2(30),
+	bgnum number(4),
+	bdeptno number(3),
+	constraint bname_bgnum_pk primary key(bgnum),
+	constraint bname_bdeptno_fk foreign key(bdeptno) references dept(denum)
+);
 
 DROP TABLE BOARD;
 INSERT INTO BOARD VALUES(0,'test','This is testContent','img.jpg',10000,SYSDATE,0,1);
@@ -93,6 +99,12 @@ COMMIT;
 
 CREATE SEQUENCE board_seq INCREMENT BY 1 START WITH 7;
 
+-- 0526 변경
+-- 메일 삭제 여부를 확인하기 위한 컬럼
+-- 1: 기본값, 2: 보낸 사람이 메일 삭제(메일이 보낸 사람의 휴지통으로 이동),
+-- 3: 보낸 사람이 메일 영구 삭제
+-- 1: 기본값, 2: 받은 사람이 메일 삭제(메일이 받은 사람의 휴지통으로 이동),
+-- 3: 받은 사람이 메일 영구 삭제
 CREATE TABLE mail(
 	mailnum NUMBER(11), -- pk
     mailtitle VARCHAR2(50) CONSTRAINT mail_mailtitle_nn NOT NULL,
@@ -101,14 +113,15 @@ CREATE TABLE mail(
     mailmem NUMBER(5), -- fk
     mailreceiver varchar2(50), -- fk
     maildate DATE,
-    mailsname varchar2(50),
-    mailrname varchar2(50),
+    mailsdelete number(1),
+    mailrdelete number(1),
     CONSTRAINT mail_mailnum_pk PRIMARY KEY(mailnum),
     CONSTRAINT mail_mailmem_fk
     FOREIGN KEY(mailmem) REFERENCES member(memnum) on delete set null,
     CONSTRAINT mail_mailreceiver_fk
     FOREIGN KEY(mailreceiver) REFERENCES member(meminmail) on delete set null
 );
+create sequence mail_seq increment by 1 start with 1;
 
 CREATE TABLE administer(
 	adnum NUMBER(3),  -- 관리자 번호 pk
@@ -149,21 +162,32 @@ CREATE TABLE todo(
     ON DELETE SET NULL
 );
 
-
+CREATE TABLE sns(
+	snum number(10), -- pk
+	scont VARCHAR2(600),
+    simg VARCHAR2(40),
+    sdate DATE,
+    sdept NUMBER(3), -- fk dept.denum
+    smem NUMBER(5), -- fk member.memnum
+    CONSTRAINT sns_snum_pk PRIMARY KEY(snum),
+    CONSTRAINT sns_smem_fk FOREIGN KEY(smem) REFERENCES MEMBER(memnum) on delete set null,
+    CONSTRAINT sns_sdept_fk FOREIGN KEY(sdept) REFERENCES DEPT(denum) on delete set null
+);
 
 CREATE TABLE comm(
 	conum NUMBER(11),
     cocont VARCHAR2(600),
-    codate DATE,
-    -- coicon VARCHAR2(40), 2015.05.26 에 칼럼 삭제함.
+    codate DATE, -- coicon VARCHAR2(40), 2015.05.26 에 칼럼 삭제함.
     comem NUMBER(5), -- fk member.memnum
     coboard NUMBER(11), -- fk board.bnum
+    commsns number(10),
+    constraint comm_commsns_fk foreign key(commsns) references sns(snum) on delete cascade,
     CONSTRAINT comm_conum_pk PRIMARY KEY(conum),
     CONSTRAINT comm_comem_fk FOREIGN KEY(comem) REFERENCES MEMBER(memnum) on delete cascade,
     CONSTRAINT comm_coboard_fk FOREIGN KEY(coboard) REFERENCES board(bnum) on delete cascade
 );
+create sequence comm_seq INCREMENT BY 1 START WITH 1;
 -- 0526 추가함. ---------------------------------------------------------------------
-create sequence comm_seq INCREMENT BY 1 START WITH 1; .
 INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment',SYSDATE, 10000, 67);
 INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment2',SYSDATE, 10001, 67);
 INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment3',SYSDATE, 10002, 67);
@@ -173,75 +197,16 @@ INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment6',SYSDATE, 10002, 50);
 INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment7',SYSDATE, 10002, 50);
 INSERT INTO COMM VALUES(COMM_SEQ.NEXTVAL,'This is comment8',SYSDATE, 10001, 50);
 ------------------------------------------------------------------------------------
-
-CREATE TABLE sns(
-	snum number(10), -- pk
-	scont VARCHAR2(600),
-    simg VARCHAR2(40),
-    sdate DATE,
-    sdept NUMBER(3), -- fk dept.denum
-    smem NUMBER(5), -- fk member.memnum
-    CONSTRAINT sns_snum_pk PRIMARY KEY(snum),
-    CONSTRAINT sns_smem_fk FOREIGN KEY(smem) REFERENCES MEMBER(memnum),
-    CONSTRAINT sns_sdept_fk FOREIGN KEY(sdept) REFERENCES DEPT(denum)
-);
-  
-
-DROP TABLE comm;
-DROP TABLE login;
-DROP TABLE ADMINISTER;
-DROP TABLE MESSENGER;
-DROP TABLE MAIL;
-DROP TABLE BOARD;
-DROP TABLE CALENDAR;
-DROP TABLE DEPT;
-DROP TABLE MEMBER;
-DROP TABLE TODO;
-
-DESC todo;
-
-commit;
-
 -----0526 업무별 사원들에게 업무부여하기 위한 테이블과 시퀀스 생성
 create table todojob(
-jobnum NUMBER(11) constraint todojob_jobnum_pk primary key,
-jobtonum NUMBER(11),
-jobmemnum NUMBER(5),
-jobcont VARCHAR2(100),
-constraint todojob_jobtonum_fk foreign key(jobtonum) references todo(tonum) on delete cascade,
-constraint todojob_jobmemnum_fk foreign key(jobmemnum) references member(memnum) on delete set null
+	jobnum NUMBER(11) constraint todojob_jobnum_pk primary key,
+	jobtonum NUMBER(11),
+	jobmemnum NUMBER(5),
+	jobcont VARCHAR2(100),
+	constraint todojob_jobtonum_fk foreign key(jobtonum) references todo(tonum) on delete cascade,
+	constraint todojob_jobmemnum_fk foreign key(jobmemnum) references member(memnum) on delete set null
 );
-create sequence todojob_seq
-increment by 1
-start with 1;
-
-create sequence mail_seq
-increment by 1
-start with 1;
-
--- 0526 변경
--- 메일 삭제 여부를 확인하기 위한 컬럼
-alter table mail add mailsdelete number(5);
--- 1: 기본값, 2: 보낸 사람이 메일 삭제(메일이 보낸 사람의 휴지통으로 이동),
--- 3: 보낸 사람이 메일 영구 삭제
-alter table mail add mailrdelete number(5);
--- 1: 기본값, 2: 받은 사람이 메일 삭제(메일이 받은 사람의 휴지통으로 이동),
--- 3: 받은 사람이 메일 영구 삭제
-
-alter table mail drop column mailsname;
-alter table mail drop column mailrname;
-
---comm 제약조건 추가
-alter table comm add commsns number(10);
-alter table comm add constraint comm_sns_fk foreign key(commsns) REFERENCES sns(snum) on delete cascade;
-
---member memprofile 제약조건 삭제
-alter table member drop constraint member_memprofile_nn cascade;
-alter table member drop constraint member_memaddr_nn cascade;
-
-
-
-
+create sequence todojob_seq increment by 1 start with 1;
 
 -- 0527 기존 messenger table 삭제 후 아래 messenger table 생성 
 create table mesmaster(
@@ -249,13 +214,12 @@ create table mesmaster(
   masstdate date,
   masendate date,
   masreip varchar2(15),
-  constraint mesmaster_masnum_pk primary key(masnum));
-  
-  create sequence mesmaster_seq
-increment by 1
-start with 1;
+  constraint mesmaster_masnum_pk primary key(masnum)
+);
+create sequence mesmaster_seq increment by 1 start with 1;  
 
-  create table mesentry(
+----------------------------------------
+create table mesentry(
   mesnum number(10),
   mesmember number(10),
   openmemberyn varchar2(10) default 'N',
@@ -264,61 +228,16 @@ start with 1;
   mesreip varchar2 (15),
   mesendnum number (10), -- 보낸 사람 사번
   primary key(mesnum,mesmember)
-  );
-  
-  create table mescontent(
-  conum number(10),
-  mesconum number(10), -- 방번호
-  meswriternum number(10),
-  mescont varchar2(200) constraint mescontent_mescont_nn not null,
-  constraint mescontent_conum_pk primary key(conum),
-  constraint mescontent_mesconum_fk foreign key(mesconum) references mesmaster(masnum));
-  
-  create sequence mescontent_seq
-  increment by 1
-  start with 1;
--- 0528 board 테이블 변경 했습니다~ 아래의 것들 차례대로 수행 하시면 됩니다. 
-DELETE FROM COMM;
-DELETE FROM BOARD;
-ALTER TABLE BOARD DROP COLUMN bgnum;
-ALTER TABLE BOARD DROP COLUMN bdeptno;
-ALTER TABLE BOARD ADD (bgnum number(4));
-ALTER TABLE BOARD ADD (bdeptno NUMBER(3));
-ALTER TABLE BOARD add CONSTRAINT board_bdeptno_fk FOREIGN KEY(bdeptno) REFERENCES dept(denum);
-ALTER TABLE BOARD MODIFY (bgnum CONSTRAINT BOARD_bgnum_nn NOT NULL);
-
-  
-  --05월 28일 member 테이블 수정 
-  
-  -- 주소 테이블  글자수 추가 
-  Alter table member modify(memaddr VARCHAR2(300));
-
-  -- 사람 추가 
-  
-  INSERT INTO MEMBER(memnum,memname,mempwd,memmail) VALUES
-(member_seq.nextVal,'이은정',1004,'lee@naver.com');
-  start with 1;
-  
--- 0528 변경
--- 컬럼 데이터 길이 수정
-  alter table mail modify(mailsdelete number(1));
-  alter table mail modify(mailrdelete number(1));
-  alter table mail modify(mailrdelete number(1));
-  
--- member 테이블 memmgr, memdept 컬럼 default 값 설정
-  alter table member modify (memdept number(3) default 900);
-  alter table member modify (memmgr number(5) default 1);
-  
--- 부서, 상급자 기본값
-INSERT INTO DEPT VALUES(900,'부서기본값');
-INSERT INTO MEMBER VALUES
-(1,'회장님', '서울','1004','boss.jpg','회장',1,'boss@naver.com','boss',NULL,100);
---0529 테이블 추가
-create table bname(
-	bname varchar2(30),
-	bgnum number(4),
-	bdeptno number(3),
-	constraint bname_bgnum_pk primary key(bgnum),
-	constraint bname_bdeptno_fk foreign key(bdeptno) references dept(denum)
 );
-insert into bname values('하람게시판', 4, 200);
+create table mescontent(
+	  conum number(10),
+	  mesconum number(10), -- 방번호
+	  meswriternum number(10),
+	  mescont varchar2(200) constraint mescontent_mescont_nn not null,
+	  constraint mescontent_conum_pk primary key(conum),
+	  constraint mescontent_mesconum_fk foreign key(mesconum) references mesmaster(masnum)
+);
+  
+create sequence mescontent_seq increment by 1 start with 1;
+
+commit;
