@@ -83,17 +83,17 @@
 		
 <!-- </form> -->
 <div class="col-lg-4" style="width: 250px">
-	<div class="row-lg-6">
+<div class="row-lg-6">
 		<div class="chat-panel panel panel-default left-profile">
 			<div class="panel-heading">
-				<i class="fa fa-user"></i> <strong class="primary-font">My
+				<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">My
 					profile</strong>
 			</div>
 			<div class="panel-body">
 				<!-- profile-img(S) -->
 				<span class="chat-img pull-left profile-img"><img
 					src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
-					class="img-circle" style="width: 82px; height: 110px;">
+					class="img-circle" style="width: 100px; height: 130px;">
 				</span>
 				<!-- profile-img(E) -->
 				
@@ -104,58 +104,128 @@
 					    <col>
 					</colgroup>
 					<tr>
-						<td><strong class="primary-font">이름</strong></td>
+						<th><strong class="primary-font">이름</strong></th>
 						<td>${sessionScope.v.memname }</td>
 					</tr>
 					<tr>
-						<td><strong class="primary-font">직급</strong></td>
+						<th><strong class="primary-font">직급</strong></th>
 						<td>${sessionScope.v.memjob }</td>
 					</tr>
 					<tr>
-						<td><strong class="primary-font">부서</strong></td>
+						<th><strong class="primary-font">부서</strong></th>
 						<td>${sessionScope.v.dename }</td>
 					</tr>
 					<tr>
-						<td><strong class="primary-font">상급자</strong></td>
+						<th><strong class="primary-font">상급자</strong></th>
 						<td>${sessionScope.v.mgrname }</td>
-					</tr>
-					<tr><td colspan="2" style="color:white">             .</td>
-					</tr>
-					<tr>
-						<td colspan="2" style="text-align:right"><a href="sumware?model=join&submod=modifyProfile"><i class="fa fa-cog"></i>프로필수정</a></td>
 					</tr>
 				</table>
 				<!-- profile-table(E) -->
 			</div>
 		</div>
 	</div>
-	<div class="row-lg-6">
-		<div class="list-group">
-
-			<div class="pannel-heading">
-			<span class="glyphicon glyphicon-pencil"></span>
-			<strong class="primary-font">Todo</strong>
-			</div> 
-				<a href="javascript:selectMenu('deptTodo')" class="list-group-item">부서 업무</a> 
+	<div class="left-menu" id="left-menu">
+	<ul>
+		<li><a href="javascript:selectMenu('deptTodo')" class="list-group-item">부서 업무</a> </li>
+		
 			<c:if test="${sessionScope.v.memauth gt 3 }">
-				<a href="javascript:selectMenu('teamTodoForm')" class="list-group-item">팀 업무</a>
+				<li><a href="javascript:selectMenu('teamTodoForm')" class="list-group-item">팀 업무</a></li>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
-				<a href="javascript:selectMenu('manageJob1')" class="list-group-item">업무관리</a>
+				<li><a href="javascript:selectMenu('manageJob1')" class="list-group-item">업무관리</a></li>
 				
 			</c:if>
 			<c:if test="${sessionScope.v.memauth eq 4 }">
-				<a href="javascript:selectMenu('manageJob2')" class="list-group-item">업무관리</a>
+				<li><a href="javascript:selectMenu('manageJob2')" class="list-group-item">업무관리</a></li>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
-				<a href="javascript:selectMenu('giveJob1')" class="list-group-item">업무부여</a>
+				<li><a href="javascript:selectMenu('giveJob1')" class="list-group-item">업무부여</a></li>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth eq 4 }">
-				<a href="javascript:selectMenu('giveJob2')" class="list-group-item">업무부여</a>
+				<li><a href="javascript:selectMenu('giveJob2')" class="list-group-item">업무부여</a></li>
 			</c:if>
-		</div>
-	</div>
+		
+	
+	</ul>
 </div>
+</div>
+
+
+
+<!-- <div class="col-lg-4" style="width: 250px"> -->
+<!-- 	<div class="row-lg-6"> -->
+<!-- 		<div class="chat-panel panel panel-default left-profile"> -->
+<!-- 			<div class="panel-heading"> -->
+<!-- 				<i class="fa fa-user"></i> <strong class="primary-font">My -->
+<!-- 					profile</strong> -->
+<!-- 			</div> -->
+<!-- 			<div class="panel-body"> -->
+<!-- 				profile-img(S) -->
+<!-- 				<span class="chat-img pull-left profile-img"><img -->
+<%-- 					src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar" --%>
+<!-- 					class="img-circle" style="width: 82px; height: 110px;"> -->
+<!-- 				</span> -->
+<!-- 				profile-img(E) -->
+				
+<!-- 				profile-table(S) -->
+<!-- 				<table class="profile-table"> -->
+<%-- 					<colgroup> --%>
+<%-- 					    <col style="width:60px"> --%>
+<%-- 					    <col> --%>
+<%-- 					</colgroup> --%>
+<!-- 					<tr> -->
+<!-- 						<td><strong class="primary-font">이름</strong></td> -->
+<%-- 						<td>${sessionScope.v.memname }</td> --%>
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td><strong class="primary-font">직급</strong></td> -->
+<%-- 						<td>${sessionScope.v.memjob }</td> --%>
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td><strong class="primary-font">부서</strong></td> -->
+<%-- 						<td>${sessionScope.v.dename }</td> --%>
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td><strong class="primary-font">상급자</strong></td> -->
+<%-- 						<td>${sessionScope.v.mgrname }</td> --%>
+<!-- 					</tr> -->
+<!-- 					<tr><td colspan="2" style="color:white">             .</td> -->
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td colspan="2" style="text-align:right"><a href="sumware?model=join&submod=modifyProfile"><i class="fa fa-cog"></i>프로필수정</a></td> -->
+<!-- 					</tr> -->
+<!-- 				</table> -->
+<!-- 				profile-table(E) -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- 	<div class="row-lg-6"> -->
+<!-- 		<div class="list-group"> -->
+
+<!-- 			<div class="pannel-heading"> -->
+<!-- 			<span class="glyphicon glyphicon-pencil"></span> -->
+<!-- 			<strong class="primary-font">Todo</strong> -->
+<!-- 			</div>  -->
+<!-- 				<a href="javascript:selectMenu('deptTodo')" class="list-group-item">부서 업무</a>  -->
+<%-- 			<c:if test="${sessionScope.v.memauth gt 3 }"> --%>
+<!-- 				<a href="javascript:selectMenu('teamTodoForm')" class="list-group-item">팀 업무</a> -->
+<%-- 			</c:if> --%>
+<%-- 			<c:if test="${sessionScope.v.memauth lt 4 }"> --%>
+<!-- 				<a href="javascript:selectMenu('manageJob1')" class="list-group-item">업무관리</a> -->
+				
+<%-- 			</c:if> --%>
+<%-- 			<c:if test="${sessionScope.v.memauth eq 4 }"> --%>
+<!-- 				<a href="javascript:selectMenu('manageJob2')" class="list-group-item">업무관리</a> -->
+<%-- 			</c:if> --%>
+<%-- 			<c:if test="${sessionScope.v.memauth lt 4 }"> --%>
+<!-- 				<a href="javascript:selectMenu('giveJob1')" class="list-group-item">업무부여</a> -->
+<%-- 			</c:if> --%>
+<%-- 			<c:if test="${sessionScope.v.memauth eq 4 }"> --%>
+<!-- 				<a href="javascript:selectMenu('giveJob2')" class="list-group-item">업무부여</a> -->
+<%-- 			</c:if> --%>
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
 
 </c:if>
 
