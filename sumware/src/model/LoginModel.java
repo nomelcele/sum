@@ -77,8 +77,6 @@ public class LoginModel implements ModelInter {
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			LoginDao.getDao().outLog(memnum);
 			
-			request.removeAttribute("memnum");
-			request.removeAttribute("mempwd");
 			HttpSession session = request.getSession();
 			//저장된 세션 다 날림.
 			session.removeAttribute("v");
