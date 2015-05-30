@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import util.CaptchasDotNet;
 import util.MyMap;
 import controller.ModelForward;
+import dao.BoardDao;
 import dao.MemberDao;
 import dto.MemberVO;
 
@@ -127,7 +128,18 @@ public class JoinModel implements ModelInter{
 		}else if(submod !=null && submod.equals("addMemberForm")){
 			url="admin/admin.jsp";
 			method = true;
+		}else if(submod != null && submod.equals("addBoard")){
+			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
+			BoardDao.getDao().addBoard(map);
+			
+			url = "sumware?model=join&submod=addBoardForm";
+			method = true;
+
+		}else if(submod != null && submod.equals("addBoardForm")){
+			url = "admin/addBoard.jsp";
+			method = true;
 		}
+		
 		System.out.println("url:"+url+" method:"+method);
 		return new ModelForward(url, method);
 	}
