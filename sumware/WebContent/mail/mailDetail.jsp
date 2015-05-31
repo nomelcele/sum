@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/top.jsp"%>
-<section id="features" class="features2">
-	<div class="container">
+<div id="global" class="wrap-layout board">
+	<div id="lnb-area" class="lnb-area">
+		<%@include file="/contentLeft.jsp"%>
+	</div>
+	<div class="contents">
 		<div class="row" style="height:400px;">
-			<%@include file="/contentLeft.jsp"%>
 			<div class="col-lg-8" id="mainContent">
 			<form method="post" action="sumware" id="detailform">
 				<input type="hidden"  name="model" value="mail">
@@ -30,31 +32,7 @@
 				</div>
 				</form>
 			</div>			
-			</div>
 		</div>
-</section>
+	</div>
+</div>
 <%@include file="/footer.jsp"%>
-
-
-
-<script>
-// 	function replyFormGo() { // 답장 쓰기
-		
-// // 		$.ajax({
-// // 			type : "post",
-// // 			url : "sumware",
-// // 			data : {
-// // 				model : "mail",
-// // 				submod : "mailWriteForm"
-// // 			},
-// // 			success : function(result) {
-// // 				$("#mainContent").html(result);
-// // 				$("#toMem").attr("value", 
-// // 						"${detail.mailsname} <${detail.replyid}@sumware.com>"); // 받는 사람 자동으로
-// // 				$("#mailtitle").attr("value", "re: ${detail.mailtitle}") // 제목 (re:...) 형태로
-// // 			}
-// // 		});
-// 	}
-</script>
-
-

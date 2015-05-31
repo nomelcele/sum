@@ -34,7 +34,7 @@ button, input, select, option, textarea, a {
 	color:inherit;
 } 
 /* ( table ) */
-#board-wrap table {
+#global table {
 	width: 100%;
 	margin:auto;
 	font-size:13px;
@@ -43,7 +43,7 @@ button, input, select, option, textarea, a {
 	border-collapse:collapse;
 	color:#333;
 }
-#board-wrap table td , #board-wrap table th {
+#global table td , #global table th {
 	padding:5px;
 	border-right:1px solid #ccc;
 	border-bottom:1px solid #ccc;
@@ -436,21 +436,21 @@ button {
 .board-form .right {float:right}
 .board-form:after {display:block;content:"";clear:both}
 /* ( board - list ) */
-#board-wrap .board-list td , #board-wrap .board-list th {
+#global .board-list td , #global .board-list th {
 	padding:5px;
 }
-#board-wrap .board-list thead, #board-wrap .board-write th {
+#global .board-list thead, #global .board-write th {
 	font-weight:700;
 	text-align:center;
 }
-#board-wrap .board-list thead th,#board-wrap .board-list thead td,
-#board-wrap .board-write th,#board-wrap .board-detail th {
+#global .board-list thead th,#global .board-list thead td,
+#global .board-write th,#global .board-detail th {
 	border: 1px solid #00856B;
 	background-color: #0eb493;
 	color: #fff;
 }
-#board-wrap .board-list tbody > tr > td.num,
-#board-wrap .board-list tbody > tr > th.num {
+#global .board-list tbody > tr > td.num,
+#global .board-list tbody > tr > th.num {
 	/* 첫번째 글번호 컬럼 */
 	font-size:11px;
 	background-color: #F4F6F5;
@@ -537,35 +537,35 @@ button {
 	color: #0D3E34;
 }
 /* ( board - detail ) */
-#board-wrap .board-detail {
+#global .board-detail {
 	font-family:Tahoma,"돋움",Dotum,sans-serif;
 	font-size:12px;
 	border: 1px solid #00856B;
 	border-top-width: 3px;
 }
-#board-wrap .board-detail td, #board-wrap .board-detail th {padding:6px}
-#board-wrap .board-detail th {
+#global .board-detail td, #global .board-detail th {padding:6px}
+#global .board-detail th {
 	padding-right:10px;
 	border: 1px solid #00856B;
 	background-color: #0eb493;
 	text-align:right;
 	color: #fff;
 }
-#board-wrap .board-detail td {
+#global .board-detail td {
 	border-right-color:#00856B;
 	border-bottom-color: #BBD1C9;
 }
-#board-wrap .board-detail td:last-child {border-right:0 none}
-#board-wrap .board-detail tbody.info td {background-color: #F8F8F8;}
-#board-wrap .board-detail .board-detail-title {font-weight:700}
-#board-wrap .board-detail .board-detail-article {
+#global .board-detail td:last-child {border-right:0 none}
+#global .board-detail tbody.info td {background-color: #F8F8F8;}
+#global .board-detail .board-detail-title {font-weight:700}
+#global .board-detail .board-detail-article {
 	padding:0;	
 	color:#333;
 	border-spacing: 0;
 	vertical-align: top;
 	border-bottom-color: #00856B;
 }
-#board-wrap .board-detail .board-detail-article > div {
+#global .board-detail .board-detail-article > div {
 	/* 본문 높이조절 : min-height  */
 	min-height: 235px;
 	
@@ -574,7 +574,7 @@ button {
 	margin:0;padding:17px;
 	box-sizing: border-box;
 }
-#board-wrap .board-detail .board-detail-article div div {
+#global .board-detail .board-detail-article div div {
 	/* 본문 높이조절 : min-height  */
 	min-height:200px;
 	

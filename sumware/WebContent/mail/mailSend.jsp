@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/top.jsp"%>
-<div id="board-wrap" class="wrap-layout board">
+<div id="global" class="wrap-layout board">
 	<div id="lnb-area" class="lnb-area">
 		<%@include file="/contentLeft.jsp" %>
 	</div>

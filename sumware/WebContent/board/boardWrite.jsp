@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/top.jsp" %>
 
-<div id="board-wrap" class="wrap-layout board">
+<div id="global" class="wrap-layout board">
 		<!-- lnb-area(S) -->
 	<div class="lnb-area" id="lnb-area">
 		<%@include file="/contentLeft.jsp" %>

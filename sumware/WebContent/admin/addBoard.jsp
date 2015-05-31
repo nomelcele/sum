@@ -7,7 +7,7 @@
 
 </script>
 
-		<div id="board-wrap" class="wrap-layout board">
+		<div id="global" class="wrap-layout board">
 			<div class="lnb-area" id="lnb-area">
 			<%@include file="/contentLeft.jsp"%>
 			</div>
