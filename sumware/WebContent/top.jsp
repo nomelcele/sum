@@ -576,7 +576,7 @@ function select(index){
 					<li><a href="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}&page=1">Mail</a></li>
 					<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
 					<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=0&bname=공지사항">Board</a></li>
-					<li><a href="javascript:openWin()">Messenger<span id="countRoomNum"></span></a></li>
+					<li><a href="javascript:openWin()">Messenger <span id="countRoomNum"></span></a></li>
 					<c:if test="${sessionScope.v.memdept eq 100 and sessionScope.v.memauth lt 4 }"> 
 					<li><a href="sumware?model=join&submod=addMemberForm">Admin</a></li>
 					</c:if>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="/top.jsp"%>
-<div id="board-wrap" class="wrap-layout board">
+<div id="global" class="wrap-layout board">
 	<div id="lnb-area" class="lnb-area">
 		<%@include file="/contentLeft.jsp" %>
 	</div>
