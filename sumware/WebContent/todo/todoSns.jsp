@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <script src="http://code.jquery.com/jquery.js"></script>
 <script>
 // push Client 설정 (받는쪽)
@@ -17,10 +16,6 @@
 	function push(){
 		if(typeof(EventSource) != "undefined"){
 			eventSource = new EventSource("sumware?model=sns&submod=pushSns&sdept=${v.memdept}&page=1&rowsPerPage="+rowsPerPage); // push를 받을수 있는 브라우져인지 판단.
-			// EventSource EventListener의 종류
-			// onmessage : 서버가 보낸 push메세지가 수신되면 발생
-			// onerror : 서버가 보낸 push에서 에러가 발생되었을때
-			// onopen : 서버가 연결이 되었을 때 발생
 			eventSource.onmessage = function(event){
 				$(".chat").html(event.data);
 			};
@@ -46,19 +41,6 @@
 			}, 1000);	
 					
 		}
-// 		else if($('.chat').scrollTop()==0){
-// 			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
-// 			setTimeout(function(){
-// 				rowsPerPage=7;
-// 				cheight=300;
-// 				console.log("rowsPerPage:"+rowsPerPage);
-// 				console.log("cheight:"+cheight);
-// 				eventSource.close();
-// 				$("#loading img").remove();
-// 				push();
-				
-// 			}, 1000);
-// 		}
 	}
 
 	function snsSend(){
@@ -93,8 +75,6 @@
 			success: function(result){
 				$("#wrapbody").html(result);
 				$("#snsCommBtn").click();
-
- 				//이거좀 이상한데?
  				ch= $('#snsCommList').height()-100;
 			}
 		});
@@ -176,8 +156,7 @@
 	#loading img{float:none; width:40px;}
 	#commloading img{float:none; width:40px;}
 </style>
-
-	<div class="col-lg-4" style="width: 50%">
+	<div class="col-lg-4" style="width: 40%">
 				<div class="chat-panel panel panel-default">
 					<div class="panel-heading">
 						<i class="fa fa-comments fa-fw"></i> <strong
@@ -204,7 +183,7 @@
 					<!-- /.panel-footer -->
 				</div>
 				<!-- /.panel .chat-panel -->
-			</div>	
+	</div>	
 			<button type="button" class="modal fade" id="snsCommBtn" data-toggle="modal" data-target="#wrap3"></button>	
 			<div class='modal' id='wrap3' role='dialog'>
 			<div class="modal-dialog">
