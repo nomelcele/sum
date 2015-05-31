@@ -8,7 +8,7 @@
 	</div>
 	<div class="contents">
 			<!-- 이 부분에 내용이 들어감 -->
-		<div class="col-lg-8" style="padding:34px;">	
+		<div class="col-lg-8">	
 			<form method="post" action="sumware" class="form-horizontal" role="form"
 				  name="f" id="mailWriteF" autocomplete="off" enctype="multipart/form-data">
 		    	<input type="hidden" name="model" value="mail">
