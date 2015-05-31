@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="/top.jsp"%>
-<section id="features" class="features2">
-	<div class="container">
-	<div class="row" style="height:400px;">
-	<%@include file="/contentLeft.jsp" %>
-	<div class="col-lg-10">
+<div id="board-wrap" class="wrap-layout board">
+	<div id="lnb-area" class="lnb-area">
+		<%@include file="/contentLeft.jsp" %>
+	</div>
+	<div class="contents">
 	<form method="post" action="sumware" id="listform">
 		<input type="hidden" id="model" name="model">
 		<input type="hidden" id="submod" name="submod">
@@ -15,17 +15,35 @@
 		<input type="hidden" id="delvalue" name="delvalue">
 		<input type="hidden" id="mailnum" name="mailnum">
 		<input type="hidden" id="tofrom" name="tofrom">
-		<c:choose>
-			<c:when test="${tofrom eq '4'}">
-			<input type="button" class="btn btn-default btn-sm" value="영구 삭제" onclick="maildeleteGo()">
-			<input type="button" class="btn btn-default btn-sm" value="복구" onclick="mailRecover()">
-			</c:when>
-			<c:otherwise>
-			<input type="button" class="btn btn-default btn-sm" value="삭제" onclick="mailTrashGo()">
-			</c:otherwise>
-		</c:choose>
-		<div class="row" style="padding:7px;">
+		
+		<!-- button-div(S) -->
+		<div class="button-div button-div-top">
+			<!-- left(S) -->
+			<div class="left">
+				<a href="javascript:mailFormGo('write')" class="btn btn-info"> 
+				<span class="glyphicon glyphicon-pencil"></span> 메일 쓰기
+				</a>
+			</div>
+			<!-- left(E) -->
+			<!-- right(S) -->
+			<div class="right">
+				<c:choose>
+					<c:when test="${tofrom eq '4'}">
+					<input type="button" class="btn btn-default btn-sm" value="영구 삭제" onclick="maildeleteGo()">
+					<input type="button" class="btn btn-default btn-sm" value="복구" onclick="mailRecover()">
+					</c:when>
+					<c:otherwise>
+					<input type="button" class="btn btn-default btn-sm" value="삭제" onclick="mailTrashGo()">
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<!-- right(E) -->
+		</div>
+		<!-- button-div(E) -->
+		
+		<div>
 			<table class="table table-condensed table-hover" id="listTable">
+				<tbody>
 					<tr style="background-color: #F5F5F5;">
 						<td class="col-lg-1"><input type="checkbox" name="all" onclick="checkAll(this)"></td>
 							<c:choose>
@@ -69,6 +87,7 @@
 							<td>${mList.maildate}</td>
 						</tr>
 					</c:forEach>
+				</tbody>
 			</table>
 		</div>
 		
@@ -95,11 +114,8 @@
 			</c:choose>
 			<%@include file="../board/page.jsp"%>
 		</div>
-		</div>
-		
-		</div>
 	</div>
-	</section>
+</div>
 	<%@include file="/footer.jsp"%>
 <script>
 	function mailTrashGo(){

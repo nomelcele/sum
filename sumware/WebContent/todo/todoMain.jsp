@@ -4,14 +4,16 @@
 
 
 
-		<div id="wrap" class="board">
-			<div class="lnb-area">
+		<div id="board-wrap" class="wrap-layout board">
+		
+			<div class="lnb-area" id="lnb-area">
 			<%@include file="/contentLeft.jsp"%>
 			</div>
+			
 			<!-- 부서업무 부분!! -->
 			<!-- menutarget 부분 -->
-			<div class="contents" style="padding-left:50px">
-			<div class="col-lg-4" style="width: 45%"  id="menuTarget">
+			<div class="contents">
+			<div class="col-lg-4" style="width: 35%"  id="menuTarget">
 				
 				<div class="chat-panel panel panel-default">
 					<div class="panel-heading">
