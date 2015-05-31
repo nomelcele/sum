@@ -113,14 +113,15 @@ $(function(){
 		  })
 	 });
 </script>
-<div  class="wrap">
+<div  class="wrap-layout wrap">
+
 	<form action="sumware" method="post" id="selCal">
 		<input type="hidden" name="model" id="mod">
 		<input type="hidden" name="submod" id="submod">
 		<input type="hidden" name="cal" id="cal">
 	</form>
 
-	<div class="lnb-area">
+	<div class="lnb-area" id="lnb-area">
 		<%@include file="/contentLeft.jsp" %>
 	</div>
 	<div class="contents">

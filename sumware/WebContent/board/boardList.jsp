@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/top.jsp" %>
-<div id="wrap" class="board">
+<div id="board-wrap" class="wrap-layout board">
 		<!-- lnb-area(S) -->
-	<div class="lnb-area">
+	<div class="lnb-area" id="lnb-area">
 		<%@include file="/contentLeft.jsp" %>
 	</div>
 		<!-- lnb-area(E) -->
