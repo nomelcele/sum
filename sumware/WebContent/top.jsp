@@ -241,7 +241,7 @@
 					data : {
 						model:"todo", 
 						submod:"teamTodoForm",
-						memmgr:"${sessionScope.v.memmgr}"
+						memmgr:"${sessionScope.v.memnum}"
 						},
 					success : function(result){
 					
@@ -347,7 +347,6 @@
 			$('#addTodoForm').submit();
 			alert("업무를 등록하였습니다.");
 		}else if(res=='addMem'){
-			alert($('#newmgr').val());
 			if($('#newjob').val() == '부장'){
 				$('#newauth').attr("value", "3");
 			}else if($('#newjob').val() == '팀장'){
