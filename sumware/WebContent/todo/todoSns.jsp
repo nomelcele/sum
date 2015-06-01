@@ -25,15 +25,11 @@
 	}
 	function pageScoll(){
 		var sctop=$('.chat').scrollTop();
-		console.log("1:::"+sctop);
-		console.log("3:::"+cheight);
 		if ( sctop > cheight) {
 			$("#loading").html("<img src='img/loading.gif' alt='loading'>");
 			setTimeout(function(){
 				rowsPerPage+=5;
 				cheight+=($('.chat').scrollTop()+100);
-				console.log("rowsPerPage:"+rowsPerPage);
-				console.log("cheight:"+cheight);
 				eventSource.close();
 				$("#loading img").remove();
 				push();
