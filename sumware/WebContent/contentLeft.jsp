@@ -49,6 +49,13 @@
 						<th><strong class="primary-font">상급자</strong></th>
 						<td>${sessionScope.v.mgrname }</td>
 					</tr>
+					<tr>
+						<td colspan="2">　</td>
+					</tr>
+					<tr>
+						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></th>
+
+					</tr>
 				</table>
 				<!-- profile-table(E) -->
 			</div>
@@ -115,6 +122,13 @@
 					<tr>
 						<th><strong class="primary-font">상급자</strong></th>
 						<td>${sessionScope.v.mgrname }</td>
+					</tr>
+					<tr>
+						<td colspan="2">　</td>
+					</tr>
+					<tr>
+						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></th>
+
 					</tr>
 				</table>
 				<!-- profile-table(E) -->
@@ -199,6 +213,13 @@
 						<th><strong class="primary-font">상급자</strong></th>
 						<td>${sessionScope.v.mgrname }</td>
 					</tr>
+					<tr>
+						<td colspan="2">　</td>
+					</tr>
+					<tr>
+						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></th>
+
+					</tr>
 				</table>
 				<!-- profile-table(E) -->
 			</div>
@@ -256,6 +277,13 @@
 					<tr>
 						<th><strong class="primary-font">상급자</strong></th>
 						<td>${sessionScope.v.mgrname }</td>
+					</tr>
+					<tr>
+						<td colspan="2">　</td>
+					</tr>
+					<tr>
+						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></th>
+
 					</tr>
 				</table>
 				<!-- profile-table(E) -->
@@ -337,6 +365,13 @@
 					<tr>
 						<th><strong class="primary-font">상급자</strong></th>
 						<td>${sessionScope.v.mgrname }</td>
+					</tr>
+					<tr>
+						<td colspan="2">　</td>
+					</tr>
+					<tr>
+						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></th>
+
 					</tr>
 				</table>
 				<!-- profile-table(E) -->
