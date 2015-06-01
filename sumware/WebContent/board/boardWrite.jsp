@@ -19,7 +19,7 @@
 			</table> -->
 			
 			<!-- heading(S) -->
-			<h2 class="title-board"> 게시판 </h2>
+			<h2 class="title-board"> ${sessionScope.bname } </h2>
 			<!-- heading(E) -->
 				<form action="sumware" method="post" id="bform">
 					<input type="hidden" name="model" id="bmodel" value="board">
