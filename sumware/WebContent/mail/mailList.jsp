@@ -134,13 +134,6 @@
 
 <script>
 	function mailTrashGo(){
-// 		$("#model").attr("value","mail");
-// 		$("#submod").attr("value","mailSetDel");
-// 		$("#usernum").attr("value","${sessionScope.v.memnum}");
-// 		$("#userid").attr("value","${sessionScope.v.meminmail}");
-// 		$("#delvalue").attr("value",2);
-// 		$("#tofrom").attr("value","${tofrom}");
-
 		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
 				"&userid=${sessionScope.v.meminmail}&delvalue=2&tofrom=${tofrom}"+
 				"&page=1&chk="+$("#chk:checked").serialize();
@@ -148,11 +141,6 @@
 	
 	function maildeleteGo(){
 		// 휴지통에서 체크된 메일들을 영구 삭제
-// 		$("#submod").attr("value","mailSetDel");
-// 		$("#usernum").attr("value","${sessionScope.v.memnum}");
-// 		$("#userid").attr("value","${sessionScope.v.meminmail}");
-// 		$("#delvalue").attr("value",3);
-// 		$("#f").submit();
 		if(!confirm("선택한 메일을 영구 삭제하겠습니까?")){
 			return; // 취소를 할 경우 삭제되지 않는다.
 		} else { // 확인 버튼을 누르면 메일 삭제
@@ -165,12 +153,6 @@
 	function mailRecover(){
 		// 휴지통에서 체크된 메일들을 복구(메일함으로 이동시킴)
 		// 체크된 메일들의 delete 속성을 1로 변경
-// 		$("#submod").attr("value","mailSetDel");
-// 		$("#usernum").attr("value","${sessionScope.v.memnum}");
-// 		$("#userid").attr("value","${sessionScope.v.meminmail}");
-// 		$("#delvalue").attr("value",1);
-// 		$("#f").submit();
-		
 		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
 		"&userid=${sessionScope.v.meminmail}&delvalue=1&tofrom=${tofrom}"+
 		"&page=1&chk="+$("#chk:checked").serialize();
@@ -194,25 +176,6 @@
 		// 상세 보기 페이지로 이동시켜주는 함수
 		location="sumware?model=mail&submod=mailDetail&mailnum="+mailnum+
 				"&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}";
-		
-		
-// 		$("#submod").attr("value","mailDetail");
-// 		$("#mailnum").attr("value",mailnum);
-// 		$("#f").submit();
-		
-		
-// 		console.log("메일 번호: "+mailnum);
-// 		$.ajax({
-// 			type: "post",
-// 			url: "sumware",
-// 			data: {model: "mail",
-// 				submod: "mailDetail",
-// 				mailnum: mailnum // 해당 메일의 번호
-// 				},
-// 			success: function(result){
-// 				$("#mainContent").html(result);
-// 			}
-// 		});
 	}
 </script>
 

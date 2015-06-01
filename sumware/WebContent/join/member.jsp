@@ -34,7 +34,7 @@ function fileUpload(){
 		// callback
 		if(xhr.readyState == 4 && xhr.status == 200){
 			$('#memimg').attr("value",xhr.responseText.trim());
-			alert("입력이 성공하였습니다.");
+			alert("사원이 등록되었습니다.");
 			myform.submit();
 			
 		}
@@ -114,7 +114,7 @@ function fileUpload(){
 					$('#address').attr("value", a1);
 					if($('#targetimg').attr("src")=="img/imgx.jpg"){
 						if("${sessionScope.v.memprofile}"!=""){
-							alert("사진잇음??"+"${sessionScope.v.memprofile}");
+							// alert("사진잇음??"+"${sessionScope.v.memprofile}");
 							// 프로필 수정 시 지정해준 사진값(memimg)이 없으므로 프로필 사진을등록해달라고 함!
 							// 그래서 프로필 수정 시 memimg의 value값을 지정해 주어야 함
 							$('#memimg').val("${sessionScope.v.memprofile}");
@@ -127,11 +127,11 @@ function fileUpload(){
 						$('#meminmail').focus();
 						
 					}else if($('#mempwd').val()==""){
-						alert("기존 비밀번호를 입력해주요!");
+						alert("기존 비밀번호를 입력해주세요!");
 						$('#mempwd').focus();
 						
 					}else if($('#mempwd1').val==""){
-						alert("새로운 비밀번호를 입력해주요!");
+						alert("새로운 비밀번호를 입력해주세요!");
 						$('#mempwd1').focus();
 					}else if($('#mempwd2').val()==""){
 						alert("비밀번호를 다시 입력해 주세요!");
@@ -152,7 +152,7 @@ function fileUpload(){
 		<%--이미지 업로드 이미지 --%>
 		$('#fileimg').change(
 			function() { // 파일 박스 안에서 변화를 감지해야 한다.
-			console.log("이미지 선택했어");
+			// console.log("이미지 선택했어");
 			// 변화가 있을 때 function을 호출한다.
 			// 확장자 . 기준으로 다음 요소를 선택해서 소문자로 변경한 후에 ext에 저장한다.
 			var ext = $(this).val().split('.').pop()
