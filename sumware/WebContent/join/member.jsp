@@ -33,9 +33,9 @@ function fileUpload(){
 	xhr.onreadystatechange = function(){
 		// callback
 		if(xhr.readyState == 4 && xhr.status == 200){
-			alert("사진경로"+xhr.responseText.trim());
+// 			alert("사진경로"+xhr.responseText.trim());
 			$('#memimg').attr("value",xhr.responseText.trim());
-			alert("입력이 성공하였습니다.");
+			alert("사원정보가 업데이트 되었습니다.");
 			myform.submit();
 			
 		}
