@@ -6,29 +6,20 @@
 <link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
 <link href="../css/bootstrap.min.css" rel="stylesheet"/>
-
 <link type="text/css" href="../css/common.css" rel="stylesheet" />
-
-
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <%--우편번호 다음 링크 --%>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
 <%--아이디 중복체크 --%>
 <script>
 var progress = null;
 var xhr = null;
-
-
 <%--파일을 업로드한다.--%>
-
 function fileUpload(){
 	var uploadFile = document.getElementById("fileimg");
 	// 업로드 시작 -> xhr.download..
 	xhr.upload.onloadstart = function (e) {
-		// onloadstart: 감지
-		// display: none인 것을 보이게 한다.
 	};
 	xhr.onreadystatechange = function(){
 		// callback
@@ -36,7 +27,6 @@ function fileUpload(){
 			$('#memimg').attr("value",xhr.responseText.trim());
 			alert("사원이 등록되었습니다.");
 			myform.submit();
-			
 		}
 	};
 	
@@ -54,10 +44,7 @@ function fileUpload(){
 		}
 		// upload 버튼을 클릭하면 파일을 업로드한다.
 		// querySelector: jQuery 타입의 selector를 만들어준다.
-		
-		
 		<%--아이디 중복검사 --%>
-		
 		$('#meminmail').keyup(
 				function() {
 					setTimeout(function() {
@@ -66,9 +53,7 @@ function fileUpload(){
 										+ $('#meminmail').val());
 					}, 500);
 				});
-
 		<%--본래 비밀번호 비밀번호 수정시 버튼 --%>
-
 		$('#chbtn').click(function() {
 			if($('#mempwd').val() == "${mempwd}" && "${sessionScope.v.mempwd }" == ""){
 				// 첫 프로필 수정시
@@ -162,14 +147,12 @@ function fileUpload(){
 			// ex) $(this).val() => img.jpg
 			// pop()하면 jpg가 리턴됨!
 			// toLowerCase(): String을 모두 소문자로 만들어준다.
-
 			// 추출한 확장자가 배열에 존재하는지 체크
 			if ($.inArray(ext, [ 'gif', 'png', 'jpg', 'jpeg' ]) == -1) {
 			// 첫번째에 있는 인자값이 두번째에 있는 배열에 있는지 확인 후, 
 			// 있으면 1, 없으면 -1을 리턴
 			// inArray는 jQuery에서 제공하는 메서드
 			resetFormElement($(this)); // 폼 초기화
-								
 				window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg만 업로드 가능)');
 			} else {
 			var file = $(this).prop("files")[0];
@@ -181,23 +164,17 @@ function fileUpload(){
 			console.log("blobURL::::", blobURL);
 			// 윈도우 자체에서 파일을 불러오는 경로값을 표현하려면
 			// createObjectURL()을 사용해야 한다.
-								
-
 			$('#targetimg').attr('src', blobURL).css(
 				'width', '200').css('height', '200');
 			// attr() src 속성에  blobURL을 넣는다.
-			
 			}
 		});
 
 	});
-
 	function resetFromElement($obj) { // 자바스크립트
 		$obj.val("");
 	}
 </script>
-
-
 <%--우편번호 찾기 --%>
 <script>
 	function sample6_execDaumPostcode() {
@@ -205,20 +182,16 @@ function fileUpload(){
 				{
 					oncomplete : function(data) {
 						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
 						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 						var fullAddr = ''; // 최종 주소 변수
 						var extraAddr = ''; // 조합형 주소 변수
-
 						// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
 						if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
 							fullAddr = data.roadAddress;
-
 						} else { // 사용자가 지번 주소를 선택했을 경우(J)
 							fullAddr = data.jibunAddress;
 						}
-
 						// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
 						if (data.userSelectedType === 'R') {
 							//법정동명이 있을 경우 추가한다.
@@ -383,15 +356,11 @@ function fileUpload(){
 										</div>
 									</div>
 									<div class="form-group" style="text-align: center;">
-										
-
 											<button type="button" class="btn btn-primary" id="btn">
 												<i class="fa fa-floppy-o"></i>
 											</button>
-								
 									</div>
 								</div>
-
 							</div>
 							</div>
 					</form>
@@ -401,5 +370,4 @@ function fileUpload(){
 		</div>
 	</div>
 </div>
-
-	<%@include file="/footer.jsp"%>
+<%@include file="/footer.jsp"%>
