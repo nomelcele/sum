@@ -365,7 +365,6 @@ function fileUpload(){
 							</div>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
