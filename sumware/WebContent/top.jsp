@@ -391,15 +391,7 @@ function mailFormGo(res){
 		$("#usernum").attr("value","${sessionScope.v.memnum}");
 		$("#userid").attr("value","${sessionScope.v.meminmail}");
 		$("#mailform").submit();
-//			$.ajax({
-//				type: "post",
-//				url: "sumware",
-//				data: {model: "mail",
-//					submod: "mailWriteForm"},
-//				success: function(result){
-//					$("#mainContent").html(result);
-//				}
-//			});
+		
 	} else if(res=='fromlist'){ // 받은 메일함
 		$("#model").attr("value","mail");
 		$("#submod").attr("value","mailFromList");
@@ -479,7 +471,6 @@ function sendKeyword(){
 		return;
 	}
 	
-
 	var key = f.toMem.value;
 	
 	if(key == '' || key == '  '){
@@ -489,16 +480,7 @@ function sendKeyword(){
 		lastKey = key;
 		var param = "model=mail&submod=mailSug&key="+key+
 		"&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}";
-		// console.log("key: "+key);
-		// 컨트롤러에서 처리하게 고칠 것
 		sendRequest("sumware", param, res, "post");
-		/* $.ajax({
-			type: "post",
-			url: "sumware",
-			data: {model: "mail",
-				submod: "mailSug",
-				key: key}
-		}); */
 	}
 	
 	setTimeout("sendKeyword();",500);
@@ -508,10 +490,7 @@ var jsonObj = null;
 function res(){
 	if(xhr.readyState == 4){
 		if(xhr.status == 200){
-			
 			var response = xhr.responseText;
-			
-			// alert("response:"+response.trim());
 			jsonObj = JSON.parse(response.trim());
 			viewTable();
 		} else {

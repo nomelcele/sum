@@ -20,12 +20,8 @@ import dto.MemberVO;
 
 public class MakeXML {
 	// db를 읽어서 xml 파일로 생성하는 클래스
-
-	// 어디서 호출되어야?
-	// db는 계속 갱신될 수 있기 때문에...
-	// 새로운 회원이 추가되면 xml 파일에도 적용되어야 한다.
+	// db는 계속 갱신될 수 있기 때문에 새로운 회원이 추가되면 xml 파일에도 적용되어야 한다.
 	
-	// 일단 테스트
 	public static void updateXML(){
 		ArrayList<MemberVO> list = MemberDao.getDao().getNameMailList();
 
