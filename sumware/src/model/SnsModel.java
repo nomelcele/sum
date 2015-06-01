@@ -52,7 +52,7 @@ public class SnsModel implements ModelInter{
 				outs.append("<span class='chat-img pull-left'>");
 				outs.append("<img src='profileImg/");
 				outs.append(v.getSmemprofile());
-				outs.append("' alt='User Avatar' class='img-circle' style='width: 50px; height: 60px;'>");
+				outs.append("' alt='User Avatar' class='img-circle' style='width: 45px; height: 55px;'>");
 				outs.append("</span>");
 				outs.append("<div class='chat-body clearfix' style='height:100px;'>");
 				outs.append("<div class='header'>");
@@ -64,7 +64,7 @@ public class SnsModel implements ModelInter{
 				outs.append("</small>");
 				outs.append("</div>");
 				outs.append("<div>");
-				outs.append("<p>　").append(v.getScont()).append("</p>");
+				outs.append("<p style='font-size:12px;'>　").append(v.getScont()).append("</p>");
 				outs.append("<a href='javascript:snsComm(");
 				outs.append(v.getSnum());
 				outs.append(")'>　댓글(").append(v.getStocount());
