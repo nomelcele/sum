@@ -8,22 +8,16 @@
 <title>ChatRoom</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-
 </head>
 <body>
-
 <!-- 		db에 저장된 내용 출력 -->
-
-
 <div class="col-lg-3" style="width: 100%">
 	<div class="chat-panel panel panel-default">
-	
 	<form action="sumware" method="post" id="closeForm" name="closeForm">
 		<input type="hidden" id="chatmodel"name="model">
 		<input type="hidden" id="chatsubmod"name="submod">
@@ -54,19 +48,11 @@
 </div>
 
 <script>
-
-	
-	
-
-// 	var webs = "ws://192.168.7.234:80/sumware/msgSocket/";
-// 	var msgSocket = new WebSocket("ws://192.168.7.234:80/sumware/msgSocket/"+sessionKey);
 	
 	var sessionKey = "${key}";
 	var userNum="${userNum}";
-// 	alert("sessionKey " + sessionKey);
 	var msgWindow = document.getElementById("msgWindow");
-	var msgSocket = new WebSocket("ws://192.168.7.199:80/sumware/msgSocket/"+sessionKey);
-// 	alert(msgSocket);
+	var msgSocket = new WebSocket("ws://192.168.7.169:80/sumware/msgSocket/"+sessionKey);
 	msgSocket.onopen = function processOpen(message) {
 		joinMsg(message);
 		
@@ -144,8 +130,5 @@
 	}
 	
 </script>
-
-
-
 </body>
 </html>
