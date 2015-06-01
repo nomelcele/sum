@@ -19,7 +19,7 @@
 	String subject = "신입 사원 로그인 정보입니다.";
 	String content = vo.getMemname()+"님의 사원번호는 "+vo.getMemnum()+", 비밀번호는 "
 	+vo.getMempwd()+", 부서는 "+vo.getDename()+", 상급자는 "+vo.getMgrname()+" 입니다.";
-
+	
 	//정보를 담기 위한 객체
 	Properties p = new Properties();
 	
