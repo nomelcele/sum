@@ -102,10 +102,9 @@ public class MailModel implements ModelInter{
 			String[] suggests = Suggest.getSuggest().getSuggest(key);
 			request.setAttribute("sugArr", suggests);
 		
-			System.out.println("????????");
 			System.out.println("key: "+key);
 			System.out.println("배열: "+suggests[0]);
-			// 여기까지는 된다
+			
 			StringBuilder su = new StringBuilder();
 			su.append("[");
 			if(suggests != null){
