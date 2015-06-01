@@ -69,7 +69,7 @@
 <div class="left-menu" id="left-menu">
 	<ul>
 		<li><a href="sumware?model=board&submod=boardList&bgnum=0&page=1&bdeptno=${sessionScope.v.memdept }&bname=공지사항">공지사항</a></li>
-	<c:forEach var="blist" items="${sessionScope.blist }">
+		<c:forEach var="blist" items="${sessionScope.blist }">
 		<c:if test="${blist.bgnum eq 0 }">
 			<c:remove var="blist"/>
 		</c:if>
