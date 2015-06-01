@@ -62,9 +62,6 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-//			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma");
-//			sql.append(" where me.memnum=ma.mailmem and ma.mailreceiver=? and ma.mailrdelete=1");
-//			sql.append(" and not ma.mailmem=? order by ma.maildate desc");
 			
 			sql.append("select * from (select rownum r_num, a.* from (");
 			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate");
@@ -111,9 +108,6 @@ public class MailDao {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
 			
-//			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate from member me, mail ma"); 
-//			sql.append(" where me.meminmail=ma.mailreceiver and ma.mailmem=? and ma.mailsdelete=1");
-//			sql.append(" and not ma.mailreceiver=? order by ma.maildate desc");
 			
 			sql.append("select * from (select rownum r_num, a.* from (");
 			sql.append("select ma.mailnum, me.memname, ma.mailtitle, ma.maildate");
@@ -158,10 +152,7 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-//			sql.append("select ma.mailnum, ma.mailtitle, ma.maildate, me.memname from member me, mail ma");
-//			sql.append(" where me.memnum=ma.mailmem and ma.mailmem=? and ma.mailreceiver=? ");
-//			sql.append(" and ma.mailsdelete=1 and ma.mailrdelete=1 order by ma.maildate desc");
-			
+
 			sql.append("select * from (select rownum r_num, a.* from (");
 			sql.append("select ma.mailnum, ma.mailtitle, ma.maildate, me.memname");
 			sql.append(" from member me, mail ma where me.memnum=ma.mailmem and ma.mailmem=?");
@@ -300,11 +291,6 @@ public class MailDao {
 		try {
 			con = ConUtil.getOds();
 			StringBuffer sql = new StringBuffer();
-//			sql.append("select ma.mailnum, me1.memname mailsname, me2.memname mailrname, ma.mailtitle, ma.maildate");
-//			sql.append(" from member me1, member me2, mail ma");
-//			sql.append(" where (me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver) and");
-//			sql.append(" ((ma.mailmem=? and ma.mailsdelete=2) or (ma.mailreceiver=? and ma.mailrdelete=2))");
-//			sql.append(" order by ma.maildate desc");
  
 			sql.append("select * from (select rownum r_num, a.* from (");
 			sql.append("select ma.mailnum, me1.memname mailsname, me2.memname mailrname, ma.mailtitle, ma.maildate");

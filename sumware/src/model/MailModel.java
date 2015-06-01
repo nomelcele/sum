@@ -29,10 +29,6 @@ public class MailModel implements ModelInter{
 		
 		HashMap<String,String> map = MyMap.getMaps().getMapList(request);
 		
-//		로그인한 사원의 사원 번호와 아이디(사내 메일)
-//		int usernum = Integer.parseInt(request.getParameter("usernum"));
-//		String userid = request.getParameter("userid");
-				
 	    if(submod != null && submod.equals("mailWriteForm")){
 			String toMem = map.get("toMem");
 			String mailtitle = map.get("mailtitle");
@@ -86,8 +82,6 @@ public class MailModel implements ModelInter{
 			System.out.println("현재 submod: mailToList");
 			// 보낸 메일함
 			// 현재 로그인한 사원의 사원 번호
-//			int usernum = Integer.parseInt(request.getParameter("usernum"));
-//			String userid = request.getParameter("userid");
 			
 			// 보낸 메일함에 있는 메일의 수
 			int totalCount = MailDao.getDao().getListNum(map)[1];
@@ -100,13 +94,6 @@ public class MailModel implements ModelInter{
 			
 			url = "mail/mailList.jsp";
 			method = true;
-			//**************************************8
-			//0529 14:56 여기까지 고침
-			//***************************************
-			//***************************************
-			//***************************************
-			//***************************************
-			//***************************************
 		} else if(submod != null && submod.equals("mailSug")){
 			// 메일 쓰기 받는 사람에서 suggest 기능
 			request.setCharacterEncoding("UTF-8");
@@ -133,10 +120,7 @@ public class MailModel implements ModelInter{
 			}
 			su.append("]");
 			request.setAttribute("sug", su.toString());
-//			PrintWriter pw = response.getWriter();
-//			pw.write(su.toString());
-//			pw.flush();
-			
+
 			url = "mail/mailSuggest.jsp";
 			method = true;
 		} else if(submod != null && submod.equals("mailDetail")){
@@ -155,8 +139,6 @@ public class MailModel implements ModelInter{
 		} else if(submod != null && submod.equals("mailMyList")){
 			System.out.println("현재 submod: mailMyList");
 			// 내게 쓴 메일함
-//			int usernum = Integer.parseInt(request.getParameter("usernum"));
-//			String userid = request.getParameter("userid");
 			
 			// 내게 쓴 메일함에 있는 메일의 수
 			int totalCount = MailDao.getDao().getListNum(map)[2];
@@ -173,8 +155,7 @@ public class MailModel implements ModelInter{
 		} else if(submod != null && submod.equals("mailTrashcan")){
 			System.out.println("현재 submod: mailTrashList");
 			// 메뉴에서 휴지통을 클릭했을 때
-//			int usernum = Integer.parseInt(request.getParameter("usernum"));
-//			String userid = request.getParameter("userid");
+
 			
 			// 휴지통에 있는 메일의 수
 			int totalCount = MailDao.getDao().getListNum(map)[3];
@@ -190,8 +171,7 @@ public class MailModel implements ModelInter{
 		}  else if(submod != null && submod.equals("mailSetDel")){
 			// 메일 테이블의 delete 속성 설정
 			System.out.println("현재 submod: mailSetDel");
-//			int usernum = Integer.parseInt(request.getParameter("usernum"));
-//			String userid = request.getParameter("userid");
+
 			
 			// 체크박스로 선택된 메일의 번호들 얻어오기
 			String[] mailnums = request.getParameterValues("chk");
@@ -200,7 +180,6 @@ public class MailModel implements ModelInter{
 				System.out.println("선택된 메일 번호: "+e);
 			}
 			
-//			int delvalue = Integer.parseInt(request.getParameter("delvalue"));
 			int tofrom = Integer.parseInt(map.get("tofrom"));
 			System.out.println("mailSetDel=="+tofrom);
 			
