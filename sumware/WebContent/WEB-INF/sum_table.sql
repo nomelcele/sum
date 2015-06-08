@@ -90,8 +90,8 @@ create table bname(
 	constraint bname_bdeptno_fk foreign key(bdeptno) references dept(denum)
 );
 
+create sequence bname_seq increment by 1 start with 1;
 
-DROP TABLE BOARD;
 INSERT INTO BOARD VALUES(0,'test','This is testContent','img.jpg',10000,SYSDATE,0,1);
 INSERT INTO BOARD VALUES(1,'test','This is testContent','img.jpg',10002,SYSDATE,0,1);
 INSERT INTO BOARD VALUES(2,'test','This is testContent','img.jpg',10003,SYSDATE,0,1);
