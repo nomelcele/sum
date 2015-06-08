@@ -1,8 +1,9 @@
 package model;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -36,8 +37,11 @@ public class BoardModel implements ModelInter{
 			Map<String, Integer> map = pageProcess(request, 0);
 			HashMap<String, String> hmap = MyMap.getMaps().getMapList(request);
 			// 게시판 이름을 뿌려오고
-			ArrayList<BnameVO> blist = BoardDao.getDao().bName(hmap);
-			ArrayList<BoardVO> list = BoardDao.getDao().getList(map,hmap);
+			map.put("bgnum", Integer.parseInt(hmap.get("bgnum")));
+			map.put("bdeptno",Integer.parseInt(hmap.get("bdeptno")));
+			
+			List<BnameVO> blist = BoardDao.getDao().bName(hmap);
+			List<BoardVO> list = BoardDao.getDao().getList(map);
 			// 보드의 이름을 세션에 저장 해준다.
 			HttpSession ses = request.getSession();
 			ses.setAttribute("bname", hmap.get("bname"));
@@ -51,7 +55,7 @@ public class BoardModel implements ModelInter{
 		else if(submod != null && submod.equals("writeForm")){
 			System.out.println("what the fuck");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
-			ArrayList<BnameVO> blist = BoardDao.getDao().bName(map);
+			List<BnameVO> blist = BoardDao.getDao().bName(map);
 			HttpSession ses = request.getSession();
 			ses.setAttribute("bname", map.get("bname"));
 			ses.setAttribute("bbbgnum", map.get("bgnum"));
@@ -70,7 +74,7 @@ public class BoardModel implements ModelInter{
 		else if(submod!=null && submod.equals("boardInsert")){
 			System.out.println("this is what ?????????");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
-			ArrayList<BnameVO> blist = BoardDao.getDao().bName(map);
+			List<BnameVO> blist = BoardDao.getDao().bName(map);
 			HttpSession ses = request.getSession();
 			ses.setAttribute("bname", map.get("bname"));
 			ses.setAttribute("bbbgnum", map.get("bgnum"));
@@ -86,7 +90,7 @@ public class BoardModel implements ModelInter{
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			BoardVO list = BoardDao.getDao().getDetail(no);
 			System.out.println(list.getBdate()+" / "+ list.getBcont()+" / "+map.get("no"));
-			ArrayList<BnameVO> blist = BoardDao.getDao().bName(map);
+			List<BnameVO> blist = BoardDao.getDao().bName(map);
 			HttpSession ses = request.getSession();
 			ses.setAttribute("bname", map.get("bname"));
 			ses.setAttribute("bbbgnum", map.get("bgnum"));
@@ -103,7 +107,7 @@ public class BoardModel implements ModelInter{
 //				sses.setAttribute("bbbgnum", map.get("bgnum"));
 //				sses.setAttribute("blist", blist);
 			}
-			ArrayList<CommVO> clist = BoardDao.getDao().getCommList(map);
+			List<CommVO> clist = BoardDao.getDao().getCommList(map);
 			request.setAttribute("clist", clist);
 			url = "board/boardDetail.jsp";
 			method = true;
