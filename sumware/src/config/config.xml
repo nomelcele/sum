@@ -26,6 +26,6 @@
   	</environments>
   <mappers>
   <mapper resource="mapper/memsql.xml"/>
-  
+  <mapper resource="mapper/boardsql.xml"/>
   </mappers>
   </configuration>
