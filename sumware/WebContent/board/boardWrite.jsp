@@ -29,6 +29,7 @@
 					<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
 					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 					<input type="hidden" name="bname" value="${sessionScope.bname }">
+					<input type="hidden" name="bimg">
 				<!-- board-write(S) -->
 				<table id="stcontent" class="board-list board-write">
 					<colgroup>
