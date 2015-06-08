@@ -2,6 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper>
-  
+  <mapper namespace="mem">
+   <update id="update" parameterType="map">
+    	update member set memaddr=#{address}, mempwd=#{mempwd2},memprofile=#{memimg},meminmail=#{meminmail} where memnum=#{memnum}
+   </update>
   </mapper>
