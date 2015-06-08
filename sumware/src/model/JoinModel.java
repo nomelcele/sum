@@ -3,6 +3,7 @@ package model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -119,7 +120,7 @@ public class JoinModel implements ModelInter{
 			System.out.println("addMemberForm들어옴");
 			// 부서선택하면 부서에 대한 팀장들 리스트가져옴
 			int memdept = Integer.parseInt(request.getParameter("memdept"));
-			ArrayList<MemberVO> memmgrlist = MemberDao.getDao().getMemMgr(memdept);
+			List<MemberVO> memmgrlist = MemberDao.getDao().getMemMgr(memdept);
 			request.setAttribute("mgrList", memmgrlist);
 			
 			url="admin/getMgrListCallback.jsp";

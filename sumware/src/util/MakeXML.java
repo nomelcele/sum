@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -23,7 +24,7 @@ public class MakeXML {
 	// db는 계속 갱신될 수 있기 때문에 새로운 회원이 추가되면 xml 파일에도 적용되어야 한다.
 	
 	public static void updateXML(){
-		ArrayList<MemberVO> list = MemberDao.getDao().getNameMailList();
+		List<MemberVO> list = MemberDao.getDao().getNameMailList();
 
 		// 사원 이름, 내부 메일 주소(아이디)가 저장된 리스트를 읽어서 
 		// root의 자식 엘리먼트로 설정
