@@ -7,4 +7,50 @@
   	<insert id="insert" parameterType="map">
   		insert into board values(board_seq.nextVal,#{btitle},#{bcont},#{bimg},#{bmem},sysdate,0,#{bgnum},#{bdeptno})
   	</insert>
+  	<select id="getList" parameterType="map" resultType="bvo">
+		<choose>
+			<when test="bgnum!=0">
+			select bnum,btitle,writer bwriter,bdate,bhit from
+			 (select tn.bnum,tn.btitle,tn.writer,tn.bdate,tn.bhit,rownum r_num
+			 from
+			 (select b.bnum, b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit
+			 from board b, member m
+			 where b.bmem = m.memnum and b.bgnum=#{bgnum} and b.bdeptno=#{bdeptno}
+			 order by b.bnum desc) tn)
+			 where r_num between #{begin} and #{end}
+			</when>
+			<otherwise>
+			select bnum,btitle,writer bwriter,bdate,bhit
+			 from
+			(select tn.bnum,tn.btitle,tn.writer,tn.bdate,tn.bhit,rownum r_num
+			 from
+			 (select b.bnum, b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit
+			 from board b, member m
+			 where b.bmem = m.memnum and b.bgnum=#{bgnum}
+			  order by b.bnum desc) tn)
+			 where r_num between #{begin} and #{end}
+			</otherwise>
+		</choose>
+  	</select>
+  	<select id="getTotalCount" parameterType="int" resultType="int">
+  		select count(*) cnt from board where bgnum=#{bgnum}
+  	</select>
+  	<select id="getTotalCommCount" parameterType="int" resultType="int">
+  		select count(*) cnt from comm where coboard=#{coboard}
+  	</select>
+  	<select id="getDetail" parameterType="int" resultType="bvo">
+  		select b.bhit,b.bmem,b.bnum,m.memname bwriter, b.btitle, b.bcont, TO_CHAR(b.bdate,'yyyy.MM.dd HH24:mi') bdate
+		 from board b, member m where b.bmem=m.memnum and bnum=#{bnum}
+  	</select>
+  	<update id="hitUp" parameterType="int">
+  		update board set bhit=(bhit+1) where bnum=#{bnum}
+  	</update>
+  	<select id="getCommList" parameterType="int" resultType="cvo">
+  		select c.cocont, TO_CHAR(c.codate,'yyyy.MM.dd HH24:mi') codate, m.memname,m.memprofile,c.coboard
+		from comm c, member m where c.comem = m.memnum and coboard=#{coboard} order by conum desc
+  	</select>
+  	<insert id="commInsert" parameterType="map">
+  		insert into comm(conum,cocont,codate,comem,coboard)
+		values(comm_seq.nextval,#{comment},sysdate,#{memnum},#{bnum}
+  	</insert>
   </mapper>
