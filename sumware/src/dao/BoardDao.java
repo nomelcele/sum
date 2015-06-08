@@ -30,7 +30,7 @@ public class BoardDao {
 	// boardWrite 하는 insert 메서드.
 	public void insert(HashMap<String, String> map){
 		SqlSession ss = FactorySrevice.getFactory().openSession(true);
-		ss.insert("board.insert" , map);
+		ss.insert("board.insert", map);
 		ss.close();
 	}
 	
