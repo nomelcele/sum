@@ -4,9 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLPermission;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.SqlSession;
+
+import service.FactorySrevice;
 import util.CloseUtil;
 import util.MakeXML;
 import util.MyMap;
@@ -22,8 +26,8 @@ public class MemberDao {
 	}
 	
 	public ArrayList<MemberVO> getNameMailList(){
-		// 사원의 이름과 내부 메일 주소를 가져오는 메서드
-		// (suggest 기능을 위한 xml 파일 만드는 데 사용)
+		// �궗�썝�쓽 �씠由꾧낵 �궡遺� 硫붿씪 二쇱냼瑜� 媛��졇�삤�뒗 硫붿꽌�뱶
+		// (suggest 湲곕뒫�쓣 �쐞�븳 xml �뙆�씪 留뚮뱶�뒗 �뜲 �궗�슜)
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -81,37 +85,18 @@ public class MemberDao {
 	}
 	
 	public void update(HashMap<String,String> map){
-		Connection con=null;
-		PreparedStatement pstmt=null;	
-		try {
-			con=ConUtil.getOds();
-			StringBuffer sql=new StringBuffer();
-			sql.append("update member set memaddr=?,mempwd=?, memprofile=?,meminmail=? where memnum=?");
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, map.get("address"));
-			pstmt.setString(2, map.get("mempwd2"));
-			pstmt.setString(3, map.get("memimg"));
-			pstmt.setString(4, map.get("meminmail"));
-            pstmt.setInt(5, Integer.parseInt(map.get("memnum")));
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}finally{
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-			
-		}
 		
-		System.out.println("xml 파일 업데이트");
+		SqlSession ss= FactorySrevice.getFactory().openSession(true);
+		ss.update("mem.update",map);
+				ss.close();
+		//uSystem.out.println("xml �뙆�씪 �뾽�뜲�씠�듃");
 		MakeXML.updateXML(); 
-		// 사원의 이름+아이디가 저장된 xml 파일
-		// 회원이 추가될 때마다 업데이트
+		// �궗�썝�쓽 �씠由�+�븘�씠�뵒媛� ���옣�맂 xml �뙆�씪
+		// �쉶�썝�씠 異붽��맆 �븣留덈떎 �뾽�뜲�씠�듃
 		
 	}
 	
-	/// 회원 정보 수정
+	/// �쉶�썝 �젙蹂� �닔�젙
 	public void modify(HashMap<String,String> map){
 		Connection con=null;
 		PreparedStatement pstmt=null;	
@@ -136,7 +121,7 @@ public class MemberDao {
 		}	
 	}
 	
-	// 신입 사원 디비에 추가
+	// �떊�엯 �궗�썝 �뵒鍮꾩뿉 異붽�
 	public void addMember(HashMap<String,String> map){
 		Connection con = null;
 		PreparedStatement pstmt=null;	
@@ -164,7 +149,7 @@ public class MemberDao {
 	}
 	
 	public ArrayList<MemberVO> getMemMgr(int memdept){
-		// 팀장정보들 가져옴
+		// ���옣�젙蹂대뱾 媛��졇�샂
 		System.out.println("memdept : "+memdept);
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -200,7 +185,7 @@ public class MemberDao {
 		return list;
 	}
 	
-	// 신입사원 정보 뽑아옴
+	// �떊�엯�궗�썝 �젙蹂� 戮묒븘�샂
 	public MemberVO getNewMemInfo(String memmail ){
 		int result=0;
 	   Connection con=null;
