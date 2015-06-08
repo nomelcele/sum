@@ -31,9 +31,10 @@ CREATE TABLE member(
 );
 
 create sequence member_seq increment by 1 start with 10000;
-
+insert into member values
+(1, 'sumware', '판교', '1004', 'sumware.jpg', 'sumware', 1,'sumware@naver.com','sumware', null, 100);
 INSERT INTO MEMBER VALUES
-(member_seq.nextVal,'김명준', '서울','1004','kmj.jpg','대표이사',1,'kmj85skier@naver.com','mjkim',NULL,100);
+(member_seq.nextVal,'김명준', '서울','1004','kmj.jpg','대표이사',1,'kmj85skier@naver.com','mjkim',1,100);
 INSERT INTO MEMBER VALUES
 (member_seq.nextVal,'김주상', '경기','1004','kjs.jpg','이사',2,'kjs@naver.com','jskim',10000,100);
 INSERT INTO MEMBER VALUES
