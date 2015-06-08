@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+
+import service.FactorySrevice;
 import util.CloseUtil;
 import conn.ConUtil;
 import dto.BnameVO;
@@ -26,30 +29,9 @@ public class BoardDao {
 	
 	// boardWrite 하는 insert 메서드.
 	public void insert(HashMap<String, String> map){
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			StringBuffer sql = new StringBuffer();
-			sql.append("insert into board values");
-			// 마지막 ? 는 게시판의 그룹 넘버. 그룹 넘버에 따라서 게시판의 종류가 달라진다.
-			sql.append("(board_seq.nextVal,?,?,?,?,sysdate,0,?,?)");
-			con = ConUtil.getOds();
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, map.get("btitle"));
-			pstmt.setString(2, map.get("bcont"));
-			pstmt.setString(3, map.get("bimg"));
-			System.out.println("이것은 널인것인가봉가? "+map.get("bimg"));
-			// 작성자의 사원 번호를 가져와야 한다.
-			pstmt.setInt(4, Integer.parseInt(map.get("bmem")));
-			pstmt.setInt(5, Integer.parseInt(map.get("bgnum")));
-			pstmt.setInt(6, Integer.parseInt(map.get("bdeptno")));
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-		}
+		SqlSession ss = FactorySrevice.getFactory().openSession(true);
+		ss.insert("board.insert" , map);
+		ss.close();
 	}
 	
 	// boardList 가져오기.
