@@ -3,7 +3,29 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="mem">
+  <select id="getNameMailList">
+  	select memname,meminmail from member
+  </select>
+  <select id="ckid" parameterType="String" resultType="int">
+  	select count(*) cnt from member where meminmail=#{meminmail}
+  </select>
+  
    <update id="update" parameterType="map">
     	update member set memaddr=#{address}, mempwd=#{mempwd2},memprofile=#{memimg},meminmail=#{meminmail} where memnum=#{memnum}
    </update>
+   <update id="modify" parameterType="map">
+   		update member set memaddr=#{address}, mempwd=#{mempwd2},memprofile=#{memimg} where memnum=#{memnum}
+   
+   </update>
+   <insert id="addMember" parameterType="map">
+   	insert into member values(member_seq.nextVal,#{newname},null,#{newpwd},null,#{newjob},#{newauth},#{newmail},null,#{newmgr},#{newdept})
+  </insert>
+  <select id="getMemMgr" parameterType="int" resultType="mvo">
+  	select memnum,memname from member where memauth=4 and memdept=#{memdept}
+  
+  </select>
+  <select id="getNewMemInfo" parameterType="String" resultType="mvo">
+  	select s.memnum,s.memname, d.dename, s.mempwd, m.memname mgrname, s.memmail from member s, dept d, member m where s.memmgr = m.memnum and s.memdept= d.denum and s.memmail=#{memmail}
+  </select>
+  
   </mapper>
