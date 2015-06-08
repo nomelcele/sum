@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.ModelInter;
 
 @WebServlet("/sumware")
-@MultipartConfig(maxFileSize=1024*1024*10, location="C:\\sumware\\project\\ws\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sumware\\upload\\")
+@MultipartConfig(maxFileSize=1024*1024*10, location="C:\\sumwareSpring\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sumware\\upload")
 public class SumControl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doService(request, response);
