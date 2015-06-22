@@ -8,7 +8,7 @@
 			<!-- 부서업무 부분!! -->
 			<!-- menutarget 부분 -->
 			<div class="contents">
-				<div class="col-lg-4" style="width: 45%"  id="menuTarget">
+				<div class="col-lg-4" style="width: 50%"  id="menuTarget">
 					<div class="chat-panel panel panel-default">
 						<div class="panel-heading">
 							<i class="fa fa-pencil-square-o"></i> <strong class="primary-font">부서업무</strong>
