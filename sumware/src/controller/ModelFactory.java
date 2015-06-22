@@ -28,7 +28,7 @@ public class ModelFactory {
 	public ModelInter getModel(String mod){
 		// model 을 선택 하기 위해 요청이온 parameter 의 값으로 해당모델의 
 		// 클래스명을 뽑아 오기 위한 properties 파일의 경로
-		String path = "C:\\sumwareSpring\\workspace\\sumware\\src\\controller\\modelchoice.txt";
+		String path = "C:\\sumware\\project\\ws\\sumware\\src\\controller\\modelchoice.txt";
 		ModelInter model = null;
 		try {
 			// path 의 경로에 있는 파일을 읽어온다.
