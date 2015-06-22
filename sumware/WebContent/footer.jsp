@@ -9,7 +9,7 @@
 		</div>
 		
 		<div class="footer-right">
-			<address>대표이사 김명준 ㅣ이메일 : kim85ii@hanmail.net ㅣ경기도 성남시 분당구 삼평동 대왕판교로 670길 유스페이스2 B동 8층</address>
+			<address>대표이사 김명준 ㅣ이메일 : kim85ii@sumware.com ㅣ경기도 성남시 분당구 삼평동 대왕판교로 670길 유스페이스2 B동 8층</address>
 			<p>Copyright (c) 2015 SumWare Office. All rights reserved.</p>
 		</div>
 	</div>
