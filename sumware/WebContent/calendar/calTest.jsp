@@ -1,6 +1,3 @@
-
-<%@page import="dto.CalendarVO"%>
-<%@page import="dao.CalendarDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../top.jsp" %>
@@ -14,21 +11,6 @@
 <!-- /캘린더 -->
 <!-- Latest compiled and minified CSS -->
 <script>
-function goCal(btn){
-	var s=$(btn).val();
-	if(s=="부서일정"){
-		$('#mod').attr("value","calendar");
-		$('#submod').attr("value","calList");
-		$('#cal').attr("value","0");
-		
-	}else{
-		$('#mod').attr("value","calendar");
-		$('#submod').attr("value","calList");
-		$('#cal').attr("value","1");
-
-	}
-	$('#selCal').submit();
-}
 $(function(){
 	  var currentLangCode = 'ko';
 	  var selCal="${cal}";
@@ -54,7 +36,7 @@ $(function(){
 				   alert("eventid:"+calEvent._id);
 				   	//삭제할 ajax
 				    $.ajax({
-			              url: "sumware?model=calendar&submod=calDelete",
+			              url: "/calDelete",
 			              type: "POST",
 			              data: {
 			                  calnum:calEvent._id,
@@ -93,7 +75,7 @@ $(function(){
 // 		    alert("selected from: " + start.format() + ", to: " + end.format());
 		   //셀렉트된 결과를 서버로 전송.
 		          $.ajax({
-		              url: "sumware?model=calendar&submod=calInsert",
+		              url: "/calInsert",
 		              type: "POST",
 		              data: {
 		                  title:encodeURIComponent(title),
@@ -114,13 +96,6 @@ $(function(){
 	 });
 </script>
 <div  class="wrap-layout wrap">
-
-	<form action="sumware" method="post" id="selCal">
-		<input type="hidden" name="model" id="mod">
-		<input type="hidden" name="submod" id="submod">
-		<input type="hidden" name="cal" id="cal">
-	</form>
-
 	<div class="lnb-area" id="lnb-area">
 		<%@include file="/contentLeft.jsp" %>
 	</div>
@@ -128,8 +103,8 @@ $(function(){
 
 			<div class="">
 				<div style="text-align: right;padding: 10px;">
-					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calDept" value="부서일정" onclick="goCal(this)">
-					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calMem" value="사원일정" onclick="goCal(this)">
+					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calDept" value="부서일정" onclick="location='/calList?cal=0'">
+					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calMem" value="사원일정" onclick="location='/calList?cal=1'">
 				</div>
 				<div id='calendar'></div>
 			</div>
