@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import util.MyMap;
-import controller.ModelForward;
-import dao.BoardDao;
-import dto.BnameVO;
-import dto.BoardVO;
-import dto.CommVO;
-import dto.PageVO;
+import com.sumware.dto.BnameVO;
+import com.sumware.dto.BoardVO;
+import com.sumware.dto.CommVO;
+import com.sumware.dto.PageVO;
+import com.sumware.mvc.controller.ModelForward;
+import com.sumware.mvc.dao.BoardDao;
+import com.sumware.util.MyMap;
 
 public class BoardModel implements ModelInter{
 
