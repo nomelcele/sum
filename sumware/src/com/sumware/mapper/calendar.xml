@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="calendar">
+  	<select id="getCalList" parameterType="cavo" resultType="cavo">
+  		select calnum,to_char(calstart,'yyyy-MM-DD')||'T'||to_char(calstart,'HH24:mi:ss') calstart,
+		nvl(to_char(calend,'yyyy-MM-DD')||'T'||to_char(calend,'HH24:mi:ss'),'0') calend,
+		calcont from calendar 
+		<where>
+			<choose>
+				<when test="cal==0">
+					 caldept=#{caldept}
+				</when>
+				<otherwise>
+					calmem=#{calmem}
+				</otherwise>
+			</choose>
+		</where>
+  	</select>
+  	<select id="calInsert" parameterType="cavo">
+  	<choose>
+		<when test="selcal==부서">
+			insert into calendar(calnum,calstart,calend,calcont,caldept)
+			values(calendar_seq.nextVal,
+			to_date(#{start},'yyyy-MM-dd-HH24:mi:ss'),to_date(#{end},'yyyy-MM-dd-HH24:mi:ss'),#{calcont},#{cal})
+		</when>
+		<otherwise>
+			insert into calendar(calnum,calstart,calend,calcont,calmem)
+			values(calendar_seq.nextVal,
+			to_date(#{start},'yyyy-MM-dd-HH24:mi:ss'),to_date(#{end},'yyyy-MM-dd-HH24:mi:ss'),#{calcont},#{cal})
+		</otherwise>
+  	</choose>
+  	</select>
+  	<delete id="calDel" parameterType="int">
+  		delete from calendar where calnum=#{calnum}
+  	</delete>
+  </mapper>
