@@ -3,6 +3,7 @@ package model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,11 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.TodoJobVO;
@@ -24,7 +30,28 @@ import com.sumware.util.MyMap;
 @Controller
 public class TodoModel{
 
+	private TodoDao dao;
 	
+	@RequestMapping(value="/todoForm", method=RequestMethod.POST)
+	public String todoForm(Model model, int memdept){
+		//int todept = Integer.parseInt(request.getParameter("memdept"));
+		int todept = memdept;
+		List<TodoVO> deptJobList= dao.getDeptJob(todept);
+		model.addAttribute("deptJobList", deptJobList);
+		
+		return "todo/todoMain";
+	}
+	
+	@RequestMapping(value="/firsttodoForm", method=RequestMethod.POST)
+	public String firsttodoForm(Model model, MemberVO mvo){
+		
+		dao.getTomem(mvo.getMemnum());
+		
+		//수정 중
+		
+		return "todo/todoMain";
+		
+	}
 	
 	
 	
