@@ -1,119 +1,96 @@
 package model;
 
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sumware.dto.CalendarVO;
 import com.sumware.dto.MemberVO;
-import com.sumware.mvc.controller.ModelForward;
 import com.sumware.mvc.dao.CalendarDAO;
-import com.sumware.util.MyMap;
 
-public class CalendarModel implements ModelInter{
-	MemberVO vo=null;
-	@Override
-	public ModelForward exe(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
-		String url="";
-		//false: redirect true:forward
-		boolean method=false;
-		//submod의 값으로 확인
-		String submod = request.getParameter("submod");
-		System.out.println("cal submod:"+submod);
 
-		if(submod!=null&&submod.equals("calList")){
-			System.out.println("calList들어옴");
-			url="calendar/calTest.jsp";
-			
-			HttpSession session = request.getSession();
-			vo = (MemberVO) session.getAttribute("v");
-			
-			int caldept = vo.getMemdept();
-			System.out.println("cal caldept:"+caldept);
-			int calmem = vo.getMemnum();
-			System.out.println("cal calmem:"+calmem);
-			
-			String cal = request.getParameter("cal");
-			if(cal==null||cal.equals("0")){
-				//리스트를 불러와서 json형식으로 바꿈
-				String sql = CalendarDAO.getDao().calSQL(0);
-				ArrayList<CalendarVO> list = CalendarDAO.getDao().getCalList(sql, caldept);
-				String json = CalendarDAO.getDao().makeJson(list);
+@Controller
+public class CalendarModel{
+	
+	@Autowired
+	CalendarDAO dao;
+	
+	@RequestMapping(value="calList")
+	public String getCalList(CalendarVO cavo,Model model,HttpSession session){
+		MemberVO vo = new MemberVO();
+		vo = (MemberVO) session.getAttribute("v");
 		
-				request.setAttribute("calJson", json);
-				request.setAttribute("cal", "부서");
-			}else{
-				//리스트를 불러와서 json형식으로 바꿈
-				String sql = CalendarDAO.getDao().calSQL(1);
-				ArrayList<CalendarVO> list = CalendarDAO.getDao().getCalList(sql, calmem);
-				String json = CalendarDAO.getDao().makeJson(list);
+		cavo.setCaldept(vo.getMemdept());
+		cavo.setCalmem(vo.getMemnum());
 		
-				request.setAttribute("calJson", json);
-				request.setAttribute("cal", "사원");
-			}
-			method=true;
-		}else if(submod!=null&&submod.equals("calInsert")){
-			String sql=null;
-			String selCal=request.getParameter("selCal");
-			System.out.println("selCal:"+selCal);
+		if(cavo.getCal()==null||cavo.getCal().equals("0")){
+			//리스트를 불러와서 json형식으로 바꿈
+			ArrayList<CalendarVO> list = (ArrayList<CalendarVO>) dao.getCalList(cavo);
 			
-			String title = URLDecoder.decode(request.getParameter("title"),"UTF-8");
-			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
-			map.put("title", title);
-//			String end=map.get("end");
-//			if(end.length()<11){
-//				end=end.replaceAll("-", "");
-//				end=String.valueOf((Integer.parseInt(end)-1));
-//				map.put("end", end);
-//				
-//			}
-			
-			HttpSession session = request.getSession();
-			vo = (MemberVO) session.getAttribute("v");
-			
-			//해당하지 않는 값을 0으로 세팅해준다.
-			//같은키로 값을 세팅. 둘이 동시에 값이 들어가는 경우가 없으므로.
-			if(selCal.equals("부서")){
-				url="sumware?model=calendar&submod=calList&calmem=0&caldept="+vo.getMemdept();
-				map.put("cal", String.valueOf(vo.getMemdept()));
-				sql = CalendarDAO.getDao().calSQL(2);
-			}else{
-				url="sumware?model=calendar&submod=calList&caldept=0&calmem="+vo.getMemnum();
-				map.put("cal", String.valueOf(vo.getMemnum()));
-				sql = CalendarDAO.getDao().calSQL(3);
-			}
-			//-----------------------
-			CalendarDAO.getDao().calInsert(sql,map);
-			
-			method=false;
-		}else if(submod!=null&&submod.equals("calDelete")){
-			System.out.println("caldelete 들어옴");
-			
-			String selCal=request.getParameter("selCal");
-			System.out.println("selCal:"+selCal);
-			
-			HttpSession session = request.getSession();
-			vo = (MemberVO) session.getAttribute("v");
-			
-			int num= Integer.parseInt(request.getParameter("calnum"));
-			
-			CalendarDAO.getDao().calDel(num);
-			if(selCal.equals("부서")){
-				url="sumware?model=calendar&submod=calList&calmem=0&caldept="+vo.getMemdept();
-			}else{
-				url="sumware?model=calendar&submod=calList&caldept=0&calmem="+vo.getMemnum();
-			}
-			method=false;
+			String json = dao.makeJson(list);
+	
+			model.addAttribute("calJson", json);
+			model.addAttribute("cal", "부서");
+		}else{
+			//리스트를 불러와서 json형식으로 바꿈
+			ArrayList<CalendarVO> list = (ArrayList<CalendarVO>) dao.getCalList(cavo);
+			String json = dao.makeJson(list);
+	
+			model.addAttribute("calJson", json);
+			model.addAttribute("cal", "사원");
 		}
-		System.out.println("calendar url:"+url+" method:"+method);
-		return new ModelForward(url, method);
+		return "calendar/calTest.jsp";
+	}
+	@RequestMapping(value="calInsert",method=RequestMethod.POST)
+	public String calInsert(String title,CalendarVO cavo,Model model,HttpSession session) throws UnsupportedEncodingException{
+		cavo.setCalcont(URLDecoder.decode(title,"UTF-8"));
+		//		String end=map.get("end");
+		//		if(end.length()<11){
+		//			end=end.replaceAll("-", "");
+		//			end=String.valueOf((Integer.parseInt(end)-1));
+		//			map.put("end", end);
+		//			
+		//		}
+		MemberVO vo = (MemberVO) session.getAttribute("v");
+		//url 저장.
+		String res="";
+		//해당하지 않는 값을 0으로 세팅해준다.
+		//같은키로 값을 세팅. 둘이 동시에 값이 들어가는 경우가 없으므로.
+		if(cavo.getSelCal().equals("부서")){
+			
+			cavo.setCal(String.valueOf(vo.getMemdept()));
+			
+			res = "redirect:calList&calmem=0&caldept="+vo.getMemdept();
+		}else{
+			
+			cavo.setCal(String.valueOf(vo.getMemnum()));
+			
+			res = "redirect:calList&caldept=0&calmem="+vo.getMemnum();
+		}
+		//-----------------------
+		dao.calInsert(cavo);
+		return res;
+	}
+	@RequestMapping(value="calDelete",method=RequestMethod.POST)
+	public String calDel(CalendarVO cavo,Model model,HttpSession session){
+		String res="";
+		MemberVO vo = (MemberVO) session.getAttribute("v");
+		dao.calDel(cavo.getCalnum());
+		
+		if(cavo.getSelCal().equals("부서")){
+			res="redirect:calList&calmem=0&caldept="+vo.getMemdept();
+		}else{
+			res="redirect:calList&caldept=0&calmem="+vo.getMemnum();
+		}
+		return res;
 	}
 
 }
