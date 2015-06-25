@@ -1,6 +1,5 @@
 package com.sumware.mvc.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,7 +20,7 @@ public class CalendarDAO {
 	public void calDel(int calnum){
 		st.delete("calendar.calDel", calnum);
 	}
-	public String makeJson(ArrayList<CalendarVO> list){
+	public String makeJson(List<CalendarVO> list){
 		StringBuilder json = new StringBuilder();
 		int size=list.size();
 		//json.append("[");
