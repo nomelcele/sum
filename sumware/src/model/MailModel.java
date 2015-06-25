@@ -10,13 +10,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import util.MyFileUp;
-import util.MyMap;
-import util.MyPage;
-import util.Suggest;
-import controller.ModelForward;
-import dao.MailDao;
-import dto.MailVO;
+import com.sumware.dto.MailVO;
+import com.sumware.mvc.controller.ModelForward;
+import com.sumware.mvc.dao.MailDao;
+import com.sumware.util.MyFileUp;
+import com.sumware.util.MyMap;
+import com.sumware.util.MyPage;
+import com.sumware.util.Suggest;
 
 public class MailModel implements ModelInter{
 

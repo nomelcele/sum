@@ -9,12 +9,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import util.MyMap;
-import util.MyPage;
-import controller.ModelForward;
-import dao.SnsDao;
-import dto.CommVO;
-import dto.SnsVO;
+import com.sumware.dto.CommVO;
+import com.sumware.dto.SnsVO;
+import com.sumware.mvc.controller.ModelForward;
+import com.sumware.mvc.dao.SnsDao;
+import com.sumware.util.MyMap;
+import com.sumware.util.MyPage;
 
 public class SnsModel implements ModelInter{
 

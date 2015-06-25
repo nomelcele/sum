@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-import controller.ModelForward;
-import dao.LoginDao;
-import dao.MemberDao;
-import dto.MemberVO;
+
+
+
+import com.sumware.dto.MemberVO;
+import com.sumware.mvc.controller.ModelForward;
+import com.sumware.mvc.dao.LoginDao;
+import com.sumware.mvc.dao.MemberDao;
 
 public class LoginModel implements ModelInter {
 

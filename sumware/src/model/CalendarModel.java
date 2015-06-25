@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import util.MyMap;
-import controller.ModelForward;
-import dao.CalendarDAO;
-import dto.CalendarVO;
-import dto.MemberVO;
+import com.sumware.dto.CalendarVO;
+import com.sumware.dto.MemberVO;
+import com.sumware.mvc.controller.ModelForward;
+import com.sumware.mvc.dao.CalendarDAO;
+import com.sumware.util.MyMap;
 
 public class CalendarModel implements ModelInter{
 	MemberVO vo=null;

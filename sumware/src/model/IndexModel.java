@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.ModelForward;
+import com.sumware.mvc.controller.ModelForward;
 
 public class IndexModel implements ModelInter{
 

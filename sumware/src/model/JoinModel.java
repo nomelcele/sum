@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import util.CaptchasDotNet;
-import util.MyMap;
-import controller.ModelForward;
-import dao.BoardDao;
-import dao.MemberDao;
-import dto.MemberVO;
+import com.sumware.dto.MemberVO;
+import com.sumware.mvc.controller.ModelForward;
+import com.sumware.mvc.dao.BoardDao;
+import com.sumware.mvc.dao.MemberDao;
+import com.sumware.util.CaptchasDotNet;
+import com.sumware.util.MyMap;
 
 public class JoinModel implements ModelInter{
 
@@ -43,7 +43,7 @@ public class JoinModel implements ModelInter{
 		}else if(submod != null && submod.equals("viewCap")){
 			// Construct the captchas object
 			// Use same settings as in query.jsp
-			CaptchasDotNet captchas = new util.CaptchasDotNet(
+			CaptchasDotNet captchas = new com.sumware.util.CaptchasDotNet(
 					request.getSession(true), // Ensure session
 					"jtrip", // client
 					"3yNe6F7kItK5fHjFZtGCMey6d6PNtYfva6Uqht4i" // secret
@@ -79,7 +79,7 @@ public class JoinModel implements ModelInter{
 			url="join/captcha.jsp";
 			method=true;
 		}else if(submod != null && submod.equals("getCap")){
-			CaptchasDotNet captchas = new util.CaptchasDotNet(
+			CaptchasDotNet captchas = new com.sumware.util.CaptchasDotNet(
 					request.getSession(true), // Ensure session
 					"jtrip", // client
 					"3yNe6F7kItK5fHjFZtGCMey6d6PNtYfva6Uqht4i" // secret

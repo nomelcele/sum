@@ -8,12 +8,12 @@ import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import util.SearchMem;
-import controller.ModelForward;
-import dao.MessengerDao;
-import dto.MemberVO;
-import dto.MessengerRoomVO;
-import dto.MessengerVO;
+import com.sumware.dto.MemberVO;
+import com.sumware.dto.MessengerRoomVO;
+import com.sumware.dto.MessengerVO;
+import com.sumware.mvc.controller.ModelForward;
+import com.sumware.mvc.dao.MessengerDao;
+import com.sumware.util.SearchMem;
 
 public class MessengerModel implements ModelInter{
 	@Override
