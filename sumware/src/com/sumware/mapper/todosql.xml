@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="todo">
+  	<select id="getTomems" parameterType="int" resultType="mvo">
+  		select memname, memnum, memprofile, memjob, memauth, memmail, meminmail, memdept from member where memmgr=#{memmgr}
+  	</select>
+  	
+  	<insert id="addTodo" parameterType="tvo" >
+  		insert into todo values(todo_seq.nextVal,#{tostdate},#{toendate},#{totitle},#{tocont},#{tofile},#{todept},#{tomem},#{toconfirm},#{tocomm})
+  	</insert>
+  	
+  	<select id="checkTodoList" parameterType="int" resultType="tvo">
+  		select tonum, to_char(tostdate,'yyyy-mm-dd') tostdate, to_char(toendate,'yyyy-mm-dd') toendate, totitle, tocont, tofile, todept, tomem, toconfirm, tocomm from todo where toconfirm = 'n' and tomem=#{tomem} order by 1 desc
+  	</select>
+  	
+  	<update id="confirmTodoY" parameterType="tvo">
+  		update todo set toconfirm='y', tocomm=#{tocomm} where tonum=#{tonum}
+  	</update>
+  	
+  	<update id="confirmTodoZ" parameterType="tvo">
+  		update todo set toconfirm='z', tocomm=#{tocomm} where tonum=#{tonum}
+  	</update>
+  	
+  	<select id="getDeptTodoList" parameterType="int" resultType="tvo">
+  		select rownum torownum, tonum,to_char(tostdate,'yyyy-MM-dd') 
+  		tostdate,to_char(toendate,'yyyy-MM-dd') toendate,nvl(totitle,'제목없음') 
+  		totitle,tocont,tomem,tocomm,toconfirm  
+  		from (select * from todo where todept=(select memdept from member where memnum=#{tomem}) 
+  		order by toconfirm desc, 1 desc)
+  	</select>
+  	
+  	<update id="todoUpdate" parameterType="tvo">
+  		update todo set toconfirm=?, tomem=?,tocomm=? where tonum=?
+  	</update>
+  	
+  	<select id="getDeptList" parameterType="mvo" resultType="tvo">
+  		select tonum, to_char(tostdate,'yyyy-mm-dd') tostdate, to_char(toendate,'yyyy-mm-dd') 
+  		toendate, totitle, tocont, tofile, todept, tomem, toconfirm, tocomm 
+  		from todo where todept=#{memdept}
+  	</select>
+  	
+  	<select id="getTeamTodoList" parameterType="mvo" resultType="tvo">
+  		select t.tonum, to_char(t.tostdate,'yyyy-mm-dd') tostdate, 
+  		to_char(t.toendate,'yyyy-mm-dd') toendate, t.totitle, t.tocont, t.tofile, t.todept, t.tomem, t.toconfirm, t.tocomm, m.memname 
+  		from todo t, member m where t.tomem = m.memnum and t.tomem=#{memnum} and t.toconfirm='y' order by 1 desc
+  	</select>
+  	
+  	<insert id="insertMemJob" parameterType="tjvo">
+  		insert into todojob values(todojob_seq.nextVal,#{jobtonum},#{jobmemnum},#{jobcont})
+  	</insert>
+  	
+  	<select id="getMembersJob" parameterType="int" resultType="tjvo">
+  		select j.jobnum, m.memname, m.memprofile, j.jobcont from todojob j, member m where m.memnum = j.jobmemnum and j.jobtonum=#{jobtonum} order by 1 desc
+  	</select>
+  	
+  	<select id="getDeptJob" parameterType="int" resultType="tvo">
+  		select t.tonum, to_char(t.tostdate,'yyyy-mm-dd') tostdate, to_char(t.toendate,'yyyy-mm-dd') 
+  		toendate, t.totitle, t.tocont, t.tofile, t.todept, t.tomem, t.toconfirm, t.tocomm,m.memname 
+  		from todo t, member m where t.tomem = m.memnum and t.todept=#{todept} and t.toconfirm='y' order by 1 desc
+  	</select>
+  	
+  	<select id="getTeamJob" parameterType="int" resultType="tvo">
+  		select t.tonum, to_char(t.tostdate,'yyyy-mm-dd') tostdate, to_char(t.toendate,'yyyy-mm-dd') toendate, t.totitle, t.tocont, t.tofile, t.todept, t.tomem, t.toconfirm, t.tocomm,m.memname 
+  		from todo t, member m where t.tomem = m.memnum and t.toconfirm='y' and (m.memnum = #{memmgr} or m.memmgr = #{memmgr}) order by 1 desc
+  	</select>
+  	
+  </mapper>
