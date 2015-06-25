@@ -1,5 +1,5 @@
-<%@page import="dao.MessengerDao"%>
-<%@page import="dto.MemberVO"%>
+<%@page import="com.sumware.mvc.dao.MessengerDao"%>
+<%@page import="com.sumware.dto.MemberVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
