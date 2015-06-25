@@ -17,17 +17,4 @@
   		<typeAlias type="com.sumware.dto.MessengerRoomVO" alias="mrvo"/>
   		<typeAlias type="com.sumware.dto.TodoJobVO" alias="tjvo"/>
   	</typeAliases>
-  	<environments default="">
-  		<environment id="">
-  			<transactionManager type="JDBC"/>
-  			<dataSource type="JNDI">
-  				<property name="data_source" value="java:comp/env/jdbc/myora"/>
-  			</dataSource>
-  		</environment>
-  	
-  	</environments>
-  <mappers>
-  <mapper resource="mapper/memsql.xml"/>
-  <mapper resource="mapper/boardsql.xml"/>
-  </mappers>
   </configuration>
