@@ -1,6 +1,6 @@
-<%@page import="dto.MemberVO"%>
+<%@page import="com.sumware.dto.MemberVO"%>
 <%@page import="javax.mail.Authenticator"%>
-<%@page import="util.SMTPAuthenticator"%>
+<%@page import="com.sumware.util.SMTPAuthenticator"%>
 <%@page import="javax.mail.Transport"%>
 <%@page import="javax.mail.Message"%>
 <%@page import="javax.mail.internet.InternetAddress"%>
