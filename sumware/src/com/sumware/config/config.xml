@@ -4,17 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
   	<typeAliases>
-  		
-  		<typeAlias type="dto.MemberVO" alias="mvo"/>
-  		<typeAlias type="dto.BoardVO" alias="bvo"/>
-  		<typeAlias type="dto.BnameVO" alias="bnvo"/>
-  		<typeAlias type="dto.CommVO" alias="cvo"/>
-  		<typeAlias type="dto.MailVO" alias="mavo"/>
-  		<typeAlias type="dto.PageVO" alias="pvo"/>
-  		<typeAlias type="dto.DeptVO" alias="dvo"/>
-  		<typeAlias type="dto.SnsVO" alias="svo"/>
-  		<typeAlias type="dto.TodoVO" alias="tvo"/>
-  		<typeAlias type="dto.MessengerRoomVO" alias="mrvo"/>
+  		<typeAlias type="com.sumware.dto.MemberVO" alias="mvo"/>
+  		<typeAlias type="com.sumware.dto.BoardVO" alias="bvo"/>
+  		<typeAlias type="com.sumware.dto.BnameVO" alias="bnvo"/>
+  		<typeAlias type="com.sumware.dto.CommVO" alias="cvo"/>
+  		<typeAlias type="com.sumware.dto.MailVO" alias="mavo"/>
+  		<typeAlias type="com.sumware.dto.PageVO" alias="pvo"/>
+  		<typeAlias type="com.sumware.dto.DeptVO" alias="dvo"/>
+  		<typeAlias type="com.sumware.dto.SnsVO" alias="svo"/>
+  		<typeAlias type="com.sumware.dto.TodoVO" alias="tvo"/>
+  		<typeAlias type="com.sumware.dto.CalendarVo" alias="cavo"/>
+  		<typeAlias type="com.sumware.dto.MessengerRoomVO" alias="mrvo"/>
+  		<typeAlias type="com.sumware.dto.TodoJobVO" alias="tjvo"/>
   	</typeAliases>
   	<environments default="">
   		<environment id="">
