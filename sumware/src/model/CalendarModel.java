@@ -2,7 +2,7 @@ package model;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -33,7 +33,7 @@ public class CalendarModel{
 		
 		if(cavo.getCal()==null||cavo.getCal().equals("0")){
 			//리스트를 불러와서 json형식으로 바꿈
-			ArrayList<CalendarVO> list = (ArrayList<CalendarVO>) dao.getCalList(cavo);
+			List<CalendarVO> list =dao.getCalList(cavo);
 			
 			String json = dao.makeJson(list);
 	
@@ -41,7 +41,7 @@ public class CalendarModel{
 			model.addAttribute("cal", "부서");
 		}else{
 			//리스트를 불러와서 json형식으로 바꿈
-			ArrayList<CalendarVO> list = (ArrayList<CalendarVO>) dao.getCalList(cavo);
+			List<CalendarVO> list = dao.getCalList(cavo);
 			String json = dao.makeJson(list);
 	
 			model.addAttribute("calJson", json);
