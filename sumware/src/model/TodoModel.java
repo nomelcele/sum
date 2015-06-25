@@ -39,8 +39,8 @@ public class TodoModel implements ModelInter{
 			
 			//부서업무 리스트 뽑아줌
 			
-			ArrayList<TodoVO> deptJobList = TodoDao.getDao().getDeptJob(todept);
-			request.setAttribute("deptJobList", deptJobList);
+//			ArrayList<TodoVO> deptJobList = TodoDao.getDao().getDeptJob(todept);
+//			request.setAttribute("deptJobList", deptJobList);
 			
 			url = "todo/Todo.jsp";
 			method=true;	
@@ -49,15 +49,15 @@ public class TodoModel implements ModelInter{
 			int todept = Integer.parseInt(request.getParameter("memdept"));
 			System.out.println("memdept : "+todept);
 			System.out.println("memnum : "+memnum);
-			ArrayList<MemberVO> list = TodoDao.getDao().getTomem(memnum);
+//			ArrayList<MemberVO> list = TodoDao.getDao().getTomem(memnum);
 
 			HttpSession session = request.getSession();
-			session.setAttribute("teamNameList", list);
+//			session.setAttribute("teamNameList", list);
 			
 			//부서업무 리스트 뽑아줌
 			
-			ArrayList<TodoVO> deptJobList = TodoDao.getDao().getDeptJob(todept);
-			request.setAttribute("deptJobList", deptJobList);
+//			ArrayList<TodoVO> deptJobList = TodoDao.getDao().getDeptJob(todept);
+//			request.setAttribute("deptJobList", deptJobList);
 			
 			url = "todo/todoMain.jsp";
 			method=true;	
@@ -75,7 +75,7 @@ public class TodoModel implements ModelInter{
 			try {
 				//todo 테이블에 등록.
 				HashMap<String,String> map = MyFileUp.getFup().fileUp(fname, request);
-				TodoDao.getDao().addTodo(map);
+				//TodoDao.getDao().addTodo(map);
 				
 				
 			} catch (ServletException e) {
@@ -94,7 +94,7 @@ public class TodoModel implements ModelInter{
 				System.out.println("approveTodo 들어옴!!");
 				// 리스트의 승인여부 n을 y로 바꿈!!!!
 				HashMap<String,String> map = MyMap.getMaps().getMapList(request);
-				TodoDao.getDao().confirmTodo(map, "y");
+//				TodoDao.getDao().confirmTodo(map, "y");
 				//캘린더에 등록
 				map.put("start",map.get("tostdate"));
 				map.put("end", map.get("toendate"));
@@ -107,7 +107,7 @@ public class TodoModel implements ModelInter{
 				// 리스트의 승인여부 n을 z로 바꿈!!!!
 				System.out.println("rejectTodo 들어옴!!");
 				HashMap<String,String> map = MyMap.getMaps().getMapList(request);
-				TodoDao.getDao().confirmTodo(map, "z");
+				//TodoDao.getDao().confirmTodo(map, "z");
 			}
 			
 			url = "sumware?model=todo&submod=checkTodoListForm";
@@ -115,8 +115,8 @@ public class TodoModel implements ModelInter{
 			
 		}else if(submod.equals("checkTodoListForm")){
 			int tomem = Integer.parseInt(request.getParameter("memnum"));
-			ArrayList<TodoVO> clist = TodoDao.getDao().checkTodoList(tomem);
-			request.setAttribute("todoList", clist);
+			//ArrayList<TodoVO> clist = TodoDao.getDao().checkTodoList(tomem);
+			//request.setAttribute("todoList", clist);
 			
 			url = "todo/checkTodoList.jsp";
 			method = true;
@@ -125,19 +125,19 @@ public class TodoModel implements ModelInter{
 			int memnum = Integer.parseInt(request.getParameter("memnum"));
 			System.out.println("memnum:"+memnum);
 
-			ArrayList<TodoVO> fwList=TodoDao.getDao().getFWMana(memnum);
-			request.setAttribute("fwList", fwList);
+			//ArrayList<TodoVO> fwList=TodoDao.getDao().getFWMana(memnum);
+//			request.setAttribute("fwList", fwList);
 			url="todo/fWMana.jsp";
 			method=true;
 		}else if(submod.equals("toUpFk")){
 			System.out.print("toUpFk 들어옴");
 			
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
-			ArrayList<TodoVO> list = TodoDao.getDao().todoUpdate(map);
+			//ArrayList<TodoVO> list = TodoDao.getDao().todoUpdate(map);
 			System.out.println("dao로 todoupdate");
 			
 			//request.removeAttribute("fwList");
-			request.setAttribute("fwList", list);
+//			request.setAttribute("fwList", list);
 			
 			url="todo/fWMana.jsp";
 			method=true;
@@ -145,13 +145,13 @@ public class TodoModel implements ModelInter{
 			System.out.println("giveJobForm들어옴");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			System.out.println("request받아옴");
-			ArrayList<TodoVO> todoList = TodoDao.getDao().getTeamTodoList(map);
+			//ArrayList<TodoVO> todoList = TodoDao.getDao().getTeamTodoList(map);
 			System.out.println("todolist받아옴");
 			int memmgr = Integer.parseInt(map.get("memnum"));
-			ArrayList<MemberVO> teamMemberList = TodoDao.getDao().getTomem(memmgr);
+			//ArrayList<MemberVO> teamMemberList = TodoDao.getDao().getTomem(memmgr);
 			System.out.println("teammembers받아옴");
-			request.setAttribute("teamTodoList", todoList);
-			request.setAttribute("teamMemberList", teamMemberList);
+//			request.setAttribute("teamTodoList", todoList);
+//			request.setAttribute("teamMemberList", teamMemberList);
 
 			url = "todo/giveJob.jsp";
 			method = true;
@@ -160,7 +160,7 @@ public class TodoModel implements ModelInter{
 			
 			System.out.print("insertMemJob 들어옴");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
-			TodoDao.getDao().insertMemJob(map);
+			//TodoDao.getDao().insertMemJob(map);
 			
 			url = "sumware?model=todo&submod=showMembersJob";
 			method = true;
@@ -169,15 +169,15 @@ public class TodoModel implements ModelInter{
 			System.out.println("showMembersJob들어옴");
 			int jobtonum = Integer.parseInt(request.getParameter("jobtonum"));
 			System.out.println("jobtonum : "+jobtonum);
-			ArrayList<TodoJobVO> membersjoblist = TodoDao.getDao().getMembersJob(jobtonum);
+			//ArrayList<TodoJobVO> membersjoblist = TodoDao.getDao().getMembersJob(jobtonum);
 			// todoJobVO확인
-			for(TodoJobVO v : membersjoblist){
-				System.out.println("memname : " + v.getMemname());
-				System.out.println("memprofile : " + v.getMemprofile());
-				System.out.println("jobcont : " + v.getJobcont());
-			}
+			//for(TodoJobVO v : membersjoblist){
+//				System.out.println("memname : " + v.getMemname());
+//				System.out.println("memprofile : " + v.getMemprofile());
+//				System.out.println("jobcont : " + v.getJobcont());
+//			}
 
-			request.setAttribute("membersjoblist", membersjoblist);
+			//request.setAttribute("membersjoblist", membersjoblist);
 			url = "todo/membersJob.jsp";
 			method = true;
 			
@@ -186,8 +186,8 @@ public class TodoModel implements ModelInter{
 			System.out.println("showmemlist들어옴");
 			int jobtonum = Integer.parseInt(request.getParameter("jobtonum"));
 			System.out.println("jobtonum : "+jobtonum);
-			ArrayList<TodoJobVO> list = TodoDao.getDao().getMembersJob(jobtonum);
-			request.setAttribute("memberjoblist", list);
+			//ArrayList<TodoJobVO> list = TodoDao.getDao().getMembersJob(jobtonum);
+			//request.setAttribute("memberjoblist", list);
 			url = "todo/jobDetail.jsp";
 			method = true;
 			
@@ -196,8 +196,8 @@ public class TodoModel implements ModelInter{
 			System.out.println("teamTodoForm들어옴");
 			int memmgr = Integer.parseInt(request.getParameter("memmgr"));
 			System.out.println("memmgr : "+ memmgr);
-			ArrayList<TodoVO> list = TodoDao.getDao().getTeamJob(memmgr);
-			request.setAttribute("teamJobList", list);
+			//ArrayList<TodoVO> list = TodoDao.getDao().getTeamJob(memmgr);
+			//request.setAttribute("teamJobList", list);
 			
 			url = "todo/teamTodoForm.jsp";
 			method = true;
@@ -205,7 +205,7 @@ public class TodoModel implements ModelInter{
 		}else if(submod.equals("successJob")){
 			// 팀장의 업무 성공 처리
 			HashMap<String,String> map = MyMap.getMaps().getMapList(request);
-			TodoDao.getDao().confirmTodo(map, "o");
+			//TodoDao.getDao().confirmTodo(map, "o");
 			
 			url = "sumware?model=todo&submod=teamTodoForm";
 			method = true;
