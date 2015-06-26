@@ -1,33 +1,23 @@
 package com.sumware.mvc.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.sumware.dto.BnameVO;
 import com.sumware.dto.BoardVO;
 import com.sumware.dto.CommVO;
 import com.sumware.mvc.service.FactorySrevice;
-import com.sumware.util.CloseUtil;
 
-import conn.ConUtil;
-
+@Repository
 public class BoardDao {
-	private static BoardDao dao;
-
-	public static synchronized BoardDao getDao() {
-		if (dao == null) {
-			dao = new BoardDao();
-		}
-		return dao;
-	}
+	@Autowired
+	private SqlSessionTemplate ss;
 	
 	// boardWrite 하는 insert 메서드.
 	public void insert(HashMap<String, String> map){

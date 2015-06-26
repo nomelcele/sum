@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.sumware.dto.PageVO;
 
+
 public class MyPage {
 	private static MyPage mp;
 
