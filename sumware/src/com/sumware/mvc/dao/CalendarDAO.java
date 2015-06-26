@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.sumware.dto.CalendarVO;
-
+@Repository
 public class CalendarDAO {
 	@Autowired
 	private SqlSessionTemplate st;
