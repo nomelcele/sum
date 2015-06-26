@@ -64,8 +64,8 @@ $(function(){
 		    if (title) {
 		     eventData = {
 		      title: title,
-		      start: start,
-		      end: end
+		      calstart: start,
+		      calend: end
 		     };
 		     $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
 		    }
@@ -78,8 +78,8 @@ $(function(){
 		              type: "POST",
 		              data: {
 		                  title:encodeURIComponent(title),
-		                  start:start.format(),
-		                  end:end.format(),
+		                  calstart:start.format(),
+		                  calend:end.format(),
 		                  selCal:selCal
 		              },
 		              dataType: "html",
