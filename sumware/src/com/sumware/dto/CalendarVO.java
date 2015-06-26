@@ -3,20 +3,23 @@ package com.sumware.dto;
 public class CalendarVO {
 	private int calnum, caldept, calmem;
 	// List에서 cal은 부서텝을 선택했는지 사원텝을 선택했는지 구분한다.
-	private String calstart, calend, calcont,cal,selCal;
+	private String calstart, calend, calcont,selCal,cal;
 	
-	public String getSelCal() {
-		return selCal;
-	}
-	public void setSelCal(String selCal) {
-		this.selCal = selCal;
-	}
+	
+
 	public String getCal() {
 		return cal;
 	}
 	public void setCal(String cal) {
 		this.cal = cal;
 	}
+	public String getSelCal() {
+		return selCal;
+	}
+	public void setSelCal(String selCal) {
+		this.selCal = selCal;
+	}
+
 	public int getCalnum() {
 		return calnum;
 	}

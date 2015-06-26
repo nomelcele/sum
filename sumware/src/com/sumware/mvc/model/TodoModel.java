@@ -9,27 +9,32 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sumware.dto.CalendarVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.TodoVO;
+import com.sumware.mvc.dao.CalendarDAO;
 import com.sumware.mvc.dao.TodoDao;
 
 @Controller
 public class TodoModel{
 	@Autowired
-	private TodoDao dao;
+	private TodoDao tdao;
+	@Autowired
+	private CalendarDAO cdao;
 	
 	// todo 기본 페이지
 	@RequestMapping(value="/todoForm", method=RequestMethod.POST)
 	public String todoForm(Model model, int memdept){
 		//int todept = Integer.parseInt(request.getParameter("memdept"));
 		int todept = memdept;
-		List<TodoVO> deptJobList= dao.getDeptJob(todept);
+		List<TodoVO> deptJobList= tdao.getDeptJob(todept);
 		model.addAttribute("deptJobList", deptJobList);
 		
 		return "todo/todoMain";
@@ -39,13 +44,13 @@ public class TodoModel{
 	@RequestMapping(value="/firsttodoForm", method=RequestMethod.POST)
 	public String firsttodoForm(Model model, MemberVO mvo){
 		
-		List<MemberVO> list = dao.getTomem(mvo.getMemnum());
+		List<MemberVO> list = tdao.getTomem(mvo.getMemnum());
 		
 		model.addAttribute("teamNameList", list);
 		
 		int todept = mvo.getMemdept();
 		//부서 업무리스트 뽑아줌
-		List<TodoVO> deptJobList = dao.getDeptJob(todept);
+		List<TodoVO> deptJobList = tdao.getDeptJob(todept);
 		
 		model.addAttribute("deptJobList", deptJobList);
 
@@ -60,6 +65,7 @@ public class TodoModel{
 		return "todo/addTodo";
 	}
 	
+	// 업무 추가 (파일 업로드)
 	@RequestMapping(value = "/addTodo", method=RequestMethod.POST)
 	public ModelAndView addTodo(@RequestParam("tofile") MultipartFile tofile, TodoVO tvo, HttpSession session){
 
@@ -77,82 +83,42 @@ public class TodoModel{
 		
 		tvo.setTofile(tofile.getOriginalFilename());
 
-			dao.addTodo(tvo);
+		tdao.addTodo(tvo);
 		return mav;
 	}
 	
+	// 업무관리 클릭 시 보여줄 화면, 업무 리스트
+	@RequestMapping(value="/checkTodoList", method=RequestMethod.POST)
+	public String checkTodoList(int memnum,Model model){
+		//int tomem = Integer.parseInt(request.getParameter("memnum"));
+		//ArrayList<TodoVO> clist = TodoDao.getDao().checkTodoList(tomem);
+		//request.setAttribute("todoList", clist);
+		int tomem = memnum;
+		List<TodoVO> clist = tdao.checkTodoList(tomem);
+		model.addAttribute("todoList", clist);
+		return "todo/checkTodoList";
+	}
 	
+	// 팀장의 업무 승인!!!! y로 바꿔줌!! 캘린더에도 등록!!!!
+	@RequestMapping(value="/approveTodo", method=RequestMethod.POST)
+	public String approveTodo(TodoVO tvo){
+		tdao.confirmTodo(tvo, "y");
+//		map.put("start",map.get("tostdate"));
+//		map.put("end", map.get("toendate"));
+//		map.put("title", map.get("totitle"));
+//		map.put("cal", map.get("todept"));
+		CalendarVO cvo = new CalendarVO();
+		cvo.setCalstart(tvo.getTostdate());
+		cvo.setCalend(tvo.getToendate());
+		cvo.setCalcont(tvo.getTotitle());
+		cvo.setCaldept(tvo.getTodept());
+		cvo.setCal("0");
+		cdao.calInsert(cvo);
+		return "todo/checkTodoList";
+	}
 	
+
 	
-	
-	
-	
-//	
-//	@Override
-//	public ModelForward exe(HttpServletRequest request,
-//			HttpServletResponse response) throws IOException {
-//		
-//		String submod = request.getParameter("submod");
-//		System.out.println("submod:"+submod);
-//		String url ="todo/todoMain.jsp";
-//		boolean method=false;
-//		
-//		if(submod.equals("todoForm")){
-//			System.out.println("submod todoForm들어옴");
-//		
-//			int todept = Integer.parseInt(request.getParameter("memdept"));
-//			System.out.println("memdept : "+todept);
-//			
-//			
-//			//부서업무 리스트 뽑아줌
-//			
-////			ArrayList<TodoVO> deptJobList = TodoDao.getDao().getDeptJob(todept);
-////			request.setAttribute("deptJobList", deptJobList);
-//			
-//			url = "todo/Todo.jsp";
-//			method=true;	
-//		}else if(submod.equals("firsttodoForm")){
-//			int memnum = Integer.parseInt(request.getParameter("memnum"));
-//			int todept = Integer.parseInt(request.getParameter("memdept"));
-//			System.out.println("memdept : "+todept);
-//			System.out.println("memnum : "+memnum);
-////			ArrayList<MemberVO> list = TodoDao.getDao().getTomem(memnum);
-//
-//			HttpSession session = request.getSession();
-////			session.setAttribute("teamNameList", list);
-//			
-//			//부서업무 리스트 뽑아줌
-//			
-////			ArrayList<TodoVO> deptJobList = TodoDao.getDao().getDeptJob(todept);
-////			request.setAttribute("deptJobList", deptJobList);
-//			
-//			url = "todo/todoMain.jsp";
-//			method=true;	
-//			
-//			
-//		}else if(submod.equals("addtodoForm")){
-//			System.out.println("addtodoForm 들어왔어");
-//			
-//			url="todo/addTodo.jsp";
-//			method = true;		
-//		}else if(submod.equals("addTodo")){
-//			System.out.println("addTodo 들어왔어");
-//			
-//			String fname = "tofile";
-//			try {
-//				//todo 테이블에 등록.
-//				HashMap<String,String> map = MyFileUp.getFup().fileUp(fname, request);
-//				//TodoDao.getDao().addTodo(map);
-//				
-//				
-//			} catch (ServletException e) {
-//				
-//				e.printStackTrace();
-//			}
-//			
-//			url = "sumware?model=todo&submod=firsttodoForm";
-//			method = true;
-//			
 //		}else if(submod.equals("checkTodoList")){
 //			// 업무 관리 클릭시 보여줄 화면 , 업무 리스트
 //
