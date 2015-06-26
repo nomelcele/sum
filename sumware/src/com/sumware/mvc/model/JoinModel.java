@@ -1,4 +1,4 @@
-package model;
+package com.sumware.mvc.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
