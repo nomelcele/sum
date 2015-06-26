@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/tiles/top.jsp"%>
 <div id="global" class="wrap-layout board">
 			<div class="lnb-area" id="lnb-area">
-				<!-- left menu !!!! 들어갈 자리 -->
+			<%@include file="/WEB-INF/tiles/contentLeft.jsp"%>
 			</div>
 			<!-- 부서업무 부분!! -->
 			<!-- menutarget 부분 -->
@@ -58,3 +59,4 @@
 		<%@include file="todoSns.jsp"%>
 	</div>
 </div>
+<%@include file="/WEB-INF/tiles/footer.jsp"%>

@@ -10,9 +10,10 @@ function getJobDetail(tonum){
 	$("#detail"+tonum).toggle("slow");
 	$.ajax({
 		type : "post",
-		url : "sumware",
-		data : {model:"todo", 
-			submod:"showmemlist", 
+		url : "/showmemlist",
+		data : {
+// 			model:"todo", 
+// 			submod:"showmemlist", 
 			jobtonum:tonum,
 			},
 		success : function(result){
