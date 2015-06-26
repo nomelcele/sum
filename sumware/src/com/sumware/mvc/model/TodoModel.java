@@ -1,37 +1,30 @@
 package com.sumware.mvc.model;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.MemberVO;
-import com.sumware.dto.TodoJobVO;
 import com.sumware.dto.TodoVO;
-import com.sumware.mvc.controller.ModelForward;
-import com.sumware.mvc.dao.CalendarDAO;
 import com.sumware.mvc.dao.TodoDao;
-import com.sumware.util.MyFileUp;
-import com.sumware.util.MyMap;
 
 @Controller
 public class TodoModel{
-
+	@Autowired
 	private TodoDao dao;
 	
+	// todo 기본 페이지
 	@RequestMapping(value="/todoForm", method=RequestMethod.POST)
 	public String todoForm(Model model, int memdept){
 		//int todept = Integer.parseInt(request.getParameter("memdept"));
@@ -42,16 +35,55 @@ public class TodoModel{
 		return "todo/todoMain";
 	}
 	
+	// 메뉴바에서 todo메뉴 첫 진입 시
 	@RequestMapping(value="/firsttodoForm", method=RequestMethod.POST)
 	public String firsttodoForm(Model model, MemberVO mvo){
 		
-		dao.getTomem(mvo.getMemnum());
+		List<MemberVO> list = dao.getTomem(mvo.getMemnum());
 		
-		//수정 중
+		model.addAttribute("teamNameList", list);
 		
+		int todept = mvo.getMemdept();
+		//부서 업무리스트 뽑아줌
+		List<TodoVO> deptJobList = dao.getDeptJob(todept);
+		
+		model.addAttribute("deptJobList", deptJobList);
+
 		return "todo/todoMain";
 		
 	}
+	
+	// 업무추가 폼 
+	@RequestMapping(value = "/addtodoForm", method=RequestMethod.POST)
+	public String addtodoForm(){
+		
+		return "todo/addTodo";
+	}
+	
+	@RequestMapping(value = "/addTodo", method=RequestMethod.POST)
+	public ModelAndView addTodo(@RequestParam("tofile") MultipartFile tofile, TodoVO tvo, HttpSession session){
+
+		ModelAndView mav = new ModelAndView("redirect:/firsttodoForm");
+		
+		StringBuffer path = new StringBuffer();
+		path.append(session.getServletContext().getRealPath("/")).append("/upload/").append(tofile.getOriginalFilename());
+		
+		File f = new File(path.toString());
+		try {
+			tofile.transferTo(f);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		tvo.setTofile(tofile.getOriginalFilename());
+
+			dao.addTodo(tvo);
+		return mav;
+	}
+	
+	
+	
+	
 	
 	
 	
