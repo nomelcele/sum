@@ -1,37 +1,27 @@
 package com.sumware.mvc.model;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import com.sumware.dto.BnameVO;
-import com.sumware.dto.BoardVO;
-import com.sumware.dto.CommVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import com.sumware.dto.PageVO;
-import com.sumware.mvc.controller.ModelForward;
 import com.sumware.mvc.dao.BoardDao;
-import com.sumware.util.MyMap;
 
-public class BoardModel implements ModelInter{
-
-	@Override
-	public ModelForward exe(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
-		String url = "";
-		boolean method = false;
-		String submod = request.getParameter("submod");
-		System.out.println("BoardModel[submod] : " + submod);
-		// boardList **********************************
+@Controller
+public class BoardModel {
+	@Autowired
+	private BoardDao dao;
+	
+	/*
+		// boardList 
 		if(submod.equals("boardList") && submod!=null){
-			/* Page 처리 영역 */
+			// Page 처리 영역 
 			// 들어온 요청은 boardList 를 보여주는 것, 그렇다면 1페이지 부터 보여줘야 한다.
 			// 두번쨰 인자값은 게시물인지, 댓글인지를 구별 해주는 인자. 0이면 게시물~
 			Map<String, Integer> map = pageProcess(request, 0);
@@ -51,7 +41,7 @@ public class BoardModel implements ModelInter{
 			url = "board/boardList.jsp";
 			method = true;
 		}
-		// boardwrite *********************************
+		// boardwrite 
 		else if(submod != null && submod.equals("writeForm")){
 			System.out.println("what the fuck");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
@@ -141,10 +131,7 @@ public class BoardModel implements ModelInter{
 			ses.setAttribute("fileUrl", fileUrl);
 			url = "board/callback.jsp";
 			method = false;
-		}
-		return new ModelForward(url, method);
-	}
-	
+	*/
 	private Map<String, Integer> pageProcess(HttpServletRequest request, int etc) {
 		PageVO pageInfo = new PageVO();
 		// 한페이지에 보일 게시글 갯수
@@ -210,6 +197,7 @@ public class BoardModel implements ModelInter{
 		map.put("end", endRow);
 		return map;
 	}
+	
 	private String getFileName(Part part){
 		// 파일 이름을 저장할 변수 선언
 		String fileName = "";
@@ -231,20 +219,4 @@ public class BoardModel implements ModelInter{
 		}
 		return fileName;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
