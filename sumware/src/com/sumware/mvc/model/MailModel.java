@@ -1,14 +1,23 @@
-package com.sumware.mvc.model;
+package model;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.MailVO;
 import com.sumware.mvc.controller.ModelForward;
@@ -18,8 +27,102 @@ import com.sumware.util.MyMap;
 import com.sumware.util.MyPage;
 import com.sumware.util.Suggest;
 
+@Controller
 public class MailModel implements ModelInter{
-
+	@Autowired
+	private MailDao dao;
+	
+	// 메일 작성 form 이동
+	@RequestMapping(value="mailWriteForm",method=RequestMethod.POST)
+	public ModelAndView mailWriteForm(@RequestParam("toMem")String toMem,
+			@RequestParam("mailtitle")String mailtitle){
+		System.out.println("mailWriteForm");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("toMem", toMem);
+		mav.addObject("mailtitle", mailtitle);
+		mav.setViewName("mailWrite");
+		return mav;
+	}
+	
+	// 받은 메일함 이동
+	@RequestMapping(value="mailFromList",method=RequestMethod.POST)
+	public ModelAndView mailFromList(@RequestParam("usernum")Integer usernum,
+			@RequestParam("userid")String userid,
+			HttpServletRequest request){
+		System.out.println("mailFromList");
+		ModelAndView mav = new ModelAndView();
+		// 받은 메일함에 있는 메일 갯수 얻어오기
+		int totalCount = dao.getListNum(userid,usernum)[0];
+		System.out.println("받은 메일함 메일 갯수: "+totalCount);
+		
+		// 페이지 정보를 가져오기 위한 map
+		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("usernum",usernum.toString()); // 로그인한 사용자의 사원 번호
+		map.put("userid", userid); // 로그인한 사용자의 아이디
+		map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
+		map.put("end", pmap.get("end").toString()); // 마지막 페이지
+		
+		// 받은 메일함에 들어갈 메일 리스트 가져오기
+		List<MailVO> fromlist = dao.getFromMailList(map);
+		mav.addObject("list", fromlist);
+		mav.addObject("tofrom", 1);
+		mav.setViewName("mailList");
+		return mav;
+		
+	}
+	
+	// 보낸 메일함 이동
+	@RequestMapping(value="mailToList",method=RequestMethod.POST)
+	public ModelAndView mailToList(@RequestParam("usernum")Integer usernum,
+			@RequestParam("userid")String userid,
+			HttpServletRequest request){
+		System.out.println("mailToList");
+		ModelAndView mav = new ModelAndView();
+		// 보낸 메일함에 있는 메일 갯수 얻어오기
+		int totalCount = dao.getListNum(userid, usernum)[1];
+		System.out.println("보낸 메일함 메일 갯수: "+totalCount);
+		
+		// 페이지 정보를 가져오기 위한 map
+		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("usernum",usernum.toString()); // 로그인한 사용자의 사원 번호
+		map.put("userid", userid); // 로그인한 사용자의 아이디
+		map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
+		map.put("end", pmap.get("end").toString()); // 마지막 페이지
+		
+		// 보낸 메일함에 들어갈 메일 리스트 가져오기
+		List<MailVO> tolist = dao.getToMailList(map);
+		mav.addObject("list", tolist);
+		mav.addObject("tofrom", 2);
+		mav.setViewName("mailList");
+		return mav;
+		
+	}
+	
+	// 내게 쓴 메일함 이동
+	@RequestMapping(value="mailMyList",method=RequestMethod.POST)
+	public ModelAndView mailMyList(@RequestParam("usernum")Integer usernum,
+			@RequestParam("userid")String userid,
+			HttpServletRequest request){
+		System.out.println("mailMyList");
+		ModelAndView mav = new ModelAndView();
+		// 내게 쓴 메일함에 있는 메일 갯수 얻어오기
+		int totalCount = dao.getListNum(userid, usernum)[2];
+		
+		
+	}
+	
+	
+	// ---------------------------------------------
+	// ---------------------------------------------
+	// ---------------------------------------------
+	// 6/26 작업 중
+	// 주석 처리된 부분은 변환 완료된 것
+	// ---------------------------------------------
+	// ---------------------------------------------
+	// ---------------------------------------------
+	
 	@Override
 	public ModelForward exe(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
@@ -29,20 +132,20 @@ public class MailModel implements ModelInter{
 		
 		HashMap<String,String> map = MyMap.getMaps().getMapList(request);
 		
-	    if(submod != null && submod.equals("mailWriteForm")){
-			String toMem = map.get("toMem");
-			String mailtitle = map.get("mailtitle");
+//	    if(submod != null && submod.equals("mailWriteForm")){
+//			String toMem = map.get("toMem");
+//			String mailtitle = map.get("mailtitle");
+//			
+//			if(toMem != null){
+//				System.out.println("toMem: "+toMem);
+//				request.setAttribute("toMem", toMem);
+//				request.setAttribute("mailtitle", mailtitle);
+//			}
+//			
+//			url = "mail/mailWrite.jsp";
+//			method = true;
 			
-			if(toMem != null){
-				System.out.println("toMem: "+toMem);
-				request.setAttribute("toMem", toMem);
-				request.setAttribute("mailtitle", mailtitle);
-			}
-			
-			url = "mail/mailWrite.jsp";
-			method = true;
-			
-		} else if(submod != null && submod.equals("mailWrite")){
+		if(submod != null && submod.equals("mailWrite")){
 			System.out.println("현재 submod: mailWrite");
 			request.setCharacterEncoding("UTF-8");
 			try {
@@ -59,41 +162,41 @@ public class MailModel implements ModelInter{
 				e.printStackTrace();
 			}
 			
-		} else if(submod != null && submod.equals("mailFromList")){
-			// 받은 메일함
-			System.out.println("현재 submod: mailFromList");
-			
-			// 받은 메일함에 있는 메일의 수
-			int totalCount = MailDao.getDao().getListNum(map)[0];
-			System.out.println("받은 메일함 메일 갯수: "+totalCount);
-			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-			
-			System.out.println("로그인한 사원 번호: "+map.get("usernum"));
-			System.out.println("로그인한 사원 아이디: "+map.get("userid"));
-			
-			ArrayList<MailVO> fromlist = MailDao.getDao().getFromMailList(map, pmap);
-			
-			request.setAttribute("list", fromlist);
-			request.setAttribute("tofrom", 1);
-			
-			url = "mail/mailList.jsp";
-			method = true;
-		} else if(submod != null && submod.equals("mailToList")){
-			System.out.println("현재 submod: mailToList");
-			// 보낸 메일함
-			// 현재 로그인한 사원의 사원 번호
-			
-			// 보낸 메일함에 있는 메일의 수
-			int totalCount = MailDao.getDao().getListNum(map)[1];
-			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-						
-			ArrayList<MailVO> tolist = MailDao.getDao().getToMailList(map,pmap);
-			
-			request.setAttribute("list", tolist);
-			request.setAttribute("tofrom", 2);
-			
-			url = "mail/mailList.jsp";
-			method = true;
+//		} else if(submod != null && submod.equals("mailFromList")){
+//			// 받은 메일함
+//			System.out.println("현재 submod: mailFromList");
+//			
+//			// 받은 메일함에 있는 메일의 수
+//			int totalCount = MailDao.getDao().getListNum(map)[0];
+//			System.out.println("받은 메일함 메일 갯수: "+totalCount);
+//			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+//			
+//			System.out.println("로그인한 사원 번호: "+map.get("usernum"));
+//			System.out.println("로그인한 사원 아이디: "+map.get("userid"));
+//			
+//			ArrayList<MailVO> fromlist = MailDao.getDao().getFromMailList(map, pmap);
+//			
+//			request.setAttribute("list", fromlist);
+//			request.setAttribute("tofrom", 1);
+//			
+//			url = "mail/mailList.jsp";
+//			method = true;
+//		} else if(submod != null && submod.equals("mailToList")){
+//			System.out.println("현재 submod: mailToList");
+//			// 보낸 메일함
+//			// 현재 로그인한 사원의 사원 번호
+//			
+//			// 보낸 메일함에 있는 메일의 수
+//			int totalCount = MailDao.getDao().getListNum(map)[1];
+//			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+//						
+//			ArrayList<MailVO> tolist = MailDao.getDao().getToMailList(map,pmap);
+//			
+//			request.setAttribute("list", tolist);
+//			request.setAttribute("tofrom", 2);
+//			
+//			url = "mail/mailList.jsp";
+//			method = true;
 		} else if(submod != null && submod.equals("mailSug")){
 			// 메일 쓰기 받는 사람에서 suggest 기능
 			request.setCharacterEncoding("UTF-8");
