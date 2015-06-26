@@ -1,4 +1,4 @@
-package model;
+package com.sumware.mvc.model;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -109,10 +109,63 @@ public class MailModel implements ModelInter{
 		ModelAndView mav = new ModelAndView();
 		// 내게 쓴 메일함에 있는 메일 갯수 얻어오기
 		int totalCount = dao.getListNum(userid, usernum)[2];
+		System.out.println("내게 쓴 메일함 메일 갯수: "+totalCount);
 		
+		// 페이지 정보를 가져오기 위한 map
+		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("usernum",usernum.toString()); // 로그인한 사용자의 사원 번호
+		map.put("userid", userid); // 로그인한 사용자의 아이디
+		map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
+		map.put("end", pmap.get("end").toString()); // 마지막 페이지
+		
+		// 내게 쓴 메일함에 들어갈 메일 리스트 가져오기
+		List<MailVO> mylist = dao.getMyMailList(map);
+		mav.addObject("list", mylist);
+		mav.addObject("tofrom", 3);
+		mav.setViewName("mailList");
+		return mav;
 		
 	}
 	
+	// 휴지통 이동
+	@RequestMapping(value="mailTrashcan",method=RequestMethod.POST)
+	public ModelAndView mailTrashcan(@RequestParam("usernum")Integer usernum,
+			@RequestParam("userid")String userid,
+			HttpServletRequest request){
+		System.out.println("mailTrashcan");
+		ModelAndView mav = new ModelAndView();
+		// 휴지통에 있는 메일 갯수 얻어오기
+		int totalCount = dao.getListNum(userid, usernum)[3];
+		System.out.println("휴지통 메일 갯수: "+totalCount);
+		
+		// 페이지 정보를 가져오기 위한 map
+		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("usernum",usernum.toString()); // 로그인한 사용자의 사원 번호
+		map.put("userid", userid); // 로그인한 사용자의 아이디
+		map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
+		map.put("end", pmap.get("end").toString()); // 마지막 페이지
+		
+		// 휴지통에 들어갈 메일 리스트 가져오기
+		List<MailVO> trashlist = dao.getTrashList(map);
+		mav.addObject("list", trashlist);
+		mav.addObject("tofrom", 4);
+		mav.setViewName("mailList");
+		return mav;
+		
+	}
+	
+	// 메일 상세 보기
+	@RequestMapping(value="mailDetail")
+	public ModelAndView mailDetail(@RequestParam("mailnum")int mailnum,
+			@RequestParam("usernum")Integer usernum,
+			@RequestParam("userid")String userid){
+		System.out.println("mailDetail");
+		ModelAndView mav = new ModelAndView();
+		
+		
+	}
 	
 	// ---------------------------------------------
 	// ---------------------------------------------
@@ -238,38 +291,38 @@ public class MailModel implements ModelInter{
 			url = "mail/mailDetail.jsp";
 			method = true;
 			
-		} else if(submod != null && submod.equals("mailMyList")){
-			System.out.println("현재 submod: mailMyList");
-			// 내게 쓴 메일함
-			
-			// 내게 쓴 메일함에 있는 메일의 수
-			int totalCount = MailDao.getDao().getListNum(map)[2];
-			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-			
-			ArrayList<MailVO> mylist = MailDao.getDao().getMyMailList(map, pmap);
-			
-			request.setAttribute("list", mylist);
-			request.setAttribute("tofrom", 3);
-			
-			url = "mail/mailList.jsp";
-			method = true;
-			
-		} else if(submod != null && submod.equals("mailTrashcan")){
-			System.out.println("현재 submod: mailTrashList");
-			// 메뉴에서 휴지통을 클릭했을 때
-
-			
-			// 휴지통에 있는 메일의 수
-			int totalCount = MailDao.getDao().getListNum(map)[3];
-			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-			
-			// 휴지통에서 보여줄 메일 리스트
-			ArrayList<MailVO> trashlist = MailDao.getDao().getTrashList(map,pmap);
-			request.setAttribute("list", trashlist);
-			request.setAttribute("tofrom", 4);
-			
-			url = "mail/mailList.jsp";
-			method = true;
+//		} else if(submod != null && submod.equals("mailMyList")){
+//			System.out.println("현재 submod: mailMyList");
+//			// 내게 쓴 메일함
+//			
+//			// 내게 쓴 메일함에 있는 메일의 수
+//			int totalCount = MailDao.getDao().getListNum(map)[2];
+//			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+//			
+//			ArrayList<MailVO> mylist = MailDao.getDao().getMyMailList(map, pmap);
+//			
+//			request.setAttribute("list", mylist);
+//			request.setAttribute("tofrom", 3);
+//			
+//			url = "mail/mailList.jsp";
+//			method = true;
+//			
+//		} else if(submod != null && submod.equals("mailTrashcan")){
+//			System.out.println("현재 submod: mailTrashList");
+//			// 메뉴에서 휴지통을 클릭했을 때
+//
+//			
+//			// 휴지통에 있는 메일의 수
+//			int totalCount = MailDao.getDao().getListNum(map)[3];
+//			Map<String, Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+//			
+//			// 휴지통에서 보여줄 메일 리스트
+//			ArrayList<MailVO> trashlist = MailDao.getDao().getTrashList(map,pmap);
+//			request.setAttribute("list", trashlist);
+//			request.setAttribute("tofrom", 4);
+//			
+//			url = "mail/mailList.jsp";
+//			method = true;
 		}  else if(submod != null && submod.equals("mailSetDel")){
 			// 메일 테이블의 delete 속성 설정
 			System.out.println("현재 submod: mailSetDel");
