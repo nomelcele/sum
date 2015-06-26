@@ -15,7 +15,7 @@
 	
 	function push(){
 		if(typeof(EventSource) != "undefined"){
-			eventSource = new EventSource("pushSns&sdept=${v.memdept}&page=1&rowsPerPage="+rowsPerPage); // push를 받을수 있는 브라우져인지 판단.
+			eventSource = new EventSource("sumware?model=sns&submod=pushSns&sdept=${v.memdept}&page=1&rowsPerPage="+rowsPerPage); // push를 받을수 있는 브라우져인지 판단.
 			eventSource.onmessage = function(event){
 				$(".chat").html(event.data);
 			};
@@ -42,6 +42,8 @@
 	function snsSend(){
 		$(".chat").scrollTop(0);
 		var fdata = {
+			model:"sns",
+			submod:"insertSns",
 			smem:"${v.memnum}",
 			sdept:"${v.memdept}",
 			scont:$("#btn-input").val()
@@ -49,20 +51,22 @@
 		$('#btn-input').val("");
 		$.ajax({
 			type:"POST",
-			url:"/insertSns",
+			url:"sumware",
 			data:fdata
 		});
 	}
 	function snsComm(snum){
 		var rowsPerPage=10;
 		var data={
+			model:"sns",
+			submod:"snsComm",
 			page:"1",
 			rowsPerPage:rowsPerPage,
 			snum:snum
 		};
 		$.ajax({
 			type:"POST",
-			url:"/snsComm",
+			url:"sumware",
 			data:data,
 			success: function(result){
 				$("#wrapbody").html(result);
@@ -73,6 +77,8 @@
 	}
 	function snsInsertComm(snum){
 		var data={
+				model:"sns",
+				submod:"snsCommInset",
 				comem:"${v.memnum}",
 				page:"1",
 				rowsPerPage:pageB,
@@ -81,7 +87,7 @@
 			};
 		$.ajax({
 			type:"POST",
-			url:"/snsCommInsert",
+			url:"sumware",
 			data:data,
 			success: function(result){
 				$("#wrapbody").html(result);
@@ -90,6 +96,8 @@
 	}
 	function snsCommDelete(conum,commsns){
 		var data={
+				model:"sns",
+				submod:"snsCommDelete",
 				page:"1",
 				rowsPerPage:pageB,
 				snum:commsns,
@@ -97,7 +105,7 @@
 		};
 		$.ajax({
 			type:"POST",
-			url:"/snsCommDelete",
+			url:"sumware",
 			data:data,
 			success:function(result){
 				$("#wrapbody").html(result);
@@ -120,13 +128,15 @@
 				var page=pageB;
 				var rowsPerPage=pageB;
 				var data={
+					model:"sns",
+					submod:"snsComm",
 					page:"1",
 					rowsPerPage:rowsPerPage,
 					snum:snum
 				};
 				$.ajax({
 					type:"POST",
-					url:"/snsComm",
+					url:"sumware",
 					data:data,
 					success: function(result){
 						$("#wrapbody").html(result);

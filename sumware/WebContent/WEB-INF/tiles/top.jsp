@@ -157,10 +157,10 @@
 				// 부서업무 버튼
 				$.ajax({
 					type : "post",
-					url : "sumware",
+					url : "/todoForm",
 					data : {
-						model:"todo", 
-						submod:"todoForm",
+// 						model:"todo", 
+// 						submod:"todoForm",
 						memdept:"${sessionScope.v.memdept}"
 						},
 					success : function(result){
@@ -173,10 +173,10 @@
 				// 부장일 때 업무 부여 버튼
 				$.ajax({
 					type : "post",
-					url : "sumware",
+					url : "/addtodoForm",
 					data : {
-						model:"todo", 
-						submod:"addtodoForm",
+// 						model:"todo", 
+// 						submod:"addtodoForm",
 						//memnum:"${sessionScope.v.memnum}"
 						},
 					success : function(result){
@@ -189,10 +189,10 @@
 				// 팀장일 때 업무 관리 버튼
 				$.ajax({
 					type : "post",
-					url : "sumware",
+					url : "/checkTodoList",
 					data : {
-						model:"todo", 
-						submod:"checkTodoList",
+// 						model:"todo", 
+// 						submod:"checkTodoList",
 						memnum:"${sessionScope.v.memnum}"
 						},
 					success : function(result){
@@ -205,10 +205,10 @@
 				// 부장일 때 업무 관리 버튼
 				$.ajax({
 					type : "post",
-					url : "sumware",
+					url : "/fWMana",
 					data : {
-						model:"todo", 
-						submod:"fWMana",
+// 						model:"todo", 
+// 						submod:"fWMana",
 						memnum:"${sessionScope.v.memnum}"
 						},
 					success : function(result){
@@ -221,10 +221,10 @@
 				// 팀장일 때 업무 부여
 				$.ajax({
 					type : "post",
-					url : "sumware",
+					url : "/giveJobForm",
 					data : {
-						model:"todo", 
-						submod:"giveJobForm",
+// 						model:"todo", 
+// 						submod:"giveJobForm",
 						memnum:"${sessionScope.v.memnum}"
 						},
 					success : function(result){
@@ -237,10 +237,10 @@
 				// 팀 업무 버튼
 				$.ajax({
 					type : "post",
-					url : "sumware",
+					url : "/teamTodoForm",
 					data : {
-						model:"todo", 
-						submod:"teamTodoForm",
+// 						model:"todo", 
+// 						submod:"teamTodoForm",
 						memmgr:"${sessionScope.v.memnum}"
 						},
 					success : function(result){
@@ -257,11 +257,11 @@
 		if(res=='rejectTodo'){
 			$.ajax({
 				type : "post",
-				url : "sumware",
+				url : "/rejectTodo",
 				data : {
-					model:"todo", 
-					submod:"checkTodoList",
-					childmod:"rejectTodo",
+// 					model:"todo", 
+// 					submod:"checkTodoList",
+// 					childmod:"rejectTodo",
 					tonum:$('#rtonum').val(),
 					memnum:"${sessionScope.v.memnum }",
 					tostdate:$('#rtostdate').val(),
@@ -283,11 +283,11 @@
 		}else if(res=='approveTodo'){
 			$.ajax({
 				type : "post",
-				url : "sumware",
+				url : "/approveTodo",
 				data : {
-					model:"todo", 
-					submod:"checkTodoList",
-					childmod:"approveTodo",
+// 					model:"todo", 
+// 					submod:"checkTodoList",
+// 					childmod:"approveTodo",
 					tonum:$('#atonum').val(),
 					memnum:"${sessionScope.v.memnum }",
 					tostdate:$('#atostdate').val(),
@@ -297,6 +297,7 @@
 					tocomm:$('#atocomm').val()
 					
 					},
+					
 				success : function(result){
 						setTimeout(function(){
 							$("#menuTarget").html(result);
@@ -309,10 +310,10 @@
 		}else if(res=='successTodo'){
 			$.ajax({
 				type : "post",
-				url : "sumware",
+				url : "/successJob",
 				data : {
-					model:"todo", 
-					submod:"successJob",
+// 					model:"todo", 
+// 					submod:"successJob",
 					tonum:$('#stonum').val(),
 					tocomm:$('#stocomm').val(),
 					memmgr:"${sessionScope.v.memmgr}"
@@ -369,9 +370,10 @@
 		$("#detail"+tonum).toggle("slow");
 		$.ajax({
 			type : "post",
-			url : "sumware",
-			data : {model:"todo", 
-				submod:"showmemlist", 
+			url : "/showmemlist",
+			data : {
+// 				model:"todo", 
+// 				submod:"showmemlist", 
 				jobtonum:tonum,
 				},
 			success : function(result){

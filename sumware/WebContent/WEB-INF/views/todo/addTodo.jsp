@@ -11,14 +11,11 @@
 					<i class="fa fa-plus-square-o"></i> <strong class="primary-font">업무 추가</strong>
 				</div>
 				<div class="panel-body">
-					<div class="column" style="overflow: auto">
+					<div class="column">
 
-						<form role="form" action="sumware" method="post" name="addTodoForm" id="addTodoForm"
+						<form role="form" action="/addTodo" method="post" name="addTodoForm" id="addTodoForm"
 							enctype="multipart/form-data">
-							<input type="hidden" name="model" value="todo"> 
-							 <input type="hidden" name="submod" value="addTodo"> 
 							 <input type="hidden" name="todept" value="${sessionScope.v.memdept }">
-							 <input type="hidden" name="toconfirm" value="n">
 							 <input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
 							 <input type="hidden" name="memdept" value="${sessionScope.v.memdept }">
 

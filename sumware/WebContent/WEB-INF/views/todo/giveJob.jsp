@@ -12,9 +12,10 @@
 		}else{
 			$.ajax({
 				type : "post",
-				url : "sumware",
-				data : {model:"todo", 
-					submod:"insertMemJob", 
+				url : "/insertMemJob",
+				data : {
+// 					model:"todo", 
+// 					submod:"insertMemJob", 
 					jobmemnum:$('#memjobName'+tonum).val(),
 					jobtonum:tonum,
 					jobcont:$('#jobcont'+tonum).val()},
@@ -35,9 +36,10 @@
 		
 		$.ajax({
 			type : "post",
-			url : "sumware",
-			data : {model:"todo", 
-				submod:"showMembersJob", 
+			url : "/showMembersJob",
+			data : {
+// 				model:"todo", 
+// 				submod:"showMembersJob", 
 				jobtonum:tonum,
 				},
 			success : function(result){
