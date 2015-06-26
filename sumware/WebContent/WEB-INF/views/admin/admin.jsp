@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="/top.jsp"%>
 <script>
 function getMemMgr(){
 	var memdeptval = $('#newdept').val();
@@ -27,7 +26,7 @@ function getMemMgr(){
 
 		<div class="wrap-layout board">
 			<div class="lnb-area" id="lnb-area">
-			<%@include file="/contentLeft.jsp"%>
+				<!-- left menu !!!! 들어갈 자리 -->
 			</div>
 
 			<form action="sumware" method="post" id="addMemForm">
@@ -88,7 +87,3 @@ function getMemMgr(){
 				</div>
 			</form>
 		</div>
-
-
-
-<%@include file="/footer.jsp"%>

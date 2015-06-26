@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../../../top.jsp" %>
 <!-- 캘린더 -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -95,9 +94,12 @@ $(function(){
 		  })
 	 });
 </script>
+<!-- include 페이지에서 닫아주는 태그 가져와야 함.
+	이게 tiles 로도 가능 하겠지?...
+ -->
 <div  class="wrap-layout wrap">
 	<div class="lnb-area" id="lnb-area">
-		<%@include file="/contentLeft.jsp" %>
+		<!-- left menu !!!! 들어갈 자리 -->
 	</div>
 	<div class="contents">
 
@@ -110,4 +112,3 @@ $(function(){
 			</div>
 	</div>
 </div>
-<%@include file="../../../footer.jsp" %>

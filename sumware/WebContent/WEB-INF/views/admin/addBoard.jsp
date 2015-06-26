@@ -1,15 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="/top.jsp"%>
-<script>
-
-
-
-</script>
-
 		<div id="global" class="wrap-layout board">
 			<div class="lnb-area" id="lnb-area">
-			<%@include file="/contentLeft.jsp"%>
+				<!-- left menu !!!! 들어갈 자리 -->
 			</div>
 
 			<form action="sumware" method="post" id="addBoardForm">
@@ -45,7 +38,3 @@
 				</div>
 			</form>
 		</div>
-
-
-
-<%@include file="/footer.jsp"%>
