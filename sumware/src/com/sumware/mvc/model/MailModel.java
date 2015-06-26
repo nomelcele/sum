@@ -36,7 +36,7 @@ public class MailModel implements ModelInter{
 	@RequestMapping(value="mailWriteForm",method=RequestMethod.POST)
 	public ModelAndView mailWriteForm(@RequestParam("toMem")String toMem,
 			@RequestParam("mailtitle")String mailtitle){
-		System.out.println("mailWriteForm");
+		System.out.println("Mail Controller: mailWriteForm");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("toMem", toMem);
 		mav.addObject("mailtitle", mailtitle);
@@ -49,7 +49,7 @@ public class MailModel implements ModelInter{
 	public ModelAndView mailFromList(@RequestParam("usernum")Integer usernum,
 			@RequestParam("userid")String userid,
 			HttpServletRequest request){
-		System.out.println("mailFromList");
+		System.out.println("Mail Controller: mailFromList");
 		ModelAndView mav = new ModelAndView();
 		// 받은 메일함에 있는 메일 갯수 얻어오기
 		int totalCount = dao.getListNum(userid,usernum)[0];
@@ -77,7 +77,7 @@ public class MailModel implements ModelInter{
 	public ModelAndView mailToList(@RequestParam("usernum")Integer usernum,
 			@RequestParam("userid")String userid,
 			HttpServletRequest request){
-		System.out.println("mailToList");
+		System.out.println("Mail Controller: mailToList");
 		ModelAndView mav = new ModelAndView();
 		// 보낸 메일함에 있는 메일 갯수 얻어오기
 		int totalCount = dao.getListNum(userid, usernum)[1];
@@ -105,7 +105,7 @@ public class MailModel implements ModelInter{
 	public ModelAndView mailMyList(@RequestParam("usernum")Integer usernum,
 			@RequestParam("userid")String userid,
 			HttpServletRequest request){
-		System.out.println("mailMyList");
+		System.out.println("Mail Controller: mailMyList");
 		ModelAndView mav = new ModelAndView();
 		// 내게 쓴 메일함에 있는 메일 갯수 얻어오기
 		int totalCount = dao.getListNum(userid, usernum)[2];
@@ -133,7 +133,7 @@ public class MailModel implements ModelInter{
 	public ModelAndView mailTrashcan(@RequestParam("usernum")Integer usernum,
 			@RequestParam("userid")String userid,
 			HttpServletRequest request){
-		System.out.println("mailTrashcan");
+		System.out.println("Mail Controller: mailTrashcan");
 		ModelAndView mav = new ModelAndView();
 		// 휴지통에 있는 메일 갯수 얻어오기
 		int totalCount = dao.getListNum(userid, usernum)[3];
@@ -161,9 +161,26 @@ public class MailModel implements ModelInter{
 	public ModelAndView mailDetail(@RequestParam("mailnum")int mailnum,
 			@RequestParam("usernum")Integer usernum,
 			@RequestParam("userid")String userid){
-		System.out.println("mailDetail");
+		System.out.println("Mail Controller: mailDetail");
 		ModelAndView mav = new ModelAndView();
 		
+		// 상세 사항을 볼 메일의 번호(mailnum)를 통해 select
+		// 메일의 정보를 가져옴
+		MailVO detail = dao.getMailDetail(mailnum);
+		mav.addObject("detail", detail);
+		mav.setViewName("mailDetail");
+		return mav;
+		
+	}
+	
+	// 메일 테이블의 delete 속성 설정
+	@RequestMapping(value="mailSetDel")
+	public ModelAndView mailSetDel(@RequestParam("usernum")Integer usernum,
+			@RequestParam("userid")String userid,
+			@RequestParam("delvalue")Integer delvalue,
+			@RequestParam("tofrom")Integer tofrom,
+			){
+		System.out.println("Mail Controller: mailSetDel");
 		
 	}
 	
@@ -278,18 +295,18 @@ public class MailModel implements ModelInter{
 
 			url = "mail/mailSuggest.jsp";
 			method = true;
-		} else if(submod != null && submod.equals("mailDetail")){
-			// 메일 상세 보기
-			// 메일 번호
-			System.out.println("현재 submod: mailDetail");
-			int mailnum = Integer.parseInt(request.getParameter("mailnum"));
-			
-			MailVO detail = MailDao.getDao().getMailDetail(mailnum);
-			
-			request.setAttribute("detail", detail);
-			
-			url = "mail/mailDetail.jsp";
-			method = true;
+//		} else if(submod != null && submod.equals("mailDetail")){
+//			// 메일 상세 보기
+//			// 메일 번호
+//			System.out.println("현재 submod: mailDetail");
+//			int mailnum = Integer.parseInt(request.getParameter("mailnum"));
+//			
+//			MailVO detail = MailDao.getDao().getMailDetail(mailnum);
+//			
+//			request.setAttribute("detail", detail);
+//			
+//			url = "mail/mailDetail.jsp";
+//			method = true;
 			
 //		} else if(submod != null && submod.equals("mailMyList")){
 //			System.out.println("현재 submod: mailMyList");
