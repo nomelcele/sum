@@ -71,13 +71,13 @@ public class SnsModel{
 		model.addAttribute("outs", outs);
 		return "todo/snsLoad_push";
 	}
-	@RequestMapping(value="snsComm")
+	@RequestMapping(value="snsComm",method=RequestMethod.POST)
 	public String snsComm(Model model,HttpServletRequest request){
 		System.out.println("댓글 보기");
 		showCommList(request,model);
 		return "todo/snsComm";
 	}
-	@RequestMapping(value="snsCommInsert")
+	@RequestMapping(value="snsCommInsert",method=RequestMethod.POST)
 	public String snsCommInsert(Model model,HttpServletRequest request){
 		System.out.println("댓글 입력!");
 		Map<String, String> map = MyMap.getMaps().getMapList(request);
@@ -86,7 +86,7 @@ public class SnsModel{
 		showCommList(request, model);
 		return "todo/snsComm";
 	}
-	@RequestMapping(value="snsCommDelete")
+	@RequestMapping(value="snsCommDelete",method=RequestMethod.POST)
 	public String snsCommDelete(Model model,HttpServletRequest request){
 		System.out.println("댓글 삭제");
 		
