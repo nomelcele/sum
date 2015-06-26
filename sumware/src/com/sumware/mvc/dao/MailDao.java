@@ -90,48 +90,16 @@ public class MailDao {
 			
 	}
 	
-	public ArrayList<MailVO> getMyMailList(HashMap<String, String> map, Map<String, Integer> pmap){
+	public List<MailVO> getMyMailList(HashMap<String, String> map){
 		// 내게 쓴 메일 리스트를 불러오는 메서드
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		ArrayList<MailVO> list = new ArrayList<MailVO>();
-		
-		try {
-			con = ConUtil.getOds();
-			StringBuffer sql = new StringBuffer();
+		return st.selectList("mail.getMyMailList", map);
 
-			sql.append("select * from (select rownum r_num, a.* from (");
-			sql.append("select ma.mailnum, ma.mailtitle, ma.maildate, me.memname");
-			sql.append(" from member me, mail ma where me.memnum=ma.mailmem and ma.mailmem=?");
-			sql.append(" and ma.mailreceiver=? and ma.mailsdelete=1 and ma.mailrdelete=1 order by ma.maildate desc) a)");
-			sql.append(" where r_num between ? and ?");
+//			sql.append("select * from (select rownum r_num, a.* from (");
+//			sql.append("select ma.mailnum, ma.mailtitle, ma.maildate, me.memname");
+//			sql.append(" from member me, mail ma where me.memnum=ma.mailmem and ma.mailmem=?");
+//			sql.append(" and ma.mailreceiver=? and ma.mailsdelete=1 and ma.mailrdelete=1 order by ma.maildate desc) a)");
+//			sql.append(" where r_num between ? and ?");
 			
-			
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, Integer.parseInt(map.get("usernum")));
-			pstmt.setString(2, map.get("userid"));
-			pstmt.setInt(3, pmap.get("begin"));
-			pstmt.setInt(4, pmap.get("end"));
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()){
-				MailVO v = new MailVO();
-				v.setMailnum(rs.getInt("mailnum"));
-				v.setMailsname(rs.getString("memname"));
-				v.setMailtitle(rs.getString("mailtitle"));
-				v.setMaildate(rs.getString("maildate"));
-				list.add(v);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			CloseUtil.close(rs);
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-		}
-		
-		return list;
 	}
 	
 	public MailVO getMailDetail(int mailnum){
@@ -229,53 +197,18 @@ public class MailDao {
 		
 	}
 	
-	public ArrayList<MailVO> getTrashList(HashMap<String, String> map, Map<String, Integer> pmap){
+	public List<MailVO> getTrashList(HashMap<String, String> map){
 		// 휴지통에서 보여줄 메일 리스트를 리턴하는 메서드
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		ArrayList<MailVO> list = new ArrayList<MailVO>();
-		
-		try {
-			con = ConUtil.getOds();
-			StringBuffer sql = new StringBuffer();
- 
-			sql.append("select * from (select rownum r_num, a.* from (");
-			sql.append("select ma.mailnum, me1.memname mailsname, me2.memname mailrname, ma.mailtitle, ma.maildate");
-			sql.append(" from member me1, member me2, mail ma");
-			sql.append(" where (me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver) and");
-			sql.append(" ((ma.mailmem=? and ma.mailsdelete=2) or (ma.mailreceiver=? and ma.mailrdelete=2))");
-			sql.append(" order by ma.maildate desc) a)");
-			sql.append(" where r_num between ? and ?");
-			
-			
-			
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, Integer.parseInt(map.get("usernum")));
-			pstmt.setString(2, map.get("userid"));
-			pstmt.setInt(3, pmap.get("begin"));
-			pstmt.setInt(4, pmap.get("end"));
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()){
-				MailVO v = new MailVO();
-				v.setMailnum(rs.getInt("mailnum"));
-				v.setMailsname(rs.getString("mailsname"));
-				v.setMailrname(rs.getString("mailrname"));
-				v.setMailtitle(rs.getString("mailtitle"));
-				v.setMaildate(rs.getString("maildate"));
-				list.add(v);
-			}
-					
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			CloseUtil.close(rs);
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-		}
-		
-		return list;
+		return st.selectList("mail.getTrashList", map);
+	
+//			sql.append("select * from (select rownum r_num, a.* from (");
+//			sql.append("select ma.mailnum, me1.memname mailsname, me2.memname mailrname, ma.mailtitle, ma.maildate");
+//			sql.append(" from member me1, member me2, mail ma");
+//			sql.append(" where (me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver) and");
+//			sql.append(" ((ma.mailmem=? and ma.mailsdelete=2) or (ma.mailreceiver=? and ma.mailrdelete=2))");
+//			sql.append(" order by ma.maildate desc) a)");
+//			sql.append(" where r_num between ? and ?");
+
 	}
 	
 	public int[] getListNum(String userid,int usernum){

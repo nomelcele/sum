@@ -20,4 +20,19 @@
 		and ma.mailsdelete=1 and not ma.mailreceiver=#{userid} order by ma.maildate desc) a)
 		where r_num between #{begin} and #{end}
 	</select>
+	<select id="getMyMailList" parameterType="map" resultType="mavo">
+		select * from (select rownum r_num, a.* from 
+		(select ma.mailnum, ma.mailtitle, ma.maildate, me.memname 
+		from member me, mail ma where me.memnum=ma.mailmem and ma.mailmem=#{usernum} 
+		and ma.mailreceiver=#{userid} and ma.mailsdelete=1 and ma.mailrdelete=1 order by ma.maildate desc) a) 
+		where r_num between #{begin} and #{end}
+	</select>
+	<select id="getTrashList" parameterType="map" resultType="mavo">
+		select * from (select rownum r_num, a.* from 
+		(select ma.mailnum, me1.memname mailsname, me2.memname mailrname, ma.mailtitle, ma.maildate 
+		from member me1, member me2, mail ma 
+		where (me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver) and 
+		((ma.mailmem=#{usernum} and ma.mailsdelete=2) or (ma.mailreceiver=#{userid} and ma.mailrdelete=2)) 
+		order by ma.maildate desc) a) where r_num between #{begin} and #{end}
+	</select>
   </mapper>
