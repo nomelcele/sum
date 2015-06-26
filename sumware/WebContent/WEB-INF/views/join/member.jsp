@@ -248,7 +248,6 @@ function fileUpload(){
 				}).open();
 	}
 </script>
-<%@include file="/top.jsp"%>
 <%--<%=application.getRealPath("/profileImg") --%>
 <div class="container">
 	<div class="row info">
@@ -403,5 +402,3 @@ function fileUpload(){
 		</div>
 	</div>
 </div>
-
-	<%@include file="/footer.jsp"%>
