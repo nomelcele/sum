@@ -1,1 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="sns">
+  	<insert id="insertSns" parameterType="svo">
+  		insert into sns(snum,scont,sdate,sdept,smem)
+		 values(sns_seq.nextVal,#{scont},sysdate,#{sdept},#{smem}
+  	</insert>
+  	<select id="getList" parameterType="map" resultType="svo">
+  		select rownum srnum,b.* from(
+		select m.memname,m.memprofile ,s.snum,s.scont,to_char(s.sdate,'MM')||'월'||to_char(s.sdate,'dd')||'일'||to_char(s.sdate,'hh24:mi') sdate,s.sdept,s.smem
+		,(select count(*) cnt from comm where commsns=s.snum) stocount
+		 from (select * from sns  where sdept=#{sdept}) s ,member m
+		 where m.memnum=s.smem  order by sdate desc) b where rownum between #{begin} and #{end}
+  	</select>
+  	<select id="snsTotalCount" parameterType="int" resultType="int">
+  		select count(*) cnt from sns where sdept=#{sdept}
+  	</select>
+  	<select id="snsCommTotalCount" parameterType="int" resultType="int">
+  		select count(*) cnt from comm where commsns=#{commsns}
+  	</select>
+  	<select id="getCommList" parameterType="map" resultType="cvo">
+  		select c.conum,c.commsns,m.memname coname,comem,m.memprofile coimg,c.cocont,to_char(c.codate,'MM')||'월'||to_char(c.codate,'dd')||'일'||to_char(c.codate,'hh24:mi') codate
+		 from (select * from comm c where commsns=#{commsns} order by 1 desc) c,member m
+		 where m.memnum=c.comem and rownum between #{begin} and #{end}
+  	</select>
+  	<insert id="insertSnsComm" parameterType="map">
+  		insert into comm(conum,cocont,codate,comem,commsns)
+		 values(comm_seq.nextVal,#{cocont},sysdate,#{comem},#{snum})
+  	</insert>
+  	<delete id="snsCommDelete" parameterType="int">
+  		delete from comm where conum=#{conum}
+  	</delete>
+  	
+  </mapper>

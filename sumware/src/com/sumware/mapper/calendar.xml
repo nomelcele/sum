@@ -26,12 +26,12 @@
 			<when test="selcal==부서">
 				insert into calendar(calnum,calstart,calend,calcont,caldept)
 				values(calendar_seq.nextVal,
-				to_date(#{start},'yyyy-MM-dd-HH24:mi:ss'),to_date(#{end},'yyyy-MM-dd-HH24:mi:ss'),#{calcont},#{cal})
+				to_date(#{calstart},'yyyy-MM-dd-HH24:mi:ss'),to_date(#{calend},'yyyy-MM-dd-HH24:mi:ss'),#{calcont},#{cal})
 			</when>
 			<otherwise>
 				insert into calendar(calnum,calstart,calend,calcont,calmem)
 				values(calendar_seq.nextVal,
-				to_date(#{start},'yyyy-MM-dd-HH24:mi:ss'),to_date(#{end},'yyyy-MM-dd-HH24:mi:ss'),#{calcont},#{cal})
+				to_date(#{calstart},'yyyy-MM-dd-HH24:mi:ss'),to_date(#{calend},'yyyy-MM-dd-HH24:mi:ss'),#{calcont},#{cal})
 			</otherwise>
 		</choose>
 	</select>
