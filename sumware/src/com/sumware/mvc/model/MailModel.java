@@ -33,19 +33,19 @@ public class MailModel implements ModelInter{
 	private MailDao dao;
 	
 	// 메일 작성 form 이동
-	@RequestMapping(value="mailWriteForm",method=RequestMethod.POST)
+	@RequestMapping(value="/mailWriteForm",method=RequestMethod.POST)
 	public ModelAndView mailWriteForm(@RequestParam("toMem")String toMem,
 			@RequestParam("mailtitle")String mailtitle){
 		System.out.println("Mail Controller: mailWriteForm");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("toMem", toMem);
 		mav.addObject("mailtitle", mailtitle);
-		mav.setViewName("mailWrite");
+		mav.setViewName("mail/mailWrite");
 		return mav;
 	}
 	
 	// 받은 메일함 이동
-	@RequestMapping(value="mailFromList",method=RequestMethod.POST)
+	@RequestMapping(value="/mailFromList",method=RequestMethod.POST)
 	public ModelAndView mailFromList(@RequestParam("usernum")Integer usernum,
 			@RequestParam("userid")String userid,
 			HttpServletRequest request){
@@ -67,13 +67,13 @@ public class MailModel implements ModelInter{
 		List<MailVO> fromlist = dao.getFromMailList(map);
 		mav.addObject("list", fromlist);
 		mav.addObject("tofrom", 1);
-		mav.setViewName("mailList");
+		mav.setViewName("mail/mailList");
 		return mav;
 		
 	}
 	
 	// 보낸 메일함 이동
-	@RequestMapping(value="mailToList",method=RequestMethod.POST)
+	@RequestMapping(value="/mailToList",method=RequestMethod.POST)
 	public ModelAndView mailToList(@RequestParam("usernum")Integer usernum,
 			@RequestParam("userid")String userid,
 			HttpServletRequest request){
@@ -95,13 +95,13 @@ public class MailModel implements ModelInter{
 		List<MailVO> tolist = dao.getToMailList(map);
 		mav.addObject("list", tolist);
 		mav.addObject("tofrom", 2);
-		mav.setViewName("mailList");
+		mav.setViewName("mail/mailList");
 		return mav;
 		
 	}
 	
 	// 내게 쓴 메일함 이동
-	@RequestMapping(value="mailMyList",method=RequestMethod.POST)
+	@RequestMapping(value="/mailMyList",method=RequestMethod.POST)
 	public ModelAndView mailMyList(@RequestParam("usernum")Integer usernum,
 			@RequestParam("userid")String userid,
 			HttpServletRequest request){
@@ -123,13 +123,13 @@ public class MailModel implements ModelInter{
 		List<MailVO> mylist = dao.getMyMailList(map);
 		mav.addObject("list", mylist);
 		mav.addObject("tofrom", 3);
-		mav.setViewName("mailList");
+		mav.setViewName("mail/mailList");
 		return mav;
 		
 	}
 	
 	// 휴지통 이동
-	@RequestMapping(value="mailTrashcan",method=RequestMethod.POST)
+	@RequestMapping(value="/mailTrashcan",method=RequestMethod.POST)
 	public ModelAndView mailTrashcan(@RequestParam("usernum")Integer usernum,
 			@RequestParam("userid")String userid,
 			HttpServletRequest request){
@@ -151,13 +151,13 @@ public class MailModel implements ModelInter{
 		List<MailVO> trashlist = dao.getTrashList(map);
 		mav.addObject("list", trashlist);
 		mav.addObject("tofrom", 4);
-		mav.setViewName("mailList");
+		mav.setViewName("mail/mailList");
 		return mav;
 		
 	}
 	
 	// 메일 상세 보기
-	@RequestMapping(value="mailDetail")
+	@RequestMapping(value="/mailDetail")
 	public ModelAndView mailDetail(@RequestParam("mailnum")int mailnum,
 			@RequestParam("usernum")Integer usernum,
 			@RequestParam("userid")String userid){
@@ -168,19 +168,32 @@ public class MailModel implements ModelInter{
 		// 메일의 정보를 가져옴
 		MailVO detail = dao.getMailDetail(mailnum);
 		mav.addObject("detail", detail);
-		mav.setViewName("mailDetail");
+		mav.setViewName("mail/mailDetail");
 		return mav;
 		
 	}
 	
 	// 메일 테이블의 delete 속성 설정
-	@RequestMapping(value="mailSetDel")
-	public ModelAndView mailSetDel(@RequestParam("usernum")Integer usernum,
+	// ********************
+	// ********************
+	// ********************
+	// ********** 트랜잭션 처리
+	// ********************
+	// ********************
+	// ********************
+	@RequestMapping(value="/mailSetDel")
+	public ModelAndView mailSetDel(@RequestParam("chk")String[] mailnums,
+			@RequestParam("usernum")Integer usernum,
 			@RequestParam("userid")String userid,
 			@RequestParam("delvalue")Integer delvalue,
-			@RequestParam("tofrom")Integer tofrom,
-			){
+			@RequestParam("tofrom")Integer tofrom){
 		System.out.println("Mail Controller: mailSetDel");
+		for(String e:mailnums){
+			// 체크된 메일의 번호들
+			System.out.println("선택된 메일 번호: "+e);
+		}
+		
+		dao.setDeleteAttr(mailnums, map);
 		
 	}
 	
@@ -399,6 +412,13 @@ public class MailModel implements ModelInter{
 		}
 	    
 	    // 왼쪽 메뉴에서 각 메일함에 있는 메일의 갯수를 보여주기 위한 메서드 호출
+		// ********************
+		// ********************
+		// ********************
+		// ********** AOP 처리
+		// ********************
+		// ********************
+		// ********************
 	 	int[] numArr = MailDao.getDao().getListNum(map);
 	 	for(int e:numArr){
 	 		System.out.println("메일 갯수: "+e);

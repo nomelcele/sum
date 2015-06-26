@@ -230,13 +230,13 @@
 
 <%-- mail left(S) --%>
 <c:if test="${param.model eq 'mail' }">
-<form method="post" action="sumware" id="mailform">
-	<input type="hidden" id="model" name="model">
-	<input type="hidden" id="submod" name="submod">
-	<input type="hidden" id="usernum" name="usernum">
-	<input type="hidden" id="userid" name="userid">
-	<input type="hidden" id="page" name="page">
-</form>
+<!-- <form method="post" action="sumware" id="mailform"> -->
+<!-- 	<input type="hidden" id="model" name="model"> -->
+<!-- 	<input type="hidden" id="submod" name="submod"> -->
+<!-- 	<input type="hidden" id="usernum" name="usernum"> -->
+<!-- 	<input type="hidden" id="userid" name="userid"> -->
+<!-- 	<input type="hidden" id="page" name="page"> -->
+<!-- </form> -->
 
 	<div>
 	<div>
