@@ -1,8 +1,11 @@
 package com.sumware.mvc.dao;
+import java.util.HashMap;
 import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.sumware.dto.MemberVO;
 import com.sumware.util.MakeXML;
 
@@ -42,9 +45,9 @@ public class MemberDao {
 		return st.selectOne("mem.ckid",meminmail);
 	}
 	
-	public void update(MemberVO vo){
+	public void update(HashMap<String, String> map){
 		
-		st.update("mem.update",vo);
+		st.update("mem.update",map);
 		//SqlSession ss= FactorySrevice.getFactory().openSession(true);
 		//ss.update("mem.update",map);
 				//ss.close();
@@ -56,16 +59,16 @@ public class MemberDao {
 	}
 	
 	/// �쉶�썝 �젙蹂� �닔�젙
-	public void modify(MemberVO vo){
-		st.update("mem.modify",vo);
+	public void modify(HashMap<String, String> map){
+		st.update("mem.modify",map);
 		//SqlSession ss = FactorySrevice.getFactory().openSession(true);
 		//ss.update("mem.modify",map);
 		//ss.close();
 	}
 	
 	// �떊�엯 �궗�썝 �뵒鍮꾩뿉 異붽�
-	public void addMember(MemberVO vo){
-		st.insert("mem.addMember",vo);
+	public void addMember(HashMap<String, String> map){
+		st.insert("mem.addMember",map);
 		//SqlSession ss = FactorySrevice.getFactory().openSession(true);
 		//ss.insert("mem.addMember",map);
 		//ss.close();
