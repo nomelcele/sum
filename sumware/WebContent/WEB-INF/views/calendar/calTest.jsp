@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../top.jsp" %>
+<%@include file="../../../top.jsp" %>
 <!-- 캘린더 -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -110,4 +110,4 @@ $(function(){
 			</div>
 	</div>
 </div>
-<%@include file="../footer.jsp" %>
+<%@include file="../../../footer.jsp" %>
