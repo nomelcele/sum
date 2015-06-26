@@ -1,9 +1,0 @@
-todo=model.TodoModel
-calendar=model.CalendarModel
-messenger=model.MessengerModel
-board=model.BoardModel
-login=model.LoginModel
-mail=model.MailModel
-sns=model.SnsModel
-index=model.IndexModel
-join=model.JoinModel
