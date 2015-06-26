@@ -118,6 +118,13 @@ public class MailDao {
 	
 	public void setDeleteAttr(String[] mailnums, HashMap<String, String> map){
 		// 메일의 delete 속성 설정
+		//*********************************
+		//*********************************
+		//*********************************
+		// 트랜잭션 처리
+		//*********************************
+		//*********************************
+		//*********************************
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

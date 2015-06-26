@@ -387,45 +387,36 @@
 <%-- 메일 --%>
 function mailFormGo(res){
 	if(res=='write'){ // 메일 쓰기
-		$("#model").attr("value","mail");
-		$("#submod").attr("value","mailWriteForm");
-		$("#usernum").attr("value","${sessionScope.v.memnum}");
-		$("#userid").attr("value","${sessionScope.v.meminmail}");
-		$("#mailform").submit();
+		location = "mailWriteForm?usernum=${sessionScope.v.memnum}"+
+				"&userid=${sessionScope.v.meminmail}";
+// 		$("#model").attr("value","mail");
+// 		$("#submod").attr("value","mailWriteForm");
+// 		$("#usernum").attr("value","${sessionScope.v.memnum}");
+// 		$("#userid").attr("value","${sessionScope.v.meminmail}");
+// 		$("#mailform").submit();
 		
 	} else if(res=='fromlist'){ // 받은 메일함
-		$("#model").attr("value","mail");
-		$("#submod").attr("value","mailFromList");
-		$("#usernum").attr("value","${sessionScope.v.memnum}");
-		$("#userid").attr("value","${sessionScope.v.meminmail}");
-		$("#page").attr("value",1);
-		$("#mailform").submit();
+		location = "mailFromList?usernum=${sessionScope.v.memnum}"+
+				"&userid=${sessionScope.v.meminmail}&page=1";
+// 		$("#model").attr("value","mail");
+// 		$("#submod").attr("value","mailFromList");
+// 		$("#usernum").attr("value","${sessionScope.v.memnum}");
+// 		$("#userid").attr("value","${sessionScope.v.meminmail}");
+// 		$("#page").attr("value",1);
+// 		$("#mailform").submit();
 		
 	} else if(res=='tolist'){ // 보낸 메일함
-		$("#model").attr("value","mail");
-		$("#submod").attr("value","mailToList");
-		$("#usernum").attr("value","${sessionScope.v.memnum}");
-		$("#userid").attr("value","${sessionScope.v.meminmail}");
-		$("#page").attr("value",1);
-		$("#mailform").submit();
+		location = "mailToList?usernum=${sessionScope.v.memnum}"+
+		"&userid=${sessionScope.v.meminmail}&page=1";
 
 	} else if(res=='mylist'){ // 내게 쓴 메일함
-		$("#model").attr("value","mail");
-		$("#submod").attr("value","mailMyList");
-		$("#usernum").attr("value","${sessionScope.v.memnum}");
-		$("#userid").attr("value","${sessionScope.v.meminmail}");
-		$("#page").attr("value",1);
-		$("#mailform").submit();
+		location = "mailMyList?usernum=${sessionScope.v.memnum}"+
+		"&userid=${sessionScope.v.meminmail}&page=1";
 		
 	} else if(res=='trashcan'){ // 휴지통
-		$("#model").attr("value","mail");
-		$("#submod").attr("value","mailTrashcan");
-		$("#usernum").attr("value","${sessionScope.v.memnum}");
-		$("#userid").attr("value","${sessionScope.v.meminmail}");
-		$("#page").attr("value",1);
-		$("#mailform").submit();
-		
-		} 
+		location = "mailTrashcan?usernum=${sessionScope.v.memnum}"+
+		"&userid=${sessionScope.v.meminmail}&page=1";		
+	} 
 }
 
 function mailSendFunc(){

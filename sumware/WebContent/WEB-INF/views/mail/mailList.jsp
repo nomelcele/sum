@@ -6,14 +6,12 @@
 		<!-- left menu !!!! 들어갈 자리 -->
 	</div>
 	<div class="contents">
-	<form method="post" action="sumware" id="listform">
-		<input type="hidden" id="model" name="model">
-		<input type="hidden" id="submod" name="submod">
-		<input type="hidden" id="usernum" name="usernum">
-		<input type="hidden" id="userid" name="userid">
+	<form method="post" action="mailSetDel" id="listform">
+		<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
+		<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
 		<input type="hidden" id="delvalue" name="delvalue">
-		<input type="hidden" id="mailnum" name="mailnum">
-		<input type="hidden" id="tofrom" name="tofrom">
+		<input type="hidden" name="tofrom" value="${tofrom}">
+		<input type="hidden" name="page" value="1">
 		
 		<!-- button-div(S) -->
 		<div class="button-div button-div-top">
@@ -89,26 +87,26 @@
 				</tbody>
 			</table>
 		</div>
-		
 		</form>
+		
 		<%-- 원래 위치 --%>
 		<div class="paging">
 			<c:choose>
 				<c:when test="${tofrom eq '1'}">
 					<c:set var="pageUrl" 
-					value="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+					value="mailFromList?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
 				</c:when>
 				<c:when test="${tofrom eq '2'}">
 					<c:set var="pageUrl" 
-					value="sumware?model=mail&submod=mailToList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+					value="mailToList?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
 				</c:when>
 				<c:when test="${tofrom eq '3'}">
 					<c:set var="pageUrl" 
-					value="sumware?model=mail&submod=mailMyList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+					value="mailMyList?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
 				</c:when>
 				<c:otherwise>
 					<c:set var="pageUrl" 
-					value="sumware?model=mail&submod=mailTrashcan&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+					value="mailTrashcan?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
 				</c:otherwise>
 			</c:choose>
 			<%@include file="../board/page.jsp"%>
@@ -118,9 +116,12 @@
 
 <script>
 	function mailTrashGo(){
-		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
-				"&userid=${sessionScope.v.meminmail}&delvalue=2&tofrom=${tofrom}"+
-				"&page=1&chk="+$("#chk:checked").serialize();
+		$("#delvalue").attr("value","2");
+		$("#listform").submit();
+// 		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
+// 				"&userid=${sessionScope.v.meminmail}&delvalue=2&tofrom=${tofrom}"+
+// 				"&page=1&chk="+$("#chk:checked").serialize();
+		
 	}
 	
 	function maildeleteGo(){
@@ -128,18 +129,22 @@
 		if(!confirm("선택한 메일을 영구 삭제하겠습니까?")){
 			return; // 취소를 할 경우 삭제되지 않는다.
 		} else { // 확인 버튼을 누르면 메일 삭제
-			location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
-			"&userid=${sessionScope.v.meminmail}&delvalue=3&tofrom=${tofrom}"+
-			"&page=1&chk="+$("#chk:checked").serialize();
+			$("#delvalue").attr("value","3");
+			$("#listform").submit();
+// 			location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
+// 			"&userid=${sessionScope.v.meminmail}&delvalue=3&tofrom=${tofrom}"+
+// 			"&page=1&chk="+$("#chk:checked").serialize();
 		}
 	}
 	
 	function mailRecover(){
 		// 휴지통에서 체크된 메일들을 복구(메일함으로 이동시킴)
 		// 체크된 메일들의 delete 속성을 1로 변경
-		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
-		"&userid=${sessionScope.v.meminmail}&delvalue=1&tofrom=${tofrom}"+
-		"&page=1&chk="+$("#chk:checked").serialize();
+		$("#delvalue").attr("value","1");
+		$("#listform").submit();
+// 		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
+// 		"&userid=${sessionScope.v.meminmail}&delvalue=1&tofrom=${tofrom}"+
+// 		"&page=1&chk="+$("#chk:checked").serialize();
 	}
 	
 	function checkAll(obj){
@@ -158,7 +163,7 @@
 	
 	function mailDetailGo(mailnum){
 		// 상세 보기 페이지로 이동시켜주는 함수
-		location="sumware?model=mail&submod=mailDetail&mailnum="+mailnum+
+		location="mailDetail?mailnum="+mailnum+
 				"&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}";
 	}
 </script>
