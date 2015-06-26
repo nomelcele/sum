@@ -35,4 +35,10 @@
 		((ma.mailmem=#{usernum} and ma.mailsdelete=2) or (ma.mailreceiver=#{userid} and ma.mailrdelete=2)) 
 		order by ma.maildate desc) a) where r_num between #{begin} and #{end}
 	</select>
+	<select id="getMailDetail" parameterType="int" resultType="mavo">
+		select ma.mailtitle, me1.memname mailsname, me2.memname mailrname, ma.maildate, 
+		ma.mailcont, ma.mailfile, me1.meminmail replyid, ma.mailreceiver 
+		from mail ma, member me1, member me2 
+		where me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver and ma.mailnum=#{mailnum}
+	</select>
   </mapper>

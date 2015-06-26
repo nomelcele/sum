@@ -103,42 +103,17 @@ public class MailDao {
 	}
 	
 	public MailVO getMailDetail(int mailnum){
-		// 메일 상세 보기 메서드
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		MailVO v = new MailVO();
+		// 메일 상세 보기 정보를 불러오는 메서드
+		return st.selectOne("mail.getMailDetail", mailnum);
+
+//			sql.append("select ma.mailtitle, me1.memname mailsname, me2.memname mailrname, ma.maildate,");
+//			sql.append(" ma.mailcont, ma.mailfile, me1.meminmail replyid, ma.mailreceiver");
+//			sql.append(" from mail ma, member me1, member me2");
+//			sql.append(" where me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver and ma.mailnum=?");
+//			pstmt = con.prepareStatement(sql.toString());
+//			pstmt.setInt(1, mailnum);
+//			rs = pstmt.executeQuery();
 		
-		try {
-			con = ConUtil.getOds();
-			StringBuffer sql = new StringBuffer();
-			sql.append("select ma.mailtitle, me1.memname mailsname, me2.memname mailrname, ma.maildate,");
-			sql.append(" ma.mailcont, ma.mailfile, me1.meminmail replyid, ma.mailreceiver");
-			sql.append(" from mail ma, member me1, member me2");
-			sql.append(" where me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver and ma.mailnum=?");
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, mailnum);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()){
-				v.setMailtitle(rs.getString("mailtitle"));
-				v.setMailsname(rs.getString("mailsname"));
-				v.setMailrname(rs.getString("mailrname"));
-				v.setMaildate(rs.getString("maildate"));
-				v.setMailcont(rs.getString("mailcont"));
-				v.setMailfile(rs.getString("mailfile"));
-				v.setReplyid(rs.getString("replyid"));
-				v.setMailreceiver(rs.getString("mailreceiver"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			CloseUtil.close(rs);
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-		}
-		
-		return v;
 	}
 	
 	public void setDeleteAttr(String[] mailnums, HashMap<String, String> map){
