@@ -119,6 +119,19 @@
 			}
 		});
 	}
+	function logout(memnum){
+		$.ajax({
+			url:"logout",
+			type:"GET",
+			data : {
+				memnum:memnum
+			},
+			success : function(result){
+				console.log("logout result: "+result);
+				location="home";
+			}
+		});
+	}
 	//보안문자에서의 폼전달
 	function capClick(){
 			$("#Captarget").load("sumware", {
