@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%-- board left(S) --%>
 <c:if test="${param.model eq 'board' }">
 <form action="sumware" method="post" id="goTodo">
@@ -53,8 +52,7 @@
 						<td colspan="2">　</td>
 					</tr>
 					<tr>
-						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></th>
-
+						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 					</tr>
 				</table>
 				<!-- profile-table(E) -->
@@ -127,7 +125,7 @@
 						<td colspan="2">　</td>
 					</tr>
 					<tr>
-						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></th>
+						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 
 					</tr>
 				</table>
@@ -217,7 +215,7 @@
 						<td colspan="2">　</td>
 					</tr>
 					<tr>
-						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></th>
+						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 
 					</tr>
 				</table>
@@ -282,7 +280,7 @@
 						<td colspan="2">　</td>
 					</tr>
 					<tr>
-						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></th>
+						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 
 					</tr>
 				</table>
@@ -370,7 +368,7 @@
 						<td colspan="2">　</td>
 					</tr>
 					<tr>
-						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></th>
+						<td colspan="2"><a href="sumware?model=join&submod=modifyProfile" class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 
 					</tr>
 				</table>
