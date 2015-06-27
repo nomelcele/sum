@@ -1,8 +1,15 @@
 package com.sumware.dto;
 
 public class MessengerRoomVO {
-	private int masnum;
+	private int masnum,key;
 	private String masstdate, masendate, masreip;
+	
+	public int getKey() {
+		return key;
+	}
+	public void setKey(int key) {
+		this.key = key;
+	}
 	public int getMasnum() {
 		return masnum;
 	}
