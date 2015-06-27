@@ -23,65 +23,14 @@ public class LoginDao {
 		return st.selectOne("login.login", mvo);
 	}
 	
-	public String ckFirstLogin(int memnum,String mempwd){
-		String res="0";
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs= null;
-		StringBuffer sql = new StringBuffer();
-		sql.append("select nvl(memprofile,'1') memprofile from member where memnum=? and mempwd=?");
-		try{
-			con=ConUtil.getOds();
-			pstmt=con.prepareStatement(sql.toString());
-			pstmt.setInt(1, memnum);
-			pstmt.setString(2, mempwd);
-			rs=pstmt.executeQuery();
-			if(rs.next()){
-				res=rs.getString("memprofile");
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-		}
-		return res;
+	public String ckFirstLogin(MemberVO mvo){
+		return st.selectOne("login.ckFirstLogin",mvo);
 	}
 	public void inLog(int memnum) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		StringBuffer sql = new StringBuffer();
-		sql.append("insert into login(lonum,locheck,lostdate,lomem) values(login_seq.nextVal,'t',sysdate,?)");
-		try{
-			con=ConUtil.getOds();
-			pstmt=con.prepareStatement(sql.toString());
-			pstmt.setInt(1, memnum);
-			pstmt.executeUpdate();
-			
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-		}
+		st.insert("login.inLog",memnum);
 		
 	}
 	public void outLog(int memnum){
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		StringBuffer sql = new StringBuffer();
-		sql.append("update login set locheck='f',loendate=sysdate where lomem=?");
-		try{
-			con=ConUtil.getOds();
-			pstmt=con.prepareStatement(sql.toString());
-			pstmt.setInt(1, memnum);
-			pstmt.executeUpdate();
-			
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-		}
+		st.update("login.outLog", memnum);
 	}
 }
