@@ -1,21 +1,18 @@
 package com.sumware.mvc.model;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.sumware.mvc.controller.ModelForward;
-
-public class IndexModel implements ModelInter{
-
-	@Override
-	public ModelForward exe(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
-		String url = "index.jsp";
-		boolean method = false;
-		
-		return new ModelForward(url, method);
+import org.springframework.stereotype.Controller;
+@Controller
+public class IndexModel{
+	public String indexForm(){
+		return "index";
 	}
+//	@Override
+//	public ModelForward exe(HttpServletRequest request,
+//			HttpServletResponse response) throws IOException {
+//		String url = "index.jsp";
+//		boolean method = false;
+//		
+//		return new ModelForward(url, method);
+//	}
 
 }
