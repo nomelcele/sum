@@ -1,6 +1,7 @@
 package com.sumware.mvc.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,10 @@ import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sumware.dto.BoardVO;
 import com.sumware.dto.PageVO;
 import com.sumware.mvc.dao.BoardDao;
 
@@ -17,6 +21,12 @@ import com.sumware.mvc.dao.BoardDao;
 public class BoardModel {
 	@Autowired
 	private BoardDao dao;
+	
+	@ModelAttribute("list")
+	@RequestMapping(value="boardList")
+	public List<BoardVO> getList(Map<String, Integer> map){
+		return dao.getList(map); 
+	}
 	
 	/*
 		// boardList 
@@ -132,6 +142,7 @@ public class BoardModel {
 			url = "board/callback.jsp";
 			method = false;
 	*/
+	/*
 	private Map<String, Integer> pageProcess(HttpServletRequest request, int etc) {
 		PageVO pageInfo = new PageVO();
 		// 한페이지에 보일 게시글 갯수
@@ -219,4 +230,5 @@ public class BoardModel {
 		}
 		return fileName;
 	}
+	*/
 }
