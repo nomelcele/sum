@@ -1,8 +1,10 @@
 package com.sumware.dto;
 
 public class MessengerVO {
+
 	private int mesmember, mesnum, conum, mesconum, meswriternum, mesendnum, key;
 	private String openmemberyn, entstdate, entendate, mescont, mesreip;
+	
 	
 	public int getKey() {
 		return key;
