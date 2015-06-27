@@ -20,12 +20,12 @@
 	</bean>
 
 	<bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="classpath:or/kosta/config/config.xml" />
-		<property name="mapperLocations" value="classpath*:or/kosta/mapper/*.xml" />
+		<property name="configLocation" value="classpath:com/sumware/config/config.xml" />
+		<property name="mapperLocations" value="classpath*:com/sumware/mapper/*.xml" />
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 
-	<bean id="template" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="st" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="factoryBean" />
 	</bean>
 

@@ -14,9 +14,9 @@ import com.sumware.dto.BoardVO;
 import com.sumware.dto.CommVO;
 import com.sumware.mvc.service.FactorySrevice;
 
-@Repository
+//@Repository
 public class BoardDao {
-	@Autowired
+	//@Autowired
 	private SqlSessionTemplate ss;
 	
 	// boardWrite 하는 insert 메서드.
