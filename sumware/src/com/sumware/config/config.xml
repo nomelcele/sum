@@ -13,7 +13,7 @@
   		<typeAlias type="com.sumware.dto.DeptVO" alias="dvo"/>
   		<typeAlias type="com.sumware.dto.SnsVO" alias="svo"/>
   		<typeAlias type="com.sumware.dto.TodoVO" alias="tvo"/>
-  		<typeAlias type="com.sumware.dto.CalendarVo" alias="cavo"/>
+  		<typeAlias type="com.sumware.dto.CalendarVO" alias="cavo"/>
   		<typeAlias type="com.sumware.dto.MessengerRoomVO" alias="mrvo"/>
   		<typeAlias type="com.sumware.dto.TodoJobVO" alias="tjvo"/>
   	</typeAliases>
