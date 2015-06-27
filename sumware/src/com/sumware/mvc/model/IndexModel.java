@@ -1,10 +1,14 @@
 package com.sumware.mvc.model;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexModel{
-	public String indexForm(){
-		return "index";
+	
+	@RequestMapping(value="/home")
+	public String indexForm(Model model){
+		return "home/login";
 	}
 //	@Override
 //	public ModelForward exe(HttpServletRequest request,
