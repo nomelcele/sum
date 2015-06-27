@@ -3,9 +3,14 @@ package com.sumware.dto;
 public class MessengerVO {
 
 	private int mesmember, mesnum, conum, mesconum, meswriternum, mesendnum, key;
-	private String openmemberyn, entstdate, entendate, mescont, mesreip;
+	private String openmemberyn, entstdate, entendate, mescont, mesreip,resState;
 	
-	
+	public String getResState() {
+		return resState;
+	}
+	public void setResState(String resState) {
+		this.resState = resState;
+	}
 	public int getKey() {
 		return key;
 	}
