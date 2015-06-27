@@ -101,7 +101,6 @@ public class JoinModel{
 		return "join/getCap";
 	}
 	
-	@RequestMapping(value="")
 	
 
 //	@Override
