@@ -5,30 +5,8 @@
 <div class="container">
 	<div id="carousel1" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
-			<div class="item active">
-				<img alt="Bootstrap template" src="resources/img/slide_01.jpg">
-			</div>
-			<div class="item">
-				<c:if test="${sessionScope.v.memnum eq null}">
-					<img alt="Bootstrap template" src="resources/img/slide_02.jpg">
-				</c:if>
-				<c:if test="${sessionScope.v.memnum ne null}">
-					<img alt="Bootstrap template" src="resources/img/slide_02.jpg"
-						onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=0&bname=공지사항'"
-						style="cursor: pointer">
-				</c:if>
-
-			</div>
-
-			<div class="item">
-				<c:if test="${sessionScope.v.memnum eq null}">
-					<img alt="Bootstrap template" src="resources/img/slide_03.jpg">
-				</c:if>
-				<c:if test="${sessionScope.v.memnum ne null}">
-					<img alt="Bootstrap template" src="resources/img/slide_03.jpg"
-						onclick="location='sumware?model=calendar&submod=calList'"
-						style="cursor: pointer">
-				</c:if>
+			<div class="item-active" style="text-align: center;">
+				<img alt="Bootstrap template" src="resources/img/slide_01.jpg" style="width: 90%;">
 			</div>
 		</div>
 		<ul class="nav nav-justified">

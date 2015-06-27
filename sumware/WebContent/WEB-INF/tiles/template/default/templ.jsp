@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SumWare</title>
 <!-- CSS 라이브러리(S)  -->
 <spring:url value="resources/css/common.css" var="css"/>
@@ -18,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="${font2}"/>
 <link rel="stylesheet" type="text/css" href="${boot}"/>
 <!-- CSS 라이브러리(E)  -->
-<!-- 자바스크립트 -->
+<!-- 자바스크립트 --> 
 <script src="js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
