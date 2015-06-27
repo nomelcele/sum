@@ -1,6 +1,10 @@
 package com.sumware.mvc.service;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -57,13 +61,45 @@ public class MessengerServiceImple extends AbstractService{
 
 	@Override
 	public void closeRoomService(MessengerVO v) {
+		System.out.println("CloseRoom Service 영역입니다.");
 		
-	}
-
-	@Override
-	public List<MessengerVO> messengerChatService() {
+		//주상이형 이부분은 다이나믹 쿼리로 해보는것이 나을듯해요.
 		
-		return null;
-	}
-	
+		// 채팅창에서 넘어온 data : 종료일만 변경
+		if(v.getResState().equals("room")){
+			sql.append("update mesentry set entendate = sysdate where mesnum=? and mesmember=?");			
+			System.out.println("room의 if문");
+			
+		// messenger main에서 넘어온 data, 시작과 종료일을 변경
+		}else if(v.getResState().equals("mesMain")){
+			sql.append("update mesentry set entstdate = sysdate, entendate = sysdate where mesnum=? and mesmember=?");
+			System.out.println("mesMain의 if문");
+			
+		}else{
+			System.out.println("이게 출력되면 망한거임!!");
+		}
+		
+//			System.out.println("Dao의 방번호 : "+v.getMesnum());
+//			System.out.println("Dao의 사용자 번호 : "+v.getMesmember());
+			
+			
+			// 방 종료 설정을 진행
+			ArrayList<MessengerRoomVO> rlist = new ArrayList<MessengerRoomVO>();
+			MessengerRoomVO vr= sql.append("select DISTINCT mesnum from mesentry where entendate is null or entendate != '9999/12/31'");
+			rlist.add(vr);
+				
+			System.out.println(rlist.size());			
+		
+			for(MessengerRoomVO e : rlist){
+				sql.append("update mesmaster set masendate = sysdate where masnum = ?");
+				
+				pstmt.setInt(1, e.getMasnum());
+				
+//				System.out.println("master table 종료 된 방번호 : "+e.getMasnum());
+				
+				sql.append("update mesentry set entstdate = sysdate, entendate = sysdate where mesnum=?");
+				pstmt.setInt(1, e.getMasnum());
+//				System.out.println("mesentry에서 종료 된 방번호 : "+e.getMasnum());
+			}
+	}	
 }

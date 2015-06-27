@@ -23,9 +23,4 @@ public class AbstractService implements ServiceInter{
 	public void closeRoomService(MessengerVO v) {
 	}
 
-	@Override
-	public List<MessengerVO> messengerChatService() {
-		return null;
-	}
-
 }
