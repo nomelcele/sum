@@ -5,7 +5,7 @@
 <footer id="footer" class="footer">
 	<div class="footer-wrap">
 		<div class="footer-logo">
-			<img src="img/sum.png" alt="로고">
+			<img src="resources/img/sum.png" alt="로고">
 		</div>
 		
 		<div class="footer-right">
