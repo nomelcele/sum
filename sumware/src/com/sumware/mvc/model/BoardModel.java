@@ -1,20 +1,12 @@
 package com.sumware.mvc.model;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.sumware.dto.BoardVO;
-import com.sumware.dto.PageVO;
 import com.sumware.mvc.dao.BoardDao;
 
 @Controller
@@ -22,10 +14,12 @@ public class BoardModel {
 	@Autowired
 	private BoardDao dao;
 	
-	@ModelAttribute("list")
-	@RequestMapping(value="boardList")
-	public List<BoardVO> getList(Map<String, Integer> map){
-		return dao.getList(map); 
+	@RequestMapping(value="board/boardList")
+	public ModelAndView getList(Map<String, Integer> map){
+		ModelAndView mav = new ModelAndView("board/boardList");
+		mav.addObject("list",dao.getList(map));
+		System.out.println(dao.getList(map).toString());
+		return mav; 
 	}
 	
 	/*
