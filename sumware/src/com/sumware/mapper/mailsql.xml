@@ -44,10 +44,10 @@
 	<select id="" parameterType="int" resultType="mavo">
 		select mailmem,mailreceiver from mail where mailnum=#{num}
 	</select>
-	<update id="" parameterType="">
-		update mail set mailsdelete=? where mailnum=?
-	</update>
-	<update id="">
-		update mail set mailrdelete=? where mailnum=?
-	</update>
+<!-- 	<update id="" parameterType=""> -->
+<!-- 		update mail set mailsdelete=? where mailnum=? -->
+<!-- 	</update> -->
+<!-- 	<update id=""> -->
+<!-- 		update mail set mailrdelete=? where mailnum=? -->
+<!-- 	</update> -->
   </mapper>
