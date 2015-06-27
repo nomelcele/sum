@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.mvc.dao.LoginDao;
@@ -18,7 +19,7 @@ public class LoginModel{
 	
 	@RequestMapping(value="login")
 	public String login(MemberVO mvo,HttpSession session){
-		String result="index";
+		String result="home/login";
 		try {
 			String res = dao.ckFirstLogin(mvo);
 
@@ -55,7 +56,7 @@ public class LoginModel{
 		session.removeAttribute("v");
 		session.removeAttribute("teamNameList");
 		session.invalidate();
-		return "index";
+		return "home/login";
 	}
 	@RequestMapping(value="firstLoginForm")
 	public String firstLoginForm(){
