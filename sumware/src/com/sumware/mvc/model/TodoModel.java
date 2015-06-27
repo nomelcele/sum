@@ -42,7 +42,7 @@ public class TodoModel{
 	}
 	
 	// 메뉴바에서 todo메뉴 첫 진입 시
-	@RequestMapping(value="/firsttodoForm", method=RequestMethod.POST)
+	@RequestMapping(value="/firsttodoForm", method=RequestMethod.GET)
 	public String firsttodoForm(Model model, MemberVO mvo){
 		
 		List<MemberVO> list = tdao.getTomem(mvo.getMemnum());
@@ -60,7 +60,7 @@ public class TodoModel{
 	}
 	
 	// 업무추가 폼 
-	@RequestMapping(value = "/addtodoForm", method=RequestMethod.GET)
+	@RequestMapping(value = "/addtodoForm", method=RequestMethod.POST)
 	public String addtodoForm(){
 		
 		return "addTodo";
@@ -166,7 +166,7 @@ public class TodoModel{
 	}
 	
 	// 업무 보여줌?
-	@RequestMapping(value="/showMembersJob", method=RequestMethod.POST)
+	@RequestMapping(value="/showMembersJob", method=RequestMethod.GET)
 	public String showMembersJob(TodoJobVO tjvo,Model model){
 		List<TodoJobVO> membersjoblist = tdao.getMembersJob(tjvo.getJobtonum());
 		model.addAttribute("membersjoblist", membersjoblist);

@@ -11,7 +11,6 @@
   	<insert id="insertRoomInfo" parameterType="mrvo">
   		insert into mesmaster values(#{key},sysdate,'9999/12/31',#{masreip})
   	</insert>
-  	
 
   	<insert id="insertRoomForTeamMgr"  parameterType="mevo">
   		insert into mesentry values(#{key},#{mesmember},#{openmemberyn},sysdate,'9999/12/31',#{mesreip},#{mesmember})
@@ -24,5 +23,49 @@
   	<insert id="insertRoomForMem" parameterType="mevo">
   		insert into mesentry values(#{key},#{mesmember},#{openmemberyn},null,null,#{hostip},#{mesendnum})
   	</insert>
+  	
+  	<select id="gettentList" parameterType="int" resultType="mevo">
+  		select mesnum, mesmember, openmemberyn, entstdate, mesendnum from mesentry 
+  		where mesmember = #{userNum} and openmemberyn='N' and entstdate is null 
+  		and mesnum in (select masnum from mesmaster where masendate = '9999/12/31')
+  	</select>
+  	
+  	<select id="countRoomNum" resultType="int" parameterType="int">
+  		select count(*) num from mesentry where mesmember=#{userNum} and openmemberyn='N' and entstdate is null 
+  		and mesnum in (select masnum from mesmaster where masendate = '9999/12/31')
+  	</select>
+  	
+  	<update id="joinRoom" parameterType="mevo">
+  		update mesentry set entstdate = sysdate, entendate = '9999/12/31' where mesnum=#{mesnum} and mesmember=#{mesmember} and openmemberyn='N'
+  	</update>
+  	
+  	<update id="updateRoomDate"  parameterType="mevo">
+  		<choose>
+  			<when test="resState==room">
+  				update mesentry set entendate = sysdate where mesnum=#{mesnum} and mesmember=#{mesmember}
+  			</when>
+  			<otherwise>
+  				update mesentry set entstdate = sysdate, entendate = sysdate where mesnum=#{mesnum} and mesmember=#{mesmember}
+  			</otherwise>
+  		</choose>
+  	</update>
+  	
+  	<select id="getMesNums" resultType="mrvo">
+  		select DISTINCT mesnum from mesentry where entendate is null or entendate != '9999/12/31'
+  	</select>
+  	
+  	<update id="upMemMaster" parameterType="mrvo">
+  		update mesmaster set masendate = sysdate where masnum = #{masnum}
+  	</update>
+  	
+  	<update id="upMesEntry" parameterType="mrvo">
+  		update mesentry set entstdate = sysdate, entendate = sysdate where mesnum=#{masnum}
+  	</update>
+  	
+  	<select id="getList" resultType="mvo">
+  		select DISTINCT m.memnum, m.memname, m.memprofile, d.dename, g.LOCHECK from member m, dept d, login g 
+  		where m.memdept=d.denum and m.memnum=g.LOMEM and g.LOCHECK='t' order by d.dename,m.memname
+  	
+  	</select>
   
   </mapper>
