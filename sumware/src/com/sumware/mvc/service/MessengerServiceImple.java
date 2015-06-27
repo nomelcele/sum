@@ -25,16 +25,16 @@ public class MessengerServiceImple extends AbstractService{
 			key=sql.append("select mesmaster_seq.nextval from dual");
 			
 			System.out.println("key : "+key);
-				
+			rv.setKey(key);
 			// 얻은 방번호로 mastertable에 정보 저장, 방번호, 사용자 ip
 			sql.append("insert into mesmaster values(?,sysdate,'9999/12/31',?)");
-			sql.setLength(0);
 			
 			// 참여자 정보 Table에 정보 저장
 			
 			String openCk= null; // 방장 여부 초기화			
 			for(MessengerVO e : list){
 				openCk = e.getOpenmemberyn();
+				e.setKey(key);
 				System.out.println("방장여부 : "+openCk);
 				if(openCk.equals("Y")){ // 방장인 경우 시작일만 지정
 					
