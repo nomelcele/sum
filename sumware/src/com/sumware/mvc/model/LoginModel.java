@@ -1,7 +1,10 @@
 package com.sumware.mvc.model;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,12 +54,14 @@ public class LoginModel{
 		return result;
 	}
 	@RequestMapping(value="logout")
-	public String logout(int memnum,HttpSession session){
+	public void logout(int memnum,HttpSession session,HttpServletResponse response) throws IOException{
 		dao.outLog(memnum);
 		session.removeAttribute("v");
 		session.removeAttribute("teamNameList");
 		session.invalidate();
-		return "home/login";
+		PrintWriter pw = response.getWriter();
+		pw.write("sucess");
+		pw.flush();
 	}
 	@RequestMapping(value="firstLoginForm")
 	public String firstLoginForm(){
