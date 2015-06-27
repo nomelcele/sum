@@ -14,9 +14,9 @@
 			 from
 			 (select b.bnum, b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit
 			 from board b, member m
-			 where b.bmem = m.memnum and b.bgnum=#{bgnum} and b.bdeptno=#{bdeptno}
+			 where b.bmem = m.memnum and b.bgnum=1 and b.bdeptno=100
 			 order by b.bnum desc) tn)
-			 where r_num between #{begin} and #{end}
+			 where r_num between 1 and 5
 			</when>
 			<otherwise>
 			select bnum,btitle,writer bwriter,bdate,bhit
