@@ -60,10 +60,10 @@ public class TodoModel{
 	}
 	
 	// 업무추가 폼 
-	@RequestMapping(value = "/addtodoForm", method=RequestMethod.POST)
+	@RequestMapping(value = "/addtodoForm", method=RequestMethod.GET)
 	public String addtodoForm(){
 		
-		return "todo/addTodo";
+		return "addTodo";
 	}
 	
 	// 업무 추가 (파일 업로드)
