@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.sumware.dto.BnameVO;
 import com.sumware.dto.BoardVO;
@@ -23,6 +24,7 @@ public class BoardDao {
 	}
 	
 	// boardList 가져오기.
+	@ModelAttribute("list")
 	public List<BoardVO> getList(Map<String, Integer> map) {
 		List<BoardVO> list = ss.selectList("board.getList",map);
 		return list;
