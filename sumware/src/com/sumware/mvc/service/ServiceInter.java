@@ -13,7 +13,5 @@ public interface ServiceInter {
 	//메신저
 	public int insertCreateRoomService(List<MessengerVO> list, MessengerRoomVO rv, int mesendNum);
 	public void closeRoomService(MessengerVO v);
-	//메신저 초기방생성
-	public List<MessengerVO> messengerChatService();
 	
 }
