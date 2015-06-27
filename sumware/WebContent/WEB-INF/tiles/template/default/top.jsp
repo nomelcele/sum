@@ -12,9 +12,7 @@
 		</div>
 		<c:choose>
    			<c:when test="${empty sessionScope.v.memnum && empty memnum}">
-      		<form class="form-inline" role="form" action="sumware" method="post">
-         		<input type="hidden" name="model" value="login"> 
-         		<input type="hidden" name="submod" value="login">
+<!--       		<form class="form-inline" role="form" action="sumware" method="post"> -->
          		<div class="porm-group">
             		<label class="control-label-" for="memnum">사원번호</label> 
             		<input type="text" id="memnum" name="memnum" placeholder="사원번호" onkeydown="enterCheck(3)"> 
@@ -22,7 +20,7 @@
             		<input type="password" id="mempwd" name="mempwd" placeholder="비밀번호" onkeydown="enterCheck(3)">
             		<button type="button"class="btn btn-xs btn-info" onclick="loginChk()">로그인</button>
          		</div>
-      		</form>
+<!--       		</form> -->
    			</c:when>
    			<c:otherwise>
 <!-- 		   	<div class="porm-group"> -->
@@ -43,11 +41,11 @@
 				<ul class="nav navbar-right navbar-nav user-name">
 				<c:if test="${empty sessionScope.v.memname}">
 			        <li><span class="control-label-" > <strong>${sessionScope.memnum}</strong> 님 환영합니다.</span></li>
-					<li><a href="logout?memnum=${sessionScope.memnum}"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
+					<li><a href="javascript:logout(${sessionScope.memnum})"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
 				</c:if>
 				<c:if test="${!empty sessionScope.v.memname}">
 			        <li><span class="control-label-" > <strong>${sessionScope.v.memname}</strong> 님 환영합니다.</span></li>
-					<li><a href="logout?memnum=${sessionScope.v.memnum}"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
+					<li><a href="javascript:logout(${sessionScope.v.memnum})"><i class="fa fa-check fa-lg"></i>로그아웃</a></li>
 				</c:if>
 				
 				</ul>
