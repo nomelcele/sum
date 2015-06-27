@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sumware.dto.MailVO;
-import com.sumware.util.CloseUtil;
 
 import conn.ConUtil;
 
@@ -49,10 +48,7 @@ public class MailDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
-		} finally {
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-		}
+		} 
 	}
 	
 	public List<MailVO> getFromMailList(HashMap<String, String> map){
@@ -154,8 +150,8 @@ public class MailDao {
 						sql.append("update mail set mailrdelete=? where mailnum=?");
 					}
 					
-					CloseUtil.close(rs);
-					CloseUtil.close(pstmt);
+//					CloseUtil.close(rs);
+//					CloseUtil.close(pstmt);
 					pstmt = con.prepareStatement(sql.toString());
 					pstmt.setInt(1, Integer.parseInt(map.get("delvalue")));
 					// 삭제(메일함에서 휴지통으로 이동)는 2
@@ -171,10 +167,6 @@ public class MailDao {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			CloseUtil.close(rs);
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
 		}
 		
 	}
@@ -227,12 +219,7 @@ public class MailDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			CloseUtil.close(rs);
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-		}
-		
+		} 
 		return numArr;
 		
 	}
@@ -252,10 +239,7 @@ public class MailDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			CloseUtil.close(pstmt);
-			CloseUtil.close(con);
-		}
+		} 
 		
 	}
 	
