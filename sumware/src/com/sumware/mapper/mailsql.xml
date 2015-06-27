@@ -41,13 +41,13 @@
 		from mail ma, member me1, member me2 
 		where me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver and ma.mailnum=#{mailnum}
 	</select>
-	<select id="" parameterType="int" resultType="mavo">
+	<!-- <select id="" parameterType="int" resultType="mavo">
 		select mailmem,mailreceiver from mail where mailnum=#{num}
 	</select>
-<!-- 	<update id="" parameterType=""> -->
-<!-- 		update mail set mailsdelete=? where mailnum=? -->
-<!-- 	</update> -->
-<!-- 	<update id=""> -->
-<!-- 		update mail set mailrdelete=? where mailnum=? -->
-<!-- 	</update> -->
+	<update id="" parameterType="">
+		update mail set mailsdelete=? where mailnum=?
+	</update>
+	<update id="">
+		update mail set mailrdelete=? where mailnum=?
+	</update> -->
   </mapper>
