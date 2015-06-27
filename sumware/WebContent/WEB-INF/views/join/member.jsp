@@ -34,7 +34,7 @@ function fileUpload(){
 		// callback
 		if(xhr.readyState == 4 && xhr.status == 200){
 // 			alert("사진경로"+xhr.responseText.trim());
-			$('#memimg').attr("value",xhr.responseText.trim());
+			$('#memprofile').attr("value",xhr.responseText.trim());
 			alert("사원정보가 업데이트 되었습니다.");
 			myform.submit();
 			
@@ -116,8 +116,8 @@ function fileUpload(){
 					if($('#targetimg').attr("src")=="img/imgx.jpg"){
 						if("${sessionScope.v.memprofile}"!=""){
 							alert("사진잇음??"+"${sessionScope.v.memprofile}");
-							// 프로필 수정 시 지정해준 사진값(memimg)이 없으므로 프로필 사진을등록해달라고 함!
-							// 그래서 프로필 수정 시 memimg의 value값을 지정해 주어야 함
+							// 프로필 수정 시 지정해준 사진값(memprofile)이 없으므로 프로필 사진을등록해달라고 함!
+							// 그래서 프로필 수정 시 memprofile의 value값을 지정해 주어야 함
 							$('#targetimg').attr('src',"profileImg/${sessionScope.v.memprofile}").css(
 									'width', '200').css('height', '200');
 						}else{
@@ -266,8 +266,8 @@ function fileUpload(){
 						<input type="hidden" name="memnum" value="${sessionScope.v.memnum}"> 
 						</c:if>
 						<input type="hidden" name="memnum" value="${memnum}"> 
-						<input type="hidden" name="address" id="address">
-						<input type="hidden" name="memimg" id="memimg">
+						<input type="hidden" name="memaddr" id="address">
+						<input type="hidden" name="memprofile" id="memprofile">
 						<header class="page-header">
 							<h1 class="page-title">Profile Modify</h1>
 							<small><i class="fa fa-clock-o"></i> Last Updated on: <time>Sunday,
@@ -288,7 +288,7 @@ function fileUpload(){
 										</c:if>
 										</figure>
 										<div class="btn-group">
-											<input type="file" id="fileimg">
+											<input type="file" id="fileimg" name="fileimg">
 											<img src="img/ion.JPG">
 										</div>
 									</div>
@@ -346,7 +346,7 @@ function fileUpload(){
 												비밀번호 재 확인 </label>
 											<div class="col-sm-6">
 												<input type="password" placeholder="새 비밀번호 확인"
-													class="form-control" id="mempwd2" name="mempwd2">
+													class="form-control" id="mempwd2" name="mempwd">
 													<div id="targetpwd"></div>
 											</div>
 											
