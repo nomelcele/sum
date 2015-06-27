@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="messenger">
+  	<select id="getNewRoomNum" resultType="int">
+  		select mesmaster_seq.nextval from dual
+  	</select>
+
+  	<insert id="insertRoomInfo" parameterType="mrvo">
+  		insert into mesmaster values(#{key},sysdate,'9999/12/31',#{masreip})
+  	</insert>
+  	
+
+  	<insert id="insertRoomForTeamMgr"  parameterType="mevo">
+  		insert into mesentry values(#{key},#{mesmember},#{openmemberyn},sysdate,'9999/12/31',#{mesreip},#{mesmember})
+  	</insert>
+  	
+  	<select id="getHostIp" parameterType="mevo" resultType="String">
+  		select masreip from mesmaster where masnum=#{key}
+  	</select>
+  
+  	<insert id="insertRoomForMem" parameterType="mevo">
+  		insert into mesentry values(#{key},#{mesmember},#{openmemberyn},null,null,#{hostip},#{mesendnum})
+  	</insert>
+  
+  </mapper>

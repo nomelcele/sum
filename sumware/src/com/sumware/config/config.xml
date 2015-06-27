@@ -16,5 +16,6 @@
   		<typeAlias type="com.sumware.dto.CalendarVO" alias="cavo"/>
   		<typeAlias type="com.sumware.dto.MessengerRoomVO" alias="mrvo"/>
   		<typeAlias type="com.sumware.dto.TodoJobVO" alias="tjvo"/>
+  		<typeAlias type="com.sumware.dto.MessengerVO" alias="mevo"/>
   	</typeAliases>
 </configuration>

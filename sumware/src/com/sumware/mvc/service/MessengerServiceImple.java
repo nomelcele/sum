@@ -38,6 +38,7 @@ public class MessengerServiceImple extends AbstractService{
 			String openCk= null; // 방장 여부 초기화			
 			for(MessengerVO e : list){
 				openCk = e.getOpenmemberyn();
+				e.setMesendnum(mesendNum);
 				e.setKey(key);
 				System.out.println("방장여부 : "+openCk);
 				if(openCk.equals("Y")){ // 방장인 경우 시작일만 지정

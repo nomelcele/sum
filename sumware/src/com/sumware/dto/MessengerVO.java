@@ -3,8 +3,16 @@ package com.sumware.dto;
 public class MessengerVO {
 
 	private int mesmember, mesnum, conum, mesconum, meswriternum, mesendnum, key;
-	private String openmemberyn, entstdate, entendate, mescont, mesreip,resState;
+	private String openmemberyn, entstdate, entendate, mescont, mesreip,resState, hostip;
 	
+	
+	
+	public String getHostip() {
+		return hostip;
+	}
+	public void setHostip(String hostip) {
+		this.hostip = hostip;
+	}
 	public String getResState() {
 		return resState;
 	}
