@@ -1,31 +1,21 @@
 package com.sumware.mvc.model;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.MailVO;
-import com.sumware.mvc.controller.ModelForward;
 import com.sumware.mvc.dao.MailDao;
-import com.sumware.util.MyFileUp;
-import com.sumware.util.MyMap;
 import com.sumware.util.MyPage;
-import com.sumware.util.Suggest;
 
 @Controller
 public class MailModel implements ModelInter{
@@ -181,6 +171,8 @@ public class MailModel implements ModelInter{
 	// ********************
 	// ********************
 	// ********************
+	/*
+	
 	@RequestMapping(value="/mailSetDel")
 	public ModelAndView mailSetDel(@RequestParam("chk")String[] mailnums,
 			@RequestParam("usernum")Integer usernum,
@@ -427,5 +419,6 @@ public class MailModel implements ModelInter{
 		
 		return new ModelForward(url, method);
 	}
-
+ * 
+	 */
 }
