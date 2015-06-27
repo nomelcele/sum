@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.sumware.dto.BnameVO;
 import com.sumware.dto.BoardVO;
 import com.sumware.dto.CommVO;
-import com.sumware.mvc.service.FactorySrevice;
 
 @Repository
 public class BoardDao {
@@ -21,9 +19,7 @@ public class BoardDao {
 	
 	// boardWrite 하는 insert 메서드.
 	public void insert(HashMap<String, String> map){
-		SqlSession ss = FactorySrevice.getFactory().openSession(true);
 		ss.insert("board.insert", map);
-		ss.close();
 	}
 	
 	// boardList 가져오기.
@@ -35,9 +31,7 @@ public class BoardDao {
 	// 게시글에 대한 총 갯수 구해주는 메서드.
 	public int getTotalCount(int no) {
 		int res = 0;
-		SqlSession ss = FactorySrevice.getFactory().openSession();
 		res = ss.selectOne("board.getTotalCount",no);
-		ss.close();
 		return res;
 	}
 
@@ -46,26 +40,20 @@ public class BoardDao {
 	// detail 페이지에 소속된 댓글의 전체 카운트 값을 가져온다.
 	public int getTotalCommCount(int no) {
 		int res = 0;
-		SqlSession ss = FactorySrevice.getFactory().openSession();
 		res = ss.selectOne("board.getTotalCommCount",no);
-		ss.close();
 		return res;
 	}
 	
 	// 게시글 상세보기 메서드.
 	public BoardVO getDetail(int no){
 		BoardVO v = null;
-		SqlSession ss = FactorySrevice.getFactory().openSession();
 		v = ss.selectOne("board.getDetail",no);
-		ss.close();
 		hitUp(no);
 		return v;
 	}
 	// 조회수 증가 시켜주는 메서드.
 	private void hitUp(int bnum){
-		SqlSession ss = FactorySrevice.getFactory().openSession();
 		ss.selectOne("board.hitUp",bnum);
-		ss.close();
 	}
 	
 	// 게시글에 대한 댓글 불러오는 메서드.
@@ -73,37 +61,27 @@ public class BoardDao {
 		// SELECT c.cocont,c.codate,m.memname,c.CODATE,m.MEMPROFILE FROM COMM c, MEMBER m
 		// WHERE c.comem = m.memnum AND coboard = 67;
 		int code = Integer.parseInt(map.get("no"));
-		SqlSession ss = FactorySrevice.getFactory().openSession();
 		List<CommVO> list = ss.selectList("board.getCommList",code);
-		ss.close();
-		
 		return list;
 	}
 	// 댓글 입력 메서드.
 	public void commInsert(HashMap<String, String> map){
-		SqlSession ss = FactorySrevice.getFactory().openSession(true);
 		ss.insert("board.commInsert",map);
-		ss.close();
 	}
 	// 게시판 이름이 필요 하기 때문에 그 이름 반환 해주는 메서드.
 	public List<BnameVO> bName(HashMap<String, String> map){
-		SqlSession ss = FactorySrevice.getFactory().openSession();
 		List<BnameVO> list= ss.selectList("board.bName",map);
 		System.out.println("이름다 뽑았다.");
 		return list;
 	}
 	// 게시글 삭제 메서드
 	public void delete(HashMap<String, String> map){
-		SqlSession ss = FactorySrevice.getFactory().openSession(true);
 		ss.delete("board.delete",Integer.parseInt(map.get("no")));
-		ss.close();	
 	}
 	
 	// 게시판 추가 하는 메서드
 	public void addBoard(HashMap<String, String> map){
-		SqlSession ss = FactorySrevice.getFactory().openSession(true);
 		ss.delete("board.addBoard",map);
-		ss.close();	
 	}
 }
 
