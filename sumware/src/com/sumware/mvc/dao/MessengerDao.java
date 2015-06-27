@@ -16,9 +16,6 @@ import com.sumware.dto.MemberVO;
 import com.sumware.dto.MessengerRoomVO;
 import com.sumware.dto.MessengerVO;
 
-
-
-
 import conn.ConUtil;
 
 @Repository
@@ -95,10 +92,10 @@ public class MessengerDao {
 	
 	/////closeRoom 메서드 ///////////////////////////////////////////
 	
-	
 	//
 	public List<MemberVO> getList(int userNum){
 		return st.selectList("messenger.getList");
+		
 	}
 	
 	
@@ -140,48 +137,57 @@ public class MessengerDao {
 	
 	
 	// 로그인한 회원, 접속자는 제외하여 출력
-	public ArrayList<MemberVO> getList(int userNum){
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
-		StringBuffer sql = new StringBuffer();
-		
-		// 로그인 된 회원만 조회하여 출력
-		sql.append("select DISTINCT m.memnum, m.memname, m.memprofile, d.dename, g.LOCHECK ");
-		sql.append("from member m, dept d, login g ");
-		sql.append("where m.memdept=d.denum and m.memnum=g.LOMEM and g.LOCHECK='t' order by d.dename,m.memname");
-		try {
-			con = ConUtil.getOds();
-			pstmt = con.prepareStatement(sql.toString());
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				if(userNum != rs.getInt("memnum")){
-				MemberVO v = new MemberVO();
-				v.setMemnum(rs.getInt("memnum"));
-				v.setMemname(rs.getString("memname"));
-				v.setMemprofile(rs.getString("memprofile"));
-				v.setDename(rs.getString("dename"));
-				list.add(v);
-				System.out.println("Dao 사원 이름 : "+v.getMemname());	
-				}else{ System.out.println("else 입니다.");}
-			}
-			System.out.println("Dao에서의 Array Size : "+list.size());
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally{
-			try {
-				if(con != null) CloseUtil.close(con);
-				if(pstmt != null) CloseUtil.close(pstmt);
-				if(rs != null) CloseUtil.close(rs);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} return list;
-	}
+//	public ArrayList<MemberVO> getList(int userNum){
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+//		StringBuffer sql = new StringBuffer();
+//		
+//		// 로그인 된 회원만 조회하여 출력
+//		sql.append("select DISTINCT m.memnum, m.memname, m.memprofile, d.dename, g.LOCHECK ");
+//		sql.append("from member m, dept d, login g ");
+//		sql.append("where m.memdept=d.denum and m.memnum=g.LOMEM and g.LOCHECK='t' order by d.dename,m.memname");
+//		try {
+//			con = ConUtil.getOds();
+//			pstmt = con.prepareStatement(sql.toString());
+//			rs = pstmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				if(userNum != rs.getInt("memnum")){
+//				MemberVO v = new MemberVO();
+//				v.setMemnum(rs.getInt("memnum"));
+//				v.setMemname(rs.getString("memname"));
+//				v.setMemprofile(rs.getString("memprofile"));
+//				v.setDename(rs.getString("dename"));
+//				list.add(v);
+//				System.out.println("Dao 사원 이름 : "+v.getMemname());	
+//				}else{ System.out.println("else 입니다.");}
+//			}
+//			System.out.println("Dao에서의 Array Size : "+list.size());
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally{
+//			try {
+//				if(con != null) CloseUtil.close(con);
+//				if(pstmt != null) CloseUtil.close(pstmt);
+//				if(rs != null) CloseUtil.close(rs);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		} return list;
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// 그냥 전체 사원 List를 출력하는 메서드
 //	public ArrayList<MemberVO> getList(){

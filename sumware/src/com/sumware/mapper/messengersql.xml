@@ -50,7 +50,7 @@
   		</choose>
   	</update>
   	
-  	<select id="getMesNums" resultType="mrvo">
+  	<select id="getMesNums"  resultType="mrvo">
   		select DISTINCT mesnum from mesentry where entendate is null or entendate != '9999/12/31'
   	</select>
   	
