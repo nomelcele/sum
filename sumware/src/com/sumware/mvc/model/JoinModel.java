@@ -1,17 +1,17 @@
 package com.sumware.mvc.model;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.sumware.dto.MemberVO;
 import com.sumware.mvc.dao.MemberDao;
 import com.sumware.util.CaptchasDotNet;
 import com.sumware.util.MyMap;
@@ -25,13 +25,23 @@ public class JoinModel{
 	@Autowired
 	private MemberDao dao;
 	
-	@RequestMapping(value="memberForm",method=RequestMethod.POST)
+	@RequestMapping(value="memberForm")
 	public String memberForm(){
-		
 		return "join/member";
+	}
+	@RequestMapping(value="joinck")
+	public void joinCk(String meminmail,HttpServletResponse response) throws IOException{
+		int res = dao.ckid(meminmail);
 		
-	
+		PrintWriter pw = response.getWriter();
+		if(res==1){
+			pw.write("<p>사용 불가능한 아이디입니다.</p>");
+			pw.flush();
 		
+		}else{
+			pw.write("<p>사용 가능한 아이디입니다.</p>");
+			pw.flush();
+		}
 	}
 	@RequestMapping(value="signup",method=RequestMethod.POST)
 	public String signup(HttpServletRequest request){
