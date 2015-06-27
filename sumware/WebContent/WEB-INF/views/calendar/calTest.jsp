@@ -35,7 +35,7 @@ $(function(){
 				   alert("eventid:"+calEvent._id);
 				   	//삭제할 ajax
 				    $.ajax({
-			              url: "/calDelete",
+			              url: "calDelete",
 			              type: "POST",
 			              data: {
 			                  calnum:calEvent._id,
@@ -74,7 +74,7 @@ $(function(){
 // 		    alert("selected from: " + start.format() + ", to: " + end.format());
 		   //셀렉트된 결과를 서버로 전송.
 		          $.ajax({
-		              url: "/calInsert",
+		              url: "calInsert",
 		              type: "POST",
 		              data: {
 		                  title:encodeURIComponent(title),
@@ -105,8 +105,8 @@ $(function(){
 
 			<div class="">
 				<div style="text-align: right;padding: 10px;">
-					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calDept" value="부서일정" onclick="location='/calList?cal=0'">
-					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calMem" value="사원일정" onclick="location='/calList?cal=1'">
+					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calDept" value="부서일정" onclick="location='calList?cal=0'">
+					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calMem" value="사원일정" onclick="location='calList?cal=1'">
 				</div>
 				<div id='calendar'></div>
 			</div>
