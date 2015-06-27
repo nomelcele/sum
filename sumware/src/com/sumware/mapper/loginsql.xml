@@ -7,5 +7,14 @@
   		select s.memnum, s.mempwd, s.memprofile, s.memname, s.memjob,s.memdept,s.memmgr, d.dename, m.memname mgrname, s.memauth,s.meminmail
 		from member s, member m, dept d where s.memmgr = m.memnum and s.memdept = d.denum and s.memnum = #{memnum} and s.mempwd =#{mempwd}
   	</select>
+  	<select id="ckFirstLogin" parameterType="mvo" resultType="String">
+  		select nvl(memprofile,'1') memprofile from member where memnum=#{memnum} and mempwd=#{mempwd}
+  	</select>
+  	<insert id="inLog" parameterType="int">
+  		insert into login(lonum,locheck,lostdate,lomem) values(login_seq.nextVal,'t',sysdate,#{lomem})
+  	</insert>
+  	<insert id="outLog" parameterType="int">
+  		update login set locheck='f',loendate=sysdate where lomem=#{lomem}
+  	</insert>
   	
   </mapper>
