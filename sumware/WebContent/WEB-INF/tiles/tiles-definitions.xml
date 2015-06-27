@@ -5,13 +5,12 @@
 
 <tiles-definitions>
 	<definition name="defaultTemplate" 
-		template="/WEB-INF/template/default/template.jsp">
-		<put-attribute name="header" value="/WEB-INF/template/default/header.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/template/default/menu.jsp"/>
-		<put-attribute name="footer" value="/WEB-INF/template/default/footer.jsp"/>
+		template="/WEB-INF/tiles/template/default/templ.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/template/default/top.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/tiles/template/default/contentLeft.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/tiles/template/default/footer.jsp"/>
 	</definition>
-	
-	<definition name="*" extends="defaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/{1}.jsp"/>
+	<definition name="*/*" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition>
 </tiles-definitions>
