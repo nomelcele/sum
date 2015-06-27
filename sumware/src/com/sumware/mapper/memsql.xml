@@ -10,10 +10,10 @@
   	select count(*) cnt from member where meminmail=#{meminmail}
   </select>
   
-   <update id="update" parameterType="map">
-    	update member set memaddr=#{address}, mempwd=#{mempwd2},memprofile=#{memimg},meminmail=#{meminmail} where memnum=#{memnum}
+   <update id="update" parameterType="mvo">
+    	update member set memaddr=#{memaddr}, mempwd=#{mempwd},memprofile=#{memprofile},meminmail=#{meminmail} where memnum=#{memnum}
    </update>
-   <update id="modify" parameterType="map">
+   <update id="modify" parameterType="mvo">
    		update member set memaddr=#{address}, mempwd=#{mempwd2},memprofile=#{memimg} where memnum=#{memnum}
    
    </update>

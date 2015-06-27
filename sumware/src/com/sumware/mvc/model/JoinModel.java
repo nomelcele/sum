@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,51 +12,60 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sumware.dto.MemberVO;
+import com.sumware.mvc.dao.BoardDao;
 import com.sumware.mvc.dao.MemberDao;
 import com.sumware.util.CaptchasDotNet;
 import com.sumware.util.MyMap;
 
-
-
-
-
 @Controller
 public class JoinModel{
-	@Autowired
-	private MemberDao dao;
 	
-	@RequestMapping(value="memberForm")
+	@Autowired
+	private MemberDao mdao;
+	@Autowired
+	private BoardDao bdao;
+	
+
+	@RequestMapping(value="/memberForm")
 	public String memberForm(){
-		return "join/member";
+		return "join/member";	
 	}
-	@RequestMapping(value="joinck")
+	
+	@RequestMapping(value="/joinck")
 	public void joinCk(String meminmail,HttpServletResponse response) throws IOException{
-		int res = dao.ckid(meminmail);
+		int res = mdao.ckid(meminmail);
 		
 		PrintWriter pw = response.getWriter();
 		if(res==1){
 			pw.write("<p>사용 불가능한 아이디입니다.</p>");
 			pw.flush();
-		
+	
 		}else{
 			pw.write("<p>사용 가능한 아이디입니다.</p>");
 			pw.flush();
 		}
 	}
-	@RequestMapping(value="signup",method=RequestMethod.POST)
-	public String signup(HttpServletRequest request){
+	@RequestMapping(value="/signup",method=RequestMethod.POST)
+	public String signup(MemberVO mvo){
 		
 		HashMap<String, String> map= MyMap.getMaps().getMapList(request);
-	    dao.update(map);
+	    
+	    mdao.update(map);
+	    
 	    HttpSession session = request.getSession();
+	    //모든 세션 정보를 삭제함 ...
 		session.invalidate();	
-		return "index";
-		
-		
+		return "index";	
 	}
 	
-	@RequestMapping(value="viewCap",method=RequestMethod.POST)
+	
+	
+	
+	
+	@RequestMapping(value="/viewCap",method=RequestMethod.POST)
 	public String viewCap(HttpServletRequest request){
 		// Construct the captchas object
 		// Use same settings as in query.jsp
@@ -68,7 +78,7 @@ public class JoinModel{
 		String id =request.getParameter("id");
 		String pw =request.getParameter("pw");
 		String password = request.getParameter("password");
-	System.out.println("cappwd "+password);
+		System.out.println("cappwd "+password);
 		// Check captcha
 		String body;
 		switch (captchas.check(password)) {
@@ -93,12 +103,12 @@ public class JoinModel{
 		System.out.println("aa : " + captchas.check(password));
 		request.setAttribute("body", body);
 	
-		return "join/captcha.jsp";
+		return "join/captcha";
 		
 	}
 	
 	
-	@RequestMapping(value="getCap",method=RequestMethod.POST)
+	@RequestMapping(value="/getCap",method=RequestMethod.POST)
 	public String getCap(HttpServletRequest request){
 		
 		CaptchasDotNet captchas = new com.sumware.util.CaptchasDotNet(
@@ -111,8 +121,76 @@ public class JoinModel{
 		return "join/getCap";
 	}
 	
+	@RequestMapping(value="/modifyProfile",method=RequestMethod.POST)
+	public String modifyProfile(){
+		
+		
+		return "join/member";
+		
+	}
 	
+	@RequestMapping(value="/modify",method=RequestMethod.POST)
+	public String modify(HttpServletRequest request){
+		
+		HashMap<String, String> map= MyMap.getMaps().getMapList(request);
+		mdao.modify(map);
+		HttpSession session = request.getSession();
+		//저장된 세션 다 날림.
+		session.removeAttribute("v");
+		session.removeAttribute("teamNameList");		
+		return "index";
+		//고칠것 ^^;;히히힝
+	}
+	
+	@RequestMapping(value="/addMember",method=RequestMethod.POST)
+	public String addMember(HttpServletRequest request){
+		
+		HashMap<String, String> map= MyMap.getMaps().getMapList(request);
+		mdao.addMember(map);
+		String memmail = map.get("newmail");
+		MemberVO vo = MemberDao.getDao().getNewMemInfo(memmail);
+		request.setAttribute("newmemVo", vo);
+		
+		return "admin/sendEmailUser";
+		//이것도 나중에 수정
+	}
 
+	@RequestMapping(value="/getMemMgr",method=RequestMethod.POST)
+	public String getMemMgr(){
+		System.out.println("addMemberForm들어옴");
+	// 부서선택하면 부서에 대한 팀장들 리스트가져옴
+		int memdept = Integer.parseInt(request.getParameter("memdept"));
+		List<MemberVO> memmgrlist = MemberDao.getDao().getMemMgr(memdept);
+		request.setAttribute("mgrList", memmgrlist);
+		
+		return "admin/getMgrListCallback";
+		
+	}
+	
+	@RequestMapping(value="/addMemberForm")
+	public String addMemberForm(){
+		
+		return "admin/admin";
+		
+	}
+	@RequestMapping(value="/addBoard")
+	public String addBoard(){
+		
+		HashMap<String, String> map = MyMap.getMaps().getMapList(request);
+		BoardDao.getDao().addBoard(map);
+		
+		return "redirect:/addBordForm";
+		
+	}
+	
+	@RequestMapping(value="/addBoardForm",method=RequestMethod.POST)
+	public String addBoardForm(){
+		
+		return "admin/addBoard.jsp";
+		
+	}
+	
+	
 //	@Override
 //	public ModelForward exe(HttpServletRequest request,
 //			HttpServletResponse response) throws IOException {
@@ -230,6 +308,7 @@ public class JoinModel{
 //			BoardDao.getDao().addBoard(map);
 //			
 //			url = "sumware?model=join&submod=addBoardForm";
+	//      "redirect:/addBordForm"
 //			method = true;
 //
 //		}else if(submod != null && submod.equals("addBoardForm")){

@@ -23,19 +23,20 @@ public class MemberDao {
 	private SqlSessionTemplate st;
 	
 
+	//메일 에서 사용??
+	public List<MemberVO> getNameMailList(){
+		return st.selectList("mem.getNameMailList");
+		
 	
-	public List<MemberVO> getNameMailList(MemberVO vo){
-		return st.selectList("mem.getNameMailList",vo);
 		
-		
-		
-		// �궗�썝�쓽 �씠由꾧낵 �궡遺� 硫붿씪 二쇱냼瑜� 媛��졇�삤�뒗 硫붿꽌�뱶
-		// (suggest 湲곕뒫�쓣 �쐞�븳 xml �뙆�씪 留뚮뱶�뒗 �뜲 �궗�슜)
+	
 		//SqlSession ss = FactorySrevice.getFactory().openSession();
 		//List<MemberVO> list = ss.selectList("mem.getNameMailList");
 		//ss.close();
 		//return list;
 	}
+	
+	//아이디 중복 검사 할때 
 	public int ckid(String meminmail){
 		
 		//int result = 0;
@@ -45,6 +46,8 @@ public class MemberDao {
 		return st.selectOne("mem.ckid",meminmail);
 	}
 	
+	
+	//회원 정보 업데이트 
 	public void update(HashMap<String, String> map){
 		
 		st.update("mem.update",map);
@@ -53,12 +56,11 @@ public class MemberDao {
 				//ss.close();
 		//uSystem.out.println("xml �뙆�씪 �뾽�뜲�씠�듃");
 		MakeXML.updateXML(); 
-		// �궗�썝�쓽 �씠由�+�븘�씠�뵒媛� ���옣�맂 xml �뙆�씪
-		// �쉶�썝�씠 異붽��맆 �븣留덈떎 �뾽�뜲�씠�듃
+		
 		
 	}
 	
-	/// �쉶�썝 �젙蹂� �닔�젙
+	//회원 정보 수정 
 	public void modify(HashMap<String, String> map){
 		st.update("mem.modify",map);
 		//SqlSession ss = FactorySrevice.getFactory().openSession(true);
@@ -66,7 +68,8 @@ public class MemberDao {
 		//ss.close();
 	}
 	
-	// �떊�엯 �궗�썝 �뵒鍮꾩뿉 異붽�
+	
+	//
 	public void addMember(HashMap<String, String> map){
 		st.insert("mem.addMember",map);
 		//SqlSession ss = FactorySrevice.getFactory().openSession(true);
@@ -74,9 +77,10 @@ public class MemberDao {
 		//ss.close();
 	}
 	
+	//
 	public List<MemberVO> getMemMgr(int memdept){
 		
-		// ���옣�젙蹂대뱾 媛��졇�샂
+	
 		//SqlSession ss = FactorySrevice.getFactory().openSession();
 		//List<MemberVO> alist = ss.selectList("mem.getMemMgr",memdept);
 		
@@ -85,7 +89,7 @@ public class MemberDao {
 	//내일 물어보기	
 	}
 	
-	// �떊�엯�궗�썝 �젙蹂� 戮묒븘�샂
+//
 	public MemberVO getNewMemInfo(String memmail ){
 		
 		//SqlSession ss = FactorySrevice.getFactory().openSession();
