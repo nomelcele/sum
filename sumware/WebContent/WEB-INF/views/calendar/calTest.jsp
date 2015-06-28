@@ -1,18 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!-- 캘린더 -->
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<link rel='stylesheet' href='calendar/fjs/fullcalendar.min.css' />
-<script src='calendar/fjs/lib/moment.min.js'></script>
-<script src='calendar/fjs/fullcalendar.min.js'></script>
-<script src='calendar/fjs/lang-all.js'></script>
+<spring:url value="resources/fjs/fullcalendar.min.css" var="fullcalendarCss"/>
+<spring:url value="resources/fjs/lib/moment.min.js" var="momentJs"/>
+<spring:url value="resources/fjs/fullcalendar.min.js" var="fullcalendarJs"/>
+<spring:url value="resources/fjs/lang-all.js" var="langJs"/>
+<link rel='stylesheet' href='${fullcalendarCss }' />
+<script src='${momentJs }'></script>
+<script src='${fullcalendarJs }'></script>
+<script src='${langJs }'></script>
 <!-- /캘린더 -->
 <!-- Latest compiled and minified CSS -->
 <script>
 $(function(){
 	  var currentLangCode = 'ko';
-	  var selCal="${cal}";
+	  var selCal="${selcal}";
 	  $('#calendar').fullCalendar('destroy');
 	  $('#calendar').fullCalendar({
 	   
@@ -64,8 +69,8 @@ $(function(){
 		    if (title) {
 		     eventData = {
 		      title: title,
-		      calstart: start,
-		      calend: end
+		      start: start,
+		      end: end
 		     };
 		     $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
 		    }
@@ -83,6 +88,10 @@ $(function(){
 		                  selCal:selCal
 		              },
 		              dataType: "html",
+		              success: function(res) {
+		            	alert("success::"+res);
+						location=res;		            	 
+		              },
 		              error: function(a, b) {
 		                  alert("Request: " + JSON.stringify(a));
 		              }

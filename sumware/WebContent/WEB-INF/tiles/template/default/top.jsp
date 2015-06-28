@@ -4,7 +4,7 @@
 <nav class="navbar navbar">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="sumware?model=index"><img src="resources/img/sum.png"
+			<a class="navbar-brand" href="home"><img src="resources/img/sum.png"
 				alt="SumWare"></a> <a class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-collapse"> <span
 				class="glyphicon glyphicon-chevron-down"></span>
@@ -28,10 +28,10 @@
     		<div class="nav navbar-right">
 				<ul class="nav navbar-nav">
 					
-					<li><a href="sumware?model=index">Main</a></li>
+					<li><a href="home">Main</a></li>
 					<li><a href="sumware?model=todo&submod=firsttodoForm&memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
 					<li><a href="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}&page=1">Mail</a></li>
-					<li><a href="sumware?model=calendar&submod=calList">Calendar</a>
+					<li><a href="calList">Calendar</a>
 					<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=0&bname=공지사항">Board</a></li>
 					<li><a href="javascript:openWin()">Messenger <span id="countRoomNum"></span></a></li>
 					<c:if test="${sessionScope.v.memdept eq 100 and sessionScope.v.memauth lt 4 }"> 

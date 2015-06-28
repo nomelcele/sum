@@ -12,26 +12,26 @@
 		calcont from calendar
 		<where>
 			<choose>
-				<when test="cal==0">
-					caldept=#{caldept}
+				<when test="cal=='1'">
+					calmem=#{calmem}					
 				</when>
 				<otherwise>
-					calmem=#{calmem}
+					caldept=#{caldept}
 				</otherwise>
 			</choose>
 		</where>
 	</select>
 	<select id="calInsert" parameterType="cavo">
 		<choose>
-			<when test="selcal==부서">
+			<when test="selCal=='부서'">
 				insert into calendar(calnum,calstart,calend,calcont,caldept)
 				values(calendar_seq.nextVal,
-				to_date(#{calstart},'yyyy-MM-dd-HH24:mi:ss'),to_date(#{calend},'yyyy-MM-dd-HH24:mi:ss'),#{calcont},#{cal})
+				to_date(#{calstart},'yyyy-MM-dd-HH24:mi:ss'),to_date(#{calend},'yyyy-MM-dd-HH24:mi:ss'),#{calcont},#{caldept})
 			</when>
 			<otherwise>
 				insert into calendar(calnum,calstart,calend,calcont,calmem)
 				values(calendar_seq.nextVal,
-				to_date(#{calstart},'yyyy-MM-dd-HH24:mi:ss'),to_date(#{calend},'yyyy-MM-dd-HH24:mi:ss'),#{calcont},#{cal})
+				to_date(#{calstart},'yyyy-MM-dd-HH24:mi:ss'),to_date(#{calend},'yyyy-MM-dd-HH24:mi:ss'),#{calcont},#{calmem})
 			</otherwise>
 		</choose>
 	</select>
