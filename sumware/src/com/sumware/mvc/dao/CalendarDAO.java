@@ -16,6 +16,8 @@ public class CalendarDAO {
 	}
 	
 	public List<CalendarVO> getCalList(CalendarVO cavo){
+		System.out.println("list를 보자");
+		System.out.println(cavo.getCal());
 		return st.selectList("calendar.getCalList",cavo);
 	}
 	public void calDel(int calnum){
