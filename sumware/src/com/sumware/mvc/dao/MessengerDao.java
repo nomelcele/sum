@@ -49,8 +49,8 @@ public class MessengerDao {
 	///// insertCreateRoom 메서드//////////////////////////////////////////
 	
 	
-	public List<MessengerVO> gettentList(int userNum){
-		return st.selectList("messenger.gettentList", userNum);
+	public List<MessengerVO> getentList(int userNum){
+		return st.selectList("messenger.getentList", userNum);
 	}
 	
 	//방 갯수 확인
@@ -85,7 +85,7 @@ public class MessengerDao {
 	/////closeRoom 메서드 ///////////////////////////////////////////
 	
 	//
-	public List<MemberVO> getList(int userNum){
+	public List<MemberVO> getList(){
 		return st.selectList("messenger.getList");
 		
 	}

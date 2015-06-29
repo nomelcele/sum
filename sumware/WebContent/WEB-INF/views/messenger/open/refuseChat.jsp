@@ -10,7 +10,7 @@
 <script>
 	
 	var sessionKey = "${key}";
-	var msgSocket = new WebSocket("ws://192.168.7.234:80/sumware/msgSocket/"+sessionKey);
+	var msgSocket = new WebSocket("ws://192.168.7.93:80/sumware/msgSocket/"+sessionKey);
 	
 	msgSocket.onopen = function processOpen(message) {
 		joinMsg(message);

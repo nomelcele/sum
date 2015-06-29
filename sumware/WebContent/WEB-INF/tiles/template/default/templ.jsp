@@ -57,7 +57,7 @@
 
 	console.log("typeof:"+typeof(EventSource));	
 	if(typeof(EventSource) != "undefined"){		
-		var eventSourceList = new EventSource("messenger/countMsg.jsp");
+		var eventSourceList = new EventSource("mesCountMsg");
 		eventSourceList.onmessage = function(event){
 			$('#countRoomNum').html(event.data);	
 		};
@@ -160,7 +160,7 @@
 
 	function openWin(){
 		var opt= "width=700, height=800, scrollbars=yes";	
-		window.open("messengerForm","MessengerMain",opt);
+		window.open("messengerForm?userNum=${sessionScope.v.memnum}","MessengerMain",opt);
 	}
 	function selectMenu(sel){
 		// 메뉴 선택

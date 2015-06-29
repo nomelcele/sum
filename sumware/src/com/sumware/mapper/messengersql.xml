@@ -24,7 +24,7 @@
   		insert into mesentry values(#{key},#{mesmember},#{openmemberyn},null,null,#{hostip},#{mesendnum})
   	</insert>
   	
-  	<select id="gettentList" parameterType="int" resultType="mevo">
+  	<select id="getentList" parameterType="int" resultType="mevo">
   		select mesnum, mesmember, openmemberyn, entstdate, mesendnum from mesentry 
   		where mesmember = #{userNum} and openmemberyn='N' and entstdate is null 
   		and mesnum in (select masnum from mesmaster where masendate = '9999/12/31')
