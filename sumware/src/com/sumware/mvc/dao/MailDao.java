@@ -1,11 +1,5 @@
 package com.sumware.mvc.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,42 +8,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sumware.dto.MailVO;
-import com.sumware.mvc.service.ServiceInter;
-
-import conn.ConUtil;
 
 @Repository
 public class MailDao {
 	@Autowired
 	private SqlSessionTemplate st;
 	
-	public boolean addMail(Map<String, String> map){
-		// 전송한 메일을 db에 추가해주는 메서드
-		Connection con = null;
-		PreparedStatement pstmt = null;
+	public void addMail(Map<String, String> map){
+		st.insert("mail.addMail", map);
 		
-		try {
-			con = ConUtil.getOds();
-			StringBuffer sql = new StringBuffer();
-			sql.append("insert into mail values(mail_seq.nextVal,?,?,?,?,?,sysdate,1,1)");
-			pstmt = con.prepareStatement(sql.toString());
-			
-			pstmt.setString(1, map.get("mailtitle")); 
-			pstmt.setString(2, map.get("mailcont"));
-			pstmt.setString(3, map.get("attach"));
-			pstmt.setInt(4, Integer.parseInt(map.get("usernum")));
-			
-			int startidx = map.get("toMem").indexOf("<")+1;
-			int endidx = map.get("toMem").indexOf("@");
-			String mailreceiver = map.get("toMem").substring(startidx, endidx); 
-			pstmt.setString(5, mailreceiver);
-			System.out.println("받는 사람 아이디: "+mailreceiver);
-			pstmt.executeUpdate();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		} 
+//			sql.append("insert into mail values(mail_seq.nextVal,?,?,?,?,?,sysdate,1,1)");
+//			pstmt = con.prepareStatement(sql.toString());
+//			
+//			pstmt.setString(1, map.get("mailtitle")); 
+//			pstmt.setString(2, map.get("mailcont"));
+//			pstmt.setString(3, map.get("mailfile"));
+//			pstmt.setInt(4, Integer.parseInt(map.get("usernum")));
+//			
+//			int startidx = map.get("mailreceiver").indexOf("<")+1;
+//			int endidx = map.get("mailreceiver").indexOf("@");
+//			String mailreceiver = map.get("mailreceiver").substring(startidx, endidx); 
+//			pstmt.setString(5, mailreceiver);
+//			System.out.println("받는 사람 아이디: "+mailreceiver);
+//			pstmt.executeUpdate();
+		
 	}
 	
 	public List<MailVO> getFromMailList(Map<String, String> map){
@@ -127,9 +109,6 @@ public class MailDao {
 	
 //	public void setDeleteAttr(String[] mailnums, Map<String, String> map){
 		// 메일의 delete 속성 설정
-		//*********************************
-		// 트랜잭션 처리
-		//*********************************
 //		for(String e:mailnums){ 
 //			MailVO vo = st.selectOne("mail.getDelAttrMailInfo",e);
 //			
@@ -216,8 +195,14 @@ public class MailDao {
 		List<Integer> numList = st.selectList("mail.getListNum",map);
 		
 		int[] numArr = new int[4];
-		for(int i=0; i<numArr.length; i++){
+		for(int i=0; i<numList.size(); i++){
+			System.out.println("메일 갯수: "+numList.get(i));
 			numArr[i] = numList.get(i);
+			// ***********************
+			// ***********************
+			// 받은 메일함 메일 갯수밖에 못 불러옴
+			// ***********************
+			// ***********************
 		}
 		
 		return numArr;
