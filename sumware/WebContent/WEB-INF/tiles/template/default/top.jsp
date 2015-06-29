@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="js/sumware.js"></script> 
 <nav class="navbar navbar">
 	<div class="container">
 		<div class="navbar-header">
@@ -27,11 +28,11 @@
 <!-- 		    </div> -->
     		<div class="nav navbar-right">
 				<ul class="nav navbar-nav">
-					
 					<li><a href="home">Main</a></li>
-					<li><a href="firsttodoForm?memnum=${sessionScope.v.memnum}&memdept=${sessionScope.v.memdept}">Todo</a></li>
-					<li><a href="mailFromList?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}&page=1">Mail</a></li>
+					<li><a href="firsttodoForm">Todo</a></li>
+					<li><a href="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}&page=1">Mail</a></li>
 					<li><a href="calList">Calendar</a>
+					<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept}&bgnum=0&bname=공지사항">Board</a></li>
 					<li><a href="boardList?page=1&bdeptno=${sessionScope.v.memdept }&bgnum=0&bname=공지사항">Board</a></li>
 					<li><a href="javascript:openWin()">Messenger <span id="countRoomNum"></span></a></li>
 					<c:if test="${sessionScope.v.memdept eq 100 and sessionScope.v.memauth lt 4 }"> 

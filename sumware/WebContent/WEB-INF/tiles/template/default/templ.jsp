@@ -17,7 +17,8 @@
 <link rel="stylesheet" type="text/css" href="${font2}"/>
 <link rel="stylesheet" type="text/css" href="${boot}"/>
 <!-- CSS 라이브러리(E)  -->
-<!-- 자바스크립트 --> 
+<!-- 자바스크립트 -->
+<script src="js/sumware.js"></script> 
 <script src="js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
