@@ -3,8 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 부서 업무 부분 뷰 ajax -->
 
-
-
 			<div class="chat-panel panel panel-default">
 				<div class="panel-heading">
 					<i class="fa fa-pencil-square-o"></i> <strong class="primary-font">부서업무</strong>

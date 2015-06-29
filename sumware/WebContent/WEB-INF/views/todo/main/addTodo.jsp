@@ -13,7 +13,7 @@
 				<div class="panel-body">
 					<div class="column">
 
-						<form role="form" action="/addTodo" method="post" name="addTodoForm" id="addTodoForm"
+						<form role="form" action="addTodo" method="post" name="addTodoForm" id="addTodoForm"
 							enctype="multipart/form-data">
 							 <input type="hidden" name="todept" value="${sessionScope.v.memdept }">
 							 <input type="hidden" name="memnum" value="${sessionScope.v.memnum }">

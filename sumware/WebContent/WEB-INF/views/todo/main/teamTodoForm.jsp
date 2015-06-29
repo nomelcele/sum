@@ -81,7 +81,7 @@ function successJob(){
 										<button type="button" class="btn btn-info-xs"
 											data-toggle="modal" data-target="#successModal">업무
 											완료</button>
-										<%@include file="okTodoModal.jsp"%>
+										<%@include file="../modal/okTodoModal.jsp"%>
 									</c:if>
 								</p>
 

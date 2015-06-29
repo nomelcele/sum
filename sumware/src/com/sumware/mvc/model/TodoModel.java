@@ -24,91 +24,98 @@ import com.sumware.mvc.dao.CalendarDAO;
 import com.sumware.mvc.dao.TodoDao;
 
 @Controller
-public class TodoModel{
+public class TodoModel {
 	@Autowired
 	private TodoDao tdao;
 	@Autowired
 	private CalendarDAO cdao;
-	
+
 	// todo 기본 페이지
-	@RequestMapping(value="/todoForm", method=RequestMethod.POST)
-	public String todoForm(Model model, int memdept){
-		//int todept = Integer.parseInt(request.getParameter("memdept"));
+	@RequestMapping(value = "/todoForm", method = RequestMethod.POST)
+	public String todoForm(Model model, int memdept) {
 		int todept = memdept;
-		List<TodoVO> deptJobList= tdao.getDeptJob(todept);
+		List<TodoVO> deptJobList = tdao.getDeptJob(todept);
 		model.addAttribute("deptJobList", deptJobList);
-		
-		return "todo/todoMain";
+
+		return "todo/main/todo";
 	}
-	
+
 	// 메뉴바에서 todo메뉴 첫 진입 시
-	@RequestMapping(value="/firsttodoForm", method=RequestMethod.GET)
-	public String firsttodoForm(Model model, MemberVO mvo){
+	@RequestMapping(value = "/firsttodoForm", method = RequestMethod.GET)
+	public String firsttodoForm(Model model, MemberVO mvo, HttpSession session) {
 		
 		List<MemberVO> list = tdao.getTomem(mvo.getMemnum());
-		
-		model.addAttribute("teamNameList", list);
-		
+	
+		session.setAttribute("teamNameList", list);
+
 		int todept = mvo.getMemdept();
-		//부서 업무리스트 뽑아줌
+		// 부서 업무리스트 뽑아줌
 		List<TodoVO> deptJobList = tdao.getDeptJob(todept);
-		
+
 		model.addAttribute("deptJobList", deptJobList);
 
 		return "todo/todoMain";
-		
-	}
-	
-	// 업무추가 폼 
-	@RequestMapping(value = "/addtodoForm", method=RequestMethod.POST)
-	public String addtodoForm(){
-		
-		return "addTodo";
-	}
-	
-	// 업무 추가 (파일 업로드)
-	@RequestMapping(value = "/addTodo", method=RequestMethod.POST)
-	public ModelAndView addTodo(@RequestParam("tofile") MultipartFile tofile, TodoVO tvo, HttpSession session){
 
+	}
+
+	// 업무추가 폼
+	@RequestMapping(value = "/addtodoForm", method = RequestMethod.POST)
+	public String addtodoForm(MemberVO mvo,Model model) {
+		System.out.println("memnum : "+mvo.getMemnum());
+		List<MemberVO> list = tdao.getTomem(mvo.getMemnum());
+
+		model.addAttribute("teamNameList", list);
+		return "todo/main/addTodo";
+	}
+
+	// 업무 추가 (파일 업로드)
+	@RequestMapping(value = "/addTodo", method = RequestMethod.POST)
+	public ModelAndView addTodo(@RequestParam("tofile") MultipartFile tofile,
+			TodoVO tvo, HttpSession session) {
+		System.out.println("업무추가 모델 매핑!!");
+		
 		ModelAndView mav = new ModelAndView("redirect:/firsttodoForm");
-		
+
 		StringBuffer path = new StringBuffer();
-		path.append(session.getServletContext().getRealPath("/")).append("/upload/").append(tofile.getOriginalFilename());
-		
+		path.append(session.getServletContext().getRealPath("/"))
+				.append("/upload/").append(tofile.getOriginalFilename());
+
 		File f = new File(path.toString());
 		try {
 			tofile.transferTo(f);
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-		
-		tvo.setTofile(tofile.getOriginalFilename());
 
+		tvo.setTofile(tofile.getOriginalFilename());
+		
+		System.out.println("파일업로드");
 		tdao.addTodo(tvo);
+		
 		return mav;
 	}
-	
+
 	// 업무관리 클릭 시 보여줄 화면, 업무 리스트
-	@RequestMapping(value="/checkTodoList", method=RequestMethod.POST)
-	public String checkTodoList(int memnum,Model model){
-		//int tomem = Integer.parseInt(request.getParameter("memnum"));
-		//ArrayList<TodoVO> clist = TodoDao.getDao().checkTodoList(tomem);
-		//request.setAttribute("todoList", clist);
+	@RequestMapping(value = "/checkTodoList", method = RequestMethod.POST)
+	public String checkTodoList(int memnum, Model model) {
+		// int tomem = Integer.parseInt(request.getParameter("memnum"));
+		// ArrayList<TodoVO> clist = TodoDao.getDao().checkTodoList(tomem);
+		// request.setAttribute("todoList", clist);
 		int tomem = memnum;
 		List<TodoVO> clist = tdao.checkTodoList(tomem);
 		model.addAttribute("todoList", clist);
-		return "todo/checkTodoList";
+		return "todo/main/checkTodoList";
 	}
-	
+
 	// 팀장의 업무 승인!!!! y로 바꿔줌!! 캘린더에도 등록!!!!
-	@RequestMapping(value="/approveTodo", method=RequestMethod.POST)
-	public String approveTodo(TodoVO tvo){
+	@RequestMapping(value = "/approveTodo", method = RequestMethod.POST)
+	public String approveTodo(TodoVO tvo) {
 		// 리스트의 승인여부 n을 y로 바꿈!!!!
 		tdao.confirmTodo(tvo, "y");
-//		map.put("start",map.get("tostdate"));
-//		map.put("end", map.get("toendate"));
-//		map.put("title", map.get("totitle"));
-//		map.put("cal", map.get("todept"));
+		// map.put("start",map.get("tostdate"));
+		// map.put("end", map.get("toendate"));
+		// map.put("title", map.get("totitle"));
+		// map.put("cal", map.get("todept"));
 		CalendarVO cvo = new CalendarVO();
 		cvo.setCalstart(tvo.getTostdate());
 		cvo.setCalend(tvo.getToendate());
@@ -116,85 +123,84 @@ public class TodoModel{
 		cvo.setCaldept(tvo.getTodept());
 		cvo.setCal("0");
 		cdao.calInsert(cvo);
-		return "todo/checkTodoList";
+		return "todo/main/checkTodoList";
 	}
-	
+
 	// 팀장의 업무 거절!!!
-	@RequestMapping(value="/rejectTodo", method=RequestMethod.POST)
-	public String rejectTodo(TodoVO tvo){
+	@RequestMapping(value = "/rejectTodo", method = RequestMethod.POST)
+	public String rejectTodo(TodoVO tvo) {
 		// 리스트의 승인여부 n을 z로 바꿈!!!!
-		
+
 		tdao.confirmTodo(tvo, "z");
-		return "todo/checkTodoList";
+		return "todo/main/checkTodoList";
 	}
-	
-	@RequestMapping(value= "/fWMana", method=RequestMethod.POST)
-	public String fWMana(MemberVO mvo, Model model){
+
+	@RequestMapping(value = "/fWMana", method = RequestMethod.POST)
+	public String fWMana(MemberVO mvo, Model model) {
 		List<TodoVO> fwList = tdao.getFWMana(mvo.getMemnum());
 		model.addAttribute("fwList", fwList);
-		
-		return "todo/fWMana";
+
+		return "todo/main/fWMana";
 	}
-	
-	@RequestMapping(value="/toUpFk", method=RequestMethod.POST)
-	public String toUpFk(TodoVO tvo, Model model){
+
+	@RequestMapping(value = "/toUpFk", method = RequestMethod.POST)
+	public String toUpFk(TodoVO tvo, Model model) {
 		List<TodoVO> list = tdao.todoUpdate(tvo);
-//		//request.removeAttribute("fwList");
+		// //request.removeAttribute("fwList");
 		model.addAttribute("fwList", list);
-		return "todo/fWMana";
+		return "todo/main/fWMana";
 	}
-	
+
 	// 업무 부여 폼
-	@RequestMapping(value="/giveJobForm",  method=RequestMethod.POST)
-	public String giveJobForm(MemberVO mvo, Model model){
+	@RequestMapping(value = "/giveJobForm", method = RequestMethod.POST)
+	public String giveJobForm(MemberVO mvo, Model model) {
 		List<TodoVO> todoList = tdao.getTeamTodoList(mvo);
 		int memmgr = mvo.getMemnum();
 		List<MemberVO> teamMemberList = tdao.getTomem(memmgr);
-		
+
 		model.addAttribute("teamTodoList", todoList);
 		model.addAttribute("teamMemberList", teamMemberList);
-		
-		return "todo/giveJob";
-		
+
+		return "todo/main/giveJob";
+
 	}
 
 	// 업무 부여
-	@RequestMapping(value="/insertMemJob", method=RequestMethod.POST )
-	public String insertMemJob(TodoJobVO tjvo){
+	@RequestMapping(value = "/insertMemJob", method = RequestMethod.POST)
+	public String insertMemJob(TodoJobVO tjvo) {
 		tdao.insertMemJob(tjvo);
 		return "redirect:/showMembersJob";
 	}
-	
+
 	// 업무 보여줌?
-	@RequestMapping(value="/showMembersJob", method=RequestMethod.GET)
-	public String showMembersJob(TodoJobVO tjvo,Model model){
+	@RequestMapping(value = "/showMembersJob", method = RequestMethod.GET)
+	public String showMembersJob(TodoJobVO tjvo, Model model) {
 		List<TodoJobVO> membersjoblist = tdao.getMembersJob(tjvo.getJobtonum());
 		model.addAttribute("membersjoblist", membersjoblist);
-		return "todo/membersJob";
+		return "todo/main/membersJob";
 	}
 
 	// 멤버리스트?
-	@RequestMapping(value="/showmemlist",  method=RequestMethod.POST)
-	public String showmemlist(TodoJobVO tjvo, Model model){
+	@RequestMapping(value = "/showmemlist", method = RequestMethod.POST)
+	public String showmemlist(TodoJobVO tjvo, Model model) {
 		List<TodoJobVO> list = tdao.getMembersJob(tjvo.getJobtonum());
 		model.addAttribute("memberjoblist", list);
-		return "todo/jobDetail";
+		return "todo/main/jobDetail";
 	}
 
 	// 팀 업무 폼?
-	@RequestMapping(value="/teamTodoForm",  method=RequestMethod.POST)
-	public String teamTodoForm(MemberVO mvo, Model model){
+	@RequestMapping(value = "/teamTodoForm", method = RequestMethod.POST)
+	public String teamTodoForm(MemberVO mvo, Model model) {
 		List<TodoVO> list = tdao.getTeamJob(mvo.getMemmgr());
 		model.addAttribute("teamJobList", list);
-		return "todo/teamTodoForm";
+		return "todo/main/teamTodoForm";
 	}
-	
-	//업무 완료 처리 
-	@RequestMapping(value="/successJob",  method=RequestMethod.POST)
-	public String successJob(Model model, TodoVO tvo ){
+
+	// 업무 완료 처리
+	@RequestMapping(value = "/successJob", method = RequestMethod.POST)
+	public String successJob(Model model, TodoVO tvo) {
 		tdao.confirmTodo(tvo, "o");
 		return "redirect:/teamTodoForm";
 	}
-
 
 }
