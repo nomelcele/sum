@@ -6,37 +6,40 @@
   	<insert id="insert" parameterType="map">
   		insert into board values(board_seq.nextVal,#{btitle},#{bcont},#{bimg},#{bmem},sysdate,0,#{bgnum},#{bdeptno})
   	</insert>
+  	<!-- getList -->
   	<select id="getList" parameterType="map" resultType="bvo">
 		<choose>
 			<when test="bgnum!=0">
-			select bnum,btitle,writer bwriter,bdate,bhit from
-			 (select tn.bnum,tn.btitle,tn.writer,tn.bdate,tn.bhit,rownum r_num
-			 from
-			 (select b.bnum, b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit
-			 from board b, member m
-			 where b.bmem = m.memnum and b.bgnum=1 and b.bdeptno=100
-			 order by b.bnum desc) tn)
-			 where r_num between 1 and 5
+				select bnum,btitle,writer bwriter,bdate,bhit from
+				 (select tn.bnum,tn.btitle,tn.writer,tn.bdate,tn.bhit,rownum r_num
+				 from
+				 (select b.bnum, b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit
+				 from board b, member m
+				 where b.bmem = m.memnum and b.bgnum=#{bgnum} and b.bdeptno=#{bdeptno}
+				 order by b.bnum desc) tn)
+				 where r_num between #{begin} and #{end}
 			</when>
 			<otherwise>
-			select bnum,btitle,writer bwriter,bdate,bhit
-			 from
-			(select tn.bnum,tn.btitle,tn.writer,tn.bdate,tn.bhit,rownum r_num
-			 from
-			 (select b.bnum, b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit
-			 from board b, member m
-			 where b.bmem = m.memnum and b.bgnum=#{bgnum}
-			  order by b.bnum desc) tn)
-			 where r_num between #{begin} and #{end}
+				select bnum,btitle,writer bwriter,bdate,bhit
+				 from
+				(select tn.bnum,tn.btitle,tn.writer,tn.bdate,tn.bhit,rownum r_num
+				 from
+				 (select b.bnum, b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit
+				 from board b, member m
+				 where b.bmem = m.memnum and b.bgnum=0
+				  order by b.bnum desc) tn)
+				 where r_num between #{begin} and #{end}
 			</otherwise>
-		</choose>
+		</choose>	
   	</select>
+  	
   	<select id="getTotalCount" parameterType="int" resultType="int">
   		select count(*) cnt from board where bgnum=#{bgnum}
   	</select>
   	<select id="getTotalCommCount" parameterType="int" resultType="int">
   		select count(*) cnt from comm where coboard=#{coboard}
   	</select>
+  	
   	<select id="getDetail" parameterType="int" resultType="bvo">
   		select b.bhit,b.bmem,b.bnum,m.memname bwriter, b.btitle, b.bcont, TO_CHAR(b.bdate,'yyyy.MM.dd HH24:mi') bdate
 		 from board b, member m where b.bmem=m.memnum and bnum=#{bnum}
