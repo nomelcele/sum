@@ -9,7 +9,7 @@
   	</insert>
   	<select id="getList" parameterType="map" resultType="svo">
   		select rownum srnum,b.* from(
-		select m.memname,m.memprofile ,s.snum,s.scont,to_char(s.sdate,'MM')||'월'||to_char(s.sdate,'dd')||'일'||to_char(s.sdate,'hh24:mi') sdate,s.sdept,s.smem
+		select m.memname smemname,m.memprofile smemprofile,s.snum,s.scont,to_char(s.sdate,'MM')||'월'||to_char(s.sdate,'dd')||'일'||to_char(s.sdate,'hh24:mi') sdate,s.sdept,s.smem
 		,(select count(*) cnt from comm where commsns=s.snum) stocount
 		 from (select * from sns  where sdept=#{sdept}) s ,member m
 		 where m.memnum=s.smem  order by snum desc) b where rownum between #{begin} and #{end}

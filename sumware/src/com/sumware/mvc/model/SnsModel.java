@@ -1,15 +1,19 @@
 package com.sumware.mvc.model;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.CommVO;
 import com.sumware.dto.SnsVO;
@@ -20,12 +24,16 @@ import com.sumware.util.MyPage;
 public class SnsModel{
 	@Autowired
 	SnsDao dao;
+	@RequestMapping(value="snsForm")
+	public String snsForm(){
+		return "todo/todoSns";
+	}
 	@RequestMapping(value="insertSns",method=RequestMethod.POST)
 	public void insertSns(SnsVO svo){
 		dao.insertSns(svo);
 	}
 	@RequestMapping(value="pushSns")
-	public String pushSns(HttpServletRequest request,Model model){
+	public void pushSns(Model model,HttpServletRequest request,HttpServletResponse response) throws IOException{
 		int rowsPerPage=Integer.parseInt(request.getParameter("rowsPerPage"));
 		int pagesPerBlock=1;
 		System.out.println("rowperpage::::::::::"+rowsPerPage);
@@ -45,7 +53,7 @@ public class SnsModel{
 		for(SnsVO v : snsList){
 			outs.append("<li class='left clearfix'>");
 			outs.append("<span class='chat-img pull-left'>");
-			outs.append("<img src='profileImg/");
+			outs.append("<img src='resources/profileImg/");
 			outs.append(v.getSmemprofile());
 			outs.append("' alt='User Avatar' class='img-circle' style='width: 45px; height: 55px;'>");
 			outs.append("</span>");
@@ -68,13 +76,18 @@ public class SnsModel{
 			outs.append("</li>");
 		}
 		outs.append("\n\n");
-		model.addAttribute("outs", outs);
-		return "todo/snsLoad_push";
+		response.setHeader("cache-control", "no-cache");
+		response.setContentType("text/event-stream");
+		PrintWriter pw = response.getWriter();
+		pw.print(outs);
+		pw.flush();
+		
 	}
 	@RequestMapping(value="snsComm",method=RequestMethod.POST)
-	public String snsComm(Model model,HttpServletRequest request){
+	public ModelAndView snsComm(HttpServletRequest request){
 		System.out.println("댓글 보기");
-		showCommList(request,model);
+		ModelAndView mav = new ModelAndView();
+		showCommList(request,mav);
 		return "todo/snsComm";
 	}
 	@RequestMapping(value="snsCommInsert",method=RequestMethod.POST)
