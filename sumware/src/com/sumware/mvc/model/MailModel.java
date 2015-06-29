@@ -1,7 +1,6 @@
 package com.sumware.mvc.model;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +30,7 @@ public class MailModel{
 	@Qualifier(value="mail")
 	private ServiceInter service;
 	
+	// *******************
 	// 왼쪽 메뉴에서 각 메일함에 있는 메일의 갯수를 보여주기 위한 메서드 호출
 	// => AOP 처리
 	
