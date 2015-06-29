@@ -14,6 +14,7 @@ import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.jdom2.output.Format.TextMode;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.mvc.dao.MemberDao;
@@ -23,9 +24,11 @@ import conn.ConUtil;
 public class MakeXML {
 	// db를 읽어서 xml 파일로 생성하는 클래스
 	// db는 계속 갱신될 수 있기 때문에 새로운 회원이 추가되면 xml 파일에도 적용되어야 한다.
+	@Autowired
+	private static MemberDao dao;
 	
 	public static void updateXML(){
-		List<MemberVO> list = MemberDao.getDao().getNameMailList();
+		List<MemberVO> list = dao.getNameMailList();
 
 		// 사원 이름, 내부 메일 주소(아이디)가 저장된 리스트를 읽어서 
 		// root의 자식 엘리먼트로 설정
