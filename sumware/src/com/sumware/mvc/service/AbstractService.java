@@ -1,6 +1,6 @@
 package com.sumware.mvc.service;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.sumware.dto.MessengerRoomVO;
@@ -14,7 +14,7 @@ public class AbstractService implements ServiceInter{
 	}
 
 	@Override
-	public int insertCreateRoomService(List<MessengerVO> list,
+	public int insertCreateRoomService(ArrayList<MessengerVO> list,
 			MessengerRoomVO rv, int mesendNum) {
 		return 0;
 	}

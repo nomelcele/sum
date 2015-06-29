@@ -1,6 +1,6 @@
 package com.sumware.mvc.service;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ public interface ServiceInter {
 	public void setDeleteAttrService(String[] mailnums, Map<String, String> map);
 	
 	//메신저
-	public int insertCreateRoomService(List<MessengerVO> list, MessengerRoomVO rv, int mesendNum);
+	public int insertCreateRoomService(ArrayList<MessengerVO> list, MessengerRoomVO rv, int mesendNum);
 	public void closeRoomService(MessengerVO v);
 	
 }
