@@ -34,9 +34,9 @@ public class AdminModel {
 		
 		
 		model.addAttribute(" ");
-		String memmail = map.get("newmail");
-		MemberVO vo = MemberDao.getDao().getNewMemInfo(memmail);
-		request.setAttribute("newmemVo", vo);
+//		String memmail = map.get("newmail");
+//		MemberVO vo = MemberDao.getDao().getNewMemInfo(memmail);
+//		request.setAttribute("newmemVo", vo);
 		
 		return "admin/sendEmailUser";
 		//이것도 나중에 수정
@@ -48,8 +48,8 @@ public class AdminModel {
 	// 부서선택하면 부서에 대한 팀장들 리스트가져옴
 		//int memdept = Integer.parseInt(request.getParameter("memdept"));
 		int memdt= memdept;
-		List<MemberVO> memmgrlist= mdao.getMemMgr(memdt);
-		model.addAttribute("mgrList",memmgrlist);
+//		List<MemberVO> memmgrlist= mdao.getMemMgr(memdt);
+//		model.addAttribute("mgrList",memmgrlist);
 		
 		//List<MemberVO> memmgrlist = MemberDao.getDao().getMemMgr(memdept);
 		//request.setAttribute("mgrList", memmgrlist);
@@ -67,8 +67,8 @@ public class AdminModel {
 	@RequestMapping(value="/addBoard")
 	public String addBoard(){
 		
-		HashMap<String, String> map = MyMap.getMaps().getMapList(request);
-		BoardDao.getDao().addBoard(map);
+//		HashMap<String, String> map = MyMap.getMaps().getMapList(request);
+//		BoardDao.getDao().addBoard(map);
 		
 		return "redirect:/addBordForm";
 		
