@@ -248,17 +248,24 @@ function fileUpload(){
 				}).open();
 	}
 </script>
+<script>
+	function signup(){
+		
+		
+	}
+</script>
 <%--<%=application.getRealPath("/profileImg") --%>
 <div class="container">
 	<div class="row info">
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
 				<div class="resume">
+				
 					<form class="form-horizontal" role="form" method="post"
-						action="sumware" id="myform" name="myform">
-						<input type="hidden" name="model" value="join"> 
+						action="sumware" id="myform" name="myform" >
+						<input type="hidden" name="model" value="join">
 						<c:if test="${param.model ne 'join' }">
-						<input type="hidden" name="submod" value="signup"> 
+						<input type="hidden" name="submod" value="signup">
 						<input type="hidden" name="memnum" value="${memnum}"> 
 						</c:if>
 						<c:if test="${param.model eq 'join' }">
@@ -268,6 +275,7 @@ function fileUpload(){
 						<input type="hidden" name="memnum" value="${memnum}"> 
 						<input type="hidden" name="memaddr" id="address">
 						<input type="hidden" name="memprofile" id="memprofile">
+						
 						<header class="page-header">
 							<h1 class="page-title">Profile Modify</h1>
 							<small><i class="fa fa-clock-o"></i> Last Updated on: <time>Sunday,
