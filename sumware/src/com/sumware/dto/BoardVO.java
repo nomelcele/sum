@@ -1,10 +1,28 @@
 package com.sumware.dto;
 
 public class BoardVO {
-	private int bnum, bmem, bhit, bgnum;
+	private int bnum, bmem, bhit, bgnum,begin,end,bdeptno;
+	public int getBdeptno() {
+		return bdeptno;
+	}
+	public void setBdeptno(int bdeptno) {
+		this.bdeptno = bdeptno;
+	}
 	private String btitle, bcont, bimg, bdate,bwriter;
 	
 	
+	public int getBegin() {
+		return begin;
+	}
+	public void setBegin(int begin) {
+		this.begin = begin;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
 	public String getBwriter() {
 		return bwriter;
 	}
