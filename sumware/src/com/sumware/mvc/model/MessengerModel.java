@@ -1,15 +1,21 @@
 package com.sumware.mvc.model;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.velocity.tools.generic.DisplayTool.Measurements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.MessengerRoomVO;
@@ -28,16 +34,22 @@ public class MessengerModel implements ModelInter {
 	private ServiceInter service;
 
 	// 메신저 폼
-	@RequestMapping(value = "/messengerForm")
+	@RequestMapping(value = "messengerForm")
 	public String messengerForm(int userNum, Model model) {
-		List<MemberVO> list = medao.getList(userNum);
-		model.addAttribute("list", list);
+		List<MemberVO> list = medao.getList();
+		ArrayList<MemberVO> resList = new ArrayList<MemberVO>();
+		for(MemberVO v : list){
+			if(userNum != v.getMemnum()){
+				resList.add(v);
+			}
+		}
+		model.addAttribute("list", resList);
 
-		return "messenger/messenger";
+		return "messenger/open/messenger";
 	}
 
 	// 초기 방을 만들 경우
-	@RequestMapping(value = "/messengerChat")
+	@RequestMapping(value = "messengerChat",method=RequestMethod.POST)
 	public String messengerChat(String fromNum, String toNum, String entNum,
 			HttpServletRequest req, Model model) {
 		// 보낸 사람 사번 받아오기
@@ -97,14 +109,219 @@ public class MessengerModel implements ModelInter {
 		model.addAttribute("toNum", toNum); // 받는 사람
 		model.addAttribute("key", keynum);
 
-		return "messenger/msgChat";
+		return "messenger/open/msgChat";
 
 	}
 	
-	////// 수정 중!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	
-	
 
+	@RequestMapping(value="msgReceieve",method=RequestMethod.POST)
+	public String msgReceieve(HttpServletRequest request,Model model){
+		String struserNum = request.getParameter("userNum2");
+		System.out.println("msgReceive userNum : "+struserNum);
+		String[] edate = request.getParameter("edata1").split("/");
+		
+		 for(String e : edate){
+			 System.out.println("푸쉬를 통해 넘어온 param : "+e);
+		 }
+		 // push를 통해 방번호, 송신자 ip, 참가자(수신자 사번) 순으로 전송하기에 split으로 각 data를 배열 형식으로 저장
+		 int keyNum = Integer.parseInt(edate[0]);
+		 String reip = edate[1];
+		 int userNum = Integer.parseInt(edate[2]); // 받는 사람 userNum
+		 int mesendNum = Integer.parseInt(edate[3]); // 보낸 사람 방장 mesendNum
+		
+		 System.out.println("Model에서의 IP : "+reip);
+		 MessengerVO v = new MessengerVO();
+		 v.setMesnum(keyNum);
+		 v.setMesmember(userNum);
+		 v.setMesreip(reip);
+		 // 요청자 사번을 받아올수 있음.
+		 medao.joinRoom(v);
+		
+		 StringBuffer ipAdd = new StringBuffer();
+		 ipAdd.append("ws://");
+		 ipAdd.append(reip);
+		 ipAdd.append(":80/sumware/msgSocket/");
+		
+		 String userName = SearchMem.getSmem().searchMember(mesendNum);
+		
+		 System.out.println("IP Adress : "+ipAdd);
+		 // request.setAttribute("memList", memList);
+		 model.addAttribute("userNum", userNum); // 참가자 사번, 받는 사람
+		 model.addAttribute("key", keyNum);
+		 model.addAttribute("userName", userName);
+		 model.addAttribute("mesendNum", mesendNum); // 방장 사번 , 보낸 사람
+		 model.addAttribute("ipAdd", ipAdd.toString());
+		
+		 // DB 정보 업데이트 : entryTable의 시작일을 수정해줘야함
+		
+		return "messenger/open/msgChat";
+	}
+	@RequestMapping(value="closeChat",method=RequestMethod.POST)
+	public String closeChat(MessengerVO mevo,HttpServletRequest request){
+		System.out.println("여기는 model의 closeRoom 입니다.============");
+		
+		 // msgChat영역에서 넘어온 파라미터 처리
+		 // 상태 여부 확인 chState : room 과 mesMain으로 구분
+		 int userNum = Integer.parseInt(request.getParameter("userNum"));
+		 int roomkey = Integer.parseInt(request.getParameter("roomKey"));
+		 System.out.println("Closechat userNum : "+userNum);
+		 System.out.println("Closechat roomkey : "+roomkey);
+		
+		 mevo.setMesmember(userNum);
+		 mevo.setMesnum(roomkey);
+		 service.closeRoomService(mevo);
+		
+		 // 창을 닫기 때문에 url 주소는 없어도 무관함
+		 return "redirect:messengerForm";
+	}
+	// messenger main에서 넘어온 경우 요청 거부 시
+	@RequestMapping(value="refuseChat",method=RequestMethod.POST)
+	public String refuserChat(MessengerVO mevo, HttpServletRequest request){
+		 // messenger.jsp에서 넘어온 파라미터 처리
+		 System.out.println("refuseChat 영역입니다.==========");
+		 String mainstate = request.getParameter("stateMain");
+		 String struserNum = request.getParameter("userNum2"); // 이상하게 null값이
+		 // 출력 확인 필요
+		 System.out.println("msgReceive userNum : " + struserNum);
+		
+		 String[] edate = request.getParameter("edata1").split("/");
+		 for (String e : edate) {
+		 System.out.println("대화 거절 시 푸쉬를 통해 넘어온 param : " + e);
+		 }
+		 // push를 통해 방번호, 송신자 ip, 참가자(수신자 사번) 순으로 전송하기에 split으로 각 data를 배열
+		 // 형식으로 저장
+		 int keyNum = Integer.parseInt(edate[0]);
+		 String reip = edate[1];
+		 int reciuserNum = Integer.parseInt(edate[2]);
+		 int mesendNum = Integer.parseInt(edate[3]); // 채팅창 종료이기 때문에 해당 파라미터는 없어도 무관함
+		
+		 mevo.setMesmember(reciuserNum);
+		 mevo.setMesnum(keyNum);
+		 mevo.setResState(mainstate);
+		 service.closeRoomService(mevo);
+		
+		 request.setAttribute("key", keyNum);
+		 request.setAttribute("userNum", reciuserNum);
+		 return "messenger/open/refuseChat";
+	}
+	//채팅방 푸쉬
+	@RequestMapping(value="mesCheck")
+	public void mesCheck(HttpServletResponse response,HttpSession session) throws IOException{
+		System.out.println("서버 푸시 영역");	
+		MemberVO mvo = (MemberVO)session.getAttribute("v");
+		int userNum = mvo.getMemnum();
+		
+		// DB에서 userNum(받는 사람 사번)인 경우만 조회해서 list에 저장
+		List<MessengerVO> list = medao.getentList(userNum);
+		
+		for(MessengerVO e : list){
+			String mesendName = null;
+			int memberNum = 0;
+			String openyn = null;
+			String stdate = "default";
+			int mesendNum = 0;
+			
+			memberNum=e.getMesmember(); // 사용자가 userNum인 경우만 참가자 목록 조회
+
+			openyn = e.getOpenmemberyn();
+			System.out.println("openyn : "+openyn);
+			System.out.println("memberNum : "+memberNum);		
+			System.out.println("userNum : "+userNum);
+
+			stdate = e.getEntstdate();
+			
+			StringBuffer outs = new StringBuffer();
+			outs.append("data:");
+			if(memberNum == userNum && openyn.equals("N") && stdate == null ){ // 받는 사람 
+				System.out.println("방번호는 : "+e.getMesnum());
+				outs.append(e.getMesnum()); // 방번호
+				outs.append("/");
+				outs.append(e.getMesreip()); // 방장 ip
+				outs.append("/");
+				outs.append(e.getMesmember()); // 수신자 사번
+				outs.append("/");
+				outs.append(e.getMesendnum()); // 송신자 사번
+				outs.append("/");
+				mesendName = SearchMem.getSmem().searchMember(e.getMesendnum());
+				outs.append(mesendName); // 송신자 이름
+				outs.append("\n\n");
+				System.out.println("메세지 송신 시 전송될 파라미터 : "+outs);
+			}
+			response.setHeader("cache-control", "no-cache");
+			response.setContentType("text/event-stream");
+			PrintWriter pw = response.getWriter();
+			pw.print(outs);
+			pw.flush();
+		}
+	}
+	
+	@RequestMapping(value="mesCountMsg")
+	public void mesCountMsg(HttpServletResponse response,HttpSession session) throws IOException{
+		System.out.println("Main Push 영역");
+		
+		MemberVO v = (MemberVO)session.getAttribute("v");
+		int userNum = v.getMemnum();
+		int countNum = medao.countRoomNum(userNum);
+		StringBuffer outs = new StringBuffer();
+		outs.append("data:");
+		outs.append("(");
+		outs.append(countNum);
+		outs.append(")");
+		outs.append("\n\n");
+		System.out.println("Count Num 메세지 송신 시 전송될 파라미터 : "+outs);
+		
+		response.setHeader("cache-control", "no-cache");
+		response.setContentType("text/event-stream");
+		PrintWriter pw = response.getWriter();
+		pw.print(outs);
+		pw.flush();
+	}
+	@RequestMapping(value="mesListLoad")
+	public void mesListLoad(HttpServletResponse response,HttpSession session) throws IOException{
+		System.out.println("사용자 List 출력, listLoad.jsp");
+		// 현재 사용자 정보를 가져옴
+		MemberVO v = (MemberVO)session.getAttribute("v");
+		int userNum = v.getMemnum();
+		
+		// DB에서 검색한 사원 정보를  list에 저장
+		List<MemberVO> list = medao.getList();
+		System.out.println("listLoad Array size : "+list.size());
+		
+		StringBuffer outs = new StringBuffer();
+		outs.append("data:");
+		System.out.println("userNum : "+userNum);
+		for(MemberVO e : list){
+			outs.append("<tr>");
+			outs.append("<td>");		
+			outs.append("<img src='resources/profileImg/");
+			outs.append(e.getMemprofile());
+			outs.append("' alt='' class='img-circle' style='width: 50px; height: 50px;'>");
+			outs.append("<a href='javascript:mesgoUrl(");
+			outs.append(e.getMemnum());
+			outs.append(")' class='primary-font'>");
+			outs.append("<strong class='primary-font'>");
+			outs.append(e.getMemname());
+			outs.append("</strong>");
+			outs.append("<strong class='primary-font'>");
+			outs.append(e.getMemnum());
+			outs.append("</strong>");
+			outs.append("<strong class='primary-font'>");
+			outs.append(e.getDename());
+			outs.append("</strong>");		
+			outs.append("</a>");
+			outs.append("</td>");
+			outs.append("</tr>");
+		}
+		outs.append("\n\n");
+		System.out.println("전송될 파라미터 : "+outs);
+		
+		response.setHeader("cache-control", "no-cache");
+		response.setContentType("text/event-stream");
+		PrintWriter pw = response.getWriter();
+		pw.print(outs);
+		pw.flush();
+	}
+	
 	// @Override
 	// public ModelForward exe(HttpServletRequest request,
 	// HttpServletResponse response) throws IOException {
@@ -202,99 +419,99 @@ public class MessengerModel implements ModelInter {
 	// System.out.println("msgReceive userNum : "+struserNum);
 	//
 	//
-	// String[] edate = request.getParameter("edata1").split("/");
-	//
-	// for(String e : edate){
-	// System.out.println("푸쉬를 통해 넘어온 param : "+e);
-	// }
-	// // push를 통해 방번호, 송신자 ip, 참가자(수신자 사번) 순으로 전송하기에 split으로 각 data를 배열 형식으로 저장
-	// int keyNum = Integer.parseInt(edate[0]);
-	// String reip = edate[1];
-	// int userNum = Integer.parseInt(edate[2]); // 받는 사람 userNum
-	// int mesendNum = Integer.parseInt(edate[3]); // 보낸 사람 방장 mesendNum
-	//
-	// System.out.println("Model에서의 IP : "+reip);
-	// MessengerVO v = new MessengerVO();
-	// v.setMesnum(keyNum);
-	// v.setMesmember(userNum);
-	// v.setMesreip(reip);
-	// // 요청자 사번을 받아올수 있음.
-	// MessengerDao.getDao().joinRoom(v);
-	//
-	// // ArrayList<MemberVO> memList = MessengerDao.getDao().getList();
-	//
-	// StringBuffer ipAdd = new StringBuffer();
-	// ipAdd.append("ws://");
-	// ipAdd.append(reip);
-	// ipAdd.append(":80/sumware/msgSocket/");
-	//
-	// String userName = SearchMem.getSmem().searchMember(mesendNum);
-	//
-	// System.out.println("IP Adress : "+ipAdd);
-	// // request.setAttribute("memList", memList);
-	// request.setAttribute("userNum", userNum); // 참가자 사번, 받는 사람
-	// request.setAttribute("key", keyNum);
-	// request.setAttribute("userName", userName);
-	// request.setAttribute("mesendNum", mesendNum); // 방장 사번 , 보낸 사람
-	// request.setAttribute("ipAdd", ipAdd.toString());
-	//
-	// // DB 정보 업데이트 : entryTable의 시작일을 수정해줘야함
-	//
+//	 String[] edate = request.getParameter("edata1").split("/");
+//	
+//	 for(String e : edate){
+//	 System.out.println("푸쉬를 통해 넘어온 param : "+e);
+//	 }
+//	 // push를 통해 방번호, 송신자 ip, 참가자(수신자 사번) 순으로 전송하기에 split으로 각 data를 배열 형식으로 저장
+//	 int keyNum = Integer.parseInt(edate[0]);
+//	 String reip = edate[1];
+//	 int userNum = Integer.parseInt(edate[2]); // 받는 사람 userNum
+//	 int mesendNum = Integer.parseInt(edate[3]); // 보낸 사람 방장 mesendNum
+//	
+//	 System.out.println("Model에서의 IP : "+reip);
+//	 MessengerVO v = new MessengerVO();
+//	 v.setMesnum(keyNum);
+//	 v.setMesmember(userNum);
+//	 v.setMesreip(reip);
+//	 // 요청자 사번을 받아올수 있음.
+//	 MessengerDao.getDao().joinRoom(v);
+//	
+//	 // ArrayList<MemberVO> memList = MessengerDao.getDao().getList();
+//	
+//	 StringBuffer ipAdd = new StringBuffer();
+//	 ipAdd.append("ws://");
+//	 ipAdd.append(reip);
+//	 ipAdd.append(":80/sumware/msgSocket/");
+//	
+//	 String userName = SearchMem.getSmem().searchMember(mesendNum);
+//	
+//	 System.out.println("IP Adress : "+ipAdd);
+//	 // request.setAttribute("memList", memList);
+//	 request.setAttribute("userNum", userNum); // 참가자 사번, 받는 사람
+//	 request.setAttribute("key", keyNum);
+//	 request.setAttribute("userName", userName);
+//	 request.setAttribute("mesendNum", mesendNum); // 방장 사번 , 보낸 사람
+//	 request.setAttribute("ipAdd", ipAdd.toString());
+//	
+//	 // DB 정보 업데이트 : entryTable의 시작일을 수정해줘야함
+//	
 	// url = "messenger/msgChat.jsp";
 	// method = true;
 	//
 	// // 참가자가 채팅방에서 나간 경우(창이 종료됨)
 	// // 방번호와 참여자 사번을 가지고 DB의 종료일자를 수정
 	// }else if(submod != null && submod.equals("closeChat")){
-	// System.out.println("여기는 model의 closeRoom 입니다.============");
-	//
-	// // msgChat영역에서 넘어온 파라미터 처리
-	// // 상태 여부 확인 chState : room 과 mesMain으로 구분
-	// int userNum = Integer.parseInt(request.getParameter("userNum"));
-	// int roomkey = Integer.parseInt(request.getParameter("roomKey"));
-	// String roomstate = request.getParameter("resState");
-	// System.out.println("Closechat userNum : "+userNum);
-	// System.out.println("Closechat roomkey : "+roomkey);
-	// System.out.println("Closechat roomstate : "+roomstate);
-	//
-	// MessengerVO v = new MessengerVO();
-	// v.setMesmember(userNum);
-	// v.setMesnum(roomkey);
-	// MessengerDao.getDao().closeRoom(v, roomstate);
-	//
-	// // 창을 닫기 때문에 url 주소는 없어도 무관함
-	// url = "sumware?model=messenger&submod=messengerForm";
+//	 System.out.println("여기는 model의 closeRoom 입니다.============");
+//	
+//	 // msgChat영역에서 넘어온 파라미터 처리
+//	 // 상태 여부 확인 chState : room 과 mesMain으로 구분
+//	 int userNum = Integer.parseInt(request.getParameter("userNum"));
+//	 int roomkey = Integer.parseInt(request.getParameter("roomKey"));
+//	 String roomstate = request.getParameter("resState");
+//	 System.out.println("Closechat userNum : "+userNum);
+//	 System.out.println("Closechat roomkey : "+roomkey);
+//	 System.out.println("Closechat roomstate : "+roomstate);
+//	
+//	 MessengerVO v = new MessengerVO();
+//	 v.setMesmember(userNum);
+//	 v.setMesnum(roomkey);
+//	 MessengerDao.getDao().closeRoom(v, roomstate);
+//	
+//	 // 창을 닫기 때문에 url 주소는 없어도 무관함
+//	 url = "sumware?model=messenger&submod=messengerForm";
 	// method = true;
 	//
 	// // messenger main에서 넘어온 경우 요청 거부 시
 	// }else if(submod != null && submod.equals("refuseChat")){
-	// // messenger.jsp에서 넘어온 파라미터 처리
-	// System.out.println("refuseChat 영역입니다.==========");
-	// String mainstate = request.getParameter("stateMain");
-	// String struserNum = request.getParameter("userNum2"); // 이상하게 null값이
-	// // 출력 확인 필요
-	// System.out.println("msgReceive userNum : " + struserNum);
-	//
-	// String[] edate = request.getParameter("edata1").split("/");
-	// for (String e : edate) {
-	// System.out.println("대화 거절 시 푸쉬를 통해 넘어온 param : " + e);
-	// }
-	// // push를 통해 방번호, 송신자 ip, 참가자(수신자 사번) 순으로 전송하기에 split으로 각 data를 배열
-	// // 형식으로 저장
-	// int keyNum = Integer.parseInt(edate[0]);
-	// String reip = edate[1];
-	// int reciuserNum = Integer.parseInt(edate[2]);
-	// int mesendNum = Integer.parseInt(edate[3]); // 채팅창 종료이기 때문에 해당 파라미터는 없어도
-	// 무관함
-	//
-	// MessengerVO v = new MessengerVO();
-	// v.setMesmember(reciuserNum);
-	// v.setMesnum(keyNum);
-	// MessengerDao.getDao().closeRoom(v, mainstate);
-	//
-	// request.setAttribute("key", keyNum);
-	// request.setAttribute("userNum", reciuserNum);
-	// url = "messenger/refuseChat.jsp";
+//	 // messenger.jsp에서 넘어온 파라미터 처리
+//	 System.out.println("refuseChat 영역입니다.==========");
+//	 String mainstate = request.getParameter("stateMain");
+//	 String struserNum = request.getParameter("userNum2"); // 이상하게 null값이
+//	 // 출력 확인 필요
+//	 System.out.println("msgReceive userNum : " + struserNum);
+//	
+//	 String[] edate = request.getParameter("edata1").split("/");
+//	 for (String e : edate) {
+//	 System.out.println("대화 거절 시 푸쉬를 통해 넘어온 param : " + e);
+//	 }
+//	 // push를 통해 방번호, 송신자 ip, 참가자(수신자 사번) 순으로 전송하기에 split으로 각 data를 배열
+//	 // 형식으로 저장
+//	 int keyNum = Integer.parseInt(edate[0]);
+//	 String reip = edate[1];
+//	 int reciuserNum = Integer.parseInt(edate[2]);
+//	 int mesendNum = Integer.parseInt(edate[3]); // 채팅창 종료이기 때문에 해당 파라미터는 없어도
+//	 무관함
+//	
+//	 MessengerVO v = new MessengerVO();
+//	 v.setMesmember(reciuserNum);
+//	 v.setMesnum(keyNum);
+//	 MessengerDao.getDao().closeRoom(v, mainstate);
+//	
+//	 request.setAttribute("key", keyNum);
+//	 request.setAttribute("userNum", reciuserNum);
+//	 url = "messenger/refuseChat.jsp";
 	// // url="sumware?model=messenger&submod=messengerForm";
 	// method=true;
 	// }

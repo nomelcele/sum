@@ -18,9 +18,7 @@
 <!-- 		db에 저장된 내용 출력 -->
 <div class="col-lg-3" style="width: 100%">
 	<div class="chat-panel panel panel-default">
-	<form action="sumware" method="post" id="closeForm" name="closeForm">
-		<input type="hidden" id="chatmodel"name="model">
-		<input type="hidden" id="chatsubmod"name="submod">
+	<form action="closeChat" method="post" id="closeForm" name="closeForm">
 		<input type="hidden" id="chatuserNum"name="userNum">
 		<input type="hidden" id="roomKey" name="roomKey">
 		<input type="hidden" id="resState" name="resState">		
@@ -107,8 +105,6 @@
 	function closeWindow(){
 		if(confirm("대화를 종료 하시겠습니까?") == true){	
 			sendcloseMsg();
-			$('#chatmodel').attr('value','messenger');
-			$('#chatsubmod').attr('value','closeChat');
 			$('#chatuserNum').attr('value',"${userNum}");
 			$('#roomKey').attr('value',"${key}");
 			$('#resState').attr('value',"room");			
