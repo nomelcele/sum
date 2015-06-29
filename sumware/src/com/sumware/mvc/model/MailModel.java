@@ -1,16 +1,21 @@
 package com.sumware.mvc.model;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.MailVO;
@@ -30,23 +35,47 @@ public class MailModel{
 	// => AOP 처리
 	
 	// 메일 작성 form 이동
-	@RequestMapping(value="/mailWriteForm",method=RequestMethod.POST)
-	public ModelAndView mailWriteForm(@RequestParam("toMem")String toMem,
-			@RequestParam("mailtitle")String mailtitle){
+	@RequestMapping(value="/mailWriteForm")
+	public String mailWriteForm(@ModelAttribute("mailreceiver")String mailreceiver,
+			@ModelAttribute("mailtitle")String mailtitle){
 		System.out.println("Mail Controller: mailWriteForm");
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("toMem", toMem);
-		mav.addObject("mailtitle", mailtitle);
-		mav.setViewName("mail/mailWrite");
-		return mav;
+		return "mail/mailWrite";
 	}
 	
-	// *******************
-	// 메일 작성(mailWrite)
-	@RequestMapping(value="/mailWrite")
-	public ModelAndView mailWrite(){
+	// 메일 작성
+	@RequestMapping(value="/mailWrite",method=RequestMethod.POST)
+	public ModelAndView mailWrite(@RequestParam("mailfile")MultipartFile mailfile,
+			@RequestParam Map<String, String> map,HttpServletRequest request){
 		System.out.println("Mail Controller: mailWrite");
 		ModelAndView mav = new ModelAndView();
+		
+		// 첨부 파일 업로드 작업
+		HttpSession session = request.getSession();
+		String r_path = session.getServletContext().getRealPath("/");
+		String oriFn = mailfile.getOriginalFilename();
+		StringBuffer path = new StringBuffer();
+		path.append(r_path).append("\\upload\\").append(oriFn);
+		System.out.println("File Upload Path: "+path.toString());
+		
+		File file = new File(path.toString());
+		try {
+			mailfile.transferTo(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		// 메일 정보 db에 추가
+		map.put("mailfile", oriFn); // 첨부파일 이름
+		map.put("mailmem", map.get("usernum")); // 발신자 사원 번호
+		String mailreceiver = map.get("mailreceiver"); // 수신자 아이디
+		int startidx = mailreceiver.indexOf("<")+1;
+		int endidx = mailreceiver.indexOf("@");
+		map.put("mailreceiver", mailreceiver.substring(startidx, endidx));
+		System.out.println("첨부파일 이름: "+oriFn);
+		System.out.println("발신자: "+map.get("usernum"));
+		System.out.println("수신자: "+mailreceiver.substring(startidx, endidx));
+		mdao.addMail(map);
+		
 		mav.setViewName("mail/mailSend"); // 메일 전송 완료 화면
 		return mav;
 	}
@@ -55,7 +84,7 @@ public class MailModel{
 	// suggest(mailSug)
 	
 	// 받은 메일함 이동
-	@RequestMapping(value="/mailFromList",method=RequestMethod.POST)
+	@RequestMapping(value="/mailFromList")
 	public ModelAndView mailFromList(@RequestParam Map<String,String> map,
 			HttpServletRequest request){
 		System.out.println("Mail Controller: mailFromList");
@@ -82,7 +111,7 @@ public class MailModel{
 	}
 	
 	// 보낸 메일함 이동
-	@RequestMapping(value="/mailToList",method=RequestMethod.POST)
+	@RequestMapping(value="/mailToList")
 	public ModelAndView mailToList(@RequestParam Map<String,String> map,
 			HttpServletRequest request){
 		System.out.println("Mail Controller: mailToList");
@@ -106,7 +135,7 @@ public class MailModel{
 	}
 	
 	// 내게 쓴 메일함 이동
-	@RequestMapping(value="/mailMyList",method=RequestMethod.POST)
+	@RequestMapping(value="/mailMyList")
 	public ModelAndView mailMyList(@RequestParam Map<String,String> map,
 			HttpServletRequest request){
 		System.out.println("Mail Controller: mailMyList");
@@ -130,7 +159,7 @@ public class MailModel{
 	}
 	
 	// 휴지통 이동
-	@RequestMapping(value="/mailTrashcan",method=RequestMethod.POST)
+	@RequestMapping(value="/mailTrashcan")
 	public ModelAndView mailTrashcan(@RequestParam Map<String,String> map,
 			HttpServletRequest request){
 		System.out.println("Mail Controller: mailTrashcan");
@@ -169,7 +198,7 @@ public class MailModel{
 	}
 	
 	// 메일 테이블의 delete 속성 설정
-	@RequestMapping(value="/mailSetDel")
+	@RequestMapping(value="/mailSetDel",method=RequestMethod.POST)
 	public String mailSetDel(@RequestParam("chk")String[] mailnums,
 			@RequestParam Map<String,String> map){
 		System.out.println("Mail Controller: mailSetDel");
@@ -183,13 +212,13 @@ public class MailModel{
 		int tofrom = Integer.parseInt(map.get("tofrom"));
 		switch(tofrom){
 			default: // 받은 메일함
-				return "redirect:/mailFromList";
+				return "redirect:/mailFromList?page=1";
 			case 2: // 보낸 메일함
-				return "redirect:/mailToList";
+				return "redirect:/mailToList?page=1";
 			case 3: // 내게 쓴 메일함
-				return "redirect:/mailMyList";
+				return "redirect:/mailMyList?page=1";
 			case 4: // 휴지통
-				return "redirect:/mailTrashcan";
+				return "redirect:/mailTrashcan?page=1";
 		}
 		
 	}
@@ -426,4 +455,5 @@ public class MailModel{
 		return new ModelForward(url, method);
 	} 
 	 */
+	
 }

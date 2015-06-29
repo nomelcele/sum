@@ -8,17 +8,15 @@
 	<div class="contents">
 			<!-- 이 부분에 내용이 들어감 -->
 		<div class="col-lg-8">	
-			<form method="post" action="sumware" class="form-horizontal" role="form"
+			<form method="post" action="mailWrite" class="form-horizontal" role="form"
 				  name="f" id="mailWriteF" autocomplete="off" enctype="multipart/form-data">
-		    	<input type="hidden" name="model" value="mail">
-				<input type="hidden" name="submod" value="mailWrite">
 				<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
 				<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
 				    <div class="form-group">
 				        <label for="receiver" class="col-sm-2 control-label">받는 사람</label>
 				        <div class="col-sm-10">
 				            <input type="text" class="form-control" 
-				            id="toMem" name="toMem" onkeydown="startSuggest()" value="${toMem }">
+				            id="mailreceiver" name="mailreceiver" onkeydown="startSuggest()" value="${mailreceiver }">
 				            <div id="view">
 				            </div>
 				        </div>
@@ -39,7 +37,7 @@
 				      <div class="form-group">
 				        <label for="content" class="col-sm-2 control-label">첨부 파일</label>
 				        <div class="col-sm-10">
-				            <input type="file" class="form-control" name="attach" id="attach" >
+				            <input type="file" class="form-control" name="mailfile" id="mailfile" >
 				        </div>
 				    </div>
 				    <div class="form-group">

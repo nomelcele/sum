@@ -3,9 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="mail">
-<!--   	<insert id="addMail" parameterType="map"> -->
-<!--   		insert into mail values(mail_seq.nextVal,?,?,?,?,?,sysdate,1,1) -->
-<!--   	</insert> -->
+  	<insert id="addMail" parameterType="map">
+  		insert into mail values(mail_seq.nextVal,#{mailtitle},
+  		#{mailcont},#{mailfile},#{mailmem},#{mailreceiver},sysdate,1,1)
+  	</insert>
 	<select id="getFromMailList" parameterType="map" resultType="mavo">
 		select * from (select rownum r_num, a.* from 
 		(select ma.mailnum, me.memname, ma.mailtitle, ma.maildate 
