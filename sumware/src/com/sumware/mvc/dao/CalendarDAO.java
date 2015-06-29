@@ -12,6 +12,8 @@ public class CalendarDAO {
 	@Autowired
 	private SqlSessionTemplate st;
 	public void calInsert(CalendarVO cavo){
+		cavo.setCalstart(timeFomat(cavo.getCalstart()));
+		cavo.setCalend(timeFomat(cavo.getCalend()));
 		st.insert("calendar.calInsert", cavo);
 	}
 	
