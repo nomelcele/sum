@@ -66,6 +66,7 @@
 			url:"snsComm",
 			data:data,
 			success: function(result){
+				alert("댓글보기:"+result);
 				$("#wrapbody").html(result);
 				$("#snsCommBtn").click();
  				ch= $('#snsCommList').height()-100;

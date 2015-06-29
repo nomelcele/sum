@@ -87,28 +87,32 @@ public class SnsModel{
 	public ModelAndView snsComm(HttpServletRequest request){
 		System.out.println("댓글 보기");
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("todo/snsComm");
 		showCommList(request,mav);
-		return "todo/snsComm";
+		return mav;
 	}
 	@RequestMapping(value="snsCommInsert",method=RequestMethod.POST)
-	public String snsCommInsert(Model model,HttpServletRequest request){
+	public ModelAndView snsCommInsert(HttpServletRequest request){
 		System.out.println("댓글 입력!");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("todo/snsComm");
 		Map<String, String> map = MyMap.getMaps().getMapList(request);
 		dao.insertSnsComm(map);
 		//리스트 받아오기
-		showCommList(request, model);
-		return "todo/snsComm";
+		showCommList(request, mav);
+		return mav;
 	}
 	@RequestMapping(value="snsCommDelete",method=RequestMethod.POST)
-	public String snsCommDelete(Model model,HttpServletRequest request){
+	public ModelAndView snsCommDelete(HttpServletRequest request){
 		System.out.println("댓글 삭제");
-		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("todo/snsComm");
 		dao.snsCommDelete(Integer.parseInt(request.getParameter("conum")));
 		
-		showCommList(request, model);
-		return "todo/snsComm";
+		showCommList(request, mav);
+		return mav;
 	}
-	private void showCommList(HttpServletRequest request,Model model){
+	private void showCommList(HttpServletRequest request,ModelAndView mav){
 		int rowsPerPage=Integer.parseInt(request.getParameter("rowsPerPage"));
 		int pagesPerBlock=1;
 		int etc = 1;
@@ -120,8 +124,8 @@ public class SnsModel{
 		map.put("commsns", snum);
 		List<CommVO> commSnsList = dao.getCommList(map);
 	
-		model.addAttribute("commSnsList", commSnsList);
-		model.addAttribute("commsns", snum);
+		mav.addObject("commSnsList", commSnsList);
+		mav.addObject("commsns", snum);
 	}
 	
 	
