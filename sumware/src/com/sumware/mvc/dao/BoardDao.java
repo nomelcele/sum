@@ -24,8 +24,7 @@ public class BoardDao {
 	}
 	
 	// boardList 가져오기.
-	@ModelAttribute("list")
-	public List<BoardVO> getList(Map<String, Integer> map) {
+	public List<BoardVO> getList(Map<String,Integer> map) {
 		List<BoardVO> list = ss.selectList("board.getList",map);
 		return list;
 	}
