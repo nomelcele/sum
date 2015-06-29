@@ -84,10 +84,10 @@ public class SnsModel{
 		
 	}
 	@RequestMapping(value="snsComm",method=RequestMethod.POST)
-	public ModelAndView snsComm(HttpServletRequest request){
+	public ModelAndView snsComm(HttpServletRequest request,Model model){
 		System.out.println("댓글 보기");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("todo/snsComm");
+		mav.setViewName("todo/modal/snsComm");
 		showCommList(request,mav);
 		return mav;
 	}
@@ -95,7 +95,7 @@ public class SnsModel{
 	public ModelAndView snsCommInsert(HttpServletRequest request){
 		System.out.println("댓글 입력!");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("todo/snsComm");
+		mav.setViewName("todo/modal/snsComm");
 		Map<String, String> map = MyMap.getMaps().getMapList(request);
 		dao.insertSnsComm(map);
 		//리스트 받아오기
@@ -106,7 +106,7 @@ public class SnsModel{
 	public ModelAndView snsCommDelete(HttpServletRequest request){
 		System.out.println("댓글 삭제");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("todo/snsComm");
+		mav.setViewName("todo/modal/snsComm");
 		dao.snsCommDelete(Integer.parseInt(request.getParameter("conum")));
 		
 		showCommList(request, mav);

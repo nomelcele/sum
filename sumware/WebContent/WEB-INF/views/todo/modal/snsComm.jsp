@@ -7,7 +7,7 @@
 	style="height: 400px; overflow-y:scroll; ">
 	<c:forEach var="csl" items="${commSnsList }">
 		<li>
-			<img class="snscomment-img" src="profileImg/${csl.coimg }" alt="" />
+			<img class="snscomment-img" src="resources/profileImg/${csl.coimg }" alt="" />
 			<div>
 				<strong>${csl.coname }</strong>
 				<p>${csl.cocont }</p>
