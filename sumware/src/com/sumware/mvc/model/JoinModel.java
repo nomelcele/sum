@@ -1,32 +1,25 @@
 package com.sumware.mvc.model;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-
-import javax.servlet.annotation.MultipartConfig;
+import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.sumware.dto.MemberVO;
-import com.sumware.mvc.dao.BoardDao;
 import com.sumware.mvc.dao.MemberDao;
 import com.sumware.util.CaptchasDotNet;
-import com.sumware.util.MyMap;
+
 
 @Controller
 public class JoinModel{
 	
 	@Autowired
 	private MemberDao mdao;
-	@Autowired
-	private BoardDao bdao;
+	
 	
 
 	@RequestMapping(value="/memberForm")
@@ -48,22 +41,15 @@ public class JoinModel{
 			pw.flush();
 		}
 	}
-	@RequestMapping(value="/signup",method=RequestMethod.POST)
-	public String signup(MemberVO mvo){
-		
-		HashMap<String, String> map= MyMap.getMaps().getMapList(request);
-	    
-	    mdao.update(map);
-	    
-	    HttpSession session = request.getSession();
+	
+	@RequestMapping(value="/signup")
+	public String signup(MemberVO mvo, HttpSession session){
+	
+	    mdao.update(mvo);
 	    //모든 세션 정보를 삭제함 ...
 		session.invalidate();	
-		return "index";	
+		return "home/login";	
 	}
-	
-	
-	
-	
 	
 	@RequestMapping(value="/viewCap",method=RequestMethod.POST)
 	public String viewCap(HttpServletRequest request){
@@ -122,73 +108,27 @@ public class JoinModel{
 	}
 	
 	@RequestMapping(value="/modifyProfile",method=RequestMethod.POST)
-	public String modifyProfile(){
-		
-		
+	public String modifyProfile(Mode mode){
+		//프로필 수정폼 
 		return "join/member";
 		
 	}
 	
 	@RequestMapping(value="/modify",method=RequestMethod.POST)
-	public String modify(HttpServletRequest request){
+	public String modify(MemberVO mvo,HttpSession session){
+		//수정 버튼 
 		
-		HashMap<String, String> map= MyMap.getMaps().getMapList(request);
-		mdao.modify(map);
-		HttpSession session = request.getSession();
+		//HashMap<String, String> map= MyMap.getMaps().getMapList(request);
+		
+		mdao.modify(mvo);
+		//session = request.getSession();
 		//저장된 세션 다 날림.
 		session.removeAttribute("v");
 		session.removeAttribute("teamNameList");		
-		return "index";
-		//고칠것 ^^;;히히힝
-	}
-	
-	@RequestMapping(value="/addMember",method=RequestMethod.POST)
-	public String addMember(HttpServletRequest request){
-		
-		HashMap<String, String> map= MyMap.getMaps().getMapList(request);
-		mdao.addMember(map);
-		String memmail = map.get("newmail");
-		MemberVO vo = MemberDao.getDao().getNewMemInfo(memmail);
-		request.setAttribute("newmemVo", vo);
-		
-		return "admin/sendEmailUser";
-		//이것도 나중에 수정
-	}
-
-	@RequestMapping(value="/getMemMgr",method=RequestMethod.POST)
-	public String getMemMgr(){
-		System.out.println("addMemberForm들어옴");
-	// 부서선택하면 부서에 대한 팀장들 리스트가져옴
-		int memdept = Integer.parseInt(request.getParameter("memdept"));
-		List<MemberVO> memmgrlist = MemberDao.getDao().getMemMgr(memdept);
-		request.setAttribute("mgrList", memmgrlist);
-		
-		return "admin/getMgrListCallback";
+		return "home/index";
 		
 	}
 	
-	@RequestMapping(value="/addMemberForm")
-	public String addMemberForm(){
-		
-		return "admin/admin";
-		
-	}
-	@RequestMapping(value="/addBoard")
-	public String addBoard(){
-		
-		HashMap<String, String> map = MyMap.getMaps().getMapList(request);
-		BoardDao.getDao().addBoard(map);
-		
-		return "redirect:/addBordForm";
-		
-	}
-	
-	@RequestMapping(value="/addBoardForm",method=RequestMethod.POST)
-	public String addBoardForm(){
-		
-		return "admin/addBoard.jsp";
-		
-	}
 	
 	
 //	@Override
