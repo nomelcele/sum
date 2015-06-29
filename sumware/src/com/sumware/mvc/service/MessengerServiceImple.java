@@ -1,5 +1,6 @@
 package com.sumware.mvc.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sumware.dto.MessengerRoomVO;
 import com.sumware.dto.MessengerVO;
 import com.sumware.mvc.dao.MessengerDao;
-
-import conn.ConUtil;
 @Transactional
 @Service
 @Qualifier(value="messenger")
@@ -20,8 +19,8 @@ public class MessengerServiceImple extends AbstractService{
 	private MessengerDao mdao;
 	
 	@Override
-	public int insertCreateRoomService(List<MessengerVO> list,
-		MessengerRoomVO mrvo, int mesendNum) {
+	public int insertCreateRoomService(ArrayList<MessengerVO> list,
+			MessengerRoomVO mrvo, int mesendNum) {
 		int key = 0;
 		System.out.println(list.size());
 			
