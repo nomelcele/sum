@@ -38,7 +38,7 @@
 												<button type="button" class="btn btn-outline btn-warning"
 													data-toggle="modal" data-target="#rejectModal">거절</button>
 
-												<%@include file="okTodoModal.jsp" %>
+												<%@include file="../modal/okTodoModal.jsp" %>
 												
 											</div>
 										</div>

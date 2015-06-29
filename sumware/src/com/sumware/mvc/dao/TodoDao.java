@@ -26,6 +26,7 @@ public class TodoDao {
 	// 부장의 업무 추가 
 	public void addTodo(TodoVO tvo){
 		st.insert("todo.addTodo", tvo);
+		System.out.println("업무 추가 완료!");
 		
 	}
 	

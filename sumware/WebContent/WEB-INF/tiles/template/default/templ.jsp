@@ -168,9 +168,9 @@
 				// 부서업무 버튼
 				$.ajax({
 					type : "post",
-					url : "/todoForm",
+					url : "todoForm",
 					data : {
-// 						model:"todo", 
+ //						model:"todo", 
 // 						submod:"todoForm",
 						memdept:"${sessionScope.v.memdept}"
 						},
@@ -184,11 +184,11 @@
 				// 부장일 때 업무 부여 버튼
 				$.ajax({
 					type : "post",
-					url : "/addtodoForm",
+					url : "addtodoForm",
 					data : {
 // 						model:"todo", 
 // 						submod:"addtodoForm",
-						//memnum:"${sessionScope.v.memnum}"
+						memnum:"${sessionScope.v.memnum}"
 						},
 					success : function(result){
 					
@@ -200,9 +200,9 @@
 				// 팀장일 때 업무 관리 버튼
 				$.ajax({
 					type : "post",
-					url : "/checkTodoList",
+					url : "checkTodoList",
 					data : {
-// 						model:"todo", 
+//  						model:"todo", 
 // 						submod:"checkTodoList",
 						memnum:"${sessionScope.v.memnum}"
 						},
@@ -216,9 +216,9 @@
 				// 부장일 때 업무 관리 버튼
 				$.ajax({
 					type : "post",
-					url : "/fWMana",
+					url : "fWMana",
 					data : {
-// 						model:"todo", 
+//  						model:"todo", 
 // 						submod:"fWMana",
 						memnum:"${sessionScope.v.memnum}"
 						},
@@ -232,9 +232,9 @@
 				// 팀장일 때 업무 부여
 				$.ajax({
 					type : "post",
-					url : "/giveJobForm",
+					url : "giveJobForm",
 					data : {
-// 						model:"todo", 
+//  						model:"todo", 
 // 						submod:"giveJobForm",
 						memnum:"${sessionScope.v.memnum}"
 						},
@@ -248,9 +248,9 @@
 				// 팀 업무 버튼
 				$.ajax({
 					type : "post",
-					url : "/teamTodoForm",
+					url : "teamTodoForm",
 					data : {
-// 						model:"todo", 
+//  						model:"todo", 
 // 						submod:"teamTodoForm",
 						memmgr:"${sessionScope.v.memnum}"
 						},
@@ -268,9 +268,9 @@
 		if(res=='rejectTodo'){
 			$.ajax({
 				type : "post",
-				url : "/rejectTodo",
+				url : "rejectTodo",
 				data : {
-// 					model:"todo", 
+ 					model:"todo", 
 // 					submod:"checkTodoList",
 // 					childmod:"rejectTodo",
 					tonum:$('#rtonum').val(),
@@ -294,9 +294,9 @@
 		}else if(res=='approveTodo'){
 			$.ajax({
 				type : "post",
-				url : "/approveTodo",
+				url : "approveTodo",
 				data : {
-// 					model:"todo", 
+ 					model:"todo", 
 // 					submod:"checkTodoList",
 // 					childmod:"approveTodo",
 					tonum:$('#atonum').val(),
@@ -321,9 +321,9 @@
 		}else if(res=='successTodo'){
 			$.ajax({
 				type : "post",
-				url : "/successJob",
+				url : "successJob",
 				data : {
-// 					model:"todo", 
+ 					model:"todo", 
 // 					submod:"successJob",
 					tonum:$('#stonum').val(),
 					tocomm:$('#stocomm').val(),
