@@ -1,12 +1,12 @@
 package com.sumware.mvc.model;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,11 +19,15 @@ import com.sumware.mvc.service.ServiceInter;
 import com.sumware.util.MyPage;
 
 @Controller
-public class MailModel implements ModelInter{
+public class MailModel{
 	@Autowired
 	private MailDao mdao;
 	@Autowired
+	@Qualifier(value="mail")
 	private ServiceInter service;
+	
+	// 왼쪽 메뉴에서 각 메일함에 있는 메일의 갯수를 보여주기 위한 메서드 호출
+	// => AOP 처리
 	
 	// 메일 작성 form 이동
 	@RequestMapping(value="/mailWriteForm",method=RequestMethod.POST)
@@ -39,8 +43,14 @@ public class MailModel implements ModelInter{
 	
 	// *******************
 	// 메일 작성(mailWrite)
+	@RequestMapping(value="/mailWrite")
+	public ModelAndView mailWrite(){
+		System.out.println("Mail Controller: mailWrite");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("mail/mailSend"); // 메일 전송 완료 화면
+		return mav;
+	}
 	
-
 	// *******************
 	// suggest(mailSug)
 	
@@ -158,10 +168,7 @@ public class MailModel implements ModelInter{
 		
 	}
 	
-	// ********************
 	// 메일 테이블의 delete 속성 설정
-	// ********** 트랜잭션 처리
-	
 	@RequestMapping(value="/mailSetDel")
 	public String mailSetDel(@RequestParam("chk")String[] mailnums,
 			@RequestParam Map<String,String> map){
@@ -191,8 +198,8 @@ public class MailModel implements ModelInter{
 	// ---------------------------------------------
 	// ---------------------------------------------
 	// ---------------------------------------------
-	// 6/26 작업 중
-	// 주석 처리된 부분은 변환 완료된 것
+	// 6/29 작업 중
+	// 메일 db에 추가, aop 작업해야 됨
 	// ---------------------------------------------
 	// ---------------------------------------------
 	// ---------------------------------------------
@@ -344,62 +351,62 @@ public class MailModel implements ModelInter{
 //			
 //			url = "mail/mailList.jsp";
 //			method = true;
-		}  else if(submod != null && submod.equals("mailSetDel")){
-			// 메일 테이블의 delete 속성 설정
-			System.out.println("현재 submod: mailSetDel");
-
-			
-			// 체크박스로 선택된 메일의 번호들 얻어오기
-			String[] mailnums = request.getParameterValues("chk");
-			mailnums[0]=mailnums[0].substring(mailnums[0].indexOf("=")+1);
-			for(String e:mailnums){
-				System.out.println("선택된 메일 번호: "+e);
-			}
-			
-			int tofrom = Integer.parseInt(map.get("tofrom"));
-			System.out.println("mailSetDel=="+tofrom);
-			
-			
-			MailDao.getDao().setDeleteAttr(mailnums, map);
-			// 받은 사람과 보낸 사람이 모두 영구 삭제한 메일을 db에서 삭제하기 위한 메서드
-			// MailDao.getDao().delMailFromDB(); 
-			ArrayList<MailVO> list = new ArrayList<MailVO>();
-			
-			int totalCount=0;
-			Map<String, Integer> pmap = null;
-			
-			switch(tofrom){
-				case 1: // 받은 메일함
-					System.out.println("받은메일함 갈꺼야");
-					totalCount = MailDao.getDao().getListNum(map)[0];
-					pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-					list = MailDao.getDao().getFromMailList(map, pmap);
-					break;
-				case 2: // 보낸 메일함
-					System.out.println("보낸메일함 고고");
-					totalCount = MailDao.getDao().getListNum(map)[1];
-					pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-					list = MailDao.getDao().getToMailList(map, pmap);
-					break;
-				case 3: // 내게 쓴 메일함
-					System.out.println("내게쓴메일함 고고");
-					totalCount = MailDao.getDao().getListNum(map)[2];
-					pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-					list = MailDao.getDao().getMyMailList(map, pmap);
-					break;
-				case 4: // 휴지통
-					System.out.println("휴지통 고고");
-					totalCount = MailDao.getDao().getListNum(map)[3];
-					pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-					list = MailDao.getDao().getTrashList(map, pmap);
-					break;
-			}
-			
-		    request.setAttribute("list", list);
-			request.setAttribute("tofrom", tofrom);
-			
-			url = "mail/mailList.jsp";
-			method = true;
+//		}  else if(submod != null && submod.equals("mailSetDel")){
+//			// 메일 테이블의 delete 속성 설정
+//			System.out.println("현재 submod: mailSetDel");
+//
+//			
+//			// 체크박스로 선택된 메일의 번호들 얻어오기
+//			String[] mailnums = request.getParameterValues("chk");
+//			mailnums[0]=mailnums[0].substring(mailnums[0].indexOf("=")+1);
+//			for(String e:mailnums){
+//				System.out.println("선택된 메일 번호: "+e);
+//			}
+//			
+//			int tofrom = Integer.parseInt(map.get("tofrom"));
+//			System.out.println("mailSetDel=="+tofrom);
+//			
+//			
+//			MailDao.getDao().setDeleteAttr(mailnums, map);
+//			// 받은 사람과 보낸 사람이 모두 영구 삭제한 메일을 db에서 삭제하기 위한 메서드
+//			// MailDao.getDao().delMailFromDB(); 
+//			ArrayList<MailVO> list = new ArrayList<MailVO>();
+//			
+//			int totalCount=0;
+//			Map<String, Integer> pmap = null;
+//			
+//			switch(tofrom){
+//				case 1: // 받은 메일함
+//					System.out.println("받은메일함 갈꺼야");
+//					totalCount = MailDao.getDao().getListNum(map)[0];
+//					pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+//					list = MailDao.getDao().getFromMailList(map, pmap);
+//					break;
+//				case 2: // 보낸 메일함
+//					System.out.println("보낸메일함 고고");
+//					totalCount = MailDao.getDao().getListNum(map)[1];
+//					pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+//					list = MailDao.getDao().getToMailList(map, pmap);
+//					break;
+//				case 3: // 내게 쓴 메일함
+//					System.out.println("내게쓴메일함 고고");
+//					totalCount = MailDao.getDao().getListNum(map)[2];
+//					pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+//					list = MailDao.getDao().getMyMailList(map, pmap);
+//					break;
+//				case 4: // 휴지통
+//					System.out.println("휴지통 고고");
+//					totalCount = MailDao.getDao().getListNum(map)[3];
+//					pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+//					list = MailDao.getDao().getTrashList(map, pmap);
+//					break;
+//			}
+//			
+//		    request.setAttribute("list", list);
+//			request.setAttribute("tofrom", tofrom);
+//			
+//			url = "mail/mailList.jsp";
+//			method = true;
 		}
 	    
 	    // 왼쪽 메뉴에서 각 메일함에 있는 메일의 갯수를 보여주기 위한 메서드 호출
@@ -417,7 +424,6 @@ public class MailModel implements ModelInter{
 	 	request.setAttribute("numArr", numArr);
 		
 		return new ModelForward(url, method);
-	}
- * 
+	} 
 	 */
 }
