@@ -2,24 +2,41 @@ package com.sumware.mvc.model;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sumware.dto.MemberVO;
+import com.sumware.dto.PageVO;
 import com.sumware.mvc.dao.BoardDao;
+import com.sumware.util.MyPage;
 
 @Controller
 public class BoardModel {
 	@Autowired
 	private BoardDao dao;
 	
-	@RequestMapping(value="board/boardList")
-	public ModelAndView getList(Map<String, Integer> map){
+	@RequestMapping(value="/boardList")
+	public ModelAndView getList(Map<String,Integer> map,HttpSession ses,
+			HttpServletRequest req,PageVO vo){
 		ModelAndView mav = new ModelAndView("board/boardList");
+		MemberVO v = new MemberVO();
+		v = (MemberVO) ses.getAttribute("v");
+		map.put("begin", Integer.parseInt(req.getParameter("begin")));
+		map.put("end", Integer.parseInt(req.getParameter("end")));
+		map.put("bdeptno", v.getMemdept());
+		if(req.getParameter("bgnum")==null){
+			map.put("bgnum",0);
+		}else{
+			map.put("bgnum", Integer.parseInt(req.getParameter("bgnum")));
+		}
 		mav.addObject("list",dao.getList(map));
 		System.out.println(dao.getList(map).toString());
-		return mav; 
+		return mav;
 	}
 	
 	/*
