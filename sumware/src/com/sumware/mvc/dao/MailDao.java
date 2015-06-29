@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sumware.dto.MailVO;
+import com.sumware.mvc.service.ServiceInter;
 
 import conn.ConUtil;
 
@@ -112,62 +113,89 @@ public class MailDao {
 		
 	}
 	
-	public void setDeleteAttr(String[] mailnums, Map<String, String> map){
+	public MailVO getDelAttrMailInfo(String num){
+		return st.selectOne("mail.getDelAttrMailInfo", num);
+	}
+	
+	public void setDelAttrFrom(Map<String,String> map){
+		st.update("mail.setDelAttrFrom", map);
+	}
+	
+	public void setDelAttrTo(Map<String,String> map){
+		st.update("mail.setDelAttrTo", map);
+	}
+	
+//	public void setDeleteAttr(String[] mailnums, Map<String, String> map){
 		// 메일의 delete 속성 설정
-		//*********************************
 		//*********************************
 		// 트랜잭션 처리
 		//*********************************
-		//*********************************
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+//		for(String e:mailnums){ 
+//			MailVO vo = st.selectOne("mail.getDelAttrMailInfo",e);
+//			
+//			int mailmem = vo.getMailmem();
+//			String mailreceiver = vo.getMailreceiver();
+//			
+//			if(mailmem == Integer.parseInt(map.get("usernum"))){
+//				map.put("mailnum", e);
+//				st.update("mail.setDelAttrFrom", map);
+//			}
+//			
+//			if(mailreceiver.equals(map.get("userid"))){
+//				map.put("mailnum", e);
+//				st.update("mail.setDelAttrTo", map);
+//			}
+//		}
+//		
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			con = ConUtil.getOds();
+//			StringBuffer sql = new StringBuffer();
+//			
+//			for(String e:mailnums){
+//				sql.setLength(0);
+//				sql.append("select mailmem,mailreceiver from mail where mailnum=?");
+//				pstmt = con.prepareStatement(sql.toString());
+//				pstmt.setInt(1, Integer.parseInt(e)); // 검색할 메일의 번호
+//				rs = pstmt.executeQuery();
+//			
+//				if(rs.next()){ 
+//					int mailmem = rs.getInt("mailmem");
+//					String mailreceiver = rs.getString("mailreceiver");
+//					
+//					if(mailmem == Integer.parseInt(map.get("usernum"))){ // 로그인한 사원이 보낸 메일일 경우
+//						sql.setLength(0); // 스트링버퍼 비우기
+//						sql.append("update mail set mailsdelete=? where mailnum=?");
+//					}
+//					
+//					if(mailreceiver.equals(map.get("userid"))){ // 로그인한 사원이 받은 메일일 경우
+//						sql.setLength(0); // 스트링버퍼 비우기
+//						sql.append("update mail set mailrdelete=? where mailnum=?");
+//					}
+//					
+////					CloseUtil.close(rs);
+////					CloseUtil.close(pstmt);
+//					pstmt = con.prepareStatement(sql.toString());
+//					pstmt.setInt(1, Integer.parseInt(map.get("delvalue")));
+//					// 삭제(메일함에서 휴지통으로 이동)는 2
+//					// 영구 삭제(휴지통에서도 보이지 않게 함)는 3
+//					// 복구(휴지통에서 메일함으로 이동)은 1
+//					pstmt.setInt(2, Integer.parseInt(e));
+//					pstmt.executeUpdate();	
+//					
+//					System.out.println("delete 속성 업데이트");
+//				}
+//				
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
-		try {
-			con = ConUtil.getOds();
-			StringBuffer sql = new StringBuffer();
-			
-			for(String e:mailnums){
-				sql.setLength(0);
-				sql.append("select mailmem,mailreceiver from mail where mailnum=?");
-				pstmt = con.prepareStatement(sql.toString());
-				pstmt.setInt(1, Integer.parseInt(e)); // 검색할 메일의 번호
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()){ 
-					int mailmem = rs.getInt("mailmem");
-					String mailreceiver = rs.getString("mailreceiver");
-					
-					if(mailmem == Integer.parseInt(map.get("usernum"))){ // 로그인한 사원이 보낸 메일일 경우
-						sql.setLength(0); // 스트링버퍼 비우기
-						sql.append("update mail set mailsdelete=? where mailnum=?");
-					}
-					
-					if(mailreceiver.equals(map.get("userid"))){ // 로그인한 사원이 받은 메일일 경우
-						sql.setLength(0); // 스트링버퍼 비우기
-						sql.append("update mail set mailrdelete=? where mailnum=?");
-					}
-					
-//					CloseUtil.close(rs);
-//					CloseUtil.close(pstmt);
-					pstmt = con.prepareStatement(sql.toString());
-					pstmt.setInt(1, Integer.parseInt(map.get("delvalue")));
-					// 삭제(메일함에서 휴지통으로 이동)는 2
-					// 영구 삭제(휴지통에서도 보이지 않게 함)는 3
-					// 복구(휴지통에서 메일함으로 이동)은 1
-					pstmt.setInt(2, Integer.parseInt(e));
-					pstmt.executeUpdate();	
-					
-					System.out.println("delete 속성 업데이트");
-				}
-				
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
+//	}
 	
 	public List<MailVO> getTrashList(Map<String, String> map){
 		// 휴지통에서 보여줄 메일 리스트를 리턴하는 메서드

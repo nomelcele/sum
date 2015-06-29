@@ -15,12 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.MailVO;
 import com.sumware.mvc.dao.MailDao;
+import com.sumware.mvc.service.ServiceInter;
 import com.sumware.util.MyPage;
 
 @Controller
 public class MailModel implements ModelInter{
 	@Autowired
-	private MailDao dao;
+	private MailDao mdao;
+	@Autowired
+	private ServiceInter service;
 	
 	// 메일 작성 form 이동
 	@RequestMapping(value="/mailWriteForm",method=RequestMethod.POST)
@@ -48,7 +51,7 @@ public class MailModel implements ModelInter{
 		System.out.println("Mail Controller: mailFromList");
 		ModelAndView mav = new ModelAndView();
 		// 받은 메일함에 있는 메일 갯수 얻어오기
-		int totalCount = dao.getListNum(map)[0];
+		int totalCount = mdao.getListNum(map)[0];
 		System.out.println("받은 메일함 메일 갯수: "+totalCount);
 		
 		// 페이지 정보를 가져오기 위한 map
@@ -60,7 +63,7 @@ public class MailModel implements ModelInter{
 		map.put("end", pmap.get("end").toString()); // 마지막 페이지
 		
 		// 받은 메일함에 들어갈 메일 리스트 가져오기
-		List<MailVO> fromlist = dao.getFromMailList(map);
+		List<MailVO> fromlist = mdao.getFromMailList(map);
 		mav.addObject("list", fromlist);
 		mav.addObject("tofrom", 1);
 		mav.setViewName("mail/mailList");
@@ -75,7 +78,7 @@ public class MailModel implements ModelInter{
 		System.out.println("Mail Controller: mailToList");
 		ModelAndView mav = new ModelAndView();
 		// 보낸 메일함에 있는 메일 갯수 얻어오기
-		int totalCount = dao.getListNum(map)[1];
+		int totalCount = mdao.getListNum(map)[1];
 		System.out.println("보낸 메일함 메일 갯수: "+totalCount);
 		
 		// 페이지 정보를 가져오기 위한 map
@@ -84,7 +87,7 @@ public class MailModel implements ModelInter{
 		map.put("end", pmap.get("end").toString()); // 마지막 페이지
 		
 		// 보낸 메일함에 들어갈 메일 리스트 가져오기
-		List<MailVO> tolist = dao.getToMailList(map);
+		List<MailVO> tolist = mdao.getToMailList(map);
 		mav.addObject("list", tolist);
 		mav.addObject("tofrom", 2);
 		mav.setViewName("mail/mailList");
@@ -99,7 +102,7 @@ public class MailModel implements ModelInter{
 		System.out.println("Mail Controller: mailMyList");
 		ModelAndView mav = new ModelAndView();
 		// 내게 쓴 메일함에 있는 메일 갯수 얻어오기
-		int totalCount = dao.getListNum(map)[2];
+		int totalCount = mdao.getListNum(map)[2];
 		System.out.println("내게 쓴 메일함 메일 갯수: "+totalCount);
 		
 		// 페이지 정보를 가져오기 위한 map
@@ -108,7 +111,7 @@ public class MailModel implements ModelInter{
 		map.put("end", pmap.get("end").toString()); // 마지막 페이지
 		
 		// 내게 쓴 메일함에 들어갈 메일 리스트 가져오기
-		List<MailVO> mylist = dao.getMyMailList(map);
+		List<MailVO> mylist = mdao.getMyMailList(map);
 		mav.addObject("list", mylist);
 		mav.addObject("tofrom", 3);
 		mav.setViewName("mail/mailList");
@@ -123,7 +126,7 @@ public class MailModel implements ModelInter{
 		System.out.println("Mail Controller: mailTrashcan");
 		ModelAndView mav = new ModelAndView();
 		// 휴지통에 있는 메일 갯수 얻어오기
-		int totalCount = dao.getListNum(map)[3];
+		int totalCount = mdao.getListNum(map)[3];
 		System.out.println("휴지통 메일 갯수: "+totalCount);
 		
 		// 페이지 정보를 가져오기 위한 map
@@ -132,7 +135,7 @@ public class MailModel implements ModelInter{
 		map.put("end", pmap.get("end").toString()); // 마지막 페이지
 		
 		// 휴지통에 들어갈 메일 리스트 가져오기
-		List<MailVO> trashlist = dao.getTrashList(map);
+		List<MailVO> trashlist = mdao.getTrashList(map);
 		mav.addObject("list", trashlist);
 		mav.addObject("tofrom", 4);
 		mav.setViewName("mail/mailList");
@@ -148,7 +151,7 @@ public class MailModel implements ModelInter{
 		
 		// 상세 사항을 볼 메일의 번호(mailnum)를 통해 select
 		// 메일의 정보를 가져옴
-		MailVO detail = dao.getMailDetail(mailnum);
+		MailVO detail = mdao.getMailDetail(mailnum);
 		mav.addObject("detail", detail);
 		mav.setViewName("mail/mailDetail");
 		return mav;
@@ -168,7 +171,7 @@ public class MailModel implements ModelInter{
 			System.out.println("선택된 메일 번호: "+e);
 		}
 		
-		dao.setDeleteAttr(mailnums, map);
+		service.setDeleteAttrService(mailnums, map);
 		
 		int tofrom = Integer.parseInt(map.get("tofrom"));
 		switch(tofrom){

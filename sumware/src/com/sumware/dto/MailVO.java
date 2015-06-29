@@ -3,7 +3,7 @@ package com.sumware.dto;
 public class MailVO {
 	private int mailnum, mailmem;
 	private String mailtitle, mailcont, mailfile, mailreceiver, 
-	maildate, mailsname, mailrname, replyid;
+	maildate, mailsdelete, mailrdelete, replyid;
 	
 	public int getMailnum() {
 		return mailnum;
@@ -47,23 +47,24 @@ public class MailVO {
 	public void setMaildate(String maildate) {
 		this.maildate = maildate;
 	}
-	public String getMailsname() {
-		return mailsname;
-	}
-	public void setMailsname(String mailsname) {
-		this.mailsname = mailsname;
-	}
-	public String getMailrname() {
-		return mailrname;
-	}
-	public void setMailrname(String mailrname) {
-		this.mailrname = mailrname;
-	}
+	
 	public String getReplyid() {
 		return replyid;
 	}
 	public void setReplyid(String replyid) {
 		this.replyid = replyid;
+	}
+	public String getMailsdelete() {
+		return mailsdelete;
+	}
+	public void setMailsdelete(String mailsdelete) {
+		this.mailsdelete = mailsdelete;
+	}
+	public String getMailrdelete() {
+		return mailrdelete;
+	}
+	public void setMailrdelete(String mailrdelete) {
+		this.mailrdelete = mailrdelete;
 	}
 	
 }
