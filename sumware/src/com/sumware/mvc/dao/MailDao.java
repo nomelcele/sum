@@ -22,7 +22,7 @@ public class MailDao {
 	@Autowired
 	private SqlSessionTemplate st;
 	
-	public boolean addMail(HashMap<String, String> map){
+	public boolean addMail(Map<String, String> map){
 		// 전송한 메일을 db에 추가해주는 메서드
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -51,7 +51,7 @@ public class MailDao {
 		} 
 	}
 	
-	public List<MailVO> getFromMailList(HashMap<String, String> map){
+	public List<MailVO> getFromMailList(Map<String, String> map){
 		// 받은 메일 리스트를 불러오는 메서드
 		// 현재 로그인되어 있는 사원이 받은 메일만 불러와야 한다.
 		return st.selectList("mail.getFromMailList", map);
@@ -73,7 +73,7 @@ public class MailDao {
 			
 	}
 	
-	public List<MailVO> getToMailList(HashMap<String, String> map){
+	public List<MailVO> getToMailList(Map<String, String> map){
 		// 보낸 메일 리스트를 불러오는 메서드
 		return st.selectList("mail.getToMailList", map);
 			
@@ -86,7 +86,7 @@ public class MailDao {
 			
 	}
 	
-	public List<MailVO> getMyMailList(HashMap<String, String> map){
+	public List<MailVO> getMyMailList(Map<String, String> map){
 		// 내게 쓴 메일 리스트를 불러오는 메서드
 		return st.selectList("mail.getMyMailList", map);
 
@@ -112,13 +112,11 @@ public class MailDao {
 		
 	}
 	
-	public void setDeleteAttr(String[] mailnums, HashMap<String, String> map){
+	public void setDeleteAttr(String[] mailnums, Map<String, String> map){
 		// 메일의 delete 속성 설정
 		//*********************************
 		//*********************************
-		//*********************************
 		// 트랜잭션 처리
-		//*********************************
 		//*********************************
 		//*********************************
 		Connection con = null;
@@ -171,7 +169,7 @@ public class MailDao {
 		
 	}
 	
-	public List<MailVO> getTrashList(HashMap<String, String> map){
+	public List<MailVO> getTrashList(Map<String, String> map){
 		// 휴지통에서 보여줄 메일 리스트를 리턴하는 메서드
 		return st.selectList("mail.getTrashList", map);
 	
@@ -185,62 +183,50 @@ public class MailDao {
 
 	}
 	
-	public int[] getListNum(String userid,int usernum){
+	public int[] getListNum(Map<String, String> map){
 		// 각 메일함에 있는 메일의 갯수를 얻기 위한 메서드
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		List<Integer> numList = st.selectList("mail.getListNum",map);
 		
 		int[] numArr = new int[4];
+		for(int i=0; i<numArr.length; i++){
+			numArr[i] = numList.get(i);
+		}
 		
-		try {
-			con = ConUtil.getOds();
-			StringBuffer sql = new StringBuffer();
-			sql.append("select (select count(*) from mail where mailreceiver=? and mailrdelete=1 and not mailmem=?) fromnum,");
-			sql.append(" (select count(*) from mail where mailmem=? and mailsdelete=1 and not mailreceiver=?) tonum,");
-			sql.append(" (select count(*) from mail where mailmem=? and mailreceiver=? and mailsdelete=1 and mailrdelete=1) mynum,");
-			sql.append(" (select count(*) from mail where (mailmem=? and mailsdelete=2) or (mailreceiver=? and mailrdelete=2)) trashnum from dual");
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, userid);
-			pstmt.setInt(2, usernum);
-			pstmt.setInt(3, usernum);
-			pstmt.setString(4, userid);
-			pstmt.setInt(5, usernum);
-			pstmt.setString(6, userid);
-			pstmt.setInt(7, usernum);
-			pstmt.setString(8, userid);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()){
-				numArr[0] = rs.getInt("fromnum");
-				numArr[1] = rs.getInt("tonum");
-				numArr[2] = rs.getInt("mynum");
-				numArr[3] = rs.getInt("trashnum");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
 		return numArr;
+		
+//			sql.append("select (select count(*) from mail where mailreceiver=? and mailrdelete=1 and not mailmem=?) fromnum,");
+//			sql.append(" (select count(*) from mail where mailmem=? and mailsdelete=1 and not mailreceiver=?) tonum,");
+//			sql.append(" (select count(*) from mail where mailmem=? and mailreceiver=? and mailsdelete=1 and mailrdelete=1) mynum,");
+//			sql.append(" (select count(*) from mail where (mailmem=? and mailsdelete=2) or (mailreceiver=? and mailrdelete=2)) trashnum from dual");
+			
+//			pstmt.setString(1, userid);
+//			pstmt.setInt(2, usernum);
+//			pstmt.setInt(3, usernum);
+//			pstmt.setString(4, userid);
+//			pstmt.setInt(5, usernum);
+//			pstmt.setString(6, userid);
+//			pstmt.setInt(7, usernum);
+//			pstmt.setString(8, userid);
 		
 	}
 	
-	public void delMailFromDB(){
-		// mailsdelete, mailrdelete 속성이 모두 3인 메일을 db에서 삭제하는 메서드
-		// (받은 사람과 보낸 사람이 모두 메일을 영구 삭제했을 경우)
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			con = ConUtil.getOds();
-			StringBuffer sql = new StringBuffer();
-			sql.append("delete from mail where mailsdelete=3 and mailrdelete=3");
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.executeUpdate(); 
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		
-	}
+//	public void delMailFromDB(){
+//		// mailsdelete, mailrdelete 속성이 모두 3인 메일을 db에서 삭제하는 메서드
+//		// (받은 사람과 보낸 사람이 모두 메일을 영구 삭제했을 경우)
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		
+//		try {
+//			con = ConUtil.getOds();
+//			StringBuffer sql = new StringBuffer();
+//			sql.append("delete from mail where mailsdelete=3 and mailrdelete=3");
+//			pstmt = con.prepareStatement(sql.toString());
+//			pstmt.executeUpdate(); 
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} 
+//		
+//	}
 	
 }

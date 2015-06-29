@@ -34,22 +34,28 @@ public class MailModel implements ModelInter{
 		return mav;
 	}
 	
+	// *******************
+	// 메일 작성(mailWrite)
+	
+
+	// *******************
+	// suggest(mailSug)
+	
 	// 받은 메일함 이동
 	@RequestMapping(value="/mailFromList",method=RequestMethod.POST)
-	public ModelAndView mailFromList(@RequestParam("usernum")Integer usernum,
-			@RequestParam("userid")String userid,
+	public ModelAndView mailFromList(@RequestParam Map<String,String> map,
 			HttpServletRequest request){
 		System.out.println("Mail Controller: mailFromList");
 		ModelAndView mav = new ModelAndView();
 		// 받은 메일함에 있는 메일 갯수 얻어오기
-		int totalCount = dao.getListNum(userid,usernum)[0];
+		int totalCount = dao.getListNum(map)[0];
 		System.out.println("받은 메일함 메일 갯수: "+totalCount);
 		
 		// 페이지 정보를 가져오기 위한 map
 		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("usernum",usernum.toString()); // 로그인한 사용자의 사원 번호
-		map.put("userid", userid); // 로그인한 사용자의 아이디
+//		HashMap<String, String> map = new HashMap<String, String>();
+//		map.put("usernum",usernum.toString()); // 로그인한 사용자의 사원 번호
+//		map.put("userid", userid); // 로그인한 사용자의 아이디
 		map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
 		map.put("end", pmap.get("end").toString()); // 마지막 페이지
 		
@@ -64,20 +70,16 @@ public class MailModel implements ModelInter{
 	
 	// 보낸 메일함 이동
 	@RequestMapping(value="/mailToList",method=RequestMethod.POST)
-	public ModelAndView mailToList(@RequestParam("usernum")Integer usernum,
-			@RequestParam("userid")String userid,
+	public ModelAndView mailToList(@RequestParam Map<String,String> map,
 			HttpServletRequest request){
 		System.out.println("Mail Controller: mailToList");
 		ModelAndView mav = new ModelAndView();
 		// 보낸 메일함에 있는 메일 갯수 얻어오기
-		int totalCount = dao.getListNum(userid, usernum)[1];
+		int totalCount = dao.getListNum(map)[1];
 		System.out.println("보낸 메일함 메일 갯수: "+totalCount);
 		
 		// 페이지 정보를 가져오기 위한 map
 		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("usernum",usernum.toString()); // 로그인한 사용자의 사원 번호
-		map.put("userid", userid); // 로그인한 사용자의 아이디
 		map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
 		map.put("end", pmap.get("end").toString()); // 마지막 페이지
 		
@@ -92,20 +94,16 @@ public class MailModel implements ModelInter{
 	
 	// 내게 쓴 메일함 이동
 	@RequestMapping(value="/mailMyList",method=RequestMethod.POST)
-	public ModelAndView mailMyList(@RequestParam("usernum")Integer usernum,
-			@RequestParam("userid")String userid,
+	public ModelAndView mailMyList(@RequestParam Map<String,String> map,
 			HttpServletRequest request){
 		System.out.println("Mail Controller: mailMyList");
 		ModelAndView mav = new ModelAndView();
 		// 내게 쓴 메일함에 있는 메일 갯수 얻어오기
-		int totalCount = dao.getListNum(userid, usernum)[2];
+		int totalCount = dao.getListNum(map)[2];
 		System.out.println("내게 쓴 메일함 메일 갯수: "+totalCount);
 		
 		// 페이지 정보를 가져오기 위한 map
 		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("usernum",usernum.toString()); // 로그인한 사용자의 사원 번호
-		map.put("userid", userid); // 로그인한 사용자의 아이디
 		map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
 		map.put("end", pmap.get("end").toString()); // 마지막 페이지
 		
@@ -120,20 +118,16 @@ public class MailModel implements ModelInter{
 	
 	// 휴지통 이동
 	@RequestMapping(value="/mailTrashcan",method=RequestMethod.POST)
-	public ModelAndView mailTrashcan(@RequestParam("usernum")Integer usernum,
-			@RequestParam("userid")String userid,
+	public ModelAndView mailTrashcan(@RequestParam Map<String,String> map,
 			HttpServletRequest request){
 		System.out.println("Mail Controller: mailTrashcan");
 		ModelAndView mav = new ModelAndView();
 		// 휴지통에 있는 메일 갯수 얻어오기
-		int totalCount = dao.getListNum(userid, usernum)[3];
+		int totalCount = dao.getListNum(map)[3];
 		System.out.println("휴지통 메일 갯수: "+totalCount);
 		
 		// 페이지 정보를 가져오기 위한 map
 		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("usernum",usernum.toString()); // 로그인한 사용자의 사원 번호
-		map.put("userid", userid); // 로그인한 사용자의 아이디
 		map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
 		map.put("end", pmap.get("end").toString()); // 마지막 페이지
 		
@@ -148,9 +142,7 @@ public class MailModel implements ModelInter{
 	
 	// 메일 상세 보기
 	@RequestMapping(value="/mailDetail")
-	public ModelAndView mailDetail(@RequestParam("mailnum")int mailnum,
-			@RequestParam("usernum")Integer usernum,
-			@RequestParam("userid")String userid){
+	public ModelAndView mailDetail(@RequestParam("mailnum")int mailnum){
 		System.out.println("Mail Controller: mailDetail");
 		ModelAndView mav = new ModelAndView();
 		
@@ -163,22 +155,13 @@ public class MailModel implements ModelInter{
 		
 	}
 	
+	// ********************
 	// 메일 테이블의 delete 속성 설정
-	// ********************
-	// ********************
-	// ********************
 	// ********** 트랜잭션 처리
-	// ********************
-	// ********************
-	// ********************
-	/*
 	
 	@RequestMapping(value="/mailSetDel")
-	public ModelAndView mailSetDel(@RequestParam("chk")String[] mailnums,
-			@RequestParam("usernum")Integer usernum,
-			@RequestParam("userid")String userid,
-			@RequestParam("delvalue")Integer delvalue,
-			@RequestParam("tofrom")Integer tofrom){
+	public String mailSetDel(@RequestParam("chk")String[] mailnums,
+			@RequestParam Map<String,String> map){
 		System.out.println("Mail Controller: mailSetDel");
 		for(String e:mailnums){
 			// 체크된 메일의 번호들
@@ -187,8 +170,21 @@ public class MailModel implements ModelInter{
 		
 		dao.setDeleteAttr(mailnums, map);
 		
+		int tofrom = Integer.parseInt(map.get("tofrom"));
+		switch(tofrom){
+			default: // 받은 메일함
+				return "redirect:/mailFromList";
+			case 2: // 보낸 메일함
+				return "redirect:/mailToList";
+			case 3: // 내게 쓴 메일함
+				return "redirect:/mailMyList";
+			case 4: // 휴지통
+				return "redirect:/mailTrashcan";
+		}
+		
 	}
 	
+	/* 
 	// ---------------------------------------------
 	// ---------------------------------------------
 	// ---------------------------------------------

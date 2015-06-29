@@ -50,4 +50,10 @@
 	<update id="">
 		update mail set mailrdelete=? where mailnum=?
 	</update> -->
+	<select id="getListNum" parameterType="map" resultType="int">
+		select (select count(*) from mail where mailreceiver=#{userid} and mailrdelete=1 and not mailmem=#{usernum}) fromnum, 
+		(select count(*) from mail where mailmem=#{usernum} and mailsdelete=1 and not mailreceiver=#{userid}) tonum, 
+		(select count(*) from mail where mailmem=#{usernum} and mailreceiver=#{userid} and mailsdelete=1 and mailrdelete=1) mynum, 
+		(select count(*) from mail where (mailmem=#{usernum} and mailsdelete=2) or (mailreceiver=#{userid} and mailrdelete=2)) trashnum from dual
+	</select>
   </mapper>
