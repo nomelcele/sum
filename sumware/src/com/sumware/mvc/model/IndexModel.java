@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexModel{
 	
-	@RequestMapping(value="/home")
+	@RequestMapping(value={"/home","/"})
 	public String indexForm(Model model){
-		return "home/login";
+		return "home/index";
 	}
 //	@Override
 //	public ModelForward exe(HttpServletRequest request,
