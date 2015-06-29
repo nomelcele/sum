@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <nav class="navbar navbar">
 	<div class="container">
 		<div class="navbar-header">
@@ -13,15 +15,13 @@
 		</div>
 		<c:choose>
 			<c:when test="${empty sessionScope.v.memnum && empty memnum}">
-				<!--       		<form class="form-inline" role="form" action="sumware" method="post"> -->
+<!--       		<form class="form-inline" role="form" action="sumware" method="post"> -->
 				<div class="porm-group">
-					<label class="control-label-" for="memnum">사원번호</label> <input
-						type="text" id="memnum" name="memnum" placeholder="사원번호"
-						onkeydown="enterCheck(3)"> <label class="control-label"
-						for="mempwd">비밀번호</label> <input type="password" id="mempwd"
-						name="mempwd" placeholder="비밀번호" onkeydown="enterCheck(3)">
-					<button type="button" class="btn btn-xs btn-info"
-						onclick="loginChk()">로그인</button>
+					<label class="control-label-" for="memnum">사원번호</label>
+					<input type="text" id="memnum" name="memnum" placeholder="사원번호" onkeydown="enterCheck(3)" />
+					<label class="control-label" for="mempwd">비밀번호</label>
+					<input type="password" id="mempwd" name="mempwd" placeholder="비밀번호" onkeydown="enterCheck(3)" />
+					<button type="button" class="btn btn-xs btn-info" onclick="loginChk()">로그인</button>
 				</div>
 				<!--       		</form> -->
 			</c:when>
@@ -29,13 +29,16 @@
 				<!-- 		   	<div class="porm-group"> -->
 				<!-- 		    </div> -->
 				<div class="nav navbar-right">
+				<form action="" method="GET">
+				<input type="hidden" name="model" value="">
+					<!-- navbar-nav(S) -->
 					<ul class="nav navbar-nav">
 						<li><a href="home">Main</a></li>
 						<li><a href="firsttodoForm?model=todo">Todo</a></li>
 						<li><a href="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}&page=1">Mail</a></li>
 						<li><a href="calList">Calendar</a>
 					<%--<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept}&bgnum=0&bname=공지사항">Board</a></li> --%>
-						<li><a href="boardList?page=1&begin=1&end=5">Board</a></li>
+						<li><a href="">Board</a></li>
 						<li><a href="javascript:openWin()">Messenger <span
 								id="countRoomNum"></span></a></li>
 						<c:if
@@ -43,6 +46,8 @@
 							<li><a href="sumware?model=join&submod=addMemberForm">Admin</a></li>
 						</c:if>
 					</ul>
+					<!-- navbar-nav(E) -->
+				</form>
 					<ul class="nav navbar-right navbar-nav user-name">
 						<c:if test="${empty sessionScope.v.memname}">
 							<li><span class="control-label-"> <strong>${sessionScope.memnum}</strong>
@@ -80,3 +85,5 @@
 		</div>
 	</div>
 </nav>
+
+
