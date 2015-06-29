@@ -14,10 +14,10 @@
     	update member set memaddr=#{memaddr}, mempwd=#{mempwd},memprofile=#{memprofile},meminmail=#{meminmail} where memnum=#{memnum}
    </update>
    <update id="modify" parameterType="mvo">
-   		update member set memaddr=#{address}, mempwd=#{mempwd2},memprofile=#{memimg} where memnum=#{memnum}
+   		update member set memaddr=#{memaddr}, mempwd=#{mempwd},memprofile=#{memprofile} where memnum=#{memnum}
    
    </update>
-   <insert id="addMember" parameterType="map">
+   <insert id="addMember" parameterType="mvo">
    	insert into member values(member_seq.nextVal,#{newname},null,#{newpwd},null,#{newjob},#{newauth},#{newmail},null,#{newmgr},#{newdept})
   </insert>
   <select id="getMemMgr" parameterType="int" resultType="mvo">
