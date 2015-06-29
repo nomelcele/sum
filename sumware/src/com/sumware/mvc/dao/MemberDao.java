@@ -1,11 +1,8 @@
 package com.sumware.mvc.dao;
-import java.util.HashMap;
 import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.sumware.dto.MemberVO;
 import com.sumware.util.MakeXML;
 
@@ -48,9 +45,9 @@ public class MemberDao {
 	
 	
 	//회원 정보 업데이트 
-	public void update(HashMap<String, String> map){
+	public void update(MemberVO vo){
 		
-		st.update("mem.update",map);
+		st.update("mem.update",vo);
 		//SqlSession ss= FactorySrevice.getFactory().openSession(true);
 		//ss.update("mem.update",map);
 				//ss.close();
@@ -61,8 +58,8 @@ public class MemberDao {
 	}
 	
 	//회원 정보 수정 
-	public void modify(HashMap<String, String> map){
-		st.update("mem.modify",map);
+	public void modify(MemberVO vo){
+		st.update("mem.modify",vo);
 		//SqlSession ss = FactorySrevice.getFactory().openSession(true);
 		//ss.update("mem.modify",map);
 		//ss.close();
@@ -70,8 +67,8 @@ public class MemberDao {
 	
 	
 	//
-	public void addMember(HashMap<String, String> map){
-		st.insert("mem.addMember",map);
+	public void addMember(MemberVO vo){
+		st.insert("mem.addMember",vo);
 		//SqlSession ss = FactorySrevice.getFactory().openSession(true);
 		//ss.insert("mem.addMember",map);
 		//ss.close();
