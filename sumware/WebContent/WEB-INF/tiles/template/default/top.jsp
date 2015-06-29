@@ -32,10 +32,10 @@
 					<ul class="nav navbar-nav">
 						<li><a href="home">Main</a></li>
 						<li><a href="firsttodoForm?model=todo">Todo</a></li>
-						<li><a
-							href="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}&page=1">Mail</a></li>
-						<li><a href="calList">Calendar</a> <%-- 					<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept}&bgnum=0&bname=공지사항">Board</a></li> --%>
-						<li><a href="boardList">Board</a></li>
+						<li><a href="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}&page=1">Mail</a></li>
+						<li><a href="calList">Calendar</a>
+					<%--<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept}&bgnum=0&bname=공지사항">Board</a></li> --%>
+						<li><a href="boardList?page=1&begin=1&end=5">Board</a></li>
 						<li><a href="javascript:openWin()">Messenger <span
 								id="countRoomNum"></span></a></li>
 						<c:if
