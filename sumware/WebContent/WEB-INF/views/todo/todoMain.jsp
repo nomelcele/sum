@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <div id="global" class="wrap-layout board">
 			<div class="lnb-area" id="lnb-area">
 			</div>
@@ -54,5 +55,6 @@
 				</div>
 			<!-- menu target 끝! -->
 			<!-- 부서업무 부분 끝!!! -->
+		<%@include file="todoSns.jsp"%>
 	</div>
 </div>
