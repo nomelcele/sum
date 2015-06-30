@@ -261,7 +261,7 @@ public class MessengerModel implements ModelInter {
 	
 	@RequestMapping(value="mesCountMsg")
 	public void mesCountMsg(HttpServletResponse response,HttpSession session) throws IOException{
-		System.out.println("Main Push 영역");
+//		System.out.println("Main Push 영역");
 		
 		MemberVO v = (MemberVO)session.getAttribute("v");
 		int userNum = v.getMemnum();
@@ -272,7 +272,7 @@ public class MessengerModel implements ModelInter {
 		outs.append(countNum);
 		outs.append(")");
 		outs.append("\n\n");
-		System.out.println("Count Num 메세지 송신 시 전송될 파라미터 : "+outs);
+//		System.out.println("Count Num 메세지 송신 시 전송될 파라미터 : "+outs);
 		
 		response.setHeader("cache-control", "no-cache");
 		response.setContentType("text/event-stream");
