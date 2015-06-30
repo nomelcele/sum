@@ -28,7 +28,7 @@
 				<!-- 		    </div> -->
 				<div class="nav navbar-right">
 				<form action="goFunc" method="post">
-				<input type="hidden" name="model" value="" id="model">
+				<input type="hidden" name="model" id="model">
 					<!-- navbar-nav(S) -->
 					<ul class="nav navbar-nav">
 						<li><a href="home">Main</a></li>
