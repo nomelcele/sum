@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ import com.sumware.dto.MailVO;
 import com.sumware.mvc.dao.MailDao;
 import com.sumware.mvc.service.ServiceInter;
 import com.sumware.util.MyPage;
+import com.sumware.util.Suggest;
 
 @Controller
 public class MailModel{
@@ -46,6 +48,7 @@ public class MailModel{
 	@RequestMapping(value="/mailWrite",method=RequestMethod.POST)
 	public ModelAndView mailWrite(@RequestParam("mailfile")MultipartFile mailfile,
 			@RequestParam Map<String, String> map,HttpServletRequest request){
+		// request.setCharacterEncoding("UTF-8");
 		System.out.println("Mail Controller: mailWrite");
 		ModelAndView mav = new ModelAndView();
 		
@@ -80,8 +83,38 @@ public class MailModel{
 		return mav;
 	}
 	
-	// *******************
 	// suggest(mailSug)
+	@RequestMapping(value="/mailSug")
+	public ModelAndView mailSug(String key){
+		System.out.println("Mail Controller: mailSug");
+		ModelAndView mav = new ModelAndView();
+		// request.setCharacterEncoding("UTF-8");
+		
+		String[] suggests = Suggest.getSuggest().getSuggest(key);
+		mav.addObject("sugArr", suggests);
+		System.out.println("Key: "+key);
+		for(String e:suggests){
+			System.out.println("배열: "+e);
+		}
+		
+		StringBuilder su = new StringBuilder();
+		su.append("[");
+		if(suggests != null){
+			for(int i=0; i<suggests.length; i++){
+				su.append("\"");
+				su.append(suggests[i]);
+				su.append("\"");
+				if(!(i == suggests.length-1)){
+					su.append(",");
+				}
+			}
+		}
+		su.append("]");
+		mav.addObject("sug", su.toString());
+		mav.setViewName("mail/mailSuggest");
+		
+		return mav;
+	}
 	
 	// 받은 메일함 이동
 	@RequestMapping(value="/mailFromList")
@@ -227,8 +260,8 @@ public class MailModel{
 	// ---------------------------------------------
 	// ---------------------------------------------
 	// ---------------------------------------------
-	// 6/29 작업 중
-	// 메일 db에 추가, aop 작업해야 됨
+	// 6/30 작업 중
+	// aop 작업해야 됨
 	// ---------------------------------------------
 	// ---------------------------------------------
 	// ---------------------------------------------
