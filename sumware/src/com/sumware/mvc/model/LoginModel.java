@@ -21,7 +21,7 @@ public class LoginModel{
 	private LoginDao dao;
 	
 	@RequestMapping(value="login")
-	public String login(MemberVO mvo,HttpSession session){
+	public void login(MemberVO mvo,HttpSession session,HttpServletResponse response) throws IOException{
 		String result="home/index";
 		try {
 			String res = dao.ckFirstLogin(mvo);
@@ -46,12 +46,15 @@ public class LoginModel{
 				//login 기록 저장.
 				dao.inLog(mvo.getMemnum());	
 			}else{
-				result="join/error";
+				result="0";
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return result;
+		PrintWriter pw = response.getWriter();
+		pw.print(result);
+		pw.flush();
+		pw.close();
 	}
 	@RequestMapping(value="logout")
 	public void logout(int memnum,HttpSession session,HttpServletResponse response) throws IOException{
