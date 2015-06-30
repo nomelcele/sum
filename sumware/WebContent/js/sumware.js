@@ -1,7 +1,3 @@
-/**
- * 
- */
-
 // $(function(){}) == document.ready
 // $(window).onload(function(){}); == window.onload (이미지, js, 임포트된 외부 리소스 모두 로드
 // 이후에 js 해석)
@@ -23,7 +19,7 @@ $(function() {
 		$pageName = $(this).text().toLowerCase();
 		switch ($pageName) {
 		case ("main"):
-			$("#model").attr("value", $pageName);
+			$("#model").attr("value", "");
 			$("#formff").submit();
 			break;
 		case ("todo"):
