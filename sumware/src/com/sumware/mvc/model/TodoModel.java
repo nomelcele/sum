@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +42,12 @@ public class TodoModel {
 	}
 
 	// 메뉴바에서 todo메뉴 첫 진입 시
-	@RequestMapping(value = "firsttodoForm", method = RequestMethod.GET)
-	public String firsttodoForm(Model model, HttpSession session) {
+	@RequestMapping(value = "firsttodoForm", method = RequestMethod.POST)
+	public String firsttodoForm(Model model, HttpSession session,HttpServletRequest req) {
 		System.out.println("메뉴에서 todo 누름");
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
 		System.out.println("세션 가져왓니? : "+mvo.getMemnum());
+		session.setAttribute("model", req.getParameter("model"));
 		List<MemberVO> list = tdao.getTomem(mvo.getMemnum());
 	
 		//그 부서의 팀장들 정보
@@ -57,7 +59,7 @@ public class TodoModel {
 
 		model.addAttribute("deptJobList", deptJobList);
 
-		return "todo/todoMain";
+		return "todo.todoMain";
 
 	}
 
