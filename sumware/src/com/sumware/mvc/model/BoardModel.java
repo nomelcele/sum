@@ -22,7 +22,7 @@ public class BoardModel {
 	@Autowired
 	private BoardDao dao;
 	
-	@RequestMapping(value="board/boardList")
+	@RequestMapping(value="boardList")
 	public ModelAndView getList(Map<String,Integer> map,HttpSession ses,
 			HttpServletRequest req){
 		System.out.println("BoardModel : getList()");
