@@ -28,11 +28,12 @@ public class IndexModel{
 		if(page.toLowerCase().equals("board")){
 			page = "board/boardList";
 		}else if(page.toLowerCase().equals("todo")){
-			page = "todo/firstTodoForm";
+			System.out.println("todo들어옴");
+			page = "todo/todoMain";
 		}else if(page.toLowerCase().equals("mail")){
-			page = "mail/mailFromList";
+			page = "mail/mailList";
 		}else if(page.toLowerCase().equals("calendar")){
-			page="calendar/calList";
+			page="calendar/calTest";
 		}
 		ModelAndView mav = new ModelAndView(page);
 		
