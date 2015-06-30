@@ -39,7 +39,7 @@ $(function() {
 			$("#formff").attr("action","mail/mailFromList").submit();
 			break;
 		case ("board"):
-//			$("#model").attr("value", $pageName);
+			$("#model").attr("value", $pageName);
 			$("#bdeptno").attr("value", "${sessionScope.v.memdept}");
 			$("#bname").attr("value", "공지사항");
 			$("#bgnum").attr("value", "0");
