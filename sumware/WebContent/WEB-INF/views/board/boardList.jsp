@@ -3,9 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div id="global" class="wrap-layout board">
 	<!-- lnb-area(S) -->
-	<div class="lnb-area" id="lnb-area">
-		<!-- left menu !!!! 들어갈 자리 -->
-	</div>
+	
 	<!-- lnb-area(E) -->
 	<!-- contents(S) -->
 	<div class="contents">

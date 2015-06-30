@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div id="global" class="wrap-layout board">
-		<!-- lnb-area(S) -->
-		<div class="lnb-area" id="lnb-area">
-		<!-- left menu !!!! 들어갈 자리 -->
-		</div>
-		<!-- lnb-area(E) -->
-		
 		<!-- contents(S) -->
-		<div class="contents">
 			<%-- <!-- board-detail(S) -->
 			<!-- board-detail(E) --> --%>
 			
@@ -124,4 +117,3 @@
 <!-- comment(E) -->
 		</div>
 		<!-- contents(E) -->
-</div>
