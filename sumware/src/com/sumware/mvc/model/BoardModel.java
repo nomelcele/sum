@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.MemberVO;
@@ -22,13 +23,14 @@ public class BoardModel {
 	@Autowired
 	private BoardDao dao;
 	
-	@RequestMapping(value="boardList")
+	@RequestMapping(value="boardList",method=RequestMethod.POST)
 	public ModelAndView getList(Map<String,Integer> map,HttpSession ses,
 			HttpServletRequest req){
 		System.out.println("BoardModel : getList()");
 		ModelAndView mav = new ModelAndView("board.boardList");
 		MemberVO v = new MemberVO();
 		v = (MemberVO) ses.getAttribute("v");
+		ses.setAttribute("model", req.getParameter("model"));
 		int bgnum = Integer.parseInt(req.getParameter("bgnum"));
 		map = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);
 //		map.put("begin", Integer.parseInt(req.getParameter("begin")));
