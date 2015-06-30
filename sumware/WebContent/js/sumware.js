@@ -41,6 +41,9 @@ $(function() {
 			$("#model").attr("value", $pageName);
 			$("#formff").submit();
 			break;
+		default:
+			openWin();
+		break;
 		}
 	});
 	
