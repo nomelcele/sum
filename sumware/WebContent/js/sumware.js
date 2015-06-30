@@ -35,11 +35,15 @@ $(function() {
 			$("#formff").submit();
 			break;
 		case ("mail"):
-			window.location.href = "";
+			$("#formff").attr("action","mail/mailFromList").submit();
 			break;
 		case ("board"):
-			$("#model").attr("value", $pageName);
-			$("#formff").submit();
+//			$("#model").attr("value", $pageName);
+			$("#bdeptno").attr("value", "${sessionScope.v.memdept}");
+			$("#bname").attr("value", "공지사항");
+			$("#bgnum").attr("value", "0");
+			$("#page").attr("value", "1");
+			$("#formff").attr("action","board/boardList").submit();
 			break;
 		default:
 			openWin();
@@ -154,7 +158,7 @@ function loginChk() {
 			} else if (result == 1) {
 				location = "firstLoginForm";
 			} else {
-				location = "index";
+				location = "home.index";
 			}
 		}
 	});

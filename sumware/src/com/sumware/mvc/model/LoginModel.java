@@ -22,7 +22,7 @@ public class LoginModel{
 	
 	@RequestMapping(value="login")
 	public void login(MemberVO mvo,HttpSession session,HttpServletResponse response) throws IOException{
-		String result="home/index";
+		String result="home.index";
 		try {
 			String res = dao.ckFirstLogin(mvo);
 
