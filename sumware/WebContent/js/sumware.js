@@ -188,7 +188,7 @@ function formSub(res) {
 
 function openWin() {
 	var opt = "width=700, height=800, scrollbars=yes";
-	window.open("messengerForm?userNum=${sessionScope.v.memnum}",
+	window.open("messengerForm",
 			"MessengerMain", opt);
 }
 function selectMenu(sel) {
