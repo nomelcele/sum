@@ -1,54 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<script>
-	function hateWorking(tonum){
-		console.log("거절했다~!!!!");
-	 	$(".title"+tonum).toggle("slow");
-	}
-	
-	function tosend(tonumval){
-		$.ajax({
-			type : "post",
-			url : "/toUpFk",
-			data : {
-// 				model:"todo", 
-// 				submod:"toUpFk", 
-				memnum:"${sessionScope.v.memnum }",
-				tomem:$('#inputSuccess'+tonumval).val(),
-				toconfirm:"n",
-				tonum:tonumval,
-				tocomm:$('#tocomm'+tonumval).val()
-				},
-			success : function(result){
-				$("#menuTarget").html(result);
-			}
-		});
-		
-		alert("업무를 전송하였습니다.");
-		}
-	
-	function getJobDetail(tonum){
-		$("#memlisttarget"+tonum).toggle("slow");
-		$("#detail"+tonum).toggle("slow");
-		$.ajax({
-			type : "post",
-			url : "/showmemlist",
-			data : {
-// 				model:"todo", 
-// 				submod:"showmemlist", 
-				jobtonum:tonum,
-				},
-			success : function(result){
-				$("#memlisttarget"+tonum).html(result);
-			
-			}
-		});
-	}
-</script>
-
-</head>
 <!-- 부장의 업무관리 ajax -->
 <div class="chat-panel panel panel-default">
 	<div class="panel-heading">
