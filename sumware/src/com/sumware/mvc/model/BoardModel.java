@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.PageVO;
 import com.sumware.mvc.dao.BoardDao;
+import com.sumware.util.MyMap;
+import com.sumware.util.MyPage;
 
 @Controller
 public class BoardModel {
@@ -22,13 +24,15 @@ public class BoardModel {
 	
 	@RequestMapping(value="board/boardList")
 	public ModelAndView getList(Map<String,Integer> map,HttpSession ses,
-			HttpServletRequest req,PageVO vo){
+			HttpServletRequest req){
 		System.out.println("BoardModel : getList()");
-		ModelAndView mav = new ModelAndView("board/boardList");
+		ModelAndView mav = new ModelAndView("board.boardList");
 		MemberVO v = new MemberVO();
 		v = (MemberVO) ses.getAttribute("v");
-		map.put("begin", Integer.parseInt(req.getParameter("begin")));
-		map.put("end", Integer.parseInt(req.getParameter("end")));
+		int bgnum = Integer.parseInt(req.getParameter("bgnum"));
+		map = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);
+//		map.put("begin", Integer.parseInt(req.getParameter("begin")));
+//		map.put("end", Integer.parseInt(req.getParameter("end")));
 		map.put("bdeptno", v.getMemdept());
 		if(req.getParameter("bgnum")==null){
 			map.put("bgnum",0);
@@ -36,7 +40,7 @@ public class BoardModel {
 			map.put("bgnum", Integer.parseInt(req.getParameter("bgnum")));
 		}
 		mav.addObject("list",dao.getList(map));
-		System.out.println(dao.getList(map).toString());
+//		System.out.println(dao.getList(map).toString());
 		return mav;
 	}
 	

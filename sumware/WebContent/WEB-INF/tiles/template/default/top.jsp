@@ -28,7 +28,12 @@
 				<!-- 		    </div> -->
 				<div class="nav navbar-right">
 				<form action="goFunc" method="post" id="formff">
-				<input type="hidden" name="model" id="model">
+					<input type="hidden" name="model" id="model">
+					<input type="hidden" name="page" id="page">
+					<input type="hidden" name="bgnum" id="bgnum">
+					<input type="hidden" name="bname" id="bname">
+					<input type="hidden" name="bdeptno" id="bdeptno">
+					<input type="hidden" name="cal" value="1">
 					<!-- navbar-nav(S) -->
 					<ul class="nav navbar-nav">
 						<li><a href="home">Main</a></li>
@@ -36,7 +41,7 @@
 <%-- 						<li><a href="sumware?model=mail&submod=mailFromList&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}&page=1">Mail</a></li> --%>
 						<li><a href="">Mail</a></li>
 						<li><a href="">Calendar</a>
-					<%--<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept}&bgnum=0&bname=공지사항">Board</a></li> --%>
+					<%--<li><a href="sumware?page=1&bdeptno=${sessionScope.v.memdept}&bgnum=0&bname=공지사항">Board</a></li> --%>
 						<li><a href="">Board</a></li>
 						<li><a href="#">Messenger<span
 								id="countRoomNum"></span></a></li>
