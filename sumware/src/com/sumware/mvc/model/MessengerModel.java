@@ -35,9 +35,13 @@ public class MessengerModel implements ModelInter {
 
 	// 메신저 폼
 	@RequestMapping(value = "messengerForm")
-	public String messengerForm(int userNum, Model model) {
+	public String messengerForm(HttpSession session, Model model) {
 		List<MemberVO> list = medao.getList();
 		ArrayList<MemberVO> resList = new ArrayList<MemberVO>();
+		
+		MemberVO vo = (MemberVO) session.getAttribute("v");
+		int userNum = vo.getMemnum();
+		
 		for(MemberVO v : list){
 			if(userNum != v.getMemnum()){
 				resList.add(v);
