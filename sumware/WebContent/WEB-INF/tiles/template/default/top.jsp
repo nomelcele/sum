@@ -27,7 +27,7 @@
 				<!-- 		   	<div class="porm-group"> -->
 				<!-- 		    </div> -->
 				<div class="nav navbar-right">
-				<form action="goFunc" method="post" id="formff">
+				<form action="goFunc" method="get" id="formff">
 					<input type="hidden" name="model" id="model">
 					<input type="hidden" name="page" id="page">
 					<input type="hidden" name="bgnum" id="bgnum">

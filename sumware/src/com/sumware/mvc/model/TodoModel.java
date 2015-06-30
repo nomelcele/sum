@@ -41,7 +41,7 @@ public class TodoModel {
 	}
 
 	// 메뉴바에서 todo메뉴 첫 진입 시
-	@RequestMapping(value = "/firsttodoForm", method = RequestMethod.GET)
+	@RequestMapping(value = "firsttodoForm", method = RequestMethod.GET)
 	public String firsttodoForm(Model model, HttpSession session) {
 		System.out.println("메뉴에서 todo 누름");
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
