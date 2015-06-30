@@ -42,10 +42,13 @@ public class TodoModel {
 
 	// 메뉴바에서 todo메뉴 첫 진입 시
 	@RequestMapping(value = "/firsttodoForm", method = RequestMethod.GET)
-	public String firsttodoForm(Model model, MemberVO mvo, HttpSession session) {
-		
+	public String firsttodoForm(Model model, HttpSession session) {
+		System.out.println("메뉴에서 todo 누름");
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		System.out.println("세션 가져왓니? : "+mvo.getMemnum());
 		List<MemberVO> list = tdao.getTomem(mvo.getMemnum());
 	
+		//그 부서의 팀장들 정보
 		session.setAttribute("teamNameList", list);
 
 		int todept = mvo.getMemdept();
@@ -59,8 +62,9 @@ public class TodoModel {
 	}
 
 	// 업무추가 폼
-	@RequestMapping(value = "/addtodoForm", method = RequestMethod.POST)
+	@RequestMapping(value = "addtodoForm", method = RequestMethod.POST)
 	public String addtodoForm(MemberVO mvo,Model model) {
+		
 		System.out.println("memnum : "+mvo.getMemnum());
 		List<MemberVO> list = tdao.getTomem(mvo.getMemnum());
 
@@ -71,7 +75,7 @@ public class TodoModel {
 	///////////////////////////////////////////////////////////////////////////////
 
 	// 업무 추가 (파일 업로드)
-	@RequestMapping(value = "/addTodo", method = RequestMethod.POST)
+	@RequestMapping(value = "addTodo", method = RequestMethod.POST)
 	public ModelAndView addTodo(@RequestParam("tofile") MultipartFile tofile,
 			TodoVO tvo, HttpSession session) {
 		System.out.println("업무추가 모델 매핑!!");

@@ -138,23 +138,23 @@
 	<!-- left-menu(S) -->
 	<div class="left-menu" id="left-menu">
 	<ul>
-		<li><a href="javascript:selectMenu('deptTodo')">부서 업무</a> </li>
+		<li><a href="javascript:selectMenu('deptTodo',${sessionScope.v.memdept})">부서 업무</a> </li>
 		
 			<c:if test="${sessionScope.v.memauth gt 3 }">
-				<li><a href="javascript:selectMenu('teamTodoForm')">팀 업무</a></li>
+				<li><a href="javascript:selectMenu('teamTodoForm',${sessionScope.v.memnum})">팀 업무</a></li>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
-				<li><a href="javascript:selectMenu('manageJob1')">업무관리</a></li>
+				<li><a href="javascript:selectMenu('manageJob1',${sessionScope.v.memnum})">업무관리</a></li>
 				
 			</c:if>
 			<c:if test="${sessionScope.v.memauth eq 4 }">
-				<li><a href="javascript:selectMenu('manageJob2')">업무관리</a></li>
+				<li><a href="javascript:selectMenu('manageJob2',${sessionScope.v.memnum})">업무관리</a></li>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth lt 4 }">
-				<li><a href="javascript:selectMenu('giveJob1')">업무부여</a></li>
+				<li><a href="javascript:selectMenu('giveJob1',${sessionScope.v.memnum})">업무부여</a></li>
 			</c:if>
 			<c:if test="${sessionScope.v.memauth eq 4 }">
-				<li><a href="javascript:selectMenu('giveJob2')">업무부여</a></li>
+				<li><a href="javascript:selectMenu('giveJob2',${sessionScope.v.memnum})">업무부여</a></li>
 			</c:if>
 	</ul>
 	</div>
