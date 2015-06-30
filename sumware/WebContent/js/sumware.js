@@ -122,7 +122,7 @@ function enterCheck(res) {
 }
 //로그인 3회....
 function loginChk() {
-	var c = 1;
+	
 	$.ajax({
 		url : "login",
 		type : "GET",
@@ -131,7 +131,6 @@ function loginChk() {
 			mempwd : $("#mempwd").val()
 		},
 		success : function(result) {
-			alert("우선 성공::"+result);
 			result = result.trim();
 			alert(result);
 			if (result == 0) {
@@ -139,12 +138,8 @@ function loginChk() {
 				c++;
 				if (c > 3) {
 					$.ajax({
-						url : "login",
+						url : "getCap",
 						type : "POST",
-						data : {
-							model : "join",
-							submod : "getCap"
-						},
 						success : function(result) {
 							$('#capBody').html(result);
 							$('#capModal').modal('toggle');
@@ -152,7 +147,7 @@ function loginChk() {
 					});
 				}
 			} else if (result == 1) {
-				location = "login?model=login&submod=firstLoginForm";
+				location = "firstLoginForm";
 			} else {
 				location = "home";
 			}
@@ -163,15 +158,13 @@ function loginChk() {
 
 //보안문자에서의 폼전달
 function capClick() {
-	$("#Captarget").load("sumware", {
-		model : "join",
-		submod : "viewCap",
+	$("#Captarget").load("viewCap", {
 		password : $("#capPassword").val()
 	}, function() {
 		var captcha = $("#Captarget").text().trim();
 		console.log(captcha)
 		if (captcha == "ok") {
-			location = "index.jsp";
+			location = "home";
 		} else {
 			alert("보안문자 확인해주세요.");
 		}
