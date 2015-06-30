@@ -189,7 +189,8 @@ function openWin() {
 	window.open("messengerForm",
 			"MessengerMain", opt);
 }
-function selectMenu(sel) {
+
+function selectMenu(sel,senddata) {
 	// 메뉴 선택
 	if (sel == 'deptTodo') {
 		// 부서업무 버튼
@@ -197,9 +198,9 @@ function selectMenu(sel) {
 			type : "post",
 			url : "todoForm",
 			data : {
-				//						model:"todo", 
-				// 						submod:"todoForm",
-				memdept : "${sessionScope.v.memdept}"
+		
+				memdept : senddata
+//				memdept : "${sessionScope.v.memdept}"
 			},
 			success : function(result) {
 
@@ -209,19 +210,22 @@ function selectMenu(sel) {
 		});
 	} else if (sel == 'giveJob1') {
 		// 부장일 때 업무 부여 버튼
+
 		$.ajax({
 			type : "post",
 			url : "addtodoForm",
 			data : {
-				// 						model:"todo", 
-				// 						submod:"addtodoForm",
-				memnum : "${sessionScope.v.memnum}"
+				
+				memnum : senddata
 			},
 			success : function(result) {
 
 				$("#menuTarget").html(result);
 
-			}
+			},
+			 error: function(a, b) {
+                 alert("Request: " + JSON.stringify(a));
+             }
 		});
 	} else if (sel == 'manageJob2') {
 		// 팀장일 때 업무 관리 버튼
@@ -229,9 +233,7 @@ function selectMenu(sel) {
 			type : "post",
 			url : "checkTodoList",
 			data : {
-				//  						model:"todo", 
-				// 						submod:"checkTodoList",
-				memnum : "${sessionScope.v.memnum}"
+				memnum : senddata
 			},
 			success : function(result) {
 
@@ -245,9 +247,8 @@ function selectMenu(sel) {
 			type : "post",
 			url : "fWMana",
 			data : {
-				//  						model:"todo", 
-				// 						submod:"fWMana",
-				memnum : "${sessionScope.v.memnum}"
+
+				memnum : senddata
 			},
 			success : function(result) {
 
@@ -261,9 +262,8 @@ function selectMenu(sel) {
 			type : "post",
 			url : "giveJobForm",
 			data : {
-				//  						model:"todo", 
-				// 						submod:"giveJobForm",
-				memnum : "${sessionScope.v.memnum}"
+
+				memnum : senddata
 			},
 			success : function(result) {
 
@@ -277,9 +277,7 @@ function selectMenu(sel) {
 			type : "post",
 			url : "teamTodoForm",
 			data : {
-				//  						model:"todo", 
-				// 						submod:"teamTodoForm",
-				memmgr : "${sessionScope.v.memnum}"
+				memmgr : senddata
 			},
 			success : function(result) {
 
