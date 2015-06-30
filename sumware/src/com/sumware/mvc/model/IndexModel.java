@@ -21,6 +21,7 @@ public class IndexModel{
 	//
 	@RequestMapping(value="/goFunc", method=RequestMethod.POST)
 	public ModelAndView goFunc(HttpServletRequest request){
+		System.out.println("indexModel!!!!!!!!!!!!!!!!!!!!!");
 		String page=request.getParameter("model");
 		HttpSession ses = request.getSession();
 		ses.setAttribute("model", page);
@@ -36,7 +37,7 @@ public class IndexModel{
 			page="calendar/calTest";
 		}
 		ModelAndView mav = new ModelAndView(page);
-		
+		mav.addObject(request);
 		return mav;
 	}
 }

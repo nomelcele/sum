@@ -7,22 +7,23 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.PageVO;
 import com.sumware.mvc.dao.BoardDao;
-import com.sumware.util.MyPage;
 
 @Controller
 public class BoardModel {
 	@Autowired
 	private BoardDao dao;
 	
-	@RequestMapping(value="/boardList")
+	@RequestMapping(value="board/boardList")
 	public ModelAndView getList(Map<String,Integer> map,HttpSession ses,
 			HttpServletRequest req,PageVO vo){
+		System.out.println("BoardModel : getList()");
 		ModelAndView mav = new ModelAndView("board/boardList");
 		MemberVO v = new MemberVO();
 		v = (MemberVO) ses.getAttribute("v");
