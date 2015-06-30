@@ -18,7 +18,12 @@ public class LoginDao {
 	}
 	
 	public String ckFirstLogin(MemberVO mvo){
-		return st.selectOne("login.ckFirstLogin",mvo);
+		String res="";
+		res = st.selectOne("login.ckFirstLogin",mvo);
+		if(res==null||res.equals("")){
+			res="0";
+		}
+		return res;
 	}
 	public void inLog(int memnum) {
 		st.insert("login.inLog",memnum);

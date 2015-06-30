@@ -130,6 +130,7 @@ function loginChk() {
 			mempwd : $("#mempwd").val()
 		},
 		success : function(result) {
+			alert("우선 성공::"+result);
 			result = result.trim();
 			if (result == 0) {
 				alert(c + "회 로그인실패");
