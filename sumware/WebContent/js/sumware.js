@@ -122,6 +122,7 @@ function enterCheck(res) {
 }
 //로그인 3회....
 function loginChk() {
+	var c = 1;
 	$.ajax({
 		url : "login",
 		type : "GET",
@@ -132,6 +133,7 @@ function loginChk() {
 		success : function(result) {
 			alert("우선 성공::"+result);
 			result = result.trim();
+			alert(result);
 			if (result == 0) {
 				alert(c + "회 로그인실패");
 				c++;
