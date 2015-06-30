@@ -39,7 +39,6 @@
 	
 	// 사원 list를 push를 사용하여 출력 하자 ~~~ 
 	if(typeof(EventSource) != "undefined"){	
-		alert("사원 List 출력!");
 		var eventSourceList = new EventSource("mesListLoad");
 		eventSourceList.onmessage = function(event){
 			$('#msgList').html(event.data);	

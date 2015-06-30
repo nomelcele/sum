@@ -160,7 +160,7 @@
 
 	function openWin(){
 		var opt= "width=700, height=800, scrollbars=yes";	
-		window.open("messengerForm?userNum=${sessionScope.v.memnum}","MessengerMain",opt);
+		window.open("messengerForm","MessengerMain",opt);
 	}
 	function selectMenu(sel){
 		// 메뉴 선택
