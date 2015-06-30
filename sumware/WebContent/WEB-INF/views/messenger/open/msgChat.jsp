@@ -80,6 +80,7 @@
 	}
 	function sendMsg() {
 		var msgchat = document.getElementById("msgText");
+		alert("메시지 내용:"+msgchat.value);
 		var sendCont = "${sessionScope.v.memname } : "+msgchat.value+"\n";
 		$('#msgWindow').scrollTop(document.getElementById('msgWindow').scrollHeight);
 		msgSocket.send(sendCont);
