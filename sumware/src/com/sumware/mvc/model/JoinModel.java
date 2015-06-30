@@ -48,7 +48,7 @@ public class JoinModel{
 	    mdao.update(mvo);
 	    //모든 세션 정보를 삭제함 ...
 		session.invalidate();	
-		return "home/login";	
+		return "home/index";	
 	}
 	
 	@RequestMapping(value="/viewCap",method=RequestMethod.POST)
@@ -89,7 +89,7 @@ public class JoinModel{
 		System.out.println("aa : " + captchas.check(password));
 		request.setAttribute("body", body);
 	
-		return "join/captcha";
+		return "join/cap/captcha";
 		
 	}
 	
@@ -104,7 +104,7 @@ public class JoinModel{
 		);
 		request.setAttribute("capImg", captchas.image());
 		
-		return "join/getCap";
+		return "join/cap/getCap";
 	}
 	
 	@RequestMapping(value="/modifyProfile",method=RequestMethod.POST)
