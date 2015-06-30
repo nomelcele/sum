@@ -56,6 +56,7 @@ public class LoginModel{
 		pw.flush();
 		pw.close();
 	}
+	
 	@RequestMapping(value="logout")
 	public void logout(int memnum,HttpSession session,HttpServletResponse response) throws IOException{
 		dao.outLog(memnum);
@@ -63,13 +64,16 @@ public class LoginModel{
 		session.removeAttribute("teamNameList");
 		session.invalidate();
 		PrintWriter pw = response.getWriter();
-		pw.write("sucess");
+		pw.write("success");
 		pw.flush();
+		pw.close();
 	}
+	
 	@RequestMapping(value="firstLoginForm")
 	public String firstLoginForm(){
 		return "join/member";
 	}
+	
 //	@Override
 //	pubString submod = request.getParameter("submod");
 //		System.out.println("submod:" + submod);
