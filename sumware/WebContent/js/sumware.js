@@ -20,31 +20,28 @@ $(function() {
 	$(".navbar-nav li a").click(function(e) {
 		// 앵커태그 새로고침 이벤트 방지
 		e.preventDefault();
-		var pageName = $(this).text().toLowerCase();
-		switch (pageName) {
+		$pageName = $(this).text().toLowerCase();
+		alert($pageName);
+		switch ($pageName) {
 		case ("main"):
-			$("#model").attr("value", pageName);
-//		alert(pageName);
-			$("form").submit();
+			$("#model").attr("value", $pageName);
+			$("#formff").submit();
 			break;
 		case ("todo"):
-			$("#model").attr("value", pageName);
-//		alert(pageName);
-			$("form").submit();
+			$("#model").attr("value", $pageName);
+			$("#formff").submit();
 			break;
 		case ("calendar"):
-			$("#model").attr("value", pageName);
-//		alert(pageName);
-			$("form").submit();
+			$("#model").attr("value", $pageName);
+			$("#formff").submit();
 			break;
 		case ("mail"):
 			window.location.href = "";
-		break;
+			break;
 		case ("board"):
-			$("#model").attr("value", pageName);
-//			alert(pageName);
-			$("form").submit();
-			// window.location.href = "boardList";
+			alert($pageName+"@@@@");
+			$("#model").attr("value", $pageName);
+			$("#formff").submit();
 			break;
 		}
 	});
