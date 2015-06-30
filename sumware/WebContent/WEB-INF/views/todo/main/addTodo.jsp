@@ -13,11 +13,10 @@
 				<div class="panel-body">
 					<div class="column">
 
-						<form role="form" action="addTodo" method="post" name="addTodoForm" id="addTodoForm"
-							enctype="multipart/form-data">
+						<form role="form" action="addTodo" method="post" name="addTodoForm" id="addTodoForm" enctype="multipart/form-data">
 							 <input type="hidden" name="todept" value="${sessionScope.v.memdept }">
-							 <input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
-							 <input type="hidden" name="memdept" value="${sessionScope.v.memdept }">
+<%-- 							 <input type="hidden" name="memnum" value="${sessionScope.v.memnum }"> --%>
+<%-- 							 <input type="hidden" name="memdept" value="${sessionScope.v.memdept }"> --%>
 
 							<div class="form-group has-success">
 								<label class="control-label"><i class="fa fa-pencil"></i> 업무 제목</label> 

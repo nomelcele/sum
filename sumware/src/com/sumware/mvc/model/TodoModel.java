@@ -33,20 +33,37 @@ public class TodoModel {
 
 	// todo 기본 페이지
 	@RequestMapping(value = "/todoForm", method = RequestMethod.POST)
-	public String todoForm(Model model, int memdept) {
-		int todept = memdept;
+	public String todoForm(Model model, HttpSession session) {
+		MemberVO mvo =(MemberVO) session.getAttribute("v");
+		int todept = mvo.getMemdept();
 		List<TodoVO> deptJobList = tdao.getDeptJob(todept);
 		model.addAttribute("deptJobList", deptJobList);
 
 		return "todo/main/todo";
 	}
 
+	// addTodo 후에 todo 메인페이지로 돌아가는 작업
+	@RequestMapping(value="afterAddTodo")
+	public String afterAddTodo(Model model, HttpSession session){
+		
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		
+		int todept = mvo.getMemdept();
+		// 부서 업무리스트 뽑아줌
+		List<TodoVO> deptJobList = tdao.getDeptJob(todept);
+
+		model.addAttribute("deptJobList", deptJobList);
+		
+		return "todo.todoMain";
+	}
+	
+	
 	// 메뉴바에서 todo메뉴 첫 진입 시
 	@RequestMapping(value = "firsttodoForm", method = RequestMethod.POST)
 	public String firsttodoForm(Model model, HttpSession session,HttpServletRequest req) {
-		System.out.println("메뉴에서 todo 누름");
+
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
-		System.out.println("세션 가져왓니? : "+mvo.getMemnum());
+
 		session.setAttribute("model", req.getParameter("model"));
 		List<MemberVO> list = tdao.getTomem(mvo.getMemnum());
 	
@@ -82,7 +99,7 @@ public class TodoModel {
 			TodoVO tvo, HttpSession session) {
 		System.out.println("업무추가 모델 매핑!!");
 		
-		ModelAndView mav = new ModelAndView("redirect:/firsttodoForm");
+		ModelAndView mav = new ModelAndView("redirect:/afterAddTodo");
 
 		StringBuffer path = new StringBuffer();
 		path.append(session.getServletContext().getRealPath("/"))
