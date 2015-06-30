@@ -12,7 +12,7 @@
 		calcont from calendar
 		<where>
 			<choose>
-				<when test="cal=='1'">
+				<when test="cal==1">
 					calmem=#{calmem}					
 				</when>
 				<otherwise>
