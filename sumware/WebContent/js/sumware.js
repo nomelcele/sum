@@ -28,7 +28,8 @@ $(function() {
 			break;
 		case ("todo"):
 			$("#model").attr("value", $pageName);
-			$("#formff").submit();
+			$("#formff").attr("action","firsttodoForm").submit();
+		
 			break;
 		case ("calendar"):
 			$("#model").attr("value", $pageName);
