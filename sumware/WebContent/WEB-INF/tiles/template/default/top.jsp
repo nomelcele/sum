@@ -38,7 +38,7 @@
 						<li><a href="#">Calendar</a>
 					<%--<li><a href="sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept}&bgnum=0&bname=공지사항">Board</a></li> --%>
 						<li><a href="#">Board</a></li>
-						<li><a href="javascript:openWin()">Messenger <span
+						<li><a href="javascript:openWin()">Messenger<span
 								id="countRoomNum"></span></a></li>
 						<c:if test="${sessionScope.v.memdept eq 100 and sessionScope.v.memauth lt 4 }">
 							<li><a href="sumware?model=join&submod=addMemberForm">Admin</a></li>
