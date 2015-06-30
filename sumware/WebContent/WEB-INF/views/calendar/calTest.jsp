@@ -106,12 +106,6 @@ $(function(){
 <!-- include 페이지에서 닫아주는 태그 가져와야 함.
 	이게 tiles 로도 가능 하겠지?...
  -->
-<div  class="wrap-layout wrap">
-	<div class="lnb-area" id="lnb-area">
-		<!-- left menu !!!! 들어갈 자리 -->
-	</div>
-	<div class="contents">
-
 			<div class="">
 				<div style="text-align: right;padding: 10px;">
 					<input type="button" class="btn btn-outline btn-primary btn-xs" id="calDept" value="부서일정" onclick="location='calList?cal=0'">
@@ -119,5 +113,3 @@ $(function(){
 				</div>
 				<div id='calendar'></div>
 			</div>
-	</div>
-</div>
