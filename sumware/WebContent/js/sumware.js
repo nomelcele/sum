@@ -44,7 +44,7 @@ $(function() {
 			$("#bname").attr("value", "공지사항");
 			$("#bgnum").attr("value", "0");
 			$("#page").attr("value", "1");
-			$("#formff").attr("action","board/boardList").submit();
+			$("#formff").attr("action","boardList").submit();
 			break;
 		default:
 			openWin();
