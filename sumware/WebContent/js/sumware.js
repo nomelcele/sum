@@ -21,7 +21,6 @@ $(function() {
 		// 앵커태그 새로고침 이벤트 방지
 		e.preventDefault();
 		$pageName = $(this).text().toLowerCase();
-		alert($pageName);
 		switch ($pageName) {
 		case ("main"):
 			$("#model").attr("value", $pageName);
@@ -39,7 +38,6 @@ $(function() {
 			window.location.href = "";
 			break;
 		case ("board"):
-			alert($pageName+"@@@@");
 			$("#model").attr("value", $pageName);
 			$("#formff").submit();
 			break;

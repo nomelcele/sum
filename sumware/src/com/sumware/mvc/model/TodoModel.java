@@ -67,6 +67,8 @@ public class TodoModel {
 		model.addAttribute("teamNameList", list);
 		return "todo/main/addTodo";
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////
 
 	// 업무 추가 (파일 업로드)
 	@RequestMapping(value = "/addTodo", method = RequestMethod.POST)
