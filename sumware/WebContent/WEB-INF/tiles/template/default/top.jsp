@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
 <nav class="navbar navbar">
 	<div class="container">
 		<div class="navbar-header">
@@ -30,7 +28,7 @@
 				<!-- 		    </div> -->
 				<div class="nav navbar-right">
 				<form action="" method="GET">
-				<input type="hidden" name="model" value="">
+<!-- 				<input type="hidden" name="model" value=""> -->
 					<!-- navbar-nav(S) -->
 					<ul class="nav navbar-nav">
 						<li><a href="home">Main</a></li>
@@ -41,30 +39,26 @@
 						<li><a href="">Board</a></li>
 						<li><a href="javascript:openWin()">Messenger <span
 								id="countRoomNum"></span></a></li>
-						<c:if
-							test="${sessionScope.v.memdept eq 100 and sessionScope.v.memauth lt 4 }">
+						<c:if test="${sessionScope.v.memdept eq 100 and sessionScope.v.memauth lt 4 }">
 							<li><a href="sumware?model=join&submod=addMemberForm">Admin</a></li>
 						</c:if>
 					</ul>
 					<!-- navbar-nav(E) -->
-				</form>
 					<ul class="nav navbar-right navbar-nav user-name">
 						<c:if test="${empty sessionScope.v.memname}">
 							<li><span class="control-label-"> <strong>${sessionScope.memnum}</strong>
 									님 환영합니다.
 							</span></li>
-							<li><a href="javascript:logout(${sessionScope.memnum})"><i
-									class="fa fa-check fa-lg"></i>로그아웃</a></li>
+							<li><button type="button" class="btn btn-xs btn-info" onclick="logout(${sessionScope.memnum})">로그아웃</button></li>
 						</c:if>
 						<c:if test="${!empty sessionScope.v.memname}">
 							<li><span class="control-label-"> <strong>${sessionScope.v.memname}</strong>
 									님 환영합니다.
 							</span></li>
-							<li><a href="javascript:logout(${sessionScope.v.memnum})"><i
-									class="fa fa-check fa-lg"></i>로그아웃</a></li>
+							<li><button type="button" class="btn btn-xs btn-info" onclick="logout(${sessionScope.v.memnum})">로그아웃</button></li>
 						</c:if>
-
 					</ul>
+				</form>
 				</div>
 			</c:otherwise>
 		</c:choose>
