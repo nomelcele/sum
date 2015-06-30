@@ -40,12 +40,14 @@
 </head>
 <body>
 	<tiles:insertAttribute flush="true" name="header" />
+	<div class="wrap-layout board">
 	<div class="lnb-area" id="lnb-area">
 		<tiles:insertAttribute flush="true" name="menu" />
 	</div>
 	<div class="contents">
 		<!-- body -->
 		<tiles:insertAttribute flush="true" name="body" />
+	</div>
 	</div>
 	<!-- footer -->
 	<tiles:insertAttribute flush="true" name="footer" />

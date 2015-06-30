@@ -153,13 +153,8 @@
 	width: 40px;
 }
 </style>
-<div id="global" class="wrap-layout board">
-	<div class="lnb-area" id="lnb-area">
-		<!-- contentLeft -->
-	</div>
 	<!-- 부서업무 부분!! -->
 	<!-- menutarget 부분 -->
-	<div class="contents">
 		<div class="col-lg-4" style="width: 50%" id="menuTarget">
 			<div class="chat-panel panel panel-default">
 				<div class="panel-heading">
@@ -253,5 +248,3 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	</div>
