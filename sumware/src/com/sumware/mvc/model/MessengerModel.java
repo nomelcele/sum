@@ -24,7 +24,7 @@ import com.sumware.mvc.service.ServiceInter;
 import com.sumware.util.SearchMem;
 
 @Controller
-public class MessengerModel implements ModelInter {
+public class MessengerModel{
 	@Autowired
 	private MessengerDao medao;
 	
