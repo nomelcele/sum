@@ -369,7 +369,7 @@ function todoConfirm(res) {
 
 }
 function todoFormGo(res) {
-	$('#model').attr("value", "todo");
+	//$('#model').attr("value", "todo");
 	if (res == 'approveTodo') {
 		// 팀장업무관리에서 승인버튼
 
