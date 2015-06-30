@@ -5,6 +5,16 @@
 // $(function(){}) == document.ready
 // $(window).onload(function(){}); == window.onload (이미지, js, 임포트된 외부 리소스 모두 로드
 // 이후에 js 해석)
+var c = 1;//로그인 실패 횟수
+console.log("typeof:" + typeof (EventSource));
+if (typeof (EventSource) != "undefined") {
+	var eventSourceList = new EventSource("mesCountMsg");
+	eventSourceList.onmessage = function(event) {
+		$('#countRoomNum').html(event.data);
+	};
+} else {
+	alert("해당 브라우저는 지원이 안됩니다.");
+}
 $(function() {
 	// DOM 요소 로드 이후에 실행되기 떄문에 이벤트가 뻑날일이 없음
 	$(".navbar-nav li a").click(function(e) {
@@ -13,18 +23,27 @@ $(function() {
 		var pageName = $(this).text().toLowerCase();
 		switch (pageName) {
 		case ("main"):
-			window.location.href = "home";
+			$("#model").attr("value", pageName);
+//		alert(pageName);
+			$("form").submit();
 			break;
 		case ("todo"):
-			window.location.href = "todo";
+			$("#model").attr("value", pageName);
+//		alert(pageName);
+			$("form").submit();
 			break;
 		case ("calendar"):
-			window.location.href = "calList";
+			$("#model").attr("value", pageName);
+//		alert(pageName);
+			$("form").submit();
 			break;
+		case ("mail"):
+			window.location.href = "";
+		break;
 		case ("board"):
-			$(".navbar-nav form").attr("action", "boardList");
-			$(".navbar-nav input").attr("value", pageName);
-			$(".navbar-nav form").submit();
+			$("#model").attr("value", pageName);
+//			alert(pageName);
+			$("form").submit();
 			// window.location.href = "boardList";
 			break;
 		}
@@ -41,7 +60,7 @@ function logout(memnum) {
 		},
 		success : function(result) {
 			console.log("logout result: " + result);
-			location = "home";
+			location = "index";
 		}
 	});
 }
@@ -91,16 +110,6 @@ function getJobDetail(tonum) {
 		}
 	});
 }
-var c = 1;//로그인 실패 횟수
-console.log("typeof:" + typeof (EventSource));
-if (typeof (EventSource) != "undefined") {
-	var eventSourceList = new EventSource("mesCountMsg");
-	eventSourceList.onmessage = function(event) {
-		$('#countRoomNum').html(event.data);
-	};
-} else {
-	alert("해당 브라우저는 지원이 안됩니다.");
-}
 
 //엔터 체크
 function enterCheck(res) {
@@ -111,7 +120,7 @@ function enterCheck(res) {
 				snsSend();
 			} else if (res == 2) {
 				snsInsertComm();
-			} else if (rse == 3) {
+			} else if (res == 3) {
 				loginChk();
 			}
 
@@ -122,7 +131,6 @@ function enterCheck(res) {
 }
 //로그인 3회....
 function loginChk() {
-	
 	$.ajax({
 		url : "login",
 		type : "GET",
@@ -132,7 +140,6 @@ function loginChk() {
 		},
 		success : function(result) {
 			result = result.trim();
-			alert(result);
 			if (result == 0) {
 				alert(c + "회 로그인실패");
 				c++;
@@ -149,7 +156,7 @@ function loginChk() {
 			} else if (result == 1) {
 				location = "firstLoginForm";
 			} else {
-				location = "home";
+				location = "index";
 			}
 		}
 	});
