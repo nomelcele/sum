@@ -59,6 +59,7 @@ public class LoginModel{
 	
 	@RequestMapping(value="logout")
 	public void logout(int memnum,HttpSession session,HttpServletResponse response) throws IOException{
+		System.out.println("로그아웃 컨트롤러");
 		dao.outLog(memnum);
 		session.removeAttribute("v");
 		session.removeAttribute("teamNameList");
