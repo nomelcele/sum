@@ -43,6 +43,8 @@ public class TodoDao {
 				st.update("todo.confirmTodoY", tvo);
 			}else if(toconfirm.equals("z")){
 				st.update("todo.confirmTodoZ", tvo);
+			}else if(toconfirm.equals("o")){
+				st.update("todo.confirmTodoO", tvo);
 			}
 			
 		}

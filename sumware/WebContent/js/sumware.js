@@ -305,7 +305,7 @@ function todoConfirm(res) {
 				// 					submod:"checkTodoList",
 				// 					childmod:"rejectTodo",
 				tonum : $('#rtonum').val(),
-				memnum : "${sessionScope.v.memnum }",
+				//memnum : "${sessionScope.v.memnum }",
 				tostdate : $('#rtostdate').val(),
 				toendate : $('#rtoendate').val(),
 				totitle : $('#rtotitle').val(),
@@ -330,7 +330,7 @@ function todoConfirm(res) {
 				// 					submod:"checkTodoList",
 				// 					childmod:"approveTodo",
 				tonum : $('#atonum').val(),
-				memnum : "${sessionScope.v.memnum }",
+				//memnum : "${sessionScope.v.memnum }",
 				tostdate : $('#atostdate').val(),
 				toendate : $('#atoendate').val(),
 				totitle : $('#atotitle').val(),
@@ -352,11 +352,10 @@ function todoConfirm(res) {
 			type : "post",
 			url : "successJob",
 			data : {
-				model : "todo",
 				// 					submod:"successJob",
 				tonum : $('#stonum').val(),
 				tocomm : $('#stocomm').val(),
-				memmgr : "${sessionScope.v.memmgr}"
+				//memmgr : "${sessionScope.v.memmgr}"
 			},
 			success : function(result) {
 				setTimeout(function() {

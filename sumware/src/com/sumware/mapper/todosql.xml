@@ -27,6 +27,10 @@
 	<update id="confirmTodoZ" parameterType="tvo">
 		update todo set toconfirm='z', tocomm=#{tocomm} where tonum=#{tonum}
 	</update>
+	
+	<update id="confirmTodoO" parameterType="tvo">
+		update todo set toconfirm='o', tocomm=#{tocomm} where tonum=#{tonum}
+	</update>
 
 	<select id="getDeptTodoList" parameterType="int" resultType="tvo">
 		select rownum torownum, tonum,to_char(tostdate,'yyyy-MM-dd')

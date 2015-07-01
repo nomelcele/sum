@@ -48,6 +48,7 @@ public class TodoModel {
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
 		
 		int todept = mvo.getMemdept();
+	
 		// 부서 업무리스트 뽑아줌
 		List<TodoVO> deptJobList = tdao.getDeptJob(todept);
 
@@ -91,30 +92,28 @@ public class TodoModel {
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////
-
+	
 	// 업무 추가 (파일 업로드)
 	@RequestMapping(value = "addTodo", method = RequestMethod.POST)
-	public ModelAndView addTodo(@RequestParam("tofile") MultipartFile tofile,
-			TodoVO tvo, HttpSession session) {
-		
-		System.out.println("업무추가 모델 매핑!!");
+	public ModelAndView addTodo(TodoVO tvo,
+		 HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/afterAddTodo");
 
 		StringBuffer path = new StringBuffer();
 		path.append(session.getServletContext().getRealPath("/"))
-				.append("/upload/").append(tofile.getOriginalFilename());
+				.append("/upload/").append(tvo.getMfile().getOriginalFilename());
 
 		File f = new File(path.toString());
 		try {
-			tofile.transferTo(f);
+			tvo.getMfile().transferTo(f);
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
 
-		tvo.setTofile(tofile.getOriginalFilename());
+		tvo.setTofile(tvo.getMfile().getOriginalFilename());
+		tvo.setToconfirm("n");
 		
-		System.out.println("파일업로드");
 		tdao.addTodo(tvo);
 		
 		return mav;
@@ -230,18 +229,22 @@ public class TodoModel {
 		return "todo/main/jobDetail";
 	}
 
-	// 팀 업무 폼?
+	// 팀 업무 폼
 	@RequestMapping(value = "/teamTodoForm", method = RequestMethod.POST)
-	public String teamTodoForm(MemberVO mvo, Model model) {
+	public String teamTodoForm(HttpSession session, Model model) {
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
 		List<TodoVO> list = tdao.getTeamJob(mvo.getMemmgr());
 		model.addAttribute("teamJobList", list);
+		
 		return "todo/main/teamTodoForm";
 	}
 
 	// 업무 완료 처리
 	@RequestMapping(value = "/successJob", method = RequestMethod.POST)
 	public String successJob(Model model, TodoVO tvo) {
+		System.out.println("업무 완료 처리 들어옴");
 		tdao.confirmTodo(tvo, "o");
+		
 		return "redirect:/teamTodoForm";
 	}
 

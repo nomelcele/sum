@@ -23,14 +23,14 @@ function getJobDetail(tonum){
 	});
 }
 
-function successJob(){
+// function successJob(){
 	
-	$('#tonum'+tonum).attr("value", tonum);
-	$('#successjob').submit();
+// 	$('#tonum'+tonum).attr("value", tonum);
+// 	$('#successjob').submit();
 	
-	alert("업무 완료 처리 하였습니다.");
+// 	alert("업무 완료 처리 하였습니다.");
 	
-}
+// }
 
 
 
