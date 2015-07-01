@@ -21,7 +21,7 @@
 				<div class="panel-body">
 					<!-- profile-img(S) -->
 					<span class="chat-img pull-left profile-img"><img
-						src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
+						src="resources/profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
 						class="img-circle" style="width: 100px; height: 130px;"> </span>
 					<!-- profile-img(E) -->
 
@@ -97,7 +97,7 @@
 			<div class="panel-body">
 				<!-- profile-img(S) -->
 				<span class="chat-img pull-left profile-img"><img
-					src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
+					src="resources/profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
 					class="img-circle" style="width: 100px; height: 130px;"> </span>
 				<!-- profile-img(E) -->
 
@@ -196,7 +196,7 @@
 		<div class="panel-body">
 			<!-- profile-img(S) -->
 			<span class="chat-img pull-left profile-img"><img
-				src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
+				src="resources/profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
 				class="img-circle" style="width: 100px; height: 130px;"> </span>
 			<!-- profile-img(E) -->
 
@@ -262,7 +262,7 @@
 					<div class="panel-body">
 						<!-- profile-img(S) -->
 						<span class="chat-img pull-left profile-img"><img
-							src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
+							src="resources/profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
 							class="img-circle" style="width: 100px; height: 130px;"> </span>
 						<!-- profile-img(E) -->
 
@@ -343,7 +343,7 @@
 				<div class="panel-body">
 					<!-- profile-img(S) -->
 					<span class="chat-img pull-left profile-img"><img
-						src="profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
+						src="resources/profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
 						class="img-circle" style="width: 100px; height: 130px;"> </span>
 					<!-- profile-img(E) -->
 
