@@ -32,11 +32,9 @@
 	</bean>
 	<!-- WebSocket -->
 	<websocket:handlers>
-		<websocket:mapping handler="myHandler" path="/myHandler"/>
+		<websocket:mapping handler="myHandler" path="/msgSocket"/>
 		<websocket:handshake-interceptors>
 			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 		</websocket:handshake-interceptors>
 	</websocket:handlers>
-	
-	<bean id="myHandler" class="com.sumware.mvc.socket.MyHandler"/>
 </beans>
