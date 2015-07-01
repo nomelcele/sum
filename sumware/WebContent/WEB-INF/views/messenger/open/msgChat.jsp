@@ -50,7 +50,7 @@
 	var sessionKey = "${key}";
 	var userNum="${userNum}";
 	var msgWindow = document.getElementById("msgWindow");
-	var msgSocket = new WebSocket("ws://192.168.7.169:80/sumware/msgSocket/myHandler");
+	var msgSocket = new WebSocket("ws://192.168.7.169:80/sumware/myHandler");
 	msgSocket.onopen = function processOpen(message) {
 		joinMsg(message);
 		
