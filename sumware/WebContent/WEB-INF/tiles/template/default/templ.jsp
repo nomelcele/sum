@@ -28,6 +28,18 @@
 <script src="js/board.js"></script>
 <script src="js/http.js"></script>
 <!-- <script src="js/bootstrap.min.js"></script> -->
+<c:if test="${sessionScope.model eq 'calendar' }">
+	<!-- 캘린더 -->
+	<spring:url value="resources/fjs/fullcalendar.min.css" var="fullcalendarCss"/>
+	<spring:url value="resources/fjs/lib/moment.min.js" var="momentJs"/>
+	<spring:url value="resources/fjs/fullcalendar.min.js" var="fullcalendarJs"/>
+	<spring:url value="resources/fjs/lang-all.js" var="langJs"/>
+	<link rel='stylesheet' href='${fullcalendarCss }' />
+	<script src='${momentJs }'></script>
+	<script src='${fullcalendarJs }'></script>
+	<script src='${langJs }'></script>
+	<!-- /캘린더 -->
+</c:if>
 <c:if test="${param.submod eq 'writeForm' }">
 	<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
 	<script src="js/myckeditor.js"></script>
