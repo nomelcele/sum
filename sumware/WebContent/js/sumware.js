@@ -13,14 +13,14 @@ if (typeof (EventSource) != "undefined") {
 }
 $(function() {
 	// DOM 요소 로드 이후에 실행되기 떄문에 이벤트가 뻑날일이 없음
+	// Main 페이지에서 각 네비바의 태그들 클릭 시 발생.
 	$(".navbar-nav li a").click(function(e) {
 		// 앵커태그 새로고침 이벤트 방지
 		e.preventDefault();
 		$pageName = $(this).text().toLowerCase();
 		switch ($pageName) {
 		case ("main"):
-			$("#model").attr("value", "");
-			$("#formff").submit();
+			$("#formff").attr("action","home").submit();
 			break;
 		case ("todo"):
 			$("#model").attr("value", $pageName);
@@ -48,14 +48,12 @@ $(function() {
 		}
 	});
 	
-//	//addTodo submit
-//	$("#addTodoFormSend").click(function(){
-//		alert("버튼 클릭");
-//		$("#addTodoForm").submit();
-//		alert("업무 등록!!");
-//	});
-	
-	
+	// boardList 에서 boardDetail 로 넘어 갈때. ----------------------------------
+	$('.board-list tbody tr a').click(function(e){
+//		alert("gkgkgk");
+		e.preventDefault();
+		$("#detailForm").submit();
+	});
 });
 function logout(memnum) {
 	$.ajax({
@@ -208,7 +206,6 @@ function selectMenu(sel,senddata) {
 			data : {
 		
 				memdept : senddata
-//				memdept : "${sessionScope.v.memdept}"
 			},
 			success : function(result) {
 
@@ -369,7 +366,6 @@ function todoConfirm(res) {
 		});
 		alert("업무 완료 처리 되었습니다.");
 	}
-
 }
 
 function todoFormGo(res) {
@@ -409,13 +405,10 @@ function getJobDetail(tonum) {
 		type : "post",
 		url : "/showmemlist",
 		data : {
-			// 				model:"todo", 
-			// 				submod:"showmemlist", 
 			jobtonum : tonum,
 		},
 		success : function(result) {
 			$("#memlisttarget" + tonum).html(result);
-
 		}
 	});
 }
@@ -457,6 +450,7 @@ function mailFormGo(res) {
 function mailSendFunc() {
 	$("#mailWriteF").submit();
 }
+
 // 메일-suggest 관련 함수
 var xhr = null;
 function getXMLHttpRequest() {
@@ -474,7 +468,6 @@ function sendRequest(url, param, callback, method) {
 	if (method == 'GET' && param != null) {
 		url = url + '?' + param;
 	}
-
 	xhr.onreadystatechange = callback;
 	xhr.open(method, url, true);
 	xhr.setRequestHeader("Content-Type",
