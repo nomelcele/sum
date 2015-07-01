@@ -36,6 +36,7 @@ public class BoardModel {
 		ses.setAttribute("model", req.getParameter("model"));
 		ses.setAttribute("bname", req.getParameter("bname"));
 		int bgnum = Integer.parseInt(req.getParameter("bgnum"));
+		ses.setAttribute("bbbgnum", bgnum);
 		map = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);
 //		map.put("begin", Integer.parseInt(req.getParameter("begin")));
 //		map.put("end", Integer.parseInt(req.getParameter("end")));
@@ -43,7 +44,7 @@ public class BoardModel {
 		if(req.getParameter("bgnum")==null){
 			map.put("bgnum",0);
 		}else{
-			map.put("bgnum", Integer.parseInt(req.getParameter("bgnum")));
+			map.put("bgnum", bgnum);
 		}
 		mav.addObject("list",dao.getList(map));
 //		System.out.println(dao.getList(map).toString());
@@ -53,9 +54,10 @@ public class BoardModel {
 	// 디테일 목록! 
 	@RequestMapping(value="boardDetail",method=RequestMethod.POST)
 	public ModelAndView getDetail(int no){
+		System.out.println("boardList 에서 넘어온 int no : "+no);
 		ModelAndView mav = new ModelAndView("board.boardDetail");
 		BoardVO v = dao.getDetail(no);
-		mav.addObject("list",v);
+		mav.addObject("board",v);
 		return mav;
 	}
 	

@@ -55,6 +55,7 @@ $(function() {
 		$("#detailForm").submit();
 	});
 });
+
 function logout(memnum) {
 	$.ajax({
 		url : "logout",
