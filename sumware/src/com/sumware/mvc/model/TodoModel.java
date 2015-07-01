@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -97,6 +96,7 @@ public class TodoModel {
 	@RequestMapping(value = "addTodo", method = RequestMethod.POST)
 	public ModelAndView addTodo(@RequestParam("tofile") MultipartFile tofile,
 			TodoVO tvo, HttpSession session) {
+		
 		System.out.println("업무추가 모델 매핑!!");
 		
 		ModelAndView mav = new ModelAndView("redirect:/afterAddTodo");
@@ -128,13 +128,14 @@ public class TodoModel {
 		// request.setAttribute("todoList", clist);
 		int tomem = memnum;
 		List<TodoVO> clist = tdao.checkTodoList(tomem);
+		
 		model.addAttribute("todoList", clist);
 		return "todo/main/checkTodoList";
 	}
 
 	// 팀장의 업무 승인!!!! y로 바꿔줌!! 캘린더에도 등록!!!!
 	@RequestMapping(value = "/approveTodo", method = RequestMethod.POST)
-	public String approveTodo(TodoVO tvo) {
+	public String approveTodo(Model model,HttpSession session, TodoVO tvo) {
 		// 리스트의 승인여부 n을 y로 바꿈!!!!
 		tdao.confirmTodo(tvo, "y");
 		// map.put("start",map.get("tostdate"));
@@ -148,15 +149,31 @@ public class TodoModel {
 		cvo.setCaldept(tvo.getTodept());
 		cvo.setCal("0");
 		cdao.calInsert(cvo);
+		
+		//팀장의 업무관리 할 것들 가져옴
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		int tomem = mvo.getMemnum();
+		List<TodoVO> clist = tdao.checkTodoList(tomem);
+		
+		model.addAttribute("todoList", clist);
+		
 		return "todo/main/checkTodoList";
 	}
 
 	// 팀장의 업무 거절!!!
 	@RequestMapping(value = "/rejectTodo", method = RequestMethod.POST)
-	public String rejectTodo(TodoVO tvo) {
+	public String rejectTodo(TodoVO tvo, Model model, HttpSession session) {
 		// 리스트의 승인여부 n을 z로 바꿈!!!!
 
 		tdao.confirmTodo(tvo, "z");
+		
+		//팀장의 업무관리 할 것들 가져옴
+				MemberVO mvo = (MemberVO) session.getAttribute("v");
+				int tomem = mvo.getMemnum();
+				List<TodoVO> clist = tdao.checkTodoList(tomem);
+				
+				model.addAttribute("todoList", clist);
+		
 		return "todo/main/checkTodoList";
 	}
 
