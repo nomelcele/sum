@@ -38,6 +38,96 @@
 	<script src='${momentJs }'></script>
 	<script src='${fullcalendarJs }'></script>
 	<script src='${langJs }'></script>
+	<script src='${mainJs}'></script>
+	<script>
+$(function(){
+	  var currentLangCode = 'ko';
+	  var selCal="${selcal}";
+	  $('#calendar').fullCalendar('destroy');
+	  $('#calendar').fullCalendar({
+	   
+	   //lang: currentLangCode,
+	   dragable:false,  //드래그앤 드랍 옵션
+	            timeFormat: 'hh:mm', //시간 포멧
+	            lang: 'ko',  //언어타입
+	            header: {
+	     left: 'prev,next today',
+	     center: 'title',
+	     right: 'month,agendaWeek,agendaDay'
+	      },
+	   //삭제클릭이벤트
+	   eventClick : function(calEvent,view){ //달력 이벤트 클릭 - 이 소스에서는 false!
+		   var r=confirm("Delete " + calEvent.title);
+	   		console.log("delete calEvent:",calEvent);
+			   if (r===true)
+				   {
+				   //_id 캘린더의 한 바의 아이디.
+				   alert("eventid:"+calEvent._id);
+				   	//삭제할 ajax
+				    $.ajax({
+			              url: "calDelete",
+			              type: "POST",
+			              data: {
+			                  calnum:calEvent._id,
+			                  selCal:selCal
+			              },
+			              dataType: "html",
+			              success: function() {
+			            	  //캘린더에서 삭제.
+			            	  $('#calendar').fullCalendar('removeEvents', calEvent._id);
+			              },
+			              error: function(a, b) {
+			                  alert("Request: " + JSON.stringify(a));
+			              }
+			          });
+				   }
+		   },
+	   defaultView: 'month',//기본 뷰 - 옵션   //첫 페이지 기본 뷰 옵션
+	   editable: false,                                             //에디터 가능 옵션
+	   selectable: true,
+	   selectHelper: true,
+	   //캘린더 셀렉트 된 값을 컬럼에 표시
+	   select: function(start, end,event) {
+		   console.log("end"+(end-start));
+			var title = prompt('Event Title:');
+		    var eventData;
+		    if (title) {
+		     eventData = {
+		      title: title,
+		      start: start,
+		      end: end
+		     };
+		     $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+		    }
+		    $('#calendar').fullCalendar('unselect');
+		    
+// 		    alert("selected from: " + start.format() + ", to: " + end.format());
+		   //셀렉트된 결과를 서버로 전송.
+		          $.ajax({
+		              url: "calInsert",
+		              type: "POST",
+		              data: {
+		                  title:encodeURIComponent(title),
+		                  calstart:start.format(),
+		                  calend:end.format(),
+		                  selCal:selCal
+		              },
+		              dataType: "html",
+		              success: function(res) {
+		            	alert("success::"+res);
+						location=res;		            	 
+		              },
+		              error: function(a, b) {
+		                  alert("Request: " + JSON.stringify(a));
+		              }
+		          });
+		   },
+		   editable: true,
+		   eventLimit: true, 
+		   events:[${calJson}]
+		  })
+	 });
+</script>
 	<!-- /캘린더 -->
 </c:if>
 <c:if test="${param.submod eq 'writeForm' }">
