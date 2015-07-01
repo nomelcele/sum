@@ -14,8 +14,6 @@
 				type : "post",
 				url : "/insertMemJob",
 				data : {
-// 					model:"todo", 
-// 					submod:"insertMemJob", 
 					jobmemnum:$('#memjobName'+tonum).val(),
 					jobtonum:tonum,
 					jobcont:$('#jobcont'+tonum).val()},
@@ -38,8 +36,6 @@
 			type : "post",
 			url : "/showMembersJob",
 			data : {
-// 				model:"todo", 
-// 				submod:"showMembersJob", 
 				jobtonum:tonum,
 				},
 			success : function(result){

@@ -30,7 +30,7 @@ public class TodoModel {
 	@Autowired
 	private CalendarDAO cdao;
 
-	// todo 기본 페이지
+	// todo 기본 페이지 //ok
 	@RequestMapping(value = "/todoForm", method = RequestMethod.POST)
 	public String todoForm(Model model, HttpSession session) {
 		MemberVO mvo =(MemberVO) session.getAttribute("v");
@@ -41,7 +41,7 @@ public class TodoModel {
 		return "todo/main/todo";
 	}
 
-	// addTodo 후에 todo 메인페이지로 돌아가는 작업
+	// addTodo 후에 todo 메인페이지로 돌아가는 작업 // ok
 	@RequestMapping(value="afterAddTodo")
 	public String afterAddTodo(Model model, HttpSession session){
 		
@@ -58,7 +58,7 @@ public class TodoModel {
 	}
 	
 	
-	// 메뉴바에서 todo메뉴 첫 진입 시
+	// 메뉴바에서 todo메뉴 첫 진입 시 //ok
 	@RequestMapping(value = "firsttodoForm", method = RequestMethod.POST)
 	public String firsttodoForm(Model model, HttpSession session,HttpServletRequest req) {
 
@@ -80,7 +80,7 @@ public class TodoModel {
 
 	}
 
-	// 업무추가 폼
+	// 업무추가 폼 //ok
 	@RequestMapping(value = "addtodoForm", method = RequestMethod.POST)
 	public String addtodoForm(MemberVO mvo,Model model) {
 		
@@ -91,9 +91,7 @@ public class TodoModel {
 		return "todo/main/addTodo";
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////
-	
-	// 업무 추가 (파일 업로드)
+	// 업무 추가 (파일 업로드)  //ok
 	@RequestMapping(value = "addTodo", method = RequestMethod.POST)
 	public ModelAndView addTodo(TodoVO tvo,
 		 HttpSession session) {
@@ -119,13 +117,12 @@ public class TodoModel {
 		return mav;
 	}
 
-	// 업무관리 클릭 시 보여줄 화면, 업무 리스트
+	// 업무관리 클릭 시 보여줄 화면, 업무 리스트  //ok
 	@RequestMapping(value = "/checkTodoList", method = RequestMethod.POST)
-	public String checkTodoList(int memnum, Model model) {
-		// int tomem = Integer.parseInt(request.getParameter("memnum"));
-		// ArrayList<TodoVO> clist = TodoDao.getDao().checkTodoList(tomem);
-		// request.setAttribute("todoList", clist);
-		int tomem = memnum;
+	public String checkTodoList(HttpSession session, Model model) {
+
+		MemberVO mvo = (MemberVO)session.getAttribute("v");
+		int tomem = mvo.getMemnum();
 		List<TodoVO> clist = tdao.checkTodoList(tomem);
 		
 		model.addAttribute("todoList", clist);
@@ -137,17 +134,15 @@ public class TodoModel {
 	public String approveTodo(Model model,HttpSession session, TodoVO tvo) {
 		// 리스트의 승인여부 n을 y로 바꿈!!!!
 		tdao.confirmTodo(tvo, "y");
-		// map.put("start",map.get("tostdate"));
-		// map.put("end", map.get("toendate"));
-		// map.put("title", map.get("totitle"));
-		// map.put("cal", map.get("todept"));
-		CalendarVO cvo = new CalendarVO();
-		cvo.setCalstart(tvo.getTostdate());
-		cvo.setCalend(tvo.getToendate());
-		cvo.setCalcont(tvo.getTotitle());
-		cvo.setCaldept(tvo.getTodept());
-		cvo.setCal("0");
-		cdao.calInsert(cvo);
+
+		// 캘린더에 등록 수정 필요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//		CalendarVO cvo = new CalendarVO();
+//		cvo.setCalstart(tvo.getTostdate());
+//		cvo.setCalend(tvo.getToendate());
+//		cvo.setCalcont(tvo.getTotitle());
+//		cvo.setCaldept(tvo.getTodept());
+//		cvo.setCal("0");
+//		cdao.calInsert(cvo);
 		
 		//팀장의 업무관리 할 것들 가져옴
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
@@ -159,7 +154,7 @@ public class TodoModel {
 		return "todo/main/checkTodoList";
 	}
 
-	// 팀장의 업무 거절!!!
+	// 팀장의 업무 거절!!!  //ok
 	@RequestMapping(value = "/rejectTodo", method = RequestMethod.POST)
 	public String rejectTodo(TodoVO tvo, Model model, HttpSession session) {
 		// 리스트의 승인여부 n을 z로 바꿈!!!!
@@ -176,6 +171,8 @@ public class TodoModel {
 		return "todo/main/checkTodoList";
 	}
 
+	
+	// 부장의 업무관리(부여한 업무들의 상태를 봄)
 	@RequestMapping(value = "/fWMana", method = RequestMethod.POST)
 	public String fWMana(MemberVO mvo, Model model) {
 		List<TodoVO> fwList = tdao.getFWMana(mvo.getMemnum());
@@ -184,6 +181,7 @@ public class TodoModel {
 		return "todo/main/fWMana";
 	}
 
+	// 팀장이 거절한 업무를 부장이 팀장에게 다시부여
 	@RequestMapping(value = "/toUpFk", method = RequestMethod.POST)
 	public String toUpFk(TodoVO tvo, Model model) {
 		List<TodoVO> list = tdao.todoUpdate(tvo);
@@ -192,7 +190,7 @@ public class TodoModel {
 		return "todo/main/fWMana";
 	}
 
-	// 업무 부여 폼
+	// 팀장의 업무 부여 폼
 	@RequestMapping(value = "/giveJobForm", method = RequestMethod.POST)
 	public String giveJobForm(MemberVO mvo, Model model) {
 		List<TodoVO> todoList = tdao.getTeamTodoList(mvo);
@@ -206,15 +204,32 @@ public class TodoModel {
 
 	}
 
-	// 업무 부여
+	// 팀장 업무부여 - 사원에게 업무 부여
 	@RequestMapping(value = "/insertMemJob", method = RequestMethod.POST)
-	public String insertMemJob(TodoJobVO tjvo) {
+	public String insertMemJob(TodoJobVO tjvo,HttpSession session,Model model) {
+		System.out.println("Jobmemnum"+tjvo.getJobmemnum());
+		System.out.println("Jobtonum"+tjvo.getJobtonum());
+		System.out.println("Jobcont"+tjvo.getJobcont());
+		
+		
+		
+		// 사원에게 업무 부여
 		tdao.insertMemJob(tjvo);
-		return "redirect:/showMembersJob";
+		
+		//업무 부여 완료 후 업무 리스트 다시가져옴
+		MemberVO mvo = (MemberVO)session.getAttribute("v");
+		List<TodoVO> todoList = tdao.getTeamTodoList(mvo);
+		int memmgr = mvo.getMemnum();
+		List<MemberVO> teamMemberList = tdao.getTomem(memmgr);
+
+		model.addAttribute("teamTodoList", todoList);
+		model.addAttribute("teamMemberList", teamMemberList);
+
+		return "todo/main/giveJob";
 	}
 
-	// 업무 보여줌?
-	@RequestMapping(value = "/showMembersJob", method = RequestMethod.GET)
+	// 팀장 업무 부여 - 사원들의 업무 보여줌
+	@RequestMapping(value = "/showMembersJob", method = RequestMethod.POST)
 	public String showMembersJob(TodoJobVO tjvo, Model model) {
 		List<TodoJobVO> membersjoblist = tdao.getMembersJob(tjvo.getJobtonum());
 		model.addAttribute("membersjoblist", membersjoblist);
@@ -229,7 +244,7 @@ public class TodoModel {
 		return "todo/main/jobDetail";
 	}
 
-	// 팀 업무 폼
+	// 팀 업무 폼 //ok
 	@RequestMapping(value = "/teamTodoForm", method = RequestMethod.POST)
 	public String teamTodoForm(HttpSession session, Model model) {
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
@@ -239,13 +254,17 @@ public class TodoModel {
 		return "todo/main/teamTodoForm";
 	}
 
-	// 업무 완료 처리
+	// 업무 완료 처리  // ok
 	@RequestMapping(value = "/successJob", method = RequestMethod.POST)
-	public String successJob(Model model, TodoVO tvo) {
+	public String successJob(Model model, TodoVO tvo, HttpSession session) {
 		System.out.println("업무 완료 처리 들어옴");
 		tdao.confirmTodo(tvo, "o");
 		
-		return "redirect:/teamTodoForm";
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		List<TodoVO> list = tdao.getTeamJob(mvo.getMemmgr());
+		model.addAttribute("teamJobList", list);
+		
+		return "todo/main/teamTodoForm";
 	}
 
 }

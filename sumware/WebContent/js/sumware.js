@@ -327,10 +327,7 @@ function todoConfirm(res) {
 			url : "approveTodo",
 			data : {
 				model : "todo",
-				// 					submod:"checkTodoList",
-				// 					childmod:"approveTodo",
 				tonum : $('#atonum').val(),
-				//memnum : "${sessionScope.v.memnum }",
 				tostdate : $('#atostdate').val(),
 				toendate : $('#atoendate').val(),
 				totitle : $('#atotitle').val(),
@@ -340,13 +337,14 @@ function todoConfirm(res) {
 			},
 
 			success : function(result) {
+				alert("승인 완료되었습니다.");
 				setTimeout(function() {
 					$("#menuTarget").html(result);
 				}, 1000);
 
 			}
 		});
-		alert("승인 완료되었습니다.");
+		
 	} else if (res == 'successTodo') {
 		$.ajax({
 			type : "post",

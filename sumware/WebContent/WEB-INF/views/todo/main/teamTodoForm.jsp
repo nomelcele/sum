@@ -12,8 +12,6 @@ function getJobDetail(tonum){
 		type : "post",
 		url : "/showmemlist",
 		data : {
-// 			model:"todo", 
-// 			submod:"showmemlist", 
 			jobtonum:tonum,
 			},
 		success : function(result){
@@ -22,17 +20,6 @@ function getJobDetail(tonum){
 		}
 	});
 }
-
-// function successJob(){
-	
-// 	$('#tonum'+tonum).attr("value", tonum);
-// 	$('#successjob').submit();
-	
-// 	alert("업무 완료 처리 하였습니다.");
-	
-// }
-
-
 
 </script>
 
@@ -78,7 +65,7 @@ function getJobDetail(tonum){
 
 								<p>
 									<c:if test="${sessionScope.v.memnum eq  teamjoblist.tomem}">
-										<button type="button" class="btn btn-info-xs"
+										<button type="button" class="btn btn-outline btn-success"
 											data-toggle="modal" data-target="#successModal">업무
 											완료</button>
 										<%@include file="../modal/okTodoModal.jsp"%>
