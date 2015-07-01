@@ -1,10 +1,20 @@
 package com.sumware.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class TodoVO {
 	private int torownum,tonum, todept, tomem;
 	private String memname, tostdate, toendate, totitle, tocont, tofile,toconfirm, tocomm;
+	private MultipartFile mfile;
 	
 	
+	
+	public MultipartFile getMfile() {
+		return mfile;
+	}
+	public void setMfile(MultipartFile mfile) {
+		this.mfile = mfile;
+	}
 	public synchronized String getMemname() {
 		return memname;
 	}

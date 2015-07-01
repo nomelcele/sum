@@ -2,10 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!--
 
-//-->
-</script>
 <!-- 업무 추가 부분 뷰 ajax-->
 		
 	<!-- 업무추가  -->
@@ -17,7 +14,7 @@
 				<div class="panel-body">
 					<div class="column">
 
-						<form action="addTodo" method="post" id="addTodoForm" enctype="multipart/form-data">
+						<form action="addTodo" method="post" id="addTodoForm"  enctype="multipart/form-data" >
 							 <input type="hidden" name="todept" value="${sessionScope.v.memdept }">
 <%-- 							 <input type="hidden" name="memnum" value="${sessionScope.v.memnum }"> --%>
 <%-- 							 <input type="hidden" name="memdept" value="${sessionScope.v.memdept }"> --%>
@@ -52,7 +49,7 @@
 							</div>
 							<div class="form-group has-success">
 								<label class="control-label" for="inputSuccess"><i class="fa fa-paperclip"></i> 파일 첨부</label> 
-								<input type="file" name="tofile" id="tofile">
+								<input type="file" name="mfile" id="mfile">
 							</div>
 
 							<div class="form-group has-warning">
@@ -61,6 +58,7 @@
 									style="width: 70%">
 							</div>
 							<div>
+<!-- 									<input type="button" class="btn btn-outline btn-success" onclick="javascript:document.getElementById('addTodoForm').submit()" id = "sendJob" value="보내기"> -->
 								<button type="button" class="btn btn-outline btn-success" onclick="javascript:todoFormGo('addTodo')" id = "sendJob">보내기</button>
 <!-- 								<button type="button" class="btn btn-outline btn-success" id ="addTodoFormSend">보내기</button> -->
 							</div>

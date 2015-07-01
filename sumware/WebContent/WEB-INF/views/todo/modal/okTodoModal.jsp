@@ -72,9 +72,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">업무 완료 처리</h4>
 			</div>
-			<form action="/successJob" method="post" id="successjob">
-<!-- 				<input type="hidden" name="model" value="todo">  -->
-<!-- 				<input type="hidden" name="submod" value="successJob">  -->
+<!-- 			<form action="successJob" method="post" id="successjob"> -->
 				<input type="hidden" name="tonum" id="stonum" value="${teamjoblist.tonum }"> 
 		
 				
@@ -83,10 +81,12 @@
 						class="inputsuccess" name="tocomm" id="stocomm">
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"
-						onclick="javascript:todoConfirm('successTodo')">보내기</button>
+<!-- 					<input type="button" class="btn btn-default" data-dismiss="modal" -->
+<!-- 						onclick="javascript:document.getElementById('successjob').submit()" value="보내기"> -->
+					<input type="button" class="btn btn-default" data-dismiss="modal"
+						onclick="javascript:todoConfirm('successTodo')" value="보내기">
 				</div>
-			</form>
+<!-- 			</form> -->
 		</div>
 
 	</div>
