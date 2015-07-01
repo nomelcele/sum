@@ -2,7 +2,6 @@ package com.sumware.mvc.model;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class CalendarModel{
 	public String getCalList(CalendarVO cavo,Model model,HttpSession session){
 		MemberVO vo = new MemberVO();
 		vo = (MemberVO) session.getAttribute("v");
-		
+		session.setAttribute("model", "calendar");
 		cavo.setCaldept(vo.getMemdept());
 		cavo.setCalmem(vo.getMemnum());
 		
@@ -50,7 +49,7 @@ public class CalendarModel{
 			model.addAttribute("calJson", json);
 			model.addAttribute("selcal", "사원");
 		}
-		return "calendar/calTest";
+		return "calendar.calTest";
 	}
 	@RequestMapping(value="calInsert",method=RequestMethod.POST)
 	public void calInsert(String title,CalendarVO cavo,Model model,HttpSession session,
@@ -67,12 +66,12 @@ public class CalendarModel{
 			
 			cavo.setCaldept(vo.getMemdept());
 			
-			res = "calList?calmem=0&caldept="+vo.getMemdept()+"&cal=0";
+			res = "calList?&caldept="+vo.getMemdept()+"&cal=0";
 		}else{
 			
 			cavo.setCalmem(vo.getMemnum());
 			
-			res = "calList?caldept=0&calmem="+vo.getMemnum()+"&cal=1";
+			res = "calList?&calmem="+vo.getMemnum()+"&cal=1";
 		}
 		//-----------------------
 		dao.calInsert(cavo);
