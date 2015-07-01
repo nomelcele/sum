@@ -29,10 +29,10 @@ $(function() {
 			break;
 		case ("calendar"):
 			$("#model").attr("value", $pageName);
-			$("#formff").submit();
+			$("#formff").attr("action","calList").submit();
 			break;
 		case ("mail"):
-			$("#formff").attr("action","mail/mailFromList").submit();
+			$("#formff").attr("action","mailFromList").submit();
 			break;
 		case ("board"):
 			$("#model").attr("value", $pageName);
