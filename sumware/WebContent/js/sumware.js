@@ -48,8 +48,15 @@ $(function() {
 		}
 	});
 	
+//	//addTodo submit
+//	$("#addTodoFormSend").click(function(){
+//		alert("버튼 클릭");
+//		$("#addTodoForm").submit();
+//		alert("업무 등록!!");
+//	});
+	
+	
 });
-
 function logout(memnum) {
 	$.ajax({
 		url : "logout",
@@ -364,11 +371,11 @@ function todoConfirm(res) {
 	}
 
 }
+
 function todoFormGo(res) {
 	//$('#model').attr("value", "todo");
 	if (res == 'approveTodo') {
 		// 팀장업무관리에서 승인버튼
-
 		$('#okForm').submit();
 	} else if (res == 'rejectTodo') {
 		// 팀장업무관리에서 거절버튼
