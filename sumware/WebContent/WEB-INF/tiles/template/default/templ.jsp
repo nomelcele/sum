@@ -40,7 +40,7 @@
 </head>
 <body>
 	<tiles:insertAttribute flush="true" name="header" />
-	<div class="wrap-layout board">
+	<div class="wrap-layout board" id="global">
 	<div class="lnb-area" id="lnb-area">
 		<tiles:insertAttribute flush="true" name="menu" />
 	</div>

@@ -22,7 +22,6 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-	
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -42,7 +41,10 @@
 		<servlet-name>sumware</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
+	<!-- session 이 유지 되는 시간 설정 -->
+	<session-config>
+		<session-timeout>15</session-timeout>
+	</session-config>
 	<!-- 공통빈 설정을 위한 리스너 설정 -->
 	<!-- applicationContext.xml -->
 	<listener>

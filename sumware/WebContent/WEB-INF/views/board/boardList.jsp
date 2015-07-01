@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div id="global" class="wrap-layout board">
-	<!-- lnb-area(S) -->
-	
-	<!-- lnb-area(E) -->
-	<!-- contents(S) -->
-	<div class="contents">
 		<h2 class="heading-page">${sessionScope.bname }</h2>
 		<!-- board-form(S) -->
 		<div class="board-form">
@@ -44,12 +38,19 @@
 			<tbody>
 				<c:forEach items="${list }" var="vlist">
 					<tr>
+			<form action="boardDetail"  method="POST"  id="detailForm">
+				<input type="hidden"  name="model" value="board">
+				<input type="hidden"  name="no" value="${vlist.bnum}">
+				<input type="hidden"  name="bgnum" value="${sessionScope.bbbgnum }">
+				<input type="hidden"  name="bname" value="${sessionScope.bname }">
+				<input type="hidden"  name="bdeptno" value="${sessionScope.v.memdept}">
 						<td class="num">${vlist.bnum }</td>
-						<td style="text-align: left"><a
-							href="sumware?model=board&submod=boardDetail&no=${vlist.bnum }&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }&bdeptno=${sessionScope.v.memdept }">${vlist.btitle }</a></td>
+						<td style="text-align: left">
+						<a href="">${vlist.btitle }</a></td>
 						<td style="text-align: center;">${vlist.bwriter }</td>
 						<td style="text-align: center;">${vlist.bdate }</td>
 						<td style="text-align: center;">${vlist.bhit }</td>
+			</form>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -59,11 +60,7 @@
 
 		<!-- paging(S) -->
 		<div class="paging">
-			<c:set var="pageUrl"
-				value="sumware?model=board&submod=boardList&bdeptno=${sessionScope.v.memdept }&bgnum=${sessionScope.bbbgnum}" />
+			<c:set var="pageUrl" value="sumware?model=board&submod=boardList&bdeptno=${sessionScope.v.memdept }&bgnum=${sessionScope.bbbgnum}" />
 			<%@include file="page.jsp"%>
 		</div>
 		<!-- paging(E) -->
-	</div>
-	<!-- contents(E) -->
-</div>
