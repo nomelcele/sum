@@ -1,27 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 팀 업무 부분 뷰 ajax-->
-
-<script>
-
-function getJobDetail(tonum){
-	$("#memlisttarget"+tonum).toggle("slow");
-	$("#detail"+tonum).toggle("slow");
-	$.ajax({
-		type : "post",
-		url : "/showmemlist",
-		data : {
-			jobtonum:tonum,
-			},
-		success : function(result){
-			$("#memlisttarget"+tonum).html(result);
-		
-		}
-	});
-}
-
-</script>
 
 <!-- 팀업무 부분!! -->
 

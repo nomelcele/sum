@@ -79,11 +79,8 @@ function hateWorking(tonum) {
 function tosend(tonumval) {
 	$.ajax({
 		type : "post",
-		url : "/toUpFk",
+		url : "toUpFk",
 		data : {
-			// model:"todo",
-			// submod:"toUpFk",
-			memnum : "${sessionScope.v.memnum }",
 			tomem : $('#inputSuccess' + tonumval).val(),
 			toconfirm : "n",
 			tonum : tonumval,
@@ -98,23 +95,6 @@ function tosend(tonumval) {
 }
 
 // -----------------------------------------
-function getJobDetail(tonum) {
-	$("#memlisttarget" + tonum).toggle("slow");
-	$("#detail" + tonum).toggle("slow");
-	$.ajax({
-		type : "post",
-		url : "/showmemlist",
-		data : {
-			// model:"todo",
-			// submod:"showmemlist",
-			jobtonum : tonum,
-		},
-		success : function(result) {
-			$("#memlisttarget" + tonum).html(result);
-
-		}
-	});
-}
 
 //엔터 체크
 function enterCheck(res) {
@@ -317,10 +297,11 @@ function todoConfirm(res) {
 				setTimeout(function() {
 					$("#menuTarget").html(result);
 				}, 1000);
+				alert("거절 완료되었습니다.");
 
 			}
 		});
-		alert("거절 완료되었습니다.");
+		
 	} else if (res == 'approveTodo') {
 		$.ajax({
 			type : "post",
@@ -359,10 +340,11 @@ function todoConfirm(res) {
 				setTimeout(function() {
 					$("#menuTarget").html(result);
 				}, 1000);
+				alert("업무 완료 처리 되었습니다.");
 
 			}
 		});
-		alert("업무 완료 처리 되었습니다.");
+		
 	}
 }
 
@@ -401,7 +383,7 @@ function getJobDetail(tonum) {
 	$("#detail" + tonum).toggle("slow");
 	$.ajax({
 		type : "post",
-		url : "/showmemlist",
+		url : "showmemlist",
 		data : {
 			jobtonum : tonum,
 		},
