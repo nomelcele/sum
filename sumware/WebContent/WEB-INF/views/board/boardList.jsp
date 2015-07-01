@@ -36,9 +36,9 @@
 			</thead>
 			<%-- 반복 구간 시작 --%>
 			<tbody>
+			<form action="boardDetail" method="POST"  id="detailForm">
 				<c:forEach items="${list }" var="vlist">
 					<tr>
-			<form action="boardDetail"  method="POST"  id="detailForm">
 				<input type="hidden"  name="model" value="board">
 				<input type="hidden"  name="no" value="${vlist.bnum}">
 				<input type="hidden"  name="bgnum" value="${sessionScope.bbbgnum }">
@@ -50,9 +50,9 @@
 						<td style="text-align: center;">${vlist.bwriter }</td>
 						<td style="text-align: center;">${vlist.bdate }</td>
 						<td style="text-align: center;">${vlist.bhit }</td>
-			</form>
 					</tr>
 				</c:forEach>
+			</form>
 			</tbody>
 			<%-- 반복 구간 끝 --%>
 		</table>

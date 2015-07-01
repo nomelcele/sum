@@ -22,37 +22,27 @@
 				<tbody class="info">
 					<tr>
 						<th>작성자</th>
-						<td>${list.bwriter }</td>
+						<td>${board.bwriter }</td>
 						<th>작성일</th>
-						<td>${list.bdate }</td>
+						<td>${board.bdate }</td>
 						<th>글번호</th>
-						<td>${list.bnum }</td>
+						<td>${board.bnum }</td>
 						<th>조회수</th>
-						<td>${list.bhit }</td>
+						<td>${board.bhit }</td>
 					</tr>
 					<tr>
 						<th>글제목</th>
-						<td colspan="7" class="board-detail-title">${list.btitle }</td>
+						<td colspan="7" class="board-detail-title">${board.btitle }</td>
 					</tr>
 				</tbody>
 				<tbody>
 					<tr>
 						<td colspan="8" class="board-detail-article">
-							<div><div>${list.bcont}</div></div>
+							<div><div>${board.bcont}</div></div>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<form action="sumware" method="post" id="dform">
-					<input type="hidden" name="model" id="bmodel" value="board">
-					<input type="hidden" name="submod" id="bsubmod" value="boardDelete">
-					<input type="hidden" name="page" id="bpage" value="1">
-					<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
-					<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
-					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
-					<input type="hidden" name="bname" value="${sessionScope.bname }">
-					<input type="hidden" name="no" value="${list.bnum }">
-			</form>
 			<div class="button-div">
 				<div class="left">
 					<c:if test="${sessionScope.v.memnum eq list.bmem }">
@@ -61,7 +51,8 @@
 				</div>
 				<div class="right">
 					<button type="button">수정</button>
-					<button type="button" onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept}&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname}'">목록</button>
+<%-- 					<button type="button" onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept}&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname}'">목록</button> --%>
+					<button type="button" onclick="javascript:boardList()">목록</button>
 					<button type="button" onclick="location='sumware?model=board&submod=writeForm&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname}&bdeptno=${sessionScope.v.memdept}'">새글쓰기</button>
 				</div>
 			</div>
@@ -98,8 +89,8 @@
 				<input type="hidden" name="submod"  value="boardDetail">
 				<input type="hidden" name="childmod" value="commInsert">
 				<input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
-				<input type="hidden" name="bnum" value="${list.bnum }">
-				<input type="hidden" name="no" value="${list.bnum }">
+				<input type="hidden" name="bnum" value="${board.bnum }">
+				<input type="hidden" name="no" value="${board.bnum }">
 				<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
 				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 				<input type="hidden" name="bname" value="${sessionScope.bname }">
@@ -111,3 +102,28 @@
 				<!-- comment-write(E) -->
 			</div>
 <!-- comment(E) -->
+
+			<!-- 리스트 form -->
+			<form action="boardList" method="post" id="listForm">
+					<input type="hidden" name="model" value="board">
+					<input type="hidden" name="page" value="1">
+					<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
+					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
+					<input type="hidden" name="bname" value="${sessionScope.bname }">
+			</form>
+
+
+
+
+
+			<!-- 글 삭제 form -->
+			<form action="sumware" method="post" id="dform">
+					<input type="hidden" name="model" value="board">
+					<input type="hidden" name="submod" id="bsubmod" value="boardDelete">
+					<input type="hidden" name="page" id="bpage" value="1">
+					<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
+					<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
+					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
+					<input type="hidden" name="bname" value="${sessionScope.bname }">
+					<input type="hidden" name="no" value="${board.bnum }">
+			</form>
