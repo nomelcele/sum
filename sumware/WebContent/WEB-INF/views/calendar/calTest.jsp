@@ -1,18 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<!-- 캘린더 -->
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<spring:url value="resources/fjs/fullcalendar.min.css" var="fullcalendarCss"/>
-<spring:url value="resources/fjs/lib/moment.min.js" var="momentJs"/>
-<spring:url value="resources/fjs/fullcalendar.min.js" var="fullcalendarJs"/>
-<spring:url value="resources/fjs/lang-all.js" var="langJs"/>
-<link rel='stylesheet' href='${fullcalendarCss }' />
-<script src='${momentJs }'></script>
-<script src='${fullcalendarJs }'></script>
-<script src='${langJs }'></script>
-<!-- /캘린더 -->
 <!-- Latest compiled and minified CSS -->
 <script>
 $(function(){
