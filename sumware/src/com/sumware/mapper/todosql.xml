@@ -42,7 +42,7 @@
 	</select>
 
 	<update id="todoUpdate" parameterType="tvo">
-		update todo set toconfirm=?, tomem=?,tocomm=? where tonum=?
+		update todo set toconfirm=#{toconfirm}, tomem=#{tomem},tocomm=#{tocomm} where tonum=#{tonum}
 	</update>
 
 	<select id="getDeptList" parameterType="mvo" resultType="tvo">
@@ -52,7 +52,7 @@
 		from todo where todept=#{memdept}
 	</select>
 
-	<select id="getTeamTodoList" parameterType="mvo" resultType="tvo">
+	<select id="getTeamTodoList" parameterType="int" resultType="tvo">
 		select t.tonum, to_char(t.tostdate,'yyyy-mm-dd') tostdate,
 		to_char(t.toendate,'yyyy-mm-dd') toendate, t.totitle, t.tocont,
 		t.tofile, t.todept, t.tomem, t.toconfirm, t.tocomm, m.memname

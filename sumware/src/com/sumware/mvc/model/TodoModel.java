@@ -172,7 +172,7 @@ public class TodoModel {
 	}
 
 	
-	// 부장의 업무관리(부여한 업무들의 상태를 봄)
+	// 부장의 업무관리(부여한 업무들의 상태를 봄)  //ok
 	@RequestMapping(value = "/fWMana", method = RequestMethod.POST)
 	public String fWMana(MemberVO mvo, Model model) {
 		List<TodoVO> fwList = tdao.getFWMana(mvo.getMemnum());
@@ -185,12 +185,11 @@ public class TodoModel {
 	@RequestMapping(value = "/toUpFk", method = RequestMethod.POST)
 	public String toUpFk(TodoVO tvo, Model model) {
 		List<TodoVO> list = tdao.todoUpdate(tvo);
-		// //request.removeAttribute("fwList");
 		model.addAttribute("fwList", list);
 		return "todo/main/fWMana";
 	}
 
-	// 팀장의 업무 부여 폼
+	// 팀장의 업무 부여 폼 //ok
 	@RequestMapping(value = "/giveJobForm", method = RequestMethod.POST)
 	public String giveJobForm(MemberVO mvo, Model model) {
 		List<TodoVO> todoList = tdao.getTeamTodoList(mvo);
@@ -204,34 +203,23 @@ public class TodoModel {
 
 	}
 
-	// 팀장 업무부여 - 사원에게 업무 부여
+	// 팀장 업무부여 - 사원에게 업무 부여 //ok
 	@RequestMapping(value = "/insertMemJob", method = RequestMethod.POST)
-	public String insertMemJob(TodoJobVO tjvo,HttpSession session,Model model) {
-		System.out.println("Jobmemnum"+tjvo.getJobmemnum());
-		System.out.println("Jobtonum"+tjvo.getJobtonum());
-		System.out.println("Jobcont"+tjvo.getJobcont());
-		
-		
-		
+	public String insertMemJob(TodoJobVO tjvo,Model model) {
+
 		// 사원에게 업무 부여
 		tdao.insertMemJob(tjvo);
 		
-		//업무 부여 완료 후 업무 리스트 다시가져옴
-		MemberVO mvo = (MemberVO)session.getAttribute("v");
-		List<TodoVO> todoList = tdao.getTeamTodoList(mvo);
-		int memmgr = mvo.getMemnum();
-		List<MemberVO> teamMemberList = tdao.getTomem(memmgr);
+		List<TodoJobVO> membersjoblist = tdao.getMembersJob(tjvo.getJobtonum());
+		model.addAttribute("membersjoblist", membersjoblist);
 
-		model.addAttribute("teamTodoList", todoList);
-		model.addAttribute("teamMemberList", teamMemberList);
-
-		return "todo/main/giveJob";
+		return "todo/main/membersJob";
 	}
 
-	// 팀장 업무 부여 - 사원들의 업무 보여줌
+	// 팀장 업무 부여 - 사원들의 업무 보여줌 //ok
 	@RequestMapping(value = "/showMembersJob", method = RequestMethod.POST)
-	public String showMembersJob(TodoJobVO tjvo, Model model) {
-		List<TodoJobVO> membersjoblist = tdao.getMembersJob(tjvo.getJobtonum());
+	public String showMembersJob(int jobtonum, Model model) {
+		List<TodoJobVO> membersjoblist = tdao.getMembersJob(jobtonum);
 		model.addAttribute("membersjoblist", membersjoblist);
 		return "todo/main/membersJob";
 	}

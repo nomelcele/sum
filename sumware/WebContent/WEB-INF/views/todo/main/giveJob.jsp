@@ -12,18 +12,18 @@
 		}else{
 			$.ajax({
 				type : "post",
-				url : "/insertMemJob",
+				url : "insertMemJob",
 				data : {
 					jobmemnum:$('#memjobName'+tonum).val(),
 					jobtonum:tonum,
 					jobcont:$('#jobcont'+tonum).val()},
 				success : function(result){
 					$("#membersjob"+tonum).html(result);
-					
+					$('#jobcont'+tonum).val("");
+					alert("업무 지정이 완료되었습니다.");
 				}
 			});
-			$('#jobcont'+tonum).val("");
-			alert("업무 지정이 완료되었습니다.");
+			
 		}
 		
 	}
@@ -34,7 +34,7 @@
 		
 		$.ajax({
 			type : "post",
-			url : "/showMembersJob",
+			url : "showMembersJob",
 			data : {
 				jobtonum:tonum,
 				},
