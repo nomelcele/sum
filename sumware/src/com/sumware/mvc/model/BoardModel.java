@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sumware.dto.BoardVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.PageVO;
 import com.sumware.mvc.dao.BoardDao;
@@ -23,14 +24,17 @@ public class BoardModel {
 	@Autowired
 	private BoardDao dao;
 	
+	// 게시판 목록
 	@RequestMapping(value="boardList",method=RequestMethod.POST)
 	public ModelAndView getList(Map<String,Integer> map,HttpSession ses,
 			HttpServletRequest req){
-		System.out.println("BoardModel : getList()");
+//		System.out.println("BoardModel : getList()");
 		ModelAndView mav = new ModelAndView("board.boardList");
 		MemberVO v = new MemberVO();
-		v = (MemberVO) ses.getAttribute("v");
+		v = (MemberVO) ses.getAttribute("v"); // LoginModel 에서 받은 session 을 전달 한다.
+		
 		ses.setAttribute("model", req.getParameter("model"));
+		ses.setAttribute("bname", req.getParameter("bname"));
 		int bgnum = Integer.parseInt(req.getParameter("bgnum"));
 		map = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);
 //		map.put("begin", Integer.parseInt(req.getParameter("begin")));
@@ -46,12 +50,21 @@ public class BoardModel {
 		return mav;
 	}
 	
+	// 디테일 목록! 
+	@RequestMapping(value="boardDetail",method=RequestMethod.POST)
+	public ModelAndView getDetail(int no){
+		ModelAndView mav = new ModelAndView("board.boardDetail");
+		BoardVO v = dao.getDetail(no);
+		mav.addObject("list",v);
+		return mav;
+	}
+	
 	/*
 		// boardList 
 		if(submod.equals("boardList") && submod!=null){
 			// Page 처리 영역 
 			// 들어온 요청은 boardList 를 보여주는 것, 그렇다면 1페이지 부터 보여줘야 한다.
-			// 두번쨰 인자값은 게시물인지, 댓글인지를 구별 해주는 인자. 0이면 게시물~
+			// 두번째 인자값은 게시물인지, 댓글인지를 구별 해주는 인자. 0이면 게시물~
 			Map<String, Integer> map = pageProcess(request, 0);
 			HashMap<String, String> hmap = MyMap.getMaps().getMapList(request);
 			// 게시판 이름을 뿌려오고
@@ -103,6 +116,7 @@ public class BoardModel {
 			System.out.println(map.get("bname").toString());
 			method = true; // forward
 		}
+		// boardDetail
 		else if(submod != null && submod.equals("boardDetail")){
 			int no = Integer.parseInt(request.getParameter("no"));
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);

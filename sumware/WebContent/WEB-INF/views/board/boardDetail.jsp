@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div id="global" class="wrap-layout board">
-		<!-- contents(S) -->
-			<%-- <!-- board-detail(S) -->
-			<!-- board-detail(E) --> --%>
-			
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 			<!-- heading-page(S) -->
 			<h2 class="heading-page">${sessionScope.bname }</h2>
 			<!-- heading-page(E) -->
@@ -65,8 +61,8 @@
 				</div>
 				<div class="right">
 					<button type="button">수정</button>
-					<button type="button" onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }'">목록</button>
-					<button type="button" onclick="location='sumware?model=board&submod=writeForm&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }&bdeptno=${sessionScope.v.memdept }'">새글쓰기</button>
+					<button type="button" onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept}&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname}'">목록</button>
+					<button type="button" onclick="location='sumware?model=board&submod=writeForm&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname}&bdeptno=${sessionScope.v.memdept}'">새글쓰기</button>
 				</div>
 			</div>
 			
@@ -115,5 +111,3 @@
 				<!-- comment-write(E) -->
 			</div>
 <!-- comment(E) -->
-		</div>
-		<!-- contents(E) -->
