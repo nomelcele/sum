@@ -32,6 +32,7 @@ $(function() {
 			$("#formff").attr("action","calList").submit();
 			break;
 		case ("mail"):
+			$("#model").attr("value",$pageName);
 			$("#page").attr("value","1");
 			$("#formff").attr("action","mailFromList").submit();
 			break;
