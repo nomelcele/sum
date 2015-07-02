@@ -15,10 +15,11 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
+import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
-
+//@ServerEndpoint("/msgSocket/{auth_key}")
 @Configuration
 @EnableWebSocket
 public class MsgProcess {
