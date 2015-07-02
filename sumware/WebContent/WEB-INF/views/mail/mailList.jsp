@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div id="global" class="wrap-layout board">
-	<div id="lnb-area" class="lnb-area">
-		<!-- left menu !!!! 들어갈 자리 -->
-	</div>
-	<div class="contents">
 	<form method="post" action="mailSetDel" id="listform">
 		<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
 		<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
@@ -111,8 +106,6 @@
 			</c:choose>
 			<%@include file="../board/page.jsp"%>
 		</div>
-	</div>
-</div>
 
 <script>
 	function mailTrashGo(){

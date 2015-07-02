@@ -41,7 +41,7 @@ public class MailModel{
 	public String mailWriteForm(@ModelAttribute("mailreceiver")String mailreceiver,
 			@ModelAttribute("mailtitle")String mailtitle){
 		System.out.println("Mail Controller: mailWriteForm");
-		return "mail/mailWrite";
+		return "mail.mailWrite";
 	}
 	
 	// 메일 작성
@@ -79,7 +79,7 @@ public class MailModel{
 		System.out.println("수신자: "+mailreceiver.substring(startidx, endidx));
 		mdao.addMail(map);
 		
-		mav.setViewName("mail/mailSend"); // 메일 전송 완료 화면
+		mav.setViewName("mail.mailSend"); // 메일 전송 완료 화면
 		return mav;
 	}
 	
@@ -138,7 +138,8 @@ public class MailModel{
 		List<MailVO> fromlist = mdao.getFromMailList(map);
 		mav.addObject("list", fromlist);
 		mav.addObject("tofrom", 1);
-		mav.setViewName("mail/mailList");
+		mav.setViewName("mail.mailList");
+		request.getSession().setAttribute("model", "mail");
 		return mav;
 		
 	}
