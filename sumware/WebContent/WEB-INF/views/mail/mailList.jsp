@@ -12,7 +12,7 @@
 		<div class="button-div button-div-top">
 			<!-- left(S) -->
 			<div class="left">
-				<a href="javascript:mailFormGo('write')" class="btn btn-info"> 
+				<a href="javascript:mailWriteFormGo()" class="btn btn-info"> 
 				<span class="glyphicon glyphicon-pencil"></span> 메일 쓰기
 				</a>
 			</div>
@@ -108,6 +108,10 @@
 		</div>
 
 <script>
+	function mailWriteFormGo(){
+		$("#listform").attr("action","mailWriteForm").submit();
+	}
+
 	function mailTrashGo(){
 		$("#delvalue").attr("value","2");
 		$("#listform").submit();
