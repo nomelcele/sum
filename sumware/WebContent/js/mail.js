@@ -3,7 +3,9 @@
  */
 // 메일 (메뉴)
 function mailFormGo(res) {
-	if (res == 'fromlist') { // 받은 메일함
+	if (res == 'write' ){
+		$("#mailform").attr("action","mailWriteForm").submit();
+	} else if (res == 'fromlist') { // 받은 메일함
 		$("#mailform").attr("action","mailFromList").submit();
 		
 //		location = "mailFromList?usernum=${sessionScope.v.memnum}"
@@ -94,6 +96,9 @@ function mailDetailGo(mailnum){
 function mailSendFunc() {
 	$("#mailWriteF").submit();
 }
+
+
+
 
 //------------------------------------
 //------------------------------------
