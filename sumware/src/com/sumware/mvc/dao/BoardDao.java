@@ -23,6 +23,11 @@ public class BoardDao {
 		ss.insert("board.insert", map);
 	}
 	
+	// 조회수 증가 시켜주는 메서드.
+	private void hitUp(int bnum){
+		ss.selectOne("board.hitUp",bnum);
+	}
+
 	// boardList 가져오기.
 	public List<BoardVO> getList(Map<String,Integer> map) {
 		List<BoardVO> list = ss.selectList("board.getList",map);
@@ -52,10 +57,6 @@ public class BoardDao {
 		hitUp(no);
 		return v;
 	}
-	// 조회수 증가 시켜주는 메서드.
-	private void hitUp(int bnum){
-		ss.selectOne("board.hitUp",bnum);
-	}
 	
 	// 게시글에 대한 댓글 불러오는 메서드.
 	public List<CommVO> getCommList(HashMap<String, String> map){
@@ -70,7 +71,7 @@ public class BoardDao {
 		ss.insert("board.commInsert",map);
 	}
 	// 게시판 이름이 필요 하기 때문에 그 이름 반환 해주는 메서드.
-	public List<BnameVO> bName(HashMap<String, String> map){
+	public List<BnameVO> bName(Map<String,Integer> map){
 		List<BnameVO> list= ss.selectList("board.bName",map);
 		System.out.println("이름다 뽑았다.");
 		return list;

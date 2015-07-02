@@ -1,5 +1,7 @@
 package com.sumware.mvc.model;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sumware.dto.BnameVO;
 import com.sumware.dto.BoardVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.PageVO;
@@ -28,26 +31,23 @@ public class BoardModel {
 	@RequestMapping(value="boardList",method=RequestMethod.POST)
 	public ModelAndView getList(Map<String,Integer> map,HttpSession ses,
 			HttpServletRequest req){
-//		System.out.println("BoardModel : getList()");
 		ModelAndView mav = new ModelAndView("board.boardList");
 		MemberVO v = new MemberVO();
 		v = (MemberVO) ses.getAttribute("v"); // LoginModel 에서 받은 session 을 전달 한다.
-		
 		ses.setAttribute("model", req.getParameter("model"));
 		ses.setAttribute("bname", req.getParameter("bname"));
 		int bgnum = Integer.parseInt(req.getParameter("bgnum"));
 		ses.setAttribute("bbbgnum", bgnum);
 		map = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);
-//		map.put("begin", Integer.parseInt(req.getParameter("begin")));
-//		map.put("end", Integer.parseInt(req.getParameter("end")));
+		System.out.println("BoardModel 이 말합니다 : ");
 		map.put("bdeptno", v.getMemdept());
 		if(req.getParameter("bgnum")==null){
 			map.put("bgnum",0);
 		}else{
 			map.put("bgnum", bgnum);
 		}
-		mav.addObject("list",dao.getList(map));
-//		System.out.println(dao.getList(map).toString());
+		ses.setAttribute("blist",boardName(map));
+		mav.addObject("list",boardList(map));
 		return mav;
 	}
 	
@@ -55,12 +55,51 @@ public class BoardModel {
 	@RequestMapping(value="boardDetail",method=RequestMethod.POST)
 	public ModelAndView getDetail(int no){
 		System.out.println("boardList 에서 넘어온 int no : "+no);
-		ModelAndView mav = new ModelAndView("board.boardDetail");
+		ModelAndView mav = new ModelAndView("board/boardDetail");
 		BoardVO v = dao.getDetail(no);
 		mav.addObject("board",v);
 		return mav;
 	}
 	
+	// 글작성 폼 !
+	@RequestMapping(value="boardWrite",method=RequestMethod.POST)
+	public String writeForm(){
+		return "board.boardWrite";
+	}
+	
+	// 글 입력 !!!
+	@RequestMapping(value="boardInsert", method=RequestMethod.POST)
+	public ModelAndView boardInsert(Map<String,Integer> map,HttpSession ses,
+			HttpServletRequest req){
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("btitle", req.getParameter("btitle"));
+		hmap.put("bcont", req.getParameter("bcont"));
+		hmap.put("bimg", req.getParameter("bimg"));
+		hmap.put("bmem", req.getParameter("bmem"));
+		hmap.put("bgnum", req.getParameter("bgnum"));
+		hmap.put("bname", req.getParameter("bname"));
+		hmap.put("bdeptno", req.getParameter("bdeptno"));
+		int bgnum=Integer.parseInt(req.getParameter("bgnum"));
+		dao.insert(hmap);
+		map = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);
+		map.put("page", 1);
+		map.put("bgnum", bgnum);
+		ModelAndView mav = new ModelAndView("board.boardList");
+//		mav.addObject("blist",boardName(hmap));
+		mav.addObject("list",boardList(map));
+		return mav;
+	}
+	
+	
+	private List<BoardVO> boardList(Map<String,Integer> map){
+		List<BoardVO> list = dao.getList(map);
+		return list;
+	}
+	
+	private List<BnameVO> boardName(Map<String, Integer> map){
+		List<BnameVO> list = dao.bName(map);
+		return list;
+	}
 	/*
 		// boardList 
 		if(submod.equals("boardList") && submod!=null){
