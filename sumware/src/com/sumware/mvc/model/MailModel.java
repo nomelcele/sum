@@ -39,7 +39,6 @@ public class MailModel{
 	// *******************
 	// 왼쪽 메뉴에서 각 메일함에 있는 메일의 갯수를 보여주기 위한 메서드 호출
 	// => AOP 처리
-	// suggest 안 됨 ㅡㅡ 고쳐놓기
 	
 	// 메일 작성 form 이동
 	@RequestMapping(value="/mailWriteForm",method=RequestMethod.POST)
