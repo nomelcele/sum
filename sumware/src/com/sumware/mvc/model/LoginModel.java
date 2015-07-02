@@ -33,7 +33,7 @@ public class LoginModel{
 				session.setAttribute("memnum", mvo.getMemnum());
 				session.setAttribute("mempwd", mvo.getMempwd());
 				
-				result="join/firstmember";
+				result="join.firstmember";
 				//회원정보입력창으로 이동.
 				//이동후에 memnum입력란에 자동으로 입력시켜주고
 				//mempwd는 유효성검사 할때 쓰기위하여 보냄.
@@ -72,7 +72,7 @@ public class LoginModel{
 	
 	@RequestMapping(value="firstLoginForm")
 	public String firstLoginForm(){
-		return "join/member";
+		return "join.member";
 	}
 	
 //	@Override

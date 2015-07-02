@@ -20,11 +20,9 @@ public class JoinModel{
 	@Autowired
 	private MemberDao mdao;
 	
-	
-
 	@RequestMapping(value="/memberForm")
 	public String memberForm(){
-		return "join/member";	
+		return "join.member";	
 	}
 	
 	@RequestMapping(value="/joinck")
@@ -48,7 +46,7 @@ public class JoinModel{
 	    mdao.update(mvo);
 	    //모든 세션 정보를 삭제함 ...
 		session.invalidate();	
-		return "home/index";	
+		return "home.index";	
 	}
 	
 	@RequestMapping(value="/viewCap",method=RequestMethod.POST)
@@ -107,10 +105,11 @@ public class JoinModel{
 		return "join/cap/getCap";
 	}
 	
-	@RequestMapping(value="/modifyProfile",method=RequestMethod.POST)
-	public String modifyProfile(Mode mode){
+	@RequestMapping(value="/modifyProfile")
+	public String modifyProfile(Mode mode,HttpSession session){
+		session.setAttribute("model","join");
 		//프로필 수정폼 
-		return "join/member";
+		return "join.member";
 		
 	}
 	
@@ -125,10 +124,13 @@ public class JoinModel{
 		//저장된 세션 다 날림.
 		session.removeAttribute("v");
 		session.removeAttribute("teamNameList");		
-		return "home/index";
+		return "home.index";
 		
 	}
-	
+	@RequestMapping(value="joinupload",method=RequestMethod.POST)
+	public String joinupload(){
+		return "join/joinupload";
+	}
 	
 	
 //	@Override
