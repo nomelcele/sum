@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.mvc.dao.LoginDao;
@@ -21,8 +20,7 @@ import com.sumware.mvc.dao.LoginDao;
 public class LoginModel{
 	@Autowired
 	private LoginDao dao;
-	@Autowired
-	@Qualifier(value="log")
+	
 	@RequestMapping(value="login")
 	public void login(MemberVO mvo,HttpSession session,HttpServletResponse response) throws IOException{
 		String result="home.index";
