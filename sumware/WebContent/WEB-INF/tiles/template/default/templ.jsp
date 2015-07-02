@@ -46,7 +46,7 @@
 		}
 	});
 </script>
-<script src="js/member.sj"></script>
+<script src="js/member.js"></script>
 </c:if>
 <c:if test="${sessionScope.model eq 'calendar' }">
 	<!-- 캘린더 -->
