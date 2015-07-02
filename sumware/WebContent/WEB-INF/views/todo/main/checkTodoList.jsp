@@ -28,6 +28,12 @@
 												</p>
 												<p>${tolist.tocont }</p>
 												<p><i class="fa fa-thumb-tack"></i> ${tolist.tocomm }</p>
+												<p>	
+													<i class="fa fa-paperclip"></i> 첨부파일 
+													<c:if test="${tolist.tofile ne null}" >
+													<a href="downloadFile?fileName=${tolist.tofile }" target="_blank">${tolist.tofile } <i class="fa fa-download"></i></a>
+													</c:if>
+												</p>
 
 											</div>
 											<div class="panel-footer">

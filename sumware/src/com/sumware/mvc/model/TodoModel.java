@@ -97,7 +97,7 @@ public class TodoModel {
 		 HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/afterAddTodo");
-
+		System.out.println(session.getServletContext().getRealPath("/"));
 		StringBuffer path = new StringBuffer();
 		path.append(session.getServletContext().getRealPath("/"))
 				.append("/upload/").append(tvo.getMfile().getOriginalFilename());
