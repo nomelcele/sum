@@ -12,8 +12,10 @@
 <title>SumWare</title>
 <!-- CSS 라이브러리(S)  -->
 <spring:url value="resources/css/common.css" var="css" />
-<spring:url value="resources/font-awesome/css/font-awesome.css"	var="font" />
-<spring:url value="resources/font-awesome/css/font-awesome.min.css"	var="font2" />
+<spring:url value="resources/font-awesome/css/font-awesome.css"
+	var="font" />
+<spring:url value="resources/font-awesome/css/font-awesome.min.css"
+	var="font2" />
 <spring:url value="resources/css/bootstrap.min.css" var="boot" />
 <link rel="stylesheet" type="text/css" href="${css }" />
 <link rel="stylesheet" type="text/css" href="${font }" />
@@ -23,11 +25,13 @@
 <!-- 자바스크립트 -->
 <!-- todo일 때 sns부분 -->
 <!-- 모달 -->
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="js/sumware.js"></script>
 <script src="js/board.js"></script>
 <script src="js/mail.js"></script>
 <script src="js/http.js"></script>
+<script src="js/todo.js"></script>
 <!-- <script src="js/bootstrap.min.js"></script> -->
 <c:if test="${sessionScope.model eq 'join' || sessionScope.model eq 'memjoin' }">
 <%--우편번호 다음 링크 --%>
@@ -46,10 +50,12 @@
 </c:if>
 <c:if test="${sessionScope.model eq 'calendar' }">
 	<!-- 캘린더 -->
-	<spring:url value="resources/fjs/fullcalendar.min.css" var="fullcalendarCss"/>
-	<spring:url value="resources/fjs/lib/moment.min.js" var="momentJs"/>
-	<spring:url value="resources/fjs/fullcalendar.min.js" var="fullcalendarJs"/>
-	<spring:url value="resources/fjs/lang-all.js" var="langJs"/>
+	<spring:url value="resources/fjs/fullcalendar.min.css"
+		var="fullcalendarCss" />
+	<spring:url value="resources/fjs/lib/moment.min.js" var="momentJs" />
+	<spring:url value="resources/fjs/fullcalendar.min.js"
+		var="fullcalendarJs" />
+	<spring:url value="resources/fjs/lang-all.js" var="langJs" />
 	<link rel='stylesheet' href='${fullcalendarCss }' />
 	<script src='${momentJs }'></script>
 	<script src='${fullcalendarJs }'></script>
@@ -146,6 +152,34 @@ $(function(){
 </script>
 	<!-- /캘린더 -->
 </c:if>
+<!-- Todo - SNS -->
+<c:if test="${sessionScope.model eq 'todo' }">
+<script>
+//push Client 설정 (받는쪽)
+var rowsPerPage = 8; // sns에 쓸 행수
+var eventSource;
+var cheight = $('.chat').height() - 50;// sns
+var ch;// snsComm
+var pageB = 5; // snscomm에서 쓸 페이지 행수
+$(function() {
+	push();
+});
+function push() {
+	if (typeof (EventSource) != "undefined") {
+		// push를 받을수 있는 브라우져인지 판단.
+		eventSource = new EventSource(
+				"pushSns?sdept=${v.memdept}&page=1&rowsPerPage=" + rowsPerPage);
+		eventSource.onmessage = function(event) {
+			$(".chat").html(event.data);
+		};
+	} else {
+		$(".chat").html("해당 브라우저는 지원이 안됩니다.");
+	}
+}
+</script>
+</c:if>
+<!-- Todo - SNS -->
+
 <c:if test="${param.submod eq 'writeForm' }">
 	<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
 	<script src="js/myckeditor.js"></script>
@@ -160,13 +194,13 @@ $(function(){
 <body>
 	<tiles:insertAttribute flush="true" name="header" />
 	<div class="wrap-layout board" id="global">
-	<div class="lnb-area" id="lnb-area">
-		<tiles:insertAttribute flush="true" name="menu" />
-	</div>
-	<div class="contents">
-		<!-- body -->
-		<tiles:insertAttribute flush="true" name="body" />
-	</div>
+		<div class="lnb-area" id="lnb-area">
+			<tiles:insertAttribute flush="true" name="menu" />
+		</div>
+		<div class="contents">
+			<!-- body -->
+			<tiles:insertAttribute flush="true" name="body" />
+		</div>
 	</div>
 	<!-- footer -->
 	<tiles:insertAttribute flush="true" name="footer" />

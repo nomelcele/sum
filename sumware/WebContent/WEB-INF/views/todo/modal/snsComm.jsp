@@ -35,7 +35,7 @@
 		<!-- comment-write(S) -->
 		<div class="comment-write">
 			<input style="width: 450px;"type="text" id="cocont" name="cocont" placeholder="댓글 내용을 입력해 주세요." onkeydown="enterCheck(2)">
-			<button type="button" class="btn-snscomm" onclick="snsInsertComm(${commsns})">등록</button>
+			<button type="button" class="btn-snscomm" onclick="snsInsertComm(${commsns},${sessionScope.v.memnum})">등록</button>
 		</div>
 		</div>
 	<!-- comment-write(E) -->
