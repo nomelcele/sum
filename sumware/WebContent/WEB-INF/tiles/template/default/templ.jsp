@@ -44,6 +44,25 @@
 			$('#targetimg').attr('src',"resources/profileImg/${sessionScope.v.memprofile}").css(
 					'width', '200').css('height', '200');
 		}
+//		<%--본래 비밀번호 비밀번호 수정시 버튼 --%>
+
+		$('#chbtn').click(function() {
+			if($('#mempwd').val() == "${mempwd}" && "${sessionScope.v.mempwd }" == ""){
+				// 첫 프로필 수정시
+				$('.dhpwd').show("slow");
+				
+			}else if($('#mempwd').val() == "${sessionScope.v.mempwd }" && "${sessionScope.v.mempwd }" != ""){
+				// 사원 프로필 수정시
+				$('.dhpwd').show("slow");
+				
+			}	else {
+		
+				$('#targetpw').html('<p style="color: red;">비밀번호가 일치 하지 않습니다.</p>');
+				setTimeout(function(){
+					$('#targetpw').html(' ');
+				}, 2000);
+			}  
+	});
 	});
 </script>
 <script src="js/member.js"></script>

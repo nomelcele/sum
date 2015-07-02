@@ -359,9 +359,23 @@ function todoFormGo(res) {
 		$('#rejectForm').submit();
 		alert("거절 완료");
 	} else if (res == 'addTodo') {
-		//부장의 업무 추가 폼 작성 후 보내기버튼
-		$('#addTodoForm').submit();
-		alert("업무를 등록하였습니다.");
+		if($('#tostdate').val() > $('#toendate').val()){
+			alert("업무 기간을 다시 설정 해주세요.");
+		}else if($('#totitle').val() == ""){
+			alert("업무 주제를 입력해 주세요.");
+		}else if($('#tostdate').val() == ""){
+			alert("업무 시작일을 설정해 주세요.");
+		}else if($('#selectTomem').val() == ""){
+			alert("업무 담당자를 선택해 주세요.");
+		}else if($('#tocont').val() == undefined){
+			alert("업무 내용을 입력해 주세요.");
+		}else{
+			//부장의 업무 추가 폼 작성 후 보내기버튼
+			$('#addTodoForm').submit();
+			alert("업무를 등록하였습니다.");
+		}
+		
+		
 	} else if (res == 'addMem') {
 		if ($('#newjob').val() == '부장') {
 			$('#newauth').attr("value", "3");
