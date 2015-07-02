@@ -31,6 +31,30 @@ function mailFormGo(res) {
 	}
 }
 
+
+//------------------------------------
+//------------------------------------
+// 체크에디터 설정
+function mailChkUpload(){
+	CKEDITOR.replace('mailcont',{
+		width:'100%',
+		height:'400px',
+		filebrowserImageUploadUrl : 'mailWrite'
+	});
+	CKEDITOR.on('dialogDefinition', function(ev){
+		var dialogName = ev.data.name;
+		var dialogDefinition = ev.data.definition;
+		switch(dialogName){
+		case 'image' : // Image Properties dialog
+			// dialogDefinition.removeContents('info');
+			dialogDefinition.removeContents('Link');
+			dialogDefinition.removeContents('advanced');
+			break;
+		}
+	});
+}
+
+
 // ------------------------------------
 // ------------------------------------
 // mailList.jsp 스크립트
