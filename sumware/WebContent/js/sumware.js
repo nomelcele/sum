@@ -309,7 +309,6 @@ function todoConfirm(res) {
 			type : "post",
 			url : "approveTodo",
 			data : {
-				model : "todo",
 				tonum : $('#atonum').val(),
 				tostdate : $('#atostdate').val(),
 				toendate : $('#atoendate').val(),

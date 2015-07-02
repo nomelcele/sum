@@ -260,3 +260,5 @@ create table mescontent(
 create sequence mescontent_seq increment by 1 start with 1;
 
 commit;
+--2015년 memprofile 사이즈 변경
+alter table member modify memprofile varchar2(100);

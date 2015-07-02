@@ -59,6 +59,7 @@ public class MemberDao {
 	
 	//회원 정보 수정 
 	public void modify(MemberVO vo){
+		System.out.println("memprofile::"+vo.getMemprofile());
 		st.update("mem.modify",vo);
 		//SqlSession ss = FactorySrevice.getFactory().openSession(true);
 		//ss.update("mem.modify",map);
