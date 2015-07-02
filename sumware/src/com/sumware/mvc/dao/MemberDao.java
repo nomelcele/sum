@@ -67,33 +67,7 @@ public class MemberDao {
 	}
 	
 	
-	//
-	public void addMember(MemberVO vo){
-		st.insert("mem.addMember",vo);
-		//SqlSession ss = FactorySrevice.getFactory().openSession(true);
-		//ss.insert("mem.addMember",map);
-		//ss.close();
-	}
-	
-	//
-	public List<MemberVO> getMemMgr(int memdept){
-		
-	
-		//SqlSession ss = FactorySrevice.getFactory().openSession();
-		//List<MemberVO> alist = ss.selectList("mem.getMemMgr",memdept);
-		
-		//ss.close();
-		return st.selectList("mem.getMemMgr",memdept);
-	//내일 물어보기	
-	}
 	
 //
-	public MemberVO getNewMemInfo(String memmail ){
-		
-		//SqlSession ss = FactorySrevice.getFactory().openSession();
-		//MemberVO vo = ss.selectOne("mem.getNewMemInfo",memmail);
-		//ss.close();
-		return st.selectOne("mem.getNewMemInfo",memmail);
-		
-	}
+
 }

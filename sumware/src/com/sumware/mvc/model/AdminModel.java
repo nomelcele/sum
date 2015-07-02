@@ -1,7 +1,10 @@
 package com.sumware.mvc.model;
 
-import java.awt.List;
 import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sumware.dto.MemberVO;
+import com.sumware.mvc.dao.AdminDao;
 import com.sumware.mvc.dao.BoardDao;
 import com.sumware.mvc.dao.MemberDao;
 import com.sumware.util.MyMap;
@@ -23,47 +27,66 @@ public class AdminModel {
 	private MemberDao mdao;
 	@Autowired
 	private BoardDao bdao;
+	@Autowired
+	private AdminDao adao;
+	
+	// 게시판 추가 메뉴 진입
+	@RequestMapping(value="/addBoardForm",method=RequestMethod.POST)
+	public String addBoardForm(){
+		
+		return "admin/addBoard";
+		
+	}
+	
+	// 사원 추가 메뉴 진입
+	@RequestMapping(value="/addMemberForm",method=RequestMethod.POST)
+	public String addMemberForm(){
+		
+		return "admin/addMember";
+		
+	}
 	
 	
+	// 관리자 - 새 사원 추가
 	@RequestMapping(value="/addMember",method=RequestMethod.POST)
 	public String addMember(MemberVO mvo, Model model){
-		//관리자 페이지에서 회원 추가 
-		//HashMap<String, String> map= MyMap.getMaps().getMapList(request);
+		System.out.println("사원 추가버튼 클릭!!!");
+		// 사원의 기본 정보를 가지고 디비에 추가
+		adao.addMember(mvo);
 		
-		mdao.addMember(mvo);
-		
-		
-		model.addAttribute(" ");
-//		String memmail = map.get("newmail");
-//		MemberVO vo = MemberDao.getDao().getNewMemInfo(memmail);
-//		request.setAttribute("newmemVo", vo);
+		// 새 사원에 대한 정보 가져옴
+		// 메일에 사원의 정보를 보여주기 위함
+		String memmail = mvo.getMemmail();
+		MemberVO nmvo = adao.getNewMemInfo(memmail);
+		model.addAttribute("newmemVo", nmvo);
 		
 		return "admin/sendEmailUser";
-		//이것도 나중에 수정
 	}
+	
+	// 관리자페이지 진입
+	@RequestMapping(value="/admin")
+	public String adminForm(HttpSession session, String model){
+		
+		session.setAttribute("model", model);
+		
+		return "admin.addMember";
+	}
+	
 
+
+	// 부서선택하면 부서에 대한 팀장들 리스트가져옴
 	@RequestMapping(value="/getMemMgr",method=RequestMethod.POST)
 	public String getMemMgr(int memdept,Model model){
-		System.out.println("addMemberForm들어옴");
-	// 부서선택하면 부서에 대한 팀장들 리스트가져옴
-		//int memdept = Integer.parseInt(request.getParameter("memdept"));
-		int memdt= memdept;
-//		List<MemberVO> memmgrlist= mdao.getMemMgr(memdt);
-//		model.addAttribute("mgrList",memmgrlist);
+
 		
-		//List<MemberVO> memmgrlist = MemberDao.getDao().getMemMgr(memdept);
-		//request.setAttribute("mgrList", memmgrlist);
+		List<MemberVO> memmgrlist= adao.getMemMgr(memdept);
+		model.addAttribute("mgrList", memmgrlist);
 		
 		return "admin/getMgrListCallback";
 		
 	}
 	
-	@RequestMapping(value="/addMemberForm")
-	public String addMemberForm(){
-		
-		return "admin/admin";
-		
-	}
+	//////// 수정해
 	@RequestMapping(value="/addBoard")
 	public String addBoard(){
 		
@@ -74,12 +97,7 @@ public class AdminModel {
 		
 	}
 	
-	@RequestMapping(value="/addBoardForm",method=RequestMethod.POST)
-	public String addBoardForm(){
-		
-		return "admin/addBoard.jsp";
-		
-	}
+
 	
 
 }

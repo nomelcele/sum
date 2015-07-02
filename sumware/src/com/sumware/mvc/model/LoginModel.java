@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.mvc.dao.LoginDao;
-import com.sumware.mvc.service.LoginService;
+
 
 @Controller
 public class LoginModel{
@@ -23,12 +23,11 @@ public class LoginModel{
 	private LoginDao dao;
 	@Autowired
 	@Qualifier(value="log")
-	private LoginService service;
 	@RequestMapping(value="login")
 	public void login(MemberVO mvo,HttpSession session,HttpServletResponse response) throws IOException{
 		String result="home.index";
 		try {
-			String res = service.ckFirstLogin(mvo);
+			String res = dao.ckFirstLogin(mvo);
 
 			System.out.println("res:::"+res);		
 			if (res.equals("1")) {

@@ -330,8 +330,8 @@
 </c:if>
 <%-- mail left(E) --%>
 
-<!-- 사원추가 left -->
-<c:if test="${(sessionScope.model eq 'join')}">
+<!-- 관리자 left -->
+<c:if test="${(sessionScope.model eq 'admin')}">
 	<div>
 		<div class="row-lg-6">
 			<div class="chat-panel panel panel-default left-profile">
@@ -388,8 +388,8 @@
 	<!-- left-menu(S) -->
 	<div class="left-menu" id="left-menu">
 		<ul>
-			<li><a href="addMemberForm">사원 추가</a></li>
-			<li><a href="addBoardForm">게시판 추가</a></li>
+			<li><a href="javascript:adminSelectMenu('addMem')">사원 추가</a></li>
+			<li><a href="javascript:adminSelectMenu('addBoard')">게시판 추가</a></li>
 		</ul>
 	</div>
 	<!-- left-menu(E) -->

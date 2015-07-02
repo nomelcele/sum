@@ -14,7 +14,7 @@
 	request.setCharacterEncoding("UTF-8");
 	MemberVO vo = (MemberVO) request.getAttribute("newmemVo");
 	System.out.print(vo.getMemmail());
-	String sender = "jinjo820925@naver.com";
+	String sender = "joosang0904@naver.com";
 	String receiver = vo.getMemmail();
 	String subject = "신입 사원 로그인 정보입니다.";
 	String content = vo.getMemname()+"님의 사원번호는 "+vo.getMemnum()+", 비밀번호는 "
@@ -26,7 +26,7 @@
 	//SMTP 서버의 계정 설정
 	//Naver와 연결할 경우 네이버 아이디 지정
 	//Google과 연결할 경우 본인의 Gmail 주소
-	p.put("mail.smtp.user", "jinjo820925");
+	p.put("mail.smtp.user", "joosang0904");
 
 	//SMTP 서버 정보 설정
 	//네이버일 경우 smtp.naver.com

@@ -15,16 +15,8 @@
    </update>
    <update id="modify" parameterType="mvo">
    		update member set memaddr=#{memaddr}, mempwd=#{mempwd},memprofile=#{memprofile} where memnum=#{memnum}
-   
    </update>
-   <insert id="addMember" parameterType="mvo">
-   	insert into member values(member_seq.nextVal,#{newname},null,#{newpwd},null,#{newjob},#{newauth},#{newmail},null,#{newmgr},#{newdept})
-  </insert>
-  <select id="getMemMgr" parameterType="int" resultType="mvo">
-  	select memnum,memname from member where memauth=4 and memdept=#{memdept}
+   
   
-  </select>
-  <select id="getNewMemInfo" parameterType="String" resultType="mvo">
-  	select s.memnum,s.memname, d.dename, s.mempwd, m.memname mgrname, s.memmail from member s, dept d, member m where s.memmgr = m.memnum and s.memdept= d.denum and s.memmail=#{memmail}
-  </select>
+  
 </mapper>

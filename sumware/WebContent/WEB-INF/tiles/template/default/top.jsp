@@ -41,7 +41,7 @@
 							<li><a href="">Board</a></li>
 							<li><a href="">Messenger <span id="countRoomNum"></span></a></li>
 						<c:if test="${sessionScope.v.memdept eq 100 and sessionScope.v.memauth lt 4 }">
-							<li><a href="sumware?model=join&submod=addMemberForm">Admin</a></li>
+							<li><a href="">Admin</a></li>
 						</c:if>
 						</ul>
 						<!-- navbar-nav(E) -->

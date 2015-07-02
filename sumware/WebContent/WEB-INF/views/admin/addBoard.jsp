@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-		<div id="global" class="wrap-layout board">
-			<div class="lnb-area" id="lnb-area">
-				<!-- left menu !!!! 들어갈 자리 -->
-			</div>
-
+		
 			<form action="sumware" method="post" id="addBoardForm">
 				<input type="hidden" name="model" value="join">
 				<input type="hidden" name="submod" value="addBoard">
@@ -31,10 +27,10 @@
 							</select>
 						</div>
 						<div class="form-group has-success">
-							<button type="button" class="btn btn-outline btn-success" onclick="javascript:todoFormGo('addBoard')" id = "sendFormToAdd">추 가</button>
+							<input type="button" class="btn btn-outline btn-success" onclick="javascript:todoFormGo('addBoard')" id = "sendFormToAdd" value="추 가">
 						</div>
 					</div>
 				</div>
 				</div>
 			</form>
-		</div>
+
