@@ -30,6 +30,8 @@
 						<input type="hidden" name="bname" id="bname"> 
 						<input type="hidden" name="bdeptno" id="bdeptno"> 
 						<input type="hidden" name="cal" value="1">
+						<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
+						<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
 						<!-- navbar-nav(S) -->
 						<ul class="nav navbar-nav">
 							<li><a href="">Main</a></li>
