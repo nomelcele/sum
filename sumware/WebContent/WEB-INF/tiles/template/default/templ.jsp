@@ -180,8 +180,8 @@ function push() {
 </c:if>
 <!-- Todo - SNS -->
 
-<c:if test="${sessionScope.model eq 'mail'">
-	<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+<c:if test="${sessionScope.model eq 'mail'}">
+	<script src="//cdn.ckeditor.com/4.5.0/basic/ckeditor.js"></script>
 	<script src="js/myckeditor.js"></script>
 	<script src="js/util.js"></script>
 	<script type="text/javascript">
