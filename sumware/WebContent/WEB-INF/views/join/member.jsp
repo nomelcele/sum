@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%--우편번호 다음 링크 --%>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
 <div class="container">
 	<div class="row info">
 		<div class="row">
@@ -11,7 +8,7 @@
 				<div class="resume">
 				
 					
-					<c:if test="${empty sessionScope.model}">
+					<c:if test="${sessionScope.model ne 'join'}">
 					<form class="form-horizontal" role="form" method="post"
 						action="signup" id="myform" name="myform" >
 					<input type="hidden" name="memnum" value="${memnum}"> 
@@ -35,7 +32,7 @@
 							<div class="row">
 								<div class="profileimg">
 									<figure>
-									<c:if test="${empty sessionScope.model}">
+									<c:if test="${sessionScope.model ne 'join'}">
 										<img class="img-circle" alt="프로필 사진 "
 											id="targetimg" src="resources/img/imgx.jpg">
 									</c:if>
@@ -67,7 +64,7 @@
 										<div id="target"></div>
 									</div>
 									</c:if>
-									<c:if test="${empty sessionScope.model }">
+									<c:if test="${sessionScope.model ne 'join' }">
 									<div class="col-sm-6">
 										<input type="text" id="meminmail" name="meminmail"
 											placeholder="사내 이메일" class="form-control">
