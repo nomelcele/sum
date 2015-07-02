@@ -36,31 +36,61 @@
 			</thead>
 			<%-- 반복 구간 시작 --%>
 			<tbody>
-			<form action="boardDetail" method="POST"  id="detailForm">
 				<c:forEach items="${list }" var="vlist">
 					<tr>
-				<input type="hidden"  name="model" value="board">
-				<input type="hidden"  name="no" value="${vlist.bnum}">
-				<input type="hidden"  name="bgnum" value="${sessionScope.bbbgnum }">
-				<input type="hidden"  name="bname" value="${sessionScope.bname }">
-				<input type="hidden"  name="bdeptno" value="${sessionScope.v.memdept}">
-						<td class="num">${vlist.bnum }</td>
+						<td style="text-align: center;">${vlist.bnum }</td>
 						<td style="text-align: left">
-						<a href="">${vlist.btitle }</a></td>
+						<span onclick="javascript:detail(${vlist.bnum },${sessionScope.bbbgnum},'${sessionScope.bname }',${sessionScope.v.memdept })" style="cursor: pointer;">${vlist.btitle }</span></td>
 						<td style="text-align: center;">${vlist.bwriter }</td>
 						<td style="text-align: center;">${vlist.bdate }</td>
 						<td style="text-align: center;">${vlist.bhit }</td>
 					</tr>
 				</c:forEach>
-			</form>
 			</tbody>
 			<%-- 반복 구간 끝 --%>
 		</table>
 		<!-- board-list(E) -->
 
 		<!-- paging(S) -->
-		<div class="paging">
-			<c:set var="pageUrl" value="sumware?model=board&submod=boardList&bdeptno=${sessionScope.v.memdept }&bgnum=${sessionScope.bbbgnum}" />
-			<%@include file="page.jsp"%>
+		<div class="paging" id="paging">
+		<form action="boardList" method="post" id="plist">
+		<input type="hidden" name="model" value="board">
+		<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum}"> 
+		<input type="hidden" name="bname" value="${sessionScope.bname }"> 
+		<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
+		<input type="hidden" name="page" id="page">
+			<!-- 이전 페이지로 보내주는 화살표 -->
+			<c:choose>
+				<c:when test="${pageInfo.currentBlock eq 1}">&lt;&lt;</c:when>
+				<c:otherwise>
+					<%-- <button type="button" class="paging-prev">&lt;&lt;</button> --%>
+					<a class="page-first" href="">&lt;&lt;</a>
+				</c:otherwise>
+			</c:choose>
+			<!-- 클릭시 해당 페이질 바로 이동!!!! -->
+			<c:choose>
+				<c:when test="${pageInfo.currentBlock ne pageInfo.totalBlocks}">
+					<c:forEach begin="1" end="${pageInfo.pagesPerBlock}" varStatus="num">
+						<a href="">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<c:forEach
+						begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}"
+						end="${pageInfo.totalPages}" varStatus="num">
+						<a href="">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+			
+			<!-- 다음 페이지로 보내주는 화살표 -->
+			<c:choose>
+				<c:when test="${pageInfo.currentBlock eq pageInfo.totalBlocks}">&gt;&gt;</c:when>
+				<c:otherwise>
+					<a class="page-last" href="">&gt;&gt;</a>
+		<input type="hidden" name="page" value="${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }"> 
+				</c:otherwise>
+			</c:choose>
+		</form>
 		</div>
 		<!-- paging(E) -->

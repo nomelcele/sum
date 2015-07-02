@@ -71,7 +71,7 @@ button, input, select, option, textarea, a {
 .wrap-layout {
 	width: 1190px;
 	margin:auto;
-	padding: 20px 20px 60px 20px;
+	padding: 0px 20px 60px 20px;
 	box-sizing: border-box;
 }
 /* contents */
