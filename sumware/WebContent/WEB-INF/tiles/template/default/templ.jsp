@@ -29,6 +29,21 @@
 <script src="js/mail.js"></script>
 <script src="js/http.js"></script>
 <!-- <script src="js/bootstrap.min.js"></script> -->
+<c:if test="${sessionScope.model eq 'join' || sessionScope.model eq 'memjoin' }">
+<%--우편번호 다음 링크 --%>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+	$(function(){
+		if("${!empty sessionScope.v.memprofile}"=="true"){
+			// 프로필 수정 시 지정해준 사진값(memprofile)이 없으므로 프로필 사진을등록해달라고 함!
+			// 그래서 프로필 수정 시 memprofile의 value값을 지정해 주어야 함
+			$('#targetimg').attr('src',"resources/profileImg/${sessionScope.v.memprofile}").css(
+					'width', '200').css('height', '200');
+		}
+	});
+</script>
+<script src="js/member.sj"></script>
+</c:if>
 <c:if test="${sessionScope.model eq 'calendar' }">
 	<!-- 캘린더 -->
 	<spring:url value="resources/fjs/fullcalendar.min.css" var="fullcalendarCss"/>
