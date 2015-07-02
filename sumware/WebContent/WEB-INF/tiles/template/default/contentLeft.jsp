@@ -52,7 +52,7 @@
 						</tr>
 						<tr>
 							<td colspan="2"><a
-								href="sumware?model=join&submod=modifyProfile"
+								href="modifyProfile"
 								class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 						</tr>
 					</table>
@@ -128,7 +128,7 @@
 					</tr>
 					<tr>
 						<td colspan="2"><a
-							href="sumware?model=join&submod=modifyProfile"
+							href="modifyProfile"
 							class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 
 					</tr>
@@ -227,7 +227,7 @@
 				</tr>
 				<tr>
 					<td colspan="2"><a
-						href="sumware?model=join&submod=modifyProfile"
+						href="modifyProfile"
 						class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 
 				</tr>
@@ -293,7 +293,7 @@
 							</tr>
 							<tr>
 								<td colspan="2"><a
-									href="sumware?model=join&submod=modifyProfile"
+									href="modifyProfile"
 									class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 
 							</tr>
@@ -374,7 +374,7 @@
 						</tr>
 						<tr>
 							<td colspan="2"><a
-								href="sumware?model=join&submod=modifyProfile"
+								href="modifyProfile"
 								class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 
 						</tr>
@@ -389,8 +389,8 @@
 	<!-- left-menu(S) -->
 	<div class="left-menu" id="left-menu">
 		<ul>
-			<li><a href="sumware?model=join&submod=addMemberForm">사원 추가</a></li>
-			<li><a href="sumware?model=join&submod=addBoardForm">게시판 추가</a></li>
+			<li><a href="addMemberForm">사원 추가</a></li>
+			<li><a href="addBoardForm">게시판 추가</a></li>
 		</ul>
 	</div>
 	<!-- left-menu(E) -->
