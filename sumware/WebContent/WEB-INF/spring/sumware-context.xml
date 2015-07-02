@@ -13,6 +13,8 @@
 <!-- 		<property name="order" value="1"/> -->
 <!-- 		<property name="basename" value="views"/> -->
 <!-- 	</bean> -->
+
+
 	<bean id="viewResolver2" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="2"/>
 		<property name="prefix" value="/WEB-INF/views/"/>
