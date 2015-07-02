@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<form action="boardWrite" method="post" id="writeForm">
+	<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum}">
+	<input type="hidden" name="bname" value="${sessionScope.bname}">
+	<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept}">
+	<input type="hidden" name="submod" value="writeForm">
+</form>
 		<h2 class="heading-page">${sessionScope.bname }</h2>
 		<!-- board-form(S) -->
 		<div class="board-form">
@@ -8,8 +14,7 @@
 				<input type="text" name="search" placeholder="search">
 			</div>
 			<div class="right">
-				<button type="button"
-					onclick="location='sumware?model=board&submod=writeForm&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }&bdeptno=${sessionScope.v.memdept }'">글쓰기</button>
+				<button type="button" onclick="javascript:formGo('write')">글쓰기</button>
 			</div>
 		</div>
 		<!-- board-form(E) -->

@@ -12,6 +12,17 @@ $(function(){
 		$("#paging form #page").attr("value",$page);
 		$("#plist").submit();
 	});
+	$("#left-menu a").click(function(e){
+		e.preventDefault();
+		var $bgnum = $(this).next().text();
+		var $bname = $(this).text();
+		$("#left-menu form #bgnum").attr("value",$bgnum);
+		$("#left-menu form #bname").attr("value",$bname);
+		$("#listtt").submit();
+		$('#left-menu span p').text("");
+		$bgnum = "";
+	});
+	
 });
 
 function detail(no,bgnum,bname,bdeptno){
