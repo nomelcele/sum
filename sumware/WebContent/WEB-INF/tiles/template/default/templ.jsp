@@ -32,6 +32,7 @@
 <script src="js/mail.js"></script>
 <script src="js/http.js"></script>
 <script src="js/todo.js"></script>
+<script src="js/admin.js"></script>
 <!-- <script src="js/bootstrap.min.js"></script> -->
 <c:if test="${sessionScope.model eq 'join' || sessionScope.model eq 'memjoin' }">
 <%--우편번호 다음 링크 --%>

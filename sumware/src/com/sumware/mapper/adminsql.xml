@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="admin">
+  	<insert id="addMember" parameterType="mvo">
+   	insert into member values(member_seq.nextVal,#{memname},null,#{mempwd},null,#{memjob},#{memauth},#{memmail},null,#{memmgr},#{memdept})
+  </insert>
+  
+  <select id="getNewMemInfo" parameterType="String" resultType="mvo">
+  	select s.memnum,s.memname, d.dename, s.mempwd, m.memname mgrname, s.memmail from member s, dept d, member m where s.memmgr = m.memnum and s.memdept= d.denum and s.memmail=#{memmail}
+  </select>
+  
+  <select id="getMemMgr" parameterType="int" resultType="mvo">
+  	select memnum,memname from member where memauth=4 and memdept=#{memdept}
+  </select>
+  </mapper>

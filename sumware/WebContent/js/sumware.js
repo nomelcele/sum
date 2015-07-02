@@ -44,6 +44,10 @@ $(function() {
 			$("#page").attr("value", "1");
 			$("#formff").attr("action","boardList").submit();
 			break;
+		case ("admin"):
+			$("#model").attr("value", $pageName);
+			$("#formff").attr("action","admin").submit();
+			break;
 		default:
 			openWin();
 		break;
