@@ -47,7 +47,7 @@ function fileUpload(){
 				function() {
 					setTimeout(function() {
 						$('#target').load(
-								"/joinck?meminmail="
+								"joinck?meminmail="
 										+ $('#meminmail').val());
 					}, 500);
 				});
