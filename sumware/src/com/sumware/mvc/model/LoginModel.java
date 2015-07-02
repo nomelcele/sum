@@ -8,23 +8,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.mvc.dao.LoginDao;
+import com.sumware.mvc.service.LoginService;
 
 @Controller
 public class LoginModel{
 	@Autowired
 	private LoginDao dao;
-	
+	@Autowired
+	@Qualifier(value="log")
+	private LoginService service;
 	@RequestMapping(value="login")
 	public void login(MemberVO mvo,HttpSession session,HttpServletResponse response) throws IOException{
 		String result="home.index";
 		try {
-			String res = dao.ckFirstLogin(mvo);
+			String res = service.ckFirstLogin(mvo);
 
 			System.out.println("res:::"+res);		
 			if (res.equals("1")) {
@@ -44,7 +48,7 @@ public class LoginModel{
 				// sessionScope에 아이디를 저장
 				session.setAttribute("v", mvo);
 				//login 기록 저장.
-				dao.inLog(mvo.getMemnum());	
+//				dao.inLog(mvo.getMemnum());	
 			}else{
 				result="0";
 			}
@@ -60,7 +64,7 @@ public class LoginModel{
 	@RequestMapping(value="logout")
 	public void logout(int memnum,HttpSession session,HttpServletResponse response) throws IOException{
 		System.out.println("로그아웃 컨트롤러");
-		dao.outLog(memnum);
+//		dao.outLog(memnum);
 		session.removeAttribute("v");
 		session.removeAttribute("teamNameList");
 		session.invalidate();
