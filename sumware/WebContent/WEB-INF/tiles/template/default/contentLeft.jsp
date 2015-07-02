@@ -241,13 +241,12 @@
 
 <%-- mail left(S) --%>
 <c:if test="${sessionScope.model eq 'mail' }">
-	<!-- <form method="post" action="sumware" id="mailform"> -->
-	<!-- 	<input type="hidden" id="model" name="model"> -->
-	<!-- 	<input type="hidden" id="submod" name="submod"> -->
-	<!-- 	<input type="hidden" id="usernum" name="usernum"> -->
-	<!-- 	<input type="hidden" id="userid" name="userid"> -->
-	<!-- 	<input type="hidden" id="page" name="page"> -->
-	<!-- </form> -->
+	<form method="post" action="sumware" id="mailform">
+		<input type="hidden" id="model" name="model">
+		<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
+		<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
+		<input type="hidden" name="page" value="1">
+	</form>
 
 	<div>
 		<div>

@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div id="global" class="wrap-layout board">
-	<div id="lnb-area" class="lnb-area">
-		<!-- left menu !!!! 들어갈 자리 -->
-	</div>
-	<div class="contents">
 		<div class="row" style="height:400px;">
 			<div class="col-lg-8" id="mainContent">
 <!-- 			<form method="post" action="sumware" id="detailform"> -->
@@ -33,8 +28,6 @@
 <!-- 				</form> -->
 			</div>			
 		</div>
-	</div>
-</div>
 
 <script>
 	function mailReplyGo(){
