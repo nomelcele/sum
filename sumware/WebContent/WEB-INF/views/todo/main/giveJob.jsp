@@ -3,49 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="/css/bootstrap-rtl.min.css" rel="stylesheet"/>
 <!-- 팀장이 사원들에게 업무를 부여하기 위한 뷰 -->
-<script>
 
-	function insertJob(tonum){
-		
-		if($('#memjobName'+tonum).val()==""){
-			alert("사원을 선택해 주세요.");
-		}else{
-			$.ajax({
-				type : "post",
-				url : "insertMemJob",
-				data : {
-					jobmemnum:$('#memjobName'+tonum).val(),
-					jobtonum:tonum,
-					jobcont:$('#jobcont'+tonum).val()},
-				success : function(result){
-					$("#membersjob"+tonum).html(result);
-					$('#jobcont'+tonum).val("");
-					alert("업무 지정이 완료되었습니다.");
-				}
-			});
-			
-		}
-		
-	}
-	
-	function getDetail(tonum){
-
-		$("#detail"+tonum).toggle("slow");
-		
-		$.ajax({
-			type : "post",
-			url : "showMembersJob",
-			data : {
-				jobtonum:tonum,
-				},
-			success : function(result){
-					$("#membersjob"+tonum).html(result);
-					
-				}
-			});
-
-	}
-</script>
 
 		<!-- 팀장의 업무부여 ajax-->
 				<div class="chat-panel panel panel-default">

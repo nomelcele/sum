@@ -3,145 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script>
-// push Client 설정 (받는쪽)
-	var rowsPerPage =8; //sns에 쓸 행수
-	var eventSource;
-	var cheight=$('.chat').height()-50;//sns
-	var ch ;//snsComm
-	var pageB=5; //snscomm에서 쓸 페이지 행수
-	$(function(){
-		push();
-	});
-	
-	function push(){
-		if(typeof(EventSource) != "undefined"){
-			 // push를 받을수 있는 브라우져인지 판단.
-			eventSource = new EventSource("pushSns?sdept=${v.memdept}&page=1&rowsPerPage="+rowsPerPage);
-			eventSource.onmessage = function(event){
-				$(".chat").html(event.data);
-			};
-		}else{
-			$(".chat").html("해당 브라우저는 지원이 안됩니다.");
-		}
-	}
-	function pageScoll(){
-		var sctop=$('.chat').scrollTop();
-		if ( sctop > cheight) {
-			$("#loading").html("<img src='resources/img/loading.gif' alt='loading'>");
-			setTimeout(function(){
-				rowsPerPage+=5;
-				cheight+=($('.chat').scrollTop()+100);
-				eventSource.close();
-				$("#loading img").remove();
-				push();
-				
-			}, 1000);	
-					
-		}
-	}
 
-	function snsSend(){
-		$(".chat").scrollTop(0);
-		var fdata = {
-			smem:"${v.memnum}",
-			sdept:"${v.memdept}",
-			scont:$("#btn-input").val()
-		};
-		$('#btn-input').val("");
-		$.ajax({
-			type:"POST",
-			url:"insertSns",
-			data:fdata
-		});
-	}
-	function snsComm(snum){
-		var rowsPerPage=10;
-		var data={
-			page:"1",
-			rowsPerPage:rowsPerPage,
-			snum:snum
-		};
-		$.ajax({
-			type:"POST",
-			url:"snsComm",
-			data:data,
-			success: function(result){
-				$("#wrapbody").html(result);
-				$("#snsCommBtn").click();
- 				ch= $('#snsCommList').height()-100;
-			},
-			error: function(a, b) {
-                alert("Request: " + JSON.stringify(a));
-            }
-		});
-	}
-	function snsInsertComm(snum){
-		var data={
-				comem:"${v.memnum}",
-				page:"1",
-				rowsPerPage:pageB,
-				snum:snum,
-				cocont:$('#cocont').val()
-			};
-		$.ajax({
-			type:"POST",
-			url:"snsCommInsert",
-			data:data,
-			success: function(result){
-				$("#wrapbody").html(result);
-			},
-			error: function(a, b) {
-                alert("Request: " + JSON.stringify(a));
-            }
-		});
-	}
-	function snsCommDelete(conum,commsns){
-		var data={
-				page:"1",
-				rowsPerPage:pageB,
-				snum:commsns,
-				conum:conum
-		};
-		$.ajax({
-			type:"POST",
-			url:"snsCommDelete",
-			data:data,
-			success:function(result){
-				$("#wrapbody").html(result);
-			}
-		});
-		
-	}
-	function snsCommScroll(snum){
-		var st = $('#snsCommList').scrollTop();
-		console.log("st:"+st);
-		console.log("ch:"+ch);
-		if ( st >= ch ){
-			$("#commloading").html("<img src='img/loading.gif' alt='loading'>");
-			setTimeout(function(){
-				ch+=$('#snsCommList').height()-200;
-				$("#commloading img").remove();
-				
-				pageB +=5;
-				var page=pageB;
-				var rowsPerPage=pageB;
-				var data={
-					page:"1",
-					rowsPerPage:rowsPerPage,
-					snum:snum
-				};
-				$.ajax({
-					type:"POST",
-					url:"snsComm",
-					data:data,
-					success: function(result){
-						$("#wrapbody").html(result);
-						$('#snsCommList').scrollTop(st);
-					}
-				});
-			}, 1000);
-		}
-	}
 </script>
 <style>
 #loading img {
@@ -224,7 +86,7 @@
 						<input id="btn-input" type="text" class="form-control input-sm"
 							placeholder="메시지를 입력해주세요" onkeydown="enterCheck(1)"> <span
 							class="input-group-btn">
-							<button class="btn btn-warning btn-sm" onclick="snsSend()"
+							<button class="btn btn-warning btn-sm" onclick="snsSend(${sessionScope.v.memnum},${sessionScope.v.memdept})"
 								id="send">Send</button>
 						</span>
 					</div>
