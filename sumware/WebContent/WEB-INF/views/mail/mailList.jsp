@@ -7,6 +7,7 @@
 		<input type="hidden" id="delvalue" name="delvalue">
 		<input type="hidden" name="tofrom" value="${tofrom}">
 		<input type="hidden" name="page" value="1">
+		<input type="hidden" id="mailnum" name="mailnum">
 		
 		<!-- button-div(S) -->
 		<div class="button-div button-div-top">
@@ -160,8 +161,8 @@
 	
 	function mailDetailGo(mailnum){
 		// 상세 보기 페이지로 이동시켜주는 함수
-		location="mailDetail?mailnum="+mailnum+
-				"&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}";
+		$("#mailnum").attr("value",mailnum);
+		$("#listform").attr("action","mailDetail").submit();
 	}
 </script>
 

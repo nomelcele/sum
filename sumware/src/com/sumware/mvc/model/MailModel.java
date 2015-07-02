@@ -32,12 +32,14 @@ public class MailModel{
 	@Qualifier(value="mail")
 	private ServiceInter service;
 	
+	// 07/02
 	// *******************
 	// 왼쪽 메뉴에서 각 메일함에 있는 메일의 갯수를 보여주기 위한 메서드 호출
 	// => AOP 처리
+	// suggest 안 됨 ㅡㅡ 고쳐놓기
 	
 	// 메일 작성 form 이동
-	@RequestMapping(value="/mailWriteForm")
+	@RequestMapping(value="/mailWriteForm",method=RequestMethod.POST)
 	public String mailWriteForm(@ModelAttribute("mailreceiver")String mailreceiver,
 			@ModelAttribute("mailtitle")String mailtitle){
 		System.out.println("Mail Controller: mailWriteForm");
@@ -123,6 +125,7 @@ public class MailModel{
 		System.out.println("Mail Controller: mailFromList");
 		ModelAndView mav = new ModelAndView();
 		// 받은 메일함에 있는 메일 갯수 얻어오기
+		// 
 		int totalCount = mdao.getListNum(map)[0];
 		System.out.println("받은 메일함 메일 갯수: "+totalCount);
 		
@@ -217,7 +220,7 @@ public class MailModel{
 	}
 	
 	// 메일 상세 보기
-	@RequestMapping(value="/mailDetail")
+	@RequestMapping(value="/mailDetail",method=RequestMethod.POST)
 	public ModelAndView mailDetail(@RequestParam("mailnum")int mailnum){
 		System.out.println("Mail Controller: mailDetail");
 		ModelAndView mav = new ModelAndView();
@@ -244,15 +247,16 @@ public class MailModel{
 		service.setDeleteAttrService(mailnums, map);
 		
 		int tofrom = Integer.parseInt(map.get("tofrom"));
+		String params = "usernum="+map.get("usernum")+"&userid="+map.get("userid")+"&page=1";
 		switch(tofrom){
 			default: // 받은 메일함
-				return "redirect:/mailFromList?page=1";
+				return "redirect:/mailFromList?"+params;
 			case 2: // 보낸 메일함
-				return "redirect:/mailToList?page=1";
+				return "redirect:/mailToList?"+params;
 			case 3: // 내게 쓴 메일함
-				return "redirect:/mailMyList?page=1";
+				return "redirect:/mailMyList?"+params;
 			case 4: // 휴지통
-				return "redirect:/mailTrashcan?page=1";
+				return "redirect:/mailTrashcan?"+params;
 		}
 		
 		// 리다이렉트 이후 dao의 getListNum 메서드 실행 시 오류
