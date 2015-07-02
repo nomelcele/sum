@@ -134,15 +134,19 @@ public class TodoModel {
 	public String approveTodo(Model model,HttpSession session, TodoVO tvo) {
 		// 리스트의 승인여부 n을 y로 바꿈!!!!
 		tdao.confirmTodo(tvo, "y");
+		// map.put("start",map.get("tostdate"));
+		// map.put("end", map.get("toendate"));
+		// map.put("title", map.get("totitle"));
+		// map.put("cal", map.get("todept"));
+		CalendarVO cvo = new CalendarVO();
+		cvo.setCalstart(tvo.getTostdate());
+		cvo.setCalend(tvo.getToendate());
+		cvo.setCalcont(tvo.getTotitle());
+		cvo.setCaldept(tvo.getTodept());
+		cvo.setSelCal("부서");
+		cvo.setCal("0");
+		cdao.calInsert(cvo);
 
-		// 캘린더에 등록 수정 필요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//		CalendarVO cvo = new CalendarVO();
-//		cvo.setCalstart(tvo.getTostdate());
-//		cvo.setCalend(tvo.getToendate());
-//		cvo.setCalcont(tvo.getTotitle());
-//		cvo.setCaldept(tvo.getTodept());
-//		cvo.setCal("0");
-//		cdao.calInsert(cvo);
 		
 		//팀장의 업무관리 할 것들 가져옴
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
