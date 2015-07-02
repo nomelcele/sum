@@ -34,13 +34,12 @@
 									<div id="detail${deptjoblist.tonum }" style="display:none">
 									<br/>
 									<p>${deptjoblist.tocont }</p>
-									<p>
-											<a href="upload/${deptjoblist.tofile }" target="_blank">
-											<i class="fa fa-paperclip"></i> 첨부파일
-											: ${deptjoblist.tofile }</a>
+									<p>	
+											<i class="fa fa-paperclip"></i> 첨부파일 
+											<c:if test="${deptjoblist.tofile ne null}" >
+											<a href="downloadFile?fileName=${deptjoblist.tofile }" target="_blank">${deptjoblist.tofile } <i class="fa fa-download"></i></a>
+											</c:if>
 									</p>
-				
-									
 								</div>
 								
 							</div>

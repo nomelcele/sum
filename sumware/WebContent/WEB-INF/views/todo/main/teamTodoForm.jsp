@@ -36,12 +36,12 @@
 							<div id="detail${teamjoblist.tonum }" style="display: none">
 								<br />
 								<p>${teamjoblist.tocont }</p>
-								<p>
-									<a href="upload/${teamjoblist.tofile }" target="_blank">
-									<i class="fa fa-paperclip"></i> 첨부파일
-										: ${teamjoblist.tofile }</a>
+								<p>	
+									<i class="fa fa-paperclip"></i> 첨부파일 
+									<c:if test="${teamjoblist.tofile ne null}" >
+									<a href="downloadFile?fileName=${teamjoblist.tofile }" target="_blank">${teamjoblist.tofile } <i class="fa fa-download"></i></a>
+									</c:if>
 								</p>
-
 								<p>
 									<c:if test="${sessionScope.v.memnum eq  teamjoblist.tomem}">
 										<button type="button" class="btn btn-outline btn-success"
