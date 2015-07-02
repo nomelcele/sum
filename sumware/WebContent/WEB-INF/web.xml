@@ -48,7 +48,7 @@
 	<!-- 공통빈 설정을 위한 리스너 설정 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/root-context.xml</param-value>
+		<param-value>/WEB-INF/spring/sumware-context.xml</param-value>
 	</context-param>
 	<!-- applicationContext.xml -->
 	<listener>

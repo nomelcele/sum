@@ -1,15 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<div id="global" class="wrap-layout board">
-		<!-- lnb-area(S) -->
-	<div class="lnb-area" id="lnb-area">
-		<!-- left menu !!!! 들어갈 자리 -->
-	</div>
-		<!-- lnb-area(E) -->
-
-		<!-- contents(S) -->
-	<div class="contents">
 		<div id="stboardWriter">
 			<!-- <table id="stTitle">
 				<tr>
@@ -20,10 +10,10 @@
 			<!-- heading(S) -->
 			<h2 class="title-board"> ${sessionScope.bname } </h2>
 			<!-- heading(E) -->
-				<form action="sumware" method="post" id="bform">
-					<input type="hidden" name="model" id="bmodel" value="board">
-					<input type="hidden" name="submod" id="bsubmod" value="boardInsert">
-					<input type="hidden" name="page" id="bpage" value="1">
+				<form action="boardInsert" method="post" id="boardInsert">
+					<input type="hidden" name="model" value="board">
+					<input type="hidden" name="">
+					<input type="hidden" name="page" value="1">
 					<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
 					<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
 					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
@@ -44,7 +34,7 @@
 					<tr>
 						<th>작성자</th>
 						<td class="td writer">
-							<input name="bwriter" id="bwriter" readonly="readonly"value="${sessionScope.v.memname }" />
+							<label id="bwriter" >${sessionScope.v.memname }</label>
 						</td>
 					</tr>
 					<tr>
@@ -56,12 +46,9 @@
 				<!-- board-write(E) -->
 				<!-- button-div(S) -->
 				<div class="button-div center">
-					<button>글작성</button>
+					<button type="button" onclick="javascript:formGo('insert')">글작성</button>
 					<button type="button"onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }'">리스트</button>
 				</div>
 			</form>
 				<!-- button-div(E) -->
 		</div>
-	</div>
-	<!-- contents(E) -->
-</div>

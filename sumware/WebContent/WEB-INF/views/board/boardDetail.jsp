@@ -51,9 +51,8 @@
 				</div>
 				<div class="right">
 					<button type="button">수정</button>
-<%-- 					<button type="button" onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept}&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname}'">목록</button> --%>
-					<button type="button" onclick="javascript:boardList()">목록</button>
-					<button type="button" onclick="location='sumware?model=board&submod=writeForm&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname}&bdeptno=${sessionScope.v.memdept}'">새글쓰기</button>
+					<button type="button" onclick="javascript:formGo('list')">목록</button>
+					<button type="button" onclick="javascript:formGo('write')">새글쓰기</button>
 				</div>
 			</div>
 			
@@ -111,7 +110,13 @@
 					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 					<input type="hidden" name="bname" value="${sessionScope.bname }">
 			</form>
-
+			<!-- 글작성 form -->
+			<form action="boardWrite" method="post" id="writeForm">
+				<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum}">
+				<input type="hidden" name="bname" value="${sessionScope.bname}">
+				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept}">
+				<input type="hidden" name="submod" value="writeForm">
+			</form>
 
 
 

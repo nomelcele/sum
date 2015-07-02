@@ -53,13 +53,6 @@ $(function() {
 		break;
 		}
 	});
-	
-	// boardList 에서 boardDetail 로 넘어 갈때. ----------------------------------
-	$('.board-list tbody tr a').click(function(e){
-//		alert("gkgkgk");
-		e.preventDefault();
-		$("#detailForm").submit();
-	});
 });
 
 function logout(memnum) {
