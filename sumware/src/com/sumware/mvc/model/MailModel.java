@@ -1,10 +1,13 @@
 package com.sumware.mvc.model;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,13 +90,11 @@ public class MailModel{
 	
 	// suggest(mailSug)
 	@RequestMapping(value="/mailSug")
-	public ModelAndView mailSug(String key){
+	public void mailSug(String key,HttpServletResponse response) throws IOException{
 		System.out.println("Mail Controller: mailSug");
-		ModelAndView mav = new ModelAndView();
 		// request.setCharacterEncoding("UTF-8");
 		
 		String[] suggests = Suggest.getSuggest().getSuggest(key);
-		mav.addObject("sugArr", suggests);
 		System.out.println("Key: "+key);
 		for(String e:suggests){
 			System.out.println("배열: "+e);
@@ -112,10 +113,12 @@ public class MailModel{
 			}
 		}
 		su.append("]");
-		mav.addObject("sug", su.toString());
-		mav.setViewName("mail.mailSuggest");
 		
-		return mav;
+		PrintWriter pw = response.getWriter();
+		pw.write(su.toString());
+		pw.flush();
+		pw.close();
+		
 	}
 	
 	// 받은 메일함 이동
