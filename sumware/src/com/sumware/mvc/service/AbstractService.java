@@ -3,6 +3,7 @@ package com.sumware.mvc.service;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.sumware.dto.MemberVO;
 import com.sumware.dto.MessengerRoomVO;
 import com.sumware.dto.MessengerVO;
 
@@ -21,6 +22,11 @@ public class AbstractService implements ServiceInter{
 
 	@Override
 	public void closeRoomService(MessengerVO v) {
+	}
+
+	@Override
+	public String ckFirstLogin(MemberVO mvo) {
+		return null;
 	}
 
 }
