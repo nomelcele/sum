@@ -32,6 +32,7 @@ $(function() {
 			$("#formff").attr("action","calList").submit();
 			break;
 		case ("mail"):
+			$("#page").attr("value","1");
 			$("#formff").attr("action","mailFromList").submit();
 			break;
 		case ("board"):
