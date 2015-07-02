@@ -9,8 +9,7 @@
 				    <div class="form-group">
 				        <label for="receiver" class="col-sm-2 control-label">받는 사람</label>
 				        <div class="col-sm-10">
-				            <input type="text" class="form-control" 
-				            id="mailreceiver" name="mailreceiver" onkeydown="startSuggest()" value="${mailreceiver }">
+				            <input type="text" class="form-control" id="mailreceiver" name="mailreceiver" onkeydown="startSuggest()" value="${mailreceiver }">
 				            <div id="view">
 				            </div>
 				        </div>
@@ -24,8 +23,7 @@
 				    <div class="form-group">
 				        <label for="content" class="col-sm-2 control-label">내용</label>
 				        <div class="col-sm-10">
-				            <textarea class="form-control" rows="13" name="mailcont" id="mailcont"
-				            style="resize:none;"></textarea>
+				            <textarea class="form-control" rows="13" name="mailcont" id="mailcont" style="resize:none;"></textarea>
 				        </div>
 				    </div>
 				      <div class="form-group">
@@ -36,8 +34,7 @@
 				    </div>
 				    <div class="form-group">
 				        <div class="col-sm-10 col-sm-offset-2">
-				            <input type="button" value="전송" class="btn btn-sm btn-info" id="sendBtn"
-				            onclick="mailSendFunc()">
+				            <input type="button" value="전송" class="btn btn-sm btn-info" id="sendBtn" onclick="mailSendFunc()">
 				        </div>
 				    </div>
 				    <div class="form-group">

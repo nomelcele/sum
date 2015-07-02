@@ -1,7 +1,7 @@
 /**
  * 
  */
-// 메일 
+// 메일 (메뉴)
 function mailFormGo(res) {
 	if (res == 'fromlist') { // 받은 메일함
 		$("#mailform").attr("action","mailFromList").submit();
@@ -29,10 +29,74 @@ function mailFormGo(res) {
 	}
 }
 
+// ------------------------------------
+// ------------------------------------
+// mailList.jsp 스크립트
+function mailWriteFormGo(){
+	$("#listform").attr("action","mailWriteForm").submit();
+}
+
+function mailTrashGo(){
+	$("#delvalue").attr("value","2");
+	$("#listform").submit();
+//		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
+//				"&userid=${sessionScope.v.meminmail}&delvalue=2&tofrom=${tofrom}"+
+//				"&page=1&chk="+$("#chk:checked").serialize();
+	
+}
+
+function maildeleteGo(){
+	// 휴지통에서 체크된 메일들을 영구 삭제
+	if(!confirm("선택한 메일을 영구 삭제하겠습니까?")){
+		return; // 취소를 할 경우 삭제되지 않는다.
+	} else { // 확인 버튼을 누르면 메일 삭제
+		$("#delvalue").attr("value","3");
+		$("#listform").submit();
+//			location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
+//			"&userid=${sessionScope.v.meminmail}&delvalue=3&tofrom=${tofrom}"+
+//			"&page=1&chk="+$("#chk:checked").serialize();
+	}
+}
+
+function mailRecover(){
+	// 휴지통에서 체크된 메일들을 복구(메일함으로 이동시킴)
+	// 체크된 메일들의 delete 속성을 1로 변경
+	$("#delvalue").attr("value","1");
+	$("#listform").submit();
+//		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
+//		"&userid=${sessionScope.v.meminmail}&delvalue=1&tofrom=${tofrom}"+
+//		"&page=1&chk="+$("#chk:checked").serialize();
+}
+
+function checkAll(obj){
+	// 체크박스 전체 선택(해제)을 해주는 메서드
+	var chkArr = document.getElementsByName("chk");
+	var len = chkArr.length;
+	
+	for(var i=0; i<len; i++){
+		if(obj.checked){
+			chkArr[i].checked = true;
+		} else {
+			chkArr[i].checked = false;
+		}
+	}
+}
+
+function mailDetailGo(mailnum){
+	// 상세 보기 페이지로 이동시켜주는 함수
+	$("#mailnum").attr("value",mailnum);
+	$("#listform").attr("action","mailDetail").submit();
+}
+
+//------------------------------------
+//------------------------------------
+// mailWrite.jsp 스크립트
 function mailSendFunc() {
 	$("#mailWriteF").submit();
 }
 
+//------------------------------------
+//------------------------------------
 // 메일-suggest 관련 함수
 var xhr = null;
 function getXMLHttpRequest() {
@@ -64,6 +128,7 @@ var loopKey = false;
 function startSuggest() {
 	if (check == false) {
 		setTimeout("sendKeyword();", 500);
+		console.log("startSuggest 함수 들어옴");
 		loopKey = true;
 	}
 	check = true;
@@ -74,17 +139,16 @@ function sendKeyword() {
 		return;
 	}
 
-	var key = f.toMem.value;
+	var key = f.mailreceiver.value;
 
 	if (key == '' || key == '  ') {
 		lastKey = '';
 		document.getElementById("view").style.display = "none";
 	} else if (key != lastKey) {
 		lastKey = key;
-		var param = "model=mail&submod=mailSug&key="
-				+ key
+		var param = "key=" + key
 				+ "&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}";
-		sendRequest("sumware", param, res, "post");
+		sendRequest("mailSug", param, res, "post");
 	}
 
 	setTimeout("sendKeyword();", 500);
@@ -117,7 +181,7 @@ function viewTable() {
 }
 
 function select(index) {
-	f.toMem.value = jsonObj[index];
+	f.mailreceiver.value = jsonObj[index];
 	document.getElementById("view").style.display = "none";
 	check = false;
 	loopKey = false;

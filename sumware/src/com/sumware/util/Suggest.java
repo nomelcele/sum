@@ -23,7 +23,7 @@ public class Suggest {
 	public Suggest(){
 		SAXBuilder sb = new SAXBuilder();
 		// xml 파일의 경로
-		String path = "C:\\sumware\\project\\ws\\sumware\\WebContent\\xml\\nameMailList.xml"; 
+		String path = "C:\\sumware\\project\\ws\\sumware\\WebContent\\resources\\xml\\nameMailList.xml"; 
 		try {
 			doc = sb.build(path);
 			root = doc.getRootElement();
