@@ -111,7 +111,7 @@ public class MailModel{
 		}
 		su.append("]");
 		mav.addObject("sug", su.toString());
-		mav.setViewName("mail/mailSuggest");
+		mav.setViewName("mail.mailSuggest");
 		
 		return mav;
 	}
@@ -163,7 +163,7 @@ public class MailModel{
 		List<MailVO> tolist = mdao.getToMailList(map);
 		mav.addObject("list", tolist);
 		mav.addObject("tofrom", 2);
-		mav.setViewName("mail/mailList");
+		mav.setViewName("mail.mailList");
 		return mav;
 		
 	}
@@ -187,7 +187,7 @@ public class MailModel{
 		List<MailVO> mylist = mdao.getMyMailList(map);
 		mav.addObject("list", mylist);
 		mav.addObject("tofrom", 3);
-		mav.setViewName("mail/mailList");
+		mav.setViewName("mail.mailList");
 		return mav;
 		
 	}
@@ -211,7 +211,7 @@ public class MailModel{
 		List<MailVO> trashlist = mdao.getTrashList(map);
 		mav.addObject("list", trashlist);
 		mav.addObject("tofrom", 4);
-		mav.setViewName("mail/mailList");
+		mav.setViewName("mail.mailList");
 		return mav;
 		
 	}
@@ -226,7 +226,7 @@ public class MailModel{
 		// 메일의 정보를 가져옴
 		MailVO detail = mdao.getMailDetail(mailnum);
 		mav.addObject("detail", detail);
-		mav.setViewName("mail/mailDetail");
+		mav.setViewName("mail.mailDetail");
 		return mav;
 		
 	}
@@ -255,6 +255,7 @@ public class MailModel{
 				return "redirect:/mailTrashcan?page=1";
 		}
 		
+		// 리다이렉트 이후 dao의 getListNum 메서드 실행 시 오류
 	}
 	
 	/* 

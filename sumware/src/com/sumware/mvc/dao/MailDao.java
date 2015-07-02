@@ -96,7 +96,7 @@ public class MailDao {
 	}
 	
 	public MailVO getDelAttrMailInfo(String num){
-		return st.selectOne("mail.getDelAttrMailInfo", num);
+		return st.selectOne("mail.getDelAttrMailInfo", num); // 오류
 	}
 	
 	public void setDelAttrFrom(Map<String,String> map){
