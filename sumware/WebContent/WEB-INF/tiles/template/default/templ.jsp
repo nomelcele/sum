@@ -25,8 +25,7 @@
 <!-- 자바스크립트 -->
 <!-- todo일 때 sns부분 -->
 <!-- 모달 -->
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="js/sumware.js"></script>
 <script src="js/board.js"></script>
 <script src="js/mail.js"></script>
@@ -67,6 +66,14 @@
 	});
 </script>
 <script src="js/member.js"></script>
+</c:if>
+<c:if test="${sessionScope.model eq 'board' }">
+<script ></script>
+<script>
+	$(function(){
+		chkUpload();
+	});
+</script>
 </c:if>
 <c:if test="${sessionScope.model eq 'calendar' }">
 	<!-- 캘린더 -->
@@ -172,7 +179,7 @@ $(function(){
 </script>
 	<!-- /캘린더 -->
 </c:if>
-<!-- Todo - SNS -->
+<!-- Todo - SNS(S) -->
 <c:if test="${sessionScope.model eq 'todo' }">
 <script>
 //push Client 설정 (받는쪽)
@@ -198,7 +205,20 @@ function push() {
 }
 </script>
 </c:if>
-<!-- Todo - SNS -->
+<!-- Todo - SNS(E) -->
+
+<!-- Board(S) -->
+<c:if test="${param.submod eq 'writeForm' }">
+	<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+	<script src="js/myckeditor.js"></script>
+	<script src="js/util.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			chkUpload();
+		});
+	</script>
+</c:if>
+<!-- Board(E) -->
 
 <c:if test="${sessionScope.model eq 'mail'}">
 	<script src="//cdn.ckeditor.com/4.5.0/basic/ckeditor.js"></script>
