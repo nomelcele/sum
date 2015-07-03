@@ -162,14 +162,6 @@ function capClick() {
 	});
 };
 
-function formSub(res) {
-	if (res == 'd') {
-		$('#dform').submit();
-	} else {
-		$('#cform').submit();
-	}
-}
-
 function openWin() {
 	var opt = "width=700, height=800, scrollbars=yes";
 	window.open("messengerForm",
