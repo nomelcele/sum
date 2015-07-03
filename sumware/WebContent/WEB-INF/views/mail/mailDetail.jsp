@@ -6,8 +6,15 @@
 				<input type="hidden"  name="model" value="mail">
 				<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
 				<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
-				<input type="hidden" name="mailreceiver" value="${detail.mailsname} <${detail.replyid}@sumware.com>">
-				<input type="hidden" name="mailtitle" value="RE: ${detail.mailtitle}">
+				<input type="hidden" name="mailreceiver" id="mailreceiver" value="${detail.mailsname} <${detail.replyid}@sumware.com>">
+				<input type="hidden" name="mailtitle" id="mailtitle" value="RE: ${detail.mailtitle}">
+				<input type="hidden" name="orimail" id="orimail"
+				value="<br/><br/><p>-----Original Message-----</p>
+				<p>From: ${detail.mailsname} &lt;${detail.replyid}@sumware.com&gt;</p>
+				<p>To: ${detail.mailrname} &lt;${detail.mailreceiver}@sumware.com&gt;</p>
+				<p>Sent: ${detail.maildate}</p>
+				<p>Subject: ${detail.mailtitle}</p>
+				<p>${detail.mailcont}</p>">
 				<div id="mailDetailContent">
 					<input type="submit" class="btn btn-default btn-sm" value="답장"><br />
 					<div style="padding-top:10px;">
@@ -26,4 +33,3 @@
 				</form>
 			</div>			
 		</div>
-

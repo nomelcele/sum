@@ -122,16 +122,11 @@ function mailSendFunc() {
 }
 
 //function mailReplyForm(){
-//	var oriForm = "<p>-----Original Message-----</p>" +
-//			"<p>From: ${detail.mailsname} &lt;${detail.replyid}@sumware.com&gt;</p>"+ 
-//			"<p>To: ${detail.mailrname} &lt;${detail.mailreceiver}@sumware.com&gt;</p>"+
-//			"<p>Sent: ${detail.maildate}</p>"+
-//			"<p>Subject: ${detail.mailtitle}</p>"+
-//			"<p>${detail.mailcont}</p>";
-//	$("#mailcont").attr("value",oriForm);
+//	var oriForm;
+//	$("#orimail").attr("value",oriForm);
 //	$("#detailform").submit();
 //}
-//
+
 //function setMailOriForm(){
 //	
 //}

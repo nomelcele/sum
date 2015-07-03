@@ -43,7 +43,8 @@ public class MailModel{
 	// 메일 작성 form 이동
 	@RequestMapping(value="/mailWriteForm",method=RequestMethod.POST)
 	public String mailWriteForm(@ModelAttribute("mailreceiver")String mailreceiver,
-			@ModelAttribute("mailtitle")String mailtitle){
+			@ModelAttribute("mailtitle")String mailtitle,
+			@ModelAttribute("orimail")String oriMail){
 		System.out.println("Mail Controller: mailWriteForm");
 		return "mail.mailWrite";
 	}
