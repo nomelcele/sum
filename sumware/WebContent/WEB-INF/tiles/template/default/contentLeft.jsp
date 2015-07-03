@@ -319,14 +319,10 @@
 		<!-- left-menu(S) -->
 		<div class="left-menu" id="left-menu">
 			<ul>
-				<li><a href="javascript:mailFormGo('fromlist')">받은 메일함 <%-- 					<span>(${numArr[0]})</span> --%>
-				</a></li>
-				<li><a href="javascript:mailFormGo('tolist')">보낸 메일함 <%-- 					<span>(${numArr[1]})</span> --%>
-				</a></li>
-				<li><a href="javascript:mailFormGo('mylist')">내게 쓴 메일함 <%-- 					<span>(${numArr[2]})</span> --%>
-				</a></li>
-				<li><a href="javascript:mailFormGo('trashcan')">휴지통 <%-- 					<span>(${numArr[3]})</span> --%>
-				</a></li>
+				<li><a href="javascript:mailFormGo('fromlist')">받은 메일함 <span>(${numArr[0]})</span></a></li>
+				<li><a href="javascript:mailFormGo('tolist')">보낸 메일함 <span>(${numArr[1]})</span></a></li>
+				<li><a href="javascript:mailFormGo('mylist')">내게 쓴 메일함 <span>(${numArr[2]})</span></a></li>
+				<li><a href="javascript:mailFormGo('trashcan')">휴지통 <span>(${numArr[3]})</span></a></li>
 			</ul>
 		</div>
 		<!-- left-menu(E) -->
