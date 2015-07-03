@@ -16,6 +16,20 @@
 				<a href="javascript:mailWriteFormGo()" class="btn btn-info"> 
 				<span class="glyphicon glyphicon-pencil"></span> 메일 쓰기
 				</a>
+				<c:choose>
+					<c:when test="${tofrom eq '1'}">
+						&nbsp;&nbsp;&nbsp;&nbsp;받은 메일함 ${numArr[0]}
+					</c:when>
+					<c:when test="${tofrom eq '2'}">
+						&nbsp;&nbsp;&nbsp;&nbsp;보낸 메일함 ${numArr[1]}
+					</c:when>
+					<c:when test="${tofrom eq '3'}">
+						&nbsp;&nbsp;&nbsp;&nbsp;내게 쓴 메일함 ${numArr[2]}
+					</c:when>
+					<c:otherwise>
+						&nbsp;&nbsp;&nbsp;&nbsp;휴지통 ${numArr[3]}
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<!-- left(E) -->
 			<!-- right(S) -->
