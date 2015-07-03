@@ -1,40 +1,62 @@
 package com.sumware.mvc.model;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.sumware.mvc.dao.MailDao;
+import com.sumware.mvc.dao.TodoDao;
 @Controller
 public class IndexModel{
-	
+	@Autowired
+	private MailDao mdao;
+	@Autowired
+	private TodoDao tdao;
 	// 요청이 home 이거나, 아무 요청이 없을 경우 
 	// 작동 됨.
 	@RequestMapping(value={"/home","/","/index"})
 	public String indexForm(Model model){
 		return "home.index";
 	}
-	
-	//
-//	@RequestMapping(value="/goFunc", method=RequestMethod.POST)
-//	public ModelAndView goFunc(HttpServletRequest request){
-//		System.out.println("indexModel!!!!!!!!!!!!!!!!!!!!!");
-//		String page=request.getParameter("model");
-//		HttpSession ses = request.getSession();
-//		ses.setAttribute("model", page);
-//		
-//		if(page.toLowerCase().equals("board")){
-//			page = "board/boardList";
-//		}else if(page.toLowerCase().equals("todo")){
-//			System.out.println("todo들어옴");
-//			page = "todo/todoMain";
-//		}else if(page.toLowerCase().equals("mail")){
-//			page = "mail/mailList";
-//		}else if(page.toLowerCase().equals("calendar")){
-//			page= "calendar/calTest";
-//		}else {
-//			page = "home.index";
-//		}
-//		ModelAndView mav = new ModelAndView(page);
-//		mav.addObject(request);
-//		return mav;
-//	}
+	//Notification
+	@RequestMapping(value="tmCount")
+	public void noti(String mailreceiver,int memnum,HttpSession session,HttpServletResponse response) throws IOException{
+		System.out.println("새로운것이 왔나??");
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("userid", mailreceiver);
+		map.put("usernum",String.valueOf(memnum));
+		if(session.getAttribute("mailCount")==null||session.getAttribute("todoCount")==null){
+			session.setAttribute("mailCount", mdao.getListNum(map)[0]);
+			session.setAttribute("todoCount",tdao.getTodoCount(map));
+		}
+		Integer tCount = (Integer) session.getAttribute("todoCount");
+		Integer mCount = (Integer) session.getAttribute("mailCount");
+		StringBuffer res = new StringBuffer();
+		res.setLength(0);
+		res.append("retry:3000\n");
+		res.append("data:");
+		if(tCount<tdao.getTodoCount(map)){
+			res.append("t");
+		}
+		if(mCount< mdao.getListNum(map)[0]){
+			res.append("m");
+		}else{
+			res.append("x");
+		}
+		res.append("\n\n");
+		System.out.println("으음???~~:"+res.toString());
+		response.setHeader("cache-control", "no-cache");
+		response.setContentType("text/event-stream");
+		PrintWriter pw = response.getWriter();
+		pw.print(res);
+		pw.flush();
+	}
 }

@@ -181,14 +181,6 @@
 
 <%-- calendar left(S) --%>
 <c:if test="${sessionScope.model eq 'calendar' }">
-
-	<form action="sumware" method="post" id="goTodo">
-		<input type="hidden" id="model" name="model">
-		<input type="hidden" id="submod" name="submod"> 
-		<input type="hidden" id="memnum" name="memnum"> 
-		<input type="hidden" id="memmgr" name="memmgr">
-		<input type="hidden" id="memdept" name="memdept">
-	</form>
 	<!-- <div> -->
 	<!-- 	<div class="row-lg-6"> -->
 	<div class="chat-panel panel panel-default left-profile">
@@ -239,7 +231,60 @@
 		</div>
 	</div>
 </c:if>
-<%-- calendar left(E) --%>
+<%-- join left(E) --%>
+<c:if test="${sessionScope.model eq 'join' }">
+
+	<!-- <div> -->
+	<!-- 	<div class="row-lg-6"> -->
+	<div class="chat-panel panel panel-default left-profile">
+		<div class="panel-heading">
+			<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">My
+				profile</strong>
+		</div>
+		<div class="panel-body">
+			<!-- profile-img(S) -->
+			<span class="chat-img pull-left profile-img"><img
+				src="resources/profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
+				class="img-circle" style="width: 100px; height: 130px;"> </span>
+			<!-- profile-img(E) -->
+
+			<!-- profile-table(S) -->
+			<table class="profile-table">
+				<colgroup>
+					<col style="width: 60px">
+					<col>
+				</colgroup>
+				<tr>
+					<th><strong class="primary-font">이름</strong></th>
+					<td>${sessionScope.v.memname }</td>
+				</tr>
+				<tr>
+					<th><strong class="primary-font">직급</strong></th>
+					<td>${sessionScope.v.memjob }</td>
+				</tr>
+				<tr>
+					<th><strong class="primary-font">부서</strong></th>
+					<td>${sessionScope.v.dename }</td>
+				</tr>
+				<tr>
+					<th><strong class="primary-font">상급자</strong></th>
+					<td>${sessionScope.v.mgrname }</td>
+				</tr>
+				<tr>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><a
+						href="modifyProfile"
+						class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
+
+				</tr>
+			</table>
+			<!-- profile-table(E) -->
+		</div>
+	</div>
+</c:if>
+<%-- join left(E) --%>
 
 <%-- mail left(S) --%>
 <c:if test="${sessionScope.model eq 'mail' }">

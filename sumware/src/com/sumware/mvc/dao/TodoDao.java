@@ -1,6 +1,7 @@
 package com.sumware.mvc.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -341,6 +342,9 @@ public class TodoDao {
 //			return list;
 
 		}
-		
+		public int getTodoCount(Map<String, String> map){
+			System.out.println(map.get("usernum"));
+			return st.selectOne("todo.getTodoCount",map);
+		}
 
 }
