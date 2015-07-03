@@ -2,6 +2,7 @@ package com.sumware.dto;
 
 public class MailVO {
 	private int mailnum, mailmem;
+	private int fromnum,tonum,mynum,trashnum;
 	private String mailtitle, mailcont, mailfile, mailreceiver, 
 	maildate, mailsdelete, mailrdelete, replyid, mailsname, mailrname;
 	
@@ -77,6 +78,31 @@ public class MailVO {
 	}
 	public void setMailsname(String mailsname) {
 		this.mailsname = mailsname;
+	}
+	
+	public int getFromnum() {
+		return fromnum;
+	}
+	public void setFromnum(int fromnum) {
+		this.fromnum = fromnum;
+	}
+	public int getTonum() {
+		return tonum;
+	}
+	public void setTonum(int tonum) {
+		this.tonum = tonum;
+	}
+	public int getMynum() {
+		return mynum;
+	}
+	public void setMynum(int mynum) {
+		this.mynum = mynum;
+	}
+	public int getTrashnum() {
+		return trashnum;
+	}
+	public void setTrashnum(int trashnum) {
+		this.trashnum = trashnum;
 	}
 	
 }
