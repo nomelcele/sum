@@ -12,17 +12,16 @@ $(function(){
 		$("#paging form #page").attr("value",$page);
 		$("#plist").submit();
 	});
-	$("#left-menu a").click(function(e){
+	$("#board-left-menu a").click(function(e){
 		e.preventDefault();
 		var $bgnum = $(this).next().text();
 		var $bname = $(this).text();
-		$("#left-menu form #bgnum").attr("value",$bgnum);
-		$("#left-menu form #bname").attr("value",$bname);
+		$("#board-left-menu form #bgnum").attr("value",$bgnum);
+		$("#board-left-menu form #bname").attr("value",$bname);
 		$("#listtt").submit();
-		$('#left-menu span p').text("");
+		$('#board-left-menu span p').text("");
 		$bgnum = "";
 	});
-	
 });
 
 function detail(no,bgnum,bname,bdeptno){
@@ -37,7 +36,10 @@ function detail(no,bgnum,bname,bdeptno){
 		}
 	});
 }
-// boardWrite 에서 사용 되는 메서드.
+
+function commIn(){
+	
+}
 
 // 각각의 폼을 전송해주는 메서드
 function formGo(where){
@@ -49,3 +51,25 @@ function formGo(where){
 		$('#boardInsert').submit();
 	}
 }
+
+// boarddetail 페이지에서 사용 되는 메서드
+function formSub(res) {
+	if (res == 'd') {
+		$('#dform').submit();
+	} else {
+		$('.wrap2 #cform').submit();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
