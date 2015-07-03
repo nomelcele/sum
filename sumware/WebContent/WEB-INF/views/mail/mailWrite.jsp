@@ -23,7 +23,7 @@
 				    <div class="form-group">
 				        <label for="content" class="col-sm-2 control-label">내용</label>
 				        <div class="col-sm-10">
-				            <textarea class="form-control" rows="13" name="mailcont" id="mailcont" style="resize:none;"></textarea>
+				            <textarea class="form-control" rows="13" name="mailcont" id="mailcont" style="resize:none;">${orimail}</textarea>
 				        </div>
 				    </div>
 				      <div class="form-group">
