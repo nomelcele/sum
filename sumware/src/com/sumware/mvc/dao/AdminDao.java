@@ -1,11 +1,13 @@
 package com.sumware.mvc.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sumware.dto.BnameVO;
 import com.sumware.dto.MemberVO;
 
 @Repository
@@ -34,6 +36,11 @@ public class AdminDao {
 	// 이메일 발송 실패 시 디비에 저장했던 내용 다시삭제
 	public void cancelAddMem(int memnum){
 		st.delete("admin.cancelAddMem", memnum);
+	}
+	
+	// 게시판 추가 하는 메서드
+	public void addBoard(BnameVO bnvo){
+		st.insert("admin.addBoard",bnvo);
 	}
 	
 }

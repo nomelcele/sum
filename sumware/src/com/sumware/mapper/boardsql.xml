@@ -61,7 +61,5 @@
   	<delete id="delete" parameterType="int">
   		delete from board where bnum=#{bnum}
   	</delete>
-  	<insert id="addBoard" parameterType="map">
-  		insert into bname values(#{bname},bname_seq.nextVal,#{bdeptno})
-  	</insert>
+  	
   </mapper>

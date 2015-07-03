@@ -26,9 +26,6 @@ public class SendEmail {
 		return sendemail;
 	}
 
-
-
-
 	public int sendEmailToNewMem(MemberVO mvo) throws IOException{
 		
 		System.out.print(mvo.getMemmail());
