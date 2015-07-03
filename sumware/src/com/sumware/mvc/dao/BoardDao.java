@@ -59,16 +59,15 @@ public class BoardDao {
 	}
 	
 	// 게시글에 대한 댓글 불러오는 메서드.
-	public List<CommVO> getCommList(HashMap<String, String> map){
+	public List<CommVO> getCommList(int code){
 		// SELECT c.cocont,c.codate,m.memname,c.CODATE,m.MEMPROFILE FROM COMM c, MEMBER m
 		// WHERE c.comem = m.memnum AND coboard = 67;
-		int code = Integer.parseInt(map.get("no"));
 		List<CommVO> list = ss.selectList("board.getCommList",code);
 		return list;
 	}
 	// 댓글 입력 메서드.
-	public void commInsert(HashMap<String, String> map){
-		ss.insert("board.commInsert",map);
+	public void commInsert(CommVO vo){
+		ss.insert("board.commInsert",vo);
 	}
 	// 게시판 이름이 필요 하기 때문에 그 이름 반환 해주는 메서드.
 	public List<BnameVO> bName(Map<String,Integer> map){
@@ -78,8 +77,8 @@ public class BoardDao {
 	}
 	
 	// 게시글 삭제 메서드
-	public void delete(HashMap<String, String> map){
-		ss.delete("board.delete",Integer.parseInt(map.get("no")));
+	public void delete(int no){
+		ss.delete("board.delete",no);
 	}
 	
 }

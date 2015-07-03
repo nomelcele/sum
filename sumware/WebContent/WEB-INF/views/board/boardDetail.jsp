@@ -45,7 +45,7 @@
 			</table>
 			<div class="button-div">
 				<div class="left">
-					<c:if test="${sessionScope.v.memnum eq list.bmem }">
+					<c:if test="${sessionScope.v.memnum eq board.bmem }">
 						<button type="button" onclick="javascript:formSub('d')">글삭제</button>
 					</c:if>
 				</div>
@@ -57,13 +57,13 @@
 			</div>
 			
 <!-- comment(S) -->
-			<div class="wrap2">
+			<div class="wrap2" id="coTarget">
 				<h2 class="tit-comment">댓글 작성하기</h2>
 				<!-- comment-list(S) -->
 				<ul class="comment-list">
 				<c:forEach var="clist" items="${clist }">
 					<li>
-						<img class="comment-img" src="profileImg/${clist.coimg }" alt="" />
+						<img class="comment-img" src="resources/profileImg/${clist.coimg }" alt="" />
 						<div>
 							<strong>${clist.coname }</strong>
 							<p>${clist.cocont }</p>
@@ -83,10 +83,7 @@
 				<!-- comment-list(E) -->
 				
 				<!-- comment-write(S) -->
-			<form action="sumware" id="cform" method="post">
-				<input type="hidden" name="model" value="board">
-				<input type="hidden" name="submod"  value="boardDetail">
-				<input type="hidden" name="childmod" value="commInsert">
+			<form action="commIn" id="cform" method="post">
 				<input type="hidden" name="memnum" value="${sessionScope.v.memnum }">
 				<input type="hidden" name="bnum" value="${board.bnum }">
 				<input type="hidden" name="no" value="${board.bnum }">
@@ -94,21 +91,20 @@
 				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 				<input type="hidden" name="bname" value="${sessionScope.bname }">
 				<div class="comment-write">
-					<textarea name="comment"rows="10" cols="10" placeholder="댓글 내용을 입력해 주세요."></textarea>
-					<button class="btn-comm" type="button" onclick="javascript:formSub('c')">댓글 등록</button>
+					<textarea name="cocont" id="cocont" rows="10" cols="10" placeholder="댓글 내용을 입력해 주세요."></textarea>
+					<button class="btn-comm" type="button" onclick="javascript:commIn(${sessionScope.v.memnum},${board.bnum})">댓글 등록</button>
 				</div>
 			</form>
 				<!-- comment-write(E) -->
 			</div>
 <!-- comment(E) -->
-
 			<!-- 리스트 form -->
 			<form action="boardList" method="post" id="listForm">
-					<input type="hidden" name="model" value="board">
-					<input type="hidden" name="page" value="1">
-					<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
-					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
-					<input type="hidden" name="bname" value="${sessionScope.bname }">
+				<input type="hidden" name="model" value="board">
+				<input type="hidden" name="page" value="1">
+				<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
+				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
+				<input type="hidden" name="bname" value="${sessionScope.bname }">
 			</form>
 			<!-- 글작성 form -->
 			<form action="boardWrite" method="post" id="writeForm">
@@ -117,18 +113,12 @@
 				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept}">
 				<input type="hidden" name="submod" value="writeForm">
 			</form>
-
-
-
-
 			<!-- 글 삭제 form -->
-			<form action="sumware" method="post" id="dform">
-					<input type="hidden" name="model" value="board">
-					<input type="hidden" name="submod" id="bsubmod" value="boardDelete">
-					<input type="hidden" name="page" id="bpage" value="1">
-					<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
-					<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
-					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
-					<input type="hidden" name="bname" value="${sessionScope.bname }">
-					<input type="hidden" name="no" value="${board.bnum }">
+			<form action="boardDelete" method="post" id="dform">
+				<input type="hidden" name="page" value="1">
+				<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
+				<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
+				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
+				<input type="hidden" name="bname" value="${sessionScope.bname }">
+				<input type="hidden" name="no" value="${board.bnum }">
 			</form>
