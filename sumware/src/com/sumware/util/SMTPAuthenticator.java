@@ -5,7 +5,7 @@ import javax.mail.PasswordAuthentication;
 
 public class SMTPAuthenticator extends Authenticator {
 	public PasswordAuthentication getPasswordAuthentication(){
-		return new PasswordAuthentication("joosang0904@naver.com","hieverybody");
+		return new PasswordAuthentication("rlawntkd89@naver.com","hieverybody");
 	}
 
 }

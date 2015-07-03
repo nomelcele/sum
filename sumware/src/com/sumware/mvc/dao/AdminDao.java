@@ -20,15 +20,20 @@ public class AdminDao {
 	}
 	
 	// 새 사원에 대한 정보 가져옴
-	public MemberVO getNewMemInfo(String memmail ){
+	public MemberVO getNewMemInfo(MemberVO mvo){
 		
-		return st.selectOne("admin.getNewMemInfo",memmail);
+		return st.selectOne("admin.getNewMemInfo",mvo);
 		
 	}
 	
 	// 사원 추가에서 선택한 부서에 따라 팀장 목록을 가져옴
 	public List<MemberVO> getMemMgr(int memdept){
 		return st.selectList("admin.getMemMgr",memdept);
+	}
+	
+	// 이메일 발송 실패 시 디비에 저장했던 내용 다시삭제
+	public void cancelAddMem(int memnum){
+		st.delete("admin.cancelAddMem", memnum);
 	}
 	
 }

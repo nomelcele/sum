@@ -31,7 +31,7 @@ function getMemMgr(){
 					<div class="panel-body">
 						<div class="form-group has-success">
 							<label class="control-label">이 름</label> 
-							<input type="text" class="form-control" id="memname" name="memname" style="width: 120px">
+							<input type="text" class="form-control" id="newname" name="memname" style="width: 120px">
 						</div>
 
 						<div class="form-group has-success">
@@ -68,7 +68,7 @@ function getMemMgr(){
 						</div>
 
 						<div class="form-group has-success">
-							<input type="button" class="btn btn-outline btn-success" onclick="javascript:todoFormGo('addMem')" id = "sendFormToAdd" value="추 가">
+							<input type="button" class="btn btn-outline btn-success" onclick="javascript:sendNewMember()" id = "sendFormToAdd" value="추 가">
 						</div>
 
 					</div>
