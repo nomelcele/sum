@@ -18,6 +18,15 @@ public class MailServiceImple extends AbstractService{
 	private MailDao mdao;
 	
 	@Override
+	public MailVO getDetailUpdate(int mailnum) {
+		MailVO detail = mdao.getMailDetail(mailnum);
+		if(detail.getMailread().equals("N")){ // 처음 읽은 메일의 경우
+			mdao.setMailRead(mailnum); // 읽기 속성 업데이트(N->Y)
+		}
+		return detail;
+	}
+
+	@Override
 	public void setDeleteAttrService(String[] mailnums, Map<String, String> map) {
 		for(String e:mailnums){
 			MailVO vo = mdao.getDelAttrMailInfo(e);

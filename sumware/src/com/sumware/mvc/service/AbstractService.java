@@ -3,6 +3,7 @@ package com.sumware.mvc.service;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.sumware.dto.MailVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.MessengerRoomVO;
 import com.sumware.dto.MessengerVO;
@@ -29,5 +30,12 @@ public class AbstractService implements ServiceInter{
 	public MemberVO addNewMember(MemberVO vo) {
 		return null;
 	}
+
+	@Override
+	public MailVO getDetailUpdate(int mailnum) {
+		return null;
+	}
+	
+	
 
 }

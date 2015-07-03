@@ -4,8 +4,14 @@ public class MailVO {
 	private int mailnum, mailmem;
 	private int fromnum,tonum,mynum,trashnum;
 	private String mailtitle, mailcont, mailfile, mailreceiver, 
-	maildate, mailsdelete, mailrdelete, replyid, mailsname, mailrname;
+	maildate, mailsdelete, mailrdelete, replyid, mailsname, mailrname, mailread;
 	
+	public String getMailread() {
+		return mailread;
+	}
+	public void setMailread(String mailread) {
+		this.mailread = mailread;
+	}
 	public int getMailnum() {
 		return mailnum;
 	}

@@ -262,3 +262,7 @@ create sequence mescontent_seq increment by 1 start with 1;
 commit;
 --2015년 memprofile 사이즈 변경
 alter table member modify memprofile varchar2(100);
+-- 0703 메일 테이블 컬럼 추가
+-- 메일 읽었는지 여부 확인
+alter table mail add(mailread varchar2(1) default 'N');
+
