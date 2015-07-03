@@ -21,9 +21,7 @@
 					${detail.mailcont}<br /> 
 					<hr/>
 					<span style="font-weight:bold;"><i class="fa fa-paperclip"></i> 첨부 파일 </span>
-					<a href="fileDown?fileName=${detail.mailfile}">${detail.mailfile}</a>
-<%-- 					<a href="upload/${detail.mailfile}" target="_blank">${detail.mailfile}</a> --%>
-					<!-- ***************** 다운로드 구현 ******************** -->
+					<a href="downloadFile?fileName=${detail.mailfile}">${detail.mailfile}</a>
 				</div>
 				</form>
 			</div>			
