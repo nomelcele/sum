@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class TodoVO {
 	private int torownum,tonum, todept, tomem;
+	//memname : manager 이름
 	private String memname, tostdate, toendate, totitle, tocont, tofile,toconfirm, tocomm;
 	private MultipartFile mfile;
 	

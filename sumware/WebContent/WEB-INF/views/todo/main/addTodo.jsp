@@ -34,7 +34,7 @@
 
 							<div class="form-group has-success">
 								<label class="control-label" for="inputSuccess">업무 내용</label>
-								<textarea class="form-control" id="inputSuccess" rows="5" id="tocont" name="tocont"
+								<textarea class="form-control" rows="5" id="tocont" name="tocont"
 									style="width: 70%"></textarea>
 							</div>
 							<div class="form-group has-success">

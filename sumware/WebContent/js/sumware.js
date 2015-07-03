@@ -340,6 +340,7 @@ function todoConfirm(res) {
 
 function todoFormGo(res) {
 	//$('#model').attr("value", "todo");
+	alert($('#tocont').val())
 	if (res == 'approveTodo') {
 		// 팀장업무관리에서 승인버튼
 		$('#okForm').submit();
@@ -356,7 +357,7 @@ function todoFormGo(res) {
 			alert("업무 시작일을 설정해 주세요.");
 		}else if($('#selectTomem').val() == ""){
 			alert("업무 담당자를 선택해 주세요.");
-		}else if($('#tocont').val() == undefined){
+		}else if($('#tocont').val() == ""){
 			alert("업무 내용을 입력해 주세요.");
 		}else{
 			//부장의 업무 추가 폼 작성 후 보내기버튼

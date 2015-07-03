@@ -19,6 +19,8 @@
 						
 						</div>
 						<div class="panel-body">
+							<p><i class="fa fa-user"></i> manager : ${fw.memname }
+									</p>
 							<p>
 								<i class="fa fa-calendar-o"></i>${fw.tostdate } ~ ${fw.toendate }
 							</p>

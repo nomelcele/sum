@@ -33,12 +33,11 @@
 	</update>
 
 	<select id="getDeptTodoList" parameterType="int" resultType="tvo">
-		select rownum torownum, tonum,to_char(tostdate,'yyyy-MM-dd')
-		tostdate,to_char(toendate,'yyyy-MM-dd') toendate,nvl(totitle,'제목없음')
-		totitle,tocont,tomem,tocomm,toconfirm
+		select rownum torownum, t.tonum,to_char(t.tostdate,'yyyy-MM-dd')
+		tostdate,to_char(t.toendate,'yyyy-MM-dd') toendate,nvl(t.totitle,'제목없음')
+		totitle,t.tocont,t.tomem,t.tocomm,t.toconfirm, m.memname
 		from (select * from todo where todept=(select memdept from member where
-		memnum=#{tomem})
-		order by toconfirm desc, 1 desc)
+		memnum=#{memnum}) order by toconfirm desc, 1 desc) t,member m where t.tomem = m.memnum
 	</select>
 
 	<update id="todoUpdate" parameterType="tvo">
