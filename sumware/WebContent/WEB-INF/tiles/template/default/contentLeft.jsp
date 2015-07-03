@@ -64,7 +64,7 @@
 	</div>
 	<!-- <hr> -->
 	<!-- left-menu(S) -->
-	<div class="left-menu" id="left-menu">
+	<div class="left-menu" id="board-left-menu">
 	<form action="boardList" method="post" id="listtt">
 		<input type="hidden" name="model" value="board">
 		<input type="hidden" name="page" value="1">
