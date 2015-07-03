@@ -10,7 +10,7 @@
 				        <label for="receiver" class="col-sm-2 control-label">받는 사람</label>
 				        <div class="col-sm-10">
 				            <input type="text" class="form-control" id="mailreceiver" name="mailreceiver" onkeydown="startSuggest()" value="${mailreceiver }">
-				            <div id="view">
+				            <div id="view" style="position:absolute; z-index:1;">
 				            </div>
 				        </div>
 				    </div>
