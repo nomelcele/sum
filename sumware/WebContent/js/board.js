@@ -57,17 +57,10 @@ function formGo(where){
 		$('#listForm').submit();
 	}else if(where=='write'){
 		$('#writeForm').submit();
+	}else if(where=='d'){
+		$('#dform').submit();
 	}else{
 		$('#boardInsert').submit();
-	}
-}
-
-// boarddetail 페이지에서 사용 되는 메서드
-function formSub(res) {
-	if (res == 'd') {
-		$('#dform').submit();
-	} else {
-		$('.wrap2 #cform').submit();
 	}
 }
 

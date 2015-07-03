@@ -41,7 +41,6 @@ public class BoardModel {
 		int bgnum = Integer.parseInt(req.getParameter("bgnum"));
 		ses.setAttribute("bbbgnum", bgnum);
 		map = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);
-		System.out.println("BoardModel 이 말합니다 : ");
 		map.put("bdeptno", v.getMemdept());
 		if(req.getParameter("bgnum")==null){
 			map.put("bgnum",0);
@@ -56,7 +55,6 @@ public class BoardModel {
 	// 디테일 목록! 
 	@RequestMapping(value="boardDetail",method=RequestMethod.POST)
 	public ModelAndView getDetail(int no){
-		System.out.println("boardList 에서 넘어온 int no : "+no);
 		ModelAndView mav = new ModelAndView("board/boardDetail");
 		BoardVO v = dao.getDetail(no);
 		mav.addObject("clist",commList(no));
@@ -88,6 +86,7 @@ public class BoardModel {
 		map = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);
 		map.put("page", 1);
 		map.put("bgnum", bgnum);
+		map.put("bdeptno", Integer.parseInt(hmap.get("bdeptno")));
 		ModelAndView mav = new ModelAndView("board.boardList");
 		mav.addObject("list",boardList(map));
 		return mav;
@@ -98,14 +97,18 @@ public class BoardModel {
 	public ModelAndView commIn(CommVO vo){
 		ModelAndView mav = new ModelAndView("board/boardComm");
 		dao.commInsert(vo);
+		System.out.println(vo.getCoboard()+" 입니다람쥐~");
 		mav.addObject("clist",commList(vo.getCoboard()));
+		mav.addObject("board",vo.getCoboard());
 		return mav;
 	}
 	
-	public ModelAndView boardDelete(){
+	// 게시글 삭제.
+	@RequestMapping(value="boardDelete", method=RequestMethod.POST)
+	public ModelAndView boardDelete(BoardVO vo){
+		System.out.println("@@@@ 게시글 삭제 메서드 !!!!!!"+" / "+vo.getBnum());
 		ModelAndView mav = new ModelAndView("board.boardList");
-		
-//		dao.d
+		dao.delete(vo.getBnum());
 		return mav;
 	}
 	

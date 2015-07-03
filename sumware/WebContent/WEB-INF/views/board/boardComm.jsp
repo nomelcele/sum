@@ -20,9 +20,9 @@
 		</li>
 	</c:forEach>
 </ul>
-
+<!-- boardComm.jsp -->
 <div class="comment-write">
-	<textarea name="cocont" rows="10" cols="10" placeholder="댓글 내용을 입력해 주세요."></textarea>
+	<textarea name="cocont" id="cocont" rows="10" cols="10" placeholder="댓글 내용을 입력해 주세요."></textarea>
 	<button class="btn-comm" type="button"
-		onclick="javascript:formSub('c')">댓글 등록</button>
+		onclick="javascript:commIn(${sessionScope.v.memnum},${board})">댓글 등록</button>
 </div>
