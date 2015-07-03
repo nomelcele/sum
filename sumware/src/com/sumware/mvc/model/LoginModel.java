@@ -41,6 +41,7 @@ public class LoginModel{
 			} else if(!res.equals("1")&&!res.equals("0")){
 				System.out.println("ddddddddd");
 				mvo = dao.login(mvo);
+				session.setAttribute("model", "join");
 				// sessionScope에 아이디를 저장
 				session.setAttribute("v", mvo);
 				//login 기록 저장.

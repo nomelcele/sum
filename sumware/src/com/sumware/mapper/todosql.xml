@@ -79,12 +79,14 @@
 		t.toconfirm='y' order by 1 desc
 	</select>
 
-	<select id="getTeamJob" parameterType="int" resultType="tvo">
+	<select id="getTeamJob" parameterType="map" resultType="tvo">
 		select t.tonum, to_char(t.tostdate,'yyyy-mm-dd') tostdate,
 		to_char(t.toendate,'yyyy-mm-dd') toendate, t.totitle, t.tocont,
 		t.tofile, t.todept, t.tomem, t.toconfirm, t.tocomm,m.memname
 		from todo t, member m where t.tomem = m.memnum and t.toconfirm='y' and
 		(m.memnum = #{memmgr} or m.memmgr = #{memmgr}) order by 1 desc
 	</select>
-
+	<select id="getTodoCount" parameterType="map" resultType="int">
+		select count(*) from todo where tomem=#{usernum}
+	</select>
 </mapper>
