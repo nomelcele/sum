@@ -50,7 +50,7 @@ public class Suggest {
 			if(name.startsWith(key)){
 				System.out.println("이름: "+name);
 				System.out.println("메일: "+inmail);
-				sugList.add(name+" <"+inmail+"@sumware.com>");
+				sugList.add(name+" &lt;"+inmail+"@sumware.com&gt;");
 			}
 		}
 		

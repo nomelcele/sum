@@ -121,6 +121,21 @@ function mailSendFunc() {
 	$("#mailWriteF").submit();
 }
 
+//function mailReplyForm(){
+//	var oriForm = "<p>-----Original Message-----</p>" +
+//			"<p>From: ${detail.mailsname} &lt;${detail.replyid}@sumware.com&gt;</p>"+ 
+//			"<p>To: ${detail.mailrname} &lt;${detail.mailreceiver}@sumware.com&gt;</p>"+
+//			"<p>Sent: ${detail.maildate}</p>"+
+//			"<p>Subject: ${detail.mailtitle}</p>"+
+//			"<p>${detail.mailcont}</p>";
+//	$("#mailcont").attr("value",oriForm);
+//	$("#detailform").submit();
+//}
+//
+//function setMailOriForm(){
+//	
+//}
+
 
 
 
@@ -201,8 +216,9 @@ function viewTable() {
 	var vD = document.getElementById("view");
 	var htmlTxt = "<table>";
 	for (var i = 0; i < jsonObj.length; i++) {
-		htmlTxt += "<tr><td style='cursor:pointer;'onmouseover='this.style.background=\"silver\"'onmouseout='this.style.background=\"white\"' onclick='select("
+		htmlTxt += "<tr style='background:white;'><td style='cursor:pointer;'onmouseover='this.style.background=\"silver\"'onmouseout='this.style.background=\"white\"' onclick='select("
 				+ i + ")'>" + jsonObj[i] + "</td></tr>";
+		console.log(jsonObj[i]);
 	}
 	htmlTxt += "</table>";
 	vD.innerHTML = htmlTxt;
@@ -211,6 +227,9 @@ function viewTable() {
 
 function select(index) {
 	f.mailreceiver.value = jsonObj[index];
+	var str = f.mailreceiver.value.replace('&lt;','<').replace('&gt;','>');
+	f.mailreceiver.value = str;
+	console.log(f.mailreceiver.value);
 	document.getElementById("view").style.display = "none";
 	check = false;
 	loopKey = false;
