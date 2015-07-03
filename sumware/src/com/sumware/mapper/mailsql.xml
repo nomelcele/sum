@@ -64,8 +64,4 @@
 		(select count(*) from mail where mailmem=#{usernum} and mailreceiver=#{userid} and mailsdelete=1 and mailrdelete=1) mynum, 
 		(select count(*) from mail where (mailmem=#{usernum} and mailsdelete=2) or (mailreceiver=#{userid} and mailrdelete=2)) trashnum from dual
 	</select>
-	
-	<select id="getReciveNum" parameterType="map" resultType="int">
-		select count(*) from mail where mailreceiver=#{mailreceiver} and mailrdelete=1 and not mailmem=#{memnum};
-	</select>
   </mapper>
