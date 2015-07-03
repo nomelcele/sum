@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.BnameVO;
 import com.sumware.dto.BoardVO;
+import com.sumware.dto.CommVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.PageVO;
 import com.sumware.mvc.dao.BoardDao;
@@ -57,6 +59,7 @@ public class BoardModel {
 		System.out.println("boardList 에서 넘어온 int no : "+no);
 		ModelAndView mav = new ModelAndView("board/boardDetail");
 		BoardVO v = dao.getDetail(no);
+		mav.addObject("clist",commList(no));
 		mav.addObject("board",v);
 		return mav;
 	}
@@ -66,6 +69,7 @@ public class BoardModel {
 	public String writeForm(){
 		return "board.boardWrite";
 	}
+	
 	
 	// 글 입력 !!!
 	@RequestMapping(value="boardInsert", method=RequestMethod.POST)
@@ -85,76 +89,50 @@ public class BoardModel {
 		map.put("page", 1);
 		map.put("bgnum", bgnum);
 		ModelAndView mav = new ModelAndView("board.boardList");
-//		mav.addObject("blist",boardName(hmap));
 		mav.addObject("list",boardList(map));
 		return mav;
 	}
+
+	// 댓글 입력 !!!!
+	@RequestMapping(value="commIn",method=RequestMethod.POST)
+	public ModelAndView commIn(CommVO vo){
+		ModelAndView mav = new ModelAndView("board/boardComm");
+		dao.commInsert(vo);
+		mav.addObject("clist",commList(vo.getCoboard()));
+		return mav;
+	}
 	
+	public ModelAndView boardDelete(){
+		ModelAndView mav = new ModelAndView("board.boardList");
+		
+//		dao.d
+		return mav;
+	}
 	
+	// 실제로 게시글! 리스트 불러오는 메서드 컨트롤러가 내부에서 사용 됨.
 	private List<BoardVO> boardList(Map<String,Integer> map){
 		List<BoardVO> list = dao.getList(map);
 		return list;
 	}
-	
+	// 게시판! 의 목록을 불러오는 메서드
 	private List<BnameVO> boardName(Map<String, Integer> map){
 		List<BnameVO> list = dao.bName(map);
 		return list;
 	}
+	// 댓글 목록 불러오는 메서드!
+	private List<CommVO> commList(int no){
+		List<CommVO> list = dao.getCommList(no);
+		return list;
+	}
+	
 	/*
-		// boardList 
-		if(submod.equals("boardList") && submod!=null){
-			// Page 처리 영역 
-			// 들어온 요청은 boardList 를 보여주는 것, 그렇다면 1페이지 부터 보여줘야 한다.
-			// 두번째 인자값은 게시물인지, 댓글인지를 구별 해주는 인자. 0이면 게시물~
-			Map<String, Integer> map = pageProcess(request, 0);
-			HashMap<String, String> hmap = MyMap.getMaps().getMapList(request);
-			// 게시판 이름을 뿌려오고
-			map.put("bgnum", Integer.parseInt(hmap.get("bgnum")));
-			map.put("bdeptno",Integer.parseInt(hmap.get("bdeptno")));
-			
-			List<BnameVO> blist = BoardDao.getDao().bName(hmap);
-			List<BoardVO> list = BoardDao.getDao().getList(map);
-			// 보드의 이름을 세션에 저장 해준다.
-			HttpSession ses = request.getSession();
-			ses.setAttribute("bname", hmap.get("bname"));
-			ses.setAttribute("bbbgnum", hmap.get("bgnum"));
-			ses.setAttribute("blist", blist);
-			request.setAttribute("list", list);
-			url = "board/boardList.jsp";
-			method = true;
-		}
-		// boardwrite 
-		else if(submod != null && submod.equals("writeForm")){
-			System.out.println("what the fuck");
-			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
-			List<BnameVO> blist = BoardDao.getDao().bName(map);
-			HttpSession ses = request.getSession();
-			ses.setAttribute("bname", map.get("bname"));
-			ses.setAttribute("bbbgnum", map.get("bgnum"));
-			ses.setAttribute("blist", blist);
-			url="board/boardWrite.jsp";
-			method=true;
-		}
+		
 		else if(submod !=null && submod.equals("boardDelete")){
 			System.out.println("여기는 삭제삭제삭제!!!!!!!!!!!!!!!!!!!!!~~~~~~~");
 			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
 			BoardDao.getDao().delete(map);
 			url = "sumware?model=board&submod=boardList&page=1&bgnum="
 					+map.get("bgnum")+"&bdeptno="+map.get("bdeptno")+"&bname="+map.get("bname").toString();
-			method = true; // forward
-		}
-		else if(submod!=null && submod.equals("boardInsert")){
-			System.out.println("this is what ?????????");
-			HashMap<String, String> map = MyMap.getMaps().getMapList(request);
-			List<BnameVO> blist = BoardDao.getDao().bName(map);
-			HttpSession ses = request.getSession();
-			ses.setAttribute("bname", map.get("bname"));
-			ses.setAttribute("bbbgnum", map.get("bgnum"));
-			ses.setAttribute("blist", blist);
-			BoardDao.getDao().insert(map);
-			url = "sumware?model=board&submod=boardList&page=1&bgnum="
-			+map.get("bgnum")+"&bdeptno="+map.get("bdeptno")+"&bname="+map.get("bname").toString();
-			System.out.println(map.get("bname").toString());
 			method = true; // forward
 		}
 		// boardDetail

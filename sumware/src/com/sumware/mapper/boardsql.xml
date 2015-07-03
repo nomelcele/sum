@@ -6,7 +6,7 @@
   	<insert id="insert" parameterType="map">
   		insert into board values(board_seq.nextVal,#{btitle},#{bcont},#{bimg},#{bmem},sysdate,0,#{bgnum},#{bdeptno})
   	</insert>
-  	<!-- getList -->
+  	<!-- 게시글 리스트 -->
   	<select id="getList" parameterType="map" resultType="bvo">
 		<choose>
 			<when test="bgnum!=0">
@@ -33,33 +33,45 @@
 		</choose>	
   	</select>
   	
+  	<!-- 해당 게시판의 총 게시글 갯수. -->
   	<select id="getTotalCount" parameterType="int" resultType="int">
   		select count(*) cnt from board where bgnum=#{bgnum}
   	</select>
+  	<!-- 해당 게시글의 총 댓글 갯수 -->
   	<select id="getTotalCommCount" parameterType="int" resultType="int">
   		select count(*) cnt from comm where coboard=#{coboard}
   	</select>
   	
+  	<!-- 게시글 상세보기 -->
   	<select id="getDetail" parameterType="int" resultType="bvo">
   		select b.bhit,b.bmem,b.bnum,m.memname bwriter, b.btitle, b.bcont, TO_CHAR(b.bdate,'yyyy.MM.dd HH24:mi') bdate
 		 from board b, member m where b.bmem=m.memnum and bnum=#{bnum}
   	</select>
+  	
+  	<!-- 게시글 조회수 업 -->
   	<update id="hitUp" parameterType="int">
   		update board set bhit=(bhit+1) where bnum=#{bnum}
   	</update>
+  	
+  	<!-- 해당 게시글의 댓글 리스트 -->
   	<select id="getCommList" parameterType="int" resultType="cvo">
-  		select c.cocont, TO_CHAR(c.codate,'yyyy.MM.dd HH24:mi') codate, m.memname,m.memprofile,c.coboard
+  		select c.cocont, TO_CHAR(c.codate,'yyyy.MM.dd HH24:mi') codate, m.memname coname,m.memprofile coimg,c.coboard
 		from comm c, member m where c.comem = m.memnum and coboard=#{coboard} order by conum desc
   	</select>
-  	<insert id="commInsert" parameterType="map">
+  	
+  	<!-- 댓글 입력 -->
+  	<insert id="commInsert" parameterType="cvo">
   		insert into comm(conum,cocont,codate,comem,coboard)
-		values(comm_seq.nextval,#{comment},sysdate,#{memnum},#{bnum})
+		values(comm_seq.nextval,#{cocont},sysdate,#{comem},#{coboard})
   	</insert>
+  	
+  	<!-- 해당 부서의 게시판 목록 -->
   	<select id="bName" parameterType="map" resultType="bnvo">
   		select bname,bdeptno,bgnum from bname where bdeptno=#{bdeptno} order by bgnum asc
   	</select>
+  	
+  	<!-- 해당 게시글 삭제 -->
   	<delete id="delete" parameterType="int">
   		delete from board where bnum=#{bnum}
   	</delete>
-  	
-  </mapper>
+ </mapper>

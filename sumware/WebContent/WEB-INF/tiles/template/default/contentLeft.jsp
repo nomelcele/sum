@@ -179,7 +179,6 @@
 </c:if>
 <%-- todo left(S) --%>
 
-
 <%-- calendar left(S) --%>
 <c:if test="${sessionScope.model eq 'calendar' }">
 
@@ -241,7 +240,6 @@
 	</div>
 </c:if>
 <%-- calendar left(E) --%>
-
 
 <%-- mail left(S) --%>
 <c:if test="${sessionScope.model eq 'mail' }">

@@ -37,8 +37,18 @@ function detail(no,bgnum,bname,bdeptno){
 	});
 }
 
-function commIn(){
-	
+function commIn(memnum,bnum){
+	var $cocont =$("#cocont").val();
+	$.ajax({
+		url : "commIn",
+		type : "post",
+		data : {
+			cocont:$cocont, comem:memnum, coboard:bnum
+		},
+		success : function(result){
+			$("#coTarget").html(result);
+		}
+	});
 }
 
 // 각각의 폼을 전송해주는 메서드
