@@ -68,12 +68,13 @@
 <script src="js/member.js"></script>
 </c:if>
 <c:if test="${sessionScope.model eq 'board' }">
-<script ></script>
-<script>
-	$(function(){
-		chkUpload();
-	});
-</script>
+<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+	<script src="js/myckeditor.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			chkUpload();
+		});
+	</script>
 </c:if>
 <c:if test="${sessionScope.model eq 'calendar' }">
 	<!-- 캘린더 -->
@@ -211,7 +212,6 @@ function push() {
 <c:if test="${param.submod eq 'writeForm' }">
 	<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
 	<script src="js/myckeditor.js"></script>
-	<script src="js/util.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			chkUpload();
@@ -223,7 +223,6 @@ function push() {
 <c:if test="${sessionScope.model eq 'mail'}">
 	<script src="//cdn.ckeditor.com/4.5.0/basic/ckeditor.js"></script>
 	<script src="js/myckeditor.js"></script>
-	<script src="js/util.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			mailChkUpload();

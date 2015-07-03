@@ -46,7 +46,7 @@
 			<div class="button-div">
 				<div class="left">
 					<c:if test="${sessionScope.v.memnum eq board.bmem }">
-						<button type="button" onclick="javascript:formSub('d')">글삭제</button>
+						<button type="button" onclick="javascript:formGo('d')">글삭제</button>
 					</c:if>
 				</div>
 				<div class="right">
@@ -97,6 +97,25 @@
 			</form>
 				<!-- comment-write(E) -->
 			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 <!-- comment(E) -->
 			<!-- 리스트 form -->
 			<form action="boardList" method="post" id="listForm">
@@ -120,5 +139,5 @@
 				<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
 				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 				<input type="hidden" name="bname" value="${sessionScope.bname }">
-				<input type="hidden" name="no" value="${board.bnum }">
+				<input type="hidden" name="bnum" value="${board.bnum }">
 			</form>
