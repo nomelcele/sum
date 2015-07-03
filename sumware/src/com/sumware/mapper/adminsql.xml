@@ -2,22 +2,34 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="admin">
-  	<insert id="addMember" parameterType="mvo">
-   	insert into member values(member_seq.nextVal,#{memname},null,#{mempwd},null,#{memjob},#{memauth},#{memmail},null,#{memmgr},#{memdept})
-  </insert>
-  
-  <select id="getNewMemInfo" parameterType="mvo" resultType="mvo">
-  	select s.memnum,s.memname, d.dename, s.mempwd, m.memname mgrname, s.memmail 
-  	from member s, dept d, member m where s.memmgr = m.memnum and s.memdept= d.denum and s.memmail=#{memmail} and s.memname=#{memname} and s.memdept=#{memdept}
-  </select>
-  
-  <select id="getMemMgr" parameterType="int" resultType="mvo">
-  	select memnum,memname from member where memauth=4 and memdept=#{memdept}
-  </select>
-  
-  <delete id="cancelAddMem" parameterType="int">
-  	delete from member where memnum=#{memnum}
-  </delete>
-  
-  </mapper>
+<mapper namespace="admin">
+	<!-- 사원 추가(S) -->
+	<insert id="addMember" parameterType="mvo">
+		insert into member
+		values(member_seq.nextVal,#{memname},null,#{mempwd},null,#{memjob},#{memauth},#{memmail},null,#{memmgr},#{memdept})
+	</insert>
+
+	<select id="getNewMemInfo" parameterType="mvo" resultType="mvo">
+		select s.memnum,s.memname, d.dename, s.mempwd, m.memname mgrname,
+		s.memmail
+		from member s, dept d, member m where s.memmgr = m.memnum and s.memdept=
+		d.denum and s.memmail=#{memmail} and s.memname=#{memname} and
+		s.memdept=#{memdept}
+	</select>
+
+	<select id="getMemMgr" parameterType="int" resultType="mvo">
+		select memnum,memname from member where memauth=4 and memdept=#{memdept}
+	</select>
+
+	<delete id="cancelAddMem" parameterType="int">
+		delete from member where memnum=#{memnum}
+	</delete>
+	<!-- 사원 추가(E) -->
+
+	<!-- 게시판 추가(S) -->
+	<insert id="addBoard" parameterType="bnvo">
+		insert into bname values(#{bname},bname_seq.nextVal,#{bdeptno})
+	</insert>
+	<!-- 게시판 추가(E) -->
+
+</mapper>

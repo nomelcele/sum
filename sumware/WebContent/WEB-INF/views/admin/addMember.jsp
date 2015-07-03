@@ -20,9 +20,8 @@ function getMemMgr(){
 
 
 </script>
-			<form action="addMember" method="post" id="addMemForm">
 				<input type="hidden" name="memauth" value="" id="newauth">
-				<div class="contents">
+
 				<div class="chat-panel panel panel-default" style="width: 60%">
 					<div class="panel-heading">
 						<i class="fa fa-plus-square-o"></i> <strong class="primary-font">
@@ -73,6 +72,5 @@ function getMemMgr(){
 
 					</div>
 				</div>
-				</div>
-			</form>
+
 		

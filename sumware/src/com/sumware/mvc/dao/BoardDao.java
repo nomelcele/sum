@@ -76,14 +76,11 @@ public class BoardDao {
 		System.out.println("이름다 뽑았다.");
 		return list;
 	}
+	
 	// 게시글 삭제 메서드
 	public void delete(HashMap<String, String> map){
 		ss.delete("board.delete",Integer.parseInt(map.get("no")));
 	}
 	
-	// 게시판 추가 하는 메서드
-	public void addBoard(HashMap<String, String> map){
-		ss.delete("board.addBoard",map);
-	}
 }
 
