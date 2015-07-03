@@ -95,6 +95,11 @@ public class MailDao {
 		
 	}
 	
+	public void setMailRead(int mailnum){
+		System.out.println("mailread 속성 업데이트");
+		st.update("mail.setMailRead", mailnum);
+	}
+	
 	public MailVO getDelAttrMailInfo(String num){
 		return st.selectOne("mail.getDelAttrMailInfo", num); // 오류
 	}

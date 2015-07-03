@@ -5,7 +5,7 @@
   <mapper namespace="mail">
   	<insert id="addMail" parameterType="map">
   		insert into mail values(mail_seq.nextVal,#{mailtitle},
-  		#{mailcont},#{mailfile},#{mailmem},#{mailreceiver},sysdate,1,1)
+  		#{mailcont},#{mailfile},#{mailmem},#{mailreceiver},sysdate,1,1,'N')
   	</insert>
 	<select id="getFromMailList" parameterType="map" resultType="mavo">
 		select * from (select rownum r_num, a.* from 
@@ -36,13 +36,7 @@
 		((ma.mailmem=#{usernum} and ma.mailsdelete=2) or (ma.mailreceiver=#{userid} and ma.mailrdelete=2)) 
 		order by ma.maildate desc) a) where r_num between #{begin} and #{end}
 	</select>
-	<select id="getMailDetail" parameterType="int" resultType="mavo">
-		select ma.mailtitle, me1.memname mailsname, me2.memname mailrname, ma.maildate, 
-		ma.mailcont, ma.mailfile, me1.meminmail replyid, ma.mailreceiver 
-		from mail ma, member me1, member me2 
-		where me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver and ma.mailnum=#{mailnum}
-	</select>
-	<!-- transation -->
+	<!-- transaction (삭제/복구)-->
 	<select id="getDelAttrMailInfo" parameterType="String" resultType="mavo">
 		select mailmem,mailreceiver from mail where mailnum=#{num}
 	</select>
@@ -52,7 +46,18 @@
 	<update id="setDelAttrTo" parameterType="map">
 		update mail set mailrdelete=#{delvalue} where mailnum=#{mailnum}
 	</update>
-	<!-- transation -->
+	<!-- transaction -->
+	<!-- transaction (상세보기 정보 가져오기 & 읽기 속성 업데이트)-->
+	<select id="getMailDetail" parameterType="int" resultType="mavo">
+		select ma.mailtitle, me1.memname mailsname, me2.memname mailrname, ma.maildate, 
+		ma.mailcont, ma.mailfile, me1.meminmail replyid, ma.mailreceiver, ma.mailread 
+		from mail ma, member me1, member me2 
+		where me1.memnum=ma.mailmem and me2.meminmail=ma.mailreceiver and ma.mailnum=#{mailnum}
+	</select>
+	<update id="setMailRead" parameterType="int">
+		update mail set mailread='Y' where mailnum=#{mailnum}
+	</update>
+	<!-- transaction -->
 	<select id="getListNum" parameterType="map" resultType="mavo">
 		select (select count(*) from mail where mailreceiver=#{userid} and mailrdelete=1 and not mailmem=#{usernum}) fromnum, 
 		(select count(*) from mail where mailmem=#{usernum} and mailsdelete=1 and not mailreceiver=#{userid}) tonum, 
