@@ -192,18 +192,25 @@ public class MailDao {
 	
 	public int[] getListNum(Map<String, String> map){
 		// 각 메일함에 있는 메일의 갯수를 얻기 위한 메서드
-		List<Integer> numList = st.selectList("mail.getListNum",map);
+		MailVO mavo = st.selectOne("mail.getListNum",map);
 		
+		System.out.println("받은 메일함 메일 갯수: "+mavo.getFromnum());
+		System.out.println("보낸 메일함 메일 갯수: "+mavo.getTonum());
 		int[] numArr = new int[4];
-		for(int i=0; i<numList.size(); i++){
-			System.out.println("메일 갯수: "+numList.get(i));
-			numArr[i] = numList.get(i);
-			// ***********************
-			// ***********************
-			// 받은 메일함 메일 갯수밖에 못 불러옴
-			// ***********************
-			// ***********************
-		}
+		numArr[0] = mavo.getFromnum();
+		numArr[1] = mavo.getTonum();
+		numArr[2] = mavo.getMynum();
+		numArr[3] = mavo.getTrashnum();
+		
+//		for(int i=0; i<numList.size(); i++){
+//			System.out.println("메일 갯수: "+numList.get(i));
+//			numArr[i] = numList.get(i);
+//			// ***********************
+//			// ***********************
+//			// 받은 메일함 메일 갯수밖에 못 불러옴
+//			// ***********************
+//			// ***********************
+//		}
 		
 		return numArr;
 		
