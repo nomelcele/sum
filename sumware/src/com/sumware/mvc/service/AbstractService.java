@@ -25,4 +25,9 @@ public class AbstractService implements ServiceInter{
 	}
 
 
+	@Override
+	public MemberVO addNewMember(MemberVO vo) {
+		return null;
+	}
+
 }

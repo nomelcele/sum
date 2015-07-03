@@ -17,4 +17,7 @@ public interface ServiceInter {
 	public int insertCreateRoomService(ArrayList<MessengerVO> list, MessengerRoomVO rv, int mesendNum);
 	public void closeRoomService(MessengerVO v);
 	
+	
+	//관리자
+	public MemberVO addNewMember(MemberVO vo);
 }
