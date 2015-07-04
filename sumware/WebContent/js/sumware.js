@@ -168,44 +168,37 @@ function openWin() {
 			"MessengerMain", opt);
 }
 
+// ajax를 이용한 메뉴 선택
 function selectMenu(sel,senddata) {
-	// 메뉴 선택
 	if (sel == 'deptTodo') {
 		// 부서업무 버튼
 		$.ajax({
 			type : "post",
 			url : "todoForm",
 			data : {
-		
 				memdept : senddata
 			},
 			success : function(result) {
-
 				$("#menuTarget").html(result);
-
 			}
 		});
 	} else if (sel == 'giveJob1') {
-		// 부장일 때 업무 부여 버튼
-
+		// 업무 부여 버튼(부장의 경우)
 		$.ajax({
 			type : "post",
 			url : "addtodoForm",
 			data : {
-				
 				memnum : senddata
 			},
 			success : function(result) {
-
 				$("#menuTarget").html(result);
-
 			},
 			 error: function(a, b) {
                  alert("Request: " + JSON.stringify(a));
              }
 		});
 	} else if (sel == 'manageJob2') {
-		// 팀장일 때 업무 관리 버튼
+		// 업무 관리 버튼(팀장의 경우)
 		$.ajax({
 			type : "post",
 			url : "checkTodoList",
@@ -213,39 +206,31 @@ function selectMenu(sel,senddata) {
 				memnum : senddata
 			},
 			success : function(result) {
-
 				$("#menuTarget").html(result);
-
 			}
 		});
 	} else if (sel == 'manageJob1') {
-		// 부장일 때 업무 관리 버튼
+		// 업무 관리 버튼 (부장의 경우)
 		$.ajax({
 			type : "post",
 			url : "fWMana",
 			data : {
-
 				memnum : senddata
 			},
 			success : function(result) {
-
 				$("#menuTarget").html(result);
-
 			}
 		});
 	} else if (sel == 'giveJob2') {
-		// 팀장일 때 업무 부여
+		// 업무 부여 버튼 (팀장의 경우)
 		$.ajax({
 			type : "post",
 			url : "giveJobForm",
 			data : {
-
 				memnum : senddata
 			},
 			success : function(result) {
-
 				$("#menuTarget").html(result);
-
 			}
 		});
 	} else if (sel == 'teamTodoForm') {
@@ -257,12 +242,9 @@ function selectMenu(sel,senddata) {
 				memmgr : senddata
 			},
 			success : function(result) {
-
 				$("#menuTarget").html(result);
-
 			}
 		});
-
 	}
 }
 
