@@ -60,14 +60,11 @@ public class AdminModel {
 	@RequestMapping(value="/addMember",method=RequestMethod.POST)
 	public String addMember(MemberVO mvo, Model model,HttpSession session) throws Exception{
 		System.out.println("사원 추가버튼 클릭!!!");
-
 		// 사원을 디비에 저장하고 부여받은 사번과 정보들을 다시가져옴
 		MemberVO nmvo = service.addNewMember(mvo);
-		
 		try {
 			// 메일전송 클래스를 이용하여 메일전송
 			int res = SendEmail.getSendemail().sendEmailToNewMem(nmvo);
-			
 			if(res==0){
 				//메일 전송 실패 시 디비 삭제
 				adao.cancelAddMem(nmvo.getMemnum());

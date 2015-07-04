@@ -59,7 +59,7 @@ function sendNewMember() {
 }
 
 //새 게시판 추가 버튼 클릭
-function sendNewMember() {
+function sendNewBoard() {
 	confirm("게시판을 추가하시겠습니까?")
 
 	$.ajax({
