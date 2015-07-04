@@ -88,14 +88,15 @@ public class MailModel{
 	@RequestMapping(value="/mailSug")
 	public void mailSug(String key,HttpServletResponse response) throws IOException{
 		System.out.println("Mail Controller: mailSug");
-		// request.setCharacterEncoding("UTF-8");
-		
+		// 5) 필요한 데이터 검색 후 배열 형태로 해당 데이터를 리턴해주는 메서드 호출
 		String[] suggests = Suggest.getSuggest().getSuggest(key);
+		
 		System.out.println("Key: "+key);
 		for(String e:suggests){
 			System.out.println("배열: "+e);
 		}
 		
+		// 8) 배열에 있는 데이터들을 읽고, JSON 문법에 맞게 StringBuffer에 append
 		StringBuilder su = new StringBuilder();
 		su.append("[");
 		if(suggests != null){
@@ -110,6 +111,7 @@ public class MailModel{
 		}
 		su.append("]");
 		
+		// 9) 요청한 쪽으로 전달해줄 데이터를 스트림에 써준다.
 		PrintWriter pw = response.getWriter();
 		pw.write(su.toString());
 		pw.flush();

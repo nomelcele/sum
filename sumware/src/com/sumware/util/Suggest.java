@@ -41,12 +41,15 @@ public class Suggest {
 		
 		// key는 한글->메일 쓰기에서 받는 사람에 사원 이름을 입력하니까
 		// toLowerCase 메서드 쓸 필요 없음
+		
+		// 6) 사원의 이름과 아이디가 저장된 xml 파일을 읽는다.
 		while(it.hasNext()){
 			Element el = it.next();
 			String name = el.getChild("name").getText();
 			String inmail = el.getChild("inmail").getText();
-				
-			// 사용자가 입력한 값으로 시작하는 것인지 판별하는 조건문
+			
+			// 7) name 태그의 데이터가 사용자가 입력한 문자로 시작하는 경우 리스트에 추가하고
+			// 리스트를 String 타입의 배열로 변환 후 리턴해준다.
 			if(name.startsWith(key)){
 				System.out.println("이름: "+name);
 				System.out.println("메일: "+inmail);
