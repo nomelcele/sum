@@ -23,7 +23,7 @@
 							</select>
 						</div>
 						<div class="form-group has-success">
-							<input type="button" class="btn btn-outline btn-success" onclick="javascript: sendNewMember()" id = "sendFormToAdd" value="추 가">
+							<input type="button" class="btn btn-outline btn-success" onclick="javascript: sendNewBoard()" value="추 가">
 						</div>
 					</div>
 				</div>
