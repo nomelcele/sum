@@ -155,7 +155,7 @@
 					href="javascript:selectMenu('teamTodoForm',${sessionScope.v.memnum})">팀
 						업무</a></li>
 			</c:if>
-			<c:if test="${sessionScope.v.memauth lt 4 }">
+			<c:if test="${sessionScope.v.memauth eq 3 }">
 				<li><a
 					href="javascript:selectMenu('manageJob1',${sessionScope.v.memnum})">업무관리</a></li>
 
@@ -164,7 +164,7 @@
 				<li><a
 					href="javascript:selectMenu('manageJob2',${sessionScope.v.memnum})">업무관리</a></li>
 			</c:if>
-			<c:if test="${sessionScope.v.memauth lt 4 }">
+			<c:if test="${sessionScope.v.memauth eq 3 }">
 				<li><a
 					href="javascript:selectMenu('giveJob1',${sessionScope.v.memnum})">업무부여</a></li>
 			</c:if>
