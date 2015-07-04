@@ -23,7 +23,75 @@ $(function(){
 		$bgnum = "";
 	});
 });
+//게시판 검색(네이버 메일 검색기능 따라하기)
+var boardCheck = false;
+var boardLoopbSearch = false;
+var sBgnum ="";
+var sBdeptno ="";
+function boardSearch(bgnum,bdeptno){
+	sBgnum=bgnum;
+	sBdeptno=bdeptno;
+	if(boardCheck == false){
+		setTimeout("sendSearch()", 500);
+		console.log("boardSearch 함수 들어옴");
+		boardLoopbSearch = true;
+	}
+	boardrCheck =true;
+}
+function sendSearch(){
+	if (boardLoopbSearch == false) {
+		return;
+	}
+	var bSearch = $('#bSearch').val();
+	var bgnum = $('#bgnum').val();
+	var bdeptno = $('#bdeptno').val();
+	var lastbSearch = '';
+	if (bSearch == '' || bSearch == '  ') {
+		document.getElementById("boardView").style.display = "none";
+	} else if (bSearch != lastbSearch) {
+		lastbSearch = bSearch;
+		var param = "bSearch=" + bSearch;
+		sendRequest("boardSearchSug", param, SearchRes, "get");
+	}
 
+	setTimeout("sendSearch();", 500);
+}
+var jsonObj = null;
+function SearchRes() {
+	if (xhr.readyState == 4) {
+		if (xhr.status == 200) {
+			var response = xhr.responseText;
+			jsonObj = JSON.parse(response.trim());
+			searchResultView();
+		} else {
+			document.getElementById("boardView").style.display = "none";
+
+		}
+	}
+}
+function searchResultView() {
+	var vD = document.getElementById("boardView");
+	var htmlTxt = "<table>";
+	for (var i = 0; i < jsonObj.length; i++) {
+		htmlTxt += "<tr style='background:white;'><td style='cursor:pointer;'onmouseover='this.style.background=\"silver\"'onmouseout='this.style.background=\"white\"' onclick='bSearchSelect("
+			+ i + ")'>" + jsonObj[i] + "</td></tr>";
+	console.log(jsonObj[i]);
+	}
+	htmlTxt += "</table>";
+	vD.innerHTML = htmlTxt;
+	vD.style.display = "block";
+	vD.style.width = "250px";
+}
+function bSearchSelect(index){
+	console.log("클릭했네");
+	var select = jsonObj[index];
+	var sel=select.split(" ");
+	sel1=sel[0];
+	sel2=sel[1];
+	
+	location="boardSearchSelect?bSearch="+sel1+"&div="+sel2+"&bgnum="+sBgnum+"&bdeptno="+sBdeptno;
+}
+//게시판 검색 종료
 function detail(no,bgnum,bname,bdeptno,page){
 	$.ajax({
 		url:"boardDetail",
