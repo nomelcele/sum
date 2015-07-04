@@ -33,6 +33,42 @@
 <script src="js/todo.js"></script>
 <script src="js/admin.js"></script>
 <!-- <script src="js/bootstrap.min.js"></script> -->
+
+<script src="js/notification.js"></script>
+<script>
+$(function(){
+	if("${empty v.meminmail}"=="false"){
+		// The user needs to allow this
+		console.log("meminmail:::${v.meminmail}");
+		if (typeof (EventSource) != "undefined") {
+			// push를 받을수 있는 브라우져인지 판단.
+			eventSourceCount = new EventSource(
+					"tmCount?mailreceiver=${v.meminmail}&memnum=${v.memnum}");
+			eventSourceCount.onmessage = function(event) {
+				var data = event.data;
+				console.log("notification::"+data);
+				if(data=="tx"){
+					console.log("todo");
+					Notify("todo","Good");
+				}else if(data=="m"){
+					console.log("mail");
+					Notify("mail","새로운 메일이 도착하였습니다.");
+				}else if(data=="tm"){
+					console.log("todo&mail");
+					Notify("todo","새로운 업무가 등록되었습니다.");
+					setTimeout(function(){
+						Notify("mail","새로운 메일이 도착하였습니다.");
+					}, 3000);
+				}
+			};
+		} else {
+			$(".chat").html("해당 브라우저는 지원이 안됩니다.");
+		}
+	}
+	
+	
+});
+</script>
 <c:if test="${sessionScope.model eq 'join' || sessionScope.model eq 'memjoin' }">
 <%--우편번호 다음 링크 --%>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

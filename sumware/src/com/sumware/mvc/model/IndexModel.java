@@ -45,9 +45,11 @@ public class IndexModel{
 		res.append("data:");
 		if(tCount<tdao.getTodoCount(map)){
 			res.append("t");
+			session.setAttribute("todoCount",tdao.getTodoCount(map));
 		}
 		if(mCount< mdao.getListNum(map)[0]){
 			res.append("m");
+			session.setAttribute("mailCount",mdao.getListNum(map)[0]);
 		}else{
 			res.append("x");
 		}
