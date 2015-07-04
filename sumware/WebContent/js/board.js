@@ -89,7 +89,7 @@ function bSearchSelect(index){
 	sel1=sel[0];
 	sel2=sel[1];
 	
-	location="boardSearchSelect?bSearch="+sel1+"&div="+sel2+"&bgnum="+sBgnum+"&bdeptno="+sBdeptno;
+	location="boardList?page=1&bSearch="+sel1+"&div="+sel2+"&bgnum="+sBgnum+"&bdeptno="+sBdeptno;
 }
 //게시판 검색 종료
 function detail(no,bgnum,bname,bdeptno,page){

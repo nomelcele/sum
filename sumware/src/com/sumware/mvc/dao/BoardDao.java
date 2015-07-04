@@ -93,8 +93,8 @@ public class BoardDao {
 	public void commDelete(int conum){
 		ss.delete("board.commDelete",conum);
 	}
-	//게시글 검색과, 검색된 수
-	public int seachCount(Map<String, String> map){
+	//게시글 검색된 수
+	public int searchCount(Map<String, String> map){
 		return ss.selectOne("board.searchCount",map);
 	}
 	
