@@ -27,15 +27,11 @@
 <script src="js/sumware.js"></script>
 <script src="js/http.js"></script>
 <!-- <script src="js/bootstrap.min.js"></script> -->
+<script src="js/notification.js"></script>
 <script>
 $(function(){
 	if("${empty v.meminmail}"=="false"){
-		var notification = window.Notification || window.mozNotification || window.webkitNotification;
 		// The user needs to allow this
-		if ('undefined' === typeof notification)
-		    alert('Web notification not supported');
-		else
-		    notification.requestPermission(function(permission){});
 		console.log("meminmail:::${v.meminmail}");
 		if (typeof (EventSource) != "undefined") {
 			// push를 받을수 있는 브라우져인지 판단.
@@ -47,14 +43,14 @@ $(function(){
 				if(data=="tx"){
 					console.log("todo");
 					Notify("todo","Good");
-				}else if(data="m"){
+				}else if(data=="m"){
 					console.log("mail");
-					Notify("mail","Good");
-				}else if(data="tm"){
+					Notify("mail","새로운 메일이 도착하였습니다.");
+				}else if(data=="tm"){
 					console.log("todo&mail");
-					Notify("todo","Good");
+					Notify("todo","새로운 업무가 등록되었습니다.");
 					setTimeout(function(){
-						Notify("mail","Good");
+						Notify("mail","새로운 메일이 도착하였습니다.");
 					}, 3000);
 				}
 			};
@@ -65,38 +61,6 @@ $(function(){
 	
 	
 });
-
-// A function handler
-function Notify(titleText, bodyText)
-{
-	console.log("Notify실행");
-    if ('undefined' === typeof notification){
-    	console.log("Notify지원안됨");
-    	return false;
-	}//Not supported....
-    var noty = new notification( 
-        titleText, {
-            body: bodyText,
-            dir: 'auto', // or ltr, rtl
-            lang: 'EN', //lang used within the notification.
-            tag: 'notificationPopup', //An element ID to get/set the content
-            icon: '' //The URL of an image to be used as an icon
-        }
-    );
-    noty.onclick = function () {
-        console.log('notification.Click');
-    };
-    noty.onerror = function () {
-        console.log('notification.Error');
-    };
-    noty.onshow = function () {
-        console.log('notification.Show');
-    };
-    noty.onclose = function () {
-        console.log('notification.Close');
-    };
-    return true;
-}
 </script>
 </head>
 <body>
