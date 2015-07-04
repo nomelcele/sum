@@ -72,8 +72,7 @@
 						<!-- 작성자일 경우에만 노출 됨  -->
 						<c:if test="${sessionScope.v.memname eq clist.coname }">
 						<span class="comment-btn">
-							<button type="button">수정</button>
-							<button type="button">삭제</button>
+							<button type="button" onclick="javascript:commDelete(${clist.conum},${clist.coboard })">삭제</button>
 						</span>
 						</c:if>
 						<!-- 작성자일 경우에만 노출 됨  -->
@@ -97,23 +96,6 @@
 			</form>
 				<!-- comment-write(E) -->
 			</div>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 <!-- comment(E) -->

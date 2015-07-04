@@ -24,12 +24,12 @@ $(function(){
 	});
 });
 
-function detail(no,bgnum,bname,bdeptno){
+function detail(no,bgnum,bname,bdeptno,page){
 	$.ajax({
 		url:"boardDetail",
 		type :"post",
 		data:{
-			no:no, bgnum:bgnum, bname:bname, bdeptno:bdeptno
+			no:no, bgnum:bgnum, bname:bname, bdeptno:bdeptno,page:page
 		},
 		success : function(result){
 			$(".contents").html(result);
@@ -37,6 +37,7 @@ function detail(no,bgnum,bname,bdeptno){
 	});
 }
 
+// 댓글 입력
 function commIn(memnum,bnum){
 	var $cocont =$("#cocont").val();
 	$.ajax({
@@ -45,6 +46,17 @@ function commIn(memnum,bnum){
 		data : {
 			cocont:$cocont, comem:memnum, coboard:bnum
 		},
+		success : function(result){
+			$("#coTarget").html(result);
+		}
+	});
+}
+// 댓글 삭제
+function commDelete(conum,bnum){
+	$.ajax({
+		url : "commDelete",
+		type : "post",
+		data : {conum:conum,coboard:bnum},
 		success : function(result){
 			$("#coTarget").html(result);
 		}

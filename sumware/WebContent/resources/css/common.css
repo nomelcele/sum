@@ -27,28 +27,7 @@ body {
 	font-size: 12px; line-height: 1.5;
 	color: #888;
 }
-button, input, select, option, textarea, a {
-	/* font-family:inherit : 폰트 패밀리를 부모로부터(여기선 body) 상속(inheritance) 받게됨 */
-	font-family:inherit;
-	font-size:inherit;
-	color:inherit;
-} 
-/* ( table ) */
-#global table {
-	width: 100%;
-	margin:auto;
-	font-size:13px;
-	border:1px solid #ccc;
-	border-spacing:0;
-	border-collapse:collapse;
-	color:#333;
-}
-#global table td , #global table th {
-	padding:5px;
-	border-right:1px solid #ccc;
-	border-bottom:1px solid #ccc;
-	border-color:#ccc;
-}
+
 
 
 /************************** [ GLOBAL DESIGN ] *********************************/

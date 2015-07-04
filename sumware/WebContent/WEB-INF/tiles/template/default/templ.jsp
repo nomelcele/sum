@@ -104,6 +104,8 @@ $(function(){
 <script src="js/member.js"></script>
 </c:if>
 <c:if test="${sessionScope.model eq 'board' }">
+<spring:url value="resources/css/boardCSS.css" var="boardCss" />
+<link rel="stylesheet" type="text/css" href="${boardCss }" />
 <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
 	<script src="js/myckeditor.js"></script>
 	<script type="text/javascript">

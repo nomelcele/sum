@@ -74,7 +74,7 @@
 	</form>	
 		<ul>
 			<li><a href="">공지사항</a><span style="display: none;">0</span></li>
-			<c:forEach var="blist" items="${sessionScope.blist }">
+			<c:forEach var="blist" items="${sessionScope.bNameList }">
 				<c:if test="${blist.bgnum eq 0 }">
 					<c:remove var="blist" />
 				</c:if>
