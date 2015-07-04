@@ -8,7 +8,7 @@ else
     notification.requestPermission(function(permission){});
 
 // A function handler
-function Notify(titleText, bodyText)
+function Notify(titleText, bodyText,link)
 {
 	console.log("Notify실행");
     if ('undefined' === typeof notification){
@@ -25,6 +25,7 @@ function Notify(titleText, bodyText)
         }
     );
     noty.onclick = function () {
+    	 window.location.href = link;
         console.log('notification.Click');
     };
     noty.onerror = function () {

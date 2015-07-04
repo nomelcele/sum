@@ -125,6 +125,13 @@ public class MailModel{
 		ModelAndView mav = new ModelAndView();
 		// 받은 메일함에 있는 메일 갯수 얻어오기
 		// 
+		HttpSession session = request.getSession();
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		System.out.println("userid::"+mvo.getMeminmail());
+		System.out.println("usernum::"+mvo.getMemnum());
+		map.put("userid", mvo.getMeminmail());
+		map.put("usernum", String.valueOf(mvo.getMemnum()));
+		
 		int totalCount = mdao.getListNum(map)[0];
 		System.out.println("받은 메일함 메일 갯수: "+totalCount);
 		
@@ -133,10 +140,7 @@ public class MailModel{
 //		HashMap<String, String> map = new HashMap<String, String>();
 //		map.put("usernum",usernum.toString()); // 로그인한 사용자의 사원 번호
 //		map.put("userid", userid); // 로그인한 사용자의 아이디
-		HttpSession session = request.getSession();
-		MemberVO mvo = (MemberVO) session.getAttribute("v");
-		map.put("userid", mvo.getMeminmail());
-		map.put("usernum", String.valueOf(mvo.getMemnum()));
+
 		map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
 		map.put("end", pmap.get("end").toString()); // 마지막 페이지
 		

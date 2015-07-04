@@ -42,15 +42,15 @@ $(function(){
 				console.log("notification::"+data);
 				if(data=="tx"){
 					console.log("todo");
-					Notify("todo","Good");
+					Notify("todo","새로운 업무가 등록되었습니다.","firsttodoForm?model=todo");
 				}else if(data=="m"){
 					console.log("mail");
-					Notify("mail","새로운 메일이 도착하였습니다.");
+					Notify("mail","새로운 메일이 도착하였습니다.","mailFromList?model=mail&page=1");
 				}else if(data=="tm"){
 					console.log("todo&mail");
-					Notify("todo","새로운 업무가 등록되었습니다.");
+					Notify("todo","새로운 업무가 등록되었습니다.","firsttodoForm?model=todo");
 					setTimeout(function(){
-						Notify("mail","새로운 메일이 도착하였습니다.");
+						Notify("mail","새로운 메일이 도착하였습니다.","mailFromList?model=mail&page=1");
 					}, 3000);
 				}
 			};

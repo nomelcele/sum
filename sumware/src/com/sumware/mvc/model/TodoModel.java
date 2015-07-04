@@ -59,7 +59,7 @@ public class TodoModel {
 	
 	
 	// 메뉴바에서 todo메뉴 첫 진입 시 //ok
-	@RequestMapping(value = "firsttodoForm", method = RequestMethod.POST)
+	@RequestMapping(value = "firsttodoForm")
 	public String firsttodoForm(Model model, HttpSession session,HttpServletRequest req) {
 
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
