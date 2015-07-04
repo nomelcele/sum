@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.MailVO;
+import com.sumware.dto.MemberVO;
 import com.sumware.mvc.dao.MailDao;
 import com.sumware.mvc.service.ServiceInter;
 import com.sumware.util.MyPage;
@@ -132,6 +133,10 @@ public class MailModel{
 //		HashMap<String, String> map = new HashMap<String, String>();
 //		map.put("usernum",usernum.toString()); // 로그인한 사용자의 사원 번호
 //		map.put("userid", userid); // 로그인한 사용자의 아이디
+		HttpSession session = request.getSession();
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		map.put("userid", mvo.getMeminmail());
+		map.put("usernum", String.valueOf(mvo.getMemnum()));
 		map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
 		map.put("end", pmap.get("end").toString()); // 마지막 페이지
 		
