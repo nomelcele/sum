@@ -10,13 +10,29 @@
   	<select id="getList" parameterType="map" resultType="bvo">
 		<choose>
 			<when test="bgnum!=0">
-				select bnum,btitle,writer bwriter,bdate,bhit from
-				 (select tn.bnum,tn.btitle,tn.writer,tn.bdate,tn.bhit,rownum r_num
+				select bnum,btitle,bcont,writer bwriter,bdate,bhit from
+				 (select rownum r_num,b.* from(select tn.bnum,tn.bcont,tn.btitle,tn.writer,tn.bdate,tn.bhit
 				 from
-				 (select b.bnum, b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit
+				 (select b.bnum,b.bcont,b.btitle, m.memname writer, to_char(b.bdate,'yy-MM-DD') bdate, b.bhit
 				 from board b, member m
 				 where b.bmem = m.memnum and b.bgnum=#{bgnum} and b.bdeptno=#{bdeptno}
-				 order by b.bnum desc) tn)
+				 order by b.bnum desc) tn) b 
+				 <where>
+					<choose>
+						<when test="div=='제목'">
+							b.btitle like '%#{bSearch}%'
+						</when>
+						<when test="div=='작성자'">
+							b.bmem=(select memnum from member where memname like '%#{bSearch}%')
+						</when>
+						<when test="div=='내용'">
+							b.bcont like '%#{bSearch}%'
+						</when>
+						<otherwise>
+						
+						</otherwise>
+					</choose>
+				</where>
 				 where r_num between #{begin} and #{end}
 			</when>
 			<otherwise>
@@ -79,6 +95,46 @@
   	<delete id="delete" parameterType="int">
   		delete from board where bnum=#{bnum}
   	</delete>
+  	<!-- 게시글 검색된 수 -->
+  	<select id="seachCount" parameterType="map" resultType="int">
+  		select count(*) from (select * from board where bdeptno=#{bdeptno} and bgnum=#{bgnum}) b
+		<where>
+			<choose>
+				<when test="div=='제목'">
+					b.btitle like '%#{bSearch}%'
+				</when>
+				<when test="div=='작성자'">
+					b.bmem=(select memnum from member where memname like '%#{bSearch}%')
+				</when>
+				<when test="div=='내용'">
+					b.bcont like '%#{bSearch}%'
+				</when>
+				<otherwise>
+				
+				</otherwise>
+			</choose>
+		</where>
+  	</select>
+  	<!-- 게시글 검색된 내용 -->
+  	<select id="seachResult" parameterType="map" resultType="bvo">
+  		select b.* from (select * from board where bdeptno=#{bdeptno} and bgnum=#{bgnum}) b
+		<where>
+			<choose>
+				<when test="div=='제목'">
+					b.btitle like '%#{bSearch}%'
+				</when>
+				<when test="div=='작성자'">
+					b.bmem=(select memnum from member where memname like '%#{bSearch}%')
+				</when>
+				<when test="div=='내용'">
+					b.bcont like '%#{bSearch}%'
+				</when>
+				<otherwise>
+				
+				</otherwise>
+			</choose>
+		</where>
+  	</select>
   	
   	<!-- 댓글 삭제 ! -->
   	<delete id="commDelete" parameterType="int">

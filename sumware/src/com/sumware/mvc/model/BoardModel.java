@@ -1,9 +1,12 @@
 package com.sumware.mvc.model;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,6 +110,30 @@ public class BoardModel {
 		mav.addObject("clist",commList(vo.getCoboard()));
 		mav.addObject("board",vo.getCoboard());
 		return mav;
+	}
+	//suggest
+	@RequestMapping(value="boardSearchSug")
+	public void boardSearchSug(String bSearch,HttpServletResponse response) throws IOException{
+		System.out.println("Search 들어왔어::"+bSearch);
+		StringBuilder sb = new StringBuilder();
+		sb.append("[\"").append(bSearch).append(" 제목\"").append(",")
+		.append("\"").append(bSearch).append(" 작성자\"").append(",")
+		.append("\"").append(bSearch).append(" 내용\"").append(",")
+		.append("\"").append(bSearch).append(" 제목+내용\"").append("]");
+		
+		PrintWriter pw = response.getWriter();
+		pw.write(sb.toString());
+		pw.flush();
+		pw.close();
+		
+	}
+	//검색
+	@RequestMapping(value="boardSearchSelect")
+	public void boardSearchSelect(@RequestParam Map<String, String> map){
+		System.out.println("SearchSelect 들어왔어");
+		for(Map.Entry<String, String> m : map.entrySet()){
+			System.out.println(m.getKey()+"::"+m.getValue());
+		}		
 	}
 	
 	// 실제로 게시글! 리스트 불러오는 메서드 컨트롤러가 내부에서 사용 됨.
