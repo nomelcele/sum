@@ -146,7 +146,7 @@ function getXMLHttpRequest() {
 	}
 }
 function sendRequest(url, param, callback, method) {
-	// get/post 방식 결정
+	// 4) 비동기식으로 요청을 보낸다.
 	getXMLHttpRequest();
 	method = (method.toLowerCase() == 'get') ? 'GET' : 'POST';
 	param = (param == null || param == '') ? null : param;
@@ -167,6 +167,8 @@ var loopKey = false;
 function startSuggest() {
 	if (check == false) {
 		setTimeout("sendKeyword();", 500);
+		// 1) 0.5초 후 sendKeyword() 호출
+		// delay 동안 아래의 코드 실행
 		console.log("startSuggest 함수 들어옴");
 		loopKey = true;
 	}
@@ -178,15 +180,25 @@ function sendKeyword() {
 		return;
 	}
 
+	// 2) f라는 name을 가진 form 태그 안에 있는
+	// mailreceiver라는 이름을 가진 태그의 value를 가져온다.
+	// (사용자가 입력한 값)
 	var key = f.mailreceiver.value;
 
 	if (key == '' || key == '  ') {
+		// 3-1) 빈 값이나 공백이 있을 경우
 		lastKey = '';
+		// name이 view인 div를 보이지 않게 한다.
+		// key값을 가지고 xml 파일에 있는 데이터를 검색한 후
+		// 검색한 데이터들을 view에 나타나게 한다.
 		document.getElementById("view").style.display = "none";
 	} else if (key != lastKey) {
+		// 3-2) 사용자가 입력한 값이 있을 경우
 		lastKey = key;
-		var param = "key=" + key
-				+ "&usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}";
+		// 파라미터로 사용자가 입력한 문자열을 보낸다.
+		var param = "key=" + key;
+		// 4) 비동기식으로 요청을 보낸다.
+		// url, 파라미터, 콜백함수, 보낼 방식
 		sendRequest("mailSug", param, res, "post");
 	}
 
@@ -197,6 +209,7 @@ var jsonObj = null;
 function res() {
 	if (xhr.readyState == 4) {
 		if (xhr.status == 200) {
+			// 10) 응답받은 데이터를 JSON 타입으로 변환
 			var response = xhr.responseText;
 			jsonObj = JSON.parse(response.trim());
 			viewTable();
@@ -210,6 +223,7 @@ function res() {
 function viewTable() {
 	var vD = document.getElementById("view");
 	var htmlTxt = "<table>";
+	// 11) 배열의 데이터를 하나씩 읽어서 view 내부에 있는 테이블에 나타나도록 코드 추가
 	for (var i = 0; i < jsonObj.length; i++) {
 		htmlTxt += "<tr style='background:white;'><td style='cursor:pointer;'onmouseover='this.style.background=\"silver\"'onmouseout='this.style.background=\"white\"' onclick='select("
 				+ i + ")'>" + jsonObj[i] + "</td></tr>";
