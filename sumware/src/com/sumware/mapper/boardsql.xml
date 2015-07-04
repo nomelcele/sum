@@ -55,7 +55,7 @@
   	
   	<!-- 해당 게시글의 댓글 리스트 -->
   	<select id="getCommList" parameterType="int" resultType="cvo">
-  		select c.cocont, TO_CHAR(c.codate,'yyyy.MM.dd HH24:mi') codate, m.memname coname,m.memprofile coimg,c.coboard
+  		select c.conum,c.cocont, TO_CHAR(c.codate,'yyyy.MM.dd HH24:mi') codate, m.memname coname,m.memprofile coimg,c.coboard
 		from comm c, member m where c.comem = m.memnum and coboard=#{coboard} order by conum desc
   	</select>
   	
@@ -66,12 +66,22 @@
   	</insert>
   	
   	<!-- 해당 부서의 게시판 목록 -->
-  	<select id="bName" parameterType="map" resultType="bnvo">
+  	<select id="bNameList" parameterType="int" resultType="bnvo">
   		select bname,bdeptno,bgnum from bname where bdeptno=#{bdeptno} order by bgnum asc
+  	</select>
+  	
+  	<!-- 게시판 이름  -->
+  	<select id="bName" parameterType="int" resultType="String">
+  		select bname from bname where bgnum=#{bgnum}
   	</select>
   	
   	<!-- 해당 게시글 삭제 -->
   	<delete id="delete" parameterType="int">
   		delete from board where bnum=#{bnum}
+  	</delete>
+  	
+  	<!-- 댓글 삭제 ! -->
+  	<delete id="commDelete" parameterType="int">
+  		delete from comm where conum=#{conum}
   	</delete>
  </mapper>

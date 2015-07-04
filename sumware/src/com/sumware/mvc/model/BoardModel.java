@@ -1,54 +1,51 @@
 package com.sumware.mvc.model;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.BnameVO;
 import com.sumware.dto.BoardVO;
 import com.sumware.dto.CommVO;
 import com.sumware.dto.MemberVO;
-import com.sumware.dto.PageVO;
 import com.sumware.mvc.dao.BoardDao;
-import com.sumware.util.MyMap;
 import com.sumware.util.MyPage;
 
 @Controller
 public class BoardModel {
 	@Autowired
 	private BoardDao dao;
-	
+	private int page;
 	// 게시판 목록
-	@RequestMapping(value="boardList",method=RequestMethod.POST)
-	public ModelAndView getList(Map<String,Integer> map,HttpSession ses,
-			HttpServletRequest req){
+	@RequestMapping(value="boardList")
+	public ModelAndView getList(HttpServletRequest req,@RequestParam Map<String,String> map,HttpSession ses){
+		System.out.println("보드리스트입니다람쥐!");
+		System.out.println(req.getParameter("bgnum"));
+		int bgnum = Integer.parseInt(map.get("bgnum"));
 		ModelAndView mav = new ModelAndView("board.boardList");
-		MemberVO v = new MemberVO();
-		v = (MemberVO) ses.getAttribute("v"); // LoginModel 에서 받은 session 을 전달 한다.
 		ses.setAttribute("model", req.getParameter("model"));
-		ses.setAttribute("bname", req.getParameter("bname"));
-		int bgnum = Integer.parseInt(req.getParameter("bgnum"));
-		ses.setAttribute("bbbgnum", bgnum);
-		map = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);
-		map.put("bdeptno", v.getMemdept());
-		if(req.getParameter("bgnum")==null){
-			map.put("bgnum",0);
-		}else{
-			map.put("bgnum", bgnum);
-		}
-		ses.setAttribute("blist",boardName(map));
+		ses.setAttribute("bname", boardName(bgnum));
+		ses.setAttribute("bbbgnum", map.get("bgnum"));
+		int begin = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0).get("begin");
+		int end = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0).get("end");
+		this.page = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0).get("page");
+		map.put("begin", String.valueOf(begin));
+		map.put("end", String.valueOf(end));
 		mav.addObject("list",boardList(map));
+		// contentLeft.jsp 에 뿌려줄 게시판 이름 불러오는 로직.
+		MemberVO v = (MemberVO) ses.getAttribute("v");
+		System.out.println("접속자의 부서번호 : "+v.getMemnum());
+		ses.setAttribute("bNameList", boardNameList(v.getMemdept()));
+		ses.setAttribute("currentPage", page);
 		return mav;
 	}
 	
@@ -71,57 +68,65 @@ public class BoardModel {
 	
 	// 글 입력 !!!
 	@RequestMapping(value="boardInsert", method=RequestMethod.POST)
-	public ModelAndView boardInsert(Map<String,Integer> map,HttpSession ses,
-			HttpServletRequest req){
-		HashMap<String, String> hmap = new HashMap<String, String>();
-		hmap.put("btitle", req.getParameter("btitle"));
-		hmap.put("bcont", req.getParameter("bcont"));
-		hmap.put("bimg", req.getParameter("bimg"));
-		hmap.put("bmem", req.getParameter("bmem"));
-		hmap.put("bgnum", req.getParameter("bgnum"));
-		hmap.put("bname", req.getParameter("bname"));
-		hmap.put("bdeptno", req.getParameter("bdeptno"));
-		int bgnum=Integer.parseInt(req.getParameter("bgnum"));
-		dao.insert(hmap);
-		map = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);
-		map.put("page", 1);
-		map.put("bgnum", bgnum);
-		map.put("bdeptno", Integer.parseInt(hmap.get("bdeptno")));
+	public ModelAndView boardInsert(@RequestParam Map<String,String> map,HttpServletRequest req){
+		dao.insert(map);
 		ModelAndView mav = new ModelAndView("board.boardList");
+		int bgnum=  Integer.parseInt(map.get("bgnum"));
+		int begin = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0).get("begin");
+		int end = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0).get("end");
+		map.put("begin", String.valueOf(begin));
+		map.put("end", String.valueOf(end));
 		mav.addObject("list",boardList(map));
 		return mav;
 	}
 
+	// 게시글 삭제.
+	@RequestMapping(value="boardDelete", method=RequestMethod.POST)
+	public ModelAndView boardDelete(BoardVO vo){
+		System.out.println("@@@@ 게시글 삭제 메서드 !!!!!!"+" / "+vo.getBnum());
+		ModelAndView mav = new ModelAndView("redirect:boardList?page="+page+"&bdeptno="+vo.getBdeptno()+"&bgnum="+vo.getBgnum()+"&model=board");
+		dao.delete(vo.getBnum());
+		return mav;
+	}
+	
 	// 댓글 입력 !!!!
 	@RequestMapping(value="commIn",method=RequestMethod.POST)
 	public ModelAndView commIn(CommVO vo){
 		ModelAndView mav = new ModelAndView("board/boardComm");
 		dao.commInsert(vo);
-		System.out.println(vo.getCoboard()+" 입니다람쥐~");
 		mav.addObject("clist",commList(vo.getCoboard()));
 		mav.addObject("board",vo.getCoboard());
 		return mav;
 	}
 	
-	// 게시글 삭제.
-	@RequestMapping(value="boardDelete", method=RequestMethod.POST)
-	public ModelAndView boardDelete(BoardVO vo){
-		System.out.println("@@@@ 게시글 삭제 메서드 !!!!!!"+" / "+vo.getBnum());
-		ModelAndView mav = new ModelAndView("board.boardList");
-		dao.delete(vo.getBnum());
+	// 댓글 삭제.
+	@RequestMapping(value="commDelete",method=RequestMethod.POST)
+	public ModelAndView commDelete(CommVO vo){
+		ModelAndView mav = new ModelAndView("board/boardComm");
+		dao.commDelete(vo.getConum());
+		mav.addObject("clist",commList(vo.getCoboard()));
+		mav.addObject("board",vo.getCoboard());
 		return mav;
 	}
 	
 	// 실제로 게시글! 리스트 불러오는 메서드 컨트롤러가 내부에서 사용 됨.
-	private List<BoardVO> boardList(Map<String,Integer> map){
+	private List<BoardVO> boardList(Map<String,String> map){
 		List<BoardVO> list = dao.getList(map);
 		return list;
 	}
+	
 	// 게시판! 의 목록을 불러오는 메서드
-	private List<BnameVO> boardName(Map<String, Integer> map){
-		List<BnameVO> list = dao.bName(map);
+	private List<BnameVO> boardNameList(int bdetpno){
+		List<BnameVO> list = dao.bNameList(bdetpno);
 		return list;
 	}
+	
+	// 게시판 이름 불러오는 메서드
+	private String boardName(int bgnum){
+		String bname = dao.bName(bgnum);
+		return bname;
+	}
+	
 	// 댓글 목록 불러오는 메서드!
 	private List<CommVO> commList(int no){
 		List<CommVO> list = dao.getCommList(no);

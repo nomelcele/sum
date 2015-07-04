@@ -1,9 +1,22 @@
 package com.sumware.dto;
 
 public class BoardVO {
-	private int bnum, bmem, bhit, bgnum,begin,end,bdeptno;
-	private String btitle, bcont, bimg, bdate,bwriter;
+	private int bnum, bmem, bhit, bgnum,begin,end,bdeptno,page;
+	private String btitle, bcont, bimg, bdate,bwriter,bname;
 	
+	
+	public String getBname() {
+		return bname;
+	}
+	public void setBname(String bname) {
+		this.bname = bname;
+	}
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
 	public int getBdeptno() {
 		return bdeptno;
 	}

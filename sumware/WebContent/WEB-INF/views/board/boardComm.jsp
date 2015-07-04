@@ -13,8 +13,7 @@
 			</div>
 			<c:if test="${sessionScope.v.memname eq colist.coname }">
 				<span class="comment-btn">
-					<button type="button">수정</button>
-					<button type="button">삭제</button>
+					<button type="button" onclick="javascript:commDelete(${colist.conum},${colist.coboard })">삭제</button>
 				</span>
 			</c:if>
 		</li>

@@ -75,6 +75,7 @@ public class MyPage {
 		
 		request.setAttribute("pageInfo", pageInfo);
 		HashMap<String, Integer> map = new HashMap<>();
+		map.put("page", currentPage);
 		map.put("begin", startRow);
 		map.put("end", endRow);
 		return map;
