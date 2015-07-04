@@ -29,7 +29,7 @@ public class IndexModel{
 	//Notification
 	@RequestMapping(value="tmCount")
 	public void noti(String mailreceiver,int memnum,HttpSession session,HttpServletResponse response) throws IOException{
-		System.out.println("새로운것이 왔나??");
+//		System.out.println("새로운것이 왔나??");
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("userid", mailreceiver);
 		map.put("usernum",String.valueOf(memnum));
@@ -54,7 +54,7 @@ public class IndexModel{
 			res.append("x");
 		}
 		res.append("\n\n");
-		System.out.println("으음???~~:"+res.toString());
+//		System.out.println("으음???~~:"+res.toString());
 		response.setHeader("cache-control", "no-cache");
 		response.setContentType("text/event-stream");
 		PrintWriter pw = response.getWriter();

@@ -42,6 +42,8 @@ $(function() {
 			$("#bname").attr("value", "공지사항");
 			$("#bgnum").attr("value", "0");
 			$("#page").attr("value", "1");
+			$("#bSearch").attr("value", "");
+			$("#div").attr("value", "");
 			$("#formff").attr("action","boardList").submit();
 			break;
 		case ("admin"):

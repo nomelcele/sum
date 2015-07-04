@@ -72,8 +72,8 @@ public class MailDao {
 		// 각 메일함에 있는 메일의 갯수를 얻기 위한 메서드
 		MailVO mavo = st.selectOne("mail.getListNum",map);
 		
-		System.out.println("받은 메일함 메일 갯수: "+mavo.getFromnum());
-		System.out.println("보낸 메일함 메일 갯수: "+mavo.getTonum());
+//		System.out.println("받은 메일함 메일 갯수: "+mavo.getFromnum());
+//		System.out.println("보낸 메일함 메일 갯수: "+mavo.getTonum());
 		int[] numArr = new int[4];
 		numArr[0] = mavo.getFromnum();
 		numArr[1] = mavo.getTonum();

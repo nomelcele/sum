@@ -65,6 +65,8 @@
 		<input type="hidden" name="bname" value="${sessionScope.bname }"> 
 		<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 		<input type="hidden" name="page" id="page">
+		<input type="hidden" name="bSearch" value="${sessionScope.boardSearch}">
+		<input type="hidden" name="div" value="${sessionScope.boardDiv }">
 			<!-- 이전 페이지로 보내주는 화살표 -->
 			<c:choose>
 				<c:when test="${pageInfo.currentBlock eq 1}">&lt;&lt;</c:when>

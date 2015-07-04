@@ -71,6 +71,8 @@
 		<input type="hidden" name="bgnum" id="bgnum" >
 		<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 		<input type="hidden" name="bname" id="bname">
+		<input type="hidden" name="bSearch" value="${sessionScope.boardSearch}">
+		<input type="hidden" name="div" value="${sessionScope.boardDiv }">
 	</form>	
 		<ul>
 			<li><a href="">공지사항</a><span style="display: none;">0</span></li>

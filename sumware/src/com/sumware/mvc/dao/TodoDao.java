@@ -343,7 +343,6 @@ public class TodoDao {
 
 		}
 		public int getTodoCount(Map<String, String> map){
-			System.out.println(map.get("usernum"));
 			return st.selectOne("todo.getTodoCount",map);
 		}
 

@@ -12,13 +12,13 @@
 			<!-- heading(E) -->
 				<form action="boardInsert" method="post" id="boardInsert">
 					<input type="hidden" name="model" value="board">
-					<input type="hidden" name="">
 					<input type="hidden" name="page" value="1">
 					<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
 					<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
 					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 					<input type="hidden" name="bname" value="${sessionScope.bname }">
 					<input type="hidden" name="bimg">
+					<input type="hidden" name="bSearch">
 				<!-- board-write(S) -->
 				<table id="stcontent" class="board-list board-write">
 					<colgroup>

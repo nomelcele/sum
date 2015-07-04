@@ -30,19 +30,39 @@ public class BoardModel {
 	private int page;
 	// 게시판 목록
 	@RequestMapping(value="boardList")
-	public ModelAndView getList(HttpServletRequest req,@RequestParam Map<String,String> map,HttpSession ses){
+	public ModelAndView getList(HttpServletRequest req,HttpSession ses,@RequestParam Map<String,String> map){
 		System.out.println("보드리스트입니다람쥐!");
-		System.out.println(req.getParameter("bgnum"));
+		System.out.println(req.getParameter("page"));
+		
+		Map<String,Integer> pMap;
+		
 		int bgnum = Integer.parseInt(map.get("bgnum"));
 		ModelAndView mav = new ModelAndView("board.boardList");
+		
 		ses.setAttribute("model", req.getParameter("model"));
 		ses.setAttribute("bname", boardName(bgnum));
 		ses.setAttribute("bbbgnum", map.get("bgnum"));
-		int begin = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0).get("begin");
-		int end = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0).get("end");
-		this.page = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0).get("page");
+		
+		ses.setAttribute("boardSearch", map.get("bSearch"));
+		ses.setAttribute("boardDiv", map.get("div"));
+		
+		if(map.get("bSearch")!=""){
+			pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.searchCount(map), 0);	
+		}else{
+			pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);	
+		}
+		
+		int begin = pMap.get("begin");
+		int end = pMap.get("end");
+		this.page = pMap.get("page");
+		
 		map.put("begin", String.valueOf(begin));
 		map.put("end", String.valueOf(end));
+		
+		for(Map.Entry<String, String> m : map.entrySet()){
+			System.out.println(m.getKey()+"::"+m.getValue());
+		}
+		
 		mav.addObject("list",boardList(map));
 		// contentLeft.jsp 에 뿌려줄 게시판 이름 불러오는 로직.
 		MemberVO v = (MemberVO) ses.getAttribute("v");
@@ -126,14 +146,6 @@ public class BoardModel {
 		pw.flush();
 		pw.close();
 		
-	}
-	//검색
-	@RequestMapping(value="boardSearchSelect")
-	public void boardSearchSelect(@RequestParam Map<String, String> map){
-		System.out.println("SearchSelect 들어왔어");
-		for(Map.Entry<String, String> m : map.entrySet()){
-			System.out.println(m.getKey()+"::"+m.getValue());
-		}		
 	}
 	
 	// 실제로 게시글! 리스트 불러오는 메서드 컨트롤러가 내부에서 사용 됨.

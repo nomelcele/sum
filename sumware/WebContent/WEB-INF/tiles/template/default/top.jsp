@@ -29,9 +29,11 @@
 						<input type="hidden" name="bgnum" id="bgnum"> 
 						<input type="hidden" name="bname" id="bname"> 
 						<input type="hidden" name="bdeptno" id="bdeptno"> 
-						<input type="hidden" name="cal" value="1">
+						<input type="hidden" name="cal" value="0">
+						<input type="hidden" name="bSearch" value="${sessionScope.boardSearch}">
 						<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
 						<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
+						<input type="hidden" name="div" value="${sessionScope.boardDiv }">
 						<!-- navbar-nav(S) -->
 						<ul class="nav navbar-nav">
 							<li><a href="">Main</a></li>
