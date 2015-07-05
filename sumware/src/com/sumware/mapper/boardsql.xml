@@ -3,12 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
-	<insert id="insert" parameterType="map">
+	<insert id="insert" parameterType="bvo">
 		insert into board
 		values(board_seq.nextVal,#{btitle},#{bcont},#{bimg},#{bmem},sysdate,0,#{bgnum},#{bdeptno})
 	</insert>
 	<!-- 게시글 리스트 -->
-	<select id="getList" parameterType="map" resultType="bvo">
+	<select id="getList" parameterType="bvo" resultType="bvo">
 		<choose>
 			<when test="bgnum!=0">
 				select bnum,btitle,writer bwriter,bdate,bhit from
@@ -24,24 +24,20 @@
 				b.bdeptno=#{bdeptno}
 				order by b.bnum desc) tn) b
 				<choose>
-					<when test="bsearch!=''">
+					<when test="div!=''">
 						<where>
 							<choose>
 								<when test="div=='제목'">
-									b.btitle like '%#{bsearch}%') where r_num
-									between #{begin} and #{end}
+									b.btitle like '%#{bsearch}%') where r_num between #{begin} and #{end}
 								</when>
 								<when test="div=='작성자'">
-									b.bmem=(select memnum from member where memname
-									like '%#{bsearch}%') where r_num between #{begin} and #{end}
+									b.bmem=(select memnum from member where memname	like '%#{bsearch}%') where r_num between #{begin} and #{end}
 								</when>
 								<when test="div=='내용'">
-									b.bcont like '%#{bsearch}%') where r_num between
-									#{begin} and #{end}
+									b.bcont like '%#{bsearch}%') where r_num between #{begin} and #{end}
 								</when>
 								<otherwise>
-									b.btitle like '%#{bsearch}%' or b.bcont like
-									'%#{bsearch}%') where r_num between #{begin} and #{end}
+									b.btitle like '%#{bsearch}%' or b.bcont like '%#{bsearch}%') where r_num between #{begin} and #{end}
 								</otherwise>
 							</choose>
 						</where>
@@ -64,24 +60,20 @@
 				where b.bmem = m.memnum and b.bgnum=0
 				order by b.bnum desc) tn) b
 				<choose>
-					<when test="bsearch!=''">
+					<when test="div!=''">
 						<where>
 							<choose>
 								<when test="div=='제목'">
-									b.btitle like '%#{bsearch}%') where r_num
-									between #{begin} and #{end}
+									b.btitle like '%#{bsearch}%') where r_num between #{begin} and #{end}
 								</when>
 								<when test="div=='작성자'">
-									b.bmem=(select memnum from member where memname
-									like '%#{bsearch}%') where r_num between #{begin} and #{end}
+									b.bmem=(select memnum from member where memname	like '%#{bsearch}%') where r_num between #{begin} and #{end}
 								</when>
 								<when test="div=='내용'">
-									b.bcont like '%#{bsearch}%') where r_num between
-									#{begin} and #{end}
+									b.bcont like '%#{bsearch}%') where r_num between #{begin} and #{end}
 								</when>
 								<otherwise>
-									b.btitle like '%#{bsearch}%' or b.bcont like
-									'%#{bsearch}%') where r_num between #{begin} and #{end}
+									b.btitle like '%#{bsearch}%' or b.bcont like '%#{bsearch}%') where r_num between #{begin} and #{end}
 								</otherwise>
 							</choose>
 						</where>
@@ -156,7 +148,7 @@
 		bnum=#{bnum}
 	</delete>
 	<!-- 게시글 검색된 수 -->
-	<select id="searchCount" parameterType="map" resultType="int">
+	<select id="searchCount" parameterType="bvo" resultType="int">
 		select count(*) from (select * from board where bdeptno=#{bdeptno} and
 		bgnum=#{bgnum}) b
 		<where>
@@ -165,15 +157,13 @@
 					b.btitle like '%{bsearch}%'
 				</when>
 				<when test="div=='작성자'">
-					b.bmem=(select memnum from member where memname like
-					'%#{bsearch}%')
+					b.bmem=(select memnum from member where memname like '%#{bsearch}%')
 				</when>
 				<when test="div=='내용'">
 					b.bcont like '%#{bsearch}%'
 				</when>
 				<otherwise>
-					b.btitle like '%#{bsearch,jdbcType=VARCHAR}%' or b.bcont
-					like '%#{bsearch}%'
+					b.btitle like '%#{bsearch,jdbcType=VARCHAR}%' or b.bcont like '%#{bsearch}%'
 				</otherwise>
 			</choose>
 		</where>

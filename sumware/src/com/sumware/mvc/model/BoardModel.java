@@ -30,25 +30,25 @@ public class BoardModel {
 	private int page;
 	// 게시판 목록
 	@RequestMapping(value="boardList")
-	public ModelAndView getList(HttpServletRequest req,HttpSession ses,@RequestParam Map<String,String> map){
+	public ModelAndView getList(BoardVO bvo,HttpServletRequest req,HttpSession ses){
 		System.out.println("보드리스트입니다람쥐!");
 		System.out.println(req.getParameter("page"));
 		
 		Map<String,Integer> pMap;
 		
-		int bgnum = Integer.parseInt(map.get("bgnum"));
+		int bgnum = bvo.getBgnum();
 		ModelAndView mav = new ModelAndView("board.boardList");
 		
-		ses.setAttribute("model", req.getParameter("model"));
+		ses.setAttribute("model", "board");
 		ses.setAttribute("bname", boardName(bgnum));
-		ses.setAttribute("bbbgnum", map.get("bgnum"));
+		ses.setAttribute("bbbgnum", bgnum);
 		
-		ses.setAttribute("boardSearch", map.get("bsearch"));
-		ses.setAttribute("boardDiv", map.get("div"));
-		System.out.println("bsearch:::::"+map.get("bsearch"));
-		System.out.println("bsearch비어있나?:::::"+map.get("bsearch").isEmpty());
-		if((!map.get("bsearch").isEmpty())){
-			pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.searchCount(map), 0);	
+		ses.setAttribute("boardSearch", bvo.getBsearch());
+		ses.setAttribute("boardDiv", bvo.getDiv());
+		System.out.println("bsearch:::::"+bvo.getBsearch());
+		System.out.println("bsearch비어있나?:::::"+bvo.getBsearch().isEmpty());
+		if((!bvo.getBsearch().isEmpty())){
+			pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.searchCount(bvo), 0);	
 		}else{
 			pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);	
 		}
@@ -56,15 +56,22 @@ public class BoardModel {
 		int begin = pMap.get("begin");
 		int end = pMap.get("end");
 		this.page = pMap.get("page");
+		bvo.setBegin(begin);
+		bvo.setEnd(end);
 		
-		map.put("begin", String.valueOf(begin));
-		map.put("end", String.valueOf(end));
+//		map.put("begin", String.valueOf(begin));
+//		map.put("end", String.valueOf(end));
 		
-		for(Map.Entry<String, String> m : map.entrySet()){
-			System.out.println(m.getKey()+"::"+m.getValue());
-		}
+		System.out.println("+++++++++++++++++++++++");
+		System.out.println(bvo.getBgnum());
+		System.out.println(bvo.getBdeptno());
+		System.out.println(bvo.getBsearch());
+		System.out.println(bvo.getDiv());
+		System.out.println(bvo.getBegin());
+		System.out.println(bvo.getEnd());
+		System.out.println("+++++++++++++++++++++++");
+		mav.addObject("list",boardList(bvo));
 		
-		mav.addObject("list",boardList(map));
 		// contentLeft.jsp 에 뿌려줄 게시판 이름 불러오는 로직.
 		MemberVO v = (MemberVO) ses.getAttribute("v");
 		System.out.println("접속자의 부서번호 : "+v.getMemnum());
@@ -92,15 +99,17 @@ public class BoardModel {
 	
 	// 글 입력 !!!
 	@RequestMapping(value="boardInsert", method=RequestMethod.POST)
-	public ModelAndView boardInsert(@RequestParam Map<String,String> map,HttpServletRequest req){
-		dao.insert(map);
+	public ModelAndView boardInsert(BoardVO bvo,HttpServletRequest req){
+		dao.insert(bvo);
 		ModelAndView mav = new ModelAndView("board.boardList");
-		int bgnum=  Integer.parseInt(map.get("bgnum"));
+		int bgnum=bvo.getBgnum();
 		int begin = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0).get("begin");
 		int end = MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0).get("end");
-		map.put("begin", String.valueOf(begin));
-		map.put("end", String.valueOf(end));
-		mav.addObject("list",boardList(map));
+//		map.put("begin", String.valueOf(begin));
+//		map.put("end", String.valueOf(end));
+		bvo.setBegin(begin);
+		bvo.setEnd(end);
+		mav.addObject("list",boardList(bvo));
 		return mav;
 	}
 
@@ -150,8 +159,8 @@ public class BoardModel {
 	}
 	
 	// 실제로 게시글! 리스트 불러오는 메서드 컨트롤러가 내부에서 사용 됨.
-	private List<BoardVO> boardList(Map<String,String> map){
-		List<BoardVO> list = dao.getList(map);
+	private List<BoardVO> boardList(BoardVO bvo){
+		List<BoardVO> list = dao.getList(bvo);
 		return list;
 	}
 	

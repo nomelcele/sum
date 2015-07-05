@@ -17,8 +17,8 @@ public class BoardDao {
 	private SqlSessionTemplate ss;
 
 	// boardWrite 하는 insert 메서드.
-	public void insert(Map<String, String> map) {
-		ss.insert("board.insert", map);
+	public void insert(BoardVO bvo) {
+		ss.insert("board.insert", bvo);
 	}
 
 	// 조회수 증가 시켜주는 메서드.
@@ -27,11 +27,8 @@ public class BoardDao {
 	}
 
 	// boardList 가져오기.
-	public List<BoardVO> getList(Map<String, String> map) {
-		for(Map.Entry<String, String> m : map.entrySet()){
-			System.out.println(m.getKey()+"::"+m.getValue());
-		}
-		List<BoardVO> list = ss.selectList("board.getList", map);
+	public List<BoardVO> getList(BoardVO bvo) {
+		List<BoardVO> list = ss.selectList("board.getList", bvo);
 		return list;
 	}
 
@@ -97,8 +94,8 @@ public class BoardDao {
 		ss.delete("board.commDelete",conum);
 	}
 	//게시글 검색된 수
-	public int searchCount(Map<String, String> map){
-		return ss.selectOne("board.searchCount",map);
+	public int searchCount(BoardVO bvo){
+		return ss.selectOne("board.searchCount",bvo);
 	}
 	
 }
