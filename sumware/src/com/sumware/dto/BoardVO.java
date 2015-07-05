@@ -1,8 +1,8 @@
 package com.sumware.dto;
 
 public class BoardVO {
-	private int bnum, bmem, bhit, bgnum,begin,end,bdeptno,page;
-	private String btitle, bcont, bimg, bdate,bwriter,bname;
+	private int bnum,bmem,bhit,bgnum,begin,end,bdeptno,page;
+	private String btitle,bcont,bimg, bdate,bwriter,bname,bsearch,div;
 	
 	
 	public String getBname() {
@@ -89,4 +89,17 @@ public class BoardVO {
 	public void setBdate(String bdate) {
 		this.bdate = bdate;
 	}
+	public String getBsearch() {
+		return bsearch;
+	}
+	public void setBsearch(String bsearch) {
+		this.bsearch = bsearch;
+	}
+	public String getDiv() {
+		return div;
+	}
+	public void setDiv(String div) {
+		this.div = div;
+	}
+	
 }

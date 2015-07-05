@@ -54,7 +54,7 @@ function sendSearch(){
 		sendRequest("boardSearchSug", param, SearchRes, "get");
 	}
 
-	setTimeout("sendSearch();", 500);
+	setTimeout("sendSearch();", 5000);
 }
 var jsonObj = null;
 function SearchRes() {
