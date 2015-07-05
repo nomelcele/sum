@@ -1,5 +1,6 @@
 package com.sumware.mvc.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,25 +15,25 @@ public class MailDao {
 	@Autowired
 	private SqlSessionTemplate st;
 	
-	public void addMail(Map<String, String> map){
+	public void addMail(HashMap<String, String> map){
 		st.insert("mail.addMail", map);
 		
 	}
 	
-	public List<MailVO> getFromMailList(Map<String, String> map){
+	public List<MailVO> getFromMailList(HashMap<String, String> map){
 		// 받은 메일 리스트를 불러오는 메서드
 		// 현재 로그인되어 있는 사원이 받은 메일만 불러와야 한다.
 		return st.selectList("mail.getFromMailList", map);
 			
 	}
 	
-	public List<MailVO> getToMailList(Map<String, String> map){
+	public List<MailVO> getToMailList(HashMap<String, String> map){
 		// 보낸 메일 리스트를 불러오는 메서드
 		return st.selectList("mail.getToMailList", map);
 			
 	}
 	
-	public List<MailVO> getMyMailList(Map<String, String> map){
+	public List<MailVO> getMyMailList(HashMap<String, String> map){
 		// 내게 쓴 메일 리스트를 불러오는 메서드
 		return st.selectList("mail.getMyMailList", map);
 
@@ -53,22 +54,22 @@ public class MailDao {
 		return st.selectOne("mail.getDelAttrMailInfo", num); // 오류
 	}
 	
-	public void setDelAttrFrom(Map<String,String> map){
+	public void setDelAttrFrom(HashMap<String,String> map){
 		st.update("mail.setDelAttrFrom", map);
 	}
 	
-	public void setDelAttrTo(Map<String,String> map){
+	public void setDelAttrTo(HashMap<String,String> map){
 		st.update("mail.setDelAttrTo", map);
 	}
 	
-	public List<MailVO> getTrashList(Map<String, String> map){
+	public List<MailVO> getTrashList(HashMap<String, String> map){
 		// 휴지통에서 보여줄 메일 리스트를 리턴하는 메서드
 		return st.selectList("mail.getTrashList", map);
 	
 
 	}
 	
-	public int[] getListNum(Map<String, String> map){
+	public int[] getListNum(HashMap<String, String> map){
 		// 각 메일함에 있는 메일의 갯수를 얻기 위한 메서드
 		MailVO mavo = st.selectOne("mail.getListNum",map);
 		

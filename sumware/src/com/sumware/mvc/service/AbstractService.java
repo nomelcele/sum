@@ -1,6 +1,7 @@
 package com.sumware.mvc.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.sumware.dto.MailVO;
@@ -12,7 +13,7 @@ public class AbstractService implements ServiceInter{
 	//상속받아서 필요한것만 오버라이드 해서 쓰시오~!
 	@Override
 	public void setDeleteAttrService(String[] mailnums,
-			Map<String, String> map) {
+			HashMap<String, String> map) {
 	}
 
 	@Override

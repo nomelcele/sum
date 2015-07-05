@@ -31,8 +31,6 @@
 						<input type="hidden" name="bdeptno" id="bdeptno" value="${sessionScope.v.memdept}"> 
 						<input type="hidden" name="cal" value="0">
 						<input type="hidden" name="bsearch" value="${sessionScope.boardSearch}">
-						<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
-						<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
 						<input type="hidden" name="div" value="${sessionScope.boardDiv }">
 						<!-- navbar-nav(S) -->
 						<ul class="nav navbar-nav">

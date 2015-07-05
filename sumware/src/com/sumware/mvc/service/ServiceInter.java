@@ -1,6 +1,7 @@
 package com.sumware.mvc.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import com.sumware.dto.MessengerVO;
 
 public interface ServiceInter {
 	//메일
-	public void setDeleteAttrService(String[] mailnums, Map<String, String> map);
+	public void setDeleteAttrService(String[] mailnums, HashMap<String,String> map);
 	public MailVO getDetailUpdate(int mailnum);
 	
 	//메신저

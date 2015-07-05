@@ -4,8 +4,6 @@
 		<div class="col-lg-8">	
 			<form method="post" action="mailWrite" class="form-horizontal" role="form"
 				  name="f" id="mailWriteF" autocomplete="off" enctype="multipart/form-data">
-				<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
-				<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
 				    <div class="form-group">
 				        <label for="receiver" class="col-sm-2 control-label">받는 사람</label>
 				        <div class="col-sm-10">

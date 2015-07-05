@@ -3,6 +3,7 @@ package com.sumware.mvc.model;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,14 +48,13 @@ public class MailModel{
 	
 	// 메일 작성
 	@RequestMapping(value="/mailWrite",method=RequestMethod.POST)
-	public ModelAndView mailWrite(@RequestParam("mailfile")MultipartFile mailfile,
-			@RequestParam Map<String, String> map,HttpServletRequest request){
+	public ModelAndView mailWrite(@RequestParam HashMap<String, String> map,
+			@RequestParam("mailfile")MultipartFile mailfile,HttpSession session){
 		// request.setCharacterEncoding("UTF-8");
 		System.out.println("Mail Controller: mailWrite");
 		ModelAndView mav = new ModelAndView();
 		
 		// 첨부 파일 업로드 작업
-		HttpSession session = request.getSession();
 		String r_path = session.getServletContext().getRealPath("/");
 		String oriFn = mailfile.getOriginalFilename();
 		StringBuffer path = new StringBuffer();
@@ -69,15 +69,20 @@ public class MailModel{
 		} 
 		
 		// 메일 정보 db에 추가
-		map.put("mailfile", oriFn); // 첨부파일 이름
-		map.put("mailmem", map.get("usernum")); // 발신자 사원 번호
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		int usernum = mvo.getMemnum();
+		String userid = mvo.getMeminmail();
+		
+		map.put("mailfile",oriFn); // 첨부파일 이름
+		map.put("mailmem", String.valueOf(usernum)); // 발신자 사원 번호
+		
 		String mailreceiver = map.get("mailreceiver"); // 수신자 아이디
 		int startidx = mailreceiver.indexOf("<")+1;
 		int endidx = mailreceiver.indexOf("@");
-		map.put("mailreceiver", mailreceiver.substring(startidx, endidx));
+		map.put("mailreceiver",mailreceiver.substring(startidx, endidx));
 		System.out.println("첨부파일 이름: "+oriFn);
-		System.out.println("발신자: "+map.get("usernum"));
-		System.out.println("수신자: "+mailreceiver.substring(startidx, endidx));
+		System.out.println("발신자: "+map.get("mailmem"));
+		System.out.println("수신자: "+map.get("mailreceiver"));
 		mdao.addMail(map);
 		
 		mav.setViewName("mail.mailSend"); // 메일 전송 완료 화면
@@ -121,28 +126,23 @@ public class MailModel{
 	
 	// 받은 메일함 이동
 	@RequestMapping(value="/mailFromList")
-	public ModelAndView mailFromList(@RequestParam Map<String,String> map,
-			HttpServletRequest request){
+	public ModelAndView mailFromList(HttpServletRequest request,HttpSession session){
 		System.out.println("Mail Controller: mailFromList");
 		ModelAndView mav = new ModelAndView();
-		// 받은 메일함에 있는 메일 갯수 얻어오기
-		// 
-		HttpSession session = request.getSession();
+		
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
 		System.out.println("userid::"+mvo.getMeminmail());
 		System.out.println("usernum::"+mvo.getMemnum());
+		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("userid", mvo.getMeminmail());
 		map.put("usernum", String.valueOf(mvo.getMemnum()));
 		
+		// 받은 메일함에 있는 메일 갯수 얻어오기
 		int totalCount = mdao.getListNum(map)[0];
 		System.out.println("받은 메일함 메일 갯수: "+totalCount);
 		
 		// 페이지 정보를 가져오기 위한 map
 		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("usernum",usernum.toString()); // 로그인한 사용자의 사원 번호
-//		map.put("userid", userid); // 로그인한 사용자의 아이디
-
 		map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
 		map.put("end", pmap.get("end").toString()); // 마지막 페이지
 		
@@ -151,17 +151,22 @@ public class MailModel{
 		mav.addObject("list", fromlist);
 		mav.addObject("tofrom", 1);
 		mav.setViewName("mail.mailList");
-		request.getSession().setAttribute("model", "mail");
+		session.setAttribute("model", "mail");
 		return mav;
 		
 	}
 	
 	// 보낸 메일함 이동
 	@RequestMapping(value="/mailToList")
-	public ModelAndView mailToList(@RequestParam Map<String,String> map,
-			HttpServletRequest request){
+	public ModelAndView mailToList(HttpServletRequest request,HttpSession session){
 		System.out.println("Mail Controller: mailToList");
 		ModelAndView mav = new ModelAndView();
+		
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("userid", mvo.getMeminmail());
+		map.put("usernum", String.valueOf(mvo.getMemnum()));
+		
 		// 보낸 메일함에 있는 메일 갯수 얻어오기
 		int totalCount = mdao.getListNum(map)[1];
 		System.out.println("보낸 메일함 메일 갯수: "+totalCount);
@@ -182,10 +187,15 @@ public class MailModel{
 	
 	// 내게 쓴 메일함 이동
 	@RequestMapping(value="/mailMyList")
-	public ModelAndView mailMyList(@RequestParam Map<String,String> map,
-			HttpServletRequest request){
+	public ModelAndView mailMyList(HttpServletRequest request,HttpSession session){
 		System.out.println("Mail Controller: mailMyList");
 		ModelAndView mav = new ModelAndView();
+		
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("userid", mvo.getMeminmail());
+		map.put("usernum", String.valueOf(mvo.getMemnum()));
+		
 		// 내게 쓴 메일함에 있는 메일 갯수 얻어오기
 		int totalCount = mdao.getListNum(map)[2];
 		System.out.println("내게 쓴 메일함 메일 갯수: "+totalCount);
@@ -206,10 +216,15 @@ public class MailModel{
 	
 	// 휴지통 이동
 	@RequestMapping(value="/mailTrashcan")
-	public ModelAndView mailTrashcan(@RequestParam Map<String,String> map,
-			HttpServletRequest request){
+	public ModelAndView mailTrashcan(HttpServletRequest request,HttpSession session){
 		System.out.println("Mail Controller: mailTrashcan");
 		ModelAndView mav = new ModelAndView();
+		
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("userid", mvo.getMeminmail());
+		map.put("usernum", String.valueOf(mvo.getMemnum()));
+		
 		// 휴지통에 있는 메일 갯수 얻어오기
 		int totalCount = mdao.getListNum(map)[3];
 		System.out.println("휴지통 메일 갯수: "+totalCount);
@@ -246,26 +261,30 @@ public class MailModel{
 	// 메일 테이블의 delete 속성 설정
 	@RequestMapping(value="/mailSetDel",method=RequestMethod.POST)
 	public String mailSetDel(@RequestParam("chk")String[] mailnums,
-			@RequestParam Map<String,String> map){
+			@RequestParam HashMap<String,String> map,HttpSession session){
 		System.out.println("Mail Controller: mailSetDel");
 		for(String e:mailnums){
 			// 체크된 메일의 번호들
 			System.out.println("선택된 메일 번호: "+e);
 		}
 		
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		map.put("usernum", String.valueOf(mvo.getMemnum()));
+		map.put("userid", mvo.getMeminmail());
+		
 		service.setDeleteAttrService(mailnums, map);
 		
 		int tofrom = Integer.parseInt(map.get("tofrom"));
-		String params = "usernum="+map.get("usernum")+"&userid="+map.get("userid")+"&page=1";
+//		String params = "usernum="+map.get("usernum")+"&userid="+map.get("userid")+"&page=1";
 		switch(tofrom){
 			default: // 받은 메일함
-				return "redirect:/mailFromList?"+params;
+				return "redirect:/mailFromList?page=1";
 			case 2: // 보낸 메일함
-				return "redirect:/mailToList?"+params;
+				return "redirect:/mailToList?page=1";
 			case 3: // 내게 쓴 메일함
-				return "redirect:/mailMyList?"+params;
+				return "redirect:/mailMyList?page=1";
 			case 4: // 휴지통
-				return "redirect:/mailTrashcan?"+params;
+				return "redirect:/mailTrashcan?page=1";
 		}
 		
 	}

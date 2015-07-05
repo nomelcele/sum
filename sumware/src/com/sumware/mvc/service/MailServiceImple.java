@@ -1,5 +1,6 @@
 package com.sumware.mvc.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class MailServiceImple extends AbstractService{
 	}
 
 	@Override
-	public void setDeleteAttrService(String[] mailnums, Map<String, String> map) {
+	public void setDeleteAttrService(String[] mailnums, HashMap<String, String> map) {
 		for(String e:mailnums){
 			MailVO vo = mdao.getDelAttrMailInfo(e);
 			

@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<form method="post" action="mailSetDel" id="listform">
-		<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
-		<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
 		<input type="hidden" id="delvalue" name="delvalue">
 		<input type="hidden" name="tofrom" value="${tofrom}">
 		<input type="hidden" name="page" value="1">
@@ -104,7 +102,7 @@
 			<c:choose>
 				<c:when test="${tofrom eq '1'}">
 					<c:set var="pageUrl" 
-					value="mailFromList?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+					value="mailFromList"/>
 				</c:when>
 				<c:when test="${tofrom eq '2'}">
 					<c:set var="pageUrl" 
@@ -119,6 +117,30 @@
 					value="mailTrashcan?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
 				</c:otherwise>
 			</c:choose>
-			<%@include file="../board/page.jsp"%>
+			<c:choose>
+	<c:when test="${pageInfo.currentBlock eq 1}">&lt;&lt;</c:when>
+	<c:otherwise>
+		<%-- <button type="button" class="paging-prev">&lt;&lt;</button> --%>
+		<a class="page-first" href="${pageUrl}&page=${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock }">&lt;&lt;</a>
+	</c:otherwise>
+</c:choose>
+<c:choose>
+	<c:when test="${pageInfo.currentBlock ne pageInfo.totalBlocks}">
+		<c:forEach begin="1" end="${pageInfo.pagesPerBlock}" varStatus="num">
+			<a href="${pageUrl}&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>
+        </c:forEach>
+	</c:when>
+	<c:otherwise>
+		<c:forEach begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}" end="${pageInfo.totalPages}" varStatus="num">
+            <a href="${pageUrl}&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>
+        </c:forEach>
+	</c:otherwise>
+</c:choose>
+<c:choose>
+	<c:when test="${pageInfo.currentBlock eq pageInfo.totalBlocks}">&gt;&gt;</c:when>
+	<c:otherwise>
+		<a class="page-last" href="${pageUrl}&page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">&gt;&gt;</a>
+	</c:otherwise>
+</c:choose>
 		</div>
 
