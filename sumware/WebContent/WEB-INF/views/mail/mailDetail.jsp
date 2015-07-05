@@ -4,8 +4,6 @@
 			<div class="col-lg-8" id="mainContent">
 			<form method="post" action="mailWriteForm" id="detailform">
 				<input type="hidden"  name="model" value="mail">
-				<input type="hidden" name="usernum" value="${sessionScope.v.memnum}">
-				<input type="hidden" name="userid" value="${sessionScope.v.meminmail}">
 				<input type="hidden" name="mailreceiver" id="mailreceiver" value="${detail.mailsname} <${detail.replyid}@sumware.com>">
 				<input type="hidden" name="mailtitle" id="mailtitle" value="RE: ${detail.mailtitle}">
 				<input type="hidden" name="orimail" id="orimail"

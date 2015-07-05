@@ -78,9 +78,6 @@ function maildeleteGo(){
 	} else { // 확인 버튼을 누르면 메일 삭제
 		$("#delvalue").attr("value","3");
 		$("#listform").submit();
-//			location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
-//			"&userid=${sessionScope.v.meminmail}&delvalue=3&tofrom=${tofrom}"+
-//			"&page=1&chk="+$("#chk:checked").serialize();
 	}
 }
 
@@ -89,9 +86,6 @@ function mailRecover(){
 	// 체크된 메일들의 delete 속성을 1로 변경
 	$("#delvalue").attr("value","1");
 	$("#listform").submit();
-//		location="sumware?model=mail&submod=mailSetDel&usernum=${sessionScope.v.memnum}"+
-//		"&userid=${sessionScope.v.meminmail}&delvalue=1&tofrom=${tofrom}"+
-//		"&page=1&chk="+$("#chk:checked").serialize();
 }
 
 function checkAll(obj){
