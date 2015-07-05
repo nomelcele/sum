@@ -89,5 +89,4 @@ public class BoardVO {
 	public void setBdate(String bdate) {
 		this.bdate = bdate;
 	}
-	
 }

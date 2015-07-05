@@ -38,7 +38,6 @@ $(function() {
 			break;
 		case ("board"):
 			$("#model").attr("value", $pageName);
-			$("#bdeptno").attr("value", "${sessionScope.v.memdept}");
 			$("#bname").attr("value", "공지사항");
 			$("#bgnum").attr("value", "0");
 			$("#page").attr("value", "1");

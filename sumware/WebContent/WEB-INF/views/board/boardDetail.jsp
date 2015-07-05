@@ -106,7 +106,7 @@
 				<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
 				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 				<input type="hidden" name="bname" value="${sessionScope.bname }">
-				<input type="hidden" name="bSearch" value="">
+				<input type="hidden" name="bsearch" value="">
 				<input type="hidden" name="div" value="">
 			</form>
 			<!-- 글작성 form -->

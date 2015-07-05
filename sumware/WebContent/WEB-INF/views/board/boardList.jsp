@@ -11,7 +11,7 @@
 		<!-- board-form(S) -->
 		<div class="board-form">
 			<div class="left">
-				<input type="text" id="bSearch" name="bSearch" placeholder="search" onkeyup="boardSearch(${sessionScope.bbbgnum},${sessionScope.v.memdept})">
+				<input type="text" id="bsearch" name="bsearch" placeholder="search" onkeyup="boardSearch(${sessionScope.bbbgnum},${sessionScope.v.memdept})">
 				<div id="boardView" style="position:absolute; z-index:1;">
 			</div>
 			<div class="right">
@@ -65,7 +65,7 @@
 		<input type="hidden" name="bname" value="${sessionScope.bname }"> 
 		<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 		<input type="hidden" name="page" id="page">
-		<input type="hidden" name="bSearch" value="${sessionScope.boardSearch}">
+		<input type="hidden" name="bsearch" value="${sessionScope.boardSearch}">
 		<input type="hidden" name="div" value="${sessionScope.boardDiv }">
 			<!-- 이전 페이지로 보내주는 화살표 -->
 			<c:choose>

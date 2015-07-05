@@ -18,7 +18,8 @@
 					<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 					<input type="hidden" name="bname" value="${sessionScope.bname }">
 					<input type="hidden" name="bimg">
-					<input type="hidden" name="bSearch">
+					<input type="hidden" name="bsearch">
+					<input type="hidden" name="div">
 				<!-- board-write(S) -->
 				<table id="stcontent" class="board-list board-write">
 					<colgroup>

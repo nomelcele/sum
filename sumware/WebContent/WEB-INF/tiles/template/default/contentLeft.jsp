@@ -71,7 +71,7 @@
 		<input type="hidden" name="bgnum" id="bgnum" >
 		<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 		<input type="hidden" name="bname" id="bname">
-		<input type="hidden" name="bSearch" value="${sessionScope.boardSearch}">
+		<input type="hidden" name="bsearch" value="${sessionScope.boardSearch}">
 		<input type="hidden" name="div" value="${sessionScope.boardDiv }">
 	</form>	
 		<ul>

@@ -28,6 +28,9 @@ public class BoardDao {
 
 	// boardList 가져오기.
 	public List<BoardVO> getList(Map<String, String> map) {
+		for(Map.Entry<String, String> m : map.entrySet()){
+			System.out.println(m.getKey()+"::"+m.getValue());
+		}
 		List<BoardVO> list = ss.selectList("board.getList", map);
 		return list;
 	}
