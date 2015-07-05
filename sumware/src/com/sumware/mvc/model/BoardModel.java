@@ -43,10 +43,11 @@ public class BoardModel {
 		ses.setAttribute("bname", boardName(bgnum));
 		ses.setAttribute("bbbgnum", map.get("bgnum"));
 		
-		ses.setAttribute("boardSearch", map.get("bSearch"));
+		ses.setAttribute("boardSearch", map.get("bsearch"));
 		ses.setAttribute("boardDiv", map.get("div"));
-		
-		if(map.get("bSearch")!=""){
+		System.out.println("bsearch:::::"+map.get("bsearch"));
+		System.out.println("bsearch비어있나?:::::"+map.get("bsearch").isEmpty());
+		if((!map.get("bsearch").isEmpty())){
 			pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.searchCount(map), 0);	
 		}else{
 			pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);	
@@ -133,13 +134,13 @@ public class BoardModel {
 	}
 	//suggest
 	@RequestMapping(value="boardSearchSug")
-	public void boardSearchSug(String bSearch,HttpServletResponse response) throws IOException{
-		System.out.println("Search 들어왔어::"+bSearch);
+	public void boardSearchSug(String bsearch,HttpServletResponse response) throws IOException{
+		System.out.println("Search 들어왔어::"+bsearch);
 		StringBuilder sb = new StringBuilder();
-		sb.append("[\"").append(bSearch).append(" 제목\"").append(",")
-		.append("\"").append(bSearch).append(" 작성자\"").append(",")
-		.append("\"").append(bSearch).append(" 내용\"").append(",")
-		.append("\"").append(bSearch).append(" 제목+내용\"").append("]");
+		sb.append("[\"").append(bsearch).append(" 제목\"").append(",")
+		.append("\"").append(bsearch).append(" 작성자\"").append(",")
+		.append("\"").append(bsearch).append(" 내용\"").append(",")
+		.append("\"").append(bsearch).append(" 제목+내용\"").append("]");
 		
 		PrintWriter pw = response.getWriter();
 		pw.write(sb.toString());

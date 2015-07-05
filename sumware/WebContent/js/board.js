@@ -42,15 +42,15 @@ function sendSearch(){
 	if (boardLoopbSearch == false) {
 		return;
 	}
-	var bSearch = $('#bSearch').val();
+	var bsearch = $('#bsearch').val();
 	var bgnum = $('#bgnum').val();
 	var bdeptno = $('#bdeptno').val();
 	var lastbSearch = '';
-	if (bSearch == '' || bSearch == '  ') {
+	if (bsearch == '' || bsearch == '  ') {
 		document.getElementById("boardView").style.display = "none";
-	} else if (bSearch != lastbSearch) {
-		lastbSearch = bSearch;
-		var param = "bSearch=" + bSearch;
+	} else if (bsearch != lastbSearch) {
+		lastbSearch = bsearch;
+		var param = "bsearch=" + bsearch;
 		sendRequest("boardSearchSug", param, SearchRes, "get");
 	}
 
@@ -73,7 +73,7 @@ function searchResultView() {
 	var vD = document.getElementById("boardView");
 	var htmlTxt = "<table>";
 	for (var i = 0; i < jsonObj.length; i++) {
-		htmlTxt += "<tr style='background:white;'><td style='cursor:pointer;'onmouseover='this.style.background=\"silver\"'onmouseout='this.style.background=\"white\"' onclick='bSearchSelect("
+		htmlTxt += "<tr style='background:white;'><td style='cursor:pointer;'onmouseover='this.style.background=\"silver\"'onmouseout='this.style.background=\"white\"' onclick='bsearchSelect("
 			+ i + ")'>" + jsonObj[i] + "</td></tr>";
 	console.log(jsonObj[i]);
 	}
@@ -82,14 +82,14 @@ function searchResultView() {
 	vD.style.display = "block";
 	vD.style.width = "250px";
 }
-function bSearchSelect(index){
+function bsearchSelect(index){
 	console.log("클릭했네");
 	var select = jsonObj[index];
 	var sel=select.split(" ");
 	sel1=sel[0];
 	sel2=sel[1];
 	
-	location="boardList?page=1&bSearch="+sel1+"&div="+sel2+"&bgnum="+sBgnum+"&bdeptno="+sBdeptno;
+	location="boardList?page=1&bsearch="+sel1+"&div="+sel2+"&bgnum="+sBgnum+"&bdeptno="+sBdeptno;
 }
 //게시판 검색 종료
 function detail(no,bgnum,bname,bdeptno,page){
