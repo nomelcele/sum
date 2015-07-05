@@ -53,8 +53,6 @@ function sendSearch(){
 		var param = "bsearch=" + bsearch;
 		sendRequest("boardSearchSug", param, SearchRes, "get");
 	}
-
-	setTimeout("sendSearch();", 5000);
 }
 var jsonObj = null;
 function SearchRes() {
@@ -88,7 +86,6 @@ function bsearchSelect(index){
 	var sel=select.split(" ");
 	sel1=sel[0];
 	sel2=sel[1];
-	
 	location="boardList?page=1&bsearch="+sel1+"&div="+sel2+"&bgnum="+sBgnum+"&bdeptno="+sBdeptno;
 }
 //게시판 검색 종료
