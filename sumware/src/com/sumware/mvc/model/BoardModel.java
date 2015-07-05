@@ -48,6 +48,7 @@ public class BoardModel {
 		System.out.println("bsearch:::::"+bvo.getBsearch());
 		System.out.println("bsearch비어있나?:::::"+bvo.getBsearch().isEmpty());
 		if((!bvo.getBsearch().isEmpty())){
+			bvo.setBtitle(bvo.getBsearch());
 			pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.searchCount(bvo), 0);	
 		}else{
 			pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);	

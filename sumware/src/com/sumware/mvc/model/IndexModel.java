@@ -41,7 +41,7 @@ public class IndexModel{
 		Integer mCount = (Integer) session.getAttribute("mailCount");
 		StringBuffer res = new StringBuffer();
 		res.setLength(0);
-		res.append("retry:3000\n");
+		res.append("retry:5000\n");
 		res.append("data:");
 		if(tCount<tdao.getTodoCount(map)){
 			res.append("t");
