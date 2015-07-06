@@ -22,7 +22,7 @@
 									b.btitle like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
 								</when>
 								<when test="div=='작성자'">
-									b.bmem=(select memnum from member where memname	like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
+									b.bmem=(select memnum from member where memname	like '%'||#{bsearch}||'%')) where r_num between #{begin} and #{end}
 								</when>
 								<when test="div=='내용'">
 									b.bcont like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
@@ -50,7 +50,7 @@
 									b.btitle like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
 								</when>
 								<when test="div=='작성자'">
-									b.bmem=(select memnum from member where memname	like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
+									b.bmem=(select memnum from member where memname	like '%'||#{bsearch}||'%')) where r_num between #{begin} and #{end}
 								</when>
 								<when test="div=='내용'">
 									b.bcont like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
