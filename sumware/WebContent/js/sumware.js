@@ -18,7 +18,6 @@ $(function() {
 		// 앵커태그 새로고침 이벤트 방지
 		e.preventDefault();
 		$pageName = $(this).text().toLowerCase();
-		alert($pageName);
 		switch ($pageName) {
 		case ("main"):
 			$("#formff").attr("action","home").submit();

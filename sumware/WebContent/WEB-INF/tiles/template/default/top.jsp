@@ -30,8 +30,8 @@
 						<input type="hidden" name="bname" id="bname"> 
 						<input type="hidden" name="bdeptno" id="bdeptno" value="${sessionScope.v.memdept}"> 
 						<input type="hidden" name="cal" value="0">
-						<input type="hidden" name="bsearch" value="${sessionScope.boardSearch}">
-						<input type="hidden" name="div" value="${sessionScope.boardDiv }">
+						<input type="hidden" name="bsearch" value="">
+						<input type="hidden" name="div" value="">
 						<!-- navbar-nav(S) -->
 						<ul class="nav navbar-nav">
 							<li><a href="">Main</a></li>
