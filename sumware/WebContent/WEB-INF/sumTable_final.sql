@@ -292,7 +292,7 @@ create table sign(
 	formnum number, -- 문서종류 번호
 	finalmemnum number, -- 최종 결재자의 사번
 	nowmemnum number, -- 현재 결재자의 사번
-	stitle varchar2(40),
+	stitle varchar2(40), 
 	scont clob,
 	sreason clob,
 	startdate date,
@@ -307,9 +307,9 @@ create table signstep(
 );
 
 create table signform(
-	sfname varchar2(20),
+	sfname varchar2(20), -- 문서의 이름
 	sfnum number, -- 문서종류 번호
-	sform clob
+	sform clob -- 문서의 형태들이 태그 형태로 저장되는 칼럼.
 );
 create table 
 update member set..... memhire, membirth, memresign, memsignimg
