@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%-- board left(S) --%>
 <c:if test="${sessionScope.model eq 'board' }">
 	<form action="sumware" method="post" id="goTodo">
@@ -233,6 +234,7 @@
 		</div>
 	</div>
 </c:if>
+
 <%-- join left(E) --%>
 <c:if test="${sessionScope.model eq 'join' }">
 
@@ -287,8 +289,9 @@
 	</div>
 </c:if>
 <%-- join left(E) --%>
-<%-- Acount left(S) --%>
-<c:if test="${sessionScope.model eq 'acount' }">
+
+<%-- Sign left(S) --%>
+<c:if test="${sessionScope.model eq 'sign' }">
 
 	<!-- <div> -->
 	<!-- 	<div class="row-lg-6"> -->
@@ -340,7 +343,8 @@
 		</div>
 	</div>
 </c:if>
-<%-- /Acount left(E) --%>
+<%-- Sign left(E) --%>
+
 <%-- mail left(S) --%>
 <c:if test="${sessionScope.model eq 'mail' }">
 	<form method="post" action="sumware" id="mailform">
@@ -426,7 +430,7 @@
 </c:if>
 <%-- mail left(E) --%>
 
-<!-- 관리자 left -->
+<!-- 관리자 left(S) -->
 <c:if test="${(sessionScope.model eq 'admin')}">
 	<div>
 		<div class="row-lg-6">
@@ -491,6 +495,6 @@
 	<!-- left-menu(E) -->
 
 </c:if>
-
+<!-- 관리자 left(E) -->
 
 
