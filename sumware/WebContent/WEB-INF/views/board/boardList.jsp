@@ -12,8 +12,7 @@
 		<div class="board-form">
 			<div class="left">
 				<input type="text" id="bsearch" name="bsearch" placeholder="search" onkeyup="boardSearch(${sessionScope.bbbgnum},${sessionScope.v.memdept})">
-				<div id="boardView" style="position:absolute; z-index:1;">
-				</div>
+				<div id="boardView" style="position:absolute; z-index:1;"></div>
 			</div>
 			<div class="right">
 				<button type="button" onclick="javascript:formGo('write')">글쓰기</button>
