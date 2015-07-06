@@ -102,7 +102,7 @@
 			<c:choose>
 				<c:when test="${tofrom eq '1'}">
 					<c:set var="pageUrl" 
-					value="mailFromList"/>
+					value="mailFromList?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
 				</c:when>
 				<c:when test="${tofrom eq '2'}">
 					<c:set var="pageUrl" 
