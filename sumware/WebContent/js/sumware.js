@@ -49,9 +49,9 @@ $(function() {
 			$("#model").attr("value", $pageName);
 			$("#formff").attr("action","admin").submit();
 			break;
-		case ("acount"):
+		case ("sign"):
 			$("#model").attr("value",$pageName);
-			$("#formff").attr("action","account").submit();
+			$("#formff").attr("action","sign").submit();
 			break;
 		default:
 			openWin();
