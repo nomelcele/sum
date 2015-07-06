@@ -268,7 +268,7 @@ alter table mail add(mailread varchar2(1) default 'N');
 
 
 -------------------------------------------------------------------------------
-150706 
+150706
 
 - DB 에 추가될 테이블 : pay(pmem, pyearly,pcomm,psalary), admin(),complete, sign(),
 						signform(sfname,sfnum,sform),
