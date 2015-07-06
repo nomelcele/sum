@@ -14,21 +14,21 @@
 					select bnum,btitle,writer bwriter,bdate,bhit from(select rownum	r_num,b.* from(select tn.bnum,tn.bcont,tn.btitle,tn.writer,tn.bdate,tn.bhit,tn.bmem
 				from(select	b.bnum,b.bcont,b.btitle, m.memname writer,to_char(b.bdate,'yy-MM-DD') bdate, b.bhit,b.bmem	from board b, member m
 				where b.bmem = m.memnum and b.bgnum=#{bgnum} and b.bdeptno=#{bdeptno} order by b.bnum desc) tn) b
-				<choose>
+					<choose>
 					<when test="div!=''">
 						<where>
 							<choose>
 								<when test="div=='제목'">
-									b.btitle like '%'||#{bsearch}||'%')) where r_num between #{begin} and #{end}
+									b.btitle like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
 								</when>
 								<when test="div=='작성자'">
-									b.bmem=(select memnum from member where memname	like '%'||#{bsearch}||'%')) where r_num between #{begin} and #{end}
+									b.bmem=(select memnum from member where memname	like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
 								</when>
 								<when test="div=='내용'">
-									b.bcont like '%'||#{bsearch}||'%')) where r_num between #{begin} and #{end}
+									b.bcont like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
 								</when>
 								<otherwise>
-									b.btitle like '%'||#{bsearch}||'%' or b.bcont like '%'||#{bsearch}||'%')) where r_num between #{begin} and #{end}
+									b.btitle like '%'||#{bsearch}||'%' or b.bcont like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
 								</otherwise>
 							</choose>
 						</where>
@@ -47,16 +47,16 @@
 						<where>
 							<choose>
 								<when test="div=='제목'">
-									b.btitle like '%'||#{bsearch}||'%')) where r_num between #{begin} and #{end}
+									b.btitle like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
 								</when>
 								<when test="div=='작성자'">
-									b.bmem=(select memnum from member where memname	like '%'||#{bsearch}||'%')) where r_num between #{begin} and #{end}
+									b.bmem=(select memnum from member where memname	like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
 								</when>
 								<when test="div=='내용'">
-									b.bcont like '%'||#{bsearch}||'%')) where r_num between #{begin} and #{end}
+									b.bcont like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
 								</when>
 								<otherwise>
-									b.btitle like '%'||#{bsearch}||'%' or b.bcont like '%'||#{bsearch}||'%')) where r_num between #{begin} and #{end}
+									b.btitle like '%'||#{bsearch}||'%' or b.bcont like '%'||#{bsearch}||'%') where r_num between #{begin} and #{end}
 								</otherwise>
 							</choose>
 						</where>
