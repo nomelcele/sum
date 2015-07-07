@@ -4,7 +4,8 @@ public class SignStepVO {
 /*stepnum number, -- 결재 고유번호 pk
  stepsnum number, -- 문서 고유번호 fk
  stepmemnum NUMBER(5), -- 결재자들의 사번 fk
- stepconfirm varchar2(1),*/
+ stepconfirm varchar2(1), -- 결재 여부
+ */
 	private int stepnum,stepsnum,stepmemnum;
 	private String stepconfirm;
 	public int getStepnum() {
