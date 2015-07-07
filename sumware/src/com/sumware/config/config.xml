@@ -21,5 +21,7 @@
   		<typeAlias type="com.sumware.dto.SignatureVO" alias="sgvo"/>
   		<typeAlias type="com.sumware.dto.SignFormVO" alias="sfvo"/>
   		<typeAlias type="com.sumware.dto.SignStepVO" alias="ssvo"/>
+  		<typeAlias type="com.sumware.dto.PayHistoryVO" alias="phvo"/>
+  		<typeAlias type="com.sumware.dto.CommissionVO" alias="comvo"/>
   	</typeAliases>
 </configuration>
