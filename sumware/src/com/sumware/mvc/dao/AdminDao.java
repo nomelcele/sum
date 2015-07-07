@@ -48,4 +48,8 @@ public class AdminDao {
 		st.insert("admin.addBoard",bnvo);
 	}
 	
+	public List<MemberVO> getMemInfoList(){
+		return st.selectList("admin.getMemInfoList");
+	}
+	
 }

@@ -121,4 +121,12 @@ public class AdminModel {
 		return "admin/addBoard";
 	}
 
+	@RequestMapping(value="/adminMemList",method=RequestMethod.POST)
+	public String getMemInfoList(Model model){
+		System.out.println("Admin: getMemInfoList 들어옴");
+		List<MemberVO> memList = adao.getMemInfoList();
+		model.addAttribute("list", memList);
+		return "admin/memInfoList";
+	}
+	
 }
