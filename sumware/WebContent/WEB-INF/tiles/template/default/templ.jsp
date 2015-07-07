@@ -12,11 +12,11 @@
 <title>SumWare</title>
 <!-- CSS 라이브러리(S)  -->
 <spring:url value="resources/css/common.css" var="css" />
-<spring:url value="resources/font-awesome/css/font-awesome.css"
-	var="font" />
-<spring:url value="resources/font-awesome/css/font-awesome.min.css"
-	var="font2" />
+<spring:url value="resources/font-awesome/css/font-awesome.css" var="font" />
+<spring:url value="resources/font-awesome/css/font-awesome.min.css" var="font2" />
 <spring:url value="resources/css/bootstrap.min.css" var="boot" />
+<spring:url value="resources/css/signForm.css" var="sign"/>
+<link rel="stylesheet" type="text/css" href="${sign }"/>
 <link rel="stylesheet" type="text/css" href="${css }" />
 <link rel="stylesheet" type="text/css" href="${font }" />
 <link rel="stylesheet" type="text/css" href="${font2}" />

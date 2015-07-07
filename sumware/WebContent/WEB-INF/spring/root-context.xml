@@ -37,7 +37,7 @@
 	<bean id="st" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="factoryBean" />
 	</bean>
-	 <!--  WebSocket--> 
+	<!--  WebSocket--> 
 	<websocket:handlers>
 		<websocket:mapping handler="myHandler" path="/msgSocket"/>
 		<websocket:handshake-interceptors>
