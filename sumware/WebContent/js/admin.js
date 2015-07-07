@@ -1,6 +1,9 @@
 /**
  * 
  */
+
+
+
 // admin Login 부분!!!!!
 //로그인 3회....
 function adminLogin() {
@@ -83,27 +86,54 @@ function adminSelectMenu(res) {
 	}
 }
 
+// 새 사원 추가에서 부서 선택 시 팀장 목록보여줌
+function getMemMgr(){
+	alert("팀장 찾아!")
+	var memdeptval = $('#newdept').val();
+	$.ajax({
+		type : "post",
+		url : "admingetMemMgr",
+		data : {
+
+			memdept:memdeptval,
+			
+			},
+		success : function(result){
+		
+				$("#mgrListTarget").html(result);
+			}
+		});
+}
+
 // 새 사원 추가 버튼 클릭시 정보 전송 및 메일 전송
 function sendNewMember() {
 	confirm("사원에게 메일을 전송하시겠습니까?")
+	var pay = "";
 	if ($('#newjob').val() == '부장') {
 		$('#newauth').attr("value", "3");
+		pay=4000;
 	} else if ($('#newjob').val() == '팀장') {
 		$('#newauth').attr("value", "4");
+		pay=3000;
 	} else if ($('#newjob').val() == '사원') {
 		$('#newauth').attr("value", "5");
+		pay=2000;
 	}
+	var mail = $('#newmail').val()+"@"+$('#mailaddr').val();
+
 	$.ajax({
 		type : "POST",
 		url : "adminaddMember",
 		data : {
 			memname : $('#newname').val(),
 			memauth : $('#newauth').val(),
-			memmail : $('#newmail').val(),
+			memmail : mail,
 			mempwd : $('#newpwd').val(),
 			memdept : $('#newdept').val(),
 			memjob : $('#newjob').val(),
-			memmgr : $('#newmgr').val()
+			memmgr : $('#newmgr').val(),
+			psalary : pay,
+			pyearly : 0
 		},
 		success : function(result) {
 			alert("사원에게 메일을 전송하였습니다.")
@@ -113,6 +143,10 @@ function sendNewMember() {
 			alert("메일 전송이 실패하였습니다. 다시 시도 해 주세요!")
 		}
 	});
+}
+
+function selmail(){
+	$('#mailaddr').val($('#selmail').val());
 }
 
 //새 게시판 추가 버튼 클릭
