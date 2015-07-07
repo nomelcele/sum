@@ -1,8 +1,10 @@
 package com.sumware.mvc.model;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +31,46 @@ public class AdminModel {
 	@Qualifier(value="admin")
 	private ServiceInter service;
 	
+	// 관리자 로그인
+	@RequestMapping(value="/adminLogin")
+	public void adminLogin(MemberVO mvo , HttpSession session, HttpServletResponse response) throws IOException{
+		MemberVO adminVo = adao.adminLogin(mvo);
+		String result = "admin.adminMain";
+		if(adminVo == null){
+			// 로그인 실패 시
+			System.out.println("로그인실패");
+			result = "0";
+		}else{
+			// 관리자에 대한 정보
+			System.out.println("로그인성공");
+			session.setAttribute("adminv", adminVo);
+		}
+		PrintWriter pw = response.getWriter();
+		pw.print(result);
+		pw.flush();
+		pw.close();
+
+	}
+	
+	//관리자 로그아웃
+	@RequestMapping(value="adminLogout")
+	public void adminLogout(int memnum,HttpSession session,HttpServletResponse response) throws IOException{
+		System.out.println("로그아웃 컨트롤러");
+		session.removeAttribute("adminv");
+		session.invalidate();
+		PrintWriter pw = response.getWriter();
+		pw.write("success");
+		pw.flush();
+		pw.close();
+	}
+	
+	
+	
 	// 관리자페이지 진입
 	@RequestMapping(value="/admin")
 	public String adminForm(HttpSession session, String model){
 		session.setAttribute("model", model);
-		return "admin.addMember";
+		return "admin.adminMain";
 	}
 
 	// 게시판 추가 메뉴 진입
@@ -47,8 +84,6 @@ public class AdminModel {
 	public String addMemberForm(){
 		return "admin/addMember";
 	}
-	
-
 	
 	// 관리자 - 새 사원 추가
 	@RequestMapping(value="/addMember",method=RequestMethod.POST)

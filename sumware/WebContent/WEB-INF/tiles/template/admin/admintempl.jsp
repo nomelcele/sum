@@ -32,6 +32,7 @@
 <!-- js, MODAL (S) -->
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="js/sumware.js"></script>
+<script src="js/admin.js"></script>
 <!-- js (E) -->
 </head>
 <body>
