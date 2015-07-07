@@ -239,10 +239,27 @@ commit;
 create table pay(
  pmem NUMBER(5), -- member 테이블의 사번을 참조 하고, pk 이다.
  pyearly NUMBER(2), -- 년차
- pcomm NUMBER(9), -- 보너스
  psalary NUMBER(10), -- 연봉
  CONSTRAINT pay_pmem_pk PRIMARY KEY(pmem),
  CONSTRAINT pay_pmem_fk FOREIGN KEY(pmem) REFERENCES member(memnum) ON DELETE CASCADE
+);
+
+CREATE TABLE payhistory(
+	hisdate DATE, -- 급여지급 날짜
+    hisamount NUMBER(11), -- 지급 금액
+    hismem NUMBER(5), -- 지급 대상(사번 fk)
+    hisnum NUMBER(10), -- 지급 고유 번호 pk
+    CONSTRAINT payhistory_hisnum_pk PRIMARY KEY(hisnum),
+    CONSTRAINT payhistory_hismem_fk FOREIGN KEY(hismem) REFERENCES MEMBER(memnum)
+);
+CREATE SEQUENCE payhistory_seq INCREMENT BY 1 START WITH 1;
+
+CREATE TABLE commission(
+	comdetail VARCHAR2(50), -- 커시면 내역
+    comamount number(9), -- 커미션 금액
+    comnum NUMBER(10), -- 지급번호는 payhistory 의 hisnum 을 fk
+    CONSTRAINT commission_comnum_fk FOREIGN KEY(comnum) REFERENCES payhistory(hisnum),
+    CONSTRAINT commission_comnum_pk PRIMARY KEY(comnum)
 );
 
 create table administrator(
