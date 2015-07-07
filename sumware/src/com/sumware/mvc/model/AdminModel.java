@@ -125,10 +125,10 @@ public class AdminModel {
 		return "admin/addBoard";
 	}
 
+	// 사원 개인 정보 리스트 가져오는 메서드
 	@RequestMapping(value="/adminMemList",method=RequestMethod.POST)
-	public String getMemInfoList(Model model){
-		System.out.println("Admin: getMemInfoList 들어옴");
-		List<MemberVO> memList = adao.getMemInfoList();
+	public String getMemInfoList(MemberVO mvo,Model model){
+		List<MemberVO> memList = adao.getMemInfoList(mvo);
 		model.addAttribute("list", memList);
 		return "admin/memInfoList";
 	}

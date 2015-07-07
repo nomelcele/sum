@@ -2,9 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<!-- Search (S) -->
-	<div>
-		<form method="post" action="adminSearchMem">
-			<select name="memdept">
+		<div>
+			<select id="searchDept">
 				<option value="0">부서</option>
 				<option value="100">인사부</option>
 				<option value="200">총무부</option>
@@ -12,11 +11,10 @@
 				<option value="400">전산부</option>
 				<option value="500">기획부</option>
 			</select>&nbsp;
-			<input type="text" name="memname" placeholder="이름">
-			<input type="submit" class="btn btn-default btn-sm" value="검색">
+			<input type="text" id="searchName" placeholder="이름">
+			<input type="button" class="btn btn-default btn-sm" value="검색" onclick="adminSelectMenu('adminMemList')">
 			<br/><br/>
-		</form>
-	</div>
+		</div>
 	<!-- Search (E) -->
 	
 	<!-- List (S) -->

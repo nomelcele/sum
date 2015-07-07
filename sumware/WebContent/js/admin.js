@@ -79,10 +79,14 @@ function adminSelectMenu(res) {
 		$.ajax({
 			type: "POST",
 			url: "adminMemList",
+			data: {
+				memdept: $("#searchDept").val(),
+				memname: $("#searchName").val()
+			},
 			success: function(result){
 				$('.contents').html(result);
 			}
-		})
+		});
 	}
 }
 

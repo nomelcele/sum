@@ -50,8 +50,8 @@ public class AdminDao {
 	}
 	
 	// 사원의 정보를 불러오는 메서드
-	public List<MemberVO> getMemInfoList(){
-		return st.selectList("admin.getMemInfoList");
+	public List<MemberVO> getMemInfoList(MemberVO mvo){
+		return st.selectList("admin.getMemInfoList",mvo);
 	}
 	
 	// 사원에 대한 연봉 입력
