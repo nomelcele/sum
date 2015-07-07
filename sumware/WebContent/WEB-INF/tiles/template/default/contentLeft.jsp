@@ -292,7 +292,6 @@
 
 <%-- Sign left(S) --%>
 <c:if test="${sessionScope.model eq 'sign' }">
-
 	<!-- <div> -->
 	<!-- 	<div class="row-lg-6"> -->
 	<div class="chat-panel panel panel-default left-profile">
