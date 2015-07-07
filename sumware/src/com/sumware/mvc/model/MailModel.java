@@ -62,6 +62,10 @@ public class MailModel{
 		System.out.println("File Upload Path: "+path.toString());
 		
 		File file = new File(path.toString());
+		if(!file.exists()){
+			file.mkdirs();
+		}
+		
 		try {
 			mailfile.transferTo(file);
 		} catch (Exception e) {
