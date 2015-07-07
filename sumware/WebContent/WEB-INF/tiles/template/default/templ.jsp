@@ -33,8 +33,10 @@
 <script src="js/todo.js"></script>
 <script src="js/admin.js"></script>
 <!-- <script src="js/bootstrap.min.js"></script> -->
-
 <script src="js/notification.js"></script>
+<c:if test="${sessionScope.model eq 'sign' }">
+	<script src="js/sign.js"></script>
+</c:if>
 <script>
 $(function(){
 	if("${empty v.meminmail}"=="false"){
