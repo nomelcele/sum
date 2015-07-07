@@ -9,11 +9,16 @@
 	
 	<!-- 해당부서의 결재 문서를 조회 하는 쿼리. model 에서 getSignList 와 맵핑 -->
 	<select id="getSgList" parameterType="sgvo" resultType="sgvo">
+		 
 	</select>
 	
 	<!-- 회사내규에 있는 결재 문서들의 종류를 보여주는 메소드 -->
 	<!-- 멤버의 정보로 결재문서들을 불러온다. -->
-	<select id="getSfList" parameterType="mvo" resultType="sfvo">
+	<select id="getSfList" resultType="sfvo">
+		select * from signform
+	</select>
+	<select id="getMgr" parameterType="int" resultType="mvo">
+		select * from member where memnum=(select memmgr from member where memnum=#{memnum})
 	</select>
 	
 	<!-- 결재문서의 종류 중 하나를 택해서 작성 한다. -->

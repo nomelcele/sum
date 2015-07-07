@@ -50,8 +50,7 @@ $(function() {
 			$("#formff").attr("action","admin").submit();
 			break;
 		case ("sign"):
-			$("#model").attr("value",$pageName);
-			$("#formff").attr("action","sign").submit();
+			$("#formff").attr("action","getSignList").submit();
 			break;
 		default:
 			openWin();

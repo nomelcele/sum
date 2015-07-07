@@ -11,7 +11,8 @@ public class SignatureVO {
 		 sreason clob,
 		 startdate date,
 		 enddate DATE,*/
-	private String stitle,scont,sreason,startdate,enddate;
+	private String stitle,scont,sreason,startdate,enddate,sgwriter;
+	private String signdiv;//구분(전체,수신....)
 	private int formnum,snum,finalmemnum,nowmemnum;
 	public String getStitle() {
 		return stitle;
@@ -67,5 +68,18 @@ public class SignatureVO {
 	public void setNowmemnum(int nowmemnum) {
 		this.nowmemnum = nowmemnum;
 	}
+	public String getSgwriter() {
+		return sgwriter;
+	}
+	public void setSgwriter(String sgwriter) {
+		this.sgwriter = sgwriter;
+	}
+	public String getSigndiv() {
+		return signdiv;
+	}
+	public void setSigndiv(String signdiv) {
+		this.signdiv = signdiv;
+	}
+	
 	
 }

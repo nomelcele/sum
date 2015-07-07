@@ -30,7 +30,6 @@
 	<!-- comment-list(E) -->
 	
 	<!-- comment-write(S) -->
-	</div>
 		<div class="modal-footer">
 		<!-- comment-write(S) -->
 		<div class="comment-write">

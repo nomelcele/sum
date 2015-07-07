@@ -279,6 +279,7 @@ CREATE SEQUENCE signform_seq INCREMENT BY 1 START WITH 1; -- sfnum 사용
 create table signature(
  snum number, -- 문서고유 번호 pk
  formnum number, -- 문서종류 번호 fk
+ sgwriter number(5),--작성자
  finalmemnum number, -- 최종 결재자의 사번 fk
  nowmemnum number, -- 현재 결재자의 사번 fk
  stitle varchar2(40), 
@@ -289,7 +290,8 @@ create table signature(
  CONSTRAINT SIGN_snum_pk PRIMARY KEY(snum),
  CONSTRAINT sign_formnum_fk FOREIGN KEY(formnum) REFERENCES signform(sfnum) ON DELETE CASCADE,
  CONSTRAINT sign_finalmemnum_fk FOREIGN KEY(finalmemnum) REFERENCES member(memnum) ON DELETE CASCADE,
- CONSTRAINT sign_nowmemnum_fk FOREIGN KEY(nowmemnum) REFERENCES member(memnum) ON DELETE CASCADE
+ CONSTRAINT sign_nowmemnum_fk FOREIGN KEY(nowmemnum) REFERENCES member(memnum) ON DELETE CASCADE,
+  CONSTRAINT sign_sgwriter_fk FOREIGN KEY(sgwriter) REFERENCES member(memnum) ON DELETE CASCADE
 );
 CREATE SEQUENCE signature_seq INCREMENT BY 1 START WITH 1; -- snum 사용
 

@@ -2,6 +2,7 @@ package com.sumware.mvc.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -23,4 +24,7 @@ public interface ServiceInter {
 	
 	//관리자
 	public MemberVO addNewMember(MemberVO vo);
+	
+	//전자결재 관리
+	public List<MemberVO> getMgrList(int memnum);
 }
