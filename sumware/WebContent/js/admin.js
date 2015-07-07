@@ -72,6 +72,14 @@ function adminSelectMenu(res) {
 				$('.contents').html(result);
 			}
 		});
+	} else if (res == 'adminMemList'){
+		$.ajax({
+			type: "POST",
+			url: "adminMemList",
+			success: function(result){
+				$('.contents').html(result);
+			}
+		})
 	}
 }
 

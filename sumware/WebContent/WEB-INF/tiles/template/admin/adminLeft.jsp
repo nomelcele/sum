@@ -25,13 +25,14 @@
   <div class="list-group panel">
     <a href="#demo3" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">사원 관리 <i class="fa fa-caret-down"></i></a>
     <div class="collapse" id="demo3">
-      <a href="#" class="list-group-item">&nbsp; &nbsp; 사원 조회</a>
+      <a href="javascript:adminSelectMenu('adminMemList')" class="list-group-item">&nbsp; &nbsp; 사원 조회</a>
       <a href="javascript:adminSelectMenu('addMem')" class="list-group-item">&nbsp; &nbsp; 사원 입사 처리</a>
     </div>
     <a href="#demo4" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">급여 관리 <i class="fa fa-caret-down"></i></a>
     <div class="collapse" id="demo4">
       <a href="#" class="list-group-item">&nbsp; &nbsp; 급여 조회</a>
       <a href="#" class="list-group-item">&nbsp; &nbsp; 급여 변경</a>
+      <a href="#" class="list-group-item">&nbsp; &nbsp; 추가급 지급</a>
     </div>
     <a href="#demo5" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">전자결재 양식 관리 <i class="fa fa-caret-down"></i></a>
     <div class="collapse" id="demo5">
