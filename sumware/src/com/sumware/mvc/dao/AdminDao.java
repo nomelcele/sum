@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sumware.dto.BnameVO;
 import com.sumware.dto.MemberVO;
+import com.sumware.dto.PayVO;
 
 @Repository
 public class AdminDao {
@@ -51,6 +52,11 @@ public class AdminDao {
 	// 사원의 정보를 불러오는 메서드
 	public List<MemberVO> getMemInfoList(){
 		return st.selectList("admin.getMemInfoList");
+	}
+	
+	// 사원에 대한 연봉 입력
+	public void insertPay(PayVO payvo){
+		st.insert("admin.insertPay", payvo);
 	}
 	
 }

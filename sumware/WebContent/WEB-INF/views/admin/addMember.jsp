@@ -1,25 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script>
-function getMemMgr(){
-	var memdeptval = $('#newdept').val();
-	$.ajax({
-		type : "post",
-		url : "getMemMgr",
-		data : {
 
-			memdept:memdeptval,
-			
-			},
-		success : function(result){
-		
-				$("#mgrListTarget").html(result);
-			}
-		});
-}
-
-
-</script>
 				<input type="hidden" name="memauth" value="" id="newauth">
 
 				<div class="chat-panel panel panel-default" style="width: 60%">
@@ -34,8 +15,19 @@ function getMemMgr(){
 						</div>
 
 						<div class="form-group has-success">
-							<label class="control-label">메 일</label> 
-							<input type="text" class="form-control" id="newmail" name="memmail" autocomplete="off" style="width: 200px; ">
+							<label class="control-label">메 일</label> <br/>
+							<input type="text" class="form-control" id="newmail"autocomplete="off" style="width: 120px; float:left "> 
+							<span style="float:left">&nbsp;@&nbsp;</span> 
+							<input type="text" class="form-control" id="mailaddr"autocomplete="off" style="width: 120px; float:left ">
+							&nbsp;
+							<select class="form-control" id="selmail"  onchange="javascript:selmail()"   style="width: 150px; display:inline">
+											<option value="">메일 선택</option>								
+											<option value="naver.com">naver.com</option>
+											<option value="hanmail.com">hanmail.com</option>
+											<option value="gmail.com">gmail.com</option>
+											<option value="nate.com">nate.com</option>
+											
+							</select>
 						</div>
 
 						<div class="form-group has-success">
@@ -65,7 +57,6 @@ function getMemMgr(){
 										<option value="사원">사 원</option>
 								</select>
 						</div>
-
 						<div class="form-group has-success">
 							<input type="button" class="btn btn-outline btn-success" onclick="javascript:sendNewMember()" id = "sendFormToAdd" value="추 가">
 						</div>

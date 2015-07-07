@@ -11,8 +11,8 @@
 
 	<!-- 사원 추가(S) -->
 	<insert id="addMember" parameterType="mvo">
-		insert into member
-		values(member_seq.nextVal,#{memname},null,#{mempwd},null,#{memjob},#{memauth},#{memmail},null,#{memmgr},#{memdept})
+		insert into member(memnum, memname,mempwd,memjob,memauth,memmail,memmgr,memdept)
+		values(member_seq.nextVal,#{memname},#{mempwd},#{memjob},#{memauth},#{memmail},#{memmgr},#{memdept})
 	</insert>
 
 	<select id="getNewMemInfo" parameterType="mvo" resultType="mvo">
@@ -44,4 +44,9 @@
 		d.dename, m.memjob, to_char(m.memhire, 'yyyy-mm-dd') memhire from member m, dept d 
 		where d.denum=m.memdept
 	</select>
+	
+	<!-- 연봉 입력 -->
+	<insert id="insertPay" parameterType="payvo">
+		insert into pay values(#{pmem},#{pyearly},#{psalary})
+	</insert>
 </mapper>

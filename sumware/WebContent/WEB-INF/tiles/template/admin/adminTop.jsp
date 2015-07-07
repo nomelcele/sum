@@ -23,29 +23,6 @@
 			</c:when>
 			<c:otherwise>
 				<div class="nav navbar-right">
-<!-- 					<form action="goFunc" method="post" id="formff"> -->
-<!-- 						<input type="hidden" name="model" id="model">  -->
-<!-- 						<input type="hidden" name="page" id="page">  -->
-<!-- 						<input type="hidden" name="bgnum" id="bgnum">  -->
-<!-- 						<input type="hidden" name="bname" id="bname">  -->
-<%-- 						<input type="hidden" name="bdeptno" id="bdeptno" value="${sessionScope.v.memdept}">  --%>
-<!-- 						<input type="hidden" name="cal" value="0"> -->
-<!-- 						<input type="hidden" name="bsearch" value=""> -->
-<!-- 						<input type="hidden" name="div" value=""> -->
-<!-- 						navbar-nav(S) -->
-<!-- 						<ul class="nav navbar-nav"> -->
-<!-- 							<li><a href="">Main</a></li> -->
-<!-- 							<li><a href="">Todo</a></li> -->
-<!-- 							<li><a href="">Mail</a></li> -->
-<!-- 							<li><a href="">Calendar</a> -->
-<!-- 							<li><a href="">Board</a></li> -->
-<!-- 							<li><a href="">Messenger <span id="countRoomNum"></span></a></li> -->
-<!-- 							<li><a href="">Acount</a></li> -->
-<%-- 						<c:if test="${sessionScope.v.memdept eq 100 and sessionScope.v.memauth lt 4 }"> --%>
-<!-- 							<li><a href="">Admin</a></li> -->
-<%-- 						</c:if> --%>
-<!-- 						</ul> -->
-<!-- 						navbar-nav(E) -->
 						<ul class="nav navbar-right navbar-nav user-name">
 						<c:if test="${!empty sessionScope.adminv.memname}">
 							<li>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sumware.dto.BnameVO;
 import com.sumware.dto.MemberVO;
+import com.sumware.dto.PayVO;
 import com.sumware.mvc.dao.AdminDao;
 import com.sumware.mvc.service.ServiceInter;
 import com.sumware.util.SendEmail;
@@ -86,8 +87,8 @@ public class AdminModel {
 	
 	// 관리자 - 새 사원 추가
 	@RequestMapping(value="/adminaddMember",method=RequestMethod.POST)
-	public String addMember(MemberVO mvo, Model model,HttpSession session) throws Exception{
-		System.out.println("사원 추가버튼 클릭!!!");
+	public String addMember(MemberVO mvo,PayVO payvo, Model model,HttpSession session) throws Exception{
+		System.out.println("사원 추가버튼 클릭!!!"+mvo.getMemmgr());
 		// 사원을 디비에 저장하고 부여받은 사번과 정보들을 다시가져옴
 		MemberVO nmvo = service.addNewMember(mvo);
 		try {
@@ -98,6 +99,9 @@ public class AdminModel {
 				adao.cancelAddMem(nmvo.getMemnum());
 					throw new Exception("메일 전송 실패");
 			}
+			payvo.setPmem(nmvo.getMemnum());
+			adao.insertPay(payvo);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
