@@ -13,29 +13,17 @@
 						<td class="col-lg-1"><span>부서</span></td>
 						<td class="col-lg-6"><span>직급</span></td>
 						<td class="col-lg-2"><span>입사일</span></td>
-						<td class="col-lg-2"><span>호봉</span></td>
 					</tr>
 					
-					<c:forEach var="memList" items="${list}">
+					<c:forEach var="mList" items="${list}">
 						<tr>
-							<td><input type="checkbox" name="chk" id="chk" value="${memList.memnum}"></td>
-							<c:choose>
-							<c:when test="${tofrom eq '1'}">
-								<td>${mList.mailsname}</td>
-							</c:when>
-							<c:when test="${tofrom eq '2' }">
-								<td>${mList.mailrname}</td>
-							</c:when>
-							<c:when test="${tofrom eq '3'}">
-								<td>${mList.mailsname}</td>
-							</c:when>
-							<c:otherwise>
-								<td>${mList.mailsname}</td>
-								<td>${mList.mailrname}</td>
-							</c:otherwise>
-							</c:choose>
-							<td><a href="javascript:mailDetailGo(${mList.mailnum})">${mList.mailtitle}</a></td>
-							<td>${mList.maildate}</td>
+							<td><input type="checkbox" name="chk" id="chk" value="${mList.memnum}"></td>
+							<td>${mList.membirth}</td>
+							<td>${mList.memaddr}</td>
+							<td>${mList.meminmail}</td>
+							<td>${mList.dename}</td>
+							<td>${mList.memjob}</td>
+							<td>${mList.memhire}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
