@@ -57,7 +57,7 @@ function adminSelectMenu(res) {
 	if (res == 'addMem') {
 		$.ajax({
 			type : "POST",
-			url : "addMemberForm",
+			url : "adminaddMemberForm",
 			success : function(result) {
 				$('.contents').html(result);
 			}
@@ -67,7 +67,7 @@ function adminSelectMenu(res) {
 	} else if (res == 'addBoard') {
 		$.ajax({
 			type : "POST",
-			url : "addBoardForm",
+			url : "adminaddBoardForm",
 			success : function(result) {
 				$('.contents').html(result);
 			}
@@ -87,7 +87,7 @@ function sendNewMember() {
 	}
 	$.ajax({
 		type : "POST",
-		url : "addMember",
+		url : "adminaddMember",
 		data : {
 			memname : $('#newname').val(),
 			memauth : $('#newauth').val(),
@@ -113,7 +113,7 @@ function sendNewBoard() {
 
 	$.ajax({
 		type : "POST",
-		url : "addBoard",
+		url : "adminaddBoard",
 		data : {
 			bname:$('#newbname').val(),
 			bdeptno:$('#newbdeptno').val()
