@@ -8,6 +8,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/home/{1}.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/tiles/template/default/footer.jsp"/>
 	</definition>
+	<definition name="admin.*" template="/WEB-INF/tiles/template/admin/admintempl.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/template/admin/adminTop.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/tiles/template/admin/adminLeft.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/{1}.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/tiles/template/admin/footer.jsp"/>
+	</definition>
 	<definition name="*.*" template="/WEB-INF/tiles/template/default/templ.jsp">
 		<put-attribute name="header" value="/WEB-INF/tiles/template/default/top.jsp"/>
 		<put-attribute name="menu" value="/WEB-INF/tiles/template/default/contentLeft.jsp"/>
