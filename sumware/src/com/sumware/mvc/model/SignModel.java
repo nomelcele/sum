@@ -10,6 +10,6 @@ public class SignModel {
 	@RequestMapping(value="sign")
 	public String acountMain(HttpSession session){
 		session.setAttribute("model", "sign");
-		return "acount.acountMain";
+		return "sign.signMain";
 	}
 }
