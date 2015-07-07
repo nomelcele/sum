@@ -28,8 +28,11 @@
 <link rel="stylesheet" type="text/css" href="${font2}" />
 <link rel="stylesheet" type="text/css" href="${boot}" />
 
-<%-- <link rel="stylesheet" type="text/css" href="${admin}" /> --%>
 <!-- CSS 라이브러리(E)  -->
+<!-- js, MODAL (S) -->
+<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="js/sumware.js"></script>
+<!-- js (E) -->
 </head>
 <body>
 	<!-- header -->

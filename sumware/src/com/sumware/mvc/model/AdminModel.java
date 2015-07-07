@@ -1,11 +1,8 @@
 package com.sumware.mvc.model;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sumware.dto.BnameVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.mvc.dao.AdminDao;
-import com.sumware.mvc.dao.BoardDao;
-import com.sumware.mvc.dao.MemberDao;
 import com.sumware.mvc.service.ServiceInter;
-import com.sumware.util.MyMap;
 import com.sumware.util.SendEmail;
 
 
