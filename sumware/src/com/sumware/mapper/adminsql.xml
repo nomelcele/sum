@@ -38,7 +38,7 @@
 	</insert>
 	<!-- 게시판 추가(E) -->
 
-	<!-- 모든 사원 정보 불러오기 -->
+	<!-- 사원 정보 불러오기 -->
 	<select id="getMemInfoList" resultType="mvo">
 		select m.memname, m.meminmail, m.membirth, m.memaddr, 
 		d.dename, m.memjob, to_char(m.memhire, 'yyyy-mm-dd') memhire from member m, dept d 
