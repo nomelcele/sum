@@ -2,29 +2,51 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-	<div class="row-lg-6">
-
-<!-- 		 left-profile(S) -->
-
-		<div class="chat-panel panel panel-default left-profile">
-			<div class="panel-heading">
-				<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">Administrator</strong>
-			</div>
-		</div>
-<!-- 		 left-profile(E) -->
-
-	</div>
-
-<!-- left-menu(S) -->
-<div class="left-menu" id="left-menu">
-	<ul>
-		<li><a href="#">사원관리</a></li>
-		<li><a href="#">급여관리</a></li>
-		<li><a href="#">전자결재</a></li>
-	</ul>
+<!-- 	<div class="row-lg-6"> -->
+<!-- 		<div class="chat-panel panel panel-default left-profile"> -->
+<!-- 			<div class="panel-heading"> -->
+<!-- 				<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">Administrator</strong> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- <!-- left-menu(S) -->
+<!-- <div class="left-menu" id="left-menu"> -->
+<!-- 	<ul> -->
+<!-- 		<li> -->
+<!-- 			<a href="#">사원관리</a> -->
+<!-- 		</li> -->
+<!-- 		<li><a href="#">급여관리</a></li> -->
+<!-- 		<li><a href="#">전자결재</a></li> -->
+<!-- 	</ul> -->
+<!-- </div> -->
+<!-- <!-- left-menu(E) -->
+<!-- test menu(S) -->
+<div id="MainMenu">
+  <div class="list-group panel">
+    <a href="#demo3" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">사원 관리 <i class="fa fa-caret-down"></i></a>
+    <div class="collapse" id="demo3">
+      <a href="#" class="list-group-item">&nbsp; &nbsp; 사원 조회</a>
+      <a href="javascript:adminSelectMenu('addMem')" class="list-group-item">&nbsp; &nbsp; 사원 입사 처리</a>
+    </div>
+    <a href="#demo4" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">급여 관리 <i class="fa fa-caret-down"></i></a>
+    <div class="collapse" id="demo4">
+      <a href="#" class="list-group-item">&nbsp; &nbsp; 급여 조회</a>
+      <a href="#" class="list-group-item">&nbsp; &nbsp; 급여 변경</a>
+    </div>
+    <a href="#demo5" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">전자결재 양식 관리 <i class="fa fa-caret-down"></i></a>
+    <div class="collapse" id="demo5">
+      <a href="#" class="list-group-item">&nbsp; &nbsp; 양식 목록</a>
+      <a href="#" class="list-group-item">&nbsp; &nbsp; 양식 추가</a>
+    </div>
+     <a href="#demo6" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">게시판 관리 <i class="fa fa-caret-down"></i></a>
+    <div class="collapse" id="demo6">
+      <a href="#" class="list-group-item">&nbsp; &nbsp; 게시판 열람</a>
+      <a href="javascript:adminSelectMenu('addBoard')" class="list-group-item">&nbsp; &nbsp; 게시판 추가</a>
+      <a href="#" class="list-group-item">&nbsp; &nbsp; 게시판 삭제</a>
+    </div>
+  </div>
 </div>
-<!-- left-menu(E) -->
-
+<!-- test menu(E) -->
 <%-- </c:if> --%>
 <%-- todo left(S) --%>
 
