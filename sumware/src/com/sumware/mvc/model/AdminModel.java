@@ -31,6 +31,13 @@ public class AdminModel {
 	@Qualifier(value="admin")
 	private ServiceInter service;
 	
+	// 관리자페이지 진입
+	@RequestMapping(value="/admin")
+	public String adminForm(HttpSession session, String model){
+		session.setAttribute("model", model);
+		return "admin.adminMain";
+	}
+	
 	// 관리자 로그인
 	@RequestMapping(value="/adminLogin")
 	public void adminLogin(MemberVO mvo , HttpSession session, HttpServletResponse response) throws IOException{
@@ -64,29 +71,21 @@ public class AdminModel {
 		pw.close();
 	}
 	
-	
-	
-	// 관리자페이지 진입
-	@RequestMapping(value="/admin")
-	public String adminForm(HttpSession session, String model){
-		session.setAttribute("model", model);
-		return "admin.adminMain";
-	}
 
 	// 게시판 추가 메뉴 진입
-	@RequestMapping(value="/addBoardForm",method=RequestMethod.POST)
+	@RequestMapping(value="/adminaddBoardForm",method=RequestMethod.POST)
 	public String addBoardForm(){
 		return "admin/addBoard";
 	}
 	
 	// 사원 추가 메뉴 진입
-	@RequestMapping(value="/addMemberForm",method=RequestMethod.POST)
+	@RequestMapping(value="/adminaddMemberForm",method=RequestMethod.POST)
 	public String addMemberForm(){
 		return "admin/addMember";
 	}
 	
 	// 관리자 - 새 사원 추가
-	@RequestMapping(value="/addMember",method=RequestMethod.POST)
+	@RequestMapping(value="/adminaddMember",method=RequestMethod.POST)
 	public String addMember(MemberVO mvo, Model model,HttpSession session) throws Exception{
 		System.out.println("사원 추가버튼 클릭!!!");
 		// 사원을 디비에 저장하고 부여받은 사번과 정보들을 다시가져옴
@@ -106,7 +105,7 @@ public class AdminModel {
 	}
 
 	// 부서선택하면 부서에 대한 팀장들 리스트가져옴
-	@RequestMapping(value="/getMemMgr",method=RequestMethod.POST)
+	@RequestMapping(value="/admingetMemMgr",method=RequestMethod.POST)
 	public String getMemMgr(int memdept,Model model){
 		List<MemberVO> memmgrlist= adao.getMemMgr(memdept);
 		model.addAttribute("mgrList", memmgrlist);
@@ -114,7 +113,7 @@ public class AdminModel {
 	}
 	
 	//게시판 추가
-	@RequestMapping(value="/addBoard",method=RequestMethod.POST)
+	@RequestMapping(value="/adminaddBoard",method=RequestMethod.POST)
 	public String addBoard(BnameVO bnvo){
 		System.out.println("보드추가 매핑됨");
 		//디비에 게시판 추가
