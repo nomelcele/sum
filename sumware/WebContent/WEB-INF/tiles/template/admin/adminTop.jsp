@@ -12,13 +12,13 @@
 			</a>
 		</div>
 		<c:choose>
-			<c:when test="${empty sessionScope.v.memnum && empty memnum}">
+			<c:when test="${empty sessionScope.adminv.memnum}">
 				<div class="porm-group">
 					<label class="control-label-" for="memnum">관리자번호</label> 
-					<input type="text" id="memnum" name="memnum" placeholder="관리자번호"	onkeydown="enterCheck(3)" />
+					<input type="text" id="adminmemnum" name="memnum" placeholder="관리자번호"	onkeydown="enterCheck(4)" />
 					<label class="control-label" for="mempwd">비밀번호</label> 
-					<input type="password" id="mempwd" name="mempwd" placeholder="비밀번호" onkeydown="enterCheck(3)" />
-					<button type="button" class="btn btn-xs btn-info" onclick="loginChk()">로그인</button>
+					<input type="password" id="adminmempwd" name="mempwd" placeholder="비밀번호" onkeydown="enterCheck(4)" />
+					<button type="button" class="btn btn-xs btn-info" onclick="adminLogin()">로그인</button>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -47,20 +47,12 @@
 <!-- 						</ul> -->
 <!-- 						navbar-nav(E) -->
 						<ul class="nav navbar-right navbar-nav user-name">
-						<c:if test="${empty sessionScope.v.memname}">
+						<c:if test="${!empty sessionScope.adminv.memname}">
 							<li>
-								<span class="control-label-"><strong>${sessionScope.memnum}</strong> 님 환영합니다.</span>
+								<span class="control-label-"><strong>${sessionScope.adminv.memname}</strong> 님 환영합니다.</span>
 							</li>
 							<li>
-								<button type="button" class="btn btn-xs btn-info" onclick="logout(${sessionScope.memnum})">로그아웃</button>
-							</li>
-						</c:if>
-						<c:if test="${!empty sessionScope.v.memname}">
-							<li>
-								<span class="control-label-"><strong>${sessionScope.v.memname}</strong> 님 환영합니다.</span>
-							</li>
-							<li>
-								<button type="button" class="btn btn-xs btn-info" onclick="logout(${sessionScope.v.memnum})">로그아웃</button>
+								<button type="button" class="btn btn-xs btn-info" onclick="adminLogout(${sessionScope.adminv.memnum})">로그아웃</button>
 							</li>
 						</c:if>
 						</ul>

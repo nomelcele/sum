@@ -1,6 +1,55 @@
 /**
  * 
  */
+// admin Login 부분!!!!!
+//로그인 3회....
+function adminLogin() {
+	$.ajax({
+		url : "adminLogin",
+		type : "GET",
+		data : {
+			memnum : $("#adminmemnum").val(),
+			mempwd : $("#adminmempwd").val()
+		},
+		success : function(result) {
+			result = result.trim();
+			if (result == 0) {
+				alert(c + "회 로그인실패");
+				c++;
+				if (c > 3) {
+					$.ajax({
+						url : "getCap",
+						type : "POST",
+						success : function(result) {
+							$('#capBody').html(result);
+							$('#capModal').modal('toggle');
+						}
+					});
+				}
+			} else {
+				location = "admin.adminMain";
+			}
+		}
+	});
+}
+
+// 관리자 로그아웃
+function adminLogout(memnum) {
+	$.ajax({
+		url : "adminLogout",
+		type : "GET",
+		data : {
+			memnum : memnum
+		},
+		success : function(result) {
+			console.log("logout result: " + result);
+			location = "admin.adminMain";
+		}
+	});
+}
+
+
+
 
 // 관리자 모드에서 left 메뉴선택
 function adminSelectMenu(res) {

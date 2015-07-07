@@ -16,6 +16,11 @@ public class AdminDao {
 	@Autowired
 	private SqlSessionTemplate st;
 	
+	// 관리자 로그인
+	public MemberVO adminLogin(MemberVO mvo){
+		return st.selectOne("admin.adminLogin", mvo);
+	}
+
 	// 관리자 - 새 사원 추가
 	public void addMember(MemberVO vo){
 		st.insert("admin.addMember",vo);
