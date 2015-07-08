@@ -52,6 +52,9 @@ $(function() {
 		case ("sign"):
 			$("#formff").attr("action","getSignList").submit();
 			break;
+		case ("auction"):
+			$("#formff").attr("action","productList").submit();
+			break;
 		default:
 			openWin();
 		break;
