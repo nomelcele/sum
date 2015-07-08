@@ -3,6 +3,7 @@ package com.sumware.mvc.model;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +52,20 @@ public class SignModel {
 	}
 	
 	// 결재문서의 종류 중 하나를 택해서 가져옴.
-	public String getSignForm(SignFormVO sfvo){
-		return null;
+	@RequestMapping(value="getSignForm",method=RequestMethod.POST)
+	public String getSignForm(HttpServletRequest request){
+		System.out.println("결재문서 선택");
+		int formnum = Integer.parseInt(request.getParameter("formnum"));
+		String[] signMgrs = request.getParameterValues("signMgrs");
+		
+		System.out.println("formnum::"+formnum);
+		for(String e: signMgrs){
+			System.out.println("signMgr::"+e);
+		}
+		SignFormVO sfvo = sgdao.getSf(formnum);
+		request.setAttribute("sf", sfvo);
+		
+		return "sign.signWriteForm";
 	}
 	
 	// 선택된 문서를 작성 함.

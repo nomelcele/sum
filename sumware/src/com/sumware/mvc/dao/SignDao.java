@@ -27,6 +27,10 @@ public class SignDao {
 	public MemberVO getMgr(int memnum){
 		return st.selectOne("sign.getMgr", memnum);
 	}
+	//선택된 폼 불러오기
+	public SignFormVO getSf(int sfnum){
+		return st.selectOne("sign.getSf", sfnum);
+	}
 	
 	
 }
