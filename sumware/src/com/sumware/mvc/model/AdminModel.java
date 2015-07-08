@@ -180,12 +180,21 @@ public class AdminModel {
 	
 //	// 모달에 mem정보
 	@RequestMapping(value="/getMemInfoForModal", method=RequestMethod.POST)
-	public String getMemInfoForModal(MemberVO vo, Model model){
+	public String getMemInfoForModal(MemberVO vo, Model model, String cmd){
 		MemberVO mvo = adao.getMemInfo(vo);
 		model.addAttribute("memvo", mvo);
 		// member pay 정보 가져옴
 		PayVO payvo = adao.getPayInfo(vo.getMemnum());
 		model.addAttribute("payvo", payvo);
+		
+		if(cmd.equals("giveSalary")){
+			// 추가적으로 급여에 대한 정보 다가져와야 됨!!!
+			// 월급 정보 쓰기 위해
+			PayVO pvo = adao.getPayInfo(vo.getMemnum());
+			
+			
+			
+		}
 		
 		return "admin/modal";
 	}
@@ -194,6 +203,13 @@ public class AdminModel {
 	@RequestMapping(value="/giveBonus", method=RequestMethod.POST)
 	public String giveBonus(CommissionVO comvo){
 			adao.giveBonus(comvo);
+		return "redirect:/adminPayManagement";
+	}
+	
+	// 추가 급여 지급/////////////////////////////////////
+	@RequestMapping(value="/giveSalary", method=RequestMethod.POST)
+	public String giveSalary(CommissionVO comvo){
+		adao.giveBonus(comvo);
 		return "redirect:/adminPayManagement";
 	}
 	

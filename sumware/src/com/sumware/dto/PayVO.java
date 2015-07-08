@@ -9,7 +9,17 @@ public class PayVO {
  CONSTRAINT pay_pmem_fk FOREIGN KEY(pmem) REFERENCES member(memnum) ON DELETE CASCADE
 );*/
 
-	private int pmem,pyearly,psalary;
+	private int pmem,pyearly,psalary,pmonthsalary;
+	
+	
+
+	public int getPmonthsalary() {
+		return pmonthsalary;
+	}
+
+	public void setPmonthsalary(int pmonthsalary) {
+		this.pmonthsalary = pmonthsalary;
+	}
 
 	public int getPmem() {
 		return pmem;
