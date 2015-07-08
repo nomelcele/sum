@@ -23,7 +23,6 @@
 					<h4 class="modal-title">결재 문서 선택하기</h4>
 				</div>
 				<div class="modal-body" id="signModalBody">
-					<!-- comment-write(E) -->
 				</div>
 			</div>
 		</div>
