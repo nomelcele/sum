@@ -15,7 +15,7 @@
 				<div id="boardView" style="position:absolute; z-index:1;"></div>
 			</div>
 			<div class="right">
-				<button type="button" onclick="javascript:formGo('write')">글쓰기</button>
+				<button type="button" onclick="javascript:formGo('write')" class="btn btn-info">글쓰기</button>
 			</div>
 		</div>
 		<!-- board-form(E) -->
