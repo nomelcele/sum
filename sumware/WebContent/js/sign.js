@@ -6,7 +6,6 @@ function signFormListModal() {
 		type : "POST",
 		url : "getSignFormList",
 		success : function(result) {
-			alert(result);
 			$("#signModalBody").html(result);
 			$("#signModal").toggle();
 		},
