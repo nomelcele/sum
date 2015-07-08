@@ -283,7 +283,7 @@ create table signform(
 CREATE SEQUENCE signform_seq INCREMENT BY 1 START WITH 1; -- sfnum 사용
 
 create table signature(
- snum number, -- 문서고유 번호 pk
+ snum number, -- 기안고유 번호 pk
  formnum number, -- 문서종류 번호 fk
  sgwriter number(5),--작성자
  finalmemnum number, -- 최종 결재자의 사번 fk
@@ -299,7 +299,7 @@ create table signature(
  constraint sign_sgwriter_fk foreign key(sgwriter) references member(memnum) on delete set null,
  CONSTRAINT sign_finalmemnum_fk FOREIGN KEY(finalmemnum) REFERENCES member(memnum) ON DELETE CASCADE,
  CONSTRAINT sign_nowmemnum_fk FOREIGN KEY(nowmemnum) REFERENCES member(memnum) ON DELETE CASCADE,
-  CONSTRAINT sign_sgwriter_fk FOREIGN KEY(sgwriter) REFERENCES member(memnum) ON DELETE CASCADE
+ CONSTRAINT sign_sgwriter_fk FOREIGN KEY(sgwriter) REFERENCES member(memnum) ON DELETE CASCADE
 );
 CREATE SEQUENCE signature_seq INCREMENT BY 1 START WITH 1; -- snum 사용
 
@@ -313,4 +313,17 @@ create table signstep(
  CONSTRAINT signstep_stepmemnum_fk FOREIGN KEY(stepmemnum) REFERENCES member(memnum) ON DELETE CASCADE
 );
 CREATE SEQUENCE signstep_seq INCREMENT BY 1 START WITH 1;
+
+CREATE TABLE product(
+	product VARCHAR2(100) CONSTRAINT product_product_nn NOT null, -- 상품명(글제목)
+    proimg VARCHAR2(50), -- 상품 이미지
+    prowriter NUMBER(5), -- 상품 게시자 fk member(memnum)
+    price NUMBER(8) CONSTRAINT product_price_nn NOT NULL, -- 상품 금액
+    procount NUMBER(3),-- 경매에 참여한 사람 수
+    pronum NUMBER(5), -- 경매번호 pk
+    zzim VARCHAR2(1) DEFAULT 'n', -- 찜한목록이면 y 아니면 n 
+    CONSTRAINT product_pronum_pk PRIMARY KEY(pronum),
+    CONSTRAINT product_prowriter_fk FOREIGN KEY(prowriter) REFERENCES MEMBER(memnum) 
+);
+CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
 COMMIT;
