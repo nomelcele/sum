@@ -337,6 +337,13 @@
 						class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 
 				</tr>
+				<tr>
+					<th><strong class="primary-font">MySign</strong></th>
+					<td><div id="mySignDiv" ondrop="signDrop(event)" ondragover="signAllowDrop(event)">
+						<img src="resources/signImg/1.JPG" id="mySignImg" draggable="true" 
+						ondragstart="signDrag(event)" width="79" height="79">
+					</div></td>
+				</tr>
 			</table>
 			<!-- profile-table(E) -->
 		</div>

@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <form action="getSignForm" method="post">
 	<div id="signFormList" style="float: left;">	
-		<select id="formnum" name="formnum" onchange="formListChange()">
+		<select id="formnum" name="formnum">
 			<option value="">문서 선택</option>
 			<c:forEach var="sf" items="${sfList }">
 			<option value="${sf.sfnum}">${sf.sfname}</option>

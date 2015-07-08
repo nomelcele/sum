@@ -27,4 +27,6 @@ public interface ServiceInter {
 	
 	//전자결재 관리
 	public List<MemberVO> getMgrList(int memnum);
+	
+	public String[] getMgrNames(String[] memnum);
 }

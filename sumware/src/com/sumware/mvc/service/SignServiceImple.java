@@ -29,6 +29,14 @@ public class SignServiceImple extends AbstractService{
 		}
 		return mList;
 	}
+	@Override
+	public String[] getMgrNames(String[] memnum) {
+		String[] str=new String[memnum.length];
+		for(int i=0; i<memnum.length; i++){
+			str[i]=sgdao.getMgrName(Integer.parseInt(memnum[i]));
+		}
+		return str;
+	}
 	
 
 }

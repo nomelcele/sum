@@ -42,6 +42,11 @@ public class AbstractService implements ServiceInter{
 	public List<MemberVO> getMgrList(int memnum) {
 		return null;
 	}
+
+	@Override
+	public String[] getMgrNames(String[] memnum) {
+		return null;
+	}
 	
 	
 
