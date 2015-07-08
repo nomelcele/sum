@@ -133,4 +133,20 @@ public class AdminModel {
 		return "admin/memInfoList";
 	}
 	
+	// 급여조회 폼
+	@RequestMapping(value="/adminPayInfoList",method=RequestMethod.POST)
+	public String adminPayInfoList(MemberVO mvo,Model model){
+		List<MemberVO> memList = adao.getMemInfoList(mvo);
+		model.addAttribute("list", memList);
+		return "admin/payInfoList";
+	}
+	
+	// 사원의 급여 디테일
+	@RequestMapping(value="/adminPayInfoDetail", method=RequestMethod.POST)
+	public String adminPayInfoDetail(MemberVO mvo, Model model){
+		
+		
+		return "admin/payInfoDetail";
+	}
+	
 }

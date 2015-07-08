@@ -30,7 +30,7 @@
     </div>
     <a href="#demo4" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">급여 관리 <i class="fa fa-caret-down"></i></a>
     <div class="collapse" id="demo4">
-      <a href="#" class="list-group-item">&nbsp; &nbsp; 급여 조회</a>
+      <a href="javascript:adminSelectMenu('adminPayInfoList')" class="list-group-item">&nbsp; &nbsp; 급여 조회</a>
       <a href="#" class="list-group-item">&nbsp; &nbsp; 급여 변경</a>
     </div>
     <a href="#demo5" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">전자결재 양식 관리 <i class="fa fa-caret-down"></i></a>
