@@ -254,6 +254,7 @@ function payManage(res){
 			data: {
 				comdetail: $('#comdetail').val(),
 				comamount:$('#comamount').val()
+				commem
 			},
 			success: function(result){
 				//$('#modalTarget').html(result);
