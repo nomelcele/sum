@@ -46,7 +46,7 @@
 					<td>${mList.memhire}</td>
 					<td>
 					<input type="button" class="btn btn-default btn-sm" value="추가급여지급"
-					onclick="javascript:getMemInfoForModal(${mList.memnum})">
+					onclick="javascript:getMemInfoForModal('giveBonus',${mList.memnum})">
 					<input type="button" class="btn btn-default btn-sm" value="월급지급"
 					data-toggle="modal" data-target="#givePayment">
 					</td>

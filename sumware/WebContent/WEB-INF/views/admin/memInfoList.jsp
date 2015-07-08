@@ -43,7 +43,7 @@
 							<td>${mList.memhire}</td>
 							<td>
 								<input type="button" class="btn btn-default btn-sm" value="인사고과" 
-								data-toggle="modal" data-target="#prForm">
+								onclick="javascript:getMemInfoForModal('prForm',${mList.memnum})">
 								<input type="button" class="btn btn-default btn-sm" value="퇴사 처리" onclick="resignMem(${mList.memnum})">
 							</td>
 						</tr>
@@ -53,78 +53,20 @@
 		</div>
 		<!-- List (E) -->
 		
-		<!-- Modal (S) -->
-		<div class="modal fade" id="prForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h3 class="modal-title" id="myModalLabel">Modal title</h3>
-	      </div>
-	      <div class="modal-body">
-	         <div class="tabbable"> 
-		        <ul class="nav nav-tabs">
-		        <li class="active"><a href="#tab1" data-toggle="tab">사원 진급 처리</a></li>
-		        <li><a href="#tab2" data-toggle="tab">사원 부서 이동</a></li>
-		        </ul>
-		        <div class="tab-content">
-		        
-		        	<br/>
-			        <div class="tab-pane active" id="tab1"> 
-			        	<div class="form-group">
-			        		<label class="control-label">현재 직급</label> 
-							<input type="text" id="curmemjob" class="form-control" style="width: 120px" readonly="readonly">
-			        	</div>
-			        	<div class="form-group">
-							<label class="control-label">변경할 직급</label> 
-							<select name="memjob" id="newmemjob" class="form-control" style="width: 120px">
-											<option value="0">직급 선택</option>								
-											<option value="대표이사">대표이사</option>
-											<option value="이사">이사</option>
-											<option value="부장">부장</option>
-											<option value="팀장">팀장</option>
-											<option value="사원">사원</option>
-							</select>
-						</div>
-			        </div>
-			   
-			        <div class="tab-pane" id="tab2">
-			        	<div class="form-group">
-			        		<label class="control-label">현재 부서</label> 
-							<input type="text" id="curmemdept" class="form-control" style="width: 120px" readonly="readonly">
-			        	</div>
-			        	<div class="form-group">
-							<label class="control-label">변경할 부서</label> 
-							<select name="memdept" id="newmemdept" class="form-control" style="width: 120px">
-											<option value="0">부서 선택</option>								
-											<option value="100">인사부</option>
-											<option value="200">총무부</option>
-											<option value="300">영업부</option>
-											<option value="400">전산부</option>
-											<option value="500">기획부</option>
-							</select>
-						</div>
-			        </div>
-		        </div>
-		        </div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" onclick="saveChange()">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-							
-		<!-- Modal (E) -->
+		<div id="modalTarget"></div>
 		
 		
 			
 		<!-- Button to trigger modal -->
 <!-- <a href="#TaskListDialog" role="button" class="btn" data-toggle="modal">Launch demo modal</a> -->
 <script>
-	function saveChange(){
+// 탭 아이디 불러오기
+// 모달 닫기
+	function saveChange(memnum){
+		console.log("사원 번호: "+memnum);
 		console.log("탭 아이디: "+$(".tab-pane active").attr("id"));
+		console.log($(".tab-pane").attr("id"));
+		
 		if($(".tab-pane active").attr("id") == "tab1"){
 			// 직급 변경 탭
 			console.log("직급 변경 탭");
@@ -136,7 +78,7 @@
 					type: "POST",
 					url: "adminPromoteMem",
 					data: {
-						memnum: 10004,
+						memnum: memnum,
 						memjob: $("#newmemjob").val()
 					},
 					success: function(result){
@@ -155,12 +97,12 @@
 					type: "POST",
 					url: "adminMoveDept",
 					data: {
-						memnum: 10004,
+						memnum: memnum,
 						memdept: $("#newmemdept").val()
 					},
 					success: function(result){
 						// 모달 꺼줘야 함
-						$('#prForm').modal('toggle');
+						// $('#prForm').modal('toggle');
 						$('.contents').html(result);
 					}
 				});

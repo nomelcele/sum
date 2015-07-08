@@ -74,8 +74,9 @@
 	
 	<!-- 멤버 정보 가져옴!!!! -->
 	<select id="getMemInfo" parameterType="mvo" resultType="mvo">
-		select memnum,memname,memaddr,mempwd,memprofile,memjob,memauth,memmail,meminmail,memmgr,memdept,memhire,memresign,membirth,memsignimg 
-		from member where memnum=#{memnum}
+		select m.memnum,m.memname,m.memaddr,m.mempwd,m.memprofile,m.memjob,
+		m.memauth,m.memmail,m.meminmail,m.memmgr,m.memdept,m.memhire,m.memresign,m.membirth,m.memsignimg,
+		d.dename from member m,dept d where memnum=#{memnum} and d.denum=m.memdept
 	</select>
 	
 	<!-- 멤버의 pay 정보 가져옴 -->

@@ -228,8 +228,8 @@ function resignMem(memnum){
 	}
 }
 
-// mem정보 가지고 모달창 띄우기
-function getMemInfoForModal(res){
+//mem정보 가지고 모달창 띄우기
+function getMemInfoForModal(id,res){
 	$.ajax({
 		type: "POST",
 		url: "getMemInfoForModal",
@@ -239,22 +239,26 @@ function getMemInfoForModal(res){
 		success: function(result){
 			alert("ggg");
 			$('#modalTarget').html(result);
-			$('#giveBonus').modal('toggle');
+			if(id=='prForm'){
+				$('#prForm').modal('toggle');
+			} else {
+				$('#giveBonus').modal('toggle');
+			}
 		}
 	});
 }
 
 
 // 급여 변경하기위한 메서드
-function payManage(res){
+function payManage(res,data){
 	if(res == 'giveBonus'){
 		$.ajax({
 			type: "POST",
 			url: "giveBonus",
 			data: {
 				comdetail: $('#comdetail').val(),
-				comamount:$('#comamount').val()
-				commem
+				comamount:$('#comamount').val(),
+				commem:data
 			},
 			success: function(result){
 				//$('#modalTarget').html(result);
