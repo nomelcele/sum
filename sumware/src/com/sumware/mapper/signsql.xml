@@ -22,7 +22,8 @@
 	</select>
 	
 	<!-- 결재문서의 종류 중 하나를 택해서 작성 한다. -->
-	<select id="getSf" parameterType="sfvo" resultType="sfvo">
+	<select id="getSf" parameterType="int" resultType="sfvo">
+		select * from signform where sfnum=#{sfnum}
 	</select>
 	
 	<!-- 선택된 문서를 작성 한다 -->
