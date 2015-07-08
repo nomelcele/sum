@@ -282,13 +282,15 @@ create table signature(
  sgwriter number(5),--작성자
  finalmemnum number, -- 최종 결재자의 사번 fk
  nowmemnum number, -- 현재 결재자의 사번 fk
- stitle varchar2(40), 
+ sgwriter number(5), -- 기안자 fk member 사번
+ stitle varchar2(40),
  scont clob,
  sreason clob,
  startdate date,
  enddate DATE,
  CONSTRAINT SIGN_snum_pk PRIMARY KEY(snum),
  CONSTRAINT sign_formnum_fk FOREIGN KEY(formnum) REFERENCES signform(sfnum) ON DELETE CASCADE,
+ constraint sign_sgwriter_fk foreign key(sgwriter) references member(memnum) on delete set null,
  CONSTRAINT sign_finalmemnum_fk FOREIGN KEY(finalmemnum) REFERENCES member(memnum) ON DELETE CASCADE,
  CONSTRAINT sign_nowmemnum_fk FOREIGN KEY(nowmemnum) REFERENCES member(memnum) ON DELETE CASCADE,
   CONSTRAINT sign_sgwriter_fk FOREIGN KEY(sgwriter) REFERENCES member(memnum) ON DELETE CASCADE
