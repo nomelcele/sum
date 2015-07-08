@@ -68,7 +68,7 @@
 		
 		if(newmemjob == 0 && newmemdept == 0){
 			alert("변경 사항을 선택하세요");
-		} else if(newmemjob != null){
+		} else if(newmemjob != 0){
 			// 첫번째 탭에서 변경할 직급을 선택했을 때
 			// 직급 변경 탭
 			console.log("직급 변경 탭");
@@ -88,7 +88,7 @@
 					}
 				});
 			}
-		} else if(newmemdept != null){
+		} else if(newmemdept != 0){
 			// 두번째 탭에서 변경할 부서를 선택했을 때
 			// 부서 이동 탭
 			console.log("부서 이동 탭");
