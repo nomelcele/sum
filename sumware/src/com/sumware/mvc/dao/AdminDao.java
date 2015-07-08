@@ -59,4 +59,10 @@ public class AdminDao {
 		st.insert("admin.insertPay", payvo);
 	}
 	
+	// 사원 퇴사 처리
+	public void resignMem(int memnum){
+		System.out.println("퇴사 처리할 사원: "+memnum);
+		st.update("admin.resignMem", memnum);
+	}
+	
 }

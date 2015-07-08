@@ -22,7 +22,6 @@
 			<table class="table table-condensed table-hover" id="listTable">
 				<tbody>
 					<tr style="background-color: #F5F5F5;">
-<!-- 						<td class="col-lg-1"><input type="checkbox" name="all" onclick="checkAll(this)"></td> -->
 						<td class="col-lg-1"><span>이름</span></td>
 						<td class="col-lg-1"><span>ID</span></td>
 						<td class="col-lg-1"><span>생년월일</span></td>
@@ -35,7 +34,6 @@
 					
 					<c:forEach var="mList" items="${list}">
 						<tr>
-<%-- 							<td><input type="checkbox" name="chk" id="chk" value="${mList.memnum}"></td> --%>
 							<td>${mList.memname}</td>
 							<td>${mList.meminmail}</td>
 							<td>${mList.membirth}</td>
@@ -45,7 +43,7 @@
 							<td>${mList.memhire}</td>
 							<td>
 								<input type="button" class="btn btn-default btn-sm" value="인사고과" onclick="adminSelectMenu('adminMemList')">
-								<input type="button" class="btn btn-default btn-sm" value="퇴사 처리" onclick="adminSelectMenu('adminMemList')">
+								<input type="button" class="btn btn-default btn-sm" value="퇴사 처리" onclick="resignMem(${mList.memnum})">
 							</td>
 						</tr>
 					</c:forEach>

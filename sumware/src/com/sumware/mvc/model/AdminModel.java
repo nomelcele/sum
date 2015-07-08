@@ -149,4 +149,11 @@ public class AdminModel {
 		return "admin/payInfoDetail";
 	}
 	
+	// 사원 퇴사 처리
+	@RequestMapping(value="/adminResignMem")
+	public String resignMem(int memnum){
+		adao.resignMem(memnum);
+		return "redirect:/adminMemList";
+	}
+	
 }
