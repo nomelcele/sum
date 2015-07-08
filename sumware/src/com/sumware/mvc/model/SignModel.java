@@ -24,6 +24,7 @@ public class SignModel {
 	private SignDao sgdao;
 	@Autowired
 	private SignServiceImple signService;
+	
 	// 전자결재 첫화면으로 가는 메쏘오드.
 	@RequestMapping(value="sign")
 	public String acountMain(HttpSession session){
@@ -37,6 +38,7 @@ public class SignModel {
 		session.setAttribute("model", "sign");
 		return "sign.signList";
 	}
+	
 	// 회사의 결재 문서들의 종류를 보여주는 메소오드~ajax처리
 	@RequestMapping(value="getSignFormList")
 	public String getSignFormList(Model mod,HttpSession session){

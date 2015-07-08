@@ -21,7 +21,7 @@
 		select * from member where memnum=(select memmgr from member where memnum=#{memnum})
 	</select>
 	
-	<!-- 결재문서의 종류 중 하나를 택해서 작성 한다. -->
+	<!-- 결재문서의 종류 중 하나를 택해서 불러온다. -->
 	<select id="getSf" parameterType="int" resultType="sfvo">
 		select * from signform where sfnum=#{sfnum}
 	</select>
@@ -29,7 +29,5 @@
 	<!-- 선택된 문서를 작성 한다 -->
 	<insert id="writeSf" parameterType="map">
 	</insert>
-	
-	<!-- 결재된 문서를  -->
 	
 </mapper>

@@ -23,5 +23,6 @@
   		<typeAlias type="com.sumware.dto.SignStepVO" alias="ssvo"/>
   		<typeAlias type="com.sumware.dto.PayHistoryVO" alias="phvo"/>
   		<typeAlias type="com.sumware.dto.CommissionVO" alias="comvo"/>
+  		<typeAlias type="com.sumware.dto.ProductVO" alias="provo"/>
   	</typeAliases>
 </configuration>
