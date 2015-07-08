@@ -40,7 +40,7 @@
 
 	<!-- 사원 정보 불러오기 -->
 	<select id="getMemInfoList" parameterType="mvo" resultType="mvo">
-		select m.memname, m.meminmail, m.membirth, m.memaddr, 
+		select m.memnum, m.memname, m.meminmail, m.membirth, m.memaddr, 
 		d.dename, m.memjob, to_char(m.memhire, 'yyyy-mm-dd') memhire from member m, dept d 
 		where d.denum=m.memdept 
 		<choose>
@@ -66,4 +66,6 @@
 	<insert id="insertPay" parameterType="payvo">
 		insert into pay values(#{pmem},#{pyearly},#{psalary})
 	</insert>
+	
+	
 </mapper>
