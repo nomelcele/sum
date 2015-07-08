@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<!-- comment-list(S) -->
 <form action="getSignForm" method="post">
 	<div id="signFormList" style="float: left;">	
 		<select id="formnum" name="formnum" onchange="formListChange()">
