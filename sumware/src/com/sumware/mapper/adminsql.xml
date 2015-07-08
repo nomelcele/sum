@@ -71,4 +71,27 @@
 	<update id="resignMem" parameterType="int">
 		update member set memresign=sysdate where memnum=#{memnum}
 	</update>
+	
+	<!-- 멤버 정보 가져옴!!!! -->
+	<select id="getMemInfo" parameterType="mvo" resultType="mvo">
+		select memnum,memname,memaddr,mempwd,memprofile,memjob,memauth,memmail,meminmail,memmgr,memdept,memhire,memresign,membirth,memsignimg 
+		from member where memnum=#{memnum}
+	</select>
+	
+	<!-- 멤버의 pay 정보 가져옴 -->
+	<select id="getPayInfo" parameterType="int" resultType="payvo">
+		select pyearly, psalary from pay where pmem=#{memnum}
+	</select>
+	
+	<!-- 멤버의 payhistory 정보 가져옴 -->
+	<select id="getPayHistoryInfo" parameterType="phvo" resultType="phvo">
+		select to_char(hisdate, 'yyyy-mm') hisdate, hisamount, hismem, hisnum from payhistory where hismem=#{hismem} order by hisdate desc 
+	</select>
+	
+	<!-- 추가 급여 지급 -->
+	<insert id="giveBonus" parameterType="comvo">
+		insert into 
+	</insert>
+	
+	
 </mapper>

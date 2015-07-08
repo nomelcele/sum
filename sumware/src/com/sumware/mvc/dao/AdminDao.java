@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sumware.dto.BnameVO;
 import com.sumware.dto.MemberVO;
+import com.sumware.dto.PayHistoryVO;
 import com.sumware.dto.PayVO;
 
 @Repository
@@ -63,6 +64,21 @@ public class AdminDao {
 	public void resignMem(int memnum){
 		System.out.println("퇴사 처리할 사원: "+memnum);
 		st.update("admin.resignMem", memnum);
+	}
+	
+	// 멤버 정보 가져옴
+	public MemberVO getMemInfo(MemberVO mvo){
+		return st.selectOne("admin.getMemInfo", mvo);
+	}
+	
+	// 멤버의 pay정보 가져옴
+	public PayVO getPayInfo(int memnum){
+		return st.selectOne("admin.getPayInfo", memnum);
+	}
+	
+	// 멤버의 payhistory정보들 가져옴
+	public List<PayHistoryVO> getPayHistoryInfo(PayHistoryVO phvo){
+		return st.selectList("admin.getPayHistoryInfo", phvo);
 	}
 	
 }
