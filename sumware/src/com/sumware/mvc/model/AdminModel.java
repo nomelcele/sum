@@ -144,7 +144,7 @@ public class AdminModel {
 	}
 	
 	// 급여지급 폼
-		@RequestMapping(value="/adminPayManagement",method=RequestMethod.POST)
+		@RequestMapping(value="/adminPayManagement")
 		public String adminPayManagement(MemberVO mvo,Model model){
 			List<MemberVO> memList = adao.getMemInfoList(mvo);
 			model.addAttribute("list", memList);
@@ -193,10 +193,6 @@ public class AdminModel {
 	// 추가 급여 지급
 	@RequestMapping(value="/giveBonus", method=RequestMethod.POST)
 	public String giveBonus(CommissionVO comvo){
-		System.out.println("commem"+comvo.getCommem());
-		System.out.println("comamout"+comvo.getComamount());
-		System.out.println("comdetail"+comvo.getComdetail());
-		
 			adao.giveBonus(comvo);
 		return "redirect:/adminPayManagement";
 	}
