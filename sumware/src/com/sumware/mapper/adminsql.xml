@@ -67,5 +67,8 @@
 		insert into pay values(#{pmem},#{pyearly},#{psalary})
 	</insert>
 	
-	
+	<!-- 퇴사 처리 -->
+	<update id="resignMem" parameterType="int">
+		update member set memresign=sysdate where memnum=#{memnum}
+	</update>
 </mapper>

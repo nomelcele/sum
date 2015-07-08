@@ -196,3 +196,22 @@ function adminPay(res, data) {
 		});
 	}
 }
+
+// 사원 퇴사 처리
+function resignMem(memnum){
+	console.log("사번: "+memnum);
+	if(!confirm("퇴사 처리하시겠습니까?")){
+		return; // 취소를 할 경우 삭제되지 않는다.
+	} else { // 확인 버튼을 누르면 퇴사 처리
+		$.ajax({
+			type: "POST",
+			url: "adminResignMem",
+			data: {
+				memnum: memnum
+			},
+			success: function(result){
+				$('.contents').html(result);
+			}
+		});
+	}
+}
