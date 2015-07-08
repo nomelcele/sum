@@ -45,10 +45,10 @@
 					<td>${mList.memjob}</td>
 					<td>${mList.memhire}</td>
 					<td>
-					<input type="button" class="btn btn-default btn-sm" value="추가급여지급"
+					<input type="button" class="btn btn-default btn-sm" value="추가급지급"
 					onclick="javascript:getMemInfoForModal('giveBonus',${mList.memnum})">
-					<input type="button" class="btn btn-default btn-sm" value="월급지급"
-					data-toggle="modal" data-target="#givePayment">
+					<input type="button" class="btn btn-default btn-sm" value="월급여지급"
+					onclick="javascript:getMemInfoForModal('giveSalary',${mList.memnum})">
 					</td>
 				</tr>
 			</c:forEach>

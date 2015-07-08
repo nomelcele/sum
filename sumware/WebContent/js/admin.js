@@ -234,7 +234,8 @@ function getMemInfoForModal(id,res){
 		type: "POST",
 		url: "getMemInfoForModal",
 		data: {
-			memnum: res
+			memnum: res,
+			cmd:id
 		},
 		success: function(result){
 			$('#modalTarget').html(result);
@@ -242,6 +243,8 @@ function getMemInfoForModal(id,res){
 				$('#prForm').modal('toggle');
 			} else if(id=='giveBonus') {
 				$('#giveBonus').modal('toggle');
+			} else if(id=='giveSalary'){
+				$('#giveSalary').modal('toggle');
 			}
 		}
 	});
@@ -267,6 +270,8 @@ function payManage(res,data){
 				}
 			});
 		}, 500)
+		
+	}else if(res='giveSalary'){
 		
 	}
 }

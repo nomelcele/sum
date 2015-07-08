@@ -81,7 +81,7 @@
 	
 	<!-- 멤버의 pay 정보 가져옴 -->
 	<select id="getPayInfo" parameterType="int" resultType="payvo">
-		select pyearly, psalary from pay where pmem=#{memnum}
+		select pyearly, psalary, trunc((psalary/12),0) pmonthsalary from pay where pmem=#{memnum}
 	</select>
 	
 	<!-- 멤버의 payhistory 정보 가져옴 -->
@@ -104,5 +104,9 @@
 		update member set memdept=#{memdept} where memnum=#{memnum}
 	</update>
 	
+	<!-- commission 정보들 가져옴 -->
+	<select id="getComInfo" parameterType="int" resultType="comvo">
+		select 
+	</select>
 	
 </mapper>
