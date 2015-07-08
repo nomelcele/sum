@@ -267,3 +267,58 @@ function payManage(res,data){
 		});
 	}
 }
+
+
+
+	// 직급 변경, 부서 이동 처리
+	function prFormSaveChange(memnum){
+		var newmemjob = $("#newmemjob").val();
+		var newmemdept = $("#newmemdept").val();
+		
+		if(newmemjob == 0 && newmemdept == 0){
+			alert("변경 사항을 선택하세요");
+		} else if(newmemjob != 0){
+			// 첫번째 탭에서 변경할 직급을 선택했을 때
+			// 직급 변경 탭
+			console.log("직급 변경 탭");
+			
+			if(!confirm("직급을 변경하시겠습니까?")){
+				return; 
+			} else {
+				$.ajax({
+					type: "POST",
+					url: "adminPromoteMem",
+					data: {
+						memnum: memnum,
+						memjob: $("#newmemjob").val()
+					},
+					success: function(result){
+						$('.contents').html(result);
+					}
+				});
+			}
+		} else if(newmemdept != 0){
+			// 두번째 탭에서 변경할 부서를 선택했을 때
+			// 부서 이동 탭
+			console.log("부서 이동 탭");
+			
+			if(!confirm("부서를 변경하시겠습니까?")){
+				return; // 취소를 할 경우 삭제되지 않는다.
+			} else { 
+				$.ajax({
+					type: "POST",
+					url: "adminMoveDept",
+					data: {
+						memnum: memnum,
+						memdept: $("#newmemdept").val()
+					},
+					success: function(result){
+						// 모달 꺼줘야 함
+						// $('#prForm').modal('toggle');
+						$('.contents').html(result);
+					}
+				});
+			}
+		}
+	}
+
