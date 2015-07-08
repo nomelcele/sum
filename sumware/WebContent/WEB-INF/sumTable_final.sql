@@ -259,6 +259,8 @@ CREATE TABLE commission(
     comamount number(9), -- 커미션 금액
     comdate date, -- 지급받은 날짜 (년월로 구분)
     comnum number(9), -- 고유번호
+    commem number(5), -- 지급받은 사원번호
+    CONSTRAINT commission_commem_fk FOREIGN KEY(commem) REFERENCES MEMBER(memnum),
     CONSTRAINT commission_comnum_pk PRIMARY KEY(comnum)
 );
 
