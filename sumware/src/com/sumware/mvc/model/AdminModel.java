@@ -183,14 +183,22 @@ public class AdminModel {
 	public String getMemInfoForModal(MemberVO vo, Model model){
 		MemberVO mvo = adao.getMemInfo(vo);
 		model.addAttribute("memvo", mvo);
+		// member pay 정보 가져옴
+		PayVO payvo = adao.getPayInfo(vo.getMemnum());
+		model.addAttribute("payvo", payvo);
 		
 		return "admin/modal";
 	}
 	
+	// 추가 급여 지급
 	@RequestMapping(value="/giveBonus", method=RequestMethod.POST)
 	public String giveBonus(CommissionVO comvo){
+		System.out.println("commem"+comvo.getCommem());
+		System.out.println("comamout"+comvo.getComamount());
+		System.out.println("comdetail"+comvo.getComdetail());
 		
-		return "";
+			adao.giveBonus(comvo);
+		return "redirect:/adminPayManagement";
 	}
 	
 	// 사원 진급 처리
