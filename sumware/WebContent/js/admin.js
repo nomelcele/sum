@@ -237,11 +237,10 @@ function getMemInfoForModal(id,res){
 			memnum: res
 		},
 		success: function(result){
-			alert("ggg");
 			$('#modalTarget').html(result);
 			if(id=='prForm'){
 				$('#prForm').modal('toggle');
-			} else {
+			} else if(id=='giveBonus') {
 				$('#giveBonus').modal('toggle');
 			}
 		}
@@ -252,19 +251,23 @@ function getMemInfoForModal(id,res){
 // 급여 변경하기위한 메서드
 function payManage(res,data){
 	if(res == 'giveBonus'){
-		$.ajax({
-			type: "POST",
-			url: "giveBonus",
-			data: {
-				comdetail: $('#comdetail').val(),
-				comamount:$('#comamount').val(),
-				commem:data
-			},
-			success: function(result){
-				//$('#modalTarget').html(result);
-				$('#giveBonus').modal('toggle');
-			}
-		});
+		$('#giveBonus').modal('toggle');
+		setTimeout(function(){
+			$.ajax({
+				type: "POST",
+				url: "giveBonus",
+				data: {
+					comdetail: $('#comdetail').val(),
+					comamount:$('#comamount').val(),
+					commem:data
+				},
+				success: function(result){
+					alert("지급 처리가 완료되었습니다.");				
+					$('.contents').html(result);
+				}
+			});
+		}, 500)
+		
 	}
 }
 
