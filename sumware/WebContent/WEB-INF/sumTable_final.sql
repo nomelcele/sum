@@ -255,10 +255,10 @@ CREATE TABLE payhistory(
 CREATE SEQUENCE payhistory_seq INCREMENT BY 1 START WITH 1;
 
 CREATE TABLE commission(
-	comdetail VARCHAR2(50), -- 커시면 내역
+    comdetail VARCHAR2(50), -- 커미션 내역
     comamount number(9), -- 커미션 금액
-    comnum NUMBER(10), -- 지급번호는 payhistory 의 hisnum 을 fk
-    CONSTRAINT commission_comnum_fk FOREIGN KEY(comnum) REFERENCES payhistory(hisnum),
+    comdate date, -- 지급받은 날짜 (년월로 구분)
+    comnum number(9), -- 고유번호
     CONSTRAINT commission_comnum_pk PRIMARY KEY(comnum)
 );
 
