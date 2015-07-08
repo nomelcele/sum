@@ -94,6 +94,18 @@ function adminSelectMenu(res) {
 				$('.contents').html(result);
 			}
 		});
+	} else if(res == 'adminPayManagement'){
+		$.ajax({
+			type : "POST",
+			url : "adminPayManagement",
+			data : {
+				memname : $("#searchName").val()
+			},
+			success : function(result) {
+				$('.contents').html(result);
+			}
+		});
+		
 	}
 }
 
@@ -211,6 +223,41 @@ function resignMem(memnum){
 			},
 			success: function(result){
 				$('.contents').html(result);
+			}
+		});
+	}
+}
+
+// mem정보 가지고 모달창 띄우기
+function getMemInfoForModal(res){
+	$.ajax({
+		type: "POST",
+		url: "getMemInfoForModal",
+		data: {
+			memnum: res
+		},
+		success: function(result){
+			alert("ggg");
+			$('#modalTarget').html(result);
+			$('#giveBonus').modal('toggle');
+		}
+	});
+}
+
+
+// 급여 변경하기위한 메서드
+function payManage(res){
+	if(res == 'giveBonus'){
+		$.ajax({
+			type: "POST",
+			url: "giveBonus",
+			data: {
+				comdetail: $('#comdetail').val(),
+				comamount:$('#comamount').val()
+			},
+			success: function(result){
+				//$('#modalTarget').html(result);
+				$('#giveBonus').modal('toggle');
 			}
 		});
 	}

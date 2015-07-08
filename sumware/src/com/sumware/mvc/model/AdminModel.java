@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sumware.dto.BnameVO;
+import com.sumware.dto.CommissionVO;
 import com.sumware.dto.MemberVO;
+import com.sumware.dto.PayHistoryVO;
 import com.sumware.dto.PayVO;
 import com.sumware.mvc.dao.AdminDao;
 import com.sumware.mvc.service.ServiceInter;
@@ -141,10 +143,30 @@ public class AdminModel {
 		return "admin/payInfoList";
 	}
 	
+	// 급여지급 폼
+		@RequestMapping(value="/adminPayManagement",method=RequestMethod.POST)
+		public String adminPayManagement(MemberVO mvo,Model model){
+			List<MemberVO> memList = adao.getMemInfoList(mvo);
+			model.addAttribute("list", memList);
+			return "admin/payManagement";
+		}
+	
 	// 사원의 급여 디테일
 	@RequestMapping(value="/adminPayInfoDetail", method=RequestMethod.POST)
-	public String adminPayInfoDetail(MemberVO mvo, Model model){
+	public String adminPayInfoDetail(MemberVO vo, Model model){
+		System.out.println("memnum ::"+vo.getMemnum());
 		
+		// member 정보 가져옴
+		MemberVO mvo = adao.getMemInfo(vo);
+		model.addAttribute("memvo", mvo);
+		// member pay 정보 가져옴
+		PayVO payvo = adao.getPayInfo(vo.getMemnum());
+		model.addAttribute("payvo", payvo);
+		// member payhistory 정보 가져옴
+		PayHistoryVO payhistoryvo = new PayHistoryVO();
+		payhistoryvo.setHismem(vo.getMemnum());
+		List<PayHistoryVO> phvo = adao.getPayHistoryInfo(payhistoryvo);
+		model.addAttribute("phvoList", phvo);
 		
 		return "admin/payInfoDetail";
 	}
@@ -154,6 +176,21 @@ public class AdminModel {
 	public String resignMem(int memnum){
 		adao.resignMem(memnum);
 		return "redirect:/adminMemList";
+	}
+	
+//	// 모달에 mem정보
+	@RequestMapping(value="/getMemInfoForModal", method=RequestMethod.POST)
+	public String getMemInfoForModal(MemberVO vo, Model model){
+		MemberVO mvo = adao.getMemInfo(vo);
+		model.addAttribute("memvo", mvo);
+		
+		return "admin/modal";
+	}
+	
+	@RequestMapping(value="/giveBonus", method=RequestMethod.POST)
+	public String giveBonus(CommissionVO comvo){
+		
+		return "";
 	}
 	
 }
