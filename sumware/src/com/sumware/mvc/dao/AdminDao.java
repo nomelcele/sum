@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sumware.dto.BnameVO;
+import com.sumware.dto.CommissionVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.PayHistoryVO;
 import com.sumware.dto.PayVO;
@@ -89,6 +90,11 @@ public class AdminDao {
 	// 사원 부서 이동
 	public void moveDept(MemberVO mvo){
 		st.update("admin.moveDept", mvo);
+	}
+	
+	// 추가 급여 지급
+	public void giveBonus(CommissionVO comvo){
+		st.insert("admin.giveBonus", comvo);
 	}
 	
 }

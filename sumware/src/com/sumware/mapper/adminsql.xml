@@ -91,7 +91,7 @@
 	
 	<!-- 추가 급여 지급 -->
 	<insert id="giveBonus" parameterType="comvo">
-		insert into 
+		insert into commission values(#{comdetail},#{comamount},sysdate,commission_seq.nextVal,#{commem})
 	</insert>
 	
 	<!-- 진급 처리 -->

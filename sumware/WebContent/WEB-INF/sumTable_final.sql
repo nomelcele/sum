@@ -264,6 +264,10 @@ CREATE TABLE commission(
     CONSTRAINT commission_comnum_pk PRIMARY KEY(comnum)
 );
 
+create sequence commission_seq
+increment by 1
+start with 1;
+
 create table administrator(
  anum number, -- pk
  amem NUMBER, -- 사번과 연결

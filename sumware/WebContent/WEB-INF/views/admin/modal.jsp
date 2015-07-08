@@ -53,8 +53,8 @@
 			</div>
 
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-default" data-dismiss="modal"
-					onclick="javascript:payManage('giveBonus')">저장</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"
+					onclick="javascript:payManage('giveBonus',${memvo.memnum})">저장</button>
 			</div>
 		</div>
 
