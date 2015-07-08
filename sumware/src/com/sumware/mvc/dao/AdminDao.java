@@ -81,4 +81,14 @@ public class AdminDao {
 		return st.selectList("admin.getPayHistoryInfo", phvo);
 	}
 	
+	// 사원 진급 처리
+	public void promoteMem(MemberVO mvo){
+		st.update("admin.promoteMem",mvo);
+	}
+	
+	// 사원 부서 이동
+	public void moveDept(MemberVO mvo){
+		st.update("admin.moveDept", mvo);
+	}
+	
 }
