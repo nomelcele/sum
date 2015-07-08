@@ -93,5 +93,15 @@
 		insert into 
 	</insert>
 	
+	<!-- 진급 처리 -->
+	<update id="promoteMem" parameterType="mvo">
+		update member set memjob=#{memjob} where memnum=#{memnum}
+	</update>
+	
+	<!-- 부서 이동 -->
+	<update id="moveDept" parameterType="mvo">
+		update member set memdept=#{memdept} where memnum=#{memnum}
+	</update>
+	
 	
 </mapper>

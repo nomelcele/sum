@@ -128,7 +128,7 @@ public class AdminModel {
 	}
 
 	// 사원 개인 정보 리스트 가져오는 메서드
-	@RequestMapping(value="/adminMemList",method=RequestMethod.POST)
+	@RequestMapping(value="/adminMemList")
 	public String getMemInfoList(MemberVO mvo,Model model){
 		List<MemberVO> memList = adao.getMemInfoList(mvo);
 		model.addAttribute("list", memList);
@@ -192,5 +192,21 @@ public class AdminModel {
 		
 		return "";
 	}
+	
+	// 사원 진급 처리
+	@RequestMapping(value="/adminPromoteMem",method=RequestMethod.POST)
+	public String promoteMem(MemberVO mvo){
+		adao.promoteMem(mvo);
+		return "redirect:/adminMemList";
+	}
+	
+	// 사원 부서 이동
+	@RequestMapping(value="/adminMoveDept",method=RequestMethod.POST)
+	public String moveDept(MemberVO mvo){
+		adao.moveDept(mvo);
+		return "redirect:/adminMemList";
+	}
+	
+	
 	
 }
