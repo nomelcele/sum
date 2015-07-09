@@ -1,14 +1,111 @@
 @CHARSET "UTF-8";
-.auction table{
+.auction-table {
 	width: 100%;
+	border-top:2px solid #ccc;
+
 }
 .auction table tbody th{
+	width: 120px;
 	background-color: #f5f5f5;
 	height: 30px;
-	text-align : center;
+	text-align : right;
 }
-.auction table tbody td{
+.auction table tbody td {
 	background-color: white;
 	height: 30px;
 	text-align : center;
 }
+
+/* 옥션 테이블 공통  */
+#global .auction-table {
+	border-top: 2px solid #559A9E;
+}
+#global .auction-table td {
+	padding: 8px 15px 9px;
+	text-align:left;
+}
+#global .auction-table td input[type="date"] {
+	height:25px;
+	border:1px solid #ccc;
+}
+
+/* 상품명 */
+#global .pro-name td input {
+	width:100%;height:25px;
+	border:1px solid #ccc;
+}
+
+/* 가격 */
+.auc-price input {
+	font-size:14px;font-weight:700;
+	padding:0 5px;
+	text-align:right;
+	color: rgb(0, 60, 63);}
+
+/* 날짜 */
+.auc-date input {
+	width:130px;
+	padding-left:5px;
+	font-family:Tahoma,"맑은 고딕","Malgul Gothic","돋움",Dotum,sans-serif;
+
+
+	
+}
+
+
+/* 상품 상세 이미지 */
+.auc-pro-img {
+	
+}
+
+.auc-pro-img #imgTarget {
+    display: block;
+    width: 100%;
+    min-height: 230px;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+    background: #F5F7F7 url(https://cdn4.iconfinder.com/data/icons/technology-devices-1/500/magnifier-128.png) center center no-repeat;
+    background-size: 110px;
+    text-align: center;
+}
+.auc-pro-img #imgTarget img {
+    max-width: 100%!important;
+	
+    border-radius: 5px;
+    border: 1px solid #00787E;
+}
+
+
+/* 상품설명 */
+.auc-info textarea {
+	width:100%;
+	height: 130px;
+	padding: 5px;
+	border-color: #ccc;
+}
+
+
+
+/* modal popup customize */
+.modal-dialog .modal-header {
+    padding: 10px 15px;
+    background-color: #00787E;
+}
+.modal-header button.close {
+	position: relative;
+	min-width: 40px;
+	margin-top: 0;
+	transition:all .5s ease;
+	top: -2px;
+	right: -4px;
+}
+.modal-header button.close:hover {
+	background-color: #FFFFFF;
+	border: 1px solid #305152;
+}
+.modal-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
