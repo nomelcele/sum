@@ -1,14 +1,19 @@
 package com.sumware.mvc.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sumware.dto.MemberVO;
+import com.sumware.dto.SignatureVO;
 import com.sumware.mvc.dao.SignDao;
 @Service
+@Transactional
 public class SignServiceImple extends AbstractService{
 	@Autowired
 	SignDao sgdao;
@@ -36,6 +41,16 @@ public class SignServiceImple extends AbstractService{
 			str[i]=sgdao.getMgrName(Integer.parseInt(memnum[i]));
 		}
 		return str;
+	}
+	@Override
+	public void insertSignService(SignatureVO sgvo,
+			List<HashMap<String, String>> mgrList) {
+		sgdao.writeSf(sgvo);
+		String stepsnum = String.valueOf(sgdao.getMax());
+		for(Map<String,String> map : mgrList){
+			map.put("stepsnum", stepsnum);
+			sgdao.writeSignStep(map);
+		}
 	}
 	
 

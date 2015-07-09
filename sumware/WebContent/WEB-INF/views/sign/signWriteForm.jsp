@@ -14,9 +14,9 @@
 		names['${index.count}']='${sn}';
 		"</c:forEach>"
 		$('#sgwriter').val("${sessionScope.v.memname}");
-		addSign(mgrs,names,"${sessionScope.v.memnum}");
+		addSign(mgrs,names,"${sessionScope.v.memnum}","${sessionScope.v.memdept}");
 	});
-	function addSign(mgrs,names,memnum){
+	function addSign(mgrs,names,memnum,memdept){
 		$('#signImg').html("");
 		var sgHtml="";
 		for(var h=1; h<=size; h++){
@@ -24,6 +24,7 @@
 			sgHtml+="<input type='hidden' id='sgImg"+h+"' name='sgImg"+h+"'value='n'/>";
 		}
 		sgHtml+="<input type='hidden' name='sgwriter' value='"+memnum+"'>";
+		sgHtml+="<input type='hidden' name='sgdept' value='"+memdept+"'>";
 		sgHtml+="<table><tr>";
 		for(var n=1; n<=size; n++){
 			sgHtml+="<td style='border: 1px solid;'>"+names[n]+"</td>";
@@ -68,6 +69,5 @@
 			}
 		}
 	}
- 
 </script>
 ${sf.sform}

@@ -28,17 +28,25 @@ public class SignModel {
 	@Autowired
 	private SignServiceImple signService;
 	
-	// 전자결재 첫화면으로 가는 메쏘오드.
-	@RequestMapping(value="sign")
-	public String acountMain(HttpSession session){
-		session.setAttribute("model", "sign");
-		return "sign.signMain";
-	}
-	
 	// 해당 부서의 결재 문서를 조회 관리(전체, 대기, 완료, 수신, 반려) 등등~
 	@RequestMapping(value="getSignList")
-	public String getSignList(SignatureVO sgvo,Model mod,HttpSession session){
+	public String getSignList(HttpServletRequest request){
+		HttpSession session = request.getSession();
 		session.setAttribute("model", "sign");
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		
+		//나중에 페이징 처리할때 map으로 바꾸고 페이지한테 맵객체 받아서 쓰자
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		String div = request.getParameter("signdiv");
+		map.put("sgdept", mvo.getMemdept());
+		if(div!=null){
+			map.put("signdiv",Integer.parseInt(div));
+		}else{
+			map.put("signdiv",0);
+		}
+		List<SignatureVO> sgList=sgdao.getSignList(map);
+		request.setAttribute("sgList", sgList);
+		
 		return "sign.signList";
 	}
 	
@@ -89,8 +97,8 @@ public class SignModel {
 		while(true){
 			if(map.get("sgMgr"+i)!=null){
 				HashMap<String, String> mgr= new HashMap<String, String>();
-				mgr.put("sgMgr"+i, map.get("sgMgr"+i));
-				mgr.put("sgImg"+i, map.get("sgImg"+i));
+				mgr.put("stepmemnum", map.get("sgMgr"+i));
+				mgr.put("stepconfirm", map.get("sgImg"+i));
 				sgMgrList.add(mgr);
 				i++;
 			}else{
@@ -98,7 +106,7 @@ public class SignModel {
 				break;
 			}
 		}
-		sgvo.setNowmemnum(Integer.parseInt(sgMgrList.get(0).get("sgMgr1")));
+		sgvo.setNowmemnum(Integer.parseInt(sgMgrList.get(0).get("stepmemnum")));
 		
 		System.out.println("============");
 		System.out.println("문서번호: "+sgvo.getFormnum());
@@ -108,11 +116,19 @@ public class SignModel {
 		System.out.println("끝나는날짜: "+sgvo.getEnddate());
 		System.out.println("현재결재자: "+sgvo.getNowmemnum());
 		System.out.println("최종결재자: "+sgvo.getFinalmemnum());
+		System.out.println("내용: "+sgvo.getScont());
+		System.out.println("사유: "+sgvo.getSreason());
 		System.out.println("============");
 		
+		signService.insertSignService(sgvo, sgMgrList);
 		return "sign.signList";
 	}
-	
+	//상세보기
+	@RequestMapping(value="signDetail",method=RequestMethod.GET)
+	public String signDetail(HttpServletRequest request){
+		int snum = Integer.parseInt(request.getParameter("snum"));
+		return "sign.signDetail";
+	}
 	// 결재권자가 올라온 문서를 결재 할때 사용 되는 메서드
 	@RequestMapping(value="confirm")
 	public String confirm(SignatureVO sgvo){
