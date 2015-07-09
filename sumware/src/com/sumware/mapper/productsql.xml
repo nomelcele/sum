@@ -3,4 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pro">
+<!--  
+PRODUCT	VARCHAR2(100)
+PROIMG	VARCHAR2(50)
+PROWRITER	NUMBER(5)
+PRICE	NUMBER(8)
+PROCOUNT	NUMBER(3)
+PRONUM	NUMBER(5)
+ZZIM	VARCHAR2(1)
+
+-->
+	<insert id="proInsert" parameterType="provo">
+		insert into product values('DSLR',#{proimg},10006,1000000,0,product_seq.nextVal,'n')
+	</insert>
 </mapper>
