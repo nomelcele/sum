@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.SignFormVO;
+import com.sumware.dto.SignStepVO;
 import com.sumware.dto.SignatureVO;
 import com.sumware.mvc.dao.SignDao;
 import com.sumware.mvc.service.SignServiceImple;
@@ -81,32 +82,22 @@ public class SignModel {
 		request.setAttribute("sf", sfvo);
 		request.setAttribute("signMgrs", signMgrs);
 		request.setAttribute("sgNames", signNames);
+		request.setAttribute("signMode", "write");
 		return "sign.signWriteForm";
 	}
 	
 	// 선택된 문서를 작성 함.
 	@RequestMapping(value="writeSign",method=RequestMethod.POST)
 	public String writeSignForm(SignatureVO sgvo,@RequestParam Map<String,String> map){
-		System.out.println("작성합시다");
+		System.out.println("작성합시다.");
 		for(Map.Entry<String, String> m : map.entrySet()){
 			System.out.println(m.getKey()+" :: "+m.getValue());
 		}
 		
-		ArrayList<HashMap<String, String>> sgMgrList=new ArrayList<HashMap<String,String>>();
-		int i=1;
-		while(true){
-			if(map.get("sgMgr"+i)!=null){
-				HashMap<String, String> mgr= new HashMap<String, String>();
-				mgr.put("stepmemnum", map.get("sgMgr"+i));
-				mgr.put("stepconfirm", map.get("sgImg"+i));
-				sgMgrList.add(mgr);
-				i++;
-			}else{
-				sgvo.setFinalmemnum(Integer.parseInt(map.get("sgMgr"+(i-1))));
-				break;
-			}
-		}
+		ArrayList<HashMap<String, String>> sgMgrList=setSignStep(map);
+		
 		sgvo.setNowmemnum(Integer.parseInt(sgMgrList.get(0).get("stepmemnum")));
+		sgvo.setFinalmemnum(Integer.parseInt(map.get("sgMgr"+(sgMgrList.size()-1))));
 		
 		System.out.println("============");
 		System.out.println("문서번호: "+sgvo.getFormnum());
@@ -127,12 +118,39 @@ public class SignModel {
 	@RequestMapping(value="signDetail",method=RequestMethod.GET)
 	public String signDetail(HttpServletRequest request){
 		int snum = Integer.parseInt(request.getParameter("snum"));
+		SignatureVO sgvo= sgdao.signDetail(snum);
+		List<SignStepVO> ssList=sgdao.getSignStep(snum);
+		SignFormVO sfvo = sgdao.getSf(sgvo.getFormnum());
+		String[] ssMem = new String[ssList.size()];
+		
+		for(int i =0; i<ssMem.length; i++){
+			ssMem[i]=String.valueOf(ssList.get(i).getStepmemnum());
+		}
+		String[] signNames=signService.getMgrNames(ssMem);
+		request.setAttribute("sgvo", sgvo);
+		request.setAttribute("sf", sfvo);
+		request.setAttribute("ssList", ssList);
+		request.setAttribute("sgNames", signNames);
+		request.setAttribute("signMode", "detail");
 		return "sign.signDetail";
 	}
 	// 결재권자가 올라온 문서를 결재 할때 사용 되는 메서드
-	@RequestMapping(value="confirm")
-	public String confirm(SignatureVO sgvo){
-		return null;
+	@RequestMapping(value="confirm",method=RequestMethod.POST)
+	public String confirm(@RequestParam Map<String,String> map){
+		System.out.println("결재를 하자");
+		for(Map.Entry<String, String> m : map.entrySet()){
+			System.out.println(m.getKey()+" :: "+m.getValue());
+		}
+		ArrayList<HashMap<String, String>> stepList =setSignStep(map);
+		for(HashMap<String, String> step : stepList){
+			int i =1;
+			if(step.get("stepnum")!=null){
+				System.out.println("if in stepnum::"+step.get("stepnum"+i));
+				sgdao.updateSignStep(step);
+			}
+			i++;
+		}
+		return "redirect:getSignList";
 	}
 	
 	// 결재 문서를 조건에 맞게 검색(결과 내 검색)
@@ -146,5 +164,23 @@ public class SignModel {
 	public String getDoc(SignatureVO sgvo){
 		return null;
 	}
-	
+	private ArrayList<HashMap<String,String>> setSignStep(Map<String,String> map){
+		ArrayList<HashMap<String, String>> sgMgrList=new ArrayList<HashMap<String,String>>();
+		int i=1;
+		while(true){
+			if(map.get("sgMgr"+i)!=null){
+				HashMap<String, String> mgr= new HashMap<String, String>();
+				mgr.put("stepmemnum", map.get("sgMgr"+i));
+				mgr.put("stepconfirm", map.get("sgImg"+i));
+				if(map.get("stepnum"+i)!=null){
+					mgr.put("stepnum", map.get("stepnum"+i));
+				}
+				sgMgrList.add(mgr);
+				i++;
+			}else{
+				break;
+			}
+		}
+		return sgMgrList;
+	}	
 }

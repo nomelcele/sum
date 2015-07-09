@@ -15,10 +15,10 @@
 			</when>
 			<otherwise>
 				select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,
-				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'mm')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
-				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'mm')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
+				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'MM')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
+				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'MM')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
 				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y') ycount,(select count(stepconfirm) ncount from signstep where stepconfirm='n') ncount,m.memname
-				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter
+				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter order by snum desc
 			</otherwise>
 		</choose>
 		
@@ -53,8 +53,6 @@
 			values(signature_seq.nextVal,#{formnum},#{finalmemnum},#{nowmemnum},#{stitle},#{scont},#{startdate},#{enddate},#{sgwriter},#{sgdept},#{sreason})
 		</otherwise>
 	</choose>
-	
-		
 	</insert>
 	<select id="getMax" resultType="int">
 		select max(snum) snum from signature
@@ -64,5 +62,20 @@
 		values(signstep_seq.nextVal,#{stepsnum},#{stepmemnum},#{stepconfirm})
 	</insert>
 	<!-- / -->
+	<!-- detail -->
+	<select id="signDetail" parameterType="int" resultType="sgvo">
+		select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,
+				to_char(sg.startdate,'yyyy-MM-dd') startdate,
+				to_char(sg.enddate,'yyyy-MM-dd') enddate,
+				sg.sgwriter,m.memname from signature sg,member m where m.memnum=sg.sgwriter and snum = #{snum}
+	</select>
+	<select id="getSignStep" parameterType="int" resultType="ssvo">
+		select * from signstep where stepsnum = #{stepsnum}
+	</select>
+	<!-- / -->
+	<!-- 결재저장. -->
+	<update id="updateSignStep" parameterType="map">
+		update signstep set stepconfirm=#{stepconfirm} where stepnum=#{stepnum}
+	</update>
 	
 </mapper>
