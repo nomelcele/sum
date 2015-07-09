@@ -1,3 +1,43 @@
+DROP TABLE TODOJOB;
+DROP TABLE TODO;
+DROP TABLE mail;
+DROP TABLE COMM;
+DROP TABLE BOARD;
+DROP TABLE BNAME;
+DROP TABLE CALENDAR;
+DROP TABLE LOGIN;
+DROP TABLE MESCONTENT;
+DROP TABLE MESENTRY;
+DROP TABLE MESMASTER;
+DROP TABLE administrator;
+DROP TABLE pay;
+DROP TABLE payhistory;
+DROP TABLE signstep;
+DROP TABLE signature;
+DROP TABLE signform;
+DROP TABLE commission;
+DROP TABLE product;
+DROP TABLE SNS;
+DROP TABLE MEMBER;
+DROP TABLE DEPT;
+DROP SEQUENCE TODO_SEQ;
+DROP SEQUENCE todojob_seq;
+DROP SEQUENCE SNS_SEQ;
+DROP SEQUENCE MESCONTENT_SEQ;
+DROP SEQUENCE MEMBER_SEQ;
+DROP SEQUENCE MAIL_SEQ;
+DROP SEQUENCE LOGIN_SEQ;
+DROP SEQUENCE COMM_SEQ;
+DROP SEQUENCE CALENDAR_SEQ;
+DROP SEQUENCE BOARD_SEQ;
+DROP SEQUENCE BNAME_SEQ;
+DROP SEQUENCE MESMASTER_seq;
+DROP SEQUENCE signform_seq;
+DROP sequence commission_seq;
+DROP SEQUENCE product_seq;
+DROP SEQUENCE signature_seq;
+DROP SEQUENCE signstep_seq;
+
 -- 0530 까지 쿼리
 CREATE TABLE dept(
   denum NUMBER(3),
@@ -64,6 +104,15 @@ CREATE TABLE calendar(
 );
 CREATE SEQUENCE calendar_seq INCREMENT BY 1 START WITH 1;
 
+create table bname(
+ bname varchar2(30),
+ bgnum number(4),
+ bdeptno number(3),
+ constraint bname_bgnum_pk primary key(bgnum),
+ constraint bname_bdeptno_fk foreign key(bdeptno) references dept(denum)
+);
+INSERT INTO BNAME VALUES('테스트게시판',1,100);
+
 CREATE TABLE board(
  bnum number(11), -- 글번호
     btitle VARCHAR2(50) CONSTRAINT board_btitle_nn NOT NULL, -- 글제목
@@ -76,16 +125,11 @@ CREATE TABLE board(
     bdeptno NUMBER(3),
     CONSTRAINT board_bnum_pk PRIMARY KEY(bnum),
     CONSTRAINT board_bmem_fk FOREIGN KEY(bmem) REFERENCES member(memnum) on delete set null,
-    constraint board_bdeptno_fk foreign key(bdeptno) references dept(denum)
+    constraint board_bdeptno_fk foreign key(bdeptno) references dept(denum),
+    constraint board_bgnum_fk foreign key(bgnum) references bname(bgnum) on delete cascade
 );
 --0529 테이블 추가
-create table bname(
- bname varchar2(30),
- bgnum number(4),
- bdeptno number(3),
- constraint bname_bgnum_pk primary key(bgnum),
- constraint bname_bdeptno_fk foreign key(bdeptno) references dept(denum)
-);
+
 
 INSERT INTO bname VALUES('공지사항',0,100);
 
@@ -99,7 +143,7 @@ INSERT INTO BOARD VALUES(4,'test','This is testContent','img.jpg',10002,SYSDATE,
 INSERT INTO BOARD VALUES(5,'test','This is testContent','img.jpg',10003,SYSDATE,0,1,300);
 INSERT INTO BOARD VALUES(6,'test','This is testContent','img.jpg',10004,SYSDATE,0,1,400);
 CREATE SEQUENCE board_seq INCREMENT BY 1 START WITH 7;
-COMMIT;
+
 -- 0526 변경
 -- 메일 삭제 여부를 확인하기 위한 컬럼
 -- 1: 기본값, 2: 보낸 사람이 메일 삭제(메일이 보낸 사람의 휴지통으로 이동),
@@ -154,6 +198,7 @@ CREATE TABLE todo(
     ON DELETE SET NULL
 );
 CREATE SEQUENCE todo_seq INCREMENT BY 1 START WITH 1;
+
 CREATE TABLE sns(
  snum number(10), -- pk
  scont VARCHAR2(600),
@@ -262,10 +307,7 @@ CREATE TABLE commission(
     CONSTRAINT commission_commem_fk FOREIGN KEY(commem) REFERENCES MEMBER(memnum),
     CONSTRAINT commission_comnum_pk PRIMARY KEY(comnum)
 );
-
-create sequence commission_seq
-increment by 1
-start with 1;
+create sequence commission_seq increment by 1 start with 1;
 
 create table administrator(
  anum number, -- pk
@@ -273,13 +315,14 @@ create table administrator(
  CONSTRAINT admin_anum_pk PRIMARY KEY(anum),
  CONSTRAINT admin_amem_fk FOREIGN KEY(amem) REFERENCES member(memnum) ON DELETE cascade
 );
+
 create table signform(
  sfname varchar2(20), -- 문서의 이름
  sfnum number, -- 문서종류 번호 pk
  sform CLOB, -- 문서의 형태들이 태그 형태로 저장되는 칼럼.
  CONSTRAINT signform_sfnum_pk PRIMARY KEY(sfnum)
 );
-CREATE SEQUENCE signform_seq INCREMENT BY 1 START WITH 1; -- sfnum 사용
+CREATE SEQUENCE signform_seq INCREMENT BY 1 START WITH 1; 
 
 create table signature(
  snum number, -- 기안고유 번호 pk
@@ -287,7 +330,6 @@ create table signature(
  sgwriter number(5),--작성자
  finalmemnum number, -- 최종 결재자의 사번 fk
  nowmemnum number, -- 현재 결재자의 사번 fk
- sgwriter number(5), -- 기안자 fk member 사번
  stitle varchar2(40),
  scont clob,
  sreason clob,
@@ -295,7 +337,6 @@ create table signature(
  enddate DATE,
  CONSTRAINT SIGN_snum_pk PRIMARY KEY(snum),
  CONSTRAINT sign_formnum_fk FOREIGN KEY(formnum) REFERENCES signform(sfnum) ON DELETE CASCADE,
- constraint sign_sgwriter_fk foreign key(sgwriter) references member(memnum) on delete set null,
  CONSTRAINT sign_finalmemnum_fk FOREIGN KEY(finalmemnum) REFERENCES member(memnum) ON DELETE CASCADE,
  CONSTRAINT sign_nowmemnum_fk FOREIGN KEY(nowmemnum) REFERENCES member(memnum) ON DELETE CASCADE,
  CONSTRAINT sign_sgwriter_fk FOREIGN KEY(sgwriter) REFERENCES member(memnum) ON DELETE CASCADE
@@ -325,11 +366,10 @@ CREATE TABLE product(
     CONSTRAINT product_prowriter_fk FOREIGN KEY(prowriter) REFERENCES MEMBER(memnum) 
 );
 CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
-COMMIT;
+
 --0709 추가
 alter table signature add(sgdept number(3));
 alter table signature add(CONSTRAINT signature_sgdept_fk foreign key(sgdept) REFERENCES dept(denum) on delete set null);
 
--- 0709 추가
--- 게시판이 삭제되었을 때, 그 게시판에 있던 게시물들이 모두 삭제되도록 속성 추가
-alter table board add constraint fk_board_bgnum foreign key(bgnum) references bname(bgnum) on delete cascade; 
+ 
+COMMIT;
