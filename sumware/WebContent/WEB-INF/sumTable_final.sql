@@ -248,11 +248,10 @@ CREATE TABLE payhistory(
 	hisdate DATE, -- 급여지급 날짜
     hisamount NUMBER(11), -- 지급 금액
     hismem NUMBER(5), -- 지급 대상(사번 fk)
-    hisnum NUMBER(10), -- 지급 고유 번호 pk
+    hisnum NUMBER(10), -- 지급 고유 번호 pk 지급월(yymm)형태로 저장
     CONSTRAINT payhistory_hisnum_pk PRIMARY KEY(hisnum),
     CONSTRAINT payhistory_hismem_fk FOREIGN KEY(hismem) REFERENCES MEMBER(memnum)
 );
-CREATE SEQUENCE payhistory_seq INCREMENT BY 1 START WITH 1;
 
 CREATE TABLE commission(
     comdetail VARCHAR2(50), -- 커미션 내역

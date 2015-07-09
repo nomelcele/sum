@@ -7,9 +7,14 @@ public class CommissionVO {
     commem number(5) -- 지급받은 사원
     comnum NUMBER(10), -- 지급번호*/
 	private String comdetail, comdate;
-	private int comamount,comnum, commem;
+	private int comamount,comnum, commem, comsum;
 	
-	
+	public int getComsum() {
+		return comsum;
+	}
+	public void setComsum(int comsum) {
+		this.comsum = comsum;
+	}
 	public String getComdate() {
 		return comdate;
 	}

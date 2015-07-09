@@ -130,7 +130,9 @@ function getMemMgr() {
 
 // 새 사원 추가 버튼 클릭시 정보 전송 및 메일 전송
 function sendNewMember() {
-	confirm("사원에게 메일을 전송하시겠습니까?")
+	if(!confirm("사원에게 메일을 전송하시겠습니까?")){
+		return;
+	}else{
 	var pay = "";
 	if ($('#newjob').val() == '부장') {
 		$('#newauth').attr("value", "3");
@@ -166,6 +168,7 @@ function sendNewMember() {
 			alert("메일 전송이 실패하였습니다. 다시 시도 해 주세요!")
 		}
 	});
+	}
 }
 
 function selmail() {
@@ -174,7 +177,9 @@ function selmail() {
 
 // 새 게시판 추가 버튼 클릭
 function sendNewBoard() {
-	confirm("게시판을 추가하시겠습니까?")
+	if(!confirm("게시판을 추가하시겠습니까?")){
+		return;
+	}else{
 
 	$.ajax({
 		type : "POST",
@@ -191,6 +196,7 @@ function sendNewBoard() {
 			alert("게시판 추가를 실패하였습니다. 다시 시도 해 주세요!")
 		}
 	});
+	}
 }
 
 // 급여 관리!!!!
@@ -253,6 +259,9 @@ function getMemInfoForModal(id,res){
 
 // 급여 변경하기위한 메서드
 function payManage(res,data){
+	if(!confirm("급여를 지급 하시겠습니까?")){
+		return;
+	}else{
 	if(res == 'giveBonus'){
 		$('#giveBonus').modal('toggle');
 		setTimeout(function(){
@@ -268,11 +277,30 @@ function payManage(res,data){
 					alert("지급 처리가 완료되었습니다.");				
 					$('.contents').html(result);
 				}
+				
 			});
 		}, 500)
 		
 	}else if(res='giveSalary'){
-		
+		$('#giveSalary').modal('toggle');
+		setTimeout(function(){
+			$.ajax({
+				type: "POST",
+				url: "giveSalary",
+				data: {
+					hismem:data,
+					hisamount:$('#hisamount').val()
+				},
+				success: function(result){
+					alert("지급 처리가 완료되었습니다.");				
+					$('.contents').html(result);
+				},
+				error : function(e) {
+					alert("지급 실패! 급여가 이미 지급되었습니다.")
+				}
+			});
+		}, 500)
+	}
 	}
 }
 
