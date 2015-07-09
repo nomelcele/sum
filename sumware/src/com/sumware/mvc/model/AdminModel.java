@@ -258,6 +258,52 @@ public class AdminModel {
 		adao.addBoard(bnvo);
 		return "admin/addBoard";
 	}
+	
+	// 게시판 열람 페이지로 이동
+		@RequestMapping(value="/adminBoardListMain")
+		public String boardListMain(){
+			return "admin/deptBoardList";
+		}
+		
+		// 해당 부서의 게시판 목록 가져오기 
+		@RequestMapping(value="/admingetDeptBoards",method=RequestMethod.POST)
+		public void getDeptBoards(int bdeptno,HttpServletResponse resp) throws IOException{
+			List<BnameVO> bList = adao.getDeptBoards(bdeptno);
+			StringBuffer sb = new StringBuffer();
+			sb.append("<option value='0'>게시판</option>");
+			
+			for(BnameVO e:bList){
+				sb.append("<option value='").append(e.getBgnum()).append("'>").append(e.getBname()).append("</option>");
+			}
+			
+			PrintWriter pw = resp.getWriter();
+			pw.write(sb.toString());
+			pw.flush();
+			pw.close();
+		}
+		
+		// 선택한 게시판 열람
+		@RequestMapping(value="/admingetDeptBoardList",method=RequestMethod.POST)
+		public String getDeptBoardList(int bgnum,Model model){
+//			List<BoardVO> bList = adao.getDeptBoardList(bgnum);
+//			model.addAttribute("list", bList);
+//			return "admin/deptBoard";
+			String params = "page=1&bsearch=&div=&bgnum="+bgnum;
+			return "redirect:/boardList?"+params;
+		}
+		
+		// 게시판 삭제 폼 이동
+		@RequestMapping(value="/adminDeleteBoardForm")
+		public String deleteBoardForm(){
+			return "admin/deleteBoard";
+		}
+		
+		// 선택한 게시판 삭제
+		@RequestMapping(value="/admindeleteBoard",method=RequestMethod.POST)
+		public String deleteBoard(int bgnum){
+			adao.deleteBoard(bgnum);
+			return "redirect:/adminDeleteBoardForm";
+		}
 	// ////////////////////////게시판 관리(E)///////////////////////////
 
 }

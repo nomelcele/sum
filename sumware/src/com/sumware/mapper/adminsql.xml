@@ -60,6 +60,7 @@
 				<!-- 부서 0, 이름 입력 안 한 경우(전체 사원 목록) -->
 			</otherwise>
 		</choose>
+		and m.memname not in('sumware') and m.memresign is null order by 1 asc
 	</select>
 	
 	<!-- 연봉 입력 -->
@@ -125,5 +126,15 @@
 			<otherwise>order by hisdate desc</otherwise>
 		</choose>
 	</select>
+	
+	<!-- 부서별 게시판 리스트 가져옴 -->
+	<select id="getDeptBoards" parameterType="int" resultType="bnvo">
+		select bgnum,bname from bname where bdeptno=#{bdeptno}
+	</select>
+	
+	<!-- 게시판 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		delete from bname where bgnum=#{bgnum}
+	</delete>
 	
 </mapper>
