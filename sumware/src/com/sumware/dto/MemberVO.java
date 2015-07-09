@@ -1,13 +1,25 @@
 package com.sumware.dto;
 
 public class MemberVO {
-	private int memnum, memauth, memmgr, memdept;
+	private int memnum, memauth, memmgr, memdept,begin,end;
 	private String memname, memaddr, mempwd, memprofile, memjob, memmail, meminmail, dename, mgrname, 
 	memhire, memresign, membirth, memsignimg;
 	
 	
 	
 	
+	public int getBegin() {
+		return begin;
+	}
+	public void setBegin(int begin) {
+		this.begin = begin;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
 	public String getMemhire() {
 		return memhire;
 	}

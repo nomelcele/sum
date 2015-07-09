@@ -321,7 +321,7 @@ function payManage(res,data){
 
 
 
-// 직급 변경, 부서 이동 처리
+//직급 변경, 부서 이동 처리
 function prFormSaveChange(memnum){
 	var newmemjob = $("#newmemjob").val();
 	var newmemdept = $("#newmemdept").val();
@@ -346,10 +346,11 @@ function prFormSaveChange(memnum){
 						memjob: $("#newmemjob").val()
 					},
 					success: function(result){
+						console.log("모달 닫기");
 						$('.contents').html(result);
 					}
 				});
-			},500);
+			},200);
 			
 		}
 	} else if(newmemdept != 0){
@@ -371,10 +372,11 @@ function prFormSaveChange(memnum){
 					},
 					success: function(result){
 						// 모달 꺼줘야 함
+						console.log("모달 닫기");
 						$('.contents').html(result);
 					}
 				});
-			},500);
+			},200);
 			
 		}
 	}
@@ -443,4 +445,14 @@ function prFormSaveChange(memnum){
 					$('#paymentDetail').modal('toggle');
 				}
 			});
+		}
+		
+		// 페이지 이동
+		function goPage(page,fname){
+			$("#page").attr("value",page);
+			console.log("페이지: "+$("#page").val());
+			
+			if(fname == 'memListPage'){
+				$("#memListPage").submit();
+			}
 		}
