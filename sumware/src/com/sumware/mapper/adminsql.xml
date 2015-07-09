@@ -40,7 +40,8 @@
 
 	<!-- 사원 정보 불러오기 -->
 	<select id="getMemInfoList" parameterType="mvo" resultType="mvo">
-		select m.memnum, m.memname, m.meminmail, m.membirth, m.memaddr, 
+		select * from (select rownum r_num, a.* from 
+		(select m.memnum, m.memname, m.meminmail, m.membirth, m.memaddr, 
 		d.dename, m.memjob, to_char(m.memhire, 'yyyy-mm-dd') memhire from member m, dept d 
 		where d.denum=m.memdept 
 		<choose>
@@ -60,7 +61,8 @@
 				<!-- 부서 0, 이름 입력 안 한 경우(전체 사원 목록) -->
 			</otherwise>
 		</choose>
-		and m.memname not in('sumware') and m.memresign is null order by 1 asc
+		and m.memname not in('sumware') and m.memresign is null order by 1 asc) a) 
+		where r_num between #{begin} and #{end}
 	</select>
 	
 	<!-- 연봉 입력 -->
@@ -145,5 +147,30 @@
 	<delete id="deleteBoard" parameterType="int">
 		delete from bname where bgnum=#{bgnum}
 	</delete>
+	
+	<!-- 사원 수 카운트 -->
+	<select id="getMemCount" parameterType="mvo" resultType="int">
+		select count(*) cnt from member 
+		<where>
+			<choose>
+				<when test="memdept != 0">
+					<!-- 부서만 입력 (해당 부서의 사원 목록)-->
+					and memdept=#{memdept} 
+					<!-- 부서, 이름 모두 입력 -->
+					<if test="memname != null">
+						and memname like '%'||#{memname}||'%' 
+					</if>
+				</when>
+				<otherwise>
+					<!-- 부서 0(기본값), 이름 입력 -->
+					<if test="memname != null">
+						and memname like '%'||#{memname}||'%' 
+					</if>
+					<!-- 부서 0, 이름 입력 안 한 경우(전체 사원 목록) -->
+				</otherwise>
+			</choose>
+			and memname not in('sumware') and memresign is null
+		</where>
+	</select>
 	
 </mapper>

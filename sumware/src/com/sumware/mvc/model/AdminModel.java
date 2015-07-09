@@ -3,7 +3,9 @@ package com.sumware.mvc.model;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +23,7 @@ import com.sumware.dto.PayHistoryVO;
 import com.sumware.dto.PayVO;
 import com.sumware.mvc.dao.AdminDao;
 import com.sumware.mvc.service.ServiceInter;
+import com.sumware.util.MyPage;
 import com.sumware.util.SendEmail;
 
 @Controller
@@ -113,14 +116,14 @@ public class AdminModel {
 	@RequestMapping(value = "/adminPromoteMem", method = RequestMethod.POST)
 	public String promoteMem(MemberVO mvo) {
 		adao.promoteMem(mvo);
-		return "redirect:/adminMemList";
+		return "redirect:/adminMemList?page=1&memdept=0&memname=";
 	}
 
 	// 사원 부서 이동
 	@RequestMapping(value = "/adminMoveDept", method = RequestMethod.POST)
 	public String moveDept(MemberVO mvo) {
 		adao.moveDept(mvo);
-		return "redirect:/adminMemList";
+		return "redirect:/adminMemList?page=1&memdept=0&memname=";
 	}
 
 	// 사원 퇴사 처리
@@ -132,10 +135,24 @@ public class AdminModel {
 
 	// 사원 개인 정보 리스트 가져오는 메서드
 	@RequestMapping(value = "/adminMemList")
-	public String getMemInfoList(MemberVO mvo, Model model) {
+	public String getMemInfoList(MemberVO mvo, String cmd, Model model, HttpServletRequest req) {
+		System.out.println("getMemInfoList");
+		int totalCount = adao.getMemCount(mvo);
+		System.out.println("사원 수: "+totalCount);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 5, 5, 0, totalCount, 0);
+		mvo.setBegin(pmap.get("begin"));
+		mvo.setEnd(pmap.get("end"));
+		
 		List<MemberVO> memList = adao.getMemInfoList(mvo);
 		model.addAttribute("list", memList);
-		return "admin/memInfoList";
+		
+		
+		System.out.println("cmd: "+cmd);
+		if(cmd == null){
+			return "admin/memInfoList";
+		} else {
+			return "admin.memInfoList";
+		}
 	}
 
 	// 사원 추가 메뉴 진입

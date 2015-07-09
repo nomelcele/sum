@@ -122,4 +122,9 @@ public class AdminDao {
 		st.delete("admin.deleteBoard", bgnum);
 	}
 	
+	// 전체 사원 수 카운트
+	public int getMemCount(MemberVO mvo){
+		return st.selectOne("admin.getMemCount",mvo);
+	}
+	
 }

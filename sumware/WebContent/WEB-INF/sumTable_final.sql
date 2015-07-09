@@ -329,3 +329,7 @@ COMMIT;
 --0709 추가
 alter table signature add(sgdept number(3));
 alter table signature add(CONSTRAINT signature_sgdept_fk foreign key(sgdept) REFERENCES dept(denum) on delete set null);
+
+-- 0709 추가
+-- 게시판이 삭제되었을 때, 그 게시판에 있던 게시물들이 모두 삭제되도록 속성 추가
+alter table board add constraint fk_board_bgnum foreign key(bgnum) references bname(bgnum) on delete cascade; 
