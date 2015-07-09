@@ -214,7 +214,7 @@ public class AdminModel {
 
 	// 사원의 급여 디테일
 	@RequestMapping(value = "/adminPayInfoDetail", method = RequestMethod.POST)
-	public String adminPayInfoDetail(MemberVO vo, Model model) {
+	public String adminPayInfoDetail(MemberVO vo,String hisdate, Model model) {
 		System.out.println("memnum ::" + vo.getMemnum());
 
 		// member 정보 가져옴
@@ -226,9 +226,17 @@ public class AdminModel {
 		// member payhistory 정보 가져옴
 		PayHistoryVO payhistoryvo = new PayHistoryVO();
 		payhistoryvo.setHismem(vo.getMemnum());
-		List<PayHistoryVO> phvo = adao.getPayHistoryInfo(payhistoryvo);
+		if(hisdate!=null && hisdate!=""){
+			payhistoryvo.setHisdate(hisdate);
+		}else{
+			payhistoryvo.setHisdate(null);
+		}
+		List<PayHistoryVO> phvo = adao.getPayHistory(payhistoryvo);
 		model.addAttribute("phvoList", phvo);
-
+		// 사원마다 급여 지급 받은 이력이 있는 년도 뽑아옴 ( select태그에 추가하기 위해)
+		List<PayHistoryVO> months = adao.getMonths(vo.getMemnum());
+		model.addAttribute("monthList", months);
+		
 		return "admin/payInfoDetail";
 	}
 

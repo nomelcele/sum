@@ -84,11 +84,6 @@
 		select pyearly, psalary, trunc((psalary/12),0) pmonthsalary from pay where pmem=#{memnum}
 	</select>
 	
-	<!-- 멤버의 payhistory 정보 가져옴 -->
-	<select id="getPayHistoryInfo" parameterType="phvo" resultType="phvo">
-		select to_char(hisdate, 'yyyy-mm') hisdate, hisamount, hismem, hisnum from payhistory where hismem=#{hismem} order by hisdate desc 
-	</select>
-	
 	<!-- 추가 급여 지급 -->
 	<insert id="giveBonus" parameterType="comvo">
 		insert into commission values(#{comdetail},#{comamount},sysdate,commission_seq.nextVal,#{commem})
@@ -114,5 +109,21 @@
 	<insert id="giveSalary" parameterType="phvo">
 		insert into payhistory values(add_months(sysdate,-1), #{hisamount}, #{hismem},to_char(add_months(sysdate,-1),'yymm'))
 	</insert>
+	
+	<!-- 사원마다 급여 지급 받은 이력이 있는 년도 뽑아옴 ( select태그에 추가하기 위해) -->
+	<select id="getMonths" parameterType="int" resultType="phvo">
+		select distinct(to_char(hisdate,'yyyy')) hisdate from payhistory where hismem=#{memnum}
+	</select>
+	
+	<!-- payhistory 정보들 가져옴!!! -->
+	<select id="getPayHistory" parameterType="phvo" resultType="phvo">
+		select to_char(hisdate,'yyyy-mm') hisdate, hisamount,hismem,hisnum from payhistory where hismem=#{hismem} 
+		<choose>
+			<when test="hisdate != null">
+				and to_char(hisdate,'yyyy')=#{hisdate} order by hisdate desc
+			</when>
+			<otherwise>order by hisdate desc</otherwise>
+		</choose>
+	</select>
 	
 </mapper>
