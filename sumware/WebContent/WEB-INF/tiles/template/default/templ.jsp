@@ -38,6 +38,41 @@
 <script src="js/notification.js"></script>
 <c:if test="${sessionScope.model eq 'sign' }">
 	<script src="js/sign.js"></script>
+	<script>
+		$(function(){
+			memnum="${sessionScope.v.memnum}";
+			var signMode="${signMode}";
+			var mgrs={};
+			var names={};
+			var status ={};
+			"<c:forEach var='sn' items='${sgNames }' varStatus='index'>";
+				names['${index.count}']='${sn}';
+			"</c:forEach>";
+			if(signMode=='write'){
+				"<c:forEach var='sm' items='${signMgrs }' varStatus='index'>";
+					mgrs['${index.count}']='${sm}';
+					size='${index.count}';
+				"</c:forEach>";
+				$('#sgwriter').val("${sessionScope.v.memname}");
+				addSignDiv(mgrs,names,"${sessionScope.v.memnum}","${sessionScope.v.memdept}");
+			}else if(signMode='detail'){
+
+				"<c:forEach var='ss' items='${ssList}' varStatus='index'>";
+					mgrs['${index.count}']='${ss.stepmemnum}';
+					status['${index.count}']='${ss.stepconfirm}';
+					size='${index.count}';
+					signimg['${index.count}']='${sessionScop.v.memsignimg}';
+				"</c:forEach>";
+				
+				$("#sgwriter").val('${sgvo.sgwriter}');
+				$('#startdate').val('${sgvo.startdate}');
+				$('#enddate').val('${sgvo.enddate}');
+				$('#stitle').val("${sgvo.stitle}");
+				$('#scont').val("${sgvo.scont}");
+				addSignDiv(mgrs,names,status);
+			}
+		});
+	</script>
 </c:if>
 <script>
 $(function(){

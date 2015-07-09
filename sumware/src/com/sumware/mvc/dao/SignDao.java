@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.SignFormVO;
+import com.sumware.dto.SignStepVO;
 import com.sumware.dto.SignatureVO;
 
 @Repository
@@ -46,6 +47,17 @@ public class SignDao {
 	}
 	public void writeSignStep(Map<String, String> map){
 		st.insert("sign.writeSignStep", map);
+	}
+	//상세보기
+	public SignatureVO signDetail(int snum){
+		return st.selectOne("sign.signDetail", snum);
+	}
+	public List<SignStepVO> getSignStep(int stepsnum){
+		return st.selectList("sign.getSignStep", stepsnum);
+	}
+	//결제하기
+	public void updateSignStep(Map<String,String> map){
+		st.update("sign.updateSignStep", map);
 	}
 	
 	

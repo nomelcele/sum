@@ -18,7 +18,7 @@
 				<tr>
 					<td>${sg.snum}</td>
 					<td>${sg.sfname }</td>
-					<td><a href="location='signDetail?snum=${sg.snum }'">${sg.stitle }</a></td>
+					<td><a href="signDetail?snum=${sg.snum }">${sg.stitle }</a></td>
 					<td>${sg.memname }</td>
 					<td>${sg.startdate } ~ ${sg.enddate}</td>
 					<c:choose>
