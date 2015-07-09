@@ -9,12 +9,12 @@
 							사원 추가</strong>
 					</div>
 					<div class="panel-body">
-						<div class="form-group has-success">
+						<div class="form-group">
 							<label class="control-label">이 름</label> 
 							<input type="text" class="form-control" id="newname" name="memname" style="width: 120px">
 						</div>
 
-						<div class="form-group has-success">
+						<div class="form-group">
 							<label class="control-label">메 일</label> <br/>
 							<input type="text" class="form-control" id="newmail"autocomplete="off" style="width: 120px; float:left "> 
 							<span style="float:left">&nbsp;@&nbsp;</span> 
@@ -30,12 +30,12 @@
 							</select>
 						</div>
 
-						<div class="form-group has-success">
+						<div class="form-group">
 							<label class="control-label">비밀번호</label> 
 							<input type="password" class="form-control" id="newpwd" name="mempwd" style="width: 120px; autocomplete:off">
 						</div>
 
-						<div class="form-group has-success">
+						<div class="form-group">
 							<label class="control-label">부 서</label> 
 							<select name="memdept" class="form-control" id="newdept" style="width: 120px" onchange="javascrpt:getMemMgr()">
 											<option value="">부서 선택</option>								
@@ -46,9 +46,9 @@
 											<option value="500">기획부</option>
 							</select>
 						</div>
-						<div class="form-group has-success" id="mgrListTarget">
+						<div class="form-group" id="mgrListTarget">
 						</div>
-						<div class="form-group has-success">
+						<div class="form-group">
 							<label class="control-label">직 급</label> 
 								<select name="memjob" class="form-control" id="newjob" style="width: 120px">
 										<option value="">직급 선택</option>								
@@ -57,8 +57,8 @@
 										<option value="사원">사 원</option>
 								</select>
 						</div>
-						<div class="form-group has-success">
-							<input type="button" class="btn btn-outline btn-success" onclick="javascript:sendNewMember()" id = "sendFormToAdd" value="추 가">
+						<div class="form-group">
+							<input type="button" class="btn btn-outline btn-default" onclick="javascript:sendNewMember()" id = "sendFormToAdd" value="추 가">
 						</div>
 
 					</div>

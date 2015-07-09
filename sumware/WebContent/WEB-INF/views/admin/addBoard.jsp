@@ -7,11 +7,11 @@
 							게시판 추가</strong>
 					</div>
 					<div class="panel-body">
-						<div class="form-group has-success">
+						<div class="form-group">
 							<label class="control-label">게시판 이름</label> 
 							<input type="text" class="form-control" name="bname" id="newbname" style="width: 120px">
 						</div>
-						<div class="form-group has-success">
+						<div class="form-group">
 							<label class="control-label">부 서</label> 
 							<select name="bdeptno" id="newbdeptno" class="form-control" style="width: 120px">
 											<option value="">부서 선택</option>								
@@ -22,8 +22,8 @@
 											<option value="500">기획부</option>
 							</select>
 						</div>
-						<div class="form-group has-success">
-							<input type="button" class="btn btn-outline btn-success" onclick="javascript: sendNewBoard()" value="추 가">
+						<div class="form-group">
+							<input type="button" class="btn btn-outline btn-default" onclick="javascript: sendNewBoard()" value="추 가">
 						</div>
 					</div>
 				</div>
