@@ -28,27 +28,32 @@
 	<table class="table table-condensed table-hover">
 		<tbody>
 			<tr style="background-color: #F5F5F5; font-weight:bold">
-				<td class="col-lg-1"><span>날짜</span></td>
-				<td class="col-lg-1"><span>월급</span></td>
-				<td class="col-lg-1"><span>추가급</span></td>
-				<td class="col-lg-1"><span>합계</span></td>
+				<td class="col-lg-1" style="text-align: center;"><span>지급 년월</span></td>
+				<td class="col-lg-1" style="text-align: center;"><span>수령 금액</span></td>
+
 				<td class="col-lg-1">
-					<select class="form-control input-sm" style="width:50%; display:inline">
-						<option value="2015">2015</option>
-						<option value="2014">2014</option>
-						<option value="2013">2013</option>
-						<option value="2012">2012</option>
+					<select class="form-control input-sm" id="hisdate" onchange="javascript:changemonth(${memvo.memnum})" style="width:50%; display:inline">
+						<option value="">년도선택</option>
+						<option value="">전 체</option>
+						<c:forEach var="month" items="${monthList }">
+						<option value="${month.hisdate }">${month.hisdate }</option>
+						</c:forEach>
 					</select><span>년도</span>
 				</td>
 			</tr>
-
-			<tr>
-				<td class="col-lg-1">날짜</td>
-				<td class="col-lg-1">월급</td>
-				<td class="col-lg-1">추가급</td>
-				<td class="col-lg-1">합계</td>
+			<c:forEach var="phvo" items="${phvoList }">
+				<tr>
+				<td class="col-lg-1" style="text-align: center;">${phvo.hisdate}</td>
+				<td class="col-lg-1" style="text-align: center;">${phvo.hisamount} 만원</td>
 				<td class="col-lg-1"></td>
 			</tr>
+			</c:forEach>
+<!-- 			<tr> -->
+<!-- 				<td class="col-lg-1" style="background-color: #F5F5F5; text-align: center;">총 수령 금액</td> -->
+<!-- 				<td class="col-lg-1" style="text-align: center;">총 수령 금액</td> -->
+<!-- 			</tr> -->
+
+			
 		</tbody>
 	</table>
 

@@ -357,4 +357,20 @@ function payManage(res,data){
 			}
 		}
 	}
+	
+	// 급여 조회에서 월 바꾸면 수행
+	function changemonth(memnum){
+		alert("년도 바꿈"+$('#hisdate').val())
+		$.ajax({
+			type: "POST",
+			url: "adminPayInfoDetail",
+			data: {
+				memnum: memnum,
+				hisdate:$('#hisdate').val()
+			},
+			success: function(result){
+				$('.contents').html(result);
+			}
+		});
+	}
 

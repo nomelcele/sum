@@ -78,8 +78,8 @@ public class AdminDao {
 	}
 	
 	// 멤버의 payhistory정보들 가져옴
-	public List<PayHistoryVO> getPayHistoryInfo(PayHistoryVO phvo){
-		return st.selectList("admin.getPayHistoryInfo", phvo);
+	public List<PayHistoryVO> getPayHistory(PayHistoryVO phvo){
+		return st.selectList("admin.getPayHistory", phvo);
 	}
 	
 	// 사원 진급 처리
@@ -105,6 +105,11 @@ public class AdminDao {
 	// 월급 지급
 	public void giveSalary(PayHistoryVO phvo){
 		st.insert("admin.giveSalary", phvo);
+	}
+	
+	// 지급 받은 이력의 년도들만 뽑아옴
+	public List<PayHistoryVO> getMonths(int memnum){
+		return st.selectList("admin.getMonths", memnum);
 	}
 	
 }
