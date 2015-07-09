@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<c:if test="${!empty sessionScope.adminv }">
 <div id="MainMenu">
   <div class="list-group panel">
     <a href="#demo3" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">사원 관리 <i class="fa fa-caret-down"></i></a>
@@ -27,5 +27,5 @@
     </div>
   </div>
 </div>
-
+</c:if>
 
