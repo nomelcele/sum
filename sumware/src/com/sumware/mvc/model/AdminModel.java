@@ -180,22 +180,32 @@ public class AdminModel {
 	
 //	// 모달에 mem정보
 	@RequestMapping(value="/getMemInfoForModal", method=RequestMethod.POST)
-	public String getMemInfoForModal(MemberVO vo, Model model, String cmd){
+	public String getMemInfoForModal(CommissionVO comvo, MemberVO vo, Model model, String cmd){
 		MemberVO mvo = adao.getMemInfo(vo);
 		model.addAttribute("memvo", mvo);
 		// member pay 정보 가져옴
+		// 급여 지급에선 월급 정보 보여주기 위해 (pmonthsalary)
 		PayVO payvo = adao.getPayInfo(vo.getMemnum());
 		model.addAttribute("payvo", payvo);
 		
 		if(cmd.equals("giveSalary")){
-			// 추가적으로 급여에 대한 정보 다가져와야 됨!!!
-			// 월급 정보 쓰기 위해
-			PayVO pvo = adao.getPayInfo(vo.getMemnum());
+			// 추가적으로 급여에 대한 정보 다가져와야 됨!!!	
+			// 달에 해당하는 추가급들 다 가져옴
+			comvo.setCommem(vo.getMemnum());
+			List<CommissionVO> comvos= adao.getComInfo(comvo);
+			model.addAttribute("comList", comvos);
 			
-			
+			// commission 총 합계 계산
+			int comsum = 0;
+			for(CommissionVO e: comvos){
+				comsum += e.getComamount();
+			}
+			model.addAttribute("comSum", comsum);
+			// 총 지급 될 급여!!!!
+			int totalSal = comsum+payvo.getPmonthsalary();
+			model.addAttribute("totalSalary", totalSal);
 			
 		}
-		
 		return "admin/modal";
 	}
 	
@@ -206,10 +216,13 @@ public class AdminModel {
 		return "redirect:/adminPayManagement";
 	}
 	
-	// 추가 급여 지급/////////////////////////////////////
+	// 월 급여 지급/////////////////////////////////////
 	@RequestMapping(value="/giveSalary", method=RequestMethod.POST)
-	public String giveSalary(CommissionVO comvo){
-		adao.giveBonus(comvo);
+	public String giveSalary(PayHistoryVO phvo){
+		System.out.println("aa:"+phvo.getHisamount());
+		System.out.println("bb : "+phvo.getHismem());
+		adao.giveSalary(phvo);
+		
 		return "redirect:/adminPayManagement";
 	}
 	

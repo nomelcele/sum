@@ -97,4 +97,14 @@ public class AdminDao {
 		st.insert("admin.giveBonus", comvo);
 	}
 	
+	// 해당 월의 commission 정보들 가져옴
+	public List<CommissionVO> getComInfo(CommissionVO comvo){
+		return st.selectList("admin.getComInfo", comvo);
+	}
+	
+	// 월급 지급
+	public void giveSalary(PayHistoryVO phvo){
+		st.insert("admin.giveSalary", phvo);
+	}
+	
 }

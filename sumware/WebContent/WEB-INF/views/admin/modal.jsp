@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Modal(S) 추가급여지급-->
 <div class="modal fade" id="giveBonus" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel">
@@ -97,32 +98,42 @@
 					</tr>
 					<tr>
 						<td class="col-lg-1" style="font-weight: bold">연봉</td>
-						<td class="col-lg-2">${payvo.psalary}</td>
+						<td class="col-lg-2" >${payvo.psalary}</td>
 					</tr>
 				</table>
 				<table class="table table-condensed table-hover">
 					<tbody>
 						<tr>
-							<td class="col-lg-1" style="font-weight: bold">기본 급</td>
-							<td class="col-lg-1">얼마</td>
+							<td class="col-lg-1" style="font-weight: bold; background-color: #F5F5F5; text-align: center;">기본 급</td>
+							<td class="col-lg-1" style="text-align: right;">${payvo.pmonthsalary} 만원</td>
 						</tr>
 						<tr>
-							<td class="col-lg-1" style="font-weight: bold">추가 급</td>
-							<td class="col-lg-1">얼마얼마</td>
+							<td class="col-lg-1" style="font-weight: bold; background-color: #F5F5F5; text-align: center;">추가 급</td>
+							<td class="col-lg-1" style="text-align: right;">총 ${comSum} 만원</td>
 						</tr>
+						<c:forEach var="comvo" items="${comList }">
+							<tr class="showComDetail">
+								<td class="col-lg-1" style="font-weight: bold; text-align: right;">${comvo.comdetail }</td>
+								<td class="col-lg-1" style="text-align: right;">${comvo.comamount} 만원</td>
+							</tr>
+						</c:forEach>
+						
+						
+						
 						<tr>
-							<td class="col-lg-1" style="font-weight: bold">총 합계</td>
-							<td class="col-lg-1">얼마얼마얼마</td>
+							<td class="col-lg-1" style="font-weight: bold; background-color: #D5D5D5; text-align: center;">총 합계</td>
+							<td class="col-lg-1" style="font-weight: bold; background-color: #EAEAEA; text-align: right;">${ totalSalary } 만원</td>
 						</tr>
 					</tbody>
 				</table>
+				<input type="hidden" id="hisamount" value="${ totalSalary }">
 
 			</div>
 
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-				<button type="button" class="btn btn-default" 
-					onclick="javascript:payManage('giveBonus',${memvo.memnum})">저장</button>
+				<button type="button" class="btn btn-default"
+					onclick="javascript:payManage('giveSalary',${memvo.memnum})">지급</button>
 			</div>
 		</div>
 
