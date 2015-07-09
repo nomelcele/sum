@@ -39,16 +39,19 @@
 	<!-- header -->
 	<tiles:insertAttribute flush="true" name="header" />
 	<div class="wrap-layout board" id="global">
+		<c:if test="${!empty sessionScope.adminv }">
 		<div class="lnb-area" id="lnb-area">
 			<!-- menu -->
 			<tiles:insertAttribute flush="true" name="menu" />
 		</div>
+		</c:if>
 		<div class="contents">
 			<!-- body -->
 			<tiles:insertAttribute flush="true" name="body" />
 		</div>
 	</div>
 	<!-- footer -->
+	
 	<tiles:insertAttribute flush="true" name="footer" />
 </body>
 </html>
