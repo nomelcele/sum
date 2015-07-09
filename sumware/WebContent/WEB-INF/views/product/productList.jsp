@@ -2,35 +2,40 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h2 class="heading-page">중고경매장터</h2>
-<div class="left">
-	<a href="javascript:" class="btn btn-info"> <span
-		class="glyphicon glyphicon-pencil"></span> 상품 등록
-	</a>
+<div class="left" id="auctionBtn1">
+	<button type="button" class="btn btn-info btn-lg">상품등록</button> 
+<!-- 
+	<a href="" class="btn btn-info" >상품등록</a>
+-->
 </div>
-
-<div style="margin-top: 10px;">
-	<table class="table table-condensed table-hover" id="listTable">
+<form action="writeForm" id="aucForm">
+<div style="margin-top: 10px;" class="auction">
+	<table>
 		<tbody>
-			<tr style="background-color: #F5F5F5;">
-				<td class="col-lg-1">
-					<input type="checkbox" name="all" onclick="checkAll(this)">
-				</td>
-				<td class="col-lg-1"><span></span></td>
-				<td class="col-lg-1"><span>받는 사람</span></td>
-				<td class="col-lg-6"><span>제목</span></td>
-				<td class="col-lg-2"><span>보낸 날짜</span></td>
+			<tr>
+				<th>상품이미지</th>
+				<th>상품명</th>
+				<th>가격</th>
+				<th>입찰 횟수</th>
+				<th>판매자</th>
+				<th>종료일시</th>
+				<th>찜</th>
 			</tr>
-			<c:forEach var="mList" items="${list}">
-				<tr>
-					<td><input type="checkbox" name="chk" id="chk" value="${mList.mailnum}"></td>
-					<td><a href="javascript:mailDetailGo(${mList.mailnum})">${mList.mailtitle}</a></td>
-					<td>${mList.maildate}</td>
-				</tr>
-			</c:forEach>
+		<c:forEach var="mList" items="${list}">
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</c:forEach>
 		</tbody>
 	</table>
 </div>
-
+</form>
 
 
 
@@ -81,3 +86,4 @@
 	</form>
 </div>
 <!-- paging(E) -->
+<div id="mTarget"></div>

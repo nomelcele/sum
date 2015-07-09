@@ -16,6 +16,8 @@
 <spring:url value="resources/font-awesome/css/font-awesome.min.css" var="font2" />
 <spring:url value="resources/css/bootstrap.min.css" var="boot" />
 <spring:url value="resources/css/signForm.css" var="sign"/>
+<spring:url value="resources/css/auction.css" var="auction"/>
+<link rel="stylesheet" type="text/css" href="${auction}"/>
 <link rel="stylesheet" type="text/css" href="${sign }"/>
 <link rel="stylesheet" type="text/css" href="${css }" />
 <link rel="stylesheet" type="text/css" href="${font }" />
@@ -26,6 +28,7 @@
 <!-- todo일 때 sns부분 -->
 <!-- 모달 -->
 <script src="js/sumware.js"></script>
+<script src="js/auction.js"></script>
 <script src="js/board.js"></script>
 <script src="js/mail.js"></script>
 <script src="js/http.js"></script>
