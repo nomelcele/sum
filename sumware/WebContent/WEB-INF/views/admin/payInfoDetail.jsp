@@ -3,11 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div style="width:100%">
 	<table class="table table-condensed table-hover">
-		<tr style="background-color: #F5F5F5;">
-			<td colspan="3"><span style="font-weight:bold">사원 정보</span></td>
+		<tr style="background-color: #F5F5F5; text-align: center">
+			<td colspan="3"><span style="font-weight:bold;">사원 정보</span></td>
 		</tr>
 		<tr>
-			<td rowspan="4" class="col-lg-1">
+			<td rowspan="4" class="col-lg-1" style="text-align: center">
 			<img src="resources/profileImg/${memvo.memprofile}" style="width:130px" ></td>
 			<td class="col-lg-1">이름</td>
 			<td class="col-lg-2">${memvo.memname}</td>
@@ -38,23 +38,18 @@
 						<c:forEach var="month" items="${monthList }">
 						<option value="${month.hisdate }">${month.hisdate }</option>
 						</c:forEach>
-					</select><span>년도</span>
+					</select>
 				</td>
 			</tr>
 			<c:forEach var="phvo" items="${phvoList }">
 				<tr>
 				<td class="col-lg-1" style="text-align: center;">${phvo.hisdate}</td>
 				<td class="col-lg-1" style="text-align: center;">${phvo.hisamount} 만원</td>
-				<td class="col-lg-1"></td>
-			</tr>
+				<td class="col-lg-1"><input type="button" class="btn btn-default btn-sm"  onclick="javascript:getPaymentDetail(${memvo.memnum},'${phvo.hisdate}')" value="상세보기"></td>
+				</tr>
 			</c:forEach>
-<!-- 			<tr> -->
-<!-- 				<td class="col-lg-1" style="background-color: #F5F5F5; text-align: center;">총 수령 금액</td> -->
-<!-- 				<td class="col-lg-1" style="text-align: center;">총 수령 금액</td> -->
-<!-- 			</tr> -->
-
 			
 		</tbody>
 	</table>
-
+<div id="modalTarget"></div>
 </div>

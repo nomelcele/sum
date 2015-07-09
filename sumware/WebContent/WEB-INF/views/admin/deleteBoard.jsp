@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="chat-panel panel panel-default" style="width: 60%">
+<div class="chat-panel panel panel-default" style="width: 70%">
 					<div class="panel-heading">
 						<i class="fa fa-plus-square-o"></i> <strong class="primary-font">
 							게시판 삭제</strong>

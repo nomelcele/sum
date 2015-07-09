@@ -127,7 +127,6 @@ function adminSelectMenu(res) {
 
 // 새 사원 추가에서 부서 선택 시 팀장 목록보여줌
 function getMemMgr() {
-	alert("팀장 찾아!")
 	var memdeptval = $('#newdept').val();
 	$.ajax({
 		type : "post",
@@ -383,7 +382,6 @@ function prFormSaveChange(memnum){
 	
 	// 급여 조회에서 월 바꾸면 수행
 	function changemonth(memnum){
-		alert("년도 바꿈"+$('#hisdate').val())
 		$.ajax({
 			type: "POST",
 			url: "adminPayInfoDetail",
@@ -430,4 +428,19 @@ function prFormSaveChange(memnum){
 					}
 				});
 			}
+		}
+
+		function getPaymentDetail(memnum, hisdate){
+			$.ajax({
+				type: "POST",
+				url: "getPaymentDetail",
+				data: {
+					commem: memnum,
+					comdate:hisdate
+				},
+				success: function(result){
+					$('#modalTarget').html(result);
+					$('#paymentDetail').modal('toggle');
+				}
+			});
 		}

@@ -15,7 +15,7 @@
 			</div>
 			<div class="modal-body">
 				<table class="table table-condensed table-hover">
-					<tr style="background-color: #F5F5F5;">
+					<tr style="background-color: #F5F5F5; text-align: center">
 						<td colspan="3"><span style="font-weight: bold">사원 정보</span></td>
 					</tr>
 					<tr>
@@ -78,7 +78,7 @@
 			</div>
 			<div class="modal-body">
 				<table class="table table-condensed table-hover">
-					<tr style="background-color: #F5F5F5;">
+					<tr style="background-color: #F5F5F5; text-align: center">
 						<td colspan="3"><span style="font-weight: bold">사원 정보</span></td>
 					</tr>
 					<tr>
@@ -140,6 +140,56 @@
 	</div>
 </div>
 <!-- Modal(E) -->
+
+
+<!-- Modal(S) 지급된 월급여 디테일!!!-->
+<div class="modal fade" id="paymentDetail" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">월 급여 세부 사항</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-condensed table-hover">
+					<tbody>
+						<tr>
+							<td class="col-lg-1" style="font-weight: bold; background-color: #F5F5F5; text-align: center;">기본 급</td>
+							<td class="col-lg-1" style="text-align: right;">${payvo.pmonthsalary} 만원</td>
+						</tr>
+						<tr>
+							<td class="col-lg-1" style="font-weight: bold; background-color: #F5F5F5; text-align: center;">추가 급</td>
+							<td class="col-lg-1" style="text-align: right;">총 ${comSum} 만원</td>
+						</tr>
+						<c:forEach var="comvo" items="${comList }">
+							<tr class="showComDetail">
+								<td class="col-lg-1" style="font-weight: bold; text-align: right;">${comvo.comdetail }</td>
+								<td class="col-lg-1" style="text-align: right;">${comvo.comamount} 만원</td>
+							</tr>
+						</c:forEach>
+						<tr>
+							<td class="col-lg-1" style="font-weight: bold; background-color: #D5D5D5; text-align: center;">총 합계</td>
+							<td class="col-lg-1" style="font-weight: bold; background-color: #EAEAEA; text-align: right;">${ totalSalary } 만원</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Modal(E) -->
+
+
 
 <!-- Modal (S) 사원 직급, 부서 변경 -->
 		<div class="modal fade" id="prForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

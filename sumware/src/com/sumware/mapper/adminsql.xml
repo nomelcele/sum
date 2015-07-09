@@ -102,8 +102,17 @@
 	
 	<!-- 해당 월의 commission 정보들 가져옴 -->
 	<select id="getComInfo" parameterType="comvo" resultType="comvo">
-		select comdetail, comamount , commem, comnum, to_char(comdate,'yyyy-mm') comdate 
-		from commission where commem=#{commem} and to_char(comdate,'yyyy-mm')=to_char(add_months(sysdate,-1),'yyyy-mm') order by comnum asc
+	select comdetail, comamount , commem, comnum, to_char(comdate,'yyyy-mm') comdate 
+		from commission where commem=#{commem} 
+	<choose>
+		<when test="comdate != null">
+			and to_char(comdate,'yyyy-mm')=#{comdate}
+		</when>
+		<otherwise>
+		and to_char(comdate,'yyyy-mm')=to_char(add_months(sysdate,-1),'yyyy-mm') 
+		</otherwise>
+	</choose>
+	order by comnum asc
 	</select>
 	
 	<!-- 월 급여 지급 : 무조건 지난 달 급여를 지급!!!-->
