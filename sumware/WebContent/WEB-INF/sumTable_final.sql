@@ -326,3 +326,6 @@ CREATE TABLE product(
 );
 CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
 COMMIT;
+--0709 추가
+alter table signature add(sgdept number(3));
+alter table signature add(CONSTRAINT signature_sgdept_fk foreign key(sgdept) REFERENCES dept(denum) on delete set null);

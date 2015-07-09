@@ -11,9 +11,9 @@ public class SignatureVO {
 		 sreason clob,
 		 startdate date,
 		 enddate DATE,*/
-	private String stitle,scont,sreason,startdate,enddate,sgwriter;
-	private String signdiv;//구분(전체,수신....)
-	private int formnum,snum,finalmemnum,nowmemnum;
+	private String stitle,scont,sreason,startdate,enddate,sgwriter,sfname,memname;
+	private int formnum,snum,finalmemnum,nowmemnum,sgdept;
+	private int ncount,ycount;//결재 상태
 	public String getStitle() {
 		return stitle;
 	}
@@ -74,11 +74,36 @@ public class SignatureVO {
 	public void setSgwriter(String sgwriter) {
 		this.sgwriter = sgwriter;
 	}
-	public String getSigndiv() {
-		return signdiv;
+	
+	public int getNcount() {
+		return ncount;
 	}
-	public void setSigndiv(String signdiv) {
-		this.signdiv = signdiv;
+	public void setNcount(int ncount) {
+		this.ncount = ncount;
+	}
+	public int getYcount() {
+		return ycount;
+	}
+	public void setYcount(int ycount) {
+		this.ycount = ycount;
+	}
+	public int getSgdept() {
+		return sgdept;
+	}
+	public void setSgdept(int sgdept) {
+		this.sgdept = sgdept;
+	}
+	public String getSfname() {
+		return sfname;
+	}
+	public void setSfname(String sfname) {
+		this.sfname = sfname;
+	}
+	public String getMemname() {
+		return memname;
+	}
+	public void setMemname(String memname) {
+		this.memname = memname;
 	}
 	
 	

@@ -9,6 +9,7 @@ import com.sumware.dto.MailVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.MessengerRoomVO;
 import com.sumware.dto.MessengerVO;
+import com.sumware.dto.SignatureVO;
 
 public class AbstractService implements ServiceInter{
 	//상속받아서 필요한것만 오버라이드 해서 쓰시오~!
@@ -47,6 +48,14 @@ public class AbstractService implements ServiceInter{
 	public String[] getMgrNames(String[] memnum) {
 		return null;
 	}
+
+	@Override
+	public void insertSignService(SignatureVO sgvo,
+			List<HashMap<String, String>> mgrList) {
+		
+	}
+
+	
 	
 	
 

@@ -8,8 +8,20 @@
 	</insert>
 	
 	<!-- 해당부서의 결재 문서를 조회 하는 쿼리. model 에서 getSignList 와 맵핑 -->
-	<select id="getSgList" parameterType="sgvo" resultType="sgvo">
-		 
+	<select id="getSgList" parameterType="map" resultType="sgvo">
+		<choose>
+			<when test="signdiv==1">
+			
+			</when>
+			<otherwise>
+				select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,
+				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'mm')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
+				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'mm')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
+				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y') ycount,(select count(stepconfirm) ncount from signstep where stepconfirm='n') ncount,m.memname
+				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter
+			</otherwise>
+		</choose>
+		
 	</select>
 	
 	<!-- 회사내규에 있는 결재 문서들의 종류를 보여주는 메소드 -->
@@ -30,7 +42,27 @@
 	</select>
 	
 	<!-- 선택된 문서를 작성 한다 -->
-	<insert id="writeSf" parameterType="map">
+	<insert id="writeSf" parameterType="sgvo">
+	<choose>
+		<when test="formnum==1">
+			insert into signature(snum,formnum,finalmemnum,nowmemnum,stitle,scont,startdate,enddate,sgwriter,sgdept)
+			values(signature_seq.nextVal,#{formnum},#{finalmemnum},#{nowmemnum},#{stitle},#{scont},#{startdate},#{enddate},#{sgwriter},#{sgdept})
+		</when>
+		<otherwise>
+			insert into signature(snum,formnum,finalmemnum,nowmemnum,stitle,scont,startdate,enddate,sgwriter,sreason,sgdept)
+			values(signature_seq.nextVal,#{formnum},#{finalmemnum},#{nowmemnum},#{stitle},#{scont},#{startdate},#{enddate},#{sgwriter},#{sgdept},#{sreason})
+		</otherwise>
+	</choose>
+	
+		
 	</insert>
+	<select id="getMax" resultType="int">
+		select max(snum) snum from signature
+	</select>
+	<insert id="writeSignStep" parameterType="map">
+		insert into signstep(stepnum,stepsnum,stepmemnum,stepconfirm)
+		values(signstep_seq.nextVal,#{stepsnum},#{stepmemnum},#{stepconfirm})
+	</insert>
+	<!-- / -->
 	
 </mapper>

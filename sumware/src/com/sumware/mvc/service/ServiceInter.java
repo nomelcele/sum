@@ -11,6 +11,7 @@ import com.sumware.dto.MailVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.MessengerRoomVO;
 import com.sumware.dto.MessengerVO;
+import com.sumware.dto.SignatureVO;
 
 public interface ServiceInter {
 	//메일
@@ -26,7 +27,10 @@ public interface ServiceInter {
 	public MemberVO addNewMember(MemberVO vo);
 	
 	//전자결재 관리
+	//상급자 리스트 불러오기
 	public List<MemberVO> getMgrList(int memnum);
-	
+	//상급자 이름 불러오기
 	public String[] getMgrNames(String[] memnum);
+	//결재문서 등록하기
+	public void insertSignService(SignatureVO sgvo,List<HashMap<String, String>> mgrList);
 }

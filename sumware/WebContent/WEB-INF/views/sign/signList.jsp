@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
 	<div>검색</div>
 	<div>
@@ -13,6 +14,23 @@
 				<td>기안일</td>
 				<td>결재상태</td>						
 			</tr>
+			<c:forEach var="sg" items="${sgList }">
+				<tr>
+					<td>${sg.snum}</td>
+					<td>${sg.sfname }</td>
+					<td><a href="location='signDetail?snum=${sg.snum }'">${sg.stitle }</a></td>
+					<td>${sg.memname }</td>
+					<td>${sg.startdate } ~ ${sg.enddate}</td>
+					<c:choose>
+						<c:when test="${sg.ycount ne sg.ncount }">
+							<td>진행중(${sg.ycount }/${sg.ncount })</td>		
+						</c:when>
+						<c:otherwise>
+							<td>완료</td>
+						</c:otherwise>
+					</c:choose>
+				</tr>		
+			</c:forEach>
 		</table>
 	</div>
 	<div class='modal' id='signModal' role='dialog'>
