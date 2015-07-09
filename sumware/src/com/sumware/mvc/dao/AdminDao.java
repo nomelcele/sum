@@ -112,4 +112,14 @@ public class AdminDao {
 		return st.selectList("admin.getMonths", memnum);
 	}
 	
+	// 해당 부서의 게시판 목록 가져오기 
+	public List<BnameVO> getDeptBoards(int bdeptno){
+		return st.selectList("admin.getDeptBoards", bdeptno);
+	}
+
+	// 선택한 게시판 삭제
+	public void deleteBoard(int bgnum){
+		st.delete("admin.deleteBoard", bgnum);
+	}
+	
 }

@@ -2,25 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- 	<div class="row-lg-6"> -->
-<!-- 		<div class="chat-panel panel panel-default left-profile"> -->
-<!-- 			<div class="panel-heading"> -->
-<!-- 				<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">Administrator</strong> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- <!-- left-menu(S) -->
-<!-- <div class="left-menu" id="left-menu"> -->
-<!-- 	<ul> -->
-<!-- 		<li> -->
-<!-- 			<a href="#">사원관리</a> -->
-<!-- 		</li> -->
-<!-- 		<li><a href="#">급여관리</a></li> -->
-<!-- 		<li><a href="#">전자결재</a></li> -->
-<!-- 	</ul> -->
-<!-- </div> -->
-<!-- <!-- left-menu(E) -->
-<!-- test menu(S) -->
 <div id="MainMenu">
   <div class="list-group panel">
     <a href="#demo3" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">사원 관리 <i class="fa fa-caret-down"></i></a>
@@ -40,15 +21,11 @@
     </div>
      <a href="#demo6" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">게시판 관리 <i class="fa fa-caret-down"></i></a>
     <div class="collapse" id="demo6">
-      <a href="#" class="list-group-item">&nbsp; &nbsp; 게시판 열람</a>
+      <a href="javascript:adminSelectMenu('adminBoardListMain')" class="list-group-item">&nbsp; &nbsp; 게시판 열람</a>
       <a href="javascript:adminSelectMenu('addBoard')" class="list-group-item">&nbsp; &nbsp; 게시판 추가</a>
-      <a href="#" class="list-group-item">&nbsp; &nbsp; 게시판 삭제</a>
+      <a href="javascript:adminSelectMenu('adminDeleteBoardForm')" class="list-group-item">&nbsp; &nbsp; 게시판 삭제</a>
     </div>
   </div>
 </div>
-<!-- test menu(E) -->
-<%-- </c:if> --%>
-<%-- todo left(S) --%>
-
 
 
