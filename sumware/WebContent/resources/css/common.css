@@ -20,13 +20,19 @@ a{display:block}
 /************************** [ INITIALIZE(PRIMARY DESIGN) ] *********************************/
 /* 아래부터 초기 디자인 셋팅 부분 (이니셜라이즈) */
 body {
-	min-height:650px;
+	min-width:1190px;min-height:650px;
 	padding-bottom:85px;
 	/* Verdana,맑은고딕으로 선언했기 때문에 영문,숫자는 Verdana 폰트로, 한글은 맑은고딕으로 출력됨 */
 	font-family:Verdana,"맑은고딕",Dotum,simsun,Arial, Geneva, Helvetica, sans-serif,"Apple-Gothic","애플고딕","Droid Sans";
 	font-size: 12px; line-height: 1.5;
 	color: #888;
 }
+/* 불필요한 반응형 제거 */
+.container {
+	min-width:1190px
+}
+
+
 
 /************************** [ GLOBAL DESIGN ] *********************************/
 /* 아래부터 사이트 전역에서 쓰이는 디자인 클래스들 모음 */
@@ -40,6 +46,9 @@ body {
 .button-div .right {float:right}
 .button-div button {margin-left:8px}
 .button-div button:first-child {margin-left:0}
+
+/* ALIGN */
+.align-center {text-align:center!important}
 
 /************************** [ DESIGN ] *********************************/
 /* 아래부터 사용자 커스터마이징 디자인 셋팅 부분 */
