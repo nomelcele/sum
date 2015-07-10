@@ -59,3 +59,36 @@
 <div id="modalTarget"></div>
 <!-- List (E) -->
 
+
+		<!-- paging(S) -->
+		<div class="paging" id="paging">
+		<input type="hidden" name="page" id="page">
+		<input type="hidden" id="memdept" name="memdept" value="${pdept}">
+		<input type="hidden" id="memname" name="memname" value="${pname}">
+			<c:choose>
+				<c:when test="${pageInfo.currentBlock eq 1}">&lt;&lt;</c:when>
+				<c:otherwise>
+					<a class="page-first" href="javascript:goPage(${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock },'payManagementPage')">&lt;&lt;</a>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${pageInfo.currentBlock ne pageInfo.totalBlocks}">
+					<c:forEach begin="1" end="${pageInfo.pagesPerBlock}" varStatus="num">
+						<a href="javascript:goPage(${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count },'payManagementPage')">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>
+			        </c:forEach>
+				</c:when>
+				<c:otherwise>
+					<c:forEach begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}" end="${pageInfo.totalPages}" varStatus="num">
+			            <a href="javascript:goPage(${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count },'payManagementPage')">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>
+			        </c:forEach>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${pageInfo.currentBlock eq pageInfo.totalBlocks}">&gt;&gt;</c:when>
+				<c:otherwise>
+					<a class="page-last" href="javascript:goPage(${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 },'payManagementPage')">&gt;&gt;</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<!-- paging(E) -->
+
