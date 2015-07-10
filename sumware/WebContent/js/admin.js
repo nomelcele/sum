@@ -450,23 +450,21 @@ function prFormSaveChange(memnum){
 		
 		// 페이지 이동
 		function goPage(page,fname){
-			$("#page").attr("value",page);
-			console.log("페이지: "+$("#page").val());
+			 $("#page").attr("value",page);
+			 console.log("페이지: "+$("#page").val());
 			
 			if(fname == 'memListPage'){
 				$.ajax({
 					type : "POST",
 					url : "adminMemList",
 					data : {
-						memdept : $("#searchDept").val(),
-						memname : $("#searchName").val(),
+						memdept : $("#memdept").val(),
+						memname : $("#memname").val(),
 						page: $("#page").val()
 					},
 					success : function(result) {
 						$('.contents').html(result);
 					}
 				});
-				
-				// $("#memListPage").submit();
 			}
 		}

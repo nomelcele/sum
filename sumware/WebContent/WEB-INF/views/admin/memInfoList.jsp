@@ -57,16 +57,12 @@
 		
 		<!-- paging(S) -->
 		<div class="paging" id="paging">
-<!-- 		<form action="adminMemList" method="post" id="memListPage"> -->
-<!-- 		<input type="hidden" name="page" id="page"> -->
-<!-- 		<input type="hidden" id="memdept" name="memdept"> -->
-<!-- 		<input type="hidden" id="memname" name="memname"> -->
-<!-- 		<input type="hidden" name="cmd" value="1"> -->
-<%-- 		<c:set var="pageUrl" value="adminMemList"/> --%>
+		<input type="hidden" name="page" id="page">
+		<input type="hidden" id="memdept" name="memdept" value="${pdept}">
+		<input type="hidden" id="memname" name="memname" value="${pname}">
 			<c:choose>
 				<c:when test="${pageInfo.currentBlock eq 1}">&lt;&lt;</c:when>
 				<c:otherwise>
-					<%-- <button type="button" class="paging-prev">&lt;&lt;</button> --%>
 					<a class="page-first" href="javascript:goPage(${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock },'memListPage')">&lt;&lt;</a>
 				</c:otherwise>
 			</c:choose>
@@ -79,7 +75,6 @@
 				<c:otherwise>
 					<c:forEach begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}" end="${pageInfo.totalPages}" varStatus="num">
 			            <a href="javascript:goPage(${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count },'memListPage')">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>
-			        <!-- ${pageUrl}?cmd=1&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count } -->
 			        </c:forEach>
 				</c:otherwise>
 			</c:choose>
@@ -89,7 +84,6 @@
 					<a class="page-last" href="javascript:goPage(${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 },'memListPage')">&gt;&gt;</a>
 				</c:otherwise>
 			</c:choose>
-<!-- 		</form> -->
 		</div>
 		<!-- paging(E) -->
 		
