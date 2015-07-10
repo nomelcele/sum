@@ -54,14 +54,14 @@
 					size='${index.count}';
 				"</c:forEach>";
 				$('#sgwriter').val("${sessionScope.v.memname}");
-				addSignDiv(mgrs,names,"${sessionScope.v.memnum}","${sessionScope.v.memdept}");
+				addSignDiv(mgrs,names,"${sessionScope.v.memdept}");
 			}else if(signMode='detail'){
-
+				var signimg={};
 				"<c:forEach var='ss' items='${ssList}' varStatus='index'>";
 					mgrs['${index.count}']='${ss.stepmemnum}';
 					status['${index.count}']='${ss.stepconfirm}';
 					size='${index.count}';
-					signimg['${index.count}']='${sessionScop.v.memsignimg}';
+					signimg['${index.count}']='${sessionScope.v.memsignimg}';
 				"</c:forEach>";
 				
 				$("#sgwriter").val('${sgvo.sgwriter}');
@@ -69,7 +69,11 @@
 				$('#enddate').val('${sgvo.enddate}');
 				$('#stitle').val("${sgvo.stitle}");
 				$('#scont').val("${sgvo.scont}");
-				addSignDiv(mgrs,names,status);
+				if("${!empty sgvo.sgreturncomm}"=="true"){
+					var signComm="<table><tr><td><h6>Comment</h6></td></tr><tr><td><textarea rows='3' cols='50' style='resize:none;' readonly='readonly'>${sgvo.sgreturncomm}</textarea></td></tr>";
+					$('#signCommDiv').html(signComm);
+				}
+				addSignDiv(mgrs,names,status,signimg,"${sgvo.sgreturn}");
 			}
 		});
 	</script>

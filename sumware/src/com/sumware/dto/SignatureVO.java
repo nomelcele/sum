@@ -11,9 +11,9 @@ public class SignatureVO {
 		 sreason clob,
 		 startdate date,
 		 enddate DATE,*/
-	private String stitle,scont,sreason,startdate,enddate,sgwriter,sfname,memname;
-	private int formnum,snum,finalmemnum,nowmemnum,sgdept;
-	private int ncount,ycount;//결재 상태
+	private String stitle,scont,sreason,startdate,enddate,sgwriter,sfname,memname,sgreturncomm;
+	private int formnum,snum,finalmemnum,nowmemnum,sgdept,sgreturn;
+	private int count,ycount;//결재 상태
 	public String getStitle() {
 		return stitle;
 	}
@@ -75,11 +75,11 @@ public class SignatureVO {
 		this.sgwriter = sgwriter;
 	}
 	
-	public int getNcount() {
-		return ncount;
+	public int getCount() {
+		return count;
 	}
-	public void setNcount(int ncount) {
-		this.ncount = ncount;
+	public void setCount(int count) {
+		this.count = count;
 	}
 	public int getYcount() {
 		return ycount;
@@ -104,6 +104,18 @@ public class SignatureVO {
 	}
 	public void setMemname(String memname) {
 		this.memname = memname;
+	}
+	public int getSgreturn() {
+		return sgreturn;
+	}
+	public void setSgreturn(int sgreturn) {
+		this.sgreturn = sgreturn;
+	}
+	public String getSgreturncomm() {
+		return sgreturncomm;
+	}
+	public void setSgreturncomm(String sgreturncomm) {
+		this.sgreturncomm = sgreturncomm;
 	}
 	
 	
