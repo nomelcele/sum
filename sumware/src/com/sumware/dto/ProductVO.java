@@ -10,7 +10,27 @@ public class ProductVO {
     pronum NUMBER(5), -- 경매번호 pk
     zzim VARCHAR2(1) DEFAULT 'n', -- 찜한목록이면 y 아니면 n*/
 	private String product,proimg,zzim;
+	private String startdate, enddate,procont;
 	private int prowriter,price,procount,pronum;
+	
+	public String getStartdate() {
+		return startdate;
+	}
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+	public String getEnddate() {
+		return enddate;
+	}
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+	public String getProcont() {
+		return procont;
+	}
+	public void setProcont(String procont) {
+		this.procont = procont;
+	}
 	public String getProduct() {
 		return product;
 	}

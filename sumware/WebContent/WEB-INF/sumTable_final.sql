@@ -16,11 +16,13 @@ DROP TABLE signstep;
 DROP TABLE signature;
 DROP TABLE signform;
 DROP TABLE commission;
+drop table zzim;
 DROP TABLE product;
 DROP TABLE SNS;
 DROP TABLE MEMBER;
 DROP TABLE DEPT;
 DROP SEQUENCE TODO_SEQ;
+DROP SEQUENCE zzim_SEQ;
 DROP SEQUENCE todojob_seq;
 DROP SEQUENCE SNS_SEQ;
 DROP SEQUENCE MESCONTENT_SEQ;
@@ -370,8 +372,44 @@ CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
 --0709 추가
 alter table signature add(sgdept number(3));
 alter table signature add(CONSTRAINT signature_sgdept_fk foreign key(sgdept) REFERENCES dept(denum) on delete set null);
+
+CREATE TABLE bidder( -- 가격제시자, 입찰자 테이블
+	bidnum number, -- pk 입찰 번호 !!! 고유 번호
+    bidmem NUMBER(5), -- 입찰자의 사번 !
+    bidpronum number(5), -- fk 상품번호 참조. product(pronum)
+    bidprice NUMBER(8), -- 입찰자가 제시한 가격!
+    CONSTRAINT bidder_bidnum_pk PRIMARY KEY(bidnum),
+    CONSTRAINT bidder_bidnum_fk FOREIGN KEY(bidpronum) 
+    REFERENCES PRODUCT(pronum) ON DELETE CASCADE, 
+    CONSTRAINT bidder_bidmem_fk FOREIGN KEY(bidmem)
+    REFERENCES MEMBER(memnum)	    
+);
+CREATE SEQUENCE bidder_seq INCREMENT BY 1 START WITH 1;
+
+ALTER TABLE PRODUCT ADD(startdate DATE, enddate date);
+alter table product add(procont varchar(800));
+
+CREATE TABLE zzim(
+	zzimnum number, -- pk
+	zdeptno NUMBER(5), -- 품목을 찜한 사번의 사번. fk member(memnum)
+    zproduct NUMBER(5), -- 상품번호. fk product(pronum)
+    soldout VARCHAR2(1) DEFAULT 'n',
+    CONSTRAINT zzim_zzimnum_pk PRIMARY KEY(zzimnum),
+    CONSTRAINT zzim_zdeptno_fk FOREIGN KEY(zdeptno)
+    REFERENCES MEMBER(memnum) ON DELETE CASCADE,
+    CONSTRAINT zzim_zproduct_fk FOREIGN KEY(zproduct) 
+    REFERENCES PRODUCT(pronum) ON DELETE cascade
+);
+CREATE SEQUENCE zzim_seq INCREMENT BY 1 START WITH 1;
+
+COMMIT;
+
 --0710 추가
 alter table signature add(sgreturn number(5));
 alter table signature add( constraint signature_sgreturn_fk foreign key(sgreturn) references member(memnum) on delete set null);
 alter table signature add(sgreturncomm varchar2(300));
 COMMIT;
+
+
+
+
