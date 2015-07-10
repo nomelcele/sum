@@ -13,7 +13,27 @@ PRONUM	NUMBER(5)
 ZZIM	VARCHAR2(1)
 
 -->
-	<insert id="proInsert" parameterType="provo">
-		insert into product values(#{product},#{proimg},#{prowriter},#{price},0,product_seq.nextVal,#{zzim})
+	<!-- 상품 등록 -->
+	<insert id="proInsert" parameterType="map">
+		insert into product values
+		(#{product},#{proimg},#{prowriter},#{price},0
+		,product_seq.nextVal,'n',#{startdate},#{enddate},#{procont })
 	</insert>
+	
+	<!-- 상품 리스트 -->
+	<select id="proList">
+		select p.product, p.proimg, m.memname, p.price 
+		from product p, member m where p.prowriter = m.memnum
+	</select>	
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+

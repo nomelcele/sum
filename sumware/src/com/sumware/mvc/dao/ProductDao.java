@@ -1,10 +1,10 @@
 package com.sumware.mvc.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.sumware.dto.ProductVO;
 
 @Repository
 public class ProductDao {
@@ -12,7 +12,7 @@ public class ProductDao {
 	@Autowired
 	private SqlSessionTemplate st;
 	
-	public void proInsert(ProductVO provo){
+	public void proInsert(Map<String,String> provo){
 		st.insert("pro.proInsert",provo);
 	}
 }
