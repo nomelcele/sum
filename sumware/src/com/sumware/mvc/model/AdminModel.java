@@ -139,12 +139,14 @@ public class AdminModel {
 		System.out.println("getMemInfoList");
 		int totalCount = adao.getMemCount(mvo);
 		System.out.println("사원 수: "+totalCount);
-		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 5, 5, 0, totalCount, 0);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 3, 5, 0, totalCount, 0);
 		mvo.setBegin(pmap.get("begin"));
 		mvo.setEnd(pmap.get("end"));
 		
 		List<MemberVO> memList = adao.getMemInfoList(mvo);
 		model.addAttribute("list", memList);
+		model.addAttribute("pdept", mvo.getMemdept());
+		model.addAttribute("pname", mvo.getMemname());
 		
 		return "admin/memInfoList";
 		
