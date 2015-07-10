@@ -12,7 +12,7 @@ public class ProductDao {
 	@Autowired
 	private SqlSessionTemplate st;
 	
-	public void proInsert(ProductVO vo){
-		st.insert("pro.proInsert",vo);
+	public void proInsert(ProductVO provo){
+		st.insert("pro.proInsert",provo);
 	}
 }
