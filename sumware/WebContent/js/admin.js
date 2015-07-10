@@ -76,7 +76,8 @@ function adminSelectMenu(res) {
 			url : "adminMemList",
 			data : {
 				memdept : $("#searchDept").val(),
-				memname : $("#searchName").val()
+				memname : $("#searchName").val(),
+				page: 1
 			},
 			success : function(result) {
 				$('.contents').html(result);
@@ -453,6 +454,19 @@ function prFormSaveChange(memnum){
 			console.log("페이지: "+$("#page").val());
 			
 			if(fname == 'memListPage'){
-				$("#memListPage").submit();
+				$.ajax({
+					type : "POST",
+					url : "adminMemList",
+					data : {
+						memdept : $("#searchDept").val(),
+						memname : $("#searchName").val(),
+						page: $("#page").val()
+					},
+					success : function(result) {
+						$('.contents').html(result);
+					}
+				});
+				
+				// $("#memListPage").submit();
 			}
 		}

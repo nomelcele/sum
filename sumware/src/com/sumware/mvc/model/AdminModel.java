@@ -135,7 +135,7 @@ public class AdminModel {
 
 	// 사원 개인 정보 리스트 가져오는 메서드
 	@RequestMapping(value = "/adminMemList")
-	public String getMemInfoList(MemberVO mvo, String cmd, Model model, HttpServletRequest req) {
+	public String getMemInfoList(MemberVO mvo, Model model, HttpServletRequest req) {
 		System.out.println("getMemInfoList");
 		int totalCount = adao.getMemCount(mvo);
 		System.out.println("사원 수: "+totalCount);
@@ -146,13 +146,8 @@ public class AdminModel {
 		List<MemberVO> memList = adao.getMemInfoList(mvo);
 		model.addAttribute("list", memList);
 		
+		return "admin/memInfoList";
 		
-		System.out.println("cmd: "+cmd);
-		if(cmd == null){
-			return "admin/memInfoList";
-		} else {
-			return "admin.memInfoList";
-		}
 	}
 
 	// 사원 추가 메뉴 진입
