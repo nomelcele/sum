@@ -339,7 +339,7 @@ create table signature(
  CONSTRAINT sign_formnum_fk FOREIGN KEY(formnum) REFERENCES signform(sfnum) ON DELETE CASCADE,
  CONSTRAINT sign_finalmemnum_fk FOREIGN KEY(finalmemnum) REFERENCES member(memnum) ON DELETE CASCADE,
  CONSTRAINT sign_nowmemnum_fk FOREIGN KEY(nowmemnum) REFERENCES member(memnum) ON DELETE CASCADE,
- CONSTRAINT sign_sgwriter_fk FOREIGN KEY(sgwriter) REFERENCES member(memnum) ON DELETE CASCADE
+ CONSTRAINT sign_sgwriter_fk FOREIGN KEY(sgwriter) REFERENCES member(memnum) ON delete set null
 );
 CREATE SEQUENCE signature_seq INCREMENT BY 1 START WITH 1; -- snum 사용
 
@@ -370,5 +370,8 @@ CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
 --0709 추가
 alter table signature add(sgdept number(3));
 alter table signature add(CONSTRAINT signature_sgdept_fk foreign key(sgdept) REFERENCES dept(denum) on delete set null);
- 
+--0710 추가
+alter table signature add(sgreturn number(5));
+alter table signature add( constraint signature_sgreturn_fk foreign key(sgreturn) references member(memnum) on delete set null);
+alter table signature add(sgreturncomm varchar2(300));
 COMMIT;

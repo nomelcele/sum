@@ -22,8 +22,11 @@
 					<td>${sg.memname }</td>
 					<td>${sg.startdate } ~ ${sg.enddate}</td>
 					<c:choose>
-						<c:when test="${sg.ycount ne sg.ncount }">
-							<td>진행중(${sg.ycount }/${sg.ncount })</td>		
+						<c:when test="${!empty sg.sgreturncomm }">
+							<td>반려문서</td>
+						</c:when>
+						<c:when test="${sg.ycount ne sg.count }">
+							<td>진행중(${sg.ycount }/${sg.count })</td>		
 						</c:when>
 						<c:otherwise>
 							<td>완료</td>

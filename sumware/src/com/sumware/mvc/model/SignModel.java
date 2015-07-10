@@ -143,16 +143,25 @@ public class SignModel {
 		}
 		ArrayList<HashMap<String, String>> stepList =setSignStep(map);
 		for(HashMap<String, String> step : stepList){
-			int i =1;
 			if(step.get("stepnum")!=null){
-				System.out.println("if in stepnum::"+step.get("stepnum"+i));
+				System.out.println("if in stepnum::"+step.get("stepnum"));
 				sgdao.updateSignStep(step);
 			}
-			i++;
 		}
 		return "redirect:getSignList";
 	}
-	
+	@RequestMapping(value="signReturn",method=RequestMethod.POST)
+	public String signReturn(int snum,String sgreturncomm,HttpSession session){
+		System.out.println("반려!");
+		MemberVO mvo = (MemberVO) session.getAttribute("v");
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("sgreturn", String.valueOf(mvo.getMemnum()));
+		map.put("snum", String.valueOf(snum));
+		map.put("sgreturncomm", sgreturncomm);
+		
+		sgdao.signReturn(map);
+		return "redirect:getSignList";
+	}
 	// 결재 문서를 조건에 맞게 검색(결과 내 검색)
 	@RequestMapping(value="signSearch")
 	public String signSearch(SignatureVO sgvo){

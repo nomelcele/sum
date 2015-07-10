@@ -59,6 +59,10 @@ public class SignDao {
 	public void updateSignStep(Map<String,String> map){
 		st.update("sign.updateSignStep", map);
 	}
+	//반려하기
+	public void signReturn(Map<String,String> map){
+		st.update("sign.signReturn",map);
+	}
 	
 	
 }
