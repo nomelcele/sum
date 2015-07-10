@@ -21,6 +21,7 @@ import com.sumware.dto.CommissionVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.PayHistoryVO;
 import com.sumware.dto.PayVO;
+import com.sumware.dto.SignFormVO;
 import com.sumware.mvc.dao.AdminDao;
 import com.sumware.mvc.service.ServiceInter;
 import com.sumware.util.MyPage;
@@ -363,5 +364,29 @@ public class AdminModel {
 		return "redirect:/adminDeleteBoardForm";
 	}
 	// ////////////////////////게시판 관리(E)///////////////////////////
+	
+	
+	
+	
+	// ////////////////////////문서 양식 관리(S)///////////////////////////
+	// 양식 추가 메뉴 선택
+	@RequestMapping(value="/adminaddSignForm")
+	public String addSignForm(){
+		return "admin/addSignForm";
+	}
+	
+	// 제작한 양식 추가
+	@RequestMapping(value="/adminaddForm", method=RequestMethod.POST)
+	public String addForm(SignFormVO sfvo){
+		System.out.println("fsname : "+sfvo.getSfname());
+		System.out.println("내용요요용 : "+sfvo.getSform());
+		adao.addSignForm(sfvo);
+		return "redirect:/adminaddSignForm";
+	}
+	
+	// ////////////////////////문서 양식 관리(E)///////////////////////////
+	
+	
+	
 
 }

@@ -373,6 +373,8 @@ CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1;
 alter table signature add(sgdept number(3));
 alter table signature add(CONSTRAINT signature_sgdept_fk foreign key(sgdept) REFERENCES dept(denum) on delete set null);
 
+ COMMIT;
+
 CREATE TABLE bidder( -- 가격제시자, 입찰자 테이블
 	bidnum number, -- pk 입찰 번호 !!! 고유 번호
     bidmem NUMBER(5), -- 입찰자의 사번 !
@@ -408,8 +410,7 @@ COMMIT;
 alter table signature add(sgreturn number(5));
 alter table signature add( constraint signature_sgreturn_fk foreign key(sgreturn) references member(memnum) on delete set null);
 alter table signature add(sgreturncomm varchar2(300));
+alter table signature add (sdate varchar2(50),splace varchar2(50),sps varchar2(200));
 COMMIT;
-
-
 
 
