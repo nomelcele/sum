@@ -89,18 +89,21 @@ function adminSelectMenu(res) {
 			type : "POST",
 			url : "adminPayInfoList",
 			data : {
-				memname : $("#searchName").val()
+				memname : $("#searchName").val(),
+				page:1
 			},
 			success : function(result) {
 				$('.contents').html(result);
 			}
 		});
+		//급여 지급
 	} else if(res == 'adminPayManagement'){
 		$.ajax({
 			type : "POST",
 			url : "adminPayManagement",
 			data : {
-				memname : $("#searchName").val()
+				memname : $("#searchName").val(),
+				page:1
 			},
 			success : function(result) {
 				$('.contents').html(result);
@@ -457,6 +460,32 @@ function prFormSaveChange(memnum){
 				$.ajax({
 					type : "POST",
 					url : "adminMemList",
+					data : {
+						memdept : $("#memdept").val(),
+						memname : $("#memname").val(),
+						page: $("#page").val()
+					},
+					success : function(result) {
+						$('.contents').html(result);
+					}
+				});
+			}else if(fname == 'payListPage'){
+				$.ajax({
+					type : "POST",
+					url : "adminPayInfoList",
+					data : {
+						memdept : $("#memdept").val(),
+						memname : $("#memname").val(),
+						page: $("#page").val()
+					},
+					success : function(result) {
+						$('.contents').html(result);
+					}
+				});
+			}else if(fname='payManagementPage'){
+				$.ajax({
+					type : "POST",
+					url : "adminPayManagement",
 					data : {
 						memdept : $("#memdept").val(),
 						memname : $("#memname").val(),

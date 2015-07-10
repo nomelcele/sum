@@ -136,20 +136,20 @@ public class AdminModel {
 	// 사원 개인 정보 리스트 가져오는 메서드
 	@RequestMapping(value = "/adminMemList")
 	public String getMemInfoList(MemberVO mvo, Model model, HttpServletRequest req) {
-		System.out.println("getMemInfoList");
+		// 페이지 처리
 		int totalCount = adao.getMemCount(mvo);
-		System.out.println("사원 수: "+totalCount);
-		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 3, 5, 0, totalCount, 0);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 3, 5, 0,totalCount, 0);
 		mvo.setBegin(pmap.get("begin"));
 		mvo.setEnd(pmap.get("end"));
-		
+
+		// 사원 리스트
 		List<MemberVO> memList = adao.getMemInfoList(mvo);
 		model.addAttribute("list", memList);
 		model.addAttribute("pdept", mvo.getMemdept());
 		model.addAttribute("pname", mvo.getMemname());
-		
+
 		return "admin/memInfoList";
-		
+
 	}
 
 	// 사원 추가 메뉴 진입
@@ -212,23 +212,41 @@ public class AdminModel {
 
 	// 급여조회 폼
 	@RequestMapping(value = "/adminPayInfoList", method = RequestMethod.POST)
-	public String adminPayInfoList(MemberVO mvo, Model model) {
+	public String adminPayInfoList(MemberVO mvo, Model model, HttpServletRequest req) {
+		// 페이지 처리
+		int totalCount = adao.getMemCount(mvo);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 3, 5, 0,totalCount, 0);
+		mvo.setBegin(pmap.get("begin"));
+		mvo.setEnd(pmap.get("end"));
+
+		// 사원 리스트
 		List<MemberVO> memList = adao.getMemInfoList(mvo);
 		model.addAttribute("list", memList);
+		model.addAttribute("pdept", mvo.getMemdept());
+		model.addAttribute("pname", mvo.getMemname());
 		return "admin/payInfoList";
 	}
 
 	// 급여지급 폼
 	@RequestMapping(value = "/adminPayManagement")
-	public String adminPayManagement(MemberVO mvo, Model model) {
+	public String adminPayManagement(MemberVO mvo, Model model,HttpServletRequest req) {
+		// 페이지 처리
+		int totalCount = adao.getMemCount(mvo);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 3, 5, 0,totalCount, 0);
+		mvo.setBegin(pmap.get("begin"));
+		mvo.setEnd(pmap.get("end"));
+
+		// 사원 리스트
 		List<MemberVO> memList = adao.getMemInfoList(mvo);
 		model.addAttribute("list", memList);
+		model.addAttribute("pdept", mvo.getMemdept());
+		model.addAttribute("pname", mvo.getMemname());
 		return "admin/payManagement";
 	}
 
 	// 사원의 급여 디테일
 	@RequestMapping(value = "/adminPayInfoDetail", method = RequestMethod.POST)
-	public String adminPayInfoDetail(MemberVO vo,String hisdate, Model model) {
+	public String adminPayInfoDetail(MemberVO vo, String hisdate, Model model) {
 		System.out.println("memnum ::" + vo.getMemnum());
 
 		// member 정보 가져옴
@@ -240,9 +258,9 @@ public class AdminModel {
 		// member payhistory 정보 가져옴
 		PayHistoryVO payhistoryvo = new PayHistoryVO();
 		payhistoryvo.setHismem(vo.getMemnum());
-		if(hisdate!=null && hisdate!=""){
+		if (hisdate != null && hisdate != "") {
 			payhistoryvo.setHisdate(hisdate);
-		}else{
+		} else {
 			payhistoryvo.setHisdate(null);
 		}
 		List<PayHistoryVO> phvo = adao.getPayHistory(payhistoryvo);
@@ -250,21 +268,21 @@ public class AdminModel {
 		// 사원마다 급여 지급 받은 이력이 있는 년도 뽑아옴 ( select태그에 추가하기 위해)
 		List<PayHistoryVO> months = adao.getMonths(vo.getMemnum());
 		model.addAttribute("monthList", months);
-		
+
 		return "admin/payInfoDetail";
 	}
-	
-	@RequestMapping(value="/getPaymentDetail" , method=RequestMethod.POST)
-	public String getPaymentDetail(CommissionVO comvo, Model model){
+
+	@RequestMapping(value = "/getPaymentDetail", method = RequestMethod.POST)
+	public String getPaymentDetail(CommissionVO comvo, Model model) {
 		// member pay 정보 가져옴
 		PayVO payvo = adao.getPayInfo(comvo.getCommem());
 		model.addAttribute("payvo", payvo);
-		
+
 		// commission 정보들 가져옴
 		// 달에 해당하는 추가급들 다 가져옴
 		List<CommissionVO> comvos = adao.getComInfo(comvo);
 		model.addAttribute("comList", comvos);
-		//////////////////////////////////////////////////////////////////////////
+
 		// commission 총 합계 계산
 		int comsum = 0;
 		for (CommissionVO e : comvos) {
@@ -274,7 +292,7 @@ public class AdminModel {
 		// 총 지급 된 급여!!!!
 		int totalSal = comsum + payvo.getPmonthsalary();
 		model.addAttribute("totalSalary", totalSal);
-		
+
 		return "admin/modal";
 	}
 
@@ -296,52 +314,54 @@ public class AdminModel {
 		adao.addBoard(bnvo);
 		return "admin/addBoard";
 	}
-	
+
 	// 게시판 열람 페이지로 이동
-		@RequestMapping(value="/adminBoardListMain")
-		public String boardListMain(){
-			return "admin/deptBoardList";
+	@RequestMapping(value = "/adminBoardListMain")
+	public String boardListMain() {
+		return "admin/deptBoardList";
+	}
+
+	// 해당 부서의 게시판 목록 가져오기
+	@RequestMapping(value = "/admingetDeptBoards", method = RequestMethod.POST)
+	public void getDeptBoards(int bdeptno, HttpServletResponse resp)
+			throws IOException {
+		List<BnameVO> bList = adao.getDeptBoards(bdeptno);
+		StringBuffer sb = new StringBuffer();
+		sb.append("<option value='0'>게시판</option>");
+
+		for (BnameVO e : bList) {
+			sb.append("<option value='").append(e.getBgnum()).append("'>")
+					.append(e.getBname()).append("</option>");
 		}
-		
-		// 해당 부서의 게시판 목록 가져오기 
-		@RequestMapping(value="/admingetDeptBoards",method=RequestMethod.POST)
-		public void getDeptBoards(int bdeptno,HttpServletResponse resp) throws IOException{
-			List<BnameVO> bList = adao.getDeptBoards(bdeptno);
-			StringBuffer sb = new StringBuffer();
-			sb.append("<option value='0'>게시판</option>");
-			
-			for(BnameVO e:bList){
-				sb.append("<option value='").append(e.getBgnum()).append("'>").append(e.getBname()).append("</option>");
-			}
-			
-			PrintWriter pw = resp.getWriter();
-			pw.write(sb.toString());
-			pw.flush();
-			pw.close();
-		}
-		
-		// 선택한 게시판 열람
-		@RequestMapping(value="/admingetDeptBoardList",method=RequestMethod.POST)
-		public String getDeptBoardList(int bgnum,Model model){
-//			List<BoardVO> bList = adao.getDeptBoardList(bgnum);
-//			model.addAttribute("list", bList);
-//			return "admin/deptBoard";
-			String params = "page=1&bsearch=&div=&bgnum="+bgnum;
-			return "redirect:/boardList?"+params;
-		}
-		
-		// 게시판 삭제 폼 이동
-		@RequestMapping(value="/adminDeleteBoardForm")
-		public String deleteBoardForm(){
-			return "admin/deleteBoard";
-		}
-		
-		// 선택한 게시판 삭제
-		@RequestMapping(value="/admindeleteBoard",method=RequestMethod.POST)
-		public String deleteBoard(int bgnum){
-			adao.deleteBoard(bgnum);
-			return "redirect:/adminDeleteBoardForm";
-		}
+
+		PrintWriter pw = resp.getWriter();
+		pw.write(sb.toString());
+		pw.flush();
+		pw.close();
+	}
+
+	// 선택한 게시판 열람
+	@RequestMapping(value = "/admingetDeptBoardList", method = RequestMethod.POST)
+	public String getDeptBoardList(int bgnum, Model model) {
+		// List<BoardVO> bList = adao.getDeptBoardList(bgnum);
+		// model.addAttribute("list", bList);
+		// return "admin/deptBoard";
+		String params = "page=1&bsearch=&div=&bgnum=" + bgnum;
+		return "redirect:/boardList?" + params;
+	}
+
+	// 게시판 삭제 폼 이동
+	@RequestMapping(value = "/adminDeleteBoardForm")
+	public String deleteBoardForm() {
+		return "admin/deleteBoard";
+	}
+
+	// 선택한 게시판 삭제
+	@RequestMapping(value = "/admindeleteBoard", method = RequestMethod.POST)
+	public String deleteBoard(int bgnum) {
+		adao.deleteBoard(bgnum);
+		return "redirect:/adminDeleteBoardForm";
+	}
 	// ////////////////////////게시판 관리(E)///////////////////////////
 
 }
