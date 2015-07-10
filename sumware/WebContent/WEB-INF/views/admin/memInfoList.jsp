@@ -57,11 +57,11 @@
 		
 		<!-- paging(S) -->
 		<div class="paging" id="paging">
-		<form action="adminMemList" method="post" id="memListPage">
-		<input type="hidden" name="page" id="page">
+<!-- 		<form action="adminMemList" method="post" id="memListPage"> -->
+<!-- 		<input type="hidden" name="page" id="page"> -->
 <!-- 		<input type="hidden" id="memdept" name="memdept"> -->
 <!-- 		<input type="hidden" id="memname" name="memname"> -->
-		<input type="hidden" name="cmd" value="1">
+<!-- 		<input type="hidden" name="cmd" value="1"> -->
 <%-- 		<c:set var="pageUrl" value="adminMemList"/> --%>
 			<c:choose>
 				<c:when test="${pageInfo.currentBlock eq 1}">&lt;&lt;</c:when>
@@ -89,7 +89,7 @@
 					<a class="page-last" href="javascript:goPage(${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 },'memListPage')">&gt;&gt;</a>
 				</c:otherwise>
 			</c:choose>
-		</form>
+<!-- 		</form> -->
 		</div>
 		<!-- paging(E) -->
 		
