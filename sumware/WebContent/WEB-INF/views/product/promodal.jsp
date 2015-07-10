@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
 	<form action="done" method="post" id="doneForm">
@@ -22,7 +23,7 @@
 						<!-- 가격(S) -->
 						<tr class="auc-price">
 							<th>가격</th>
-							<td><input type="number" placeholder="10,000" id="auc-price" /> 원</td>
+							<td><input type="number" placeholder="10,000" id="auc-price" step="1000" min="0"/> 원</td>
 						</tr>
 						<!-- 가격(E) -->
 						
@@ -30,7 +31,7 @@
 						<!-- 경매기간(S) -->
 						<tr class="auc-date">
 							<th>경매기간</th>
-							<td>시작일자 : <input type="date" />&nbsp; / 종료일자 : <input type="date" /></td>
+							<td>시작일자 : <input type="date" name=""/>&nbsp;  종료일자 : <input type="date" name=""/></td>
 						</tr>
 						<!-- 경매기간(E) -->
 						
