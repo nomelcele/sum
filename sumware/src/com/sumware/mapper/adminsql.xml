@@ -173,4 +173,9 @@
 		</where>
 	</select>
 	
+	<!-- 제작한 양식 추가 -->
+	<insert id="addSignForm" parameterType="sfvo">
+		insert into signform values(#{sfname}, signform_seq.nextVal, #{sform})
+	</insert>
+	
 </mapper>

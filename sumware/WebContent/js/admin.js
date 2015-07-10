@@ -126,6 +126,14 @@ function adminSelectMenu(res) {
 				$('.contents').html(result);
 			}
 		});
+	} else if(res =='addSignForm'){
+		$.ajax({
+			type : "POST",
+			url : "adminaddSignForm",
+			success : function(result) {
+				$('.contents').html(result);
+			}
+		});
 	}
 }
 
@@ -497,3 +505,87 @@ function prFormSaveChange(memnum){
 				});
 			}
 		}
+		
+		// 문서 양식 커스터마이징
+		function manageForm(chk){
+			if(chk == 'writerchk'){
+				if($('#writerchk').attr("checked") == 'checked'){
+					//체크 햇을때
+					$('#sgwriterTarget').html("기안자: <input type='text' id='sgwriter' readonly='readonly'>");
+				}else{
+					//체크 푸를때
+					$('#sgwriterTarget').html("");
+				}
+			}else if(chk == 'stendatechk'){
+				if($('#stendatechk').attr("checked") == 'checked'){
+					$('#stendateTarget').html("기안일: <input type='date' id='startdate' name='startdate'> ~ <input type='date' id='enddate' name='enddate'>");
+				}else{
+					$('#stendateTarget').html("");
+				}
+			} else if(chk == 'stitlechk'){
+				if($('#stitlechk').attr("checked") == 'checked'){
+					$('#stitleTarget').html("제목 : <input type='text' id='stitle' name='stitle' >");
+				}else{
+					$('#stitleTarget').html("");
+				}
+			} else if(chk == 'sdatechk'){
+				if($('#sdatechk').attr("checked") == 'checked'){
+					$('#sdateTarget').html("<tr><td>일시</td></tr><tr><td><input type='text' id='sdate' name='sdate'></td></tr>");
+				}else{
+					$('#sdateTarget').html("");
+				}
+			} else if(chk == 'splacechk'){
+				if($('#splacechk').attr("checked") == 'checked'){
+					$('#splaceTarget').html("<tr><td>장소</td></tr><tr><td><input type='text' id='splace' name='splace'></td></tr>");
+				}else{
+					$('#splaceTarget').html("");
+				}
+			} else if(chk == 'scontchk'){
+				if($('#scontchk').attr("checked") == 'checked'){
+					$('#scontTarget').html("<tr><td>내용</td></tr><tr><td><textarea rows='15' cols='70' id='scont' name='scont' style='resize:none'></textarea></td></tr>");
+				}else{
+					$('#scontTarget').html("");
+				}
+			} else if(chk == 'sreasonchk'){
+				if($('#sreasonchk').attr("checked") == 'checked'){
+					$('#sreasonTarget').html("<tr><td>사유</td></tr><tr><td><textarea rows='5' cols='70' id='sreason' name='reason' style='resize:none'></textarea></td></tr>");
+				}else{
+					$('#sreasonTarget').html("");
+				}
+			} else if(chk == 'sps'){
+				if($('#sps').attr("checked") == 'checked'){
+					$('#spsTarget').html("<tr><td>특이사항</td></tr><tr><td><textarea rows='5' cols='70' id='sps' name='sps' style='resize:none'></textarea></td></tr>");
+				}else{
+					$('#spsTarget').html("");
+				}
+			}
+
+		}
+
+		// 제작한 양식 추가
+		function addForm(){
+			var completeForm = $('#completeForm').html();
+			if(!confirm("현재 양식을 추가하시겠습니까?")){
+				return;
+			}else{
+				if($('#sfname').val()!=""){
+					$.ajax({
+						type : "POST",
+						url : "adminaddForm",
+						data : {
+							sfname:$('#sfname').val(),
+							sform:$('#completeForm').html()
+						},
+						success : function(result) {
+							alert("양식을 추가하였습니다.")
+							$('.contents').html(result);
+						}
+					});
+				}else{
+					alert("양식 이름을 입력해주세요.")
+				}
+				
+			}
+			
+		}
+		

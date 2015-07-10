@@ -1,6 +1,5 @@
 package com.sumware.mvc.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,6 +11,7 @@ import com.sumware.dto.CommissionVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.PayHistoryVO;
 import com.sumware.dto.PayVO;
+import com.sumware.dto.SignFormVO;
 
 @Repository
 public class AdminDao {
@@ -125,6 +125,11 @@ public class AdminDao {
 	// 전체 사원 수 카운트
 	public int getMemCount(MemberVO mvo){
 		return st.selectOne("admin.getMemCount",mvo);
+	}
+	
+	// 제작한 양식 추가
+	public void addSignForm(SignFormVO sfvo){
+		st.insert("admin.addSignForm", sfvo);
 	}
 	
 }
