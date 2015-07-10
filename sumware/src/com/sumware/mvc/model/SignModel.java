@@ -79,6 +79,7 @@ public class SignModel {
 		String[] signNames=signService.getMgrNames(signMgrs);
 		
 		SignFormVO sfvo = sgdao.getSf(formnum);
+		request.setAttribute("formnum", formnum);
 		request.setAttribute("sf", sfvo);
 		request.setAttribute("signMgrs", signMgrs);
 		request.setAttribute("sgNames", signNames);
