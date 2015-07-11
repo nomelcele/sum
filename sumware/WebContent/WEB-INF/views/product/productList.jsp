@@ -21,9 +21,9 @@
 				<th>종료일시</th>
 				<th>찜</th>
 			</tr>
-		<c:forEach var="mList" items="${list}">
+		<c:forEach var="list" items="${plist}">
 			<tr>
-				<td></td>
+				<td>${list.proimg }</td>
 				<td></td>
 				<td></td>
 				<td></td>
