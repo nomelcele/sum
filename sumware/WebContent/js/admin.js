@@ -134,6 +134,14 @@ function adminSelectMenu(res) {
 				$('.contents').html(result);
 			}
 		});
+	} else if(res == 'FormList'){
+		$.ajax({
+			type : "POST",
+			url : "adminFormList",
+			success : function(result) {
+				$('.contents').html(result);
+			}
+		});
 	}
 }
 

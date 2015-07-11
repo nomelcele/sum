@@ -384,6 +384,12 @@ public class AdminModel {
 		return "redirect:/adminaddSignForm";
 	}
 	
+	// 양식 목록 메뉴 선택
+	@RequestMapping(value="/adminFormList", method=RequestMethod.POST)
+	public String adminFormList(){
+		return "admin/signFormList";
+	}
+	
 	// ////////////////////////문서 양식 관리(E)///////////////////////////
 	
 	
