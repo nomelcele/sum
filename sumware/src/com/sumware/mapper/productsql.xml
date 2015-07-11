@@ -22,7 +22,7 @@ ZZIM	VARCHAR2(1)
 	<!-- 상품 리스트 -->
 	<select id="proList" resultType="provo">
 		select p.product, p.proimg, m.memname, p.price 
-		from product p, member m where p.prowriter = m.memnum
+		from product p, member m where p.prowriter = m.memnum order by pronum desc
 	</select>	
 	
 	
