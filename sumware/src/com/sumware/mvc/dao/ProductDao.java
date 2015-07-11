@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sumware.dto.ProductVO;
 
@@ -23,5 +24,8 @@ public class ProductDao {
 		return st.selectList("pro.proList");
 	}
 	
+	public ProductVO proDetail(int pronum){
+		return st.selectOne("pro.proDetail",pronum);
+	}
 	
 }

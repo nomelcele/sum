@@ -13,7 +13,14 @@ $(function(){
 			}
 		});
 	});
+	$('#proimg').click(function(){
+		location='proDetail';
+	});
 });
+
+function detailGo(no){
+	location='proDetail?pronum='+no;
+}
 
 // promodal.jsp 에서 사용 파일 업로드시 미리보기 시켜주는 메소드.
 function preview(input){
@@ -27,7 +34,24 @@ function preview(input){
 	}
 }
 
+// 상품등록 모달에서 완료 버튼 클릭시 (Done)
 function doneClick(){
+	// 종료 일자유무 판단 후 검증 처리.
 	$('#doneForm').submit();
 	$('#myModal').modal('toggle');
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

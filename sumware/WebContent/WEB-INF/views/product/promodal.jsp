@@ -35,8 +35,8 @@
 						
 						<!-- 경매기간(S) -->
 						<tr class="auc-date">
-							<th>경매기간</th>
-							<td>시작일자 : <input type="date" name="startdate"/>&nbsp;  종료일자 : <input type="date" name="enddate"/></td>
+							<th>종료일자</th>
+							<td><input type="date" name="enddate"/></td>
 						</tr>
 						<!-- 경매기간(E) -->
 						
