@@ -182,7 +182,7 @@
 	<select id="getSignFormList" parameterType="sfvo"  resultType="sfvo">
 		select sfname, sfnum, sform from signform
 		<if test="sfname != null">
-		sfname like '%'||#{sfname}||'%' 
+		where sfname like '%'||#{sfname}||'%' 
 		</if>
 	</select>
 	
