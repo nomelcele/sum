@@ -22,23 +22,3 @@
 	
 	<!-- Board -->
 	<div id="deptBoard"></div>
-	
-<script>
-
-	
-// 두번째 selectbox에서 선택한 게시판을 보여줌
-	function getDeptBoardList(){
-		$.ajax({
-			type: "POST",
-			url: "admingetDeptBoardList",
-			data: {
-				bgnum: $("#searchDeptBoard").val()
-			},
-			success: function(result){
-				$('#deptBoard').html(result);
-			}
-		});
-	}
-	
-	
-</script>

@@ -117,6 +117,7 @@ public class AdminModel {
 	@RequestMapping(value = "/adminPromoteMem", method = RequestMethod.POST)
 	public String promoteMem(MemberVO mvo) {
 		adao.promoteMem(mvo);
+		// 업데이트 후 사원 개인정보 리스트 보여줌
 		return "redirect:/adminMemList?page=1&memdept=0&memname=";
 	}
 
@@ -124,6 +125,7 @@ public class AdminModel {
 	@RequestMapping(value = "/adminMoveDept", method = RequestMethod.POST)
 	public String moveDept(MemberVO mvo) {
 		adao.moveDept(mvo);
+		// 업데이트 후 사원 개인정보 리스트 보여줌
 		return "redirect:/adminMemList?page=1&memdept=0&memname=";
 	}
 
@@ -139,7 +141,7 @@ public class AdminModel {
 	public String getMemInfoList(MemberVO mvo, Model model, HttpServletRequest req) {
 		// 페이지 처리
 		int totalCount = adao.getMemCount(mvo);
-		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 3, 5, 0,totalCount, 0);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
 		mvo.setBegin(pmap.get("begin"));
 		mvo.setEnd(pmap.get("end"));
 
@@ -343,11 +345,8 @@ public class AdminModel {
 
 	// 선택한 게시판 열람
 	@RequestMapping(value = "/admingetDeptBoardList", method = RequestMethod.POST)
-	public String getDeptBoardList(int bgnum, Model model) {
-		// List<BoardVO> bList = adao.getDeptBoardList(bgnum);
-		// model.addAttribute("list", bList);
-		// return "admin/deptBoard";
-		String params = "page=1&bsearch=&div=&bgnum=" + bgnum;
+	public String getDeptBoardList(int bgnum, int bdeptno, Model model) {
+		String params = "page=1&bsearch=&div=&bgnum=" + bgnum+"&bdeptno="+bdeptno;
 		return "redirect:/boardList?" + params;
 	}
 

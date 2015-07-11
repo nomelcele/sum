@@ -74,10 +74,24 @@ public class BoardModel {
 		mav.addObject("list",boardList(bvo));
 		
 		// contentLeft.jsp 에 뿌려줄 게시판 이름 불러오는 로직.
+//		MemberVO v = (MemberVO) ses.getAttribute("v");
+//		System.out.println("접속자의 부서번호 : "+v.getMemnum());
+//		ses.setAttribute("bNameList", boardNameList(v.getMemdept()));
+//		ses.setAttribute("currentPage", page);
+		
+		// contentLeft.jsp 에 뿌려줄 게시판 이름 불러오는 로직.
 		MemberVO v = (MemberVO) ses.getAttribute("v");
-		System.out.println("접속자의 부서번호 : "+v.getMemnum());
-		ses.setAttribute("bNameList", boardNameList(v.getMemdept()));
-		ses.setAttribute("currentPage", page);
+		MemberVO adv = (MemberVO) ses.getAttribute("adminv");
+		if(v != null){ // 일반 사원이 로그인했을 경우
+			System.out.println("접속자의 사원번호 : "+v.getMemnum());
+			System.out.println("접속자의 부서번호: "+v.getMemdept());
+			ses.setAttribute("bNameList", boardNameList(v.getMemdept()));
+			ses.setAttribute("currentPage", page);
+		} else { // 관리자 모드의 게시판 열람에서 접근했을 경우
+			System.out.println("관리자 게시판 열람 접근");
+			System.out.println(adv.getMemdept());
+			mav.setViewName("board/boardList");
+		}		
 		return mav;
 	}
 	
@@ -118,7 +132,7 @@ public class BoardModel {
 	@RequestMapping(value="boardDelete", method=RequestMethod.POST)
 	public ModelAndView boardDelete(BoardVO vo){
 		System.out.println("@@@@ 게시글 삭제 메서드 !!!!!!"+" / "+vo.getBnum());
-		ModelAndView mav = new ModelAndView("redirect:boardList?page="+page+"&bdeptno="+vo.getBdeptno()+"&bgnum="+vo.getBgnum()+"&model=board");
+		ModelAndView mav = new ModelAndView("redirect:boardList?page="+page+"&bdeptno="+vo.getBdeptno()+"&bgnum="+vo.getBgnum()+"&model=board&bsearch=");
 		dao.delete(vo.getBnum());
 		return mav;
 	}

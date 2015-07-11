@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" type="text/css" href="resources/css/boardCSS.css" />			
 			<!-- heading-page(S) -->
 			<h2 class="heading-page">${sessionScope.bname }</h2>
 			<!-- heading-page(E) -->
@@ -48,17 +49,27 @@
 					<c:if test="${sessionScope.v.memnum eq board.bmem }">
 						<button type="button" onclick="javascript:formGo('d')">글삭제</button>
 					</c:if>
+					<c:if test="${not empty sessionScope.adminv.memdept}">
+						<button type="button" onclick="javascript:adminBoardDelete()">글삭제</button>
+					</c:if>					
 				</div>
 				<div class="right">
+				<c:if test="${empty sessionScope.adminv.memdept}">				
 					<button type="button">수정</button>
 					<button type="button" onclick="javascript:formGo('list')">목록</button>
 					<button type="button" onclick="javascript:formGo('write')">새글쓰기</button>
+				</c:if>
 				</div>
 			</div>
 			
 <!-- comment(S) -->
 			<div class="wrap2" id="coTarget">
+			<c:if test="${empty sessionScope.adminv.memdept}">
 				<h2 class="tit-comment">댓글 작성하기</h2>
+			</c:if>
+			<c:if test="${not empty sessionScope.adminv.memdept}">
+				<h2 class="tit-comment">댓글 목록</h2>
+			</c:if>			
 				<!-- comment-list(S) -->
 				<ul class="comment-list">
 				<c:forEach var="clist" items="${clist }">
@@ -70,7 +81,7 @@
 							<span class="date">${clist.codate }</span>
 						</div>
 						<!-- 작성자일 경우에만 노출 됨  -->
-						<c:if test="${sessionScope.v.memname eq clist.coname }">
+						<c:if test="${sessionScope.v.memname eq clist.coname || not empty sessionScope.adminv.memdept}">
 						<span class="comment-btn">
 							<button type="button" onclick="javascript:commDelete(${clist.conum},${clist.coboard })">삭제</button>
 						</span>
@@ -90,8 +101,10 @@
 				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 				<input type="hidden" name="bname" value="${sessionScope.bname }">
 				<div class="comment-write">
+				<c:if test="${empty sessionScope.adminv.memdept}">				
 					<textarea name="cocont" id="cocont" rows="10" cols="10" placeholder="댓글 내용을 입력해 주세요."></textarea>
 					<button class="btn-comm" type="button" onclick="javascript:commIn(${sessionScope.v.memnum},${board.bnum})">댓글 등록</button>
+				</c:if>
 				</div>
 			</form>
 				<!-- comment-write(E) -->
@@ -124,4 +137,7 @@
 				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 				<input type="hidden" name="bname" value="${sessionScope.bname }">
 				<input type="hidden" name="bnum" value="${board.bnum }">
+				<input type="hidden" id="adminBnum" value="${board.bnum }">
+				<input type="hidden" id="adminBgnum" value="${sessionScope.bbbgnum }">
+				<input type="hidden" id="adminDeptno" value="${sessionScope.adminv.memdept}">
 			</form>
