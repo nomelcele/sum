@@ -22,15 +22,8 @@
 						<tr>
 							<td>${mList.memname}</td>
 							<td>${mList.meminmail}</td>
-							<td>${mList.membirth}</td>
-							<td>${mList.memaddr}</td>
-							<td>${mList.dename}</td>
-							<td>${mList.memjob}</td>
-							<td>${mList.memhire}</td>
 							<td>
-								<input type="button" class="btn btn-default btn-sm" value="인사고과" 
-								onclick="javascript:getMemInfoForModal('prForm',${mList.memnum})">
-								<input type="button" class="btn btn-default btn-sm" value="퇴사 처리" onclick="resignMem(${mList.memnum})">
+								<input type="button" class="btn btn-default btn-sm" value="양식 보기"  onclick="javascript:getMemInfoForModal('prForm',${mList.memnum})">
 							</td>
 						</tr>
 					</c:forEach>

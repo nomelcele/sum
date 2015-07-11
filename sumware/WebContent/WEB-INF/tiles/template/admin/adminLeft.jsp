@@ -16,7 +16,7 @@
     </div>
     <a href="#demo5" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">전자결재 양식 관리 <i class="fa fa-caret-down"></i></a>
     <div class="collapse" id="demo5">
-      <a href="#" class="list-group-item">&nbsp; &nbsp; 양식 목록</a>
+      <a href="javascript:adminSelectMenu('FormList')" class="list-group-item">&nbsp; &nbsp; 양식 목록</a>
       <a href="javascript:adminSelectMenu('addSignForm')" class="list-group-item">&nbsp; &nbsp; 양식 추가</a>
     </div>
      <a href="#demo6" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">게시판 관리 <i class="fa fa-caret-down"></i></a>
