@@ -27,11 +27,10 @@
 				<!-- 						<td class="col-lg-1"><input type="checkbox" name="all" onclick="checkAll(this)"></td> -->
 				<td class="col-lg-1"><span>이름</span></td>
 				<td class="col-lg-1"><span>ID</span></td>
-				<td class="col-lg-1"><span>생년월일</span></td>
-				<td class="col-lg-2"><span>주소</span></td>
 				<td class="col-lg-1"><span>부서</span></td>
 				<td class="col-lg-1"><span>직급</span></td>
-				<td class="col-lg-1"><span>입사일</span></td>
+				<td class="col-lg-1"><span>호봉</span></td>
+				<td class="col-lg-1"><span>연봉(만원)</span></td>
 				<td class="col-lg-2"></td>
 			</tr>
 
@@ -39,11 +38,10 @@
 				<tr>
 					<td>${mList.memname}</td>
 					<td>${mList.meminmail}</td>
-					<td>${mList.membirth}</td>
-					<td>${mList.memaddr}</td>
 					<td>${mList.dename}</td>
 					<td>${mList.memjob}</td>
-					<td>${mList.memhire}</td>
+					<td>${mList.pyearly}</td>
+					<td>${mList.psalary}</td>
 					<td>
 					<input type="button" class="btn btn-default btn-sm" value="추가급지급"
 					onclick="javascript:getMemInfoForModal('giveBonus',${mList.memnum})">
@@ -91,4 +89,5 @@
 			</c:choose>
 		</div>
 		<!-- paging(E) -->
+		
 
