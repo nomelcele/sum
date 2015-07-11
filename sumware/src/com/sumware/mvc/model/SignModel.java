@@ -38,13 +38,14 @@ public class SignModel {
 		
 		//나중에 페이징 처리할때 map으로 바꾸고 페이지한테 맵객체 받아서 쓰자
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		String div = request.getParameter("signdiv");
-		map.put("sgdept", mvo.getMemdept());
-		if(div!=null){
-			map.put("signdiv",Integer.parseInt(div));
-		}else{
-			map.put("signdiv",0);
+		String div=request.getParameter("signdiv");
+		if(div==null||div==""){
+			div="0";
 		}
+		map.put("signdiv",Integer.parseInt(div));
+		map.put("sgdept", mvo.getMemdept());
+		map.put("nowmemnum", mvo.getMemnum());
+		
 		List<SignatureVO> sgList=sgdao.getSignList(map);
 		request.setAttribute("sgList", sgList);
 		
@@ -150,6 +151,11 @@ public class SignModel {
 			if(step.get("stepnum")!=null){
 				System.out.println("if in stepnum::"+step.get("stepnum"));
 				sgdao.updateSignStep(step);
+				int nowmemnum=sgdao.getNowmem(Integer.parseInt(step.get("stepnum")));
+				HashMap<String, Integer> setNow = new HashMap<String, Integer>();
+				setNow.put("snum", Integer.parseInt(step.get("stepnum")));
+				setNow.put("nowmemnum",nowmemnum );
+				sgdao.setNowmem(setNow);
 			}
 		}
 		return "redirect:getSignList";
