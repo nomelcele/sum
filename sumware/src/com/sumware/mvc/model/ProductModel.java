@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.mvc.dao.ProductDao;
 
@@ -22,8 +23,11 @@ public class ProductModel {
 	
 	// 상단 메뉴 탭 눌렀을 경우 보여지는 첫 페이지.
 	@RequestMapping(value="productList")
-	public String productList(){
-		return "product.productList";
+	public ModelAndView productList(){
+		ModelAndView mav = new ModelAndView("product.productList");
+		mav.addObject("plist",pdao.proList());
+		
+		return mav;
 	}
 	
 	// 상품 등록 버튼 눌렀을 때 상품 등록 폼으로 이동
