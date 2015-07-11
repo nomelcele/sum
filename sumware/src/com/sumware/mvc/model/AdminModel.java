@@ -385,8 +385,8 @@ public class AdminModel {
 	
 	// 양식 목록 메뉴 선택
 	@RequestMapping(value="/adminFormList")
-	public String adminFormList(Model model){
-		SignFormVO sfvo = new SignFormVO();
+	public String adminFormList(SignFormVO sfvo, Model model){
+
 		List<SignFormVO> sfvoList = adao.getSignFormList(sfvo);
 		model.addAttribute("sfvoList", sfvoList);
 		
