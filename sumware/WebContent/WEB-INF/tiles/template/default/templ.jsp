@@ -48,6 +48,7 @@
 			"<c:forEach var='sn' items='${sgNames }' varStatus='index'>";
 				names['${index.count}']='${sn}';
 			"</c:forEach>";
+			$("#formnum").val("${formnum}");
 			if(signMode=='write'){
 				"<c:forEach var='sm' items='${signMgrs }' varStatus='index'>";
 					mgrs['${index.count}']='${sm}';
@@ -63,12 +64,14 @@
 					size='${index.count}';
 					signimg['${index.count}']='${sessionScope.v.memsignimg}';
 				"</c:forEach>";
+				var id=['formnum','stitle','scont','sreason','startdate','enddate','sgwriter','sfname','sgreturncomm','sdate','splace','sps'];
+				var val=['${sf.sfnum}','${sgvo.stitle}','${sgvo.scont}','${sgvo.sreason}','${sgvo.startdate}','${sgvo.enddate}','${sgvo.memname}','${sgvo.sfname}','${sgvo.sgreturncomm}','${sgvo.sdate}','${sgvo.splace}','${sgvo.sps}'];
+				for(var f=0; f<id.length; f++){
+					if(val[f]!=""){
+						setSignValue(id[f],val[f]);
+					}
+				}
 				
-				$("#sgwriter").val('${sgvo.sgwriter}');
-				$('#startdate').val('${sgvo.startdate}');
-				$('#enddate').val('${sgvo.enddate}');
-				$('#stitle').val("${sgvo.stitle}");
-				$('#scont').val("${sgvo.scont}");
 				if("${!empty sgvo.sgreturncomm}"=="true"){
 					var signComm="<table><tr><td><h6>Comment</h6></td></tr><tr><td><textarea rows='3' cols='50' style='resize:none;' readonly='readonly'>${sgvo.sgreturncomm}</textarea></td></tr>";
 					$('#signCommDiv').html(signComm);

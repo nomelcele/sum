@@ -12,6 +12,7 @@ public class SignatureVO {
 		 startdate date,
 		 enddate DATE,*/
 	private String stitle,scont,sreason,startdate,enddate,sgwriter,sfname,memname,sgreturncomm;
+	private String sdate,splace,sps;
 	private int formnum,snum,finalmemnum,nowmemnum,sgdept,sgreturn;
 	private int count,ycount;//결재 상태
 	public String getStitle() {
@@ -116,6 +117,24 @@ public class SignatureVO {
 	}
 	public void setSgreturncomm(String sgreturncomm) {
 		this.sgreturncomm = sgreturncomm;
+	}
+	public String getSdate() {
+		return sdate;
+	}
+	public void setSdate(String sdate) {
+		this.sdate = sdate;
+	}
+	public String getSplace() {
+		return splace;
+	}
+	public void setSplace(String splace) {
+		this.splace = splace;
+	}
+	public String getSps() {
+		return sps;
+	}
+	public void setSps(String sps) {
+		this.sps = sps;
 	}
 	
 	
