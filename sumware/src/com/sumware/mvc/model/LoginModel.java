@@ -46,6 +46,11 @@ public class LoginModel{
 				session.setAttribute("v", mvo);
 				//login 기록 저장.
 //				dao.inLog(mvo.getMemnum());	
+				if(mvo.getMemresign() != null){
+					// 퇴사일 컬럼에 값이 있을 경우(퇴사한 사원이 로그인했을 경우)
+					// 로그인하지 못하게 함
+					result="0";
+				}
 			}else{
 				result="0";
 			}

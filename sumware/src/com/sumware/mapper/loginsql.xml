@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="login">
   	<select id="login" parameterType="mvo" resultType="mvo">
-  		select s.memnum,s.memsignimg ,s.mempwd, s.memprofile, s.memname, s.memjob,s.memdept,s.memmgr, d.dename, m.memname mgrname, s.memauth,s.meminmail
+  		select s.memnum,s.memsignimg ,s.mempwd, s.memprofile, s.memname, s.memjob,s.memdept,s.memmgr, d.dename, m.memname mgrname, s.memauth,s.meminmail,s.memresign
 		from member s, member m, dept d where s.memmgr = m.memnum and s.memdept = d.denum and s.memnum = #{memnum} and s.mempwd =#{mempwd}
   	</select>
   	<select id="ckFirstLogin" parameterType="mvo" resultType="String">

@@ -86,7 +86,21 @@ function bsearchSelect(index){
 	var sel=select.split(" ");
 	sel1=sel[0];
 	sel2=sel[1];
-	location="boardList?page=1&bsearch="+sel1+"&div="+sel2+"&bgnum="+sBgnum+"&bdeptno="+sBdeptno;
+	
+	if(sBdeptno == 999){ // 관리자 모드에서 접근했을 때
+		$.ajax({
+			url:"boardList",
+			type :"post",
+			data:{
+				page:1, bsearch:sel1, div:sel2,	bgnum:sBgnum, bdeptno:sBdeptno
+			},
+			success : function(result){
+				$('#deptBoard').html(result);
+			}
+		});
+	} else {
+		location="boardList?page=1&bsearch="+sel1+"&div="+sel2+"&bgnum="+sBgnum+"&bdeptno="+sBdeptno;
+	}	
 }
 //게시판 검색 종료
 function detail(no,bgnum,bname,bdeptno,page){
@@ -97,7 +111,11 @@ function detail(no,bgnum,bname,bdeptno,page){
 			no:no, bgnum:bgnum, bname:bname, bdeptno:bdeptno,page:page
 		},
 		success : function(result){
-			$(".contents").html(result);
+			if(bdeptno == 999){ // 관리자가 접근했을 때
+				$('#deptBoard').html(result);
+			} else {
+				$(".contents").html(result);
+			}
 		}
 	});
 }

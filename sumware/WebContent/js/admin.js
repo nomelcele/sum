@@ -109,15 +109,28 @@ function adminSelectMenu(res) {
 				$('.contents').html(result);
 			}
 		});
-		
+		// 게시판 열람 메인 페이지 접근
 	} else if(res == 'adminBoardListMain'){
 		$.ajax({
 			type : "POST",
 			url : "adminBoardListMain",
 			success : function(result) {
 				$('.contents').html(result);
+					$.ajax({
+						type: "POST",
+						url: "admingetDeptBoardList",
+						data: {
+							bgnum: $("#searchDeptBoard").val(),
+							bdeptno: $("#searchDept").val()
+						},
+						success: function(result){
+							$('#deptBoard').html(result);
+							// 초기 화면에는 공지사항 게시판이 나옴
+						}
+					});
 			}
 		});
+		// 게시판 삭제
 	} else if(res == 'adminDeleteBoardForm'){
 		$.ajax({
 			type : "POST",
@@ -514,7 +527,23 @@ function prFormSaveChange(memnum){
 						$('.contents').html(result);
 					}
 				});
-			}
+			} else if(fname=='adminBoardPage'){
+				// 게시판 열람 페이지 처리
+				$.ajax({
+					type : "POST",
+					url : "boardList",
+					data : {
+						bgnum: $("#adminBgnum").val(),
+						bdeptno: $("#adminDeptno").val(),
+						bsearch: $("#adminBsearch").val(),
+						div: $("#adminDiv").val(),
+						page: $("#page").val()
+					},
+					success : function(result) {
+						$('#deptBoard').html(result);
+					}
+				});
+			} 
 		}
 		
 		// 문서 양식 커스터마이징
@@ -618,5 +647,37 @@ function prFormSaveChange(memnum){
 				});
 			}
 			
+		}
+		
+		// 게시판 열람 페이지에서 게시물 삭제할 때 호출되는 함수
+		function adminBoardDelete(){
+			$.ajax({
+				type : "POST",
+				url : "boardDelete",
+				data : {
+					bnum: $("#adminBnum").val(),
+					bgnum: $("#adminBgnum").val(),
+					bdeptno: $("#adminDeptno").val(),
+					page: 1
+				},
+				success : function(result) {
+					$('#deptBoard').html(result);
+				}
+			});
+		}
+		
+		// 게시판 열람의 select 메뉴에서 선택한 게시판을 보여줌
+		function getDeptBoardList(){
+			$.ajax({
+				type: "POST",
+				url: "admingetDeptBoardList",
+				data: {
+					bgnum: $("#searchDeptBoard").val(),
+					bdeptno: $("#searchDept").val()
+				},
+				success: function(result){
+					$('#deptBoard').html(result);
+				}
+			});
 		}
 		
