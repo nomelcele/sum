@@ -3,11 +3,20 @@ package com.sumware.dto;
 public class MemberVO {
 	private int memnum, memauth, memmgr, memdept,begin,end;
 	private String memname, memaddr, mempwd, memprofile, memjob, memmail, meminmail, dename, mgrname, 
-	memhire, memresign, membirth, memsignimg;
-	
-	
-	
-	
+	memhire, memresign, membirth, memsignimg, pyearly, psalary;
+
+	public String getPyearly() {
+		return pyearly;
+	}
+	public void setPyearly(String pyearly) {
+		this.pyearly = pyearly;
+	}
+	public String getPsalary() {
+		return psalary;
+	}
+	public void setPsalary(String psalary) {
+		this.psalary = psalary;
+	}
 	public int getBegin() {
 		return begin;
 	}

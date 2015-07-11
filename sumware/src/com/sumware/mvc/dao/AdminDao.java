@@ -132,4 +132,13 @@ public class AdminDao {
 		st.insert("admin.addSignForm", sfvo);
 	}
 	
+	// 결재 양식 목록 가져옴
+	public List<SignFormVO> getSignFormList(SignFormVO sfvo){
+		return st.selectList("admin.getSignFormList", sfvo);
+	}
+	
+	//양식 삭제
+	public void deleteSignForm(SignFormVO sfvo){
+		st.delete("admin.deleteSignForm", sfvo);
+	}
 }

@@ -385,9 +385,21 @@ public class AdminModel {
 	}
 	
 	// 양식 목록 메뉴 선택
-	@RequestMapping(value="/adminFormList", method=RequestMethod.POST)
-	public String adminFormList(){
+	@RequestMapping(value="/adminFormList")
+	public String adminFormList(Model model){
+		SignFormVO sfvo = new SignFormVO();
+		List<SignFormVO> sfvoList = adao.getSignFormList(sfvo);
+		model.addAttribute("sfvoList", sfvoList);
+		
 		return "admin/signFormList";
+	}
+	
+	// 양식 삭제
+	@RequestMapping(value="/admindeleteSignForm", method=RequestMethod.POST)
+	public String admindeleteSignForm(SignFormVO sfvo){
+		//삭제
+		adao.deleteSignForm(sfvo);
+		return "redirect:/adminFormList";
 	}
 	
 	// ////////////////////////문서 양식 관리(E)///////////////////////////

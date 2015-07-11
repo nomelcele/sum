@@ -42,8 +42,8 @@
 	<select id="getMemInfoList" parameterType="mvo" resultType="mvo">
 		select * from (select rownum r_num, a.* from 
 		(select m.memnum, m.memname, m.meminmail, m.membirth, m.memaddr, 
-		d.dename, m.memjob, to_char(m.memhire, 'yyyy-mm-dd') memhire from member m, dept d 
-		where d.denum=m.memdept 
+		d.dename, m.memjob, to_char(m.memhire, 'yyyy-mm-dd') memhire, p.pyearly, p.psalary from member m, dept d, pay p 
+		where d.denum=m.memdept and p.pmem=m.memnum 
 		<choose>
 			<when test="memdept != 0">
 				<!-- 부서만 입력 (해당 부서의 사원 목록)-->
@@ -177,5 +177,18 @@
 	<insert id="addSignForm" parameterType="sfvo">
 		insert into signform values(#{sfname}, signform_seq.nextVal, #{sform})
 	</insert>
+	
+	<!-- 결재양식의 목록 가져오기 -->
+	<select id="getSignFormList" parameterType="sfvo"  resultType="sfvo">
+		select sfname, sfnum, sform from signform
+		<if test="sfname != null">
+		sfname like '%'||#{sfname}||'%' 
+		</if>
+	</select>
+	
+	<!-- 양식 삭제 -->
+	<delete id="deleteSignForm" parameterType="sfvo">
+		delete from signform where sfnum=#{sfnum}
+	</delete>
 	
 </mapper>

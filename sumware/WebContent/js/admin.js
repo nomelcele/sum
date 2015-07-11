@@ -138,6 +138,9 @@ function adminSelectMenu(res) {
 		$.ajax({
 			type : "POST",
 			url : "adminFormList",
+			data:{
+				sfname:$('#searchName').val()
+			},
 			success : function(result) {
 				$('.contents').html(result);
 			}
@@ -556,7 +559,7 @@ function prFormSaveChange(memnum){
 				}
 			} else if(chk == 'sreasonchk'){
 				if($('#sreasonchk').attr("checked") == 'checked'){
-					$('#sreasonTarget').html("<tr><td>사유</td></tr><tr><td><textarea rows='5' cols='70' id='sreason' name='reason' style='resize:none'></textarea></td></tr>");
+					$('#sreasonTarget').html("<tr><td>사유</td></tr><tr><td><textarea rows='5' cols='70' id='sreason' name='sreason' style='resize:none'></textarea></td></tr>");
 				}else{
 					$('#sreasonTarget').html("");
 				}
@@ -593,6 +596,26 @@ function prFormSaveChange(memnum){
 					alert("양식 이름을 입력해주세요.")
 				}
 				
+			}
+			
+		}
+		
+		// 양식 삭제
+		function deleteSignForm(sfnum){
+			if(!confirm("양식을 삭제 하시겠습니까?")){
+				return;
+			}else{
+				$.ajax({
+					type : "POST",
+					url : "admindeleteSignForm",
+					data : {
+						sfnum:sfnum
+					},
+					success : function(result) {
+						alert("양식을 삭제하였습니다..")
+						$('.contents').html(result);
+					}
+				});
 			}
 			
 		}
