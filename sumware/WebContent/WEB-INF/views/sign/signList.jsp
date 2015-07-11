@@ -4,7 +4,6 @@
 <div>
 	<div>검색</div>
 	<div>
-		<input type="button" id="signWriteFListBtn" value="문서작성" onclick="signFormListModal()">
 		<table>
 			<tr>
 				<td>번호</td>

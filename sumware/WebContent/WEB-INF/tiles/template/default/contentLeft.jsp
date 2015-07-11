@@ -347,6 +347,19 @@
 			</table>
 			<!-- profile-table(E) -->
 		</div>
+		<div id="MainMenu">
+  <div class="list-group panel">
+   <a href="javascript:signleftMenu('signWrite')" class="list-group-item">&nbsp; &nbsp; 결제 문서 작성</a>
+    <a href="#demo3" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">결재 문서 조회 <i class="fa fa-caret-down"></i></a>
+    <div class="collapse" id="demo3">
+      <a href="javascript:signleftMenu('signAll')" class="list-group-item">&nbsp; &nbsp; 전체 문서</a>
+      <a href="javascript:signleftMenu('signReceive')" class="list-group-item">&nbsp; &nbsp; 수신 문서</a>
+      <a href="javascript:signleftMenu('signStandBy')" class="list-group-item">&nbsp; &nbsp; 대기 문서</a>
+      <a href="javascript:signleftMenu('signComplete')" class="list-group-item">&nbsp; &nbsp; 완료 문서</a>
+      <a href="javascript:signleftMenu('signReturn')" class="list-group-item">&nbsp; &nbsp; 반려 문서</a>
+    </div>
+  </div>
+</div>
 	</div>
 </c:if>
 <%-- Sign left(E) --%>
@@ -435,72 +448,3 @@
 	</div>
 </c:if>
 <%-- mail left(E) --%>
-
-<!-- 관리자 left(S) -->
-<c:if test="${(sessionScope.model eq 'admin')}">
-	<div>
-		<div class="row-lg-6">
-			<div class="chat-panel panel panel-default left-profile">
-				<div class="panel-heading">
-					<i class="fa fa-comments fa-fw"></i> <strong class="primary-font">My
-						profile</strong>
-				</div>
-				<div class="panel-body">
-					<!-- profile-img(S) -->
-					<span class="chat-img pull-left profile-img"><img
-						src="resources/profileImg/${sessionScope.v.memprofile }" alt="User Avatar"
-						class="img-circle" style="width: 100px; height: 130px;"> </span>
-					<!-- profile-img(E) -->
-
-					<!-- profile-table(S) -->
-					<table class="profile-table">
-						<colgroup>
-							<col style="width: 60px">
-							<col>
-						</colgroup>
-						<tr>
-							<th><strong class="primary-font">이름</strong></th>
-							<td>${sessionScope.v.memname }</td>
-						</tr>
-						<tr>
-							<th><strong class="primary-font">직급</strong></th>
-							<td>${sessionScope.v.memjob }</td>
-						</tr>
-						<tr>
-							<th><strong class="primary-font">부서</strong></th>
-							<td>${sessionScope.v.dename }</td>
-						</tr>
-						<tr>
-							<th><strong class="primary-font">상급자</strong></th>
-							<td>${sessionScope.v.mgrname }</td>
-						</tr>
-						<tr>
-							<td colspan="2"></td>
-						</tr>
-						<tr>
-							<td colspan="2"><a
-								href="modifyProfile"
-								class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
-
-						</tr>
-					</table>
-					<!-- profile-table(E) -->
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- <hr> -->
-
-	<!-- left-menu(S) -->
-	<div class="left-menu" id="left-menu">
-		<ul>
-			<li><a href="javascript:adminSelectMenu('addMem')">사원 추가</a></li>
-			<li><a href="javascript:adminSelectMenu('addBoard')">게시판 추가</a></li>
-		</ul>
-	</div>
-	<!-- left-menu(E) -->
-
-</c:if>
-<!-- 관리자 left(E) -->
-
-

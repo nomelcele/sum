@@ -4,19 +4,6 @@
 var size="";
 var memnum="";
 var signimg={};
-function signFormListModal() {
-	$.ajax({
-		type : "POST",
-		url : "getSignFormList",
-		success : function(result) {
-			$("#signModalBody").html(result);
-			$("#signModal").toggle();
-		},
-		error : function(a, b) {
-			alert("Request: " + JSON.stringify(a));
-		}
-	});
-}
 function addSignDiv(){
 	var argslen = arguments.length;
 	switch(argslen){
@@ -136,4 +123,26 @@ function sgDetail(res){
 	}else{
 		location='getSignList';
 	}
+}
+function setSignValue(id,val){
+	$("#"+id).val(val);
+}
+function signleftMenu(res){
+	alert("left click:"+res);
+	if(res=="signWrite"){
+		signFormListModal();
+	}
+}
+function signFormListModal() {
+	$.ajax({
+		type : "POST",
+		url : "getSignFormList",
+		success : function(result) {
+			$("#signModalBody").html(result);
+			$("#signModal").toggle();
+		},
+		error : function(a, b) {
+			alert("Request: " + JSON.stringify(a));
+		}
+	});
 }

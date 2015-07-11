@@ -27,8 +27,8 @@
 #signImg table{
 	border: 1px solid;
 }
-#signBody{
-	
+#signBody input{
+	background:#ECF8E0;
 }
 #signBody table{
 	width: 795px;
