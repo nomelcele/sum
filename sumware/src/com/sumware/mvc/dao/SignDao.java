@@ -59,6 +59,12 @@ public class SignDao {
 	public void updateSignStep(Map<String,String> map){
 		st.update("sign.updateSignStep", map);
 	}
+	public int getNowmem(int stepsnum){
+		return st.selectOne("sign.getNowmem", stepsnum);
+	}
+	public void setNowmem(Map<String,Integer> map){
+		st.update("sign.setNowmem", map);
+	}
 	//반려하기
 	public void signReturn(Map<String,String> map){
 		st.update("sign.signReturn",map);

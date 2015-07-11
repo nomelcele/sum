@@ -133,10 +133,20 @@ function setSignValue(id,val){
 	$("#"+id).val(val);
 }
 function signleftMenu(res){
-	alert("left click:"+res);
 	if(res=="signWrite"){
 		signFormListModal();
+	}else if(res=="signAll"){
+		signFormList("0");
+	}else if(res=="signReceive"){
+		signFormList("1");
+	}else if(res=="signStandBy"){
+		signFormList("2");
+	}else if(res=="signComplete"){
+		signFormList("3");
+	}else if(res=="signReturn"){
+		signFormList("4");
 	}
+	
 }
 function signFormListModal() {
 	$.ajax({
@@ -150,4 +160,7 @@ function signFormListModal() {
 			alert("Request: " + JSON.stringify(a));
 		}
 	});
+}
+function signFormList(div) {
+	location="getSignList?signdiv="+div;
 }
