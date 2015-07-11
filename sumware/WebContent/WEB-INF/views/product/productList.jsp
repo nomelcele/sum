@@ -23,12 +23,12 @@
 			</tr>
 		<c:forEach var="list" items="${plist}">
 			<tr>
-				<td>${list.proimg }</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><img src="aucImg/${list.proimg }" style="width: 40px; height: 40px;"></td>
+				<td>${list.product}</td>
+				<td>${list.price } 원</td>
+				<td>${list.procount }</td>
+				<td>${list.memname }</td>
+				<td>${list.enddate }</td>
 				<td></td>
 			</tr>
 		</c:forEach>
