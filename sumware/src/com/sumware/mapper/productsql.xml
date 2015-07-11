@@ -16,15 +16,20 @@ ZZIM	VARCHAR2(1)
 	<insert id="proInsert" parameterType="map">
 		insert into product values
 		(#{product},#{proimg},#{prowriter},#{price},0
-		,product_seq.nextVal,'n',#{startdate},#{enddate},#{procont })
+		,product_seq.nextVal,'n',sysdate,#{enddate},#{procont })
 	</insert>
 	
 	<!-- 상품 리스트 -->
 	<select id="proList" resultType="provo">
-		select p.product, p.proimg, m.memname, p.price 
+		select p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, p.enddate,p.pronum
 		from product p, member m where p.prowriter = m.memnum order by pronum desc
 	</select>	
 	
+	<!-- 상품 디테일 -->
+	<select id="proDetail" parameterType="int" resultType="provo">
+		select p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, p.enddate
+		from product p, member m where p.prowriter = m.memnum and p.pronum=#{pronum} order by pronum desc
+	</select>
 	
 </mapper>
 

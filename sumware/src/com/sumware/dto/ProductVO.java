@@ -10,10 +10,16 @@ public class ProductVO {
     pronum NUMBER(5), -- 경매번호 pk
     zzim VARCHAR2(1) DEFAULT 'n', -- 찜한목록이면 y 아니면 n*/
 	private String product,proimg,zzim;
-	private String startdate, enddate,procont,memname;
-	private int prowriter,price,procount,pronum;
+	private String startdate, enddate,procont,price,memname;
+	private int prowriter,procount,pronum;
 	
 	
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
 	public String getMemname() {
 		return memname;
 	}
@@ -61,12 +67,6 @@ public class ProductVO {
 	}
 	public void setProwriter(int prowriter) {
 		this.prowriter = prowriter;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
 	}
 	public int getProcount() {
 		return procount;
