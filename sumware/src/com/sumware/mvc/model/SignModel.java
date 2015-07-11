@@ -110,10 +110,13 @@ public class SignModel {
 		System.out.println("최종결재자: "+sgvo.getFinalmemnum());
 		System.out.println("내용: "+sgvo.getScont());
 		System.out.println("사유: "+sgvo.getSreason());
+		System.out.println("장소: "+sgvo.getSplace());
+		System.out.println("특이사항: "+sgvo.getSps());
+		System.out.println("기간: "+sgvo.getSdate());
 		System.out.println("============");
 		
 		signService.insertSignService(sgvo, sgMgrList);
-		return "sign.signList";
+		return "redirect:getSignList";
 	}
 	//상세보기
 	@RequestMapping(value="signDetail",method=RequestMethod.GET)

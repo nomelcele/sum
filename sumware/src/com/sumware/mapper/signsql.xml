@@ -44,16 +44,8 @@
 	
 	<!-- 선택된 문서를 작성 한다 -->
 	<insert id="writeSf" parameterType="sgvo">
-	<choose>
-		<when test="formnum==1">
-			insert into signature(snum,formnum,finalmemnum,nowmemnum,stitle,scont,startdate,enddate,sgwriter,sgdept)
-			values(signature_seq.nextVal,#{formnum},#{finalmemnum},#{nowmemnum},#{stitle},#{scont},#{startdate},#{enddate},#{sgwriter},#{sgdept})
-		</when>
-		<otherwise>
-			insert into signature(snum,formnum,finalmemnum,nowmemnum,stitle,scont,startdate,enddate,sgwriter,sreason,sgdept)
-			values(signature_seq.nextVal,#{formnum},#{finalmemnum},#{nowmemnum},#{stitle},#{scont},#{startdate},#{enddate},#{sgwriter},#{sgdept},#{sreason})
-		</otherwise>
-	</choose>
+		insert into signature(snum,formnum,finalmemnum,nowmemnum,stitle,scont,sreason,startdate,enddate,sgwriter,sgdept,sdate,splace,sps)
+		values(signature_seq.nextVal,#{formnum},#{finalmemnum},#{nowmemnum},#{stitle},#{scont},#{sreason},#{startdate},#{enddate},#{sgwriter},#{sgdept},#{sdate},#{splace},#{sps})
 	</insert>
 	<select id="getMax" resultType="int">
 		select max(snum) snum from signature
@@ -66,9 +58,8 @@
 	<!-- detail -->
 	<select id="signDetail" parameterType="int" resultType="sgvo">
 		select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
-				to_char(sg.startdate,'yyyy-MM-dd') startdate,
-				to_char(sg.enddate,'yyyy-MM-dd') enddate,
-				sg.sgwriter,m.memname from signature sg,member m where m.memnum=sg.sgwriter and snum = #{snum}
+		to_char(sg.startdate,'yyyy-MM-dd') startdate,to_char(sg.enddate,'yyyy-MM-dd') enddate,
+		sg.sgwriter,sg.sdate,sg.splace,sg.sps,m.memname from signature sg,member m where m.memnum=sg.sgwriter and snum = #{snum}
 	</select>
 	<select id="getSignStep" parameterType="int" resultType="ssvo">
 		select * from signstep where stepsnum = #{stepsnum}

@@ -31,7 +31,12 @@ function addSignDiv(){
 		sgHtml+="</tr></table>";
 		console.log(sgHtml);
 		$('#signImg').html(sgHtml);
-		
+		for(var index=0; index<id.length; index++){
+			if($('#'+id[index]).length<=0){
+				sgHtml+="<input type='hidden' name='"+id[index]+"'>";
+			}
+		}
+		$('#signImg').html(sgHtml);
 		break;
 	case 5:
 		var mgrs=arguments[0];
@@ -75,11 +80,11 @@ function addSignDiv(){
 		sgHtml+="</tr></table>";
 		console.log(sgHtml);
 		$('#signImg').html(sgHtml);
-		$("#startdate").attr("readonly","readonly");
-		$("#enddate").attr("readonly","readonly");
-		$("#stitle").attr("readonly","readonly");
-		$("#scont").attr("readonly","readonly");
-		
+		for(var index=0; index<id.length; index++){
+			if($('#'+id[index]).length<=0){
+				$("#"+id[index]).attr("readonly","readonly");
+			}
+		}		
 		break;
 	}
 }
