@@ -96,7 +96,7 @@ function adminSelectMenu(res) {
 				$('.contents').html(result);
 			}
 		});
-		//급여 지급
+		// 급여 지급
 	} else if(res == 'adminPayManagement'){
 		$.ajax({
 			type : "POST",
@@ -184,16 +184,12 @@ function sendNewMember() {
 	if(!confirm("사원에게 메일을 전송하시겠습니까?")){
 		return;
 	}else{
-	var pay = "";
 	if ($('#newjob').val() == '부장') {
 		$('#newauth').attr("value", "3");
-		pay = 4000;
 	} else if ($('#newjob').val() == '팀장') {
 		$('#newauth').attr("value", "4");
-		pay = 3000;
 	} else if ($('#newjob').val() == '사원') {
 		$('#newauth').attr("value", "5");
-		pay = 2000;
 	}
 	var mail = $('#newmail').val() + "@" + $('#mailaddr').val();
 
@@ -208,7 +204,7 @@ function sendNewMember() {
 			memdept : $('#newdept').val(),
 			memjob : $('#newjob').val(),
 			memmgr : $('#newmgr').val(),
-			psalary : pay,
+			psalary : $('#newpay').val(),
 			pyearly : 0
 		},
 		success : function(result) {
@@ -285,7 +281,7 @@ function resignMem(memnum){
 	}
 }
 
-//mem정보 가지고 모달창 띄우기
+// mem정보 가지고 모달창 띄우기
 function getMemInfoForModal(id,res){
 	$.ajax({
 		type: "POST",
@@ -357,7 +353,7 @@ function payManage(res,data){
 
 
 
-//직급 변경, 부서 이동 처리
+// 직급 변경, 부서 이동 처리
 function prFormSaveChange(memnum){
 	var newmemjob = $("#newmemjob").val();
 	var newmemdept = $("#newmemdept").val();
@@ -548,59 +544,61 @@ function prFormSaveChange(memnum){
 		
 		// 문서 양식 커스터마이징
 		function manageForm(chk){
-			
-			if(chk == 'writerchk'){
+			// 전체 체크일 경우에는 chk='checkall'로 모든 경우 수행
+			switch(chk){
+			case 'checkall':
+			case 'writerchk':
 				if($('#writerchk').attr("checked") == 'checked'){
-					//체크 햇을때
+					// 체크 햇을때
 					$('#sgwriterTarget').html("기안자: <input type='text' id='sgwriter' readonly='readonly'>");
 				}else{
-					//체크 푸를때
+					// 체크 푸를때
 					$('#sgwriterTarget').html("");
 				}
-			}else if(chk == 'stendatechk'){
+			case 'stendatechk':
 				if($('#stendatechk').attr("checked") == 'checked'){
 					$('#stendateTarget').html("기안일: <input type='date' id='startdate' name='startdate'> ~ <input type='date' id='enddate' name='enddate'>");
 				}else{
 					$('#stendateTarget').html("");
 				}
-			} else if(chk == 'stitlechk'){
+			case 'stitlechk':
 				if($('#stitlechk').attr("checked") == 'checked'){
 					$('#stitleTarget').html("제목 : <input type='text' id='stitle' name='stitle' >");
 				}else{
 					$('#stitleTarget').html("");
 				}
-			} else if(chk == 'sdatechk'){
+			case 'sdatechk':
 				if($('#sdatechk').attr("checked") == 'checked'){
 					$('#sdateTarget').html("<tr><td>일시</td></tr><tr><td><input type='text' id='sdate' name='sdate'></td></tr>");
 				}else{
 					$('#sdateTarget').html("");
 				}
-			} else if(chk == 'splacechk'){
+			case 'splacechk':
 				if($('#splacechk').attr("checked") == 'checked'){
 					$('#splaceTarget').html("<tr><td>장소</td></tr><tr><td><input type='text' id='splace' name='splace'></td></tr>");
 				}else{
 					$('#splaceTarget').html("");
 				}
-			} else if(chk == 'scontchk'){
+			case 'scontchk':
 				if($('#scontchk').attr("checked") == 'checked'){
 					$('#scontTarget').html("<tr><td>내용</td></tr><tr><td><textarea rows='15' cols='70' id='scont' name='scont' style='resize:none'></textarea></td></tr>");
 				}else{
 					$('#scontTarget').html("");
 				}
-			} else if(chk == 'sreasonchk'){
+			case 'sreasonchk':
 				if($('#sreasonchk').attr("checked") == 'checked'){
 					$('#sreasonTarget').html("<tr><td>사유</td></tr><tr><td><textarea rows='5' cols='70' id='sreason' name='sreason' style='resize:none'></textarea></td></tr>");
 				}else{
 					$('#sreasonTarget').html("");
 				}
-			} else if(chk == 'sps'){
+			case 'sps':
 				if($('#sps').attr("checked") == 'checked'){
 					$('#spsTarget').html("<tr><td>특이사항</td></tr><tr><td><textarea rows='5' cols='70' id='sps' name='sps' style='resize:none'></textarea></td></tr>");
 				}else{
 					$('#spsTarget').html("");
 				}
 			}
-
+			
 		}
 
 		// 제작한 양식 추가
@@ -682,11 +680,16 @@ function prFormSaveChange(memnum){
 			});
 		}
 		
+		// 체크박스 전체선택!!
 		function checkAllElement(){
+			//전체선택이란 체크박스가 체크되면
 			if($('#checkAll').attr("checked")=="checked"){
+				//공통적으로 가지고 있는 name을 이용 해서 모두 체크 후 메서드 실행
 				$('input[name=check]').attr("checked",true);
+				manageForm('checkall');
 			}else{
 				$('input[name=check]').attr("checked",false);
+				manageForm('checkall');
 			}
 		}
 		

@@ -9,6 +9,7 @@ import com.sumware.dto.MailVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.MessengerRoomVO;
 import com.sumware.dto.MessengerVO;
+import com.sumware.dto.PayVO;
 import com.sumware.dto.SignatureVO;
 
 public class AbstractService implements ServiceInter{
@@ -30,8 +31,7 @@ public class AbstractService implements ServiceInter{
 
 
 	@Override
-	public MemberVO addNewMember(MemberVO vo) {
-		return null;
+	public void addNewMember(MemberVO vo, PayVO payvo) throws Exception {
 	}
 
 	@Override

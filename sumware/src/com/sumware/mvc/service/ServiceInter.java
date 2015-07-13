@@ -11,6 +11,7 @@ import com.sumware.dto.MailVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.MessengerRoomVO;
 import com.sumware.dto.MessengerVO;
+import com.sumware.dto.PayVO;
 import com.sumware.dto.SignatureVO;
 
 public interface ServiceInter {
@@ -24,7 +25,7 @@ public interface ServiceInter {
 	
 	
 	//관리자
-	public MemberVO addNewMember(MemberVO vo);
+	public void addNewMember(MemberVO vo, PayVO payvo) throws Exception ;
 	
 	//전자결재 관리
 	//상급자 리스트 불러오기
