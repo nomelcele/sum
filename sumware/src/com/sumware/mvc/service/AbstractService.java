@@ -55,7 +55,10 @@ public class AbstractService implements ServiceInter{
 		
 	}
 
-	
+	@Override
+	public void changeJobSalary(MemberVO mvo) {
+		
+	}
 	
 	
 

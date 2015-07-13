@@ -375,7 +375,8 @@ function prFormSaveChange(memnum){
 					url: "adminPromoteMem",
 					data: {
 						memnum: memnum,
-						memjob: $("#newmemjob").val()
+						memjob: $("#newmemjob").val(),
+						psalary: $("#newpsalary").val()
 					},
 					success: function(result){
 						console.log("모달 닫기");

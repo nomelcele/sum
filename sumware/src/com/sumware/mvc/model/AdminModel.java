@@ -116,7 +116,7 @@ public class AdminModel {
 	// 사원 진급 처리
 	@RequestMapping(value = "/adminPromoteMem", method = RequestMethod.POST)
 	public String promoteMem(MemberVO mvo) {
-		adao.promoteMem(mvo);
+		service.changeJobSalary(mvo);
 		// 업데이트 후 사원 개인정보 리스트 보여줌
 		return "redirect:/adminMemList?page=1&memdept=0&memname=";
 	}

@@ -79,7 +79,7 @@
 	<select id="getMemInfo" parameterType="mvo" resultType="mvo">
 		select m.memnum,m.memname,m.memaddr,m.mempwd,m.memprofile,m.memjob,
 		m.memauth,m.memmail,m.meminmail,m.memmgr,m.memdept,m.memhire,m.memresign,m.membirth,m.memsignimg,
-		d.dename from member m,dept d where memnum=#{memnum} and d.denum=m.memdept
+		d.dename,p.psalary from member m,dept d,pay p where memnum=#{memnum} and d.denum=m.memdept and m.memnum=p.pmem
 	</select>
 	
 	<!-- 멤버의 pay 정보 가져옴 -->
@@ -92,9 +92,14 @@
 		insert into commission values(#{comdetail},#{comamount},sysdate,commission_seq.nextVal,#{commem})
 	</insert>
 	
-	<!-- 진급 처리 -->
+	<!-- 진급 처리(직급 변경) -->
 	<update id="promoteMem" parameterType="mvo">
 		update member set memjob=#{memjob} where memnum=#{memnum}
+	</update>
+	
+	<!-- 진급 처리(연봉 변경 & 연차 0으로) -->
+	<update id="changeSalary" parameterType="mvo">
+		update pay set pyearly=0, psalary=#{psalary} where pmem=#{memnum}
 	</update>
 	
 	<!-- 부서 이동 -->
