@@ -215,6 +215,11 @@
 							style="width: 120px" readonly="readonly" value="${memvo.memjob}">
 			        	</div>
 			        	<div class="form-group">
+			        		<label class="control-label">현재 연봉(만원)</label> 
+							<input type="text" id="curpsalary" class="form-control" 
+							style="width: 120px" readonly="readonly" value="${memvo.psalary}">
+			        	</div>
+			        	<div class="form-group">
 							<label class="control-label">변경할 직급</label> 
 							<select name="memjob" id="newmemjob" class="form-control" style="width: 120px">
 											<option value="0">직급 선택</option>								
@@ -224,6 +229,11 @@
 											<option value="팀장">팀장</option>
 											<option value="사원">사원</option>
 							</select>
+						</div>
+						<div class="form-group">
+							<label class="control-label">변경할 연봉(만원)</label> 
+							<input type="number" id="newpsalary" class="form-control" 
+							style="width: 120px" step="100" value="${memvo.psalary}">
 						</div>
 			        </div>
 			   

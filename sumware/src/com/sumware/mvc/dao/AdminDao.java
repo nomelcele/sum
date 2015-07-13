@@ -82,9 +82,15 @@ public class AdminDao {
 		return st.selectList("admin.getPayHistory", phvo);
 	}
 	
-	// 사원 진급 처리
+	// 사원 진급 처리(직급 변경)
+	// 직급 변경 후 연봉도 변경해줘야 함(트랜잭션 처리)
 	public void promoteMem(MemberVO mvo){
 		st.update("admin.promoteMem",mvo);
+	}
+	
+	// 사원 진급 처리(연봉 변경, 연차 0으로 변경)
+	public void changeSalary(MemberVO mvo){
+		st.update("admin.changeSalary", mvo);
 	}
 	
 	// 사원 부서 이동

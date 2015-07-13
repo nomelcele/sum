@@ -42,4 +42,11 @@ public class AdminServiceImple extends AbstractService {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void changeJobSalary(MemberVO mvo) {
+		// 사원 진급 처리
+		adao.promoteMem(mvo); // 직급 변경
+		adao.changeSalary(mvo); // 연봉 변경
+	}
 }
