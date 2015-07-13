@@ -11,6 +11,7 @@
 	<div class="signDetailDiv">
 		<input type="button" id="sgBtn" class="signDetailDiv btn" onclick="sgDetail(this)" value="결재">&nbsp;
 		<input type="hidden" id="sgReturnBtn" class="signDetailDiv btn" onclick="sgDetail(this)" value="반려">&nbsp;
+		<input type="hidden" id="sgDocBtn" class="signDetailDiv btn" onclick="sgDetail(this)" value="출력">&nbsp;
 		<input type="button" class="signDetailDiv btn" onclick="sgDetail(this)" value="목록">&nbsp;
 	</div>
 	<div class='modal' id='signReturnModal' role='dialog'>

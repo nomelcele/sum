@@ -56,6 +56,9 @@ public class AbstractService implements ServiceInter{
 	}
 
 	@Override
+	public void setNowmemService(int snum) {
+	}
+	@Override
 	public void changeJobSalary(MemberVO mvo) {
 		
 	}

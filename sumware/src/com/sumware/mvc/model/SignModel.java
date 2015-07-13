@@ -151,13 +151,10 @@ public class SignModel {
 			if(step.get("stepnum")!=null){
 				System.out.println("if in stepnum::"+step.get("stepnum"));
 				sgdao.updateSignStep(step);
-				int nowmemnum=sgdao.getNowmem(Integer.parseInt(step.get("stepnum")));
-				HashMap<String, Integer> setNow = new HashMap<String, Integer>();
-				setNow.put("snum", Integer.parseInt(step.get("stepnum")));
-				setNow.put("nowmemnum",nowmemnum );
-				sgdao.setNowmem(setNow);
 			}
 		}
+		signService.setNowmemService(Integer.parseInt(map.get("snum")));
+		
 		return "redirect:getSignList";
 	}
 	@RequestMapping(value="signReturn",method=RequestMethod.POST)
