@@ -11,8 +11,8 @@
 
 	<!-- 사원 추가(S) -->
 	<insert id="addMember" parameterType="mvo">
-		insert into member(memnum, memname,mempwd,memjob,memauth,memmail,memmgr,memdept)
-		values(member_seq.nextVal,#{memname},#{mempwd},#{memjob},#{memauth},#{memmail},#{memmgr},#{memdept})
+		insert into member(memnum, memname,mempwd,memjob,memauth,memmail,memmgr,memdept,memhire)
+		values(member_seq.nextVal,#{memname},#{mempwd},#{memjob},#{memauth},#{memmail},#{memmgr},#{memdept},sysdate)
 	</insert>
 
 	<select id="getNewMemInfo" parameterType="mvo" resultType="mvo">

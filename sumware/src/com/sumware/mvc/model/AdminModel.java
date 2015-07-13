@@ -64,6 +64,7 @@ public class AdminModel {
 		pw.flush();
 		pw.close();
 
+
 	}
 
 	// 관리자 로그아웃
