@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.SignFormVO;
@@ -176,9 +177,23 @@ public class SignModel {
 	}
 	
 	// 사용자가 요청하는 문서를 출력 해주는 메쏘오드!
-	@RequestMapping(value="getDoc")
-	public String getDoc(SignatureVO sgvo){
-		return null;
+	@RequestMapping(value="getDoc",method=RequestMethod.POST)
+	public ModelAndView getDoc(@RequestParam Map<String, String> map){
+		System.out.println("문서출력");
+		ArrayList<MemberVO> mgrList = new ArrayList<MemberVO>();
+		for(int i =1; i<map.size(); i++){
+			if(map.get("sgMgr"+i)!=""&&map.get("sgMgr"+i)!=null){
+				System.out.println(map.get("sgMgr"+i));
+				mgrList.add(sgdao.getSignImg(Integer.parseInt(map.get("sgMgr"+i))));
+			}else{
+				break;
+			}
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("excelView");
+		mav.addObject("map", map);
+		mav.addObject("mgrList", mgrList);
+		return mav;
 	}
 	private ArrayList<HashMap<String,String>> setSignStep(Map<String,String> map){
 		ArrayList<HashMap<String, String>> sgMgrList=new ArrayList<HashMap<String,String>>();

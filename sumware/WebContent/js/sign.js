@@ -126,7 +126,8 @@ function sgDetail(res){
 		$("#signDetailF").attr("action","signReturn");
 		$("#signReturnModal").toggle();
 	}else if(res.value='출력'){
-		
+		$("#signDetailF").attr("action","getDoc");
+		$("#signDetailF").submit();
 	}else{
 		location='getSignList';
 	}

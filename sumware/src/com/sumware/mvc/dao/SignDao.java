@@ -69,6 +69,8 @@ public class SignDao {
 	public void signReturn(Map<String,String> map){
 		st.update("sign.signReturn",map);
 	}
-	
+	public MemberVO getSignImg(int memnum){
+		return st.selectOne("sign.getSignImg",memnum);
+	}
 	
 }
