@@ -166,22 +166,11 @@ public class AdminModel {
 	public String addMember(MemberVO mvo, PayVO payvo, Model model,
 			HttpSession session) throws Exception {
 		System.out.println("사원 추가버튼 클릭!!!" + mvo.getMemmgr());
-		// 사원을 디비에 저장하고 부여받은 사번과 정보들을 다시가져옴
-		MemberVO nmvo = service.addNewMember(mvo);
-		try {
-			// 메일전송 클래스를 이용하여 메일전송
-			int res = SendEmail.getSendemail().sendEmailToNewMem(nmvo);
-			if (res == 0) {
-				// 메일 전송 실패 시 디비 삭제
-				adao.cancelAddMem(nmvo.getMemnum());
-				throw new Exception("메일 전송 실패");
-			}
-			payvo.setPmem(nmvo.getMemnum());
-			adao.insertPay(payvo);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+		// 사원을 디비에 저장하고 부여받은 사번과 정보들로 사원에게 메일을 전송해 준다
+		//실패 시 DB에 저장되었던 사원정보를 다시 삭제하고, 성공 시 pay테이블에 연봉 정보를 입력한다.
+		service.addNewMember(mvo,payvo);
+		
 		return "admin/addMember";
 	}
 

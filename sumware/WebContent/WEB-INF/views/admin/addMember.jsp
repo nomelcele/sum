@@ -58,6 +58,10 @@
 								</select>
 						</div>
 						<div class="form-group">
+							<label class="control-label">연 봉(만 원)</label> 
+								<input type="number" class="form-control"  step="100" value="2000" id="newpay" style="width: 120px">
+						</div>
+						<div class="form-group">
 							<input type="button" class="btn btn-outline btn-default" onclick="javascript:sendNewMember()" id = "sendFormToAdd" value="추 가">
 						</div>
 					<input type="hidden" name="memauth" value="" id="newauth">
