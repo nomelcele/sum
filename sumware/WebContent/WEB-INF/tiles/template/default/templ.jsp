@@ -36,6 +36,7 @@
 <script src="js/admin.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/notification.js"></script>
+<script src="js/meminfo.js"></script>
 <c:if test="${sessionScope.model eq 'sign' }">
 	<script>
 	var id=['formnum','stitle','scont','sreason','startdate','enddate','sgwriter','sfname','sgreturncomm','sdate','splace','sps'];

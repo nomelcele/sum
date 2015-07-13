@@ -27,8 +27,15 @@ public class AdminServiceImple extends AbstractService {
 		// 메일에 사원의 정보를 보여주기 위함
 		MemberVO nmvo = adao.getNewMemInfo(vo);
 		try {
+			// 메일에 보내질 제목
+			String mailsubject = "신입 사원 로그인 정보입니다.";
+			
+			// 메일에 보내질 내용
+			String mailcont = nmvo.getMemname()+"님의 사원번호는 "+nmvo.getMemnum()+", 비밀번호는 "
+					+nmvo.getMempwd()+", 부서는 "+nmvo.getDename()+", 상급자는 "+nmvo.getMgrname()+" 입니다.";
+			
 			// 메일전송 클래스를 이용하여 메일전송
-			int res = SendEmail.getSendemail().sendEmailToNewMem(nmvo);
+			int res = SendEmail.getSendemail().sendEmailToNewMem(nmvo, mailsubject, mailcont);
 			if (res == 0) {
 				// 메일 전송 실패 시 디비 삭제
 				adao.cancelAddMem(nmvo.getMemnum());

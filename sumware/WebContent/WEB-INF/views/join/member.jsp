@@ -2,10 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="container">
-	<div class="row info">
-		<div class="row">
-			<div class="col-sm-8 col-sm-offset-1">
 				<div class="resume">
 				
 					
@@ -151,7 +147,3 @@
 				</form>
 				</div>
 
-			</div>
-		</div>
-	</div>
-</div>

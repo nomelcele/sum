@@ -43,7 +43,7 @@
 					<td>${mList.psalary}</td>
 					<td><input type="button" class="btn btn-default btn-sm"
 						value="급여내역"
-						onclick="adminPay('adminPayInfoDetail',${mList.memnum})"></td>
+						onclick="javascript:adminPay('adminPayInfoDetail',${mList.memnum})"></td>
 				</tr>
 			</c:forEach>
 		</tbody>
