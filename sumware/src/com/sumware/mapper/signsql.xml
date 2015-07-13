@@ -16,7 +16,7 @@
 				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'MM')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
 				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
-				from signature sg,signform sf,member m where sg.sgdept=#{sgdept}and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nowmemnum=#{nowmemnum} order by snum desc
+				from signature sg,signform sf,member m where sg.sgdept=#{sgdept}and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nowmemnum=#{nowmemnum} and nvl(sg.sgreturncomm,'0')='0' order by snum desc
 			</when>
 			<when test="signdiv==2">
 				select st.* from(select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
@@ -88,18 +88,20 @@
 	<select id="signDetail" parameterType="int" resultType="sgvo">
 		select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
 		to_char(sg.startdate,'yyyy-MM-dd') startdate,to_char(sg.enddate,'yyyy-MM-dd') enddate,
+		(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
+		(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname,
 		sg.sgwriter,sg.sdate,sg.splace,sg.sps,m.memname from signature sg,member m where m.memnum=sg.sgwriter and snum = #{snum}
 	</select>
 	<select id="getSignStep" parameterType="int" resultType="ssvo">
-		select * from signstep where stepsnum = #{stepsnum}
+		select * from signstep where stepsnum = #{stepsnum} order by stepnum desc
 	</select>
 	<!-- / -->
 	<!-- 결재저장. -->
 	<update id="updateSignStep" parameterType="map">
 		update signstep set stepconfirm=#{stepconfirm} where stepnum=#{stepnum}
 	</update>
-	<select id="getNowmem" parameterType="int">
-		select max(stepmemnum) from signstep where stepconfirm ='n' and stepsnum=#{stepsnum}
+	<select id="getNowmem" parameterType="int" resultType="int">
+		select nvl(max(stepmemnum),0) from signstep where stepconfirm ='n' and stepsnum=#{stepsnum}
 	</select>
 	<update id="setNowmem" parameterType="map">
 		update signature set nowmemnum=#{nowmemnum} where snum=#{snum}

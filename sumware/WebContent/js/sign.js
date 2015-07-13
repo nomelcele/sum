@@ -81,7 +81,7 @@ function addSignDiv(){
 		console.log(sgHtml);
 		$('#signImg').html(sgHtml);
 		for(var index=0; index<id.length; index++){
-			if($('#'+id[index]).length<=0){
+			if($('#'+id[index]).length>0){
 				$("#"+id[index]).attr("readonly","readonly");
 			}
 		}		
@@ -125,6 +125,8 @@ function sgDetail(res){
 	}else if(res.value=='반려'){
 		$("#signDetailF").attr("action","signReturn");
 		$("#signReturnModal").toggle();
+	}else if(res.value='출력'){
+		
 	}else{
 		location='getSignList';
 	}

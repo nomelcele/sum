@@ -52,6 +52,17 @@ public class SignServiceImple extends AbstractService{
 			sgdao.writeSignStep(map);
 		}
 	}
+	@Override
+	public void setNowmemService(int snum) {
+		int nowmemnum=sgdao.getNowmem(snum);
+		System.out.println("nowmemnum::"+nowmemnum);
+		if(nowmemnum != 0){
+			HashMap<String, Integer> setNow = new HashMap<String, Integer>();
+			setNow.put("snum", snum);
+			setNow.put("nowmemnum",nowmemnum );
+			sgdao.setNowmem(setNow);
+		}
+	}
 	
-
+	
 }
