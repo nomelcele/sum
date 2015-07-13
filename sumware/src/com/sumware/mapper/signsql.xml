@@ -110,5 +110,8 @@
 	<update id="signReturn" parameterType="map">
 		update signature set sgreturn=#{sgreturn},sgreturncomm=#{sgreturncomm} where snum=#{snum}
 	</update>
-	
+	<!-- signImg 뽑기 -->
+	<select id="getSignImg" parameterType="int" resultType="mvo">
+		select memname,memsignimg from member where memnum=#{memnum}
+	</select>
 </mapper>
