@@ -9,14 +9,15 @@
 	<div class="panel-body">
 		<div class="form-group">
 			<label class="control-label">선택사항</label> 
-			<p><label class="checkbox-inline"> <input type="checkbox"  onchange ="javascript:manageForm('writerchk')" id="writerchk" value="기안자"> 기안자 </label> 
-			<p><label class="checkbox-inline"> <input type="checkbox"  onchange ="javascript:manageForm('stendatechk')" id="stendatechk" value="기안일"> 기안일 </label> 
-			<p><label class="checkbox-inline"> <input type="checkbox"  onchange ="javascript:manageForm('stitlechk')" id="stitlechk" value="제목"> 제목 </label>
-			<p><label class="checkbox-inline"> <input type="checkbox"  onchange ="javascript:manageForm('sdatechk')" id="sdatechk" value="일시"> 일시 </label>
-			<p><label class="checkbox-inline"> <input type="checkbox"  onchange ="javascript:manageForm('splacechk')" id="splacechk" value="장소"> 장소 </label>
-			<p><label class="checkbox-inline"> <input type="checkbox"  onchange ="javascript:manageForm('scontchk')" id="scontchk" value="내용"> 내용 </label>
-			<p><label class="checkbox-inline"> <input type="checkbox"  onchange ="javascript:manageForm('sreasonchk')" id="sreasonchk" value="사유"> 사유 </label> 
-			<p><label class="checkbox-inline"> <input type="checkbox"  onchange ="javascript:manageForm('sps')" id="sps" value="특이사항"> 특이사항 </label>
+			<p><label class="checkbox-inline"> <input type="checkbox" onchange ="javascript:checkAllElement()" id="checkAll" value="전체선택"> 전체선택 </label> 
+			<p><label class="checkbox-inline"> <input type="checkbox" name="check" onchange ="javascript:manageForm('writerchk')" id="writerchk" value="기안자"> 기안자 </label> 
+			<p><label class="checkbox-inline"> <input type="checkbox" name="check"  onchange ="javascript:manageForm('stendatechk')" id="stendatechk" value="기안일"> 기안일 </label> 
+			<p><label class="checkbox-inline"> <input type="checkbox" name="check"  onchange ="javascript:manageForm('stitlechk')" id="stitlechk" value="제목"> 제목 </label>
+			<p><label class="checkbox-inline"> <input type="checkbox" name="check" onchange ="javascript:manageForm('sdatechk')" id="sdatechk" value="일시"> 일시 </label>
+			<p><label class="checkbox-inline"> <input type="checkbox" name="check"  onchange ="javascript:manageForm('splacechk')" id="splacechk" value="장소"> 장소 </label>
+			<p><label class="checkbox-inline"> <input type="checkbox" name="check"  onchange ="javascript:manageForm('scontchk')" id="scontchk" value="내용"> 내용 </label>
+			<p><label class="checkbox-inline"> <input type="checkbox" name="check"  onchange ="javascript:manageForm('sreasonchk')" id="sreasonchk" value="사유"> 사유 </label> 
+			<p><label class="checkbox-inline"> <input type="checkbox" name="check"  onchange ="javascript:manageForm('sps')" id="sps" value="특이사항"> 특이사항 </label>
 		</div>
 		<div class="form-group">
 			<label class="control-label">양식 이름</label> 
