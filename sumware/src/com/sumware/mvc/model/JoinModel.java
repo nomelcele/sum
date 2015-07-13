@@ -105,28 +105,7 @@ public class JoinModel{
 		return "join/cap/getCap";
 	}
 	
-	@RequestMapping(value="/modifyProfile")
-	public String modifyProfile(Mode mode,HttpSession session){
-		session.setAttribute("model","join");
-		//프로필 수정폼 
-		return "join.member";
-		
-	}
 	
-	@RequestMapping(value="/modify",method=RequestMethod.POST)
-	public String modify(MemberVO mvo,HttpSession session){
-		//수정 버튼 
-		
-		//HashMap<String, String> map= MyMap.getMaps().getMapList(request);
-		
-		mdao.modify(mvo);
-		//session = request.getSession();
-		//저장된 세션 다 날림.
-		session.removeAttribute("v");
-		session.removeAttribute("teamNameList");		
-		return "home.index";
-		
-	}
 	@RequestMapping(value="joinupload",method=RequestMethod.POST)
 	public String joinupload(){
 		return "join/joinupload";

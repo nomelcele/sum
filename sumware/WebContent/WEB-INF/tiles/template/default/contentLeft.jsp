@@ -54,7 +54,7 @@
 						<tr>
 							<td colspan="2"><a
 								href="modifyProfile"
-								class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
+								class="primary-font"><i class="fa fa-cog"></i> 사원 정보</a></td>
 						</tr>
 					</table>
 					<!-- profile-table(E) -->
@@ -136,7 +136,7 @@
 					<tr>
 						<td colspan="2"><a
 							href="modifyProfile"
-							class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
+							class="primary-font"><i class="fa fa-cog"></i> 사원 정보</a></td>
 
 					</tr>
 				</table>
@@ -226,7 +226,7 @@
 				<tr>
 					<td colspan="2"><a
 						href="modifyProfile"
-						class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
+						class="primary-font"><i class="fa fa-cog"></i> 사원 정보</a></td>
 
 				</tr>
 			</table>
@@ -235,7 +235,7 @@
 	</div>
 </c:if>
 
-<%-- join left(E) --%>
+<%-- join left(E) 사원 정보 meminfo부분--%>
 <c:if test="${sessionScope.model eq 'join' }">
 
 	<!-- <div> -->
@@ -280,13 +280,24 @@
 				<tr>
 					<td colspan="2"><a
 						href="modifyProfile"
-						class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
+						class="primary-font"><i class="fa fa-cog"></i> 사원 정보</a></td>
 
 				</tr>
 			</table>
 			<!-- profile-table(E) -->
 		</div>
 	</div>
+	<!-- left-menu(S) -->
+	<div class="left-menu" id="left-menu">
+		<ul>
+			<li><a href="javascript:memInfoSelectMenu('modifyProfile','')">정보 수정</a></li>
+			<li><a href="javascript:memInfoSelectMenu('payInfo',${sessionScope.v.memnum })">급여내역조회</a></li>
+			<li><a href="javascript:memInfoSelectMenu('commute','')">출퇴근 관리</a></li>
+		</ul>
+	</div>
+	<!-- left-menu(E) -->
+	
+	
 </c:if>
 <%-- join left(E) --%>
 

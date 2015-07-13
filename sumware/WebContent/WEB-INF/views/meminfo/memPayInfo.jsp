@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div style="float:right">
-			<input type="button" class="btn btn-default btn-sm" value="목록"
-					onclick="javascript:adminSelectMenu('adminPayInfoList')"><p>
-		</div>
 <div style="width:100%">
 	<table class="table table-condensed table-hover">
 		<tr style="background-color: #F5F5F5; text-align: center">
@@ -36,7 +32,7 @@
 				<td class="col-lg-1" style="text-align: center;"><span>수령 금액</span></td>
 
 				<td class="col-lg-1">
-					<select class="form-control input-sm" id="hisdate" onchange="javascript:changeyear(${memvo.memnum})" style="width:50%; display:inline">
+					<select class="form-control input-sm" id="hisdate" onchange="javascript:memchangeyear(${sessionScope.v.memnum})" style="width:50%; display:inline">
 						<option value="">년도선택</option>
 						<option value="">전 체</option>
 						<c:forEach var="month" items="${monthList }">

@@ -208,7 +208,7 @@ public class AdminModel {
 	public String adminPayInfoList(MemberVO mvo, Model model, HttpServletRequest req) {
 		// 페이지 처리
 		int totalCount = adao.getMemCount(mvo);
-		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 3, 5, 0,totalCount, 0);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
 		mvo.setBegin(pmap.get("begin"));
 		mvo.setEnd(pmap.get("end"));
 
@@ -225,7 +225,7 @@ public class AdminModel {
 	public String adminPayManagement(MemberVO mvo, Model model,HttpServletRequest req) {
 		// 페이지 처리
 		int totalCount = adao.getMemCount(mvo);
-		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 3, 5, 0,totalCount, 0);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
 		mvo.setBegin(pmap.get("begin"));
 		mvo.setEnd(pmap.get("end"));
 
@@ -353,9 +353,6 @@ public class AdminModel {
 		return "redirect:/adminDeleteBoardForm";
 	}
 	// ////////////////////////게시판 관리(E)///////////////////////////
-	
-	
-	
 	
 	// ////////////////////////문서 양식 관리(S)///////////////////////////
 	// 양식 추가 메뉴 선택

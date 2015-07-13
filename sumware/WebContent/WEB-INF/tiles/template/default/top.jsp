@@ -19,6 +19,7 @@
 					<label class="control-label" for="mempwd">비밀번호</label> 
 					<input type="password" id="mempwd" name="mempwd" placeholder="비밀번호" onkeydown="enterCheck(3)" />
 					<button type="button" class="btn btn-xs btn-info" onclick="loginChk()">로그인</button>
+					&nbsp; <a href="#" data-toggle="modal" data-target="#findPW" style="display:inline"><i class="fa fa-search"></i> pw</a>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -83,5 +84,45 @@
 		</div>
 	</div>
 </nav>
+
+<!-- Modal (S) 비밀 번호 찾기 -->
+<div class="modal fade" id="findPW" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h3 class="modal-title" id="myModalLabel">비밀번호 찾기</h3>
+			</div>
+			<div class="modal-body">
+				<div class="tabbable">
+					<div class="tab-content">
+						<div class="form-group">
+							<label class="control-label">사원번호</label> <input type="text"
+								id="memnum" class="form-control" style="width: 170px"
+								placeholder="사원 번호">
+						</div>
+						<div class="form-group">
+							<label class="control-label">E-mail</label> <input type="text"
+								id="memmail" class="form-control" style="width: 220px"
+								placeholder="ex) abcd@gmail.com">
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary"
+							onclick="">찾기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal (E) -->
 
 

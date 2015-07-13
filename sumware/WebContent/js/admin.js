@@ -415,8 +415,8 @@ function prFormSaveChange(memnum){
 	}
 }
 	
-	// 급여 조회에서 월 바꾸면 수행
-	function changemonth(memnum){
+	// 급여 조회에서 년도 바꾸면 수행
+	function changeyear(memnum){
 		$.ajax({
 			type: "POST",
 			url: "adminPayInfoDetail",

@@ -22,14 +22,13 @@ public class SendEmail {
 		return sendemail;
 	}
 
-	public int sendEmailToNewMem(MemberVO mvo) throws IOException{
+	public int sendEmailToNewMem(MemberVO mvo,String mailsubject,String mailcont) throws IOException{
 		
 		System.out.print(mvo.getMemmail());
 		String sender = "rlawntkd89@naver.com";
 		String receiver = mvo.getMemmail();
-		String subject = "신입 사원 로그인 정보입니다.";
-		String content = mvo.getMemname()+"님의 사원번호는 "+mvo.getMemnum()+", 비밀번호는 "
-		+mvo.getMempwd()+", 부서는 "+mvo.getDename()+", 상급자는 "+mvo.getMgrname()+" 입니다.";
+		String subject = mailsubject;
+		String content = mailcont;
 		
 		//정보를 담기 위한 객체
 		Properties p = new Properties();
