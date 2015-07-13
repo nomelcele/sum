@@ -548,6 +548,7 @@ function prFormSaveChange(memnum){
 		
 		// 문서 양식 커스터마이징
 		function manageForm(chk){
+			
 			if(chk == 'writerchk'){
 				if($('#writerchk').attr("checked") == 'checked'){
 					//체크 햇을때
@@ -679,5 +680,13 @@ function prFormSaveChange(memnum){
 					$('#deptBoard').html(result);
 				}
 			});
+		}
+		
+		function checkAllElement(){
+			if($('#checkAll').attr("checked")=="checked"){
+				$('input[name=check]').attr("checked",true);
+			}else{
+				$('input[name=check]').attr("checked",false);
+			}
 		}
 		
