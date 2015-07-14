@@ -16,7 +16,5 @@
    <update id="modify" parameterType="mvo">
    		update member set memaddr=#{memaddr}, mempwd=#{mempwd},memprofile=#{memprofile} where memnum=#{memnum}
    </update>
-   
-  
-  
+
 </mapper>

@@ -388,3 +388,66 @@ function getJobDetail(tonum) {
 		}
 	});
 }
+
+//인증번호를 사원의 외부메일로 전송
+function findPassWord(res){
+	// 사번과 메일을 확인하여 인증코드를 메일로전송
+	if(res=='sendNumber'){
+		$.ajax({
+			type: "POST",
+			url: "sendCode",
+			data: {
+				memnum: $('#findpwmemnum').val(),
+				memmail: $('#findpwmemmail').val()
+			},
+			success: function(result){
+				alert("인증번호를 메일로 전송하였습니다.")
+				$('#findpwTarget').html(result);
+			},
+			error:function(a,b){
+				alert("사원번호와 E-mail이 일치하는 사원이 없습니다. 다시 시도 해 주세요.")
+			}
+		});
+	// 인증번호가 일치하는지 확인
+	}else if(res=='checkCode'){
+		$.ajax({
+			type: "POST",
+			url: "checkCode",
+			data: {
+				code: $('#mycode').val(),
+			},
+			success: function(result){
+				alert("인증번호가 일치합니다. 비밀번호를 변경하여 주세요.")
+				$('.changePwForm').show('slow');
+			},
+			error:function(a,b){
+				alert("인증번호가 일치하지 않습니다. 다시 시도 해 주세요.")
+			}
+		});
+		
+	// 새 비밀번호가 일치하는지 확인
+	}else if(res =='confirmnewPW'){
+		if($('#newpw').val() == $('#checknewpw').val()){
+			$('#checkPwTarget').html("<p style='color:blue'>비밀번호 일치</p>");
+			$('#changeBtn').attr("disabled",false);
+		}else{
+			$('#checkPwTarget').html("<p style='color:red'>비밀번호 불일치</p>");
+			$('#changeBtn').attr("disabled",true);
+		}
+	}else{
+		alert(res+"  "+$('#checknewpw').val())
+		$.ajax({
+			type: "POST",
+			url: "changePW",
+			data: {
+				memnum: res,
+				mempwd: $('#checknewpw').val()
+			},
+			success: function(result){
+				alert("비밀번호 변경이 완료되었습니다.")
+				// 모달 종료
+				$('#findPW').modal('toggle');
+			}
+		});
+	}
+}

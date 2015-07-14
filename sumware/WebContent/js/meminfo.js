@@ -2,7 +2,7 @@
  * 
  */
 // Left 메뉴
-function memInfoSelectMenu(res,data) {
+function memInfoSelectMenu(res, data) {
 	if (res == 'modifyProfile') {
 		$.ajax({
 			url : "modifyProfileMenu",
@@ -13,12 +13,12 @@ function memInfoSelectMenu(res,data) {
 		});
 	} else if (res == 'payInfo') {
 		$.ajax({
-			type:"post",
-			url:"memPayInfoDetail",
-			data:{
-				memnum:data
+			type : "post",
+			url : "memPayInfoDetail",
+			data : {
+				memnum : data
 			},
-			success:function(result){
+			success : function(result) {
 				$('.contents').html(result);
 			}
 		});
@@ -27,16 +27,16 @@ function memInfoSelectMenu(res,data) {
 	}
 }
 
-//급여 조회에서 년도 바꾸면 수행
-function memchangeyear(memnum){
+// 급여 조회에서 년도 바꾸면 수행
+function memchangeyear(memnum) {
 	$.ajax({
-		type: "POST",
-		url: "memPayInfoDetail",
-		data: {
-			memnum: memnum,
-			hisdate:$('#hisdate').val()
+		type : "POST",
+		url : "memPayInfoDetail",
+		data : {
+			memnum : memnum,
+			hisdate : $('#hisdate').val()
 		},
-		success: function(result){
+		success : function(result) {
 			$('.contents').html(result);
 		}
 	});

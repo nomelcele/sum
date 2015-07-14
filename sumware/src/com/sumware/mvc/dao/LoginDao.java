@@ -32,4 +32,14 @@ public class LoginDao {
 	public void outLog(int memnum){
 		st.update("login.outLog", memnum);
 	}
+	
+	// 비밀번호 찾기
+	public MemberVO findPW(MemberVO mvo){
+		return st.selectOne("login.findPW", mvo);
+	}
+	
+	// 비밀번호 변경
+	public void changePW(MemberVO mvo){
+		st.update("login.changePW", mvo);
+	}
 }

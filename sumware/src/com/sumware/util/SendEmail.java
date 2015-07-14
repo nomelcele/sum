@@ -22,7 +22,7 @@ public class SendEmail {
 		return sendemail;
 	}
 
-	public int sendEmailToNewMem(MemberVO mvo,String mailsubject,String mailcont) throws IOException{
+	public int sendEmailToMem(MemberVO mvo,String mailsubject,String mailcont) throws IOException{
 		
 		System.out.print(mvo.getMemmail());
 		String sender = "rlawntkd89@naver.com";
