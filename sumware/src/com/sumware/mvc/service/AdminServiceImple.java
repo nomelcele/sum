@@ -35,7 +35,7 @@ public class AdminServiceImple extends AbstractService {
 					+nmvo.getMempwd()+", 부서는 "+nmvo.getDename()+", 상급자는 "+nmvo.getMgrname()+" 입니다.";
 			
 			// 메일전송 클래스를 이용하여 메일전송
-			int res = SendEmail.getSendemail().sendEmailToNewMem(nmvo, mailsubject, mailcont);
+			int res = SendEmail.getSendemail().sendEmailToMem(nmvo, mailsubject, mailcont);
 			if (res == 0) {
 				// 메일 전송 실패 시 디비 삭제
 				adao.cancelAddMem(nmvo.getMemnum());

@@ -17,4 +17,12 @@
   		update login set locheck='f',loendate=sysdate where lomem=#{lomem}
   	</insert>
   	
+  	<select id="findPW" parameterType="mvo" resultType="mvo">
+  		select memnum, mempwd, memjob, memname, memmail from member where memnum=#{memnum} and memmail=#{memmail}
+  	</select>
+  	
+  	<update id="changePW" parameterType="mvo">
+  		update member set mempwd=#{mempwd} where memnum=#{memnum}
+  	</update>
+  	
   </mapper>

@@ -81,4 +81,6 @@ public class MemInfoModel {
 
 		return "meminfo/memPayInfo";
 	}
+	
+	
 }
