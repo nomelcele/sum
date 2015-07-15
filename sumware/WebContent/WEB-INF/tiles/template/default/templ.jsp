@@ -39,8 +39,8 @@
 <script src="js/meminfo.js"></script>
 <c:if test="${sessionScope.model eq 'sign' }">
 	<script>
-	var id=['formnum','stitle','scont','sreason','startdate','enddate','sgwriter','sfname','sgreturncomm','sdate','splace','sps'];
-	var val=['${sf.sfnum}','${sgvo.stitle}','${sgvo.scont}','${sgvo.sreason}','${sgvo.startdate}','${sgvo.enddate}','${sgvo.memname}','${sgvo.sfname}','${sgvo.sgreturncomm}','${sgvo.sdate}','${sgvo.splace}','${sgvo.sps}'];
+	var id=['formnum','stitle','startdate','enddate','sgwriter','sfname','sgreturncomm','sdate','splace','sps'];
+	var val=['${sf.sfnum}','${sgvo.stitle}','${sgvo.startdate}','${sgvo.enddate}','${sgvo.memname}','${sgvo.sfname}','${sgvo.sgreturncomm}','${sgvo.sdate}','${sgvo.splace}','${sgvo.sps}'];
 		$(function(){
 			memnum="${sessionScope.v.memnum}";		
 			var signMode="${signMode}";
@@ -66,6 +66,17 @@
 					size='${index.count}';
 					signimg['${index.count}']='${sessionScope.v.memsignimg}';
 				"</c:forEach>";
+				
+				if("${!empty sgvo.scont}"=="true"){
+					$("#scont").val($("#targetScont").val());
+					$("#targetScont").val("");
+				}
+				if("${!empty sgvo.sreason}"=="true"){
+					$("#sreason").val($("#targetSreason").val());
+					$("#targetSreason").val("");
+				}else{
+					
+				}
 				for(var f=0; f<id.length; f++){
 					if(val[f]!=""){
 						setSignValue(id[f],val[f]);

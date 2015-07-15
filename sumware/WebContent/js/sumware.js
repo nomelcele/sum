@@ -50,6 +50,7 @@ $(function() {
 			$("#formff").attr("action","admin").submit();
 			break;
 		case ("sign"):
+			$("#page").attr("value", "1");
 			$("#formff").attr("action","getSignList").submit();
 			break;
 		case ("auction"):

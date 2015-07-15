@@ -15,6 +15,20 @@ public class SignatureVO {
 	private String sdate,splace,sps;
 	private int formnum,snum,finalmemnum,nowmemnum,sgdept,sgreturn;
 	private int count,ycount;//결재 상태
+	private int begin,end;
+	
+	public int getBegin() {
+		return begin;
+	}
+	public void setBegin(int begin) {
+		this.begin = begin;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
 	public String getStitle() {
 		return stitle;
 	}

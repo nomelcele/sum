@@ -3,52 +3,48 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sign">
-	<!-- signForm 저장 하는 쿼리. -->
-	<insert id="sfInsert" parameterType="sfvo">
-	</insert>
-	
 	<!-- 해당부서의 결재 문서를 조회 하는 쿼리. model 에서 getSignList 와 맵핑 -->
 	<select id="getSgList" parameterType="map" resultType="sgvo">
 		<choose>
 			<when test="signdiv==1">
-				select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
+				select rownum , res.* from (select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
 				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'MM')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
 				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'MM')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
 				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
-				from signature sg,signform sf,member m where sg.sgdept=#{sgdept}and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nowmemnum=#{nowmemnum} and nvl(sg.sgreturncomm,'0')='0' order by snum desc
+				from signature sg,signform sf,member m where sg.sgdept=#{sgdept}and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nowmemnum=#{nowmemnum} and nvl(sg.sgreturncomm,'0')='0' order by snum desc) res where rownum BETWEEN #{begin} and #{end}
 			</when>
 			<when test="signdiv==2">
-				select st.* from(select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
+				select rownum , res.* from (select st.* from(select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
 				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'MM')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
 				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'MM')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
 				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
-				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nvl(sg.sgreturncomm,'0')='0' order by snum desc) st where ycount != count
+				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nvl(sg.sgreturncomm,'0')='0' order by snum desc) st where ycount != count) res where rownum BETWEEN #{begin} and #{end}
 			</when>
 			<when test="signdiv==3">
-				select st.* from(select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
+				select rownum , res.* from (select st.* from(select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
 				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'MM')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
 				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'MM')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
 				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
-				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter order by snum desc) st where ycount = count
+				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter order by snum desc) st where ycount = count) res where rownum BETWEEN #{begin} and #{end}
 			</when>
 			<when test="signdiv==4">
-				select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
+				select rownum , res.* from (select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
 				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'MM')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
 				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'MM')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
 				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
-				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nvl(sg.sgreturncomm,'0')!='0' order by snum desc
+				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nvl(sg.sgreturncomm,'0')!='0' order by snum desc) res where rownum BETWEEN #{begin} and #{end}
 			</when>
 			<otherwise>
-				select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
+				select rownum , res.* from (select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
 				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'MM')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
 				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'MM')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
 				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
-				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter order by snum desc
+				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter order by snum desc) res where rownum BETWEEN #{begin} and #{end}
 			</otherwise>
 		</choose>
 		
@@ -113,5 +109,31 @@
 	<!-- signImg 뽑기 -->
 	<select id="getSignImg" parameterType="int" resultType="mvo">
 		select memname,memsignimg from member where memnum=#{memnum}
+	</select>
+	<!-- total -->
+	<select id="getSignCount" parameterType="map" resultType="int">
+		<choose>
+			<when test="signdiv==1">
+				select count(*)  from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nowmemnum=#{nowmemnum} and nvl(sg.sgreturncomm,'0')='0'
+			</when>
+			<when test="signdiv==2">
+				select count(*) from (select (select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
+				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count
+				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nvl(sg.sgreturncomm,'0')='0') st where ycount != count
+			</when>
+			<when test="signdiv==3">
+				select count(*) from (select (select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
+				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count
+				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nvl(sg.sgreturncomm,'0')='0') st where ycount = count
+			</when>
+			<when test="signdiv==4">
+				select count(*) from (select (select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
+				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count
+				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nvl(sg.sgreturncomm,'0')!='0') st;
+			</when>
+			<otherwise>
+				select count(*) from signature where sgdept =#{sgdept}
+			</otherwise>
+		</choose>
 	</select>
 </mapper>

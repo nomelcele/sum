@@ -56,7 +56,6 @@ public class CalendarModel{
 			HttpServletResponse response) throws IOException{
 		System.out.println("일정 등록!");
 		cavo.setCalcont(URLDecoder.decode(title,"UTF-8"));
-		
 		MemberVO vo = (MemberVO) session.getAttribute("v");
 		//url 저장.
 		String res="";

@@ -72,5 +72,8 @@ public class SignDao {
 	public MemberVO getSignImg(int memnum){
 		return st.selectOne("sign.getSignImg",memnum);
 	}
-	
+	//signcount
+	public int getSignCount(Map<String,Integer> map){
+		return st.selectOne("sign.getSignCount", map);
+	}
 }
