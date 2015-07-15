@@ -59,7 +59,7 @@ public class SignModel {
 		int totalCount = sgdao.getSignCount(map);
 		System.out.println("totalCount::"+totalCount);
 		System.out.println("page::"+request.getParameter("page"));
-		Map<String,Integer> pMap = MyPage.getMp().pageProcess(request, 2, 5, 0, totalCount, 0);
+		Map<String,Integer> pMap = MyPage.getMp().pageProcess(request, 10, 5, 0, totalCount, 0);
 		System.out.println("begin :::"+pMap.get("begin"));
 		System.out.println("end :::"+pMap.get("end"));
 		map.put("begin", pMap.get("begin"));
