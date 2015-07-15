@@ -248,29 +248,30 @@ $(function(){
 		      end: end
 		     };
 		     $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+		      $.ajax({
+	              url: "calInsert",
+	              type: "POST",
+	              data: {
+	                  title:encodeURIComponent(title),
+	                  calstart:start.format(),
+	                  calend:end.format(),
+	                  selCal:selCal
+	              },
+	              dataType: "html",
+	              success: function(res) {
+	            	alert("success::"+res);
+					location=res;		            	 
+	              },
+	              error: function(a, b) {
+	                  alert("Request: " + JSON.stringify(a));
+	              }
+	          });
 		    }
 		    $('#calendar').fullCalendar('unselect');
 		    
 // 		    alert("selected from: " + start.format() + ", to: " + end.format());
 		   //셀렉트된 결과를 서버로 전송.
-		          $.ajax({
-		              url: "calInsert",
-		              type: "POST",
-		              data: {
-		                  title:encodeURIComponent(title),
-		                  calstart:start.format(),
-		                  calend:end.format(),
-		                  selCal:selCal
-		              },
-		              dataType: "html",
-		              success: function(res) {
-		            	alert("success::"+res);
-						location=res;		            	 
-		              },
-		              error: function(a, b) {
-		                  alert("Request: " + JSON.stringify(a));
-		              }
-		          });
+		    
 		   },
 		   editable: true,
 		   eventLimit: true, 
