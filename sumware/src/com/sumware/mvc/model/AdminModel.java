@@ -116,7 +116,7 @@ public class AdminModel {
 
 	// 사원 진급 처리
 	@RequestMapping(value = "/adminPromoteMem", method = RequestMethod.POST)
-	public String promoteMem(MemberVO mvo) {
+	public String adminUppromoteMem(MemberVO mvo) {
 		service.changeJobSalary(mvo);
 		// 업데이트 후 사원 개인정보 리스트 보여줌
 		return "redirect:/adminMemList?page=1&memdept=0&memname=";
@@ -124,7 +124,7 @@ public class AdminModel {
 
 	// 사원 부서 이동
 	@RequestMapping(value = "/adminMoveDept", method = RequestMethod.POST)
-	public String moveDept(MemberVO mvo) {
+	public String adminUpmoveDept(MemberVO mvo) {
 		adao.moveDept(mvo);
 		// 업데이트 후 사원 개인정보 리스트 보여줌
 		return "redirect:/adminMemList?page=1&memdept=0&memname=";
@@ -132,7 +132,7 @@ public class AdminModel {
 
 	// 사원 퇴사 처리
 	@RequestMapping(value = "/adminResignMem")
-	public String resignMem(int memnum) {
+	public String adminUpresignMem(int memnum) {
 		adao.resignMem(memnum);
 		return "redirect:/adminMemList";
 	}
@@ -164,7 +164,7 @@ public class AdminModel {
 
 	// 관리자 - 새 사원 추가
 	@RequestMapping(value = "/adminaddMember", method = RequestMethod.POST)
-	public String addMember(MemberVO mvo, PayVO payvo, Model model,
+	public String adminUpaddMember(MemberVO mvo, PayVO payvo, Model model,
 			HttpSession session) throws Exception {
 		System.out.println("사원 추가버튼 클릭!!!" + mvo.getMemmgr());
 		
@@ -188,14 +188,14 @@ public class AdminModel {
 	// ////////////////////////급여 관리(S)///////////////////////////
 	// 추가 급여 지급
 	@RequestMapping(value = "/giveBonus", method = RequestMethod.POST)
-	public String giveBonus(CommissionVO comvo) {
+	public String adminUpgiveBonus(CommissionVO comvo) {
 		adao.giveBonus(comvo);
 		return "redirect:/adminPayManagement";
 	}
 
 	// 월 급여 지급
 	@RequestMapping(value = "/giveSalary", method = RequestMethod.POST)
-	public String giveSalary(PayHistoryVO phvo) {
+	public String adminUpgiveSalary(PayHistoryVO phvo) {
 		System.out.println("aa:" + phvo.getHisamount());
 		System.out.println("bb : " + phvo.getHismem());
 		adao.giveSalary(phvo);
@@ -265,6 +265,7 @@ public class AdminModel {
 		return "admin/payInfoDetail";
 	}
 
+	//달의 추가급여 디테일
 	@RequestMapping(value = "/getPaymentDetail", method = RequestMethod.POST)
 	public String getPaymentDetail(CommissionVO comvo, Model model) {
 		// member pay 정보 가져옴
@@ -301,7 +302,7 @@ public class AdminModel {
 
 	// 게시판 추가
 	@RequestMapping(value = "/adminaddBoard", method = RequestMethod.POST)
-	public String addBoard(BnameVO bnvo) {
+	public String adminUpaddBoard(BnameVO bnvo) {
 		System.out.println("보드추가 매핑됨");
 		// 디비에 게시판 추가
 		adao.addBoard(bnvo);
@@ -348,7 +349,7 @@ public class AdminModel {
 
 	// 선택한 게시판 삭제
 	@RequestMapping(value = "/admindeleteBoard", method = RequestMethod.POST)
-	public String deleteBoard(int bgnum) {
+	public String adminUpdeleteBoard(int bgnum) {
 		adao.deleteBoard(bgnum);
 		return "redirect:/adminDeleteBoardForm";
 	}
@@ -363,7 +364,7 @@ public class AdminModel {
 	
 	// 제작한 양식 추가
 	@RequestMapping(value="/adminaddForm", method=RequestMethod.POST)
-	public String addForm(SignFormVO sfvo){
+	public String adminUpaddForm(SignFormVO sfvo){
 		System.out.println("fsname : "+sfvo.getSfname());
 		System.out.println("내용요요용 : "+sfvo.getSform());
 		adao.addSignForm(sfvo);
@@ -382,7 +383,7 @@ public class AdminModel {
 	
 	// 양식 삭제
 	@RequestMapping(value="/admindeleteSignForm", method=RequestMethod.POST)
-	public String admindeleteSignForm(SignFormVO sfvo){
+	public String adminUpdeleteSignForm(SignFormVO sfvo){
 		//삭제
 		adao.deleteSignForm(sfvo);
 		return "redirect:/adminFormList";

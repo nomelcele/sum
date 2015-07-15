@@ -189,6 +189,7 @@
 		<if test="sfname != null">
 		where sfname like '%'||#{sfname}||'%' 
 		</if>
+		order by sfnum desc
 	</select>
 	
 	<!-- 양식 삭제 -->
