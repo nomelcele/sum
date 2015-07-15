@@ -360,7 +360,7 @@
 		</div>
 		<div id="MainMenu">
   <div class="list-group panel">
-   <a href="javascript:signleftMenu('signWrite')" class="list-group-item">&nbsp; &nbsp; 결제 문서 작성</a>
+   <a href="javascript:signleftMenu('signWrite')" class="list-group-item">결제 문서 작성</a>
     <a href="#demo3" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">결재 문서 조회 <i class="fa fa-caret-down"></i></a>
     <div class="collapse" id="demo3">
       <a href="javascript:signleftMenu('signAll')" class="list-group-item">&nbsp; &nbsp; 전체 문서</a>
@@ -372,7 +372,34 @@
   </div>
 </div>
 	</div>
+	<!-- Modal(S) -->
+		<div class="modal fade" id="signModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" >
+			<form action="getSignForm" method="post">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">결재 문서 선택하기</h4>
+				</div>
+				
+				<div class="modal-body" id="signModalBody" style="padding-left: 60px">
+				</div>
+				
+				<div class="modal-footer">
+					<input class="btn btn-outline btn-default"  type="submit" id="signWriteFBtn" value="작성하기">
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				</div>
+			</form>
+			</div>
+		</div>
+	</div>
+	<!-- Modal(E) -->
 </c:if>
+		
 <%-- Sign left(E) --%>
 
 <%-- mail left(S) --%>
@@ -428,7 +455,6 @@
 								<td colspan="2"><a
 									href="modifyProfile"
 									class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
-
 							</tr>
 						</table>
 						<!-- profile-table(E) -->
@@ -437,8 +463,6 @@
 			</div>
 		</div>
 		<!-- <hr> -->
-
-
 
 		<!-- <div>
 			<a href="javascript:mailFormGo('write')" class="btn btn-info"> 
@@ -503,7 +527,6 @@
 								<td colspan="2"><a
 									href="modifyProfile"
 									class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
-
 							</tr>
 						</table>
 						<!-- profile-table(E) -->
@@ -511,20 +534,4 @@
 				</div>
 </c:if>
 <%-- auction left(E) --%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

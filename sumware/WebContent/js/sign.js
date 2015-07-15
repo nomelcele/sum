@@ -127,7 +127,7 @@ function sgDetail(res){
 		$("#signDetailF").submit();
 	}else if(res.value=='반려'){
 		$("#signDetailF").attr("action","signReturn");
-		$("#signReturnModal").toggle();
+		$("#signReturnModal").modal('toggle');
 	}else if(res.value=='출력'){
 		$("#signDetailF").attr("action","getDoc");
 		$("#signDetailF").submit();
@@ -160,7 +160,7 @@ function signFormListModal() {
 		url : "getSignFormList",
 		success : function(result) {
 			$("#signModalBody").html(result);
-			$("#signModal").toggle();
+			$("#signModal").modal('toggle');
 		},
 		error : function(a, b) {
 			alert("Request: " + JSON.stringify(a));
@@ -168,5 +168,9 @@ function signFormListModal() {
 	});
 }
 function signFormList(div) {
-	location="getSignList?signdiv="+div;
+	location="getSignList?signdiv="+div+"&page=1";
+}
+
+function searchSignList(){
+	$('#searchSignForm').submit();
 }
