@@ -44,21 +44,24 @@ public class SignModel {
 		session.setAttribute("model", "sign");
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
 		System.out.println();
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		String div=request.getParameter("signdiv");
 		if(div==null||div==""){
 			div="0";
 		}
-		
+	
 		map.put("signdiv",Integer.parseInt(div));
 		map.put("sgdept", mvo.getMemdept());
 		map.put("nowmemnum", mvo.getMemnum());
+		map.put("searchName", request.getParameter("searchName"));
+		map.put("searchType", request.getParameter("searchType"));
 		
 		int totalCount = sgdao.getSignCount(map);
 		System.out.println("totalCount::"+totalCount);
 		System.out.println("page::"+request.getParameter("page"));
-		Map<String,Integer> pMap = MyPage.getMp().pageProcess(request, 10, 5, 0, totalCount, 0);
-		
+		Map<String,Integer> pMap = MyPage.getMp().pageProcess(request, 2, 5, 0, totalCount, 0);
+		System.out.println("begin :::"+pMap.get("begin"));
+		System.out.println("end :::"+pMap.get("end"));
 		map.put("begin", pMap.get("begin"));
 		map.put("end", pMap.get("end"));
 		

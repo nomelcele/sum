@@ -17,7 +17,7 @@ public class SignDao {
 	@Autowired
 	private SqlSessionTemplate st;
 	
-	public List<SignatureVO> getSignList(Map<String,Integer> map){
+	public List<SignatureVO> getSignList(Map<String,Object> map){
 		return st.selectList("sign.getSgList",map);
 	}
 	
@@ -73,7 +73,7 @@ public class SignDao {
 		return st.selectOne("sign.getSignImg",memnum);
 	}
 	//signcount
-	public int getSignCount(Map<String,Integer> map){
+	public int getSignCount(Map<String,Object> map){
 		return st.selectOne("sign.getSignCount", map);
 	}
 }
