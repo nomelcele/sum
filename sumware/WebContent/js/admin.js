@@ -370,13 +370,27 @@ function prFormSaveChange(memnum){
 		} else {
 			$("#prForm").modal('toggle');
 			setTimeout(function(){
+				// 직급에 따른 권한
+				var memauthval = ""
+					if($("#newmemjob").val() == '대표이사'){
+						memauthval = 1;
+					}else if($("#newmemjob").val() == '이사'){
+						memauthval = 2;
+					}else if($("#newmemjob").val() == '부장'){
+						memauthval = 3;
+					}else if($("#newmemjob").val() == '팀장'){
+						memauthval = 4;
+					}else if($("#newmemjob").val() == '사원'){
+						memauthval = 5;
+					}
 				$.ajax({
 					type: "POST",
 					url: "adminPromoteMem",
 					data: {
 						memnum: memnum,
 						memjob: $("#newmemjob").val(),
-						psalary: $("#newpsalary").val()
+						psalary: $("#newpsalary").val(),
+						memauth:memauthval
 					},
 					success: function(result){
 						console.log("모달 닫기");
