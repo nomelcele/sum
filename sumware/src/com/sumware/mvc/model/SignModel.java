@@ -1,6 +1,7 @@
 package com.sumware.mvc.model;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import com.sumware.dto.SignStepVO;
 import com.sumware.dto.SignatureVO;
 import com.sumware.mvc.dao.SignDao;
 import com.sumware.mvc.service.SignServiceImple;
+import com.sumware.util.MyPage;
 
 @Controller
 public class SignModel {
@@ -33,23 +35,36 @@ public class SignModel {
 	// 해당 부서의 결재 문서를 조회 관리(전체, 대기, 완료, 수신, 반려) 등등~
 	@RequestMapping(value="getSignList")
 	public String getSignList(HttpServletRequest request){
+		Enumeration<String> en = request.getParameterNames();
+		while(en.hasMoreElements()){
+			String key = en.nextElement();
+			System.out.println("key::"+key+" value::"+request.getParameter(key));
+		}
 		HttpSession session = request.getSession();
 		session.setAttribute("model", "sign");
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
-		
-		//나중에 페이징 처리할때 map으로 바꾸고 페이지한테 맵객체 받아서 쓰자
+		System.out.println();
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		String div=request.getParameter("signdiv");
 		if(div==null||div==""){
 			div="0";
 		}
+		
 		map.put("signdiv",Integer.parseInt(div));
 		map.put("sgdept", mvo.getMemdept());
 		map.put("nowmemnum", mvo.getMemnum());
 		
+		int totalCount = sgdao.getSignCount(map);
+		System.out.println("totalCount::"+totalCount);
+		System.out.println("page::"+request.getParameter("page"));
+		Map<String,Integer> pMap = MyPage.getMp().pageProcess(request, 10, 5, 0, totalCount, 0);
+		
+		map.put("begin", pMap.get("begin"));
+		map.put("end", pMap.get("end"));
+		
 		List<SignatureVO> sgList=sgdao.getSignList(map);
 		request.setAttribute("sgList", sgList);
-		
+		request.setAttribute("signdiv", div);
 		return "sign.signList";
 	}
 	
@@ -100,7 +115,7 @@ public class SignModel {
 		ArrayList<HashMap<String, String>> sgMgrList=setSignStep(map);
 		
 		sgvo.setNowmemnum(Integer.parseInt(sgMgrList.get(0).get("stepmemnum")));
-		sgvo.setFinalmemnum(Integer.parseInt(map.get("sgMgr"+(sgMgrList.size()-1))));
+		sgvo.setFinalmemnum(Integer.parseInt(map.get("sgMgr"+(sgMgrList.size()))));
 		
 		System.out.println("============");
 		System.out.println("문서번호: "+sgvo.getFormnum());
@@ -118,12 +133,13 @@ public class SignModel {
 		System.out.println("============");
 		
 		signService.insertSignService(sgvo, sgMgrList);
-		return "redirect:getSignList";
+		return "redirect:getSignList?page=1";
 	}
 	//상세보기
 	@RequestMapping(value="signDetail",method=RequestMethod.GET)
 	public String signDetail(HttpServletRequest request){
 		int snum = Integer.parseInt(request.getParameter("snum"));
+		String page = request.getParameter("page");
 		SignatureVO sgvo= sgdao.signDetail(snum);
 		List<SignStepVO> ssList=sgdao.getSignStep(snum);
 		SignFormVO sfvo = sgdao.getSf(sgvo.getFormnum());
@@ -138,6 +154,7 @@ public class SignModel {
 		request.setAttribute("ssList", ssList);
 		request.setAttribute("sgNames", signNames);
 		request.setAttribute("signMode", "detail");
+		request.setAttribute("page", page);
 		return "sign.signDetail";
 	}
 	// 결재권자가 올라온 문서를 결재 할때 사용 되는 메서드
@@ -156,7 +173,7 @@ public class SignModel {
 		}
 		signService.setNowmemService(Integer.parseInt(map.get("snum")));
 		
-		return "redirect:getSignList";
+		return "redirect:getSignList?page=1";
 	}
 	@RequestMapping(value="signReturn",method=RequestMethod.POST)
 	public String signReturn(int snum,String sgreturncomm,HttpSession session){
@@ -168,7 +185,7 @@ public class SignModel {
 		map.put("sgreturncomm", sgreturncomm);
 		
 		sgdao.signReturn(map);
-		return "redirect:getSignList";
+		return "redirect:getSignList?page=1";
 	}
 	// 결재 문서를 조건에 맞게 검색(결과 내 검색)
 	@RequestMapping(value="signSearch")
@@ -189,6 +206,17 @@ public class SignModel {
 				break;
 			}
 		}
+		SignatureVO sgvo = sgdao.signDetail(Integer.parseInt(map.get("snum")));
+		map.put("memname", sgvo.getMemname());
+		if(sgvo.getScont()!=""&&sgvo.getScont()!=null){
+			map.remove("scont");
+			map.put("scont", sgvo.getScont());
+		}
+		if(sgvo.getSreason()!=""&&sgvo.getSreason()!=null){
+			map.remove("sreason");
+			map.put("sreason", sgvo.getSreason());
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("excelView");
 		mav.addObject("map", map);

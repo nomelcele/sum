@@ -26,7 +26,7 @@ function addSignDiv(){
 		}
 		sgHtml=sgHtml+"</tr><tr>";
 		for(var m=1; m<=size; m++){
-			sgHtml+="<td><div  ondrop='signDrop(event)' ondragover='signAllowDrop(event)' id='signImg"+m+"' style='width: 80px; height: 80px;'></div></td>";
+			sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'></div></td>";
 		}
 		sgHtml+="</tr></table>";
 		console.log(sgHtml);
@@ -35,6 +35,9 @@ function addSignDiv(){
 			if($('#'+id[index]).length<=0){
 				sgHtml+="<input type='hidden' name='"+id[index]+"'>";
 			}
+		}
+		if($('#sreason').length<=0){
+			sgHtml+="<input type='hidden' name='sreason'>";
 		}
 		$('#signImg').html(sgHtml);
 		break;
@@ -125,11 +128,11 @@ function sgDetail(res){
 	}else if(res.value=='반려'){
 		$("#signDetailF").attr("action","signReturn");
 		$("#signReturnModal").toggle();
-	}else if(res.value='출력'){
+	}else if(res.value=='출력'){
 		$("#signDetailF").attr("action","getDoc");
 		$("#signDetailF").submit();
 	}else{
-		location='getSignList';
+		location='getSignList?page=1';
 	}
 }
 function setSignValue(id,val){

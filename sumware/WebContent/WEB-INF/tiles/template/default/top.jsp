@@ -26,7 +26,7 @@
 				<div class="nav navbar-right">
 					<form action="goFunc" method="post" id="formff">
 						<input type="hidden" name="model" id="model"> 
-						<input type="hidden" name="page" id="page"> 
+						<input type="hidden" name="page" id="page" value="1"> 
 						<input type="hidden" name="bgnum" id="bgnum"> 
 						<input type="hidden" name="bname" id="bname"> 
 						<input type="hidden" name="bdeptno" id="bdeptno" value="${sessionScope.v.memdept}"> 
