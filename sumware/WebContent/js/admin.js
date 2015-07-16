@@ -542,7 +542,7 @@ function prFormSaveChange(memnum){
 				// 게시판 열람 페이지 처리
 				$.ajax({
 					type : "POST",
-					url : "boardList",
+					url : "saboardList",
 					data : {
 						bgnum: $("#adminBgnum").val(),
 						bdeptno: $("#adminDeptno").val(),
@@ -667,7 +667,7 @@ function prFormSaveChange(memnum){
 		function adminBoardDelete(){
 			$.ajax({
 				type : "POST",
-				url : "boardDelete",
+				url : "saboardDelete",
 				data : {
 					bnum: $("#adminBnum").val(),
 					bgnum: $("#adminBgnum").val(),
