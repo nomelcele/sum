@@ -123,13 +123,13 @@ function setTargetValue(targetId){
 }
 function sgDetail(res){
 	if(res.value=='결재'){
-		$("#signDetailF").attr("action","confirm");
+		$("#signDetailF").attr("action","saconfirm");
 		$("#signDetailF").submit();
 	}else if(res.value=='반려'){
-		$("#signDetailF").attr("action","signReturn");
+		$("#signDetailF").attr("action","sasignReturn");
 		$("#signReturnModal").modal('toggle');
 	}else if(res.value=='출력'){
-		$("#signDetailF").attr("action","getDoc");
+		$("#signDetailF").attr("action","sagetDoc");
 		$("#signDetailF").submit();
 	}else{
 		location='sagetSignList?page=1';
