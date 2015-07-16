@@ -12,7 +12,7 @@
 					</c:if>
 					<c:if test="${sessionScope.model eq 'join' }">
 						<form class="form-horizontal" role="form" method="post"
-							action="sasamodify" id="myform" name="myform" >
+							action="samodify" id="myform" name="myform" >
 						<input type="hidden" name="memnum" value="${sessionScope.v.memnum}"> 
 					</c:if>
 					<input type="hidden" name="memnum" value="${memnum}"> 
