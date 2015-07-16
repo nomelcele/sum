@@ -124,7 +124,7 @@
 	
 	<!-- 월 급여 지급 : 무조건 지난 달 급여를 지급!!!-->
 	<insert id="giveSalary" parameterType="phvo">
-		insert into payhistory values(add_months(sysdate,-1), #{hisamount}, #{hismem},to_char(add_months(sysdate,-1),'yymm'))
+		insert into payhistory values(add_months(sysdate,-1), #{hisamount}, #{hismem},#{hismem}||to_char(add_months(sysdate,-1),'yymm'))
 	</insert>
 	
 	<!-- 사원마다 급여 지급 받은 이력이 있는 년도 뽑아옴 ( select태그에 추가하기 위해) -->
