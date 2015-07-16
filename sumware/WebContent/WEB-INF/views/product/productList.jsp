@@ -8,7 +8,7 @@
 	<a href="" class="btn btn-info" >상품등록</a>
 -->
 </div>
-<form action="sasawriteForm" id="aucForm">
+<form action="sawriteForm" id="aucForm">
 <div style="margin-top: 10px;" class="auction">
 	<table>
 		<tbody>

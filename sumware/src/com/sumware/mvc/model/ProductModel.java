@@ -64,7 +64,7 @@ public class ProductModel {
 		
 		
 		pdao.proInsert(provo);
-		return "redirect:productList";
+		return "redirect:saproductList";
 	}
 	
 	@RequestMapping(value="/saproDetail")
