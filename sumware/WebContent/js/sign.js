@@ -132,7 +132,7 @@ function sgDetail(res){
 		$("#signDetailF").attr("action","getDoc");
 		$("#signDetailF").submit();
 	}else{
-		location='getSignList?page=1';
+		location='sagetSignList?page=1';
 	}
 }
 function setSignValue(id,val){
@@ -157,7 +157,7 @@ function signleftMenu(res){
 function signFormListModal() {
 	$.ajax({
 		type : "POST",
-		url : "getSignFormList",
+		url : "sagetSignFormList",
 		success : function(result) {
 			$("#signModalBody").html(result);
 			$("#signModal").modal('toggle');
@@ -168,7 +168,7 @@ function signFormListModal() {
 	});
 }
 function signFormList(div) {
-	location="getSignList?signdiv="+div+"&page=1";
+	location="sagetSignList?signdiv="+div+"&page=1";
 }
 
 function searchSignList(){

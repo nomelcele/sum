@@ -9,7 +9,7 @@ function insertJob(tonum) {
 	} else {
 		$.ajax({
 			type : "post",
-			url : "insertMemJob",
+			url : "sainsertMemJob",
 			data : {
 				jobmemnum : $('#memjobName' + tonum).val(),
 				jobtonum : tonum,
@@ -30,7 +30,7 @@ function getDetail(tonum) {
 
 	$.ajax({
 		type : "post",
-		url : "showMembersJob",
+		url : "sashowMembersJob",
 		data : {
 			jobtonum : tonum,
 		},
@@ -71,7 +71,7 @@ function snsSend(memnum, memdept) {
 	$('#btn-input').val("");
 	$.ajax({
 		type : "POST",
-		url : "insertSns",
+		url : "sainsertSns",
 		data : fdata
 	});
 }
@@ -84,7 +84,7 @@ function snsComm(snum) {
 	};
 	$.ajax({
 		type : "POST",
-		url : "snsComm",
+		url : "sasnsComm",
 		data : data,
 		success : function(result) {
 			$("#wrapbody").html(result);
@@ -107,7 +107,7 @@ function snsInsertComm(snum, memnum) {
 	};
 	$.ajax({
 		type : "POST",
-		url : "snsCommInsert",
+		url : "sasnsCommInsert",
 		data : data,
 		success : function(result) {
 			$("#wrapbody").html(result);
@@ -126,7 +126,7 @@ function snsCommDelete(conum, commsns) {
 	};
 	$.ajax({
 		type : "POST",
-		url : "snsCommDelete",
+		url : "sasnsCommDelete",
 		data : data,
 		success : function(result) {
 			$("#wrapbody").html(result);
@@ -154,7 +154,7 @@ function snsCommScroll(snum) {
 			};
 			$.ajax({
 				type : "POST",
-				url : "snsComm",
+				url : "sasnsComm",
 				data : data,
 				success : function(result) {
 					$("#wrapbody").html(result);

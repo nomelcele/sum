@@ -5,7 +5,7 @@
 function memInfoSelectMenu(res, data) {
 	if (res == 'modifyProfile') {
 		$.ajax({
-			url : "modifyProfileMenu",
+			url : "samodifyProfileMenu",
 			type : "post",
 			success : function(result) {
 				$('.contents').html(result);
@@ -14,7 +14,7 @@ function memInfoSelectMenu(res, data) {
 	} else if (res == 'payInfo') {
 		$.ajax({
 			type : "post",
-			url : "memPayInfoDetail",
+			url : "samemPayInfoDetail",
 			data : {
 				memnum : data
 			},
@@ -31,7 +31,7 @@ function memInfoSelectMenu(res, data) {
 function memchangeyear(memnum) {
 	$.ajax({
 		type : "POST",
-		url : "memPayInfoDetail",
+		url : "samemPayInfoDetail",
 		data : {
 			memnum : memnum,
 			hisdate : $('#hisdate').val()

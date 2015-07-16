@@ -20,12 +20,12 @@ public class JoinModel{
 	@Autowired
 	private MemberDao mdao;
 	
-	@RequestMapping(value="/memberForm")
+	@RequestMapping(value="/samemberForm")
 	public String memberForm(){
 		return "join.member";	
 	}
 	
-	@RequestMapping(value="/joinck")
+	@RequestMapping(value="/sajoinck")
 	public void joinCk(String meminmail,HttpServletResponse response) throws IOException{
 		int res = mdao.ckid(meminmail);
 		System.out.println("아이디중복검사");
@@ -40,7 +40,7 @@ public class JoinModel{
 		}
 	}
 	
-	@RequestMapping(value="/signup")
+	@RequestMapping(value="/sasignup")
 	public String signup(MemberVO mvo, HttpSession session){
 	
 	    mdao.update(mvo);
@@ -49,7 +49,7 @@ public class JoinModel{
 		return "home.index";	
 	}
 	
-	@RequestMapping(value="/viewCap",method=RequestMethod.POST)
+	@RequestMapping(value="/saviewCap",method=RequestMethod.POST)
 	public String viewCap(HttpServletRequest request){
 		// Construct the captchas object
 		// Use same settings as in query.jsp
@@ -92,7 +92,7 @@ public class JoinModel{
 	}
 	
 	
-	@RequestMapping(value="/getCap",method=RequestMethod.POST)
+	@RequestMapping(value="/sagetCap",method=RequestMethod.POST)
 	public String getCap(HttpServletRequest request){
 		
 		CaptchasDotNet captchas = new com.sumware.util.CaptchasDotNet(
@@ -106,7 +106,7 @@ public class JoinModel{
 	}
 	
 	
-	@RequestMapping(value="joinupload",method=RequestMethod.POST)
+	@RequestMapping(value="/sajoinupload",method=RequestMethod.POST)
 	public String joinupload(){
 		return "join/joinupload";
 	}

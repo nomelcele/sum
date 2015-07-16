@@ -23,8 +23,8 @@ import com.sumware.util.SendEmail;
 public class LoginModel{
 	@Autowired
 	private LoginDao dao;
-	
-	@RequestMapping(value="/login",method=RequestMethod.POST)
+
+	@RequestMapping(value="/salogin")
 	public void login(MemberVO mvo,HttpSession session,HttpServletResponse response) throws IOException{
 //		String result="home.index";
 //		try {
@@ -67,7 +67,8 @@ public class LoginModel{
 //		pw.close();
 	}
 	
-	@RequestMapping(value="/logout")
+
+	@RequestMapping(value="/salogout")
 	public void logout(int memnum,HttpSession session,HttpServletResponse response) throws IOException{
 		System.out.println("로그아웃 컨트롤러");
 //		dao.outLog(memnum);
@@ -80,7 +81,7 @@ public class LoginModel{
 		pw.close();
 	}
 	
-	@RequestMapping(value="firstLoginForm")
+	@RequestMapping(value="/safirstLoginForm")
 	public String firstLoginForm(HttpSession session){
 		System.out.println("첫번째 이용자!! 정보를 입력해볼까??");
 		session.setAttribute("model", "memjoin");
@@ -89,7 +90,7 @@ public class LoginModel{
 	
 	// 비밀번호 찾기/////////////////////////////
 	// 인증번호 메일로 전송
-	@RequestMapping(value="sendCode", method = RequestMethod.POST)
+	@RequestMapping(value="/sasendCode", method = RequestMethod.POST)
 	public String sendCode(MemberVO vo, Model model,HttpSession session) throws Exception{
 		
 		MemberVO mvo = dao.findPW(vo);
@@ -113,7 +114,7 @@ public class LoginModel{
 	}
 	
 	//인증번호 일치하는지 체크
-	@RequestMapping(value="checkCode", method = RequestMethod.POST)
+	@RequestMapping(value="/sacheckCode", method = RequestMethod.POST)
 	public ModelAndView checkCode(int code, HttpSession session) throws Exception{
 		ModelAndView mav = new ModelAndView("join/enterCodeCallback");
 		int realcode = (int) session.getAttribute("code");

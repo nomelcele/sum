@@ -25,7 +25,7 @@ public class CalendarModel{
 	@Autowired
 	CalendarDAO dao;
 	
-	@RequestMapping(value="calList")
+	@RequestMapping(value="/sacalList")
 	public String getCalList(CalendarVO cavo,Model model,HttpSession session){
 		MemberVO vo = new MemberVO();
 		vo = (MemberVO) session.getAttribute("v");
@@ -51,7 +51,7 @@ public class CalendarModel{
 		}
 		return "calendar.calTest";
 	}
-	@RequestMapping(value="calInsert",method=RequestMethod.POST)
+	@RequestMapping(value="/sacalInsert",method=RequestMethod.POST)
 	public void calInsert(String title,CalendarVO cavo,Model model,HttpSession session,
 			HttpServletResponse response) throws IOException{
 		System.out.println("일정 등록!");
@@ -78,16 +78,16 @@ public class CalendarModel{
 		pw.write(res);
 		pw.flush();
 	}
-	@RequestMapping(value="calDelete",method=RequestMethod.POST)
+	@RequestMapping(value="/sacalDelete",method=RequestMethod.POST)
 	public String calDel(CalendarVO cavo,Model model,HttpSession session){
 		String res="";
 		MemberVO vo = (MemberVO) session.getAttribute("v");
 		dao.calDel(cavo.getCalnum());
 		
 		if(cavo.getSelCal().equals("부서")){
-			res="redirect:calList?calmem=0&caldept="+vo.getMemdept();
+			res="redirect:/sacalList?calmem=0&caldept="+vo.getMemdept();
 		}else{
-			res="redirect:calList?caldept=0&calmem="+vo.getMemnum();
+			res="redirect:/sacalList?caldept=0&calmem="+vo.getMemnum();
 		}
 		
 		return res;
