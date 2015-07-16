@@ -34,7 +34,7 @@ $(function() {
 		case ("mail"):
 			$("#model").attr("value",$pageName);
 			$("#page").attr("value","1");
-			$("#formff").attr("action","mailFromList").submit();
+			$("#formff").attr("action","samailFromList").submit();
 			break;
 		case ("board"):
 			$("#model").attr("value", $pageName);

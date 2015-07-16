@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 		<div class="row" style="height:400px;">
 			<div class="col-lg-8" id="mainContent">
-			<form method="post" action="mailWriteForm" id="detailform">
+			<form method="post" action="samailWriteForm" id="detailform">
 				<input type="hidden"  name="model" value="mail">
 				<input type="hidden" name="mailreceiver" id="mailreceiver" value="${detail.mailsname} <${detail.replyid}@sumware.com>">
 				<input type="hidden" name="mailtitle" id="mailtitle" value="RE: ${detail.mailtitle}">
@@ -26,7 +26,7 @@
 					${detail.mailcont}<br /> 
 					<hr/>
 					<span style="font-weight:bold;"><i class="fa fa-paperclip"></i> 첨부 파일 </span>
-					<a href="downloadFile?fileName=${detail.mailfile}">${detail.mailfile}</a>
+					<a href="sadownloadFile?fileName=${detail.mailfile}">${detail.mailfile}</a>
 				</div>
 				</form>
 			</div>			

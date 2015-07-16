@@ -4,27 +4,27 @@
 // 메일 (메뉴)
 function mailFormGo(res) {
 	if (res == 'write' ){
-		$("#mailform").attr("action","mailWriteForm").submit();
+		$("#mailform").attr("action","samailWriteForm").submit();
 	} else if (res == 'fromlist') { // 받은 메일함
-		$("#mailform").attr("action","mailFromList").submit();
+		$("#mailform").attr("action","samailFromList").submit();
 		
 //		location = "mailFromList?usernum=${sessionScope.v.memnum}"
 //				+ "&userid=${sessionScope.v.meminmail}&page=1";
 
 	} else if (res == 'tolist') { // 보낸 메일함
-		$("#mailform").attr("action","mailToList").submit();
+		$("#mailform").attr("action","samailToList").submit();
 		
 //		location = "mailToList?usernum=${sessionScope.v.memnum}"
 //				+ "&userid=${sessionScope.v.meminmail}&page=1";
 
 	} else if (res == 'mylist') { // 내게 쓴 메일함
-		$("#mailform").attr("action","mailMyList").submit();
+		$("#mailform").attr("action","samailMyList").submit();
 		
 //		location = "mailMyList?usernum=${sessionScope.v.memnum}"
 //				+ "&userid=${sessionScope.v.meminmail}&page=1";
 
 	} else if (res == 'trashcan') { // 휴지통
-		$("#mailform").attr("action","mailTrashcan").submit();
+		$("#mailform").attr("action","samailTrashcan").submit();
 		
 //		location = "mailTrashcan?usernum=${sessionScope.v.memnum}"
 //				+ "&userid=${sessionScope.v.meminmail}&page=1";
@@ -39,7 +39,7 @@ function mailChkUpload(){
 	CKEDITOR.replace('mailcont',{
 		width:'100%',
 		height:'400px',
-		filebrowserImageUploadUrl : 'mailWrite'
+		filebrowserImageUploadUrl : 'samailWrite'
 	});
 	CKEDITOR.on('dialogDefinition', function(ev){
 		var dialogName = ev.data.name;
@@ -59,7 +59,7 @@ function mailChkUpload(){
 // ------------------------------------
 // mailList.jsp 스크립트
 function mailWriteFormGo(){
-	$("#listform").attr("action","mailWriteForm").submit();
+	$("#listform").attr("action","samailWriteForm").submit();
 }
 
 function mailTrashGo(){
@@ -105,7 +105,7 @@ function checkAll(obj){
 function mailDetailGo(mailnum){
 	// 상세 보기 페이지로 이동시켜주는 함수
 	$("#mailnum").attr("value",mailnum);
-	$("#listform").attr("action","mailDetail").submit();
+	$("#listform").attr("action","samailDetail").submit();
 }
 
 //------------------------------------
@@ -193,7 +193,7 @@ function sendKeyword() {
 		var param = "key=" + key;
 		// 4) 비동기식으로 요청을 보낸다.
 		// url, 파라미터, 콜백함수, 보낼 방식
-		sendRequest("mailSug", param, res, "post");
+		sendRequest("samailSug", param, res, "post");
 	}
 
 	setTimeout("sendKeyword();", 500);
