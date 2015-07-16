@@ -149,6 +149,7 @@ public class ExcelBuilder extends AbstractExcelView{
 			}
 		}
 		response.setContentType("Application/Msexcel");
+		response.setCharacterEncoding("UTF-8");
 		response.setHeader("Content-Disposition", "attachment; filename="+map.get("stitle")+"_exce.xls;");
 		
 	}

@@ -107,18 +107,18 @@
 	
 </script>
 <body>
-	<form action="messengerChat" method="post" id="mesform" name="mesform">
+	<form action="samessengerChat" method="post" id="mesform" name="mesform">
 		<input type="hidden" id="fromNum" name="fromNum">
 		<input type="hidden" id="toName" name="toNum">
 		<input type="hidden" name="entNum">
 	</form>
 				
-	<form action="msgReceieve" method="post" id="entform" name="entform">
+	<form action="samsgReceieve" method="post" id="entform" name="entform">
 		<input type="hidden" id="edata1" name="edata1">
 		<input type="hidden" id="userNum2" name="uerNum2">
 	</form>
 				
-	<form action=refuseChat method="post" id="disform" name="disform">
+	<form action="sarefuseChat" method="post" id="disform" name="disform">
 		<input type="hidden" id="edata2" name="edata1">
 		<input type="hidden" id="userNum3" name="uerNum2">
 		<input type="hidden" id="stateMain" name="stateMain">

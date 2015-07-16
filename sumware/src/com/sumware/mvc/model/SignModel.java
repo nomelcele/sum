@@ -33,7 +33,7 @@ public class SignModel {
 	private SignServiceImple signService;
 	
 	// 해당 부서의 결재 문서를 조회 관리(전체, 대기, 완료, 수신, 반려) 등등~
-	@RequestMapping(value="getSignList")
+	@RequestMapping(value="/sagetSignList")
 	public String getSignList(HttpServletRequest request){
 		Enumeration<String> en = request.getParameterNames();
 		while(en.hasMoreElements()){
@@ -72,7 +72,7 @@ public class SignModel {
 	}
 	
 	// 회사의 결재 문서들의 종류를 보여주는 메소오드~ajax처리
-	@RequestMapping(value="getSignFormList")
+	@RequestMapping(value="/sagetSignFormList")
 	public String getSignFormList(Model mod,HttpSession session){
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
 
@@ -86,7 +86,7 @@ public class SignModel {
 	}
 	
 	// 결재문서의 종류 중 하나를 택해서 가져옴.
-	@RequestMapping(value="getSignForm",method=RequestMethod.POST)
+	@RequestMapping(value="/sagetSignForm",method=RequestMethod.POST)
 	public String getSignForm(HttpServletRequest request){
 		System.out.println("결재문서 선택");
 		int formnum = Integer.parseInt(request.getParameter("formnum"));
@@ -108,7 +108,7 @@ public class SignModel {
 	}
 	
 	// 선택된 문서를 작성 함.
-	@RequestMapping(value="writeSign",method=RequestMethod.POST)
+	@RequestMapping(value="/sawriteSign",method=RequestMethod.POST)
 	public String writeSignForm(SignatureVO sgvo,@RequestParam Map<String,String> map){
 		System.out.println("작성합시다.");
 		for(Map.Entry<String, String> m : map.entrySet()){
@@ -139,7 +139,7 @@ public class SignModel {
 		return "redirect:getSignList?page=1";
 	}
 	//상세보기
-	@RequestMapping(value="signDetail",method=RequestMethod.GET)
+	@RequestMapping(value="/sasignDetail",method=RequestMethod.GET)
 	public String signDetail(HttpServletRequest request){
 		int snum = Integer.parseInt(request.getParameter("snum"));
 		String page = request.getParameter("page");
@@ -161,7 +161,7 @@ public class SignModel {
 		return "sign.signDetail";
 	}
 	// 결재권자가 올라온 문서를 결재 할때 사용 되는 메서드
-	@RequestMapping(value="confirm",method=RequestMethod.POST)
+	@RequestMapping(value="/saconfirm",method=RequestMethod.POST)
 	public String confirm(@RequestParam Map<String,String> map){
 		System.out.println("결재를 하자");
 		for(Map.Entry<String, String> m : map.entrySet()){
@@ -176,9 +176,9 @@ public class SignModel {
 		}
 		signService.setNowmemService(Integer.parseInt(map.get("snum")));
 		
-		return "redirect:getSignList?page=1";
+		return "redirect:sagetSignList?page=1";
 	}
-	@RequestMapping(value="signReturn",method=RequestMethod.POST)
+	@RequestMapping(value="/sasignReturn",method=RequestMethod.POST)
 	public String signReturn(int snum,String sgreturncomm,HttpSession session){
 		System.out.println("반려!");
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
@@ -188,16 +188,16 @@ public class SignModel {
 		map.put("sgreturncomm", sgreturncomm);
 		
 		sgdao.signReturn(map);
-		return "redirect:getSignList?page=1";
+		return "redirect:sagetSignList?page=1";
 	}
 	// 결재 문서를 조건에 맞게 검색(결과 내 검색)
-	@RequestMapping(value="signSearch")
+	@RequestMapping(value="/sasignSearch")
 	public String signSearch(SignatureVO sgvo){
 		return null;
 	}
 	
 	// 사용자가 요청하는 문서를 출력 해주는 메쏘오드!
-	@RequestMapping(value="getDoc",method=RequestMethod.POST)
+	@RequestMapping(value="/sagetDoc",method=RequestMethod.POST)
 	public ModelAndView getDoc(@RequestParam Map<String, String> map){
 		System.out.println("문서출력");
 		ArrayList<MemberVO> mgrList = new ArrayList<MemberVO>();

@@ -113,7 +113,7 @@
 			
 <!-- comment(E) -->
 			<!-- 리스트 form -->
-			<form action="boardList" method="post" id="listForm">
+			<form action="saboardList" method="post" id="listForm">
 				<input type="hidden" name="model" value="board">
 				<input type="hidden" name="page" value="1">
 				<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
@@ -123,14 +123,14 @@
 				<input type="hidden" name="div" value="">
 			</form>
 			<!-- 글작성 form -->
-			<form action="boardWrite" method="post" id="writeForm">
+			<form action="saboardWrite" method="post" id="writeForm">
 				<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum}">
 				<input type="hidden" name="bname" value="${sessionScope.bname}">
 				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept}">
 				<input type="hidden" name="submod" value="writeForm">
 			</form>
 			<!-- 글 삭제 form -->
-			<form action="boardDelete" method="post" id="dform">
+			<form action="saboardDelete" method="post" id="dform">
 				<input type="hidden" name="page" value="1">
 				<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">
 				<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">

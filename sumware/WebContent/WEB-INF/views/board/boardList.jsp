@@ -77,7 +77,7 @@
 		<c:when test="${not empty sessionScope.v.memdept}">
 		<!-- paging(S) -->
 		<div class="paging" id="paging">
-		<form action="boardList" method="post" id="plist">
+		<form action="saboardList" method="post" id="plist">
 		<input type="hidden" name="model" value="board">
 		<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum}"> 
 		<input type="hidden" name="bname" value="${sessionScope.bname }"> 

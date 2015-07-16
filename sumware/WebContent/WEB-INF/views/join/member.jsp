@@ -7,12 +7,12 @@
 					
 					<c:if test="${sessionScope.model ne 'join'}">
 					<form class="form-horizontal" role="form" method="post"
-						action="signup" id="myform" name="myform" >
+						action="sasignup" id="myform" name="myform" >
 					<input type="hidden" name="memnum" value="${memnum}"> 
 					</c:if>
 					<c:if test="${sessionScope.model eq 'join' }">
 						<form class="form-horizontal" role="form" method="post"
-							action="modify" id="myform" name="myform" >
+							action="sasamodify" id="myform" name="myform" >
 						<input type="hidden" name="memnum" value="${sessionScope.v.memnum}"> 
 					</c:if>
 					<input type="hidden" name="memnum" value="${memnum}"> 

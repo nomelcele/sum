@@ -127,7 +127,7 @@ function enterCheck(res) {
 function loginChk() {
 	$.ajax({
 		url : "login",
-		type : "GET",
+		type : "POST",
 		data : {
 			memnum : $("#memnum").val(),
 			mempwd : $("#mempwd").val()

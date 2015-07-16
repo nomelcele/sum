@@ -24,7 +24,7 @@ public class ProductModel {
 	private ProductDao pdao;
 	
 	// 상단 메뉴 탭 눌렀을 경우 보여지는 첫 페이지.
-	@RequestMapping(value="productList")
+	@RequestMapping(value="/saproductList")
 	public ModelAndView productList(HttpSession ses){
 		ses.setAttribute("model", "auction");
 		ModelAndView mav = new ModelAndView("product.productList");
@@ -33,14 +33,14 @@ public class ProductModel {
 	}
 	
 	// 상품 등록 버튼 눌렀을 때 상품 등록 폼으로 이동
-	@RequestMapping(value="writeForm")
+	@RequestMapping(value="/sawriteForm")
 	public String writeForm(){
 //		System.out.println("옥션 writeForm");
 		return "product/promodal";
 	}
 	
 	// promodal.jsp 에서 Done 버튼 눌렀을 경우에 인서트 되고 리스트 다시 불러온다.
-	@RequestMapping(value="done")
+	@RequestMapping(value="/sadone")
 	public String proInsert(@RequestParam Map<String,String> provo, @RequestParam MultipartFile proimg,HttpSession ses){
 		System.out.println("옥션 done !!!!!");
 		
@@ -67,7 +67,7 @@ public class ProductModel {
 		return "redirect:productList";
 	}
 	
-	@RequestMapping(value="proDetail")
+	@RequestMapping(value="/saproDetail")
 	public String proDetail(int pronum,Model model){
 		System.out.println("proDetail 메소드!");
 		System.out.println("상품 번호 : "+pronum);
