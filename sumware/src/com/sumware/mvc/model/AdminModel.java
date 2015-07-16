@@ -134,7 +134,7 @@ public class AdminModel {
 	@RequestMapping(value = "/adminResignMem")
 	public String adminUpresignMem(int memnum) {
 		adao.resignMem(memnum);
-		return "redirect:/adminMemList";
+		return "redirect:/adminMemList?page=1&memdept=0&memname=";
 	}
 
 	// 사원 개인 정보 리스트 가져오는 메서드
@@ -190,7 +190,7 @@ public class AdminModel {
 	@RequestMapping(value = "/giveBonus", method = RequestMethod.POST)
 	public String adminUpgiveBonus(CommissionVO comvo) {
 		adao.giveBonus(comvo);
-		return "redirect:/adminPayManagement";
+		return "redirect:/adminPayManagement?page=1";
 	}
 
 	// 월 급여 지급
@@ -200,7 +200,7 @@ public class AdminModel {
 		System.out.println("bb : " + phvo.getHismem());
 		adao.giveSalary(phvo);
 
-		return "redirect:/adminPayManagement";
+		return "redirect:/adminPayManagement?page=1";
 	}
 
 	// 급여조회 폼
@@ -365,8 +365,7 @@ public class AdminModel {
 	// 제작한 양식 추가
 	@RequestMapping(value="/adminaddForm", method=RequestMethod.POST)
 	public String adminUpaddForm(SignFormVO sfvo){
-		System.out.println("fsname : "+sfvo.getSfname());
-		System.out.println("내용요요용 : "+sfvo.getSform());
+		
 		adao.addSignForm(sfvo);
 		return "redirect:/adminaddSignForm";
 	}
