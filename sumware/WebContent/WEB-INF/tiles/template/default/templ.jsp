@@ -122,7 +122,8 @@ $(function(){
 						Notify("mail","새로운 메일이 도착하였습니다.","samailFromList?model=mail&page=1");
 					}, 3000);
 			};
-		} else {
+		} 
+		}else {
 			$(".chat").html("해당 브라우저는 지원이 안됩니다.");
 		}
 	}
