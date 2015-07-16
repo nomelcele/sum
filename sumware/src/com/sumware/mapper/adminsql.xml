@@ -197,4 +197,20 @@
 		delete from signform where sfnum=#{sfnum}
 	</delete>
 	
+	<!--  전체 사원 월급 지급!!!!!!(S) -->
+	
+	<!-- 전체사원정보가져옴 -->
+	<select id="getAllMem" resultType="mvo">
+		select * from member where memnum != 1
+	</select>
+	
+	<!-- 전월 추가급여 합 : 없을경우 0-->
+	<select id="getCommSum" parameterType="comvo" resultType="int">
+		select nvl(sum(comamount),0) comsum from commission 
+		where to_char(comdate,'yyyy-mm') = to_char(ADD_MONTHS(sysdate, -1),'yyyy-mm') 
+		and commem=#{commem}
+	</select>
+	
+	<!-- 전체 사원 월급 지급 !!!!!(E) -->
+	
 </mapper>

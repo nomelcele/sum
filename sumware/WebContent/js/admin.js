@@ -285,7 +285,7 @@ function resignMem(memnum){
 function getMemInfoForModal(id,res){
 	$.ajax({
 		type: "POST",
-		url: "getMemInfoForModal",
+		url: "admingetMemInfoForModal",
 		data: {
 			memnum: res,
 			cmd:id
@@ -314,7 +314,7 @@ function payManage(res,data){
 		setTimeout(function(){
 			$.ajax({
 				type: "POST",
-				url: "giveBonus",
+				url: "admingiveBonus",
 				data: {
 					comdetail: $('#comdetail').val(),
 					comamount:$('#comamount').val(),
@@ -333,7 +333,7 @@ function payManage(res,data){
 		setTimeout(function(){
 			$.ajax({
 				type: "POST",
-				url: "giveSalary",
+				url: "admingiveSalary",
 				data: {
 					hismem:data,
 					hisamount:$('#hisamount').val()
@@ -482,7 +482,7 @@ function prFormSaveChange(memnum){
 		function getPaymentDetail(memnum, hisdate){
 			$.ajax({
 				type: "POST",
-				url: "getPaymentDetail",
+				url: "admingetPaymentDetail",
 				data: {
 					commem: memnum,
 					comdate:hisdate
@@ -705,6 +705,22 @@ function prFormSaveChange(memnum){
 			}else{
 				$('input[name=check]').attr("checked",false);
 				manageForm('checkall');
+			}
+		}
+		
+		// 전체 사원 급여 지급
+		function giveAllMemSal(){
+			if(!confirm("전체 사원에게 급여를 지급하시겠습니까?")){
+				return;
+			}else{
+				$.ajax({
+					type: "POST",
+					url: "admingiveAllMemSal",
+					success: function(result){
+						alert("지급 처리가 완료되었습니다.");				
+						$('.contents').html(result);
+					}
+				});
 			}
 		}
 		
