@@ -53,7 +53,7 @@
 						</tr>
 						<tr>
 							<td colspan="2"><a
-								href="modifyProfile"
+								href="samodifyProfile"
 								class="primary-font"><i class="fa fa-cog"></i> 사원 정보</a></td>
 						</tr>
 					</table>
@@ -135,7 +135,7 @@
 					</tr>
 					<tr>
 						<td colspan="2"><a
-							href="modifyProfile"
+							href="samodifyProfile"
 							class="primary-font"><i class="fa fa-cog"></i> 사원 정보</a></td>
 
 					</tr>
@@ -225,7 +225,7 @@
 				</tr>
 				<tr>
 					<td colspan="2"><a
-						href="modifyProfile"
+						href="samodifyProfile"
 						class="primary-font"><i class="fa fa-cog"></i> 사원 정보</a></td>
 
 				</tr>
@@ -279,7 +279,7 @@
 				</tr>
 				<tr>
 					<td colspan="2"><a
-						href="modifyProfile"
+						href="samodifyProfile"
 						class="primary-font"><i class="fa fa-cog"></i> 사원 정보</a></td>
 
 				</tr>
@@ -344,7 +344,7 @@
 				</tr>
 				<tr>
 					<td colspan="2"><a
-						href="modifyProfile"
+						href="samodifyProfile"
 						class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 
 				</tr>
@@ -453,7 +453,7 @@
 							</tr>
 							<tr>
 								<td colspan="2"><a
-									href="modifyProfile"
+									href="samodifyProfile"
 									class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 							</tr>
 						</table>
@@ -525,7 +525,7 @@
 							</tr>
 							<tr>
 								<td colspan="2"><a
-									href="modifyProfile"
+									href="samodifyProfile"
 									class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
 							</tr>
 						</table>
