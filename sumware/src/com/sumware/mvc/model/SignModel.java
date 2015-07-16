@@ -136,7 +136,7 @@ public class SignModel {
 		System.out.println("============");
 		
 		signService.insertSignService(sgvo, sgMgrList);
-		return "redirect:getSignList?page=1";
+		return "redirect:sagetSignList?page=1";
 	}
 	//상세보기
 	@RequestMapping(value="/sasignDetail",method=RequestMethod.GET)
