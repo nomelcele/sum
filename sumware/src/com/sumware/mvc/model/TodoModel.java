@@ -96,7 +96,7 @@ public class TodoModel {
 	public ModelAndView addTodo(TodoVO tvo,
 		 HttpSession session) {
 		
-		ModelAndView mav = new ModelAndView("redirect:/afterAddTodo");
+		ModelAndView mav = new ModelAndView("redirect:/saafterAddTodo");
 		System.out.println(session.getServletContext().getRealPath("/"));
 		StringBuffer path = new StringBuffer();
 		path.append(session.getServletContext().getRealPath("/"))

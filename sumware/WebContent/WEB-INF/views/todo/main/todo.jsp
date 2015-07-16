@@ -37,7 +37,7 @@
 									<p>	
 											<i class="fa fa-paperclip"></i> 첨부파일 
 											<c:if test="${deptjoblist.tofile ne null}" >
-											<a href="downloadFile?fileName=${deptjoblist.tofile }" target="_blank">${deptjoblist.tofile } <i class="fa fa-download"></i></a>
+											<a href="sadownloadFile?fileName=${deptjoblist.tofile }" target="_blank">${deptjoblist.tofile } <i class="fa fa-download"></i></a>
 											</c:if>
 									</p>
 								</div>

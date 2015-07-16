@@ -14,7 +14,7 @@
 				<div class="panel-body">
 					<div class="column">
 
-						<form action="addTodo" method="post" id="addTodoForm"  enctype="multipart/form-data" >
+						<form action="saaddTodo" method="post" id="addTodoForm"  enctype="multipart/form-data" >
 							 <input type="hidden" name="todept" value="${sessionScope.v.memdept }">
 <%-- 							 <input type="hidden" name="memnum" value="${sessionScope.v.memnum }"> --%>
 <%-- 							 <input type="hidden" name="memdept" value="${sessionScope.v.memdept }"> --%>
