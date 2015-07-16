@@ -66,7 +66,7 @@
 	<!-- <hr> -->
 	<!-- left-menu(S) -->
 	<div class="left-menu" id="board-left-menu">
-	<form action="boardList" method="post" id="listtt">
+	<form action="saboardList" method="post" id="listtt">
 		<input type="hidden" name="model" value="board">
 		<input type="hidden" name="page" value="1">
 		<input type="hidden" name="bgnum" id="bgnum" >
@@ -377,7 +377,7 @@
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content" >
-			<form action="getSignForm" method="post">
+			<form action="sagetSignForm" method="post">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
