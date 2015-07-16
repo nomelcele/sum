@@ -147,4 +147,15 @@ public class AdminDao {
 	public void deleteSignForm(SignFormVO sfvo){
 		st.delete("admin.deleteSignForm", sfvo);
 	}
+	
+	// 전체 사원
+	public List<MemberVO> getAllMemInfo(){
+		return st.selectList("admin.getAllMem");
+	}
+	
+	// 전월 추가급여 합(합 반환)
+	public int getCommSum(CommissionVO comvo){
+		return st.selectOne("admin.getCommSum", comvo);	
+	}
+	
 }

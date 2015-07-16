@@ -12,9 +12,10 @@
 		<option value="300">영업부</option>
 		<option value="400">전산부</option>
 		<option value="500">기획부</option>
-	</select>&nbsp; <input type="text" id="searchName" placeholder="이름"> <input
-		type="button" class="btn btn-default btn-sm" value="검색"
-		onclick="adminSelectMenu('adminPayManagement')"> <br />
+	</select>&nbsp; <input type="text" id="searchName" placeholder="이름"> 
+	<input type="button" class="btn btn-default btn-sm" value="검색" onclick="adminSelectMenu('adminPayManagement')">
+	<input type="button" class="btn btn-default btn-sm" value="전체 사원 급여 지급" onclick="javascript:giveAllMemSal()" style="float:right">
+	 <br />
 	<br />
 </div>
 <!-- Search (E) -->

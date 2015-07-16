@@ -81,7 +81,7 @@ public class AdminModel {
 	}
 
 	// / 모달에 mem정보
-	@RequestMapping(value = "/getMemInfoForModal", method = RequestMethod.POST)
+	@RequestMapping(value = "/admingetMemInfoForModal", method = RequestMethod.POST)
 	public String getMemInfoForModal(CommissionVO comvo, MemberVO vo,
 			Model model, String cmd) {
 		MemberVO mvo = adao.getMemInfo(vo);
@@ -187,14 +187,14 @@ public class AdminModel {
 
 	// ////////////////////////급여 관리(S)///////////////////////////
 	// 추가 급여 지급
-	@RequestMapping(value = "/giveBonus", method = RequestMethod.POST)
+	@RequestMapping(value = "/admingiveBonus", method = RequestMethod.POST)
 	public String adminUpgiveBonus(CommissionVO comvo) {
 		adao.giveBonus(comvo);
 		return "redirect:/adminPayManagement?page=1";
 	}
 
 	// 월 급여 지급
-	@RequestMapping(value = "/giveSalary", method = RequestMethod.POST)
+	@RequestMapping(value = "/admingiveSalary", method = RequestMethod.POST)
 	public String adminUpgiveSalary(PayHistoryVO phvo) {
 		System.out.println("aa:" + phvo.getHisamount());
 		System.out.println("bb : " + phvo.getHismem());
@@ -266,7 +266,7 @@ public class AdminModel {
 	}
 
 	//달의 추가급여 디테일
-	@RequestMapping(value = "/getPaymentDetail", method = RequestMethod.POST)
+	@RequestMapping(value = "/admingetPaymentDetail", method = RequestMethod.POST)
 	public String getPaymentDetail(CommissionVO comvo, Model model) {
 		// member pay 정보 가져옴
 		PayVO payvo = adao.getPayInfo(comvo.getCommem());
@@ -289,6 +289,35 @@ public class AdminModel {
 
 		return "admin/modal";
 	}
+	
+	// 전체 사원 급여 지급
+	@RequestMapping(value = "/admingiveAllMemSal", method = RequestMethod.POST)
+	public String giveAllMemSal(){
+		List<MemberVO> mvo = adao.getAllMemInfo();
+		
+		for(MemberVO mv : mvo){
+			PayVO payvo =adao.getPayInfo(mv.getMemnum());
+			CommissionVO comvo = new CommissionVO();
+			comvo.setCommem(mv.getMemnum());
+			int comsum = adao.getCommSum(comvo);
+			// 지급받을 급여
+			int monthtotal = payvo.getPmonthsalary()+comsum;
+			System.out.println("지급 급여1!! = "+monthtotal);
+			System.out.println("받는 사람 =="+mv.getMemnum());
+			PayHistoryVO phvo = new PayHistoryVO();
+			phvo.setHisamount(monthtotal);
+			phvo.setHismem(mv.getMemnum());
+			try{
+				adao.giveSalary(phvo);
+			}catch(Exception e){
+				System.out.println(mv.getMemnum()+"는 이미 지급된 사원");
+				continue;
+			}
+			
+		}
+		return "redirect:/adminPayManagement?page=1";
+	}
+	
 
 	// ////////////////////////급여 관리(E)///////////////////////////
 
@@ -389,8 +418,5 @@ public class AdminModel {
 	}
 	
 	// ////////////////////////문서 양식 관리(E)///////////////////////////
-	
-	
-	
 
 }
