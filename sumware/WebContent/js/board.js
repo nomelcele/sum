@@ -51,7 +51,7 @@ function sendSearch(){
 	} else if (bsearch != lastbSearch) {
 		lastbSearch = bsearch;
 		var param = "bsearch=" + bsearch;
-		sendRequest("boardSearchSug", param, SearchRes, "get");
+		sendRequest("saboardSearchSug", param, SearchRes, "get");
 	}
 }
 var jsonObj = null;
