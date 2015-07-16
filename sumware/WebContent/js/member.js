@@ -24,7 +24,7 @@ function fileUpload(){
 		}
 	};
 	
-	xhr.open("POST","joinupload",true); // 크로스 도메인으로 데이터를 보내는 것이 가능해졌다.
+	xhr.open("POST","sajoinupload",true); // 크로스 도메인으로 데이터를 보내는 것이 가능해졌다.
 	xhr.setRequestHeader("X-File-Name", // 헤더로 파일의 이름이 간다.
 			encodeURIComponent(uploadFile.files[0].name));
 	xhr.send(uploadFile.files[0]); // post 방식이니까 send로 파라미터 전송
