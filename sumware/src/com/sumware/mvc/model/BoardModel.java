@@ -29,7 +29,7 @@ public class BoardModel {
 	private BoardDao dao;
 	private int page;
 	// 게시판 목록
-	@RequestMapping(value="boardList")
+	@RequestMapping(value="/saboardList")
 	public ModelAndView getList(BoardVO bvo,HttpServletRequest req,HttpSession ses){
 		System.out.println("보드리스트입니다람쥐!");
 		System.out.println(req.getParameter("page"));
@@ -96,7 +96,7 @@ public class BoardModel {
 	}
 	
 	// 디테일 목록! 
-	@RequestMapping(value="boardDetail",method=RequestMethod.POST)
+	@RequestMapping(value="/saboardDetail",method=RequestMethod.POST)
 	public ModelAndView getDetail(int no){
 		ModelAndView mav = new ModelAndView("board/boardDetail");
 		BoardVO v = dao.getDetail(no);
@@ -106,14 +106,14 @@ public class BoardModel {
 	}
 	
 	// 글작성 폼 !
-	@RequestMapping(value="boardWrite",method=RequestMethod.POST)
+	@RequestMapping(value="/saboardWrite",method=RequestMethod.POST)
 	public String writeForm(){
 		return "board.boardWrite";
 	}
 	
 	
 	// 글 입력 !!!
-	@RequestMapping(value="boardInsert", method=RequestMethod.POST)
+	@RequestMapping(value="/saboardInsert", method=RequestMethod.POST)
 	public ModelAndView boardInsert(BoardVO bvo,HttpServletRequest req){
 		dao.insert(bvo);
 		ModelAndView mav = new ModelAndView("board.boardList");
@@ -129,16 +129,16 @@ public class BoardModel {
 	}
 
 	// 게시글 삭제.
-	@RequestMapping(value="boardDelete", method=RequestMethod.POST)
+	@RequestMapping(value="/saboardDelete", method=RequestMethod.POST)
 	public ModelAndView boardDelete(BoardVO vo){
 		System.out.println("@@@@ 게시글 삭제 메서드 !!!!!!"+" / "+vo.getBnum());
-		ModelAndView mav = new ModelAndView("redirect:boardList?page="+page+"&bdeptno="+vo.getBdeptno()+"&bgnum="+vo.getBgnum()+"&model=board&bsearch=");
+		ModelAndView mav = new ModelAndView("redirect:/saboardList?page="+page+"&bdeptno="+vo.getBdeptno()+"&bgnum="+vo.getBgnum()+"&model=board&bsearch=");
 		dao.delete(vo.getBnum());
 		return mav;
 	}
 	
 	// 댓글 입력 !!!!
-	@RequestMapping(value="commIn",method=RequestMethod.POST)
+	@RequestMapping(value="/sacommIn",method=RequestMethod.POST)
 	public ModelAndView commIn(CommVO vo){
 		ModelAndView mav = new ModelAndView("board/boardComm");
 		dao.commInsert(vo);
@@ -148,7 +148,7 @@ public class BoardModel {
 	}
 	
 	// 댓글 삭제.
-	@RequestMapping(value="commDelete",method=RequestMethod.POST)
+	@RequestMapping(value="/sacommDelete",method=RequestMethod.POST)
 	public ModelAndView commDelete(CommVO vo){
 		ModelAndView mav = new ModelAndView("board/boardComm");
 		dao.commDelete(vo.getConum());
@@ -157,7 +157,7 @@ public class BoardModel {
 		return mav;
 	}
 	//suggest
-	@RequestMapping(value="boardSearchSug")
+	@RequestMapping(value="/saboardSearchSug")
 	public void boardSearchSug(String bsearch,HttpServletResponse response) throws IOException{
 		System.out.println("Search 들어왔어::"+bsearch);
 		StringBuilder sb = new StringBuilder();

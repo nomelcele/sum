@@ -20,16 +20,16 @@ $(function() {
 		$pageName = $(this).text().toLowerCase();
 		switch ($pageName) {
 		case ("main"):
-			$("#formff").attr("action","home").submit();
+			$("#formff").attr("action","sahome").submit();
 			break;
 		case ("todo"):
 			$("#model").attr("value", $pageName);
-			$("#formff").attr("action","firsttodoForm").submit();
+			$("#formff").attr("action","safirsttodoForm").submit();
 		
 			break;
 		case ("calendar"):
 			$("#model").attr("value", $pageName);
-			$("#formff").attr("action","calList").submit();
+			$("#formff").attr("action","sacalList").submit();
 			break;
 		case ("mail"):
 			$("#model").attr("value",$pageName);
@@ -43,18 +43,18 @@ $(function() {
 			$("#page").attr("value", "1");
 			$("#bSearch").attr("value", "");
 			$("#div").attr("value", "");
-			$("#formff").attr("action","boardList").submit();
+			$("#formff").attr("action","saboardList").submit();
 			break;
 		case ("admin"):
 			$("#model").attr("value", $pageName);
-			$("#formff").attr("action","admin").submit();
+			$("#formff").attr("action","saadmin").submit();
 			break;
 		case ("sign"):
 			$("#page").attr("value", "1");
-			$("#formff").attr("action","getSignList").submit();
+			$("#formff").attr("action","sagetSignList").submit();
 			break;
 		case ("auction"):
-			$("#formff").attr("action","productList").submit();
+			$("#formff").attr("action","saproductList").submit();
 			break;
 		default:
 			openWin();
@@ -65,14 +65,14 @@ $(function() {
 
 function logout(memnum) {
 	$.ajax({
-		url : "logout",
+		url : "salogout",
 		type : "GET",
 		data : {
 			memnum : memnum
 		},
 		success : function(result) {
 			console.log("logout result: " + result);
-			location = "index";
+			location = "saindex";
 		}
 	});
 }
@@ -86,7 +86,7 @@ function hateWorking(tonum) {
 function tosend(tonumval) {
 	$.ajax({
 		type : "post",
-		url : "toUpFk",
+		url : "satoUpFk",
 		data : {
 			tomem : $('#inputSuccess' + tonumval).val(),
 			toconfirm : "n",
@@ -126,7 +126,7 @@ function enterCheck(res) {
 //로그인 3회....
 function loginChk() {
 	$.ajax({
-		url : "login",
+		url : "salogin",
 		type : "POST",
 		data : {
 			memnum : $("#memnum").val(),
@@ -139,7 +139,7 @@ function loginChk() {
 				c++;
 				if (c > 3) {
 					$.ajax({
-						url : "getCap",
+						url : "sagetCap",
 						type : "POST",
 						success : function(result) {
 							$('#capBody').html(result);
@@ -148,7 +148,7 @@ function loginChk() {
 					});
 				}
 			} else if (result == 1) {
-				location = "firstLoginForm";
+				location = "safirstLoginForm";
 			} else {
 				location = "home.index";
 			}
@@ -165,7 +165,7 @@ function capClick() {
 		var captcha = $("#Captarget").text().trim();
 		console.log(captcha)
 		if (captcha == "ok") {
-			location = "home";
+			location = "sahome";
 		} else {
 			alert("보안문자 확인해주세요.");
 		}
@@ -184,7 +184,7 @@ function selectMenu(sel,senddata) {
 		// 부서업무 버튼
 		$.ajax({
 			type : "post",
-			url : "todoForm",
+			url : "satodoForm",
 			data : {
 				memdept : senddata
 			},
@@ -196,7 +196,7 @@ function selectMenu(sel,senddata) {
 		// 업무 부여 버튼(부장의 경우)
 		$.ajax({
 			type : "post",
-			url : "addtodoForm",
+			url : "saaddtodoForm",
 			data : {
 				memnum : senddata
 			},
@@ -211,7 +211,7 @@ function selectMenu(sel,senddata) {
 		// 업무 관리 버튼(팀장의 경우)
 		$.ajax({
 			type : "post",
-			url : "checkTodoList",
+			url : "sacheckTodoList",
 			data : {
 				memnum : senddata
 			},
@@ -223,7 +223,7 @@ function selectMenu(sel,senddata) {
 		// 업무 관리 버튼 (부장의 경우)
 		$.ajax({
 			type : "post",
-			url : "fWMana",
+			url : "safWMana",
 			data : {
 				memnum : senddata
 			},
@@ -235,7 +235,7 @@ function selectMenu(sel,senddata) {
 		// 업무 부여 버튼 (팀장의 경우)
 		$.ajax({
 			type : "post",
-			url : "giveJobForm",
+			url : "sagiveJobForm",
 			data : {
 				memnum : senddata
 			},
@@ -247,7 +247,7 @@ function selectMenu(sel,senddata) {
 		// 팀 업무 버튼
 		$.ajax({
 			type : "post",
-			url : "teamTodoForm",
+			url : "sateamTodoForm",
 			data : {
 				memmgr : senddata
 			},
@@ -262,7 +262,7 @@ function todoConfirm(res) {
 	if (res == 'rejectTodo') {
 		$.ajax({
 			type : "post",
-			url : "rejectTodo",
+			url : "sarejectTodo",
 			data : {
 				model : "todo",
 				// 					submod:"checkTodoList",
@@ -288,7 +288,7 @@ function todoConfirm(res) {
 	} else if (res == 'approveTodo') {
 		$.ajax({
 			type : "post",
-			url : "approveTodo",
+			url : "saapproveTodo",
 			data : {
 				tonum : $('#atonum').val(),
 				tostdate : $('#atostdate').val(),
@@ -311,7 +311,7 @@ function todoConfirm(res) {
 	} else if (res == 'successTodo') {
 		$.ajax({
 			type : "post",
-			url : "successJob",
+			url : "sasuccessJob",
 			data : {
 				// 					submod:"successJob",
 				tonum : $('#stonum').val(),
@@ -380,7 +380,7 @@ function getJobDetail(tonum) {
 	$("#detail" + tonum).toggle("slow");
 	$.ajax({
 		type : "post",
-		url : "showmemlist",
+		url : "sashowmemlist",
 		data : {
 			jobtonum : tonum,
 		},
@@ -396,7 +396,7 @@ function findPassWord(res){
 	if(res=='sendNumber'){
 		$.ajax({
 			type: "POST",
-			url: "sendCode",
+			url: "sasendCode",
 			data: {
 				memnum: $('#findpwmemnum').val(),
 				memmail: $('#findpwmemmail').val()
@@ -413,7 +413,7 @@ function findPassWord(res){
 	}else if(res=='checkCode'){
 		$.ajax({
 			type: "POST",
-			url: "checkCode",
+			url: "sacheckCode",
 			data: {
 				code: $('#mycode').val(),
 			},
@@ -439,7 +439,7 @@ function findPassWord(res){
 		alert(res+"  "+$('#checknewpw').val())
 		$.ajax({
 			type: "POST",
-			url: "changePW",
+			url: "sachangePW",
 			data: {
 				memnum: res,
 				mempwd: $('#checknewpw').val()

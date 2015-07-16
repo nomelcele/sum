@@ -25,12 +25,18 @@ public class IndexModel{
 
 	// 요청이 home 이거나, 아무 요청이 없을 경우 
 	// 작동 됨.
-	@RequestMapping(value={"/home","/","/index","/login"},method=RequestMethod.GET)
+
+	
+//=======
+//	@RequestMapping(value={"/home","/","/index","/login"},method=RequestMethod.GET)
+//>>>>>>> .r937
+	@RequestMapping(value={"/sahome","/","/saindex"})
 	public String indexForm(Model model){
 		return "home.index";
 	}
+	
 	//Notification
-	@RequestMapping(value="tmCount")
+	@RequestMapping(value="/satmCount")
 	public void noti(String mailreceiver,int memnum,HttpSession session,HttpServletResponse response) throws IOException{
 //		System.out.println("새로운것이 왔나??");
 		HashMap<String, String> map = new HashMap<String, String>();

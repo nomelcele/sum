@@ -27,7 +27,7 @@ public class DownloadModel {
 		// -> HttpSession session, HttpServletRequest request
 		// 다운로드란, 브라우저와 Stream 으로 연결 되어서 통신 되어야 하기 때문에....
 		// -> HttpServletResponse response
-	@RequestMapping(value="/downloadFile")
+	@RequestMapping(value="/sadownloadFile")
 	   public void fileDown(@RequestParam("fileName") String fileName,
 	         HttpSession session, HttpServletRequest request,
 	         HttpServletResponse response) throws IOException{

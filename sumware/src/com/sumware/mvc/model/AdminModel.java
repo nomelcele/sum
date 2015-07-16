@@ -367,7 +367,7 @@ public class AdminModel {
 	@RequestMapping(value = "/admingetDeptBoardList", method = RequestMethod.POST)
 	public String getDeptBoardList(int bgnum, int bdeptno, Model model) {
 		String params = "page=1&bsearch=&div=&bgnum=" + bgnum+"&bdeptno="+bdeptno;
-		return "redirect:/boardList?" + params;
+		return "redirect:/saboardList?" + params;
 	}
 
 	// 게시판 삭제 폼 이동

@@ -89,7 +89,7 @@ function bsearchSelect(index){
 	
 	if(sBdeptno == 999){ // 관리자 모드에서 접근했을 때
 		$.ajax({
-			url:"boardList",
+			url:"saboardList",
 			type :"post",
 			data:{
 				page:1, bsearch:sel1, div:sel2,	bgnum:sBgnum, bdeptno:sBdeptno
@@ -99,13 +99,13 @@ function bsearchSelect(index){
 			}
 		});
 	} else {
-		location="boardList?page=1&bsearch="+sel1+"&div="+sel2+"&bgnum="+sBgnum+"&bdeptno="+sBdeptno;
+		location="saboardList?page=1&bsearch="+sel1+"&div="+sel2+"&bgnum="+sBgnum+"&bdeptno="+sBdeptno;
 	}	
 }
 //게시판 검색 종료
 function detail(no,bgnum,bname,bdeptno,page){
 	$.ajax({
-		url:"boardDetail",
+		url:"saboardDetail",
 		type :"post",
 		data:{
 			no:no, bgnum:bgnum, bname:bname, bdeptno:bdeptno,page:page
@@ -124,7 +124,7 @@ function detail(no,bgnum,bname,bdeptno,page){
 function commIn(memnum,bnum){
 	var $cocont =$("#cocont").val();
 	$.ajax({
-		url : "commIn",
+		url : "sacommIn",
 		type : "post",
 		data : {
 			cocont:$cocont, comem:memnum, coboard:bnum
@@ -137,7 +137,7 @@ function commIn(memnum,bnum){
 // 댓글 삭제
 function commDelete(conum,bnum){
 	$.ajax({
-		url : "commDelete",
+		url : "sacommDelete",
 		type : "post",
 		data : {conum:conum,coboard:bnum},
 		success : function(result){

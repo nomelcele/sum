@@ -5,7 +5,7 @@
 $(function(){
 	$('#auctionBtn1 button').click(function(){
 		$.ajax({
-			url : "writeForm",
+			url : "sawriteForm",
 			type : "post",
 			success : function(result){
 				$('#mTarget').html(result);
@@ -14,12 +14,12 @@ $(function(){
 		});
 	});
 	$('#proimg').click(function(){
-		location='proDetail';
+		location='saproDetail';
 	});
 });
 
 function detailGo(no){
-	location='proDetail?pronum='+no;
+	location='saproDetail?pronum='+no;
 }
 
 // promodal.jsp 에서 사용 파일 업로드시 미리보기 시켜주는 메소드.
