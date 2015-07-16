@@ -111,17 +111,16 @@ $(function(){
 				console.log("notification::"+data);
 				if(data=="tx"){
 					console.log("todo");
-					Notify("todo","Good");
+					Notify("todo","새로운 업무가 등록되었습니다.","safirsttodoForm?model=todo");
 				}else if(data=="m"){
 					console.log("mail");
-					Notify("mail","새로운 메일이 도착하였습니다.");
+					Notify("mail","새로운 메일이 도착하였습니다.","samailFromList?model=mail&page=1");
 				}else if(data=="tm"){
 					console.log("todo&mail");
-					Notify("todo","새로운 업무가 등록되었습니다.");
+					Notify("todo","새로운 업무가 등록되었습니다.","safirsttodoForm?model=todo");
 					setTimeout(function(){
-						Notify("mail","새로운 메일이 도착하였습니다.");
+						Notify("mail","새로운 메일이 도착하였습니다.","samailFromList?model=mail&page=1");
 					}, 3000);
-				}
 			};
 		} else {
 			$(".chat").html("해당 브라우저는 지원이 안됩니다.");
