@@ -10,7 +10,7 @@
 			<!-- heading(S) -->
 			<h2 class="title-board"> ${sessionScope.bname } </h2>
 			<!-- heading(E) -->
-				<form action="boardInsert" method="post" id="boardInsert">
+				<form action="saboardInsert" method="post" id="boardInsert">
 					<input type="hidden" name="model" value="board">
 					<input type="hidden" name="page" value="1">
 					<input type="hidden" name="bmem" value="${sessionScope.v.memnum }">

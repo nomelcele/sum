@@ -3,7 +3,7 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
-	<form action="done" method="post" id="doneForm" enctype="multipart/form-data">
+	<form action="sadone" method="post" id="doneForm" enctype="multipart/form-data">
 	<input type="hidden"  name="prowriter" value="${sessionScope.v.memnum }">
 	<div class="modal-dialog">
 		<!-- Modal content-->

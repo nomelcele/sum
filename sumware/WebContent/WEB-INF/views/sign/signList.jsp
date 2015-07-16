@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
-	<form method="post" action="getSignList" id="searchSignForm">
+	<form method="post" action="sagetSignList" id="searchSignForm">
 		<input type="hidden" name="page" value="1">
 		<input type="hidden" name="memdept" value="${sessionScope.v.memdept }">
 	<!-- Search (S) -->
@@ -33,7 +33,7 @@
 					<tr>
 						<td class="col-lg-1"><span>${sg.snum}</span></td>
 						<td class="col-lg-2"><span>${sg.sfname }</span></td>
-						<td class="col-lg-3"><span><a href="signDetail?snum=${sg.snum }">${sg.stitle }</span></td>
+						<td class="col-lg-3"><span><a href="sasignDetail?snum=${sg.snum }">${sg.stitle }</span></td>
 						<td class="col-lg-1"><span>${sg.memname }</span></td>
 						<td class="col-lg-3"><span>${sg.startdate } ~ ${sg.enddate}</span></td>
 						<c:choose>
@@ -55,7 +55,7 @@
 	</form>
 	<%-- 원래 위치 --%>
 	<div class="paging">
-		<c:set var="pageUrl" value="getSignList?signdiv=${signdiv}"/>
+		<c:set var="pageUrl" value="sagetSignList?signdiv=${signdiv}"/>
 			<c:choose>
 				<c:when test="${pageInfo.currentBlock eq 1}">&lt;&lt;</c:when>
 				<c:otherwise>

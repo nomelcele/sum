@@ -31,7 +31,7 @@ public class TodoModel {
 	private CalendarDAO cdao;
 
 	// todo 기본 페이지 //ok
-	@RequestMapping(value = "/todoForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/satodoForm", method = RequestMethod.POST)
 	public String todoForm(Model model, HttpSession session) {
 		MemberVO mvo =(MemberVO) session.getAttribute("v");
 		int todept = mvo.getMemdept();
@@ -42,7 +42,7 @@ public class TodoModel {
 	}
 
 	// addTodo 후에 todo 메인페이지로 돌아가는 작업 // ok
-	@RequestMapping(value="afterAddTodo")
+	@RequestMapping(value="/saafterAddTodo")
 	public String afterAddTodo(Model model, HttpSession session){
 		
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
@@ -59,7 +59,7 @@ public class TodoModel {
 	
 	
 	// 메뉴바에서 todo메뉴 첫 진입 시 //ok
-	@RequestMapping(value = "firsttodoForm")
+	@RequestMapping(value = "/safirsttodoForm")
 	public String firsttodoForm(Model model, HttpSession session,HttpServletRequest req) {
 
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
@@ -81,7 +81,7 @@ public class TodoModel {
 	}
 
 	// 업무추가 폼 //ok
-	@RequestMapping(value = "addtodoForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/saaddtodoForm", method = RequestMethod.POST)
 	public String addtodoForm(MemberVO mvo,Model model) {
 		
 		System.out.println("memnum : "+mvo.getMemnum());
@@ -92,7 +92,7 @@ public class TodoModel {
 	}
 	
 	// 업무 추가 (파일 업로드)  //ok
-	@RequestMapping(value = "addTodo", method = RequestMethod.POST)
+	@RequestMapping(value = "/saaddTodo", method = RequestMethod.POST)
 	public ModelAndView addTodo(TodoVO tvo,
 		 HttpSession session) {
 		
@@ -118,7 +118,7 @@ public class TodoModel {
 	}
 
 	// 업무관리 클릭 시 보여줄 화면, 업무 리스트  //ok
-	@RequestMapping(value = "/checkTodoList", method = RequestMethod.POST)
+	@RequestMapping(value = "/sacheckTodoList", method = RequestMethod.POST)
 	public String checkTodoList(HttpSession session, Model model) {
 
 		MemberVO mvo = (MemberVO)session.getAttribute("v");
@@ -130,7 +130,7 @@ public class TodoModel {
 	}
 
 	// 팀장의 업무 승인!!!! y로 바꿔줌!! 캘린더에도 등록!!!!
-	@RequestMapping(value = "/approveTodo", method = RequestMethod.POST)
+	@RequestMapping(value = "/saapproveTodo", method = RequestMethod.POST)
 	public String approveTodo(Model model,HttpSession session, TodoVO tvo) {
 		// 리스트의 승인여부 n을 y로 바꿈!!!!
 		tdao.confirmTodo(tvo, "y");
@@ -159,7 +159,7 @@ public class TodoModel {
 	}
 
 	// 팀장의 업무 거절!!!  //ok
-	@RequestMapping(value = "/rejectTodo", method = RequestMethod.POST)
+	@RequestMapping(value = "/sarejectTodo", method = RequestMethod.POST)
 	public String rejectTodo(TodoVO tvo, Model model, HttpSession session) {
 		// 리스트의 승인여부 n을 z로 바꿈!!!!
 
@@ -177,7 +177,7 @@ public class TodoModel {
 
 	
 	// 부장의 업무관리(부여한 업무들의 상태를 봄)  //ok
-	@RequestMapping(value = "/fWMana", method = RequestMethod.POST)
+	@RequestMapping(value = "/safWMana", method = RequestMethod.POST)
 	public String fWMana(MemberVO mvo, Model model) {
 		List<TodoVO> fwList = tdao.getFWMana(mvo.getMemnum());
 		model.addAttribute("fwList", fwList);
@@ -186,7 +186,7 @@ public class TodoModel {
 	}
 
 	// 팀장이 거절한 업무를 부장이 팀장에게 다시부여
-	@RequestMapping(value = "/toUpFk", method = RequestMethod.POST)
+	@RequestMapping(value = "/satoUpFk", method = RequestMethod.POST)
 	public String toUpFk(TodoVO tvo, Model model) {
 		List<TodoVO> list = tdao.todoUpdate(tvo);
 		model.addAttribute("fwList", list);
@@ -194,7 +194,7 @@ public class TodoModel {
 	}
 
 	// 팀장의 업무 부여 폼 //ok
-	@RequestMapping(value = "/giveJobForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/sagiveJobForm", method = RequestMethod.POST)
 	public String giveJobForm(MemberVO mvo, Model model) {
 		List<TodoVO> todoList = tdao.getTeamTodoList(mvo);
 		int memmgr = mvo.getMemnum();
@@ -208,7 +208,7 @@ public class TodoModel {
 	}
 
 	// 팀장 업무부여 - 사원에게 업무 부여 //ok
-	@RequestMapping(value = "/insertMemJob", method = RequestMethod.POST)
+	@RequestMapping(value = "/sainsertMemJob", method = RequestMethod.POST)
 	public String insertMemJob(TodoJobVO tjvo,Model model) {
 
 		// 사원에게 업무 부여
@@ -221,7 +221,7 @@ public class TodoModel {
 	}
 
 	// 팀장 업무 부여 - 사원들의 업무 보여줌 //ok
-	@RequestMapping(value = "/showMembersJob", method = RequestMethod.POST)
+	@RequestMapping(value = "/sashowMembersJob", method = RequestMethod.POST)
 	public String showMembersJob(int jobtonum, Model model) {
 		List<TodoJobVO> membersjoblist = tdao.getMembersJob(jobtonum);
 		model.addAttribute("membersjoblist", membersjoblist);
@@ -229,7 +229,7 @@ public class TodoModel {
 	}
 
 	// 멤버리스트?
-	@RequestMapping(value = "/showmemlist", method = RequestMethod.POST)
+	@RequestMapping(value = "/sashowmemlist", method = RequestMethod.POST)
 	public String showmemlist(TodoJobVO tjvo, Model model) {
 		List<TodoJobVO> list = tdao.getMembersJob(tjvo.getJobtonum());
 		model.addAttribute("memberjoblist", list);
@@ -237,7 +237,7 @@ public class TodoModel {
 	}
 
 	// 팀 업무 폼 //ok
-	@RequestMapping(value = "/teamTodoForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/sateamTodoForm", method = RequestMethod.POST)
 	public String teamTodoForm(HttpSession session, Model model) {
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
 		List<TodoVO> list = tdao.getTeamJob(mvo.getMemmgr());
@@ -247,7 +247,7 @@ public class TodoModel {
 	}
 
 	// 업무 완료 처리  // ok
-	@RequestMapping(value = "/successJob", method = RequestMethod.POST)
+	@RequestMapping(value = "/sasuccessJob", method = RequestMethod.POST)
 	public String successJob(Model model, TodoVO tvo, HttpSession session) {
 		System.out.println("업무 완료 처리 들어옴");
 		tdao.confirmTodo(tvo, "o");

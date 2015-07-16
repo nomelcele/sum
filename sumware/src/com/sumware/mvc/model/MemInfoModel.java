@@ -26,7 +26,7 @@ public class MemInfoModel {
 	@Autowired
 	private AdminDao adao;
 
-	@RequestMapping(value = "/modifyProfile")
+	@RequestMapping(value = "/samodifyProfile")
 	public String modifyProfile(Mode mode, HttpSession session) {
 		session.setAttribute("model", "join");
 		// 프로필 수정폼
@@ -34,14 +34,14 @@ public class MemInfoModel {
 
 	}
 
-	@RequestMapping(value = "/modifyProfileMenu")
+	@RequestMapping(value = "/samodifyProfileMenu")
 	public String modifyProfileMenu(Mode mode, HttpSession session) {
 		// 프로필 수정폼
 		return "join/member";
 
 	}
 
-	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	@RequestMapping(value = "/samodify", method = RequestMethod.POST)
 	public String modify(MemberVO mvo, HttpSession session) {
 		// 수정 버튼
 
@@ -56,7 +56,7 @@ public class MemInfoModel {
 
 	}
 
-	@RequestMapping(value = "/memPayInfoDetail", method = RequestMethod.POST)
+	@RequestMapping(value = "/samemPayInfoDetail", method = RequestMethod.POST)
 	public String memPayInfoDetail(MemberVO vo, String hisdate, Model model) {
 
 		// member 정보 가져옴

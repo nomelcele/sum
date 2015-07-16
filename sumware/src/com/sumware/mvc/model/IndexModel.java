@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sumware.mvc.dao.MailDao;
 import com.sumware.mvc.dao.TodoDao;
@@ -20,9 +21,11 @@ public class IndexModel{
 	private MailDao mdao;
 	@Autowired
 	private TodoDao tdao;
+	
+
 	// 요청이 home 이거나, 아무 요청이 없을 경우 
 	// 작동 됨.
-	@RequestMapping(value={"/home","/","/index"})
+	@RequestMapping(value={"/home","/","/index","/login"},method=RequestMethod.GET)
 	public String indexForm(Model model){
 		return "home.index";
 	}

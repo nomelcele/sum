@@ -18,7 +18,7 @@
 <!-- 		db에 저장된 내용 출력 -->
 <div class="col-lg-3" style="width: 100%">
 	<div class="chat-panel panel panel-default">
-	<form action="closeChat" method="post" id="closeForm" name="closeForm">
+	<form action="sacloseChat" method="post" id="closeForm" name="closeForm">
 		<input type="hidden" id="chatuserNum"name="userNum">
 		<input type="hidden" id="roomKey" name="roomKey">
 		<input type="hidden" id="resState" name="resState">		

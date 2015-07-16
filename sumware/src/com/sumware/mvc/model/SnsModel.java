@@ -24,15 +24,15 @@ import com.sumware.util.MyPage;
 public class SnsModel{
 	@Autowired
 	SnsDao dao;
-	@RequestMapping(value="snsForm")
+	@RequestMapping(value="/sasnsForm")
 	public String snsForm(){
 		return "todo/todoSns";
 	}
-	@RequestMapping(value="insertSns",method=RequestMethod.POST)
+	@RequestMapping(value="/sainsertSns",method=RequestMethod.POST)
 	public void insertSns(SnsVO svo){
 		dao.insertSns(svo);
 	}
-	@RequestMapping(value="pushSns")
+	@RequestMapping(value="/sapushSns")
 	public void pushSns(Model model,HttpServletRequest request,HttpServletResponse response) throws IOException{
 		int rowsPerPage=Integer.parseInt(request.getParameter("rowsPerPage"));
 		int pagesPerBlock=1;
@@ -83,7 +83,7 @@ public class SnsModel{
 		pw.flush();
 		
 	}
-	@RequestMapping(value="snsComm",method=RequestMethod.POST)
+	@RequestMapping(value="/sasnsComm",method=RequestMethod.POST)
 	public ModelAndView snsComm(HttpServletRequest request,Model model){
 		System.out.println("댓글 보기");
 		ModelAndView mav = new ModelAndView();
@@ -91,7 +91,7 @@ public class SnsModel{
 		showCommList(request,mav);
 		return mav;
 	}
-	@RequestMapping(value="snsCommInsert",method=RequestMethod.POST)
+	@RequestMapping(value="/sasnsCommInsert",method=RequestMethod.POST)
 	public ModelAndView snsCommInsert(HttpServletRequest request){
 		System.out.println("댓글 입력!");
 		ModelAndView mav = new ModelAndView();
@@ -102,7 +102,7 @@ public class SnsModel{
 		showCommList(request, mav);
 		return mav;
 	}
-	@RequestMapping(value="snsCommDelete",method=RequestMethod.POST)
+	@RequestMapping(value="/sasnsCommDelete",method=RequestMethod.POST)
 	public ModelAndView snsCommDelete(HttpServletRequest request){
 		System.out.println("댓글 삭제");
 		ModelAndView mav = new ModelAndView();

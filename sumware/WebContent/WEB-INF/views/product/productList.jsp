@@ -8,7 +8,7 @@
 	<a href="" class="btn btn-info" >상품등록</a>
 -->
 </div>
-<form action="writeForm" id="aucForm">
+<form action="sasawriteForm" id="aucForm">
 <div style="margin-top: 10px;" class="auction">
 	<table>
 		<tbody>
@@ -42,7 +42,7 @@
 
 <!-- paging(S) -->
 <div class="paging" id="paging">
-	<form action="boardList" method="post" id="plist">
+	<form action="saboardList" method="post" id="plist">
 		<input type="hidden" name="model" value="board"> <input
 			type="hidden" name="bgnum" value="${sessionScope.bbbgnum}"> <input
 			type="hidden" name="bname" value="${sessionScope.bname }"> <input

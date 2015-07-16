@@ -33,7 +33,7 @@ public class MessengerModel{
 	private ServiceInter service;
 
 	// 메신저 폼
-	@RequestMapping(value = "messengerForm")
+	@RequestMapping(value = "/samessengerForm")
 	public String messengerForm(HttpSession session, Model model) {
 		List<MemberVO> list = medao.getList();
 		ArrayList<MemberVO> resList = new ArrayList<MemberVO>();
@@ -52,7 +52,7 @@ public class MessengerModel{
 	}
 
 	// 초기 방을 만들 경우
-	@RequestMapping(value = "messengerChat",method=RequestMethod.POST)
+	@RequestMapping(value = "/samessengerChat",method=RequestMethod.POST)
 	public String messengerChat(String fromNum, String toNum, String entNum,
 			HttpServletRequest req, Model model) {
 		// 보낸 사람 사번 받아오기
@@ -117,7 +117,7 @@ public class MessengerModel{
 	}
 	
 
-	@RequestMapping(value="msgReceieve",method=RequestMethod.POST)
+	@RequestMapping(value="/samsgReceieve",method=RequestMethod.POST)
 	public String msgReceieve(HttpServletRequest request,Model model){
 		String struserNum = request.getParameter("userNum2");
 		System.out.println("msgReceive userNum : "+struserNum);
@@ -159,7 +159,7 @@ public class MessengerModel{
 		
 		return "messenger/open/msgChat";
 	}
-	@RequestMapping(value="closeChat",method=RequestMethod.POST)
+	@RequestMapping(value="/sacloseChat",method=RequestMethod.POST)
 	public String closeChat(MessengerVO mevo,HttpServletRequest request){
 		System.out.println("여기는 model의 closeRoom 입니다.============");
 		
@@ -175,10 +175,10 @@ public class MessengerModel{
 		 service.closeRoomService(mevo);
 		
 		 // 창을 닫기 때문에 url 주소는 없어도 무관함
-		 return "redirect:messengerForm";
+		 return "redirect:samessengerForm";
 	}
 	// messenger main에서 넘어온 경우 요청 거부 시
-	@RequestMapping(value="refuseChat",method=RequestMethod.POST)
+	@RequestMapping(value="/sarefuseChat",method=RequestMethod.POST)
 	public String refuserChat(MessengerVO mevo, HttpServletRequest request){
 		 // messenger.jsp에서 넘어온 파라미터 처리
 		 System.out.println("refuseChat 영역입니다.==========");
@@ -208,7 +208,7 @@ public class MessengerModel{
 		 return "messenger/open/refuseChat";
 	}
 	//채팅방 푸쉬
-	@RequestMapping(value="mesCheck")
+	@RequestMapping(value="/samesCheck")
 	public void mesCheck(HttpServletResponse response,HttpSession session) throws IOException{
 		System.out.println("서버 푸시 영역");	
 		MemberVO mvo = (MemberVO)session.getAttribute("v");
@@ -258,7 +258,7 @@ public class MessengerModel{
 		}
 	}
 	
-	@RequestMapping(value="mesCountMsg")
+	@RequestMapping(value="/samesCountMsg")
 	public void mesCountMsg(HttpServletResponse response,HttpSession session) throws IOException{
 //		System.out.println("Main Push 영역");
 		
@@ -279,7 +279,7 @@ public class MessengerModel{
 		pw.print(outs);
 		pw.flush();
 	}
-	@RequestMapping(value="mesListLoad")
+	@RequestMapping(value="/samesListLoad")
 	public void mesListLoad(HttpServletResponse response,HttpSession session) throws IOException{
 		System.out.println("사용자 List 출력, listLoad.jsp");
 		// 현재 사용자 정보를 가져옴

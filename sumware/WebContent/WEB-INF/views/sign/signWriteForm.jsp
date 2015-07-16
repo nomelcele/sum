@@ -3,7 +3,7 @@
 <style>
 #signBody{padding-left: 50px}
 </style>	
-<form action="writeSign" method="post">
+<form action="sawriteSign" method="post">
 	<div class="panel-body" align="center">
 		<div class="form-group">${sf.sform}</div>
 	</div>
