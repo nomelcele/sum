@@ -105,7 +105,7 @@ $(function(){
 		if (typeof (EventSource) != "undefined") {
 			// push를 받을수 있는 브라우져인지 판단.
 			eventSourceCount = new EventSource(
-					"tmCount?mailreceiver=${v.meminmail}&memnum=${v.memnum}");
+					"satmCount?mailreceiver=${v.meminmail}&memnum=${v.memnum}");
 			eventSourceCount.onmessage = function(event) {
 				var data = event.data;
 				console.log("notification::"+data);
@@ -215,7 +215,7 @@ $(function(){
 				   alert("eventid:"+calEvent._id);
 				   	//삭제할 ajax
 				    $.ajax({
-			              url: "calDelete",
+			              url: "sacalDelete",
 			              type: "POST",
 			              data: {
 			                  calnum:calEvent._id,
@@ -249,7 +249,7 @@ $(function(){
 		     };
 		     $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
 		      $.ajax({
-	              url: "calInsert",
+	              url: "sacalInsert",
 	              type: "POST",
 	              data: {
 	                  title:encodeURIComponent(title),
@@ -297,7 +297,7 @@ function push() {
 	if (typeof (EventSource) != "undefined") {
 		// push를 받을수 있는 브라우져인지 판단.
 		eventSource = new EventSource(
-				"pushSns?sdept=${v.memdept}&page=1&rowsPerPage=" + rowsPerPage);
+				"sapushSns?sdept=${v.memdept}&page=1&rowsPerPage=" + rowsPerPage);
 		eventSource.onmessage = function(event) {
 			$(".chat").html(event.data);
 		};
