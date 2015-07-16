@@ -118,6 +118,7 @@ function setTargetValue(targetId){
 			console.log("이프문 들어옴");
 			document.getElementsByName("sgImg"+i)[0].value="y";
 			$('#sgReturnBtn').attr("type","hidden");
+			$('#sgBtn').attr("type","button");
 		}
 	}
 }
