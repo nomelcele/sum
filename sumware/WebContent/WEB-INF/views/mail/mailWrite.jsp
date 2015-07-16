@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 		<div class="col-lg-8">	
-			<form method="post" action="mailWrite" class="form-horizontal" role="form"
+			<form method="post" action="samailWrite" class="form-horizontal" role="form"
 				  name="f" id="mailWriteF" autocomplete="off" enctype="multipart/form-data">
 				    <div class="form-group">
 				        <label for="receiver" class="col-sm-2 control-label">받는 사람</label>

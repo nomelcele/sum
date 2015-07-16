@@ -38,7 +38,7 @@ public class MailModel{
 	private ServiceInter service;
 
 	// 메일 작성 form 이동
-	@RequestMapping(value="/mailWriteForm",method=RequestMethod.POST)
+	@RequestMapping(value="/samailWriteForm",method=RequestMethod.POST)
 	public String mailWriteForm(@ModelAttribute("mailreceiver")String mailreceiver,
 			@ModelAttribute("mailtitle")String mailtitle,
 			@ModelAttribute("orimail")String oriMail){
@@ -47,7 +47,7 @@ public class MailModel{
 	}
 	
 	// 메일 작성
-	@RequestMapping(value="/mailWrite",method=RequestMethod.POST)
+	@RequestMapping(value="/samailWrite",method=RequestMethod.POST)
 	public ModelAndView mailWrite(@RequestParam HashMap<String, String> map,
 			@RequestParam("mailfile")MultipartFile mailfile,HttpSession session){
 		// request.setCharacterEncoding("UTF-8");
@@ -94,7 +94,7 @@ public class MailModel{
 	}
 	
 	// suggest(mailSug)
-	@RequestMapping(value="/mailSug")
+	@RequestMapping(value="/samailSug")
 	public void mailSug(String key,HttpServletResponse response) throws IOException{
 		System.out.println("Mail Controller: mailSug");
 		// 5) 필요한 데이터 검색 후 배열 형태로 해당 데이터를 리턴해주는 메서드 호출
@@ -129,7 +129,7 @@ public class MailModel{
 	}
 	
 	// 받은 메일함 이동
-	@RequestMapping(value="/mailFromList")
+	@RequestMapping(value="/samailFromList")
 	public ModelAndView mailFromList(HttpServletRequest request,HttpSession session){
 		System.out.println("Mail Controller: mailFromList");
 		ModelAndView mav = new ModelAndView();
@@ -161,7 +161,7 @@ public class MailModel{
 	}
 	
 	// 보낸 메일함 이동
-	@RequestMapping(value="/mailToList")
+	@RequestMapping(value="/samailToList")
 	public ModelAndView mailToList(HttpServletRequest request,HttpSession session){
 		System.out.println("Mail Controller: mailToList");
 		ModelAndView mav = new ModelAndView();
@@ -190,7 +190,7 @@ public class MailModel{
 	}
 	
 	// 내게 쓴 메일함 이동
-	@RequestMapping(value="/mailMyList")
+	@RequestMapping(value="/samailMyList")
 	public ModelAndView mailMyList(HttpServletRequest request,HttpSession session){
 		System.out.println("Mail Controller: mailMyList");
 		ModelAndView mav = new ModelAndView();
@@ -219,7 +219,7 @@ public class MailModel{
 	}
 	
 	// 휴지통 이동
-	@RequestMapping(value="/mailTrashcan")
+	@RequestMapping(value="/samailTrashcan")
 	public ModelAndView mailTrashcan(HttpServletRequest request,HttpSession session){
 		System.out.println("Mail Controller: mailTrashcan");
 		ModelAndView mav = new ModelAndView();
@@ -248,7 +248,7 @@ public class MailModel{
 	}
 	
 	// 메일 상세 보기
-	@RequestMapping(value="/mailDetail",method=RequestMethod.POST)
+	@RequestMapping(value="/samailDetail",method=RequestMethod.POST)
 	public ModelAndView mailDetail(@RequestParam("mailnum")int mailnum){
 		System.out.println("Mail Controller: mailDetail");
 		ModelAndView mav = new ModelAndView();
@@ -263,7 +263,7 @@ public class MailModel{
 	}
 	
 	// 메일 테이블의 delete 속성 설정
-	@RequestMapping(value="/mailSetDel",method=RequestMethod.POST)
+	@RequestMapping(value="/samailSetDel",method=RequestMethod.POST)
 	public String mailSetDel(@RequestParam("chk")String[] mailnums,
 			@RequestParam HashMap<String,String> map,HttpSession session){
 		System.out.println("Mail Controller: mailSetDel");
@@ -282,13 +282,13 @@ public class MailModel{
 //		String params = "usernum="+map.get("usernum")+"&userid="+map.get("userid")+"&page=1";
 		switch(tofrom){
 			default: // 받은 메일함
-				return "redirect:/mailFromList?page=1";
+				return "redirect:/samailFromList?page=1";
 			case 2: // 보낸 메일함
-				return "redirect:/mailToList?page=1";
+				return "redirect:/samailToList?page=1";
 			case 3: // 내게 쓴 메일함
-				return "redirect:/mailMyList?page=1";
+				return "redirect:/samailMyList?page=1";
 			case 4: // 휴지통
-				return "redirect:/mailTrashcan?page=1";
+				return "redirect:/samailTrashcan?page=1";
 		}
 		
 	}

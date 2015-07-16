@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<form method="post" action="mailSetDel" id="listform">
+	<form method="post" action="samailSetDel" id="listform">
 		<input type="hidden" id="delvalue" name="delvalue">
 		<input type="hidden" name="tofrom" value="${tofrom}">
 		<input type="hidden" name="page" value="1">
@@ -102,19 +102,19 @@
 			<c:choose>
 				<c:when test="${tofrom eq '1'}">
 					<c:set var="pageUrl" 
-					value="mailFromList?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+					value="samailFromList?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
 				</c:when>
 				<c:when test="${tofrom eq '2'}">
 					<c:set var="pageUrl" 
-					value="mailToList?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+					value="samailToList?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
 				</c:when>
 				<c:when test="${tofrom eq '3'}">
 					<c:set var="pageUrl" 
-					value="mailMyList?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+					value="samailMyList?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
 				</c:when>
 				<c:otherwise>
 					<c:set var="pageUrl" 
-					value="mailTrashcan?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
+					value="samailTrashcan?usernum=${sessionScope.v.memnum}&userid=${sessionScope.v.meminmail}"/>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
