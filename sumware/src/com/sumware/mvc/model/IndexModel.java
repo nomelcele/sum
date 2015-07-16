@@ -27,9 +27,7 @@ public class IndexModel{
 	// 작동 됨.
 
 	
-//=======
-//	@RequestMapping(value={"/home","/","/index","/login"},method=RequestMethod.GET)
-//>>>>>>> .r937
+
 	@RequestMapping(value={"/sahome","/","/saindex"})
 	public String indexForm(Model model){
 		return "home.index";

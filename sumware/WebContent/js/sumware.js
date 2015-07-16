@@ -150,7 +150,7 @@ function loginChk() {
 			} else if (result == 1) {
 				location = "safirstLoginForm";
 			} else {
-				location = "home.index";
+				location = "sahome";
 			}
 		}
 	});
@@ -174,7 +174,7 @@ function capClick() {
 
 function openWin() {
 	var opt = "width=700, height=800, scrollbars=yes";
-	window.open("messengerForm",
+	window.open("samessengerForm",
 			"MessengerMain", opt);
 }
 
