@@ -46,6 +46,7 @@
 							<li><a href="">Messenger <span id="countRoomNum"></span></a></li>
 							<li><a href="">Sign</a></li>
 							<li><a href="">Auction</a></li>
+							<li><a href="">Conference</a></li>
 						</ul>
 						<!-- navbar-nav(E) -->
 						<ul class="nav navbar-right navbar-nav user-name">

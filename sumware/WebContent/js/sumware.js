@@ -46,6 +46,9 @@ $(function() {
 		case ("auction"):
 			$("#formff").attr("action","saproductList").submit();
 			break;
+		case ("conference"):
+			goVcForm();
+			break;
 		default:
 			openWin();
 		break;
@@ -422,4 +425,10 @@ function findPassWord(res){
 			}
 		});
 	}
+}
+
+//회의방 만들기
+function goVcForm(){
+	var option = "width=600, height=500, scrollbars=yes";
+	window.open("savcForm?memdept=0&memname=&page=1","Video Conference",option);
 }
