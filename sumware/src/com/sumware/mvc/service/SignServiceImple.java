@@ -6,17 +6,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.SignatureVO;
 import com.sumware.mvc.dao.SignDao;
-@Service
 @Transactional
+@Service
+@Qualifier(value="sign")
 public class SignServiceImple extends AbstractService{
 	@Autowired
-	SignDao sgdao;
+	private SignDao sgdao;
 	@Override
 	public List<MemberVO> getMgrList(int memnum) {
 		ArrayList<MemberVO> mList = new ArrayList<MemberVO>();
