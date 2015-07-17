@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import com.sumware.dto.SignFormVO;
 import com.sumware.dto.SignStepVO;
 import com.sumware.dto.SignatureVO;
 import com.sumware.mvc.dao.SignDao;
+import com.sumware.mvc.service.ServiceInter;
 import com.sumware.mvc.service.SignServiceImple;
 import com.sumware.util.MyPage;
 
@@ -30,44 +32,48 @@ public class SignModel {
 	@Autowired
 	private SignDao sgdao;
 	@Autowired
-	private SignServiceImple signService;
+	@Qualifier(value="sign")
+	private ServiceInter signService;
 	
 	// 해당 부서의 결재 문서를 조회 관리(전체, 대기, 완료, 수신, 반려) 등등~
 	@RequestMapping(value="/sagetSignList")
 	public String getSignList(HttpServletRequest request){
-		Enumeration<String> en = request.getParameterNames();
-		while(en.hasMoreElements()){
-			String key = en.nextElement();
-			System.out.println("key::"+key+" value::"+request.getParameter(key));
-		}
 		HttpSession session = request.getSession();
-		session.setAttribute("model", "sign");
-		MemberVO mvo = (MemberVO) session.getAttribute("v");
-		System.out.println();
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		String div=request.getParameter("signdiv");
-		if(div==null||div==""){
-			div="0";
+		String first = (String) session.getAttribute("first");
+		if(first.equals("1")){
+			return "safirstLoginForm";
+		}else if(first.equals("0")){
+			session.invalidate();
+			return "home";
+		}else{
+			session.setAttribute("model", "sign");
+			MemberVO mvo = (MemberVO) session.getAttribute("v");
+			System.out.println();
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			String div=request.getParameter("signdiv");
+			if(div==null||div==""){
+				div="0";
+			}
+		
+			map.put("signdiv",Integer.parseInt(div));
+			map.put("sgdept", mvo.getMemdept());
+			map.put("nowmemnum", mvo.getMemnum());
+			map.put("searchName", request.getParameter("searchName"));
+			map.put("searchType", request.getParameter("searchType"));
+			
+			int totalCount = sgdao.getSignCount(map);
+			System.out.println("totalCount::"+totalCount);
+			System.out.println("page::"+request.getParameter("page"));
+			Map<String,Integer> pMap = MyPage.getMp().pageProcess(request, 10, 5, 0, totalCount, 0);
+			System.out.println("begin :::"+pMap.get("begin"));
+			System.out.println("end :::"+pMap.get("end"));
+			map.put("begin", pMap.get("begin"));
+			map.put("end", pMap.get("end"));
+			
+			List<SignatureVO> sgList=sgdao.getSignList(map);
+			request.setAttribute("sgList", sgList);
+			request.setAttribute("signdiv", div);
 		}
-	
-		map.put("signdiv",Integer.parseInt(div));
-		map.put("sgdept", mvo.getMemdept());
-		map.put("nowmemnum", mvo.getMemnum());
-		map.put("searchName", request.getParameter("searchName"));
-		map.put("searchType", request.getParameter("searchType"));
-		
-		int totalCount = sgdao.getSignCount(map);
-		System.out.println("totalCount::"+totalCount);
-		System.out.println("page::"+request.getParameter("page"));
-		Map<String,Integer> pMap = MyPage.getMp().pageProcess(request, 10, 5, 0, totalCount, 0);
-		System.out.println("begin :::"+pMap.get("begin"));
-		System.out.println("end :::"+pMap.get("end"));
-		map.put("begin", pMap.get("begin"));
-		map.put("end", pMap.get("end"));
-		
-		List<SignatureVO> sgList=sgdao.getSignList(map);
-		request.setAttribute("sgList", sgList);
-		request.setAttribute("signdiv", div);
 		return "sign.signList";
 	}
 	

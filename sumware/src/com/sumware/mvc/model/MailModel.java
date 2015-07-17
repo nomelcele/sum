@@ -132,30 +132,38 @@ public class MailModel{
 	@RequestMapping(value="/samailFromList")
 	public ModelAndView mailFromList(HttpServletRequest request,HttpSession session){
 		System.out.println("Mail Controller: mailFromList");
+		
 		ModelAndView mav = new ModelAndView();
-		
-		MemberVO mvo = (MemberVO) session.getAttribute("v");
-		System.out.println("userid::"+mvo.getMeminmail());
-		System.out.println("usernum::"+mvo.getMemnum());
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("userid", mvo.getMeminmail());
-		map.put("usernum", String.valueOf(mvo.getMemnum()));
-		
-		// 받은 메일함에 있는 메일 갯수 얻어오기
-		int totalCount = mdao.getListNum(map)[0];
-		System.out.println("받은 메일함 메일 갯수: "+totalCount);
-		
-		// 페이지 정보를 가져오기 위한 map
-		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
-		map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
-		map.put("end", pmap.get("end").toString()); // 마지막 페이지
-		
-		// 받은 메일함에 들어갈 메일 리스트 가져오기
-		List<MailVO> fromlist = mdao.getFromMailList(map);
-		mav.addObject("list", fromlist);
-		mav.addObject("tofrom", 1);
-		mav.setViewName("mail.mailList");
-		session.setAttribute("model", "mail");
+		String first = (String) session.getAttribute("first");
+		if(first.equals("1")){
+			mav.setViewName("safirstLoginForm");
+		}else if(first.equals("0")){
+			session.invalidate();
+			mav.setViewName("home");
+		}else{
+			MemberVO mvo = (MemberVO) session.getAttribute("v");
+			System.out.println("userid::"+mvo.getMeminmail());
+			System.out.println("usernum::"+mvo.getMemnum());
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("userid", mvo.getMeminmail());
+			map.put("usernum", String.valueOf(mvo.getMemnum()));
+			
+			// 받은 메일함에 있는 메일 갯수 얻어오기
+			int totalCount = mdao.getListNum(map)[0];
+			System.out.println("받은 메일함 메일 갯수: "+totalCount);
+			
+			// 페이지 정보를 가져오기 위한 map
+			Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
+			map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
+			map.put("end", pmap.get("end").toString()); // 마지막 페이지
+			
+			// 받은 메일함에 들어갈 메일 리스트 가져오기
+			List<MailVO> fromlist = mdao.getFromMailList(map);
+			mav.addObject("list", fromlist);
+			mav.addObject("tofrom", 1);
+			mav.setViewName("mail.mailList");
+			session.setAttribute("model", "mail");
+		}
 		return mav;
 		
 	}
