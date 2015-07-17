@@ -49,6 +49,7 @@ public class IndexModel{
 				
 				System.out.println("첫번째 이용자다!!!!");
 				session.setAttribute("memnum", memnum);
+				session.setAttribute("mempwd",ldao.firstPwd(memnum));
 				
 				session.setAttribute("first", "1");
 				//회원정보입력창으로 이동.
