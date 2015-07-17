@@ -57,6 +57,7 @@ public class IndexModel{
 	
 			} else if(!res.equals("1")&&!res.equals("0")){
 				System.out.println("ddddddddd");
+				session.setAttribute("first", "2");
 				MemberVO mvo = ldao.login(memnum);
 				session.setAttribute("model", "join");
 				// sessionScope에 아이디를 저장
