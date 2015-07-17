@@ -4,7 +4,7 @@
 <nav class="navbar navbar">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="sahome"><img
+			<a class="navbar-brand" href="home"><img
 				src="resources/img/sum.png" alt="SumWare"></a> <a
 				class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-collapse"> <span

@@ -37,48 +37,48 @@ public class AdminModel {
 	@Qualifier(value = "admin")
 	private ServiceInter service;
 
-	// 관리자페이지 진입
-	@RequestMapping(value = "/admin")
-	public String adminForm(HttpSession session, String model) {
-		session.setAttribute("model", model);
-		return "admin.adminMain";
-	}
+//	// 관리자페이지 진입
+//	@RequestMapping(value = "/admin")
+//	public String adminForm(HttpSession session, String model) {
+//		session.setAttribute("model", model);
+//		return "admin.adminMain";
+//	}
 
 	// 관리자 로그인
-	@RequestMapping(value = "/adminLogin")
-	public void adminLogin(MemberVO mvo, HttpSession session,
-			HttpServletResponse response) throws IOException {
-		MemberVO adminVo = adao.adminLogin(mvo);
-		String result = "admin.adminMain";
-		if (adminVo == null) {
-			// 로그인 실패 시
-			System.out.println("로그인실패");
-			result = "0";
-		} else {
-			// 관리자에 대한 정보
-			System.out.println("로그인성공");
-			session.setAttribute("adminv", adminVo);
-		}
-		PrintWriter pw = response.getWriter();
-		pw.print(result);
-		pw.flush();
-		pw.close();
-
-
-	}
-
-	// 관리자 로그아웃
-	@RequestMapping(value = "adminLogout")
-	public void adminLogout(int memnum, HttpSession session,
-			HttpServletResponse response) throws IOException {
-		System.out.println("로그아웃 컨트롤러");
-		session.removeAttribute("adminv");
-		session.invalidate();
-		PrintWriter pw = response.getWriter();
-		pw.write("success");
-		pw.flush();
-		pw.close();
-	}
+//	@RequestMapping(value = "/adminLogin")
+//	public void adminLogin(MemberVO mvo, HttpSession session,
+//			HttpServletResponse response) throws IOException {
+//		MemberVO adminVo = adao.adminLogin(mvo);
+//		String result = "admin.adminMain";
+//		if (adminVo == null) {
+//			// 로그인 실패 시
+//			System.out.println("로그인실패");
+//			result = "0";
+//		} else {
+//			// 관리자에 대한 정보
+//			System.out.println("로그인성공");
+//			session.setAttribute("adminv", adminVo);
+//		}
+//		PrintWriter pw = response.getWriter();
+//		pw.print(result);
+//		pw.flush();
+//		pw.close();
+//
+//
+//	}
+//
+//	// 관리자 로그아웃
+//	@RequestMapping(value = "adminLogout")
+//	public void adminLogout(int memnum, HttpSession session,
+//			HttpServletResponse response) throws IOException {
+//		System.out.println("로그아웃 컨트롤러");
+//		session.removeAttribute("adminv");
+//		session.invalidate();
+//		PrintWriter pw = response.getWriter();
+//		pw.write("success");
+//		pw.flush();
+//		pw.close();
+//	}
 
 	// / 모달에 mem정보
 	@RequestMapping(value = "/admingetMemInfoForModal", method = RequestMethod.POST)

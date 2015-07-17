@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
 	<!-- Admin Login -->
-	<select id="adminLogin" parameterType="mvo" resultType="mvo">
+	<select id="adminLogin" parameterType="int" resultType="mvo">
 		select memnum,memname,memaddr,mempwd,memprofile,memjob,memauth,memmail,meminmail,memmgr,memdept,memhire,memresign,membirth,memsignimg 
-		from (select * from member where memnum=1 and mempwd='1004') where memnum=#{memnum} and mempwd=#{mempwd}
+		from (select * from member where memnum=1 and mempwd='1004') where memnum=#{memnum}
 	</select>
 
 	<!-- 사원 추가(S) -->
