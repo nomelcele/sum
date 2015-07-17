@@ -20,8 +20,8 @@ public class AdminDao {
 	private SqlSessionTemplate st;
 	
 	// 관리자 로그인
-	public MemberVO adminLogin(MemberVO mvo){
-		return st.selectOne("admin.adminLogin", mvo);
+	public MemberVO adminLogin(int memnum){
+		return st.selectOne("admin.adminLogin", memnum);
 	}
 
 	// 관리자 - 새 사원 추가

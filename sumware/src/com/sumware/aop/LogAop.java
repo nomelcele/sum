@@ -1,5 +1,7 @@
 package com.sumware.aop;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -28,7 +30,7 @@ public class LogAop {
 		String res = String.valueOf(ret);
 		System.out.println(res);
 		if(!res.equals("1")&&!res.equals("0")){
-		int memnum = Integer.parseInt(request.getParameter("memnum"));
+		int memnum = Integer.parseInt(res);
 		logDao.inLog(memnum);
 		}
 	}

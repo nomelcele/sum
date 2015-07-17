@@ -4,15 +4,17 @@
 <nav class="navbar navbar">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="sahome"><img
+			<a class="navbar-brand" href="home"><img
 				src="resources/img/sum.png" alt="SumWare"></a> <a
 				class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-collapse"> <span
 				class="glyphicon glyphicon-chevron-down"></span>
 			</a>
 		</div>
+		
 		<c:choose>
 			<c:when test="${empty sessionScope.v.memnum && empty memnum}">
+			<form action="<c:url value='/j_spring_security_check'/>" method="POST" id="loginF">
 				<div class="porm-group">
 					<label class="control-label-" for="memnum">사원번호</label> 
 					<input type="text" id="memnum" name="memnum" placeholder="사원번호"	onkeydown="enterCheck(3)" />
@@ -21,6 +23,7 @@
 					<button type="button" class="btn btn-xs btn-info" onclick="loginChk()">로그인</button>
 					&nbsp; <a href="#" data-toggle="modal" data-target="#findPW" style="display:inline"><i class="fa fa-search"></i> pw</a>
 				</div>
+			</form>
 			</c:when>
 			<c:otherwise>
 				<div class="nav navbar-right">

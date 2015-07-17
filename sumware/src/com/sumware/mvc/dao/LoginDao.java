@@ -13,17 +13,22 @@ public class LoginDao {
 	private SqlSessionTemplate st;
 
 	// 로그인 시 사용하는 메서드
-	public MemberVO login(MemberVO mvo) throws SQLException{
-		return st.selectOne("login.login", mvo);
+	public MemberVO login(int memnum) throws SQLException{
+		return st.selectOne("login.login", memnum);
 	}
 	
-	public String ckFirstLogin(MemberVO mvo){
+	public String ckFirstLogin(int memnum){
 		String res="";
-		res = st.selectOne("login.ckFirstLogin",mvo);
+		res = st.selectOne("login.ckFirstLogin",memnum);
 		if(res==null||res.equals("")){
 			res="0";
+		}else{
+			res=String.valueOf(memnum);
 		}
 		return res;
+	}
+	public String firstPwd(int memnum){
+		return st.selectOne("login.firstPwd",memnum);
 	}
 	public void inLog(int memnum) {
 		st.insert("login.inLog",memnum);

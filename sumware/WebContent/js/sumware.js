@@ -2,15 +2,6 @@
 // $(window).onload(function(){}); == window.onload (이미지, js, 임포트된 외부 리소스 모두 로드
 // 이후에 js 해석)
 var c = 1;//로그인 실패 횟수
-console.log("typeof:" + typeof (EventSource));
-if (typeof (EventSource) != "undefined") {
-	var eventSourceList = new EventSource("mesCountMsg");
-	eventSourceList.onmessage = function(event) {
-		$('#countRoomNum').html(event.data);
-	};
-} else {
-	alert("해당 브라우저는 지원이 안됩니다.");
-}
 $(function() {
 	// DOM 요소 로드 이후에 실행되기 떄문에 이벤트가 뻑날일이 없음
 	// Main 페이지에서 각 네비바의 태그들 클릭 시 발생.
@@ -20,7 +11,7 @@ $(function() {
 		$pageName = $(this).text().toLowerCase();
 		switch ($pageName) {
 		case ("main"):
-			$("#formff").attr("action","sahome").submit();
+			$("#formff").attr("action","home").submit();
 			break;
 		case ("todo"):
 			$("#model").attr("value", $pageName);
@@ -65,14 +56,14 @@ $(function() {
 
 function logout(memnum) {
 	$.ajax({
-		url : "salogout",
-		type : "GET",
+		url : "logout",
+		type : "POST",
 		data : {
 			memnum : memnum
 		},
 		success : function(result) {
 			console.log("logout result: " + result);
-			location = "saindex";
+			location = "index";
 		}
 	});
 }
@@ -113,7 +104,7 @@ function enterCheck(res) {
 			} else if (res == 2) {
 				snsInsertComm();
 			} else if (res == 3) {
-				loginChk();
+//				loginChk();
 			}else if(res == 4){
 				adminLogin();
 			}
@@ -125,35 +116,38 @@ function enterCheck(res) {
 }
 //로그인 3회....
 function loginChk() {
-	$.ajax({
-		url : "salogin",
-		type : "POST",
-		data : {
-			memnum : $("#memnum").val(),
-			mempwd : $("#mempwd").val()
-		},
-		success : function(result) {
-			result = result.trim();
-			if (result == 0) {
-				alert(c + "회 로그인실패");
-				c++;
-				if (c > 3) {
-					$.ajax({
-						url : "sagetCap",
-						type : "POST",
-						success : function(result) {
-							$('#capBody').html(result);
-							$('#capModal').modal('toggle');
-						}
-					});
-				}
-			} else if (result == 1) {
-				location = "safirstLoginForm";
-			} else {
-				location = "sahome";
-			}
-		}
-	});
+//	$.ajax({
+//		url : "salogin",
+//		type : "POST",
+//		data : {
+//			memnum : $("#memnum").val(),
+//			mempwd : $("#mempwd").val()
+//		},
+//		success : function(result) {
+//			result = result.trim();
+//			if (result == 0) {
+//				alert(c + "회 로그인실패");
+//				c++;
+//				if (c > 3) {
+//					$.ajax({
+//						url : "sagetCap",
+//						type : "POST",
+//						success : function(result) {
+//							$('#capBody').html(result);
+//							$('#capModal').modal('toggle');
+//						}
+//					});
+//				}
+//			} else if (result == 1) {
+//				location = "safirstLoginForm";
+//			} else {
+//				alert("성공:"+result);
+//				$('#loginF').submit();
+//				location = "home";
+//			}
+//		}
+//	});
+	$('#loginF').submit();
 }
 
 
@@ -165,7 +159,7 @@ function capClick() {
 		var captcha = $("#Captarget").text().trim();
 		console.log(captcha)
 		if (captcha == "ok") {
-			location = "sahome";
+			location = "home";
 		} else {
 			alert("보안문자 확인해주세요.");
 		}
