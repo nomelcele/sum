@@ -104,7 +104,7 @@ function enterCheck(res) {
 			} else if (res == 2) {
 				snsInsertComm();
 			} else if (res == 3) {
-//				loginChk();
+				loginChk();
 			}else if(res == 4){
 				adminLogin();
 			}
