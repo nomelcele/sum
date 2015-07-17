@@ -32,16 +32,24 @@ public class IndexModel{
 	AdminDao adao;
 	// 요청이 home 이거나, 아무 요청이 없을 경우 
 	// 작동 됨.
-
+	private int capCount;
 	
 
-	@RequestMapping(value={"/home","/","/index"},method=RequestMethod.GET)
+	@RequestMapping(value={"/home","/"},method=RequestMethod.GET)
 	public String indexForm(Model model){
+		return "home.index";
+	}
+	@RequestMapping(value="index",method=RequestMethod.GET)
+	public String indexForm(HttpSession session){
+		capCount++;
+		System.out.println("들어옴:"+capCount);
+		session.setAttribute("capCount", capCount);
 		return "home.index";
 	}
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String indexForm(Principal principal,HttpSession session){
 		System.out.println(":::::::"+principal.getName());
+		capCount=0;
 		int memnum = Integer.parseInt(principal.getName());
 		String str ="";
 		if(memnum !=1){

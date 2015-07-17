@@ -30,6 +30,13 @@
 <script src="js/notification.js"></script>
 <script>
 $(function(){
+	if("${not empty param.fail }"=="true"){
+		capCount = "${sessionScope.capCount}";
+		alert("로그인 "+capCount+"회 실패");
+		if(capCount>3){
+			openCap();
+		}
+	}
 	if("${empty v.meminmail}"=="false"){
 		// The user needs to allow this
 		console.log("meminmail:::${v.meminmail}");

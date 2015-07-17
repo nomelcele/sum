@@ -92,7 +92,7 @@ public class JoinModel{
 	}
 	
 	
-	@RequestMapping(value="/sagetCap",method=RequestMethod.POST)
+	@RequestMapping(value="/getCap",method=RequestMethod.POST)
 	public String getCap(HttpServletRequest request){
 		
 		CaptchasDotNet captchas = new com.sumware.util.CaptchasDotNet(

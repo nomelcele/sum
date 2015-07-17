@@ -1,7 +1,6 @@
 // $(function(){}) == document.ready
 // $(window).onload(function(){}); == window.onload (이미지, js, 임포트된 외부 리소스 모두 로드
 // 이후에 js 해석)
-var c = 1;//로그인 실패 횟수
 $(function() {
 	// DOM 요소 로드 이후에 실행되기 떄문에 이벤트가 뻑날일이 없음
 	// Main 페이지에서 각 네비바의 태그들 클릭 시 발생.
@@ -63,7 +62,7 @@ function logout(memnum) {
 		},
 		success : function(result) {
 			console.log("logout result: " + result);
-			location = "index";
+			location = "home";
 		}
 	});
 }
@@ -116,40 +115,18 @@ function enterCheck(res) {
 }
 //로그인 3회....
 function loginChk() {
-//	$.ajax({
-//		url : "salogin",
-//		type : "POST",
-//		data : {
-//			memnum : $("#memnum").val(),
-//			mempwd : $("#mempwd").val()
-//		},
-//		success : function(result) {
-//			result = result.trim();
-//			if (result == 0) {
-//				alert(c + "회 로그인실패");
-//				c++;
-//				if (c > 3) {
-//					$.ajax({
-//						url : "sagetCap",
-//						type : "POST",
-//						success : function(result) {
-//							$('#capBody').html(result);
-//							$('#capModal').modal('toggle');
-//						}
-//					});
-//				}
-//			} else if (result == 1) {
-//				location = "safirstLoginForm";
-//			} else {
-//				alert("성공:"+result);
-//				$('#loginF').submit();
-//				location = "home";
-//			}
-//		}
-//	});
 	$('#loginF').submit();
 }
-
+function openCap(){
+	$.ajax({
+		url : "getCap",
+		type : "POST",
+		success : function(result) {
+			$('#capBody').html(result);
+			$('#capModal').modal('toggle');
+		}
+	});
+}
 
 //보안문자에서의 폼전달
 function capClick() {
