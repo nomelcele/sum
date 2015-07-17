@@ -31,67 +31,77 @@ public class BoardModel {
 	// 게시판 목록
 	@RequestMapping(value="/saboardList")
 	public ModelAndView getList(BoardVO bvo,HttpServletRequest req,HttpSession ses){
-		System.out.println("보드리스트입니다람쥐!");
-		System.out.println(req.getParameter("page"));
-		
-		Map<String,Integer> pMap;
-		
-		int bgnum = bvo.getBgnum();
-		ModelAndView mav = new ModelAndView("board.boardList");
-		
-		ses.setAttribute("model", "board");
-		ses.setAttribute("bname", boardName(bgnum));
-		ses.setAttribute("bbbgnum", bgnum);
-		
-		ses.setAttribute("boardSearch", bvo.getBsearch());
-		ses.setAttribute("boardDiv", bvo.getDiv());
-		System.out.println("bsearch:::::"+bvo.getBsearch());
-		System.out.println("bsearch비어있나?:::::"+bvo.getBsearch().isEmpty());
-		if((!bvo.getBsearch().isEmpty())){
-			bvo.setBtitle(bvo.getBsearch());
-			pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.searchCount(bvo), 0);	
+		ModelAndView mav = new ModelAndView();
+		String first = (String) ses.getAttribute("first");
+		if(first.equals("1")){
+			mav.setViewName("safirstLoginForm");
+		}else if(first.equals("0")){
+			ses.invalidate();
+			mav.setViewName("home");
 		}else{
-			pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);	
+			System.out.println("보드리스트입니다람쥐!");
+			System.out.println(req.getParameter("page"));
+			
+			Map<String,Integer> pMap;
+			
+			int bgnum = bvo.getBgnum();
+	
+			mav.setViewName("board.boardList");
+			
+			ses.setAttribute("model", "board");
+			ses.setAttribute("bname", boardName(bgnum));
+			ses.setAttribute("bbbgnum", bgnum);
+			
+			ses.setAttribute("boardSearch", bvo.getBsearch());
+			ses.setAttribute("boardDiv", bvo.getDiv());
+			System.out.println("bsearch:::::"+bvo.getBsearch());
+			System.out.println("bsearch비어있나?:::::"+bvo.getBsearch().isEmpty());
+			if((!bvo.getBsearch().isEmpty())){
+				bvo.setBtitle(bvo.getBsearch());
+				pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.searchCount(bvo), 0);	
+			}else{
+				pMap =MyPage.getMp().pageProcess(req, 10, 5, 0, dao.getTotalCount(bgnum), 0);	
+			}
+			
+			int begin = pMap.get("begin");
+			int end = pMap.get("end");
+			this.page = pMap.get("page");
+			bvo.setBegin(begin);
+			bvo.setEnd(end);
+			
+	//		map.put("begin", String.valueOf(begin));
+	//		map.put("end", String.valueOf(end));
+			
+			System.out.println("+++++++++++++++++++++++");
+			System.out.println(bvo.getBgnum());
+			System.out.println(bvo.getBdeptno());
+			System.out.println(bvo.getBsearch());
+			System.out.println(bvo.getDiv());
+			System.out.println(bvo.getBegin());
+			System.out.println(bvo.getEnd());
+			System.out.println("+++++++++++++++++++++++");
+			mav.addObject("list",boardList(bvo));
+			
+			// contentLeft.jsp 에 뿌려줄 게시판 이름 불러오는 로직.
+	//		MemberVO v = (MemberVO) ses.getAttribute("v");
+	//		System.out.println("접속자의 부서번호 : "+v.getMemnum());
+	//		ses.setAttribute("bNameList", boardNameList(v.getMemdept()));
+	//		ses.setAttribute("currentPage", page);
+			
+			// contentLeft.jsp 에 뿌려줄 게시판 이름 불러오는 로직.
+			MemberVO v = (MemberVO) ses.getAttribute("v");
+			MemberVO adv = (MemberVO) ses.getAttribute("adminv");
+			if(v != null){ // 일반 사원이 로그인했을 경우
+				System.out.println("접속자의 사원번호 : "+v.getMemnum());
+				System.out.println("접속자의 부서번호: "+v.getMemdept());
+				ses.setAttribute("bNameList", boardNameList(v.getMemdept()));
+				ses.setAttribute("currentPage", page);
+			} else { // 관리자 모드의 게시판 열람에서 접근했을 경우
+				System.out.println("관리자 게시판 열람 접근");
+				System.out.println(adv.getMemdept());
+				mav.setViewName("board/boardList");
+			}	
 		}
-		
-		int begin = pMap.get("begin");
-		int end = pMap.get("end");
-		this.page = pMap.get("page");
-		bvo.setBegin(begin);
-		bvo.setEnd(end);
-		
-//		map.put("begin", String.valueOf(begin));
-//		map.put("end", String.valueOf(end));
-		
-		System.out.println("+++++++++++++++++++++++");
-		System.out.println(bvo.getBgnum());
-		System.out.println(bvo.getBdeptno());
-		System.out.println(bvo.getBsearch());
-		System.out.println(bvo.getDiv());
-		System.out.println(bvo.getBegin());
-		System.out.println(bvo.getEnd());
-		System.out.println("+++++++++++++++++++++++");
-		mav.addObject("list",boardList(bvo));
-		
-		// contentLeft.jsp 에 뿌려줄 게시판 이름 불러오는 로직.
-//		MemberVO v = (MemberVO) ses.getAttribute("v");
-//		System.out.println("접속자의 부서번호 : "+v.getMemnum());
-//		ses.setAttribute("bNameList", boardNameList(v.getMemdept()));
-//		ses.setAttribute("currentPage", page);
-		
-		// contentLeft.jsp 에 뿌려줄 게시판 이름 불러오는 로직.
-		MemberVO v = (MemberVO) ses.getAttribute("v");
-		MemberVO adv = (MemberVO) ses.getAttribute("adminv");
-		if(v != null){ // 일반 사원이 로그인했을 경우
-			System.out.println("접속자의 사원번호 : "+v.getMemnum());
-			System.out.println("접속자의 부서번호: "+v.getMemdept());
-			ses.setAttribute("bNameList", boardNameList(v.getMemdept()));
-			ses.setAttribute("currentPage", page);
-		} else { // 관리자 모드의 게시판 열람에서 접근했을 경우
-			System.out.println("관리자 게시판 열람 접근");
-			System.out.println(adv.getMemdept());
-			mav.setViewName("board/boardList");
-		}		
 		return mav;
 	}
 	

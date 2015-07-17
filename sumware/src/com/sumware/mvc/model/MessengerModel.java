@@ -35,19 +35,26 @@ public class MessengerModel{
 	// 메신저 폼
 	@RequestMapping(value = "/samessengerForm")
 	public String messengerForm(HttpSession session, Model model) {
-		List<MemberVO> list = medao.getList();
-		ArrayList<MemberVO> resList = new ArrayList<MemberVO>();
-		
-		MemberVO vo = (MemberVO) session.getAttribute("v");
-		int userNum = vo.getMemnum();
-		
-		for(MemberVO v : list){
-			if(userNum != v.getMemnum()){
-				resList.add(v);
+		String first = (String) session.getAttribute("first");
+		if(first.equals("1")){
+			return "safirstLoginForm";
+		}else if(first.equals("0")){
+			session.invalidate();
+			return "home";
+		}else{
+			List<MemberVO> list = medao.getList();
+			ArrayList<MemberVO> resList = new ArrayList<MemberVO>();
+			
+			MemberVO vo = (MemberVO) session.getAttribute("v");
+			int userNum = vo.getMemnum();
+			
+			for(MemberVO v : list){
+				if(userNum != v.getMemnum()){
+					resList.add(v);
+				}
 			}
+			model.addAttribute("list", resList);
 		}
-		model.addAttribute("list", resList);
-
 		return "messenger/open/messenger";
 	}
 

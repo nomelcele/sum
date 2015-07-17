@@ -28,6 +28,13 @@ public class CalendarModel{
 	@RequestMapping(value="/sacalList")
 	public String getCalList(CalendarVO cavo,Model model,HttpSession session){
 		MemberVO vo = new MemberVO();
+		String first = (String) session.getAttribute("first");
+		if(first.equals("1")){
+			return "safirstLoginForm";
+		}else if(first.equals("0")){
+			session.invalidate();
+			return "home";
+		}else{
 		vo = (MemberVO) session.getAttribute("v");
 		session.setAttribute("model", "calendar");
 		cavo.setCaldept(vo.getMemdept());
@@ -48,6 +55,7 @@ public class CalendarModel{
 	
 			model.addAttribute("calJson", json);
 			model.addAttribute("selcal", "사원");
+		}
 		}
 		return "calendar.calTest";
 	}

@@ -26,9 +26,18 @@ public class ProductModel {
 	// 상단 메뉴 탭 눌렀을 경우 보여지는 첫 페이지.
 	@RequestMapping(value="/saproductList")
 	public ModelAndView productList(HttpSession ses){
-		ses.setAttribute("model", "auction");
-		ModelAndView mav = new ModelAndView("product.productList");
-		mav.addObject("plist",pdao.proList());
+		ModelAndView mav = new ModelAndView();
+		String first = (String) ses.getAttribute("first");
+		if(first.equals("1")){
+			mav.setViewName("safirstLoginForm");
+		}else if(first.equals("0")){
+			ses.invalidate();
+			mav.setViewName("home");
+		}else{
+			ses.setAttribute("model", "auction");
+			mav.setViewName("product.productList");
+			mav.addObject("plist",pdao.proList());
+		}
 		return mav;
 	}
 	

@@ -33,11 +33,18 @@ public class TodoModel {
 	// todo 기본 페이지 //ok
 	@RequestMapping(value = "/satodoForm", method = RequestMethod.POST)
 	public String todoForm(Model model, HttpSession session) {
-		MemberVO mvo =(MemberVO) session.getAttribute("v");
-		int todept = mvo.getMemdept();
-		List<TodoVO> deptJobList = tdao.getDeptJob(todept);
-		model.addAttribute("deptJobList", deptJobList);
-
+		String first = (String) session.getAttribute("first");
+		if(first.equals("1")){
+			return "safirstLoginForm";
+		}else if(first.equals("0")){
+			session.invalidate();
+			return "home";
+		}else{
+			MemberVO mvo =(MemberVO) session.getAttribute("v");
+			int todept = mvo.getMemdept();
+			List<TodoVO> deptJobList = tdao.getDeptJob(todept);
+			model.addAttribute("deptJobList", deptJobList);
+		}
 		return "todo/main/todo";
 	}
 
