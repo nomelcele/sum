@@ -65,6 +65,7 @@
 	</beans:bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/> 
+	
 	<!--  WebSocket--> 
 	<websocket:handlers>
 		<websocket:mapping handler="myHandler" path="/msgSocket"/>
