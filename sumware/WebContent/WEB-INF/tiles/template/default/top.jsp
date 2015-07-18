@@ -38,7 +38,7 @@
 						<input type="hidden" name="div" value="">
 						<!-- navbar-nav(S) -->
 						<ul class="nav navbar-nav">
-							<li><a href="">Main</a></li>
+<!-- 							<li><a href="">Main</a></li> -->
 							<li><a href="">Todo</a></li>
 							<li><a href="">Mail</a></li>
 							<li><a href="">Calendar</a>
@@ -47,7 +47,7 @@
 							<li><a href="">Sign</a></li>
 							<li><a href="">Auction</a></li>
 							<li><a href="">Chart</a></li>
-							<li><a href="">Conference</a></li>
+							<li><a href="">Conf</a></li>
 						</ul>
 						<!-- navbar-nav(E) -->
 						<ul class="nav navbar-right navbar-nav user-name">
