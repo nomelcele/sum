@@ -64,6 +64,9 @@
 		<beans:constructor-arg ref="factoryBean" />
 	</beans:bean>
 	
+	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<beans:property name="dataSource" ref="dataSource"></beans:property>
+	</beans:bean>
 	<tx:annotation-driven transaction-manager="transactionManager"/> 
 	
 	<!--  WebSocket--> 
