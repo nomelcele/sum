@@ -21,14 +21,14 @@ ZZIM	VARCHAR2(1)
 	
 	<!-- 상품 리스트 -->
 	<select id="proList" resultType="provo">
-		select p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, p.enddate,p.pronum
+		select p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, to_char(p.enddate,'yyyy-MM-dd') enddate,p.pronum
 		from product p, member m where p.prowriter = m.memnum order by pronum desc
 	</select>	
 	
 	<!-- 상품 디테일 -->
 	<select id="proDetail" parameterType="int" resultType="provo">
-		select p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, p.enddate
-		from product p, member m where p.prowriter = m.memnum and p.pronum=#{pronum} order by pronum desc
+		select p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, to_char(p.enddate,'yyyy-MM-dd') enddate
+		from product p, member m where p.prowriter = m.memnum and p.pronum=#{pronum}
 	</select>
 	
 </mapper>

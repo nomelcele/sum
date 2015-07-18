@@ -1,23 +1,22 @@
 /**
  * 
  */
-// productList.jsp 에서 상품등록 버튼 누르면 작동 되는 메소드.
+
 $(function(){
+	// productList.jsp 에서 상품등록 버튼 누르면 작동 되는 메소드.
 	$('#auctionBtn1 button').click(function(){
 		$.ajax({
 			url : "sawriteForm",
 			type : "post",
 			success : function(result){
 				$('#mTarget').html(result);
-				$('#myModal').modal('toggle');
+				$('#proRegister').modal('toggle');
 			}
 		});
 	});
-	$('#proimg').click(function(){
-		location='saproDetail';
-	});
 });
 
+// 상품 목록 클릭시(이미지를 클릭하면 작동)
 function detailGo(no){
 	location='saproDetail?pronum='+no;
 }
@@ -38,16 +37,19 @@ function preview(input){
 function doneClick(){
 	// 종료 일자유무 판단 후 검증 처리.
 	$('#doneForm').submit();
-	$('#myModal').modal('toggle');
+	$('#proRegister').modal('toggle');
 }
 
-
-
-
-
-
-
-
+function bidBtn(){
+	$.ajax({
+		url:"saproBid",
+		type : "post",
+		success:function(res){
+			$('#bidTarget').html(res);
+			$('#')
+		}
+	});
+}
 
 
 

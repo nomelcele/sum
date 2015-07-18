@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<!-- 상품등록 Modal -->
+<div id="proRegister" class="modal fade" role="dialog">
 	<form action="sadone" method="post" id="doneForm" enctype="multipart/form-data">
 	<input type="hidden"  name="prowriter" value="${sessionScope.v.memnum }">
 	<div class="modal-dialog">
@@ -71,3 +71,9 @@
 	</div>
 	</form>
 </div>
+
+<!-- 상품입찰 Modal -->
+<div id="bidModal">
+	Good!!!!
+</div>
+
