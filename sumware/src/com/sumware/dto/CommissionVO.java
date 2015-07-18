@@ -6,9 +6,16 @@ public class CommissionVO {
     comdate date -- 지급 받은 날짜
     commem number(5) -- 지급받은 사원
     comnum NUMBER(10), -- 지급번호*/
-	private String comdetail, comdate;
+	private String comdetail, comdate, memname;
 	private int comamount,comnum, commem, comsum;
 	
+	
+	public String getMemname() {
+		return memname;
+	}
+	public void setMemname(String memname) {
+		this.memname = memname;
+	}
 	public int getComsum() {
 		return comsum;
 	}

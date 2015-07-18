@@ -37,6 +37,40 @@
 <script src="js/http.js"></script>
 <!-- js (E) -->
 </head>
+
+
+<!-- Modal(S) 인증-->
+<div class="modal fade" id="authentication" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">관리자 인증</h4>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" id="senddata">
+				<table>
+						<tr>
+							<td class="col-lg-1" style="font-weight: bold">관리자 비밀 번호</td>
+							<td class="col-lg-1"><input type="password" id="authpwd"  name="mempwd"></td>
+						</tr>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-default" id="authBtn"
+					onclick="">인증</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal(E) -->
+
+
 <body>
 	<!-- header -->
 	<tiles:insertAttribute flush="true" name="header" />

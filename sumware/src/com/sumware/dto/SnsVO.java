@@ -1,9 +1,15 @@
 package com.sumware.dto;
 
 public class SnsVO {
-	private int srnum,snum,sdept,smem,stocount;
+	private int srnum,snum,sdept,smem,stocount,scnt;
 	private String smemname,smemprofile,scont,simg,sdate;
 	
+	public int getScnt() {
+		return scnt;
+	}
+	public void setScnt(int scnt) {
+		this.scnt = scnt;
+	}
 	public int getStocount() {
 		return stocount;
 	}

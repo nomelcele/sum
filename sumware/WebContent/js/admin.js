@@ -268,16 +268,10 @@ function resignMem(memnum){
 	if(!confirm("퇴사 처리하시겠습니까?")){
 		return; // 취소를 할 경우 삭제되지 않는다.
 	} else { // 확인 버튼을 누르면 퇴사 처리
-		$.ajax({
-			type: "POST",
-			url: "adminResignMem",
-			data: {
-				memnum: memnum
-			},
-			success: function(result){
-				$('.contents').html(result);
-			}
-		});
+		$('#authentication').modal('toggle');
+		$('#authBtn').attr("onclick","javascript:authentication('deleteMem')")
+		$('#senddata').val(memnum)
+		
 	}
 }
 
@@ -466,16 +460,8 @@ function prFormSaveChange(memnum){
 			if(!confirm("게시판을 삭제하시겠습니까?")){
 				return; 
 			} else { 
-				$.ajax({
-					type: "POST",
-					url: "admindeleteBoard",
-					data: {
-						bgnum: $("#searchDeptBoard").val()
-					},
-					success: function(result){
-						$('.contents').html(result);
-					}
-				});
+				$('#authentication').modal('toggle');
+				$('#authBtn').attr("onclick","javascript:authentication('deleteBoard')")
 			}
 		}
 
@@ -722,5 +708,51 @@ function prFormSaveChange(memnum){
 					}
 				});
 			}
+		}
+
+		
+		// 인증 후 각 DB 변경 업무 처리
+		function authentication(job){
+			$.ajax({
+				type: "POST",
+				url: "adminauthentication",
+				data: {
+					mempwd: $("#authpwd").val()
+				},
+				success: function(){
+					$('#authentication').modal('toggle');
+					setTimeout(function() {
+						if (job == 'deleteBoard') {
+								$.ajax({
+									type : "POST",
+									url : "admindeleteBoard",
+									data : {
+										bgnum : $("#searchDeptBoard").val()
+									},
+									success : function(result) {
+										alert("삭제가 완료되었습니다.")
+										$('.contents').html(result);
+									}
+								});
+						}else if(job=='deleteMem'){
+								$.ajax({
+									type: "POST",
+									url: "adminResignMem",
+									data: {
+										memnum: $('#senddata').val()
+									},
+									success: function(result){
+										alert("퇴사 처리가 완료되었습니다.")
+										$('.contents').html(result);
+									}
+								});
+						}			
+					},500);
+				},
+				error : function(e) {
+					alert("인증 실패! 비밀번호가 틀렸습니다")
+				}
+			});
+			
 		}
 		
