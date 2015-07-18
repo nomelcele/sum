@@ -413,4 +413,14 @@ alter table signature add(sgreturncomm varchar2(300));
 alter table signature add (sdate varchar2(50),splace varchar2(50),sps varchar2(200));
 COMMIT;
 
+--0718 pay테이블에 기본 사원들 정보 추가
+insert into pay values(10000,2,7000);
+insert into pay values(10001,2,7000);
+insert into pay values(10002,2,7000);
+insert into pay values(10003,2,7000);
+insert into pay values(10004,2,7000);
+insert into pay values(10005,2,7000);
+insert into pay values(10006,2,7000);
+commit;
+
 

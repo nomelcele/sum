@@ -110,7 +110,41 @@ public class ChartModel {
 				System.out.println("json4 : "+todosf.toString());	
 				model.addAttribute("tododept", todosf.toString());
 				
-		
+				// 부서의 팀장별 업무수
+				StringBuffer teamtodosf = new StringBuffer();
+				teamtodosf.append("[");
+				if(dvolist != null){
+					for(int i=0; i<dvolist.size(); i++){
+						List<DeptVO> teamlist = cdao.getTodoKingTeam(dvolist.get(i).getDenum());
+						teamtodosf.append("{name:");
+						teamtodosf.append("\"");
+						teamtodosf.append(dvolist.get(i).getDename());
+						teamtodosf.append("\",id:\"");
+						teamtodosf.append(dvolist.get(i).getDename());
+						teamtodosf.append("\",data:[");
+						if(teamlist != null){
+							for(int j=0; j<teamlist.size();j++){
+								teamtodosf.append("[\"");
+								teamtodosf.append(teamlist.get(j).getMemname());
+								teamtodosf.append(" 팀\",");
+								teamtodosf.append(teamlist.get(j).getTcnt());
+								teamtodosf.append("]");	
+								if(!(j == teamlist.size()-1)){
+									teamtodosf.append(",");
+								}
+							}
+						}
+						teamtodosf.append("]");	
+						teamtodosf.append("}");
+						if(!(i == dvolist.size()-1)){
+							teamtodosf.append(",");
+						}
+					}
+				}
+				teamtodosf.append("]");
+				System.out.println("tododetailjson:::"+teamtodosf.toString());
+				model.addAttribute("todoteam", teamtodosf.toString());
+
 		return "charts.charts";
 	}
 	

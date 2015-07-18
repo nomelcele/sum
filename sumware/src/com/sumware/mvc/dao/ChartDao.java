@@ -31,4 +31,9 @@ public class ChartDao {
 		return st.selectList("chart.getTodoKingDept");
 	}
 	
+	// 부서의 팀별 팀장,업무수
+	public List<DeptVO> getTodoKingTeam(int deptnum){
+		return st.selectList("chart.getTodoKingTeam", deptnum);	
+	}
+	
 }

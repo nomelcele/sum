@@ -13,15 +13,21 @@
   	
   	<select id="getSnsKing" resultType="svo">
   		select rownum, res.* from (select m.memname smemname,s.smem, s.scnt 
-		from (select count(*) scnt, smem from sns where to_char(sdate,'yyyy-mm')=to_char(add_months(sysdate,-1),'yyyy-mm') group by smem) s, member m where s.smem = m.memnum 
+		from (select count(*) scnt, smem from sns where to_char(sdate,'yyyy-mm')=to_char(add_months(sysdate,0),'yyyy-mm') group by smem) s, member m where s.smem = m.memnum 
 		order by s.scnt desc) res where rownum <![CDATA[<=]]> 5
   	</select>
   	
   	<select id="getTodoKingDept" resultType="dvo">
-  		select rownum, d.DENAME, t.tcnt from (select count(*) tcnt, todept from todo 
+  		select rownum, d.dename, d.denum, t.tcnt from (select count(*) tcnt, todept from todo 
 		where toconfirm='o' 
 		and to_char(TOSTDATE,'yyyy')=to_char(sysdate,'yyyy') group by todept order by tcnt desc) t, (select * from dept where denum!=999) d 
 		where d.denum=t.todept(+) and rownum <![CDATA[<=]]> 5
+  	</select>
+  	
+  	<select id="getTodoKingTeam" parameterType="int" resultType="dvo">
+  		select m.memname, t.tcnt from
+		(select tomem, count(*) tcnt from (select * from todo where todept=#{deptnum}) group by tomem) t, member m
+		where t.tomem=m.memnum
   	</select>
 
   </mapper>

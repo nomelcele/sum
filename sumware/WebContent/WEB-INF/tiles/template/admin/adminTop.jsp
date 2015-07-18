@@ -29,7 +29,7 @@
 								<span class="control-label-"><strong>${sessionScope.adminv.memname}</strong> 님 환영합니다.</span>
 							</li>
 							<li>
-								<button type="button" class="btn btn-xs btn-info" onclick="adminLogout(${sessionScope.adminv.memnum})">로그아웃</button>
+								<button type="button" class="btn btn-xs btn-info" onclick="logout(${sessionScope.adminv.memnum})">로그아웃</button>
 							</li>
 						</c:if>
 						</ul>
