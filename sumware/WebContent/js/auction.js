@@ -46,7 +46,7 @@ function bidBtn(){
 		type : "post",
 		success:function(res){
 			$('#bidTarget').html(res);
-			$('#')
+			$('#bidModal').modal('toggle');
 		}
 	});
 }
