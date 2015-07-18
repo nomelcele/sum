@@ -46,12 +46,15 @@ $(function() {
 		case ("auction"):
 			$("#formff").attr("action","saproductList").submit();
 			break;
+		case ("chart"):
+			$("#formff").attr("action","sachart").submit();
+			break;
 		case ("conference"):
 			goVcForm();
 			break;
 		default:
 			openWin();
-		break;
+			break;
 		}
 	});
 });

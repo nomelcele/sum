@@ -418,5 +418,26 @@ public class AdminModel {
 	}
 	
 	// ////////////////////////문서 양식 관리(E)///////////////////////////
+	
+	// ////////////////////////인증 부분(S)///////////////////////////
+	//인증
+	@RequestMapping(value="/adminauthentication", method=RequestMethod.POST)
+	public String adminauthentication(MemberVO mvo, HttpSession session) throws Exception{
+		MemberVO adminvo = (MemberVO) session.getAttribute("adminv");
+		mvo.setMemnum(adminvo.getMemnum());
+		System.out.println("memnum:"+mvo.getMemnum()+"mempwd:"+mvo.getMempwd());
+		MemberVO adminv = adao.adminLogin(mvo.getMemnum());
+		if(adminv==null){
 
+			throw new Exception("비밀번호가 틀렸습니다.");
+		}
+		
+		// 의미없는 뷰
+		return "admin/adminMain";
+	}
+	
+	// ////////////////////////인증 부분(E)///////////////////////////
+
+	
+	
 }

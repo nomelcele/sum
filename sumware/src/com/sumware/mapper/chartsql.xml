@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="chart">
+  	<select id="getCommissionKing" resultType="comvo">
+  		select rownum row_n, c.commem, m.memname, c.comsum from 
+		(select commem, sum(comamount) comsum 
+		from commission where to_char(comdate,'yyyy-mm')=to_char(add_months(sysdate,-1),'yyyy-mm') 
+		GROUP BY commem order by comsum desc) c, member m 
+		where c.commem=m.memnum and rownum  <![CDATA[<=]]> 5
+  	</select>
+  	
+  	<select id="getSnsKing" resultType="svo">
+  		select rownum, res.* from (select m.memname smemname,s.smem, s.scnt 
+		from (select count(*) scnt, smem from sns where to_char(sdate,'yyyy-mm')=to_char(add_months(sysdate,-1),'yyyy-mm') group by smem) s, member m where s.smem = m.memnum 
+		order by s.scnt desc) res where rownum <![CDATA[<=]]> 5
+  	</select>
+  	
+  	<select id="getTodoKingDept" resultType="dvo">
+  		select rownum, d.DENAME, t.tcnt from (select count(*) tcnt, todept from todo 
+		where toconfirm='o' 
+		and to_char(TOSTDATE,'yyyy')=to_char(sysdate,'yyyy') group by todept order by tcnt desc) t, (select * from dept where denum!=999) d 
+		where d.denum=t.todept(+) and rownum <![CDATA[<=]]> 5
+  	</select>
+
+  </mapper>

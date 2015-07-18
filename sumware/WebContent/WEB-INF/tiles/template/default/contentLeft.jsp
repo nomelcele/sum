@@ -54,7 +54,7 @@
 						<tr>
 							<td colspan="2"><a
 								href="samodifyProfile"
-								class="primary-font"><i class="fa fa-cog"></i> 사원 정보</a></td>
+								class="primary-font"><i class="fa fa-cog"></i> 내 정보</a></td>
 						</tr>
 					</table>
 					<!-- profile-table(E) -->
@@ -136,7 +136,7 @@
 					<tr>
 						<td colspan="2"><a
 							href="samodifyProfile"
-							class="primary-font"><i class="fa fa-cog"></i> 사원 정보</a></td>
+							class="primary-font"><i class="fa fa-cog"></i> 내 정보</a></td>
 
 					</tr>
 				</table>
@@ -226,7 +226,7 @@
 				<tr>
 					<td colspan="2"><a
 						href="samodifyProfile"
-						class="primary-font"><i class="fa fa-cog"></i> 사원 정보</a></td>
+						class="primary-font"><i class="fa fa-cog"></i> 내 정보</a></td>
 
 				</tr>
 			</table>
@@ -280,7 +280,7 @@
 				<tr>
 					<td colspan="2"><a
 						href="samodifyProfile"
-						class="primary-font"><i class="fa fa-cog"></i> 사원 정보</a></td>
+						class="primary-font"><i class="fa fa-cog"></i> 내 정보</a></td>
 
 				</tr>
 			</table>
@@ -292,7 +292,6 @@
 		<ul>
 			<li><a href="javascript:memInfoSelectMenu('modifyProfile','')">정보 수정</a></li>
 			<li><a href="javascript:memInfoSelectMenu('payInfo',${sessionScope.v.memnum })">급여내역조회</a></li>
-			<li><a href="javascript:memInfoSelectMenu('commute','')">출퇴근 관리</a></li>
 		</ul>
 	</div>
 	<!-- left-menu(E) -->
@@ -345,7 +344,7 @@
 				<tr>
 					<td colspan="2"><a
 						href="samodifyProfile"
-						class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
+						class="primary-font"><i class="fa fa-cog"></i> 내 정보</a></td>
 
 				</tr>
 				<tr>
@@ -454,7 +453,7 @@
 							<tr>
 								<td colspan="2"><a
 									href="samodifyProfile"
-									class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
+									class="primary-font"><i class="fa fa-cog"></i> 내 정보</a></td>
 							</tr>
 						</table>
 						<!-- profile-table(E) -->
@@ -526,7 +525,7 @@
 							<tr>
 								<td colspan="2"><a
 									href="samodifyProfile"
-									class="primary-font"><i class="fa fa-cog"></i> 프로필 수정</a></td>
+									class="primary-font"><i class="fa fa-cog"></i> 내 정보</a></td>
 							</tr>
 						</table>
 						<!-- profile-table(E) -->
