@@ -1,15 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+	.error{
+	color:red; font-weight: bold;
+	}
+</style>
 		<div class="col-lg-8">	
-			<form method="post" action="samailWrite" class="form-horizontal" role="form"
-				  name="f" id="mailWriteF" autocomplete="off" enctype="multipart/form-data">
+		<form:form method="post" action="samailWrite" class="form-horizontal" role="form"
+ 		commandName="mailForm"	name="f" id="mailWriteF" autocomplete="off" enctype="multipart/form-data">
 				    <div class="form-group">
 				        <label for="receiver" class="col-sm-2 control-label">받는 사람</label>
 				        <div class="col-sm-10">
 				            <input type="text" class="form-control" id="mailreceiver" 
-				            name="mailreceiver" onkeydown="startSuggest()" 
-				            value="${mailreceiver }">
+				            name="mailreceiver" onkeydown="startSuggest()" value="${mailreceiver }"/>
+				            <form:errors path="mailreceiver" cssClass="error"/>
 				            <div id="view" style="position:absolute; z-index:1;">
 				            </div>
 				        </div>
@@ -17,7 +23,8 @@
 				    <div class="form-group">
 				        <label for="title" class="col-sm-2 control-label">제목</label>
 				        <div class="col-sm-10">
-				            <input type="text" class="form-control" id="mailtitle" name="mailtitle" value="${mailtitle}">
+				            <input  class="form-control"  name="mailtitle" id="mailtitle" value="${mailtitle}"/>
+				        	<form:errors path="mailtitle" cssClass="error"/>
 				        </div>
 				    </div>
 				    <div class="form-group">
@@ -41,5 +48,5 @@
 				        <div class="col-sm-10 col-sm-offset-2">
 				        </div>
 				    </div>
-			</form>
+			</form:form>
 		</div>
