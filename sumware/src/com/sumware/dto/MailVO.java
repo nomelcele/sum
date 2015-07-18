@@ -1,11 +1,16 @@
 package com.sumware.dto;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class MailVO {
 	private int mailnum, mailmem;
 	private int fromnum,tonum,mynum,trashnum;
-	private String mailtitle, mailcont, mailfile, mailreceiver, 
-	maildate, mailsdelete, mailrdelete, replyid, mailsname, mailrname, mailread;
-	
+	private String mailcont;
+	private String mailfile,maildate, mailsdelete, mailrdelete, replyid, mailsname, mailrname, mailread;
+	@NotEmpty(message="받는사람을 입력해주세요!")
+	private String mailreceiver;
+	@NotEmpty(message="제목을 입력해주세요!")
+	private String mailtitle;
 	public String getMailread() {
 		return mailread;
 	}

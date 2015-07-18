@@ -10,11 +10,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,57 +41,66 @@ public class MailModel{
 
 	// 메일 작성 form 이동
 	@RequestMapping(value="/samailWriteForm",method=RequestMethod.POST)
-	public String mailWriteForm(@ModelAttribute("mailreceiver")String mailreceiver,
+	public String mailWriteForm(Map<String,Object> model,@ModelAttribute("mailreceiver")String mailreceiver,
 			@ModelAttribute("mailtitle")String mailtitle,
 			@ModelAttribute("orimail")String oriMail){
 		System.out.println("Mail Controller: mailWriteForm");
+		MailVO mavo = new MailVO();
+		model.put("mailForm", mavo);
 		return "mail.mailWrite";
 	}
 	
 	// 메일 작성
 	@RequestMapping(value="/samailWrite",method=RequestMethod.POST)
-	public ModelAndView mailWrite(@RequestParam HashMap<String, String> map,
+	public ModelAndView mailWrite(@Valid @ModelAttribute("mailForm") MailVO mavo,BindingResult result, @RequestParam HashMap<String, String> map,
 			@RequestParam("mailfile")MultipartFile mailfile,HttpSession session){
-		// request.setCharacterEncoding("UTF-8");
+		
 		System.out.println("Mail Controller: mailWrite");
 		ModelAndView mav = new ModelAndView();
-		
-		// 첨부 파일 업로드 작업
-		String r_path = session.getServletContext().getRealPath("/");
-		String oriFn = mailfile.getOriginalFilename();
-		StringBuffer path = new StringBuffer();
-		path.append(r_path).append("\\upload\\").append(oriFn);
-		System.out.println("File Upload Path: "+path.toString());
-		
-		File file = new File(path.toString());
-		if(!file.exists()){
-			file.mkdirs();
+		System.out.println("받는사람:"+mavo.getMailreceiver());
+		System.out.println("제목:"+mavo.getMailtitle());
+		if(result.hasErrors()){
+			System.out.println(result.hasErrors());
+			System.out.println("에러페이지");
+			mav.setViewName("mail.mailWrite");
+		}else{
+			// 첨부 파일 업로드 작업
+			String r_path = session.getServletContext().getRealPath("/");
+			String oriFn = mailfile.getOriginalFilename();
+			StringBuffer path = new StringBuffer();
+			path.append(r_path).append("\\upload\\").append(oriFn);
+			System.out.println("File Upload Path: "+path.toString());
+			
+			File file = new File(path.toString());
+			if(!file.exists()){
+				file.mkdirs();
+			}
+			
+			try {
+				mailfile.transferTo(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+			
+			// 메일 정보 db에 추가
+			MemberVO mvo = (MemberVO) session.getAttribute("v");
+			int usernum = mvo.getMemnum();
+			String userid = mvo.getMeminmail();
+			
+			map.put("mailfile",oriFn); // 첨부파일 이름
+			map.put("mailmem", String.valueOf(usernum)); // 발신자 사원 번호
+			
+			String mailreceiver = map.get("mailreceiver"); // 수신자 아이디
+			int startidx = mailreceiver.indexOf("<")+1;
+			int endidx = mailreceiver.indexOf("@");
+			map.put("mailreceiver",mailreceiver.substring(startidx, endidx));
+			System.out.println("첨부파일 이름: "+oriFn);
+			System.out.println("발신자: "+map.get("mailmem"));
+			System.out.println("수신자: "+map.get("mailreceiver"));
+			mdao.addMail(map);
+			
+			mav.setViewName("mail.mailSend"); // 메일 전송 완료 화면
 		}
-		
-		try {
-			mailfile.transferTo(file);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		
-		// 메일 정보 db에 추가
-		MemberVO mvo = (MemberVO) session.getAttribute("v");
-		int usernum = mvo.getMemnum();
-		String userid = mvo.getMeminmail();
-		
-		map.put("mailfile",oriFn); // 첨부파일 이름
-		map.put("mailmem", String.valueOf(usernum)); // 발신자 사원 번호
-		
-		String mailreceiver = map.get("mailreceiver"); // 수신자 아이디
-		int startidx = mailreceiver.indexOf("<")+1;
-		int endidx = mailreceiver.indexOf("@");
-		map.put("mailreceiver",mailreceiver.substring(startidx, endidx));
-		System.out.println("첨부파일 이름: "+oriFn);
-		System.out.println("발신자: "+map.get("mailmem"));
-		System.out.println("수신자: "+map.get("mailreceiver"));
-		mdao.addMail(map);
-		
-		mav.setViewName("mail.mailSend"); // 메일 전송 완료 화면
 		return mav;
 	}
 	
