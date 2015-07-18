@@ -41,29 +41,22 @@ public class MailModel{
 
 	// 메일 작성 form 이동
 	@RequestMapping(value="/samailWriteForm",method=RequestMethod.POST)
-	public String mailWriteForm(Map<String,Object> model,@ModelAttribute("mailreceiver")String mailreceiver,
+	public String mailWriteForm(@ModelAttribute("mailreceiver")String mailreceiver,
 			@ModelAttribute("mailtitle")String mailtitle,
 			@ModelAttribute("orimail")String oriMail){
 		System.out.println("Mail Controller: mailWriteForm");
-		MailVO mavo = new MailVO();
-		model.put("mailForm", mavo);
+
 		return "mail.mailWrite";
 	}
 	
 	// 메일 작성
 	@RequestMapping(value="/samailWrite",method=RequestMethod.POST)
-	public ModelAndView mailWrite(@Valid @ModelAttribute("mailForm") MailVO mavo,BindingResult result, @RequestParam HashMap<String, String> map,
+	public ModelAndView mailWrite(@RequestParam HashMap<String, String> map,
 			@RequestParam("mailfile")MultipartFile mailfile,HttpSession session){
 		
 		System.out.println("Mail Controller: mailWrite");
 		ModelAndView mav = new ModelAndView();
-		System.out.println("받는사람:"+mavo.getMailreceiver());
-		System.out.println("제목:"+mavo.getMailtitle());
-		if(result.hasErrors()){
-			System.out.println(result.hasErrors());
-			System.out.println("에러페이지");
-			mav.setViewName("mail.mailWrite");
-		}else{
+		
 			// 첨부 파일 업로드 작업
 			String r_path = session.getServletContext().getRealPath("/");
 			String oriFn = mailfile.getOriginalFilename();
@@ -100,7 +93,7 @@ public class MailModel{
 			mdao.addMail(map);
 			
 			mav.setViewName("mail.mailSend"); // 메일 전송 완료 화면
-		}
+		
 		return mav;
 	}
 	
