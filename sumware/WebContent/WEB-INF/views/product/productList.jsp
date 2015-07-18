@@ -25,10 +25,10 @@
 			<tr>
 				<td><img src="aucImg/${list.proimg }" style="width: 40px; height: 40px; cursor: pointer;" id="proimg" onclick="detailGo(${list.pronum})"></td>
 				<td>${list.product}</td>
-				<td>${list.price } 원</td>
-				<td>${list.procount }</td>
-				<td>${list.memname }</td>
-				<td>${list.enddate }</td>
+				<td>${list.price}원</td>
+				<td>${list.procount}</td>
+				<td>${list.memname}</td>
+				<td>${list.enddate}</td>
 				<td><button>장바구니</button></td>
 			</tr>
 		</c:forEach>

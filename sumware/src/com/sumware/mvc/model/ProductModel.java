@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,6 +28,7 @@ public class ProductModel {
 	@RequestMapping(value="/saproductList")
 	public ModelAndView productList(HttpSession ses){
 		ModelAndView mav = new ModelAndView();
+		// 시큐리티 관련 되어서 멤버 세션을 저장하는데...필요해서.. 추후 홍코더 한테 다시 물어 보자.
 		String first = (String) ses.getAttribute("first");
 		if(first.equals("1")){
 			mav.setViewName("safirstLoginForm");
@@ -44,7 +46,6 @@ public class ProductModel {
 	// 상품 등록 버튼 눌렀을 때 상품 등록 폼으로 이동
 	@RequestMapping(value="/sawriteForm")
 	public String writeForm(){
-//		System.out.println("옥션 writeForm");
 		return "product/promodal";
 	}
 	
@@ -76,19 +77,19 @@ public class ProductModel {
 		return "redirect:saproductList";
 	}
 	
+	// 상품 디테일 보여주는 메서드.
 	@RequestMapping(value="/saproDetail")
-	public String proDetail(int pronum,Model model){
-		System.out.println("proDetail 메소드!");
-		System.out.println("상품 번호 : "+pronum);
-		model.addAttribute("provo", pdao.proDetail(pronum));
+	public String proDetail(ProductVO vo,Model model){
+		System.out.println("proDetail 메소드!");		
+		model.addAttribute("provo", pdao.proDetail(vo.getPronum()));
 		return "product.proDetail";
 	}
 	
-	
-	
-	
-	
-	
+	// 상품 디테일 화면에서 입찰하기 버튼 눌렀을 경우 실행.
+	@RequestMapping(value="/saproBid")
+	public String proBid(){
+		return "product/promodal";
+	}
 	
 }
 
