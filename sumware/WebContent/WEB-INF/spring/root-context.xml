@@ -27,7 +27,7 @@
 	</beans:bean>
 	<http authentication-manager-ref="jdbc-auth" access-decision-manager-ref="accessDecisionManager">
 		<intercept-url pattern="/ad*" access="sumware"/>
-		<intercept-url pattern="/sa*" access="사원,팀장,부장,이사,대표이사"/>
+		<intercept-url pattern="/sa*" access="사원,팀장,부장,이사,대표이사,sumware"/>
 		<form-login login-page="/home" authentication-failure-url="/index?fail=true"
 			username-parameter="memnum" password-parameter="mempwd" default-target-url="/login"/>
 		<logout invalidate-session="true" logout-success-url="/" logout-url="/logout"/>
