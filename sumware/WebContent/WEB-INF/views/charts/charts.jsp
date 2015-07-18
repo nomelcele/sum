@@ -147,16 +147,16 @@
 	
 </script>
 <body>
-	<div class="col-lg-4">
+	<div class="col-lg-6">
 		<div class="row-lg-6">
-			<div id="payment" style="width: 300px; height: 300px; margin: 0 auto"></div>
+			<div id="payment" style="width: 400px; height: 300px; margin: 0 auto"></div>
 		</div>
 		<div class="row-lg-6">
-			<div id="sns" style="width: 300px; height: 300px; margin: 0 auto"></div>
+			<div id="sns" style="width: 400px; height: 300px; margin: 0 auto"></div>
 		</div>
 	</div>
-	<div class="col-lg-8">
-		<div id="todo" style="width: 600px; height: 600px; margin: 0 auto"></div>
+	<div class="col-lg-6">
+		<div id="todo" style="width: 600px; height: 600px; margin: 0 auto; border:2px"></div>
 	</div>
 	
 
