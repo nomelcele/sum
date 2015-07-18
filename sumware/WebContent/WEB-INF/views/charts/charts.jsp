@@ -14,16 +14,14 @@
 <script src="http://code.highcharts.com/modules/drilldown.js"></script>
 <script>
 	$(function() {
-		// 개인 급여
+		// 추가 급여 순위
 		var comnames = JSON.parse('${comnames}'.trim());
 		var comsums = JSON.parse('${comsums}'.trim());
 		var snschart = JSON.parse('${snschart}'.trim());
-// 		var tododept = JSON.parse('${tododept}'.trim());
 		alert(comnames)
 		alert(comsums)
 		$('#payment').highcharts(
 				{
-
 					chart : {
 						type : 'column'
 					},
@@ -65,54 +63,7 @@
 					} ]
 				});
 
-		// 부서별 총 업무수
-		$('#deptWorks')
-				.highcharts(
-						{
-							chart : {
-								plotBackgroundColor : null,
-								plotBorderWidth : null,
-								plotShadow : false,
-								type : 'pie'
-							},
-							title : {
-								text : '부서별 업무'
-							},
-							tooltip : {
-								pointFormat : '{series.name}: <b>{point.y} : {point.percentage:.1f}%</b>'
-							},
-							plotOptions : {
-								pie : {
-									allowPointSelect : true,
-									cursor : 'pointer',
-									dataLabels : {
-										enabled : false
-									},
-									showInLegend : true
-								}
-							},
-							series : [ {
-								name : "Department",
-								colorByPoint : true,
-								data : [ {
-									name : "인사부",
-									y : 56,
-									sliced : true,
-									selected : true
-								}, {
-									name : "총무부",
-									y : 22,
-
-								}, {
-									name : "기획부",
-									y : 10
-								}, {
-									name : "전산부",
-									y : 30
-								} ]
-							} ]
-						});
-
+		// SNS 활동 순위
 		$('#sns').highcharts({
 			chart : {
 				type : 'column'
@@ -163,87 +114,51 @@
 			} ]
 		});
 
-		//todo
+		// 부서별 업무 성취 순위
 		$('#todo').highcharts({
-							chart : {
-								type : 'pie'
-							},
-							title : {
-								text : '부서별 업무'
-							},
-							subtitle : {
-								text : 'Click the slices to view detail'
-							},
-							plotOptions : {
-								series : {
-									dataLabels : {
-										enabled : true,
-										format : '{point.name}: {point.percentage:.2f}%'
-									}
-								}
-							},
+	        chart: {
+	            type: 'pie'
+	        },
+	        title: {
+	            text: '부서별 업무'
+	        },
+	        plotOptions: {
+	            series: {
+	                dataLabels: {
+	                    enabled: true,
+	                    format: '{point.name}: {point.percentage:.1f}%'
+	                }
+	            }
+	        },
 
-							tooltip : {
-								headerFormat : '<span style="font-size:11px">{series.name}</span><br>',
-								pointFormat : '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}개</b> <br/>'
-							},
-							series : [ {
-								name : "Department",
-								colorByPoint : true,
-								data : ${tododept},
-								drilldown : {
-									series : [
-											{
-												name : "인사부",
-												id : "인사부",
-												data : [ [ "팀장1", 3 ],
-														[ "팀장2", 3 ],
-														[ "팀장3", 6 ] ]
-											},
-											{
-												name : "기획부",
-												id : "기획부",
-												data : [ [ "팀장1", 5 ],
-														[ "팀장2", 5 ],
-														[ "팀장3", 5 ],
-														[ "팀장4", 9 ] ]
-											},
-											{
-												name : "전산부",
-												id : "전산부",
-												data : [ [ "팀장1", 2 ],
-														[ "팀장2", 2 ],
-														[ "팀장3", 2 ],
-														[ "팀장4", 4 ] ]
-											},
-											{
-												name : "영업부",
-												id : "영업부",
-												data : [ [ "팀장1", 2 ],
-														[ "팀장2", 2 ],
-														[ "팀장3", 0 ] ]
-											},
-											{
-												name : "총무부",
-												id : "총무부",
-												data : [ [ "팀장1", 1 ],
-														[ "팀장2", 1 ],
-														[ "팀장3", 1 ],
-														[ "팀장4", 0 ] ]
-											} ]
-								}
-							}]
-
-						});
+	        tooltip: {
+	            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+	            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}개</b><br/>'
+	        },
+	        series: [{
+	            name: "Department",
+	            colorByPoint: true,
+	            data: ${tododept}}],
+	        drilldown: {
+	            series: ${todoteam}
+	        }
+	    });
 	});
+	
 </script>
 <body>
-	<div id="payment" style="width: 400px; height: 400px; margin: 0 auto"></div>
-	<div id="deptWorks"
-		style="width: 400px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-	<div id="sns" style="width: 400px; height: 400px; margin: 0 auto"></div>
-	<div id="todo"
-		style="width: 400px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+	<div class="col-lg-4">
+		<div class="row-lg-6">
+			<div id="payment" style="width: 300px; height: 300px; margin: 0 auto"></div>
+		</div>
+		<div class="row-lg-6">
+			<div id="sns" style="width: 300px; height: 300px; margin: 0 auto"></div>
+		</div>
+	</div>
+	<div class="col-lg-8">
+		<div id="todo" style="width: 600px; height: 600px; margin: 0 auto"></div>
+	</div>
+	
 
 </body>
 </html>

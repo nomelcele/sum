@@ -2,8 +2,14 @@ package com.sumware.dto;
 
 public class DeptVO {
 	private int denum, tcnt;
-	private String dename;
+	private String dename, memname;
 	
+	public String getMemname() {
+		return memname;
+	}
+	public void setMemname(String memname) {
+		this.memname = memname;
+	}
 	public int getTcnt() {
 		return tcnt;
 	}
