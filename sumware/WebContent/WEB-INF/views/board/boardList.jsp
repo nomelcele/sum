@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" type="text/css" href="resources/css/boardCSS.css" />
-<form action="boardWrite" method="post" id="writeForm">
+<form action="saboardWrite" method="post" id="writeForm">
 	<input type="hidden" id="bgnum" name="bgnum" value="${sessionScope.bbbgnum}">
 	<input type="hidden" name="bname" value="${sessionScope.bname}">
 	<input type="hidden" id="bdeptno" name="bdeptno" value="${sessionScope.v.memdept}">
