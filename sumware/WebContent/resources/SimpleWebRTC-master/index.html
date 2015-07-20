@@ -4,7 +4,7 @@
         <title>Video Conference</title>
     </head>
     <body>
-        <h1 id="title">Start a room</h1>
+<!--         <h1 id="title">Start a room</h1> -->
         <style>
             .videoContainer {
                 position: relative;
@@ -25,12 +25,13 @@
                 background-color: #12acef;
             }
         </style>
-        <button id="screenShareButton"></button>
-        <p id="subTitle"></p>
+<!--         <button id="screenShareButton"></button> -->
+        <a id="subTitle"></a>
         <form id="createRoom">
             <input id="sessionInput"/>
             <!-- 1) 새로운 방 만들기 -->
-            <button type="submit">Create it!</button>
+            <button type="submit">입장</button>
+<!--             <button type="submit">Create it!</button> -->
         </form>
         <div class="videoContainer">
             <video id="localVideo" style="height: 150px;" oncontextmenu="return false;"></video>
@@ -113,7 +114,8 @@
             function setRoom(name) {
                 $('form').remove();
                 $('h1').text(name);
-                $('#subTitle').text('Link to join: ' + location.href);
+                $('#subTitle').text(location.href);
+                $('#subTitle').attr('href',location.href);
                 $('body').addClass('active');
             }
 
@@ -125,7 +127,6 @@
                     var val = $('#sessionInput').val().toLowerCase().replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
                     console.log("val: "+val);
                     webrtc.createRoom(val, function (err, name) {
-                    	// name은 어디서 나옴?
                         console.log(' create room cb', arguments);
                     
                         var newUrl = location.pathname + '?' + name;
