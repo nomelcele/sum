@@ -50,6 +50,7 @@ public class MessengerModel{
 			
 			for(MemberVO v : list){
 				if(userNum != v.getMemnum()){
+					System.out.println("memnum:"+v.getMemnum());
 					resList.add(v);
 				}
 			}
@@ -296,11 +297,17 @@ public class MessengerModel{
 		// DB에서 검색한 사원 정보를  list에 저장
 		List<MemberVO> list = medao.getList();
 		System.out.println("listLoad Array size : "+list.size());
-		
+		ArrayList<MemberVO> resList = new ArrayList<MemberVO>();
+		for(MemberVO mvo : list){
+			if(userNum != mvo.getMemnum()){
+				System.out.println("list:"+mvo.getMemnum());
+				resList.add(mvo);
+			}
+		}
 		StringBuffer outs = new StringBuffer();
 		outs.append("data:");
 		System.out.println("userNum : "+userNum);
-		for(MemberVO e : list){
+		for(MemberVO e : resList){
 			outs.append("<tr>");
 			outs.append("<td>");		
 			outs.append("<img src='resources/profileImg/");

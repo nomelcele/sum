@@ -24,6 +24,7 @@
 	var i = 0;
 	function mesgoUrl(res){
 		// 새창이름 1씩 증가
+		alert("${sessionScope.v.memnum}");
 		i++;
 		var resNum = res;
 		var opt="width=500, height=600, scrollbars=no";
@@ -39,8 +40,8 @@
 	
 	// 사원 list를 push를 사용하여 출력 하자 ~~~ 
 	if(typeof(EventSource) != "undefined"){	
-		var eventSourceList = new EventSource("mesListLoad");
-		eventSourceList.onmessage = function(event){
+		var eventMesSourceList = new EventSource("samesListLoad");
+		eventMesSourceList.onmessage = function(event){
 			$('#msgList').html(event.data);	
 		};
 	}else{
@@ -50,9 +51,9 @@
 	// 채팅방 푸쉬
 	console.log("typeof:"+typeof(EventSource));	
 	if(typeof(EventSource) != "undefined"){
-		var eventSource = new EventSource("mesCheck");
+		var eventMesSource = new EventSource("samesCheck");
 		
-		eventSource.onmessage = function(event){
+		eventMesSource.onmessage = function(event){
 			var edata1 = event.data;
  			alert("메세지가 도착했습니다.");
 			// 도착한 push data를 가공

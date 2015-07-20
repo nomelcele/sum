@@ -139,7 +139,7 @@ function sgDetail(res){
 function setSignValue(id,val){
 	$("#"+id).val(val);
 }
-function signleftMenu(res){
+function signMenu(res){
 	if(res=="signWrite"){
 		signFormListModal();
 	}else if(res=="signAll"){

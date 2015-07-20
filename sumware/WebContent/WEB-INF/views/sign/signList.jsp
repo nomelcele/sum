@@ -17,6 +17,13 @@
 			<input type="button" class="btn btn-default btn-sm" value="검색" onclick="javascript:searchSignList()">
 			<br/><br/>
 		</div>
+		<div style="margin-bottom: 10px">
+			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signAll')" value="전체선택">&nbsp; &nbsp;
+			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signReceive')" value="수신 문서">&nbsp; &nbsp;
+			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signStandBy')" value="대기 문서">&nbsp; &nbsp;
+			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signComplete')" value="완료 문서">&nbsp; &nbsp;
+			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signReturn')" value="반려 문서">
+		</div>
 	<!-- Search (E) -->
 	<div>
 		<table class="table table-condensed table-hover">

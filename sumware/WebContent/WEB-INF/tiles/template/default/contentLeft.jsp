@@ -359,15 +359,7 @@
 		</div>
 		<div id="MainMenu">
   <div class="list-group panel">
-   <a href="javascript:signleftMenu('signWrite')" class="list-group-item">결제 문서 작성</a>
-    <a href="#demo3" class="list-group-item strong" data-toggle="collapse" data-parent="#MainMenu">결재 문서 조회 <i class="fa fa-caret-down"></i></a>
-    <div class="collapse" id="demo3">
-      <a href="javascript:signleftMenu('signAll')" class="list-group-item">&nbsp; &nbsp; 전체 문서</a>
-      <a href="javascript:signleftMenu('signReceive')" class="list-group-item">&nbsp; &nbsp; 수신 문서</a>
-      <a href="javascript:signleftMenu('signStandBy')" class="list-group-item">&nbsp; &nbsp; 대기 문서</a>
-      <a href="javascript:signleftMenu('signComplete')" class="list-group-item">&nbsp; &nbsp; 완료 문서</a>
-      <a href="javascript:signleftMenu('signReturn')" class="list-group-item">&nbsp; &nbsp; 반려 문서</a>
-    </div>
+   <a href="javascript:signMenu('signWrite')" class="list-group-item">결제 문서 작성</a>
   </div>
 </div>
 	</div>

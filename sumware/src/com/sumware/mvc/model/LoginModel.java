@@ -73,18 +73,17 @@ public class LoginModel{
 	}
 
 	@RequestMapping(value="/logout",method=RequestMethod.POST)
-	public void logout(int memnum,HttpSession session,HttpServletResponse response) throws IOException{
+	public String logout(int memnum,HttpSession session){
 		System.out.println("로그아웃 컨트롤러");
 //		dao.outLog(memnum);
 		session.removeAttribute("v");
 		session.removeAttribute("teamNameList");
 		session.invalidate();
-		PrintWriter pw = response.getWriter();
-		pw.write("success");
-		pw.flush();
-		pw.close();
+		return "redirect:logoutgo";
 	}
-	
+	@RequestMapping(value="/logoutgo")
+	public void logoutgo(HttpServletRequest request, Model model){
+	}
 	@RequestMapping(value="/safirstLoginForm")
 	public String firstLoginForm(HttpSession session){
 		System.out.println("첫번째 이용자!! 정보를 입력해볼까??");

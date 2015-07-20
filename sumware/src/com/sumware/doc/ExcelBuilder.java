@@ -141,7 +141,7 @@ public class ExcelBuilder extends AbstractExcelView{
 					}
 					body.getCell(1).setCellStyle(style);
 					body.getCell(2).setCellStyle(style);
-					i++;
+					i=i+2;
 					
 				}
 			}else{
