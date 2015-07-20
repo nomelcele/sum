@@ -140,6 +140,8 @@ public class AdminModel {
 	// 사원 개인 정보 리스트 가져오는 메서드
 	@RequestMapping(value = "/adminMemList")
 	public String getMemInfoList(MemberVO mvo, Model model, HttpServletRequest req) {
+		System.out.println("memjob :::"+mvo.getMemjob());
+		
 		// 페이지 처리
 		int totalCount = adao.getMemCount(mvo);
 		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);

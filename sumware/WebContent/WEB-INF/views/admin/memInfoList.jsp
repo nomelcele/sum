@@ -11,6 +11,14 @@
 				<option value="400">전산부</option>
 				<option value="500">기획부</option>
 			</select>&nbsp;
+			<select id="searchJob">
+				<option value="0">직급</option>
+				<option value="1">대표이사</option>
+				<option value="2">이사</option>
+				<option value="3">부장</option>
+				<option value="4">팀장</option>
+				<option value="5">사원</option>
+			</select>&nbsp;
 			<input type="text" id="searchName" placeholder="이름">
 			<input type="button" class="btn btn-default btn-sm" value="검색" onclick="adminSelectMenu('adminMemList')">
 			<br/><br/>
