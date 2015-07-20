@@ -38,6 +38,16 @@ $(function(){
 		}
 	}
 	if("${empty v.meminmail}"=="false"){
+		//메신저
+		console.log("Messenge typeof:" + typeof (EventSource));
+		if (typeof (EventSource) != "undefined") {
+			var eventMesSourceList = new EventSource("samesCountMsg");
+			eventMesSourceList.onmessage = function(event) {
+				$('#countRoomNum').html(event.data);
+			};
+		} else {
+			alert("해당 브라우저는 지원이 안됩니다.");
+		}
 		// The user needs to allow this
 		console.log("meminmail:::${v.meminmail}");
 		if (typeof (EventSource) != "undefined") {
