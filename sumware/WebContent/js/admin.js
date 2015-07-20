@@ -77,6 +77,7 @@ function adminSelectMenu(res) {
 			data : {
 				memdept : $("#searchDept").val(),
 				memname : $("#searchName").val(),
+				memauth:$('#searchJob').val(),
 				page: 1
 			},
 			success : function(result) {
@@ -89,7 +90,9 @@ function adminSelectMenu(res) {
 			type : "POST",
 			url : "adminPayInfoList",
 			data : {
+				memdept : $("#searchDept").val(),
 				memname : $("#searchName").val(),
+				memauth:$('#searchJob').val(),
 				page:1
 			},
 			success : function(result) {
