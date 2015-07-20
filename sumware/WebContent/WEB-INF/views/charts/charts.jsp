@@ -15,11 +15,15 @@
 <script>
 	$(function() {
 		// 추가 급여 순위
+		chartpayment();
+		chartsns();
+		charttodo();
+
+	});
+	
+	function chartpayment(){
 		var comnames = JSON.parse('${comnames}'.trim());
 		var comsums = JSON.parse('${comsums}'.trim());
-		var snschart = JSON.parse('${snschart}'.trim());
-		alert(comnames)
-		alert(comsums)
 		$('#payment').highcharts(
 				{
 					chart : {
@@ -62,7 +66,10 @@
 						data : comsums,
 					} ]
 				});
-
+	}
+	
+	function chartsns(){
+		var snschart = JSON.parse('${snschart}'.trim());
 		// SNS 활동 순위
 		$('#sns').highcharts({
 			chart : {
@@ -113,7 +120,9 @@
 				}
 			} ]
 		});
-
+	}
+	
+	function charttodo(){
 		// 부서별 업무 성취 순위
 		$('#todo').highcharts({
 	        chart: {
@@ -130,7 +139,6 @@
 	                }
 	            }
 	        },
-
 	        tooltip: {
 	            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
 	            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}개</b><br/>'
@@ -143,22 +151,46 @@
 	            series: ${todoteam}
 	        }
 	    });
-	});
+	}
+	
+	function showbigsize(res){
+		if(res == 'todo'){
+			$('#payment').hide('slow');
+			$('#sns').hide('slow');
+			$('#'+res).attr("style","width:800px; height:800px;")
+			$('#'+res).attr("onclick","")
+			$('#backbtn').show('slow');
+			charttodo();
+		}else if(res == 'payment'){
+			$('#todo').hide('slow');
+			$('#sns').hide('slow');
+			$('#'+res).attr("style","width:800px; height:800px;")
+			$('#'+res).attr("onclick","")
+			$('#backbtn').show('slow');
+			chartpayment();
+		}else if(res == 'sns'){
+			alert("sns클릭")
+			$('#todo').hide('slow');
+			$('#payment').hide('slow');
+			$('#'+res).attr("style","width:800px; height:800px;")
+			$('#'+res).attr("onclick","")
+			$('#backbtn').show('slow');
+			chartsns();
+		}
+	}
 	
 </script>
-<body>
-	<div class="col-lg-6">
-		<div class="row-lg-6">
-			<div id="payment" style="width: 400px; height: 300px; margin: 0 auto"></div>
-		</div>
-		<div class="row-lg-6">
-			<div id="sns" style="width: 400px; height: 300px; margin: 0 auto"></div>
-		</div>
-	</div>
-	<div class="col-lg-6">
-		<div id="todo" style="width: 600px; height: 600px; margin: 0 auto; border:2px"></div>
-	</div>
-	
 
-</body>
-</html>
+<div class="container" style="position: center;" align="center">
+	<button type="button"  id="backbtn" onclick="location='sachart'" class="btn btn-default btn-sm"  style="float:right; display:none; margin-right: 30px"><i class="fa fa-reply"></i> Back</button>
+	<div id="payment"
+		style="width: 300px; height: 300px; float:left; margin-left:100px; cursor: zoom-in;"
+		onclick="javascript:showbigsize('payment')"></div>
+	<div id="todo"
+		style="width: 300px; height: 300px; float:left; margin-left: 30px; cursor: zoom-in;"
+		onclick="javascript:showbigsize('todo')"></div>
+	<div id="sns"
+		style="width: 300px; height: 300px; float:left; margin-left: 30px; cursor: zoom-in;"
+		onclick="javascript:showbigsize('sns')"></div>
+	
+</div>
