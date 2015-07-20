@@ -49,7 +49,7 @@ $(function() {
 		case ("chart"):
 			$("#formff").attr("action","sachart").submit();
 			break;
-		case ("conference"):
+		case ("conf"):
 			goVcForm();
 			break;
 		default:
