@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="simplewebrtc.bundle.js"></script>
 </head>
 <body>
 	<div class="panel-body">
@@ -29,16 +28,44 @@
 					<option value="400">전산부</option>
 					<option value="500">기획부</option>
 				</select> <input type="text" id="searchName" placeholder="이름" class="form-control" style="width: 100px; display: inline;">
-				<input type="button" class="btn btn-default btn-sm" value="검색" onclick="getAttendeeList()"> <br />
+				<input type="button" class="btn btn-default btn-sm" value="검색" onclick="getMemberListForVc()"> <br />
 			</div>
 			<!-- Search (E) -->
-			<!-- List (S) -->
+			
+			<!-- 참석자 리스트 (S) -->
 			<div>
-				<table class="table table-condensed table-hover" id="listTable">
+				<table class="table table-condensed table-hover" id="attendeeList">
 					<tbody>
 						<tr style="background-color: #F5F5F5;">
 							<td class="col-lg-1"><input type="checkbox" name="all"
-								onclick="checkAll(this)"></td>
+								onclick="checkAll(this,'chk2')"></td>
+							<td class="col-lg-1"><span>이름</span></td>
+							<td class="col-lg-1"><span>부서</span></td>
+							<td class="col-lg-1"><span>직급</span></td>
+						</tr>
+
+<%-- 						<c:forEach var="mList" items="${list}"> --%>
+<!-- 							<tr> -->
+<!-- 								<td><input type="checkbox" name="chk" id="chk" -->
+<%-- 									value="${mList.memnum}"></td> --%>
+<%-- 								<td>${mList.memname}</td> --%>
+<%-- 								<td>${mList.dename}</td> --%>
+<%-- 								<td>${mList.memjob}</td> --%>
+<!-- 							</tr> -->
+<%-- 						</c:forEach> --%>
+					</tbody>
+				</table>
+			</div>
+			<!-- 참석자 리스트 (E) -->
+			
+			
+			<!-- List (S) -->
+			<div>
+				<table class="table table-condensed table-hover" id="memberList">
+					<tbody>
+						<tr style="background-color: #F5F5F5;">
+							<td class="col-lg-1"><input type="checkbox" name="all"
+								onclick="checkAll(this,'chk')"></td>
 							<td class="col-lg-1"><span>이름</span></td>
 							<td class="col-lg-1"><span>부서</span></td>
 							<td class="col-lg-1"><span>직급</span></td>
@@ -46,8 +73,8 @@
 
 						<c:forEach var="mList" items="${list}">
 							<tr>
-								<td><input type="checkbox" name="chk" id="chk"
-									value="${mList.memnum}"></td>
+								<td><input type="checkbox" name="chk" id="chk" value="${mList.memnum}" 
+								onclick="goToList(this,${mList.memnum},'${mList.memname}','${mList.dename}','${mList.memjob}')"></td>
 								<td>${mList.memname}</td>
 								<td>${mList.dename}</td>
 								<td>${mList.memjob}</td>
@@ -92,10 +119,11 @@
 
 			<input type="button" id="moveBtn" onclick="moveVcRoom()" class="btn btn-default btn-sm" value="방 만들기">
 		</form>
+		<div id="test"></div>
 	</div>
 </body>
 <script>
-	function getAttendeeList() {
+	function getMemberListForVc() {
 		// 참석자를 선택하기 위해서 사원 리스트 불러오기
 		$.ajax({
 			type : "POST",
@@ -111,9 +139,15 @@
 		});
 	}
 
-	function checkAll(obj) {
+	function checkAll(obj,name) {
 		// 체크박스 전체 선택(해제)을 해주는 메서드
-		var chkArr = document.getElementsByName("chk");
+		var chkArr;
+		console.log(name);
+		if(name=='chk'){
+			chkArr = document.getElementsByName("chk");
+		} else {
+			chkArr = document.getElementsByName("chk2");
+		}
 		var len = chkArr.length;
 
 		for (var i = 0; i < len; i++) {
@@ -123,10 +157,40 @@
 				chkArr[i].checked = false;
 			}
 		}
+		
+	}
+	
+	function goToList(obj,memnum,memname,dename,memjob){
+		// 1. 다시 체크박스 클릭했을 때 참석자 리스트에서 사라져야 함
+		// 2. 검색 버튼 눌렀을 때 참석자 리스트는 초기화 안 되게 변경
+		var row;
+		
+		if(obj.checked){
+			console.log("사원 번호: "+memnum);
+			console.log("사원 이름: "+memname);
+			var row = "<tr id='"+memnum+"'><td><input type='checkbox' name='chk2' id='chk2' value='"+
+			memnum+"'></td>"+"<td>"+memname+"</td>"+"<td>"+dename+"</td>"+"<td>"+memjob+"</td></tr>"
+			$("#attendeeList").append(row);
+		} else {
+			row = document.getElementById(memnum);
+			row.parentNode.removeChild(row);
+		}
 	}
 	 
+// 	$(function(){
+// 		$.ajax({
+// 			type : "GET",
+// 			url: "http://192.168.56.1:8001",
+// 			// http://stackoverflow.com/questions/20035101/no-access-control-allow-origin-header-is-present-on-the-requested-resource
+// 			success : function(result) {
+// 				$('#test').html(result);
+// 			}
+// 		});
+// 	});
+	
 	function moveVcRoom(){
-		location = "http://192.168.56.1:8001";  
+		var option = "width=600, height=500, scrollbars=yes";
+		window.open("http://192.168.56.1:8001","Video Conference",option);
 	}
 </script>
 </html>
