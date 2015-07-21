@@ -59,10 +59,7 @@
 					</tbody>
 				</table>
 				<!-- auction-table(E) -->
-				
-				
 			</div>
-			
 			<div class="modal-footer align-center">
 				<button type="button" id="doneBtn" class="btn btn-default" onclick="doneClick()">Done</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -73,8 +70,63 @@
 </div>
 
 <!-- 상품입찰 Modal -->
-<div id="bidModal">
-	Good!!!! <!-- 여기에 모달 관련 코드 하고 다시 실행 해 볼 것.
-	디테일에서 입찰하기 눌렀을때 이게 모달로 떠야 함.  -->
+<div id="bidModal" class="modal fade" role="dialog">
+<form id="bidForm" action="bidInsert" method="post">
+<input type="hidden" name="bidpronum" value="${provo.pronum }">
+<input type="hidden" name="bidmem"	 value="${sessionScope.v.memnum }">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">상품정보</h4>
+			</div>
+			<div class="modal-body auction">
+			<!-- 입찰 할 상품에 대한 정보테이블 -->				
+				<div>
+				<h6>* 입찰 상품</h6>
+					<table>
+						<tr>
+							<td>상품명</td>
+							<td>${provo.product }</td>
+						</tr>
+						<tr>
+							<td>종료일</td>
+							<td>${provo.enddate }</td>
+						</tr>
+						<tr>
+							<td>구매가능수량</td>
+							<td>아 몰랑~ 100개</td>
+						</tr>
+					</table>
+				</div>
+				
+			<!-- 상품에 대한 입찰 정보 -->
+				<div>
+				<h6>* 입찰 하기</h6>
+					<table>
+						<tr>
+							<td>현재가격</td>
+							<td>${provo.price}</td>
+						</tr>
+						<tr>
+							<td>입찰수량</td>
+							<td><input type="number" step="1" min="1"></td>
+						</tr>
+						<tr>
+							<td>입찰금액</td>
+							<td><input type="number" step="1000" name="bidprice" min="${price}" placeholder="${provo.price}"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			<div class="modal-footer align-center">
+				<button type="button" id="doneBtn" class="btn btn-default" onclick="javascript:bidExe()">입찰</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
+</form>
 </div>
 
