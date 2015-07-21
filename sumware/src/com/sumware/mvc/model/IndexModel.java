@@ -90,6 +90,7 @@ public class IndexModel{
 				e.printStackTrace();
 			}
 		}else{
+			session.setAttribute("first", "2");
 			MemberVO adminVo = adao.adminLogin(memnum);
 			session.setAttribute("adminv", adminVo);
 			str= "admin.adminMain";
