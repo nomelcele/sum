@@ -33,6 +33,7 @@ public class BoardModel {
 	public ModelAndView getList(BoardVO bvo,HttpServletRequest req,HttpSession ses){
 		ModelAndView mav = new ModelAndView();
 		String first = (String) ses.getAttribute("first");
+		System.out.println("boardfirst::"+first);
 		if(first.equals("1")){
 			mav.setViewName("safirstLoginForm");
 		}else if(first.equals("0")){
