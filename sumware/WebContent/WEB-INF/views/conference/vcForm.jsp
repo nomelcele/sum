@@ -28,7 +28,9 @@
 					<option value="400">전산부</option>
 					<option value="500">기획부</option>
 				</select> <input type="text" id="searchName" placeholder="이름" class="form-control" style="width: 100px; display: inline;">
-				<input type="button" class="btn btn-default btn-sm" value="검색" onclick="getMemberListForVc()"> <br />
+				<input type="button" class="btn btn-default btn-sm" value="검색" onclick="getMemberListForVc()"> 
+				<input type="button" class="btn btn-default btn-sm" value="삭제" onclick="deleteFromList()" style="float:right;"> 
+				<br />
 			</div>
 			<!-- Search (E) -->
 			
@@ -191,6 +193,10 @@
 	function moveVcRoom(){
 		var option = "width=600, height=500, scrollbars=yes";
 		window.open("http://192.168.56.1:8001","Video Conference",option);
+	}
+	
+	function deleteFromList(){
+		
 	}
 </script>
 </html>
