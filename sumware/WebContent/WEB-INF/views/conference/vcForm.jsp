@@ -27,7 +27,8 @@
 					<option value="300">영업부</option>
 					<option value="400">전산부</option>
 					<option value="500">기획부</option>
-				</select> <input type="text" id="searchName" placeholder="이름" class="form-control" style="width: 100px; display: inline;">
+				</select> 
+				<input type="text" id="searchName" placeholder="이름" class="form-control" style="width: 100px; display: inline;">
 				<input type="button" class="btn btn-default btn-sm" value="검색" onclick="getMemberListForVc()"> 
 				<input type="button" class="btn btn-default btn-sm" value="삭제" onclick="deleteFromList()" style="float:right;"> 
 				<br />
@@ -40,21 +41,11 @@
 					<tbody>
 						<tr style="background-color: #F5F5F5;">
 							<td class="col-lg-1"><input type="checkbox" name="all"
-								onclick="checkAll(this,'chk2')"></td>
+							onclick="checkAll(this,'chk2')"></td>
 							<td class="col-lg-1"><span>이름</span></td>
 							<td class="col-lg-1"><span>부서</span></td>
 							<td class="col-lg-1"><span>직급</span></td>
 						</tr>
-
-<%-- 						<c:forEach var="mList" items="${list}"> --%>
-<!-- 							<tr> -->
-<!-- 								<td><input type="checkbox" name="chk" id="chk" -->
-<%-- 									value="${mList.memnum}"></td> --%>
-<%-- 								<td>${mList.memname}</td> --%>
-<%-- 								<td>${mList.dename}</td> --%>
-<%-- 								<td>${mList.memjob}</td> --%>
-<!-- 							</tr> -->
-<%-- 						</c:forEach> --%>
 					</tbody>
 				</table>
 			</div>
@@ -62,7 +53,7 @@
 			
 			
 			<!-- List (S) -->
-			<div>
+			<div id="memSearchForm">
 				<table class="table table-condensed table-hover" id="memberList">
 					<tbody>
 						<tr style="background-color: #F5F5F5;">
@@ -129,14 +120,14 @@
 		// 참석자를 선택하기 위해서 사원 리스트 불러오기
 		$.ajax({
 			type : "POST",
-			url : "savcForm",
+			url : "savcSearch",
 			data : {
 				memdept : $("#searchDept").val(),
 				memname : $("#searchName").val(),
 				page : 1
 			},
 			success : function(result) {
-				$('body').html(result);
+				$('#memSearchForm').html(result);
 			}
 		});
 	}
@@ -168,8 +159,6 @@
 		var row;
 		
 		if(obj.checked){
-			console.log("사원 번호: "+memnum);
-			console.log("사원 이름: "+memname);
 			var row = "<tr id='"+memnum+"'><td><input type='checkbox' name='chk2' id='chk2' value='"+
 			memnum+"'></td>"+"<td>"+memname+"</td>"+"<td>"+dename+"</td>"+"<td>"+memjob+"</td></tr>"
 			$("#attendeeList").append(row);
@@ -178,25 +167,28 @@
 			row.parentNode.removeChild(row);
 		}
 	}
-	 
-// 	$(function(){
-// 		$.ajax({
-// 			type : "GET",
-// 			url: "http://192.168.56.1:8001",
-// 			// http://stackoverflow.com/questions/20035101/no-access-control-allow-origin-header-is-present-on-the-requested-resource
-// 			success : function(result) {
-// 				$('#test').html(result);
-// 			}
-// 		});
-// 	});
-	
+
 	function moveVcRoom(){
+		// 알림 보내기
+		// 참석자 테이블의 행에서 id(사원번호) 얻어오기
+		
+		// 화상회의 페이지 띄우기
+		// 로컬 영역 ip
 		var option = "width=600, height=500, scrollbars=yes";
-		window.open("http://192.168.56.1:8001","Video Conference",option);
+		window.open("http://192.168.7.124:8001?"+$("#vcTitle").val(),"Video Conference",option);
 	}
 	
 	function deleteFromList(){
+		// ....
+		var chkArr = document.getElementsByName("chk2");
 		
+		for(var i=0; i<chkArr.length; i++){
+			var obj = chkArr[i];
+			if(obj.checked){ // 체크된 행 삭제
+				obj.parentNode.parentNode.parentNode.removeChild(obj.parentNode.parentNode);
+				console.log("삭제");
+			}
+		}
 	}
 </script>
 </html>
