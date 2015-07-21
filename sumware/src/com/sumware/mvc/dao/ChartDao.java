@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sumware.dto.CommissionVO;
 import com.sumware.dto.DeptVO;
+import com.sumware.dto.ProductVO;
 import com.sumware.dto.SnsVO;
 
 @Repository
@@ -34,6 +35,11 @@ public class ChartDao {
 	// 부서의 팀별 팀장,업무수
 	public List<DeptVO> getTodoKingTeam(int deptnum){
 		return st.selectList("chart.getTodoKingTeam", deptnum);	
+	}
+	
+	// 경매 입찰수 순위
+	public List<ProductVO> getAuctionCount(){
+		return st.selectList("chart.getAuctionCount");
 	}
 	
 }

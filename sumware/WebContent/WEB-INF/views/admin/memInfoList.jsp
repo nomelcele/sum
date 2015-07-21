@@ -2,27 +2,36 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<!-- Search (S) -->
-		<div>
+		<div style="border: solid; padding-top: 15px; padding-left: 15px">
+			<p><span style="font-weight: bold">부 서 : </span>
 			<select id="searchDept">
-				<option value="0">부서</option>
+				<option value="0">전 체</option>
 				<option value="100">인사부</option>
 				<option value="200">총무부</option>
 				<option value="300">영업부</option>
 				<option value="400">전산부</option>
 				<option value="500">기획부</option>
-			</select>&nbsp;
-			<select id="searchJob">
-				<option value="0">직급</option>
+			</select>
+			<span style="font-weight: bold; margin-left: 15px">직 급 : </span>
+			<select class="controls" id="searchJob">
+				<option value="0">전 체</option>
 				<option value="1">대표이사</option>
 				<option value="2">이사</option>
 				<option value="3">부장</option>
 				<option value="4">팀장</option>
 				<option value="5">사원</option>
-			</select>&nbsp;
-			<input type="text" id="searchName" placeholder="이름">
-			<input type="button" class="btn btn-default btn-sm" value="검색" onclick="adminSelectMenu('adminMemList')">
-			<br/><br/>
+			</select>
+			<span style="font-weight: bold; margin-left: 15px">입사일 : </span>
+				<input type="date" id="hiredstdate"> ~ <input type="date" id="hiredendate">
+					<span style="font-weight: bold; margin-left: 15px">이 름 : </span>
+					<input type="text" id="searchName" placeholder="사원 이름">
+			</p>
+			<p style="text-align: right">
+				<input type="button" class="btn btn-default btn-sm" value="검색" style=" margin-right: 25px" onclick="adminSelectMenu('adminMemList')">
+			</p>
+
 		</div>
+		<br/>
 	<!-- Search (E) -->
 	
 	<!-- List (S) -->
