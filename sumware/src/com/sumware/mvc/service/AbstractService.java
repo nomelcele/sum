@@ -62,7 +62,10 @@ public class AbstractService implements ServiceInter{
 	public void changeJobSalary(MemberVO mvo) {
 		
 	}
-	
-	
+
+	@Override
+	public String confNotify(int confmem) {
+		return null;
+	}
 
 }

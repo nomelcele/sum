@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import com.sumware.mvc.dao.ConferenceDao;
 import com.sumware.mvc.dao.LoginDao;
 import com.sumware.mvc.dao.MailDao;
 import com.sumware.mvc.dao.TodoDao;
+import com.sumware.mvc.service.ServiceInter;
 @Controller
 public class IndexModel{
 	@Autowired
@@ -34,6 +36,9 @@ public class IndexModel{
 	AdminDao adao;
 	@Autowired
 	private ConferenceDao cdao;
+	@Autowired
+	@Qualifier(value="index")
+	private ServiceInter service;
 	// 요청이 home 이거나, 아무 요청이 없을 경우 
 	// 작동 됨.
 	private int capCount;
@@ -140,9 +145,11 @@ public class IndexModel{
 	
 	@RequestMapping(value="/saconfNotify")
 	public void confNotify(int confmem,HttpServletResponse response) throws IOException{
-		ConferenceVO confvo = cdao.getConfurl(confmem);
-		String confurl = confvo.getConfurl();
-		int confnum = confvo.getConfnum();
+		String confurl = service.confNotify(confmem);
+		
+		// ConferenceVO confvo = cdao.getConfurl(confmem);
+		// String confurl = confvo.getConfurl();
+		// int confnum = confvo.getConfnum();
 		StringBuffer sb = new StringBuffer();
 		sb.append("data:").append(confurl).append("\n\n");
 		
@@ -152,7 +159,7 @@ public class IndexModel{
 		pw.print(sb);
 		pw.flush();
 		
-		cdao.deleteConfnum(confnum);
+		// cdao.deleteConfnum(confnum);
 	}
 	
 }

@@ -37,4 +37,7 @@ public interface ServiceInter {
 	public void insertSignService(SignatureVO sgvo,List<HashMap<String, String>> mgrList);
 	//현재 결재자 업데이트
 	public void setNowmemService(int snum);
+	
+	//회의 알림
+	public String confNotify(int confmem);
 }

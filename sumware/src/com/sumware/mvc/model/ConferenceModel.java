@@ -58,11 +58,14 @@ public class ConferenceModel {
 	}
 
 	@RequestMapping(value = "/saconfMemAdd")
-	public void vcNotify(String confurl, int confmem) {
-		ConferenceVO confvo = new ConferenceVO();
-		confvo.setConfurl(confurl);
-		confvo.setConfmem(confmem);
-		cdao.addConfmem(confvo);
+	public void vcNotify(String confurl, int[] confmems) {
+		for(int e:confmems){
+			System.out.println("알림 보낼 사원 번호: "+e);
+			ConferenceVO confvo = new ConferenceVO();
+			confvo.setConfurl(confurl);
+			confvo.setConfmem(e);
+			cdao.addConfmem(confvo);
+		}
 	}
 
 }
