@@ -43,7 +43,7 @@
 							<li><a href="">Mail</a></li>
 							<li><a href="">Calendar</a>
 							<li><a href="">Board</a></li>
-							<li><a href="">Messenger <span id="countRoomNum"></span></a></li>
+							<li><a href="">MSG <span id="countRoomNum"></span></a></li>
 							<li><a href="">Sign</a></li>
 							<li><a href="">Auction</a></li>
 							<li><a href="">Chart</a></li>

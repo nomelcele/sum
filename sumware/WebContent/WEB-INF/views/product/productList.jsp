@@ -19,6 +19,7 @@
 				<th>입찰 횟수</th>
 				<th>판매자</th>
 				<th>종료일시</th>
+				<th>입찰정보</th>
 				<th>찜</th>
 			</tr>
 		<c:forEach var="list" items="${plist}">
@@ -29,7 +30,8 @@
 				<td>${list.procount}</td>
 				<td>${list.memname}</td>
 				<td>${list.enddate}</td>
-				<td><button>장바구니</button></td>
+				<td><button class="btn btn-default btn-sm">입찰정보</button></td>
+				<td><button class="btn btn-default btn-sm">장바구니</button></td>
 			</tr>
 		</c:forEach>
 		</tbody>
