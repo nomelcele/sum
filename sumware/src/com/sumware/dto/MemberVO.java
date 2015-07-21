@@ -1,10 +1,36 @@
 package com.sumware.dto;
 
 public class MemberVO {
-	private int memnum, memauth, memmgr, memdept,begin,end;
+	private int memnum, memauth, memmgr, memdept,begin,end, salstprice, salenprice;
 	private String memname, memaddr, mempwd, memprofile, memjob, memmail, meminmail, dename, mgrname, 
-	memhire, memresign, membirth, memsignimg, pyearly, psalary;
+	memhire, memresign, membirth, memsignimg, pyearly, psalary, hiredstdate, hiredendate;
 
+	
+	
+	public int getSalstprice() {
+		return salstprice;
+	}
+	public void setSalstprice(int salstprice) {
+		this.salstprice = salstprice;
+	}
+	public int getSalenprice() {
+		return salenprice;
+	}
+	public void setSalenprice(int salenprice) {
+		this.salenprice = salenprice;
+	}
+	public String getHiredstdate() {
+		return hiredstdate;
+	}
+	public void setHiredstdate(String hiredstdate) {
+		this.hiredstdate = hiredstdate;
+	}
+	public String getHiredendate() {
+		return hiredendate;
+	}
+	public void setHiredendate(String hiredendate) {
+		this.hiredendate = hiredendate;
+	}
 	public String getPyearly() {
 		return pyearly;
 	}

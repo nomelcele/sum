@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sumware.dto.CommissionVO;
 import com.sumware.dto.DeptVO;
+import com.sumware.dto.ProductVO;
 import com.sumware.dto.SnsVO;
 import com.sumware.mvc.dao.ChartDao;
 
@@ -144,6 +145,32 @@ public class ChartModel {
 				teamtodosf.append("]");
 				System.out.println("tododetailjson:::"+teamtodosf.toString());
 				model.addAttribute("todoteam", teamtodosf.toString());
+				
+				
+				// 경매 입찰 순위
+				List<ProductVO> provolist = cdao.getAuctionCount();
+				System.out.println(" 최고 입찰 수 "+provolist.get(0).getProcount());
+				//
+				StringBuffer aucsf = new StringBuffer();
+				aucsf.append("[");
+				if (provolist != null) {
+					for (int i = 0; i < provolist.size(); i++) {
+						aucsf.append("[");
+						aucsf.append("\"");
+						aucsf.append(provolist.get(i).getProduct());
+						aucsf.append("-");
+						aucsf.append(provolist.get(i).getMemname());
+						aucsf.append("\",");
+						aucsf.append(provolist.get(i).getProcount());
+						aucsf.append("]");
+						if (!(i == provolist.size() - 1)) {
+							aucsf.append(",");
+						}
+					}
+				}
+				aucsf.append("]");
+				System.out.println("aucsf : " + aucsf.toString());
+				model.addAttribute("auctionchart", aucsf.toString());
 
 		return "charts.charts";
 	}

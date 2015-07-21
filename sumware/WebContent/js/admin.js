@@ -78,6 +78,8 @@ function adminSelectMenu(res) {
 				memdept : $("#searchDept").val(),
 				memname : $("#searchName").val(),
 				memauth:$('#searchJob').val(),
+				hiredstdate:$('#hiredstdate').val(),
+				hiredendate:$('#hiredendate').val(),
 				page: 1
 			},
 			success : function(result) {
@@ -93,6 +95,8 @@ function adminSelectMenu(res) {
 				memdept : $("#searchDept").val(),
 				memname : $("#searchName").val(),
 				memauth:$('#searchJob').val(),
+				salstprice:$('#salstprice').val(),
+				salenprice:$('#salenprice').val(),
 				page:1
 			},
 			success : function(result) {

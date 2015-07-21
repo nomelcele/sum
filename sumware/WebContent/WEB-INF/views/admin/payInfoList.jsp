@@ -3,28 +3,35 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Search (S) -->
 <div style="width:100%">
-<div style="border: solid">
-	<select id="searchDept">
-		<option value="0">부서</option>
-		<option value="100">인사부</option>
-		<option value="200">총무부</option>
-		<option value="300">영업부</option>
-		<option value="400">전산부</option>
-		<option value="500">기획부</option>
-	</select>&nbsp;
-	<select id="searchJob">
-		<option value="0">직급</option>
-		<option value="1">대표이사</option>
-		<option value="2">이사</option>
-		<option value="3">부장</option>
-		<option value="4">팀장</option>
-		<option value="5">사원</option>
-	</select>&nbsp;
-	 <input type="text" id="searchName" placeholder="이름"> <input
-		type="button" class="btn btn-default btn-sm" value="검색"
-		onclick="adminSelectMenu('adminPayInfoList')"> <br />
-	<br />
-</div>
+		<div style="border: solid; padding-top: 15px; padding-left: 15px">
+			<p><span style="font-weight: bold">부 서 : </span>
+			<select id="searchDept">
+				<option value="0">전 체</option>
+				<option value="100">인사부</option>
+				<option value="200">총무부</option>
+				<option value="300">영업부</option>
+				<option value="400">전산부</option>
+				<option value="500">기획부</option>
+			</select>
+			<span style="font-weight: bold; margin-left: 15px">직 급 : </span>
+			<select class="controls" id="searchJob">
+				<option value="0">전 체</option>
+				<option value="1">대표이사</option>
+				<option value="2">이사</option>
+				<option value="3">부장</option>
+				<option value="4">팀장</option>
+				<option value="5">사원</option>
+			</select>
+			<span style="font-weight: bold; margin-left: 15px">연 봉 : </span>
+				<input type="number" id="salstprice" value="1000" step="100" style="width:150px"> ~ <input type="number" id="salenprice" value="10000" step="100" style="width:150px">
+			<span style="font-weight: bold; margin-left: 15px">이 름 : </span>
+			<input type="text" id="searchName" placeholder="사원 이름">
+			</p>
+			<p style="text-align: right">
+			<input type="button" class="btn btn-default btn-sm" value="검색" style=" margin-right: 25px" onclick="adminSelectMenu('adminPayInfoList')">
+			</p>
+		</div>
+		<br/>
 <!-- Search (E) -->
 
 <!-- List (S) -->
