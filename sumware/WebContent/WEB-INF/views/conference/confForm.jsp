@@ -13,9 +13,8 @@
 </head>
 <body>
 	<div class="panel-body">
-		<form action="savcMakeRoom" method="post">
 			<label class="control-label">제목</label> 
-			<input type="text" id="vcTitle" name="vcTitle" class="form-control" style="width: 250px"><br /> 
+			<input type="text" id="confTitle" name="confTitle" class="form-control" style="width: 250px"><br /> 
 			<label class="control-label">참석자</label>
 			<div class="form-group">
 				<!-- 회의에 참석할 사원 선택 -> 사원 리스트 보여주기(+ 검색) -->
@@ -29,7 +28,7 @@
 					<option value="500">기획부</option>
 				</select> 
 				<input type="text" id="searchName" placeholder="이름" class="form-control" style="width: 100px; display: inline;">
-				<input type="button" class="btn btn-default btn-sm" value="검색" onclick="getMemberListForVc()"> 
+				<input type="button" class="btn btn-default btn-sm" value="검색" onclick="getMemberListForConf()"> 
 				<input type="button" class="btn btn-default btn-sm" value="삭제" onclick="deleteFromList()" style="float:right;"> 
 				<br />
 			</div>
@@ -110,17 +109,16 @@
 			</div>
 			<!-- paging(E) -->
 
-			<input type="button" id="moveBtn" onclick="moveVcRoom()" class="btn btn-default btn-sm" value="방 만들기">
-		</form>
+			<input type="button" id="moveBtn" onclick="moveConfRoom()" class="btn btn-default btn-sm" value="방 만들기">
 		<div id="test"></div>
 	</div>
 </body>
 <script>
-	function getMemberListForVc() {
+	function getMemberListForConf() {
 		// 참석자를 선택하기 위해서 사원 리스트 불러오기
 		$.ajax({
 			type : "POST",
-			url : "savcSearch",
+			url : "saconfSearch",
 			data : {
 				memdept : $("#searchDept").val(),
 				memname : $("#searchName").val(),
@@ -168,14 +166,26 @@
 		}
 	}
 
-	function moveVcRoom(){
-		// 알림 보내기
-		// 참석자 테이블의 행에서 id(사원번호) 얻어오기
+	function moveConfRoom(){
+		var roomUrl = "http://192.168.7.124:8001?"+$("#confTitle").val();
 		
+		$.ajax({
+			type : "POST",
+			url : "saconfMemAdd",
+			data : {
+				confurl: roomUrl,
+				confmem: 10006
+				// 참석자 테이블의 행에서 id(사원번호) 얻어오기
+			},
+			success : function(result) {
+				// $('#memSearchForm').html(result);
+			}
+		});
+		
+		var option = "width=600, height=500, scrollbars=yes";
+		window.open(roomUrl,"Video Conference",option);
 		// 화상회의 페이지 띄우기
 		// 로컬 영역 ip
-		var option = "width=600, height=500, scrollbars=yes";
-		window.open("http://192.168.7.124:8001?"+$("#vcTitle").val(),"Video Conference",option);
 	}
 	
 	function deleteFromList(){
