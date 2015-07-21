@@ -47,16 +47,26 @@ public class SignModel {
 			session.setAttribute("model", "sign");
 			MemberVO mvo = (MemberVO) session.getAttribute("v");
 			HashMap<String, Object> map = new HashMap<String, Object>();
+			
 			String div=request.getParameter("signdiv");
+			
 			if(div==null||div==""){
 				div="0";
 			}
 		
+		
 			map.put("signdiv",Integer.parseInt(div));
 			map.put("sgdept", mvo.getMemdept());
 			map.put("nowmemnum", mvo.getMemnum());
+			
 			map.put("searchName", request.getParameter("searchName"));
 			map.put("searchType", request.getParameter("searchType"));
+			map.put("searchStartDay", request.getParameter("searchStartDay"));
+			map.put("searchEndDay", request.getParameter("searchEndDay"));
+			map.put("searchDocDiv", request.getParameter("searchDocDiv"));
+			map.put("searchDocState", request.getParameter("searchDocState"));
+			map.put("selectDay", request.getParameter("selectDay"));
+			map.put("except", request.getParameter("except"));
 			
 			int totalCount = sgdao.getSignCount(map);
 			System.out.println("totalCount::"+totalCount);
@@ -70,6 +80,7 @@ public class SignModel {
 			List<SignatureVO> sgList=sgdao.getSignList(map);
 			
 			List<SignFormVO> sfList = sgdao.getSfList();
+			request.setAttribute("signPage", request.getParameter("page"));
 			request.setAttribute("sfList", sfList);
 			request.setAttribute("sgList", sgList);
 			request.setAttribute("signdiv", div);
