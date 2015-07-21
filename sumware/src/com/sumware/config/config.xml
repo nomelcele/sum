@@ -24,5 +24,6 @@
   		<typeAlias type="com.sumware.dto.PayHistoryVO" alias="phvo"/>
   		<typeAlias type="com.sumware.dto.CommissionVO" alias="comvo"/>
   		<typeAlias type="com.sumware.dto.ProductVO" alias="provo"/>
+  		<typeAlias type="com.sumware.dto.BidderVO" alias="bidvo"/>
   	</typeAliases>
 </configuration>

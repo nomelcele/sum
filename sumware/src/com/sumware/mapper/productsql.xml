@@ -27,9 +27,25 @@ ZZIM	VARCHAR2(1)
 	
 	<!-- 상품 디테일 -->
 	<select id="proDetail" parameterType="int" resultType="provo">
-		select p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, to_char(p.enddate,'yyyy-MM-dd') enddate
+		select p.pronum,p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, to_char(p.enddate,'yyyy-MM-dd') enddate
 		from product p, member m where p.prowriter = m.memnum and p.pronum=#{pronum}
 	</select>
+	
+	<!-- 입찰정보를 인서트 -->
+	<insert id="bidInsert" parameterType="bidvo">
+		insert into bidder values
+		(bidder_seq.nextval,#{bidmem},#{bidpronum},#{bidprice})
+	</insert>
+	
+	<!-- 입찰이 일어났을 때 가격정보 수정. -->
+	<update id="proUpdate" parameterType="bidvo">
+		update product set price=#{bidprice} where pronum=#{bidpronum}
+	</update>
+	
+	<!-- 입찰이 일어났을 때 procount 수정. -->
+	<update id="proCount" parameterType="bidvo">
+		update product set procount=(procount+1) where pronum=#{bidpronum}
+	</update>
 	
 </mapper>
 

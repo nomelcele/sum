@@ -40,6 +40,8 @@ function doneClick(){
 	$('#proRegister').modal('toggle');
 }
 
+
+// 입찰 하기 버튼 눌렀을 때 동작.(proDetail.jsp)
 function bidBtn(){
 	$.ajax({
 		url:"saproBid",
@@ -50,6 +52,17 @@ function bidBtn(){
 		}
 	});
 }
+
+// 입찰 버튼 눌렀을 때 동작.(promodal.jsp)
+function bidExe(){
+	$('#bidForm').submit();
+	$('#bidModal').modal('toggle');
+}
+
+
+
+
+
 
 
 

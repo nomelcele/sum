@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.servlet.Filter;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sumware.dto.BidderVO;
 import com.sumware.dto.ProductVO;
 import com.sumware.mvc.dao.ProductDao;
 
@@ -79,17 +81,47 @@ public class ProductModel {
 	
 	// 상품 디테일 보여주는 메서드.
 	@RequestMapping(value="/saproDetail")
-	public String proDetail(ProductVO vo,Model model){
+	public String proDetail(ProductVO vo,HttpSession ses){
 		System.out.println("proDetail 메소드!");		
-		model.addAttribute("provo", pdao.proDetail(vo.getPronum()));
+		// 입찰가격이 변경 된다면 detail 페이지에서도 현재 가격이 변동 되어야 함으로
+		// session 에 저장 해서 관리 한다.
+		ProductVO provo = pdao.proDetail(vo.getPronum());
+		ses.setAttribute("provo", provo);
+		System.out.println("상품의 가격은 제대로 ? : "+provo.getPrice());
+		// promodal.jsp 에서 숫자값이 필요 하기 때문에 가공 하는 로직.
+		StringBuffer sb = new StringBuffer(); 
+		String[] price = provo.getPrice().trim().split(",");
+		for(int i = 0; i<price.length;i++){
+			sb.append(price[i]);
+		}
+		int p = Integer.parseInt(sb.toString());
+		//////////////////////////////////////////////////////
+		ses.setAttribute("price", p);
 		return "product.proDetail";
 	}
 	
-	// 상품 디테일 화면에서 입찰하기 버튼 눌렀을 경우 실행.
+	// 상품 디테일 화면에서 입찰하기 폼으로 이동.(modal 폼)
 	@RequestMapping(value="/saproBid")
 	public String proBid(){
+		System.out.println("proBid() 실행!");
 		return "product/promodal";
 	}
+	
+	// 입찰하기 폼(modal 폼) 에서 입찰 누르면 입찰 실행 하는 method.
+	@RequestMapping(value="/bidInsert")
+	public String bidInsert(BidderVO bidvo){
+		// bidder 테이블에 입찰 정보가 입력 되어야 하고,
+		// product 의 price 가 업데이트 되어야 한다.
+		System.out.println("입찰한 상품 번호?:::::: "+bidvo.getBidpronum());
+		System.out.println("입찰한 상품 가격?:::::: "+bidvo.getBidprice());
+		pdao.bidInsert(bidvo);
+		pdao.bidUpdate(bidvo);
+		pdao.bidCount(bidvo);
+		return "redirect:/saproDetail?pronum="+bidvo.getBidpronum();
+	
+	}	
+	
+	
 	
 }
 
