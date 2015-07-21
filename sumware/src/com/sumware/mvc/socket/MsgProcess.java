@@ -19,9 +19,10 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
-//@ServerEndpoint("/msgSocket/{auth_key}")
+
 @Configuration
 @EnableWebSocket
+@ServerEndpoint("/samsgSocket/{auth_key}")
 public class MsgProcess {
 	
 	static Map<String, List<Session>> msgSessionMap = Collections.synchronizedMap(new HashMap<String, List<Session>>());

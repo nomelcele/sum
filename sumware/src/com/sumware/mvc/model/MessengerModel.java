@@ -108,7 +108,7 @@ public class MessengerModel{
 		// ipAdd.append("192.168.7.234");
 		ipAdd.append("ws://");
 		ipAdd.append(reip);
-		ipAdd.append(":80/sumware/msgSocket/");
+		ipAdd.append(":80/sumware/samsgSocket/");
 		System.out.println("IP Adress : " + ipAdd);
 
 		model.addAttribute("ipAdd", ipAdd.toString());
@@ -151,7 +151,7 @@ public class MessengerModel{
 		 StringBuffer ipAdd = new StringBuffer();
 		 ipAdd.append("ws://");
 		 ipAdd.append(reip);
-		 ipAdd.append(":80/sumware/msgSocket/");
+		 ipAdd.append(":80/sumware/samsgSocket/");
 		
 		 String userName = SearchMem.getSmem().searchMember(mesendNum);
 		
