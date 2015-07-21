@@ -6,16 +6,50 @@
 		<input type="hidden" name="page" value="1">
 		<input type="hidden" name="memdept" value="${sessionScope.v.memdept }">
 	<!-- Search (S) -->
-		<div>
-			<select id="searchType" name="searchType">
-				<option value="0">전체</option>
-				<option value="1">문서번호</option>
-				<option value="2">제목</option>
-				<option value="3">기안자</option>
-			</select>&nbsp;
-			<input type="text" id="searchName"  name="searchName">
-			<input type="button" class="btn btn-default btn-sm" value="검색" onclick="javascript:searchSignList()">
-			<br/><br/>
+		<div style="border: solid; margin-bottom: 15px; width: 800px">
+		<table>
+			<tr><td>
+			<div>
+				<input value="검색 일자 : " style="border: 0px; width: 80px; margin-top: 10px;margin-bottom: 10px"readonly="readonly">
+				<input id="searchStartDay" name="searchStartDay">부터<input id="searchEndDay" name="searchEndDay">까지
+				<input class="btn btn-default btn-sm" type="button" id="searchTodayBtn" value="오늘">&nbsp;
+				<input class="btn btn-default btn-sm" type="button" id="searchWeekBtn" value="7일">&nbsp;
+				<input class="btn btn-default btn-sm" type="button" id="searchMonthBtn" value="3개월" style="margin-right: 5px"><br/>
+				
+				<input value="문서 검색 : " style="border: 0px; width: 80px;margin-bottom: 10px" readonly="readonly">
+				<select id="searchType" name="searchType">
+					<option value="0">전체</option>
+					<option value="1">문서번호</option>
+					<option value="2">제목</option>
+					<option value="3">기안자</option>
+				</select>&nbsp;
+				<input type="text" id="searchName"  name="searchName"><br/>
+				
+				<input value="문서 종류 : " style="border: 0px; width: 80px; ;margin-bottom: 10px"readonly="readonly">
+				<select id="searchDocDiv" name="searchDocDiv">
+					<option value="0">전체</option>
+					<c:forEach var="sf" items="${sfList}">
+						<option value="${sf.sfnum }">${sf.sfname }</option>
+					</c:forEach>				
+				</select><br/>
+				
+				<input value="문서 상태 : " style="border: 0px; width: 80px; margin-bottom: 10px"readonly="readonly">
+				<select id="searchDocState" name="searchDocState">
+					<option value="0">전체</option>
+					<option value="1">완료</option>
+					<option value="2">진행중</option>
+					<option value="3">반려</option>			
+				</select> 
+			</div>
+			</td>
+				<td style="border-left: solid 1px; border-color: gray; text-align: center; width: ">
+					<div>
+						<input type="button" class="btn btn-default btn-sm" value="검색" onclick="javascript:searchSignList()" style="width: 100px; height:40px; margin-left: 20px"><br/><br/>
+						<input type="button" class="btn btn-default btn-sm" value="제외" onclick="javascript:searchSignList()" style="width: 100px; height:40px; margin-left: 20px">
+					</div>
+				</td>
+			</tr>
+		</table>
 		</div>
 		<div style="margin-bottom: 10px">
 			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signAll')" value="전체선택">&nbsp; &nbsp;

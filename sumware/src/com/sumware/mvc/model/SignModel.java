@@ -1,7 +1,6 @@
 package com.sumware.mvc.model;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,6 @@ import com.sumware.dto.SignStepVO;
 import com.sumware.dto.SignatureVO;
 import com.sumware.mvc.dao.SignDao;
 import com.sumware.mvc.service.ServiceInter;
-import com.sumware.mvc.service.SignServiceImple;
 import com.sumware.util.MyPage;
 
 @Controller
@@ -48,7 +46,6 @@ public class SignModel {
 		}else{
 			session.setAttribute("model", "sign");
 			MemberVO mvo = (MemberVO) session.getAttribute("v");
-			System.out.println();
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			String div=request.getParameter("signdiv");
 			if(div==null||div==""){
@@ -71,6 +68,9 @@ public class SignModel {
 			map.put("end", pMap.get("end"));
 			
 			List<SignatureVO> sgList=sgdao.getSignList(map);
+			
+			List<SignFormVO> sfList = sgdao.getSfList();
+			request.setAttribute("sfList", sfList);
 			request.setAttribute("sgList", sgList);
 			request.setAttribute("signdiv", div);
 		}
