@@ -37,10 +37,17 @@ public class ConferenceModel {
 		return "conference/vcForm";
 	}
 	
-//	@RequestMapping(value="/savcMakeRoom")
-//	public String vcMakeRoom(){
-//		// 회의방 생성
-//		return "";
-//	}
+	@RequestMapping(value="/savcSearch")
+	public String vcMakeRoom(MemberVO mvo,Model model,HttpServletRequest req){
+		// 폼에서 사원 검색했을 때 리스트만 불러옴
+		int totalCount = adao.getMemCount(mvo);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
+		mvo.setBegin(pmap.get("begin"));
+		mvo.setEnd(pmap.get("end"));
+		
+		List<MemberVO> list = adao.getMemInfoList(mvo);
+		model.addAttribute("list", list);
+		return "conference/vcMemSearch";
+	}
 
 }
