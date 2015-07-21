@@ -3,20 +3,24 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
 	<form method="post" action="sagetSignList" id="searchSignForm">
-		<input type="hidden" name="page" value="1">
+		<input type="hidden" name="page" value="${signPage }">
 		<input type="hidden" name="memdept" value="${sessionScope.v.memdept }">
+		<input type="hidden" id="selectDay" name="selectDay">
+		<input type="hidden" id="except" name="except">
+		
 	<!-- Search (S) -->
 		<div style="border: solid; margin-bottom: 15px; width: 800px">
 		<table>
-			<tr><td>
+		<tr>
+		<td style="width: 651px;">
 			<div>
-				<input value="검색 일자 : " style="border: 0px; width: 80px; margin-top: 10px;margin-bottom: 10px"readonly="readonly">
-				<input id="searchStartDay" name="searchStartDay">부터<input id="searchEndDay" name="searchEndDay">까지
-				<input class="btn btn-default btn-sm" type="button" id="searchTodayBtn" value="오늘">&nbsp;
-				<input class="btn btn-default btn-sm" type="button" id="searchWeekBtn" value="7일">&nbsp;
-				<input class="btn btn-default btn-sm" type="button" id="searchMonthBtn" value="3개월" style="margin-right: 5px"><br/>
+				<input value="검색 일자 : " style="border: 0px; width: 80px; margin-left: 20px;"readonly="readonly">
+				<input type="date" name="searchStartDay"> 부터 <input type="date" name="searchEndDay" style=" margin-top: 10px;margin-bottom: 10px">까지
+				<input class="btn btn-default btn-sm" type="button" id="searchTodayBtn" value="오늘" onclick="javascript:searchSignList(this)">&nbsp;
+				<input class="btn btn-default btn-sm" type="button" id="searchWeekBtn" value="7일" onclick="javascript:searchSignList(this)">&nbsp;
+				<input class="btn btn-default btn-sm" type="button" id="searchMonthBtn" value="3개월" onclick="javascript:searchSignList(this)" style="margin-right: 5px"><br/>
 				
-				<input value="문서 검색 : " style="border: 0px; width: 80px;margin-bottom: 10px" readonly="readonly">
+				<input value="문서 검색 : " style="border: 0px; width: 80px;margin-bottom: 10px;  margin-left: 20px;" readonly="readonly">
 				<select id="searchType" name="searchType">
 					<option value="0">전체</option>
 					<option value="1">문서번호</option>
@@ -25,7 +29,7 @@
 				</select>&nbsp;
 				<input type="text" id="searchName"  name="searchName"><br/>
 				
-				<input value="문서 종류 : " style="border: 0px; width: 80px; ;margin-bottom: 10px"readonly="readonly">
+				<input value="문서 종류 : " style="border: 0px; width: 80px; ;margin-bottom: 10px;  margin-left: 20px;"readonly="readonly">
 				<select id="searchDocDiv" name="searchDocDiv">
 					<option value="0">전체</option>
 					<c:forEach var="sf" items="${sfList}">
@@ -33,7 +37,7 @@
 					</c:forEach>				
 				</select><br/>
 				
-				<input value="문서 상태 : " style="border: 0px; width: 80px; margin-bottom: 10px"readonly="readonly">
+				<input value="문서 상태 : " style="border: 0px; width: 80px; margin-bottom: 10px;  margin-left: 20px;"readonly="readonly">
 				<select id="searchDocState" name="searchDocState">
 					<option value="0">전체</option>
 					<option value="1">완료</option>
@@ -42,10 +46,10 @@
 				</select> 
 			</div>
 			</td>
-				<td style="border-left: solid 1px; border-color: gray; text-align: center; width: ">
+			<td style="border-left: solid 1px; border-color: gray; text-align: center; width: 149px">
 					<div>
-						<input type="button" class="btn btn-default btn-sm" value="검색" onclick="javascript:searchSignList()" style="width: 100px; height:40px; margin-left: 20px"><br/><br/>
-						<input type="button" class="btn btn-default btn-sm" value="제외" onclick="javascript:searchSignList()" style="width: 100px; height:40px; margin-left: 20px">
+						<input type="button" class="btn btn-default btn-sm" value="검색" onclick="javascript:searchSignList(this)" style="width: 100px; height:40px;"><br/><br/>
+						<input type="button" class="btn btn-default btn-sm" value="제외" onclick="javascript:searchSignList(this)" style="width: 100px; height:40px;">
 					</div>
 				</td>
 			</tr>

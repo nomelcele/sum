@@ -172,6 +172,17 @@ function signFormList(div) {
 	location="sagetSignList?signdiv="+div+"&page=1";
 }
 
-function searchSignList(){
+function searchSignList(res){
+	if(res.value=="검색"){
+		$("#except").val("0");
+	}else if(res.value=="제외"){
+		$("#except").val("1");
+	}else if(res.value=="오늘"){
+		$("#selectDay").val("today");
+	}else if(res.value=="7일"){
+		$("#selectDay").val("week");
+	}else if(res.value=="3개월"){
+		$("#selectDay").val("month");
+	}
 	$('#searchSignForm').submit();
 }
