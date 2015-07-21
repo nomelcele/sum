@@ -423,4 +423,14 @@ insert into pay values(10005,2,7000);
 insert into pay values(10006,2,7000);
 commit;
 
-
+-- 0721 테이블 추가
+-- 화상회의 알림 보내기 위한 테이블
+create table conf(
+confnum number(11),
+confurl varchar2(200), -- 화상회의 페이지 url
+confmem number(5), -- 참석자의 사원 번호
+constraint conf_confmem_fk foreign key(confmem) references member(memnum) on delete cascade
+);
+create sequence conf_seq
+increment by 1
+start with 1;

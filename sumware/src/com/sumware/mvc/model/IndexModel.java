@@ -15,8 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sumware.dto.ConferenceVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.mvc.dao.AdminDao;
+import com.sumware.mvc.dao.ConferenceDao;
 import com.sumware.mvc.dao.LoginDao;
 import com.sumware.mvc.dao.MailDao;
 import com.sumware.mvc.dao.TodoDao;
@@ -30,6 +32,8 @@ public class IndexModel{
 	private LoginDao ldao;
 	@Autowired
 	AdminDao adao;
+	@Autowired
+	private ConferenceDao cdao;
 	// 요청이 home 이거나, 아무 요청이 없을 경우 
 	// 작동 됨.
 	private int capCount;
@@ -133,4 +137,22 @@ public class IndexModel{
 		pw.print(res);
 		pw.flush();
 	}
+	
+	@RequestMapping(value="/saconfNotify")
+	public void confNotify(int confmem,HttpServletResponse response) throws IOException{
+		ConferenceVO confvo = cdao.getConfurl(confmem);
+		String confurl = confvo.getConfurl();
+		int confnum = confvo.getConfnum();
+		StringBuffer sb = new StringBuffer();
+		sb.append("data:").append(confurl).append("\n\n");
+		
+		response.setHeader("cache-control", "no-cache");
+		response.setContentType("text/event-stream");
+		PrintWriter pw = response.getWriter();
+		pw.print(sb);
+		pw.flush();
+		
+		cdao.deleteConfnum(confnum);
+	}
+	
 }

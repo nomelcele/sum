@@ -25,5 +25,6 @@
   		<typeAlias type="com.sumware.dto.CommissionVO" alias="comvo"/>
   		<typeAlias type="com.sumware.dto.ProductVO" alias="provo"/>
   		<typeAlias type="com.sumware.dto.BidderVO" alias="bidvo"/>
+  		<typeAlias type="com.sumware.dto.ConferenceVO" alias="confvo"/>
   	</typeAliases>
 </configuration>

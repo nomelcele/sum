@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="conf">
+  	<insert id="addConfmem" parameterType="confvo">
+  		insert into conf values(conf_seq.nextVal,#{confurl},#{confmem})
+  	</insert>
+  	<select id="getConfurl" parameterType="int" resultType="confvo">
+  		select confnum,confurl from conf where confmem=#{confmem}
+  	</select>
+  	<delete id="deleteConfnum" parameterType="int">
+  		delete from conf where confnum=#{confnum}
+  	</delete>
+  </mapper>
