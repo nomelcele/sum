@@ -79,7 +79,7 @@ public class IndexModel{
 					//회원정보입력창으로 이동.
 					//이동후에 memnum입력란에 자동으로 입력시켜주고
 					//mempwd는 유효성검사 할때 쓰기위하여 보냄.
-		
+					str="redirect:safirstLoginForm";
 				} else if(!res.equals("1")&&!res.equals("0")){
 					System.out.println("ddddddddd");
 					session.setAttribute("first", "2");
