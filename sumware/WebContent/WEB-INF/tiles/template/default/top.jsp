@@ -36,18 +36,19 @@
 						<input type="hidden" name="cal" value="0">
 						<input type="hidden" name="bsearch" value="">
 						<input type="hidden" name="div" value="">
+						<input type="hidden" name="searchType" value="0">
 						<!-- navbar-nav(S) -->
 						<ul class="nav navbar-nav">
 <!-- 							<li><a href="">Main</a></li> -->
-							<li><a href="">Todo</a></li>
-							<li><a href="">Mail</a></li>
-							<li><a href="">Calendar</a>
-							<li><a href="">Board</a></li>
-							<li><a href="">MSG <span id="countRoomNum"></span></a></li>
-							<li><a href="">Sign</a></li>
-							<li><a href="">Auction</a></li>
-							<li><a href="">Chart</a></li>
-							<li><a href="">Conf</a></li>
+							<li><a href="#">Todo</a></li>
+							<li><a href="#">Mail</a></li>
+							<li><a href="#">Calendar</a>
+							<li><a href="#">Board</a></li>
+							<li><a href="#">MSG <span id="countRoomNum"></span></a></li>
+							<li><a href="#">Sign</a></li>
+							<li><a href="#">Auction</a></li>
+							<li><a href="#">Chart</a></li>
+							<li><a href="#">Conf</a></li>
 						</ul>
 						<!-- navbar-nav(E) -->
 						<ul class="nav navbar-right navbar-nav user-name">
