@@ -8,144 +8,129 @@
 		<choose>
 			<when test="signdiv==1">
 				select res2.* from (select rownum row_n , res.* from (select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
-				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'MM')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
-				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'MM')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
-				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
+				to_char(sg.startdate,'yy-mm-dd') startdate,to_char(sg.enddate,'yy-mm-dd') enddate,sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
 				from signature sg,signform sf,member m where sg.sgdept=#{sgdept}and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nowmemnum=#{nowmemnum} and nvl(sg.sgreturncomm,'0')='0' order by snum desc) res 
-				<if test="searchType != null">
-					<choose>
-						<when test="searchType==0">
-							where res.snum like '%'||#{searchName}||'%' or res.stitle like '%'||#{searchName}||'%' or res.memname like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<when test="searchType==1">
-							where res.snum like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<when test="searchType==2">
-							where res.stitle like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<otherwise>
-							where res.memname like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</otherwise>
-					</choose>
-				</if>
-				<if test="searchType==null">
-					) res2 where row_n BETWEEN #{begin} and #{end}
-				</if>
 			</when>
 			
 			<when test="signdiv==2">
 				select res2.* from (select rownum row_n , res.* from (select st.* from(select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
-				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'MM')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
-				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'MM')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
-				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
+				to_char(sg.startdate,'yy-mm-dd') startdate,to_char(sg.enddate,'yy-mm-dd') enddate,sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
 				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nvl(sg.sgreturncomm,'0')='0' order by snum desc) st where ycount != count) res 
-				<if test="searchType != null">
-					<choose>
-						<when test="searchType==0">
-							where res.snum like '%'||#{searchName}||'%' or res.stitle like '%'||#{searchName}||'%' or res.memname like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<when test="searchType==1">
-							where res.snum like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<when test="searchType==2">
-							where res.stitle like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<otherwise>
-							where res.memname like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</otherwise>
-					</choose>
-				</if>
-				<if test="searchType==null">
-					) res2 where row_n BETWEEN #{begin} and #{end}
-				</if>
 			</when>
 			<when test="signdiv==3">
 				select res2.* from (select rownum row_n , res.* from (select st.* from(select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
-				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'MM')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
-				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'MM')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
-				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
+				to_char(sg.startdate,'yy-mm-dd') startdate,to_char(sg.enddate,'yy-mm-dd') enddate,sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
 				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter order by snum desc) st where ycount = count) res 
-				<if test="searchType != null">
-					<choose>
-						<when test="searchType==0">
-							where res.snum like '%'||#{searchName}||'%' or res.stitle like '%'||#{searchName}||'%' or res.memname like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<when test="searchType==1">
-							where res.snum like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<when test="searchType==2">
-							where res.stitle like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<otherwise>
-							where res.memname like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</otherwise>
-					</choose>
-				</if>
-				<if test="searchType==null">
-					) res2 where row_n BETWEEN #{begin} and #{end}
-				</if>
-				
 			</when>
 			<when test="signdiv==4">
 				select res2.* from (select rownum row_n , res.* from (select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
-				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'MM')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
-				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'MM')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
-				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
+				to_char(sg.startdate,'yy-mm-dd') startdate,to_char(sg.enddate,'yy-mm-dd') enddate,sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
 				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nvl(sg.sgreturncomm,'0')!='0' order by snum desc) res 
-				<if test="searchType != null">
-					<choose>
-						<when test="searchType==0">
-							where res.snum like '%'||#{searchName}||'%' or res.stitle like '%'||#{searchName}||'%' or res.memname like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<when test="searchType==1">
-							where res.snum like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<when test="searchType==2">
-							where res.stitle like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<otherwise>
-							where res.memname like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</otherwise>
-					</choose>
-				</if>
-				<if test="searchType==null">
-					) res2 where row_n BETWEEN #{begin} and #{end}
-				</if>
 			</when>
 			<otherwise>
 				select res2.* from (select rownum row_n , res.* from (select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,sg.stitle,sg.scont,sg.sreason,sg.sgreturncomm,
-				to_char(sg.startdate,'yy')||'년'||to_char(sg.startdate,'MM')||'월'||to_char(sg.startdate,'dd')||'일' startdate,
-				to_char(sg.enddate,'yy')||'년'||to_char(sg.enddate,'MM')||'월'||to_char(sg.enddate,'dd')||'일' enddate,
-				sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
+				to_char(sg.startdate,'yy-mm-dd') startdate,to_char(sg.enddate,'yy-mm-dd') enddate,sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
 				from signature sg,signform sf,member m where sg.sgdept=#{sgdept} and sg.formnum=sf.sfnum and m.memnum=sg.sgwriter order by snum desc) res 
-				<if test="searchType != null">
-					<choose>
-						<when test="searchType==0">
-							where res.snum like '%'||#{searchName}||'%' or res.stitle like '%'||#{searchName}||'%' or res.memname like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<when test="searchType==1">
-							where res.snum like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<when test="searchType==2">
-							where res.stitle like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</when>
-						<otherwise>
-							where res.memname like '%'||#{searchName}||'%') res2 where row_n BETWEEN #{begin} and #{end}
-						</otherwise>
-					</choose>
-				</if>
-				<if test="searchType==null">
-					) res2 where row_n BETWEEN #{begin} and #{end}
-				</if>
-				
 			</otherwise>
 		</choose>
-		
+		<where>
+			<choose>
+				<when test="except==0">
+					<choose>
+						<when test="searchType==0">
+							(res.snum like '%'||#{searchName}||'%' or res.stitle like '%'||#{searchName}||'%' or res.memname like '%'||#{searchName}||'%')
+						</when>
+						<when test="searchType==1">
+							(res.snum like '%'||#{searchName}||'%')
+						</when>
+						<when test="searchType==2">
+							(res.stitle like '%'||#{searchName}||'%')
+						</when>
+						<otherwise>
+							(res.memname like '%'||#{searchName}||'%')
+						</otherwise>
+					</choose>
+					<choose>
+						<when test="selectDay=='today'">
+							 and res.startdate = to_date(sysdate,'yy-mm-dd')
+						</when>
+						<when test="selectDay=='week'">
+							and res.startdate <![CDATA[>]]> to_date(sysdate,'yy-mm-dd')-7
+						</when>
+						<when test="selectDay=='month'">
+							and res.startdate <![CDATA[>]]> add_months(to_date(sysdate,'yy-mm-dd'),-3)
+						</when>
+						<otherwise></otherwise>
+					</choose>
+					<if test="searchStartDay!=''">
+						and res.startdate<![CDATA[>=]]>to_date(#{searchStartDay},'yy-mm-dd')
+					</if>
+					<if test="searchEndDay!=''">
+						and res.enddate<![CDATA[<=]]>to_date(#{searchEndDay},'yy-mm-dd')
+					</if>
+					<choose>
+						<when test="searchDocState==1">
+							and ycount=count
+						</when>
+						<when test="searchDocState==2">
+							and ycount<![CDATA[<]]>count
+						</when>
+						<when test="searchDocState==3">
+							and nvl(res.sgreturncomm,'0')=0
+						</when>
+						<otherwise></otherwise>							
+					</choose>
+					<if test="searchDocDiv!=0">
+						and res.formnum=#{searchDocDiv}
+					</if>
+				</when>
+				<when test="except==1">
+					<choose>
+						<when test="searchType==0">
+							not ((res.snum like '%'||#{searchName}||'%' or res.stitle like '%'||#{searchName}||'%' or res.memname like '%'||#{searchName}||'%')
+						</when>
+						<when test="searchType==1">
+							not ((res.snum like '%'||#{searchName}||'%')
+						</when>
+						<when test="searchType==2">
+							not ((res.stitle like '%'||#{searchName}||'%')
+						</when>
+						<otherwise>
+							not ((res.memname like '%'||#{searchName}||'%')
+						</otherwise>
+					</choose>
+					<if test="searchStartDay!=''">
+						and res.startdate<![CDATA[>=]]>to_date(#{searchStartDay},'yy-mm-dd')
+					</if>
+					<if test="searchEndDay!=''">
+						and res.enddate<![CDATA[<=]]>to_date(#{searchEndDay},'yy-mm-dd')
+					</if>
+					<choose>
+						<when test="searchDocState==1">
+							and ycount=count
+						</when>
+						<when test="searchDocState==2">
+							and ycount<![CDATA[<]]>count
+						</when>
+						<when test="searchDocState==3">
+							and nvl(res.sgreturncomm,'0')=0
+						</when>
+						<otherwise></otherwise>							
+					</choose>
+					<if test="searchDocDiv!=0">
+						and res.formnum=#{searchDocDiv}
+					</if>
+					)
+				</when>
+				<otherwise></otherwise>
+			</choose>
+		</where>
+		) res2 where row_n BETWEEN #{begin} and #{end}
 	</select>
 	
 	<!-- 회사내규에 있는 결재 문서들의 종류를 보여주는 메소드 -->

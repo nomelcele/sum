@@ -69,17 +69,19 @@ public class SignModel {
 			map.put("except", request.getParameter("except"));
 			
 			int totalCount = sgdao.getSignCount(map);
-			System.out.println("totalCount::"+totalCount);
-			System.out.println("page::"+request.getParameter("page"));
-			Map<String,Integer> pMap = MyPage.getMp().pageProcess(request, 10, 5, 0, totalCount, 0);
-			System.out.println("begin :::"+pMap.get("begin"));
-			System.out.println("end :::"+pMap.get("end"));
+			Map<String,Integer> pMap = MyPage.getMp().pageProcess(request, 5, 5, 0, totalCount, 0);
 			map.put("begin", pMap.get("begin"));
 			map.put("end", pMap.get("end"));
 			
-			List<SignatureVO> sgList=sgdao.getSignList(map);
+			System.out.println("======================");
+			for(Map.Entry<String, Object> e:map.entrySet()){
+				System.out.println("key::"+e.getKey()+" value::"+e.getValue());
+			}
+			System.out.println("======================");
 			
+			List<SignatureVO> sgList=sgdao.getSignList(map);
 			List<SignFormVO> sfList = sgdao.getSfList();
+			
 			request.setAttribute("signPage", request.getParameter("page"));
 			request.setAttribute("sfList", sfList);
 			request.setAttribute("sgList", sgList);
