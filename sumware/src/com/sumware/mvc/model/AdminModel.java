@@ -79,6 +79,72 @@ public class AdminModel {
 //		pw.flush();
 //		pw.close();
 //	}
+	/////////////////////////TOP 메뉴 선택하여 페이지 첫 진입(S)///////////////////////
+	
+	// 관리자페이지 진입
+	@RequestMapping(value = "/admin")
+	public String adminForm(HttpSession session, String model) {
+		session.removeAttribute("adminModel");
+		return "admin.adminMain";
+	}
+	
+	@RequestMapping(value="/adminSalaryPage")
+	public String firstSalary(MemberVO mvo, Model model, HttpServletRequest req, HttpSession session){
+		session.setAttribute("adminModel", "salary");
+		// 페이지 처리
+		int totalCount = adao.getMemCount(mvo);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
+		mvo.setBegin(pmap.get("begin"));
+		mvo.setEnd(pmap.get("end"));
+
+		// 사원 리스트
+		List<MemberVO> memList = adao.getMemInfoList(mvo);
+		model.addAttribute("list", memList);
+		model.addAttribute("pdept", mvo.getMemdept());
+		model.addAttribute("pname", mvo.getMemname());
+		return "admin.payInfoList";
+	}
+	
+	@RequestMapping(value="/adminEmployeePage")
+	public String firstEmployee(MemberVO mvo, Model model, HttpServletRequest req, HttpSession session){
+		session.setAttribute("adminModel", "employee");
+		// 페이지 처리
+		int totalCount = adao.getMemCount(mvo);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
+		mvo.setBegin(pmap.get("begin"));
+		mvo.setEnd(pmap.get("end"));
+
+		// 사원 리스트
+		List<MemberVO> memList = adao.getMemInfoList(mvo);
+		model.addAttribute("list", memList);
+		model.addAttribute("pdept", mvo.getMemdept());
+		model.addAttribute("pname", mvo.getMemname());
+
+		return "admin.memInfoList";
+	}
+	
+	@RequestMapping(value="/adminSignFormPage")
+	public String firstSignForm(SignFormVO sfvo, Model model, HttpServletRequest req, HttpSession session){
+
+		session.setAttribute("adminModel", "signform");
+		
+		List<SignFormVO> sfvoList = adao.getSignFormList(sfvo);
+		model.addAttribute("sfvoList", sfvoList);
+		
+		return "admin.signFormList";
+	}
+	
+	@RequestMapping(value="/adminBoardPage")
+	public String firstBoard(SignFormVO sfvo, Model model, HttpServletRequest req, HttpSession session){
+
+		session.setAttribute("adminModel", "boardmgr");
+		return "admin.addBoard";
+	}
+	
+	
+	
+	/////////////////////////TOP 메뉴 선택하여 페이지 첫 진입(E)///////////////////////
+	
 
 	// / 모달에 mem정보
 	@RequestMapping(value = "/admingetMemInfoForModal", method = RequestMethod.POST)
@@ -139,8 +205,7 @@ public class AdminModel {
 
 	// 사원 개인 정보 리스트 가져오는 메서드
 	@RequestMapping(value = "/adminMemList")
-	public String getMemInfoList(MemberVO mvo, Model model, HttpServletRequest req) {
-		
+	public String getMemInfoList(MemberVO mvo, Model model, HttpServletRequest req, HttpSession session) {
 		// 페이지 처리
 		int totalCount = adao.getMemCount(mvo);
 		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
@@ -207,6 +272,7 @@ public class AdminModel {
 	// 급여조회 폼
 	@RequestMapping(value = "/adminPayInfoList", method = RequestMethod.POST)
 	public String adminPayInfoList(MemberVO mvo, Model model, HttpServletRequest req) {
+
 		// 페이지 처리
 		int totalCount = adao.getMemCount(mvo);
 		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
@@ -326,14 +392,13 @@ public class AdminModel {
 
 	// 게시판 추가 메뉴 진입
 	@RequestMapping(value = "/adminaddBoardForm", method = RequestMethod.POST)
-	public String addBoardForm() {
+	public String addBoardForm(HttpSession session) {
 		return "admin/addBoard";
 	}
 
 	// 게시판 추가
 	@RequestMapping(value = "/adminaddBoard", method = RequestMethod.POST)
 	public String adminUpaddBoard(BnameVO bnvo) {
-		System.out.println("보드추가 매핑됨");
 		// 디비에 게시판 추가
 		adao.addBoard(bnvo);
 		return "admin/addBoard";
@@ -402,8 +467,8 @@ public class AdminModel {
 	
 	// 양식 목록 메뉴 선택
 	@RequestMapping(value="/adminFormList")
-	public String adminFormList(SignFormVO sfvo, Model model){
-
+	public String adminFormList(SignFormVO sfvo, Model model, HttpSession session){
+		
 		List<SignFormVO> sfvoList = adao.getSignFormList(sfvo);
 		model.addAttribute("sfvoList", sfvoList);
 		

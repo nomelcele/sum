@@ -75,7 +75,7 @@
 	<!-- header -->
 	<tiles:insertAttribute flush="true" name="header" />
 	<div class="wrap-layout board" id="global">
-		<c:if test="${!empty sessionScope.adminv }">
+		<c:if test="${!empty sessionScope.adminModel }">
 		<div class="lnb-area" id="lnb-area">
 			<!-- menu -->
 			<tiles:insertAttribute flush="true" name="menu" />
