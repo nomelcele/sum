@@ -9,8 +9,11 @@
         <style>
             .videoContainer {
                 position: relative;
-                width: 200px;
-                height: 150px;
+                width: 400px;
+                height: 300px;
+                display: -webkit-inline-box;
+                margin: 15px;
+                border: 5px solid black;
             }
             .videoContainer video {
                 position: absolute;
@@ -38,7 +41,8 @@
 <!--             <button type="submit">Create it!</button> -->
         </form>
         <div class="videoContainer">
-            <video id="localVideo" style="height: 150px;" oncontextmenu="return false;"></video>
+        	<video id="localVideo" oncontextmenu="return false;"></video>
+<!--             <video id="localVideo" style="height: 150px;" oncontextmenu="return false;"></video> -->
 <!--             <div id="localVolume" class="volume_bar"></div> -->
         </div>
         <div id="remotes"></div>
