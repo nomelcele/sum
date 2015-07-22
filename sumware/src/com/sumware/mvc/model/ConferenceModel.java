@@ -31,8 +31,7 @@ public class ConferenceModel {
 		// -> 따로 만들어야 되나?
 		// 페이지 처리
 		int totalCount = adao.getMemCount(mvo);
-		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,
-				totalCount, 0);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0, totalCount, 0);
 		mvo.setBegin(pmap.get("begin"));
 		mvo.setEnd(pmap.get("end"));
 
@@ -47,8 +46,7 @@ public class ConferenceModel {
 	public String vcMakeRoom(MemberVO mvo, Model model, HttpServletRequest req) {
 		// 폼에서 사원 검색했을 때 리스트만 불러옴
 		int totalCount = adao.getMemCount(mvo);
-		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,
-				totalCount, 0);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0, totalCount, 0);
 		mvo.setBegin(pmap.get("begin"));
 		mvo.setEnd(pmap.get("end"));
 
