@@ -16,25 +16,25 @@ ZZIM	VARCHAR2(1)
 	<insert id="proInsert" parameterType="map">
 		insert into product values
 		(#{product},#{proimg},#{prowriter},#{price},0
-		,product_seq.nextVal,'n',sysdate,#{enddate},#{procont })
+		,product_seq.nextVal,sysdate,#{enddate},#{procont},#{prostep})
 	</insert>
 	
 	<!-- 상품 리스트 -->
 	<select id="proList" resultType="provo">
-		select p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, to_char(p.enddate,'yyyy-MM-dd') enddate,p.pronum
+		select p.procount,p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, to_char(p.enddate,'yyyy-MM-dd') enddate,p.pronum
 		from product p, member m where p.prowriter = m.memnum order by pronum desc
 	</select>	
 	
 	<!-- 상품 디테일 -->
 	<select id="proDetail" parameterType="int" resultType="provo">
-		select p.pronum,p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, to_char(p.enddate,'yyyy-MM-dd') enddate
+		select p.prostep,p.pronum,p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, to_char(p.enddate,'yyyy-MM-dd') enddate
 		from product p, member m where p.prowriter = m.memnum and p.pronum=#{pronum}
 	</select>
 	
 	<!-- 입찰정보를 인서트 -->
 	<insert id="bidInsert" parameterType="bidvo">
 		insert into bidder values
-		(bidder_seq.nextval,#{bidmem},#{bidpronum},#{bidprice})
+		(bidder_seq.nextval,#{bidmem},#{bidpronum},#{bidprice},sysdate)
 	</insert>
 	
 	<!-- 입찰이 일어났을 때 가격정보 수정. -->
@@ -46,6 +46,22 @@ ZZIM	VARCHAR2(1)
 	<update id="proCount" parameterType="bidvo">
 		update product set procount=(procount+1) where pronum=#{bidpronum}
 	</update>
+	
+	<!-- 상품의 총 갯수 -->
+	<select id="proTotalCount">
+		select count(*) from product
+	</select>
+	
+	<!-- 상품에 대한 입찰정보 -->
+	<select id="bidInfo" parameterType="bidvo" resultType="bidvo">
+		select 
+		bidnum,bidmem,bidpronum,bidprice,m.memname bidmemname ,b.biddate
+		from 
+		bidder b, member m
+		where 
+		bidpronum=#{bidpronum} and b.bidmem = m.memnum
+		order by bidnum desc
+	</select>
 	
 </mapper>
 

@@ -50,6 +50,15 @@ public class ProductDao {
 	}
 	/* /나중에 트랜잭션 처리 해보자                              */
 	
+	// 상품목록 페이징을 위한 상품 총 갯수
+	public int proTotalCount(){
+		return st.selectOne("pro.proTotalCount");
+	}
+	
+	// 입찰정보를 보여주는 셀렉트
+	public List<BidderVO> bidInfo(BidderVO bidvo){
+		return st.selectList("pro.bidInfo", bidvo);
+	}
 	
 	
 }

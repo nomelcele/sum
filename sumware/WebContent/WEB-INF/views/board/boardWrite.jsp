@@ -48,8 +48,17 @@
 				<!-- button-div(S) -->
 				<div class="button-div center">
 					<button type="button" onclick="javascript:formGo('insert')">글작성</button>
-					<button type="button"onclick="location='sumware?model=board&submod=boardList&page=1&bdeptno=${sessionScope.v.memdept }&bgnum=${sessionScope.bbbgnum}&bname=${sessionScope.bname }'">리스트</button>
+					<button type="button"onclick="javascript:formGo('list')">리스트</button>
 				</div>
 			</form>
 				<!-- button-div(E) -->
 		</div>
+<form action="saboardList" method="post" id="listForm">
+				<input type="hidden" name="model" value="board">
+				<input type="hidden" name="page" value="1">
+				<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
+				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
+				<input type="hidden" name="bname" value="${sessionScope.bname }">
+				<input type="hidden" name="bsearch" value="">
+				<input type="hidden" name="div" value="">
+</form>
