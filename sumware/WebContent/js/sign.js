@@ -67,8 +67,10 @@ function addSignDiv(){
 					if(memnum==mgrs[m]){
 						sgHtml+="<td><div  ondrop='signDrop(event)' ondragover='signAllowDrop(event)' id='signImg"+m+"' style='width: 80px; height: 80px;'></div></td>";
 						$('#sgReturnBtn').attr("type","button");
+						$('#sgDocBtn').attr("type","hidden");
 					}else{
 						sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'></div></td>";
+						$('#sgDocBtn').attr("type","hidden");
 					}
 				}
 			}else{

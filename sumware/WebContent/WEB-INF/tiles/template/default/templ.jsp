@@ -69,10 +69,12 @@
 				
 				if("${!empty sgvo.scont}"=="true"){
 					$("#scont").val($("#targetScont").val());
+					$("#scont").attr("readonly","readonly");
 					$("#targetScont").val("");
 				}
 				if("${!empty sgvo.sreason}"=="true"){
 					$("#sreason").val($("#targetSreason").val());
+					$("#sreason").attr("readonly","readonly");
 					$("#targetSreason").val("");
 				}else{
 					
