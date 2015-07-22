@@ -25,7 +25,12 @@ function Notify(titleText, bodyText,link)
         }
     );
     noty.onclick = function () {
-    	 window.location.href = link;
+    	if(titleText == 'Conference'){
+    		// 화상 회의 -> 새 창 띄우기
+    		window.open(link,'Video Conference','width=600, height=500, scrollbars=yes');
+    	} else {
+    		window.location.href = link;
+    	}
         console.log('notification.Click');
     };
     noty.onerror = function () {

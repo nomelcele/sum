@@ -71,10 +71,10 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
+		
 		<!-- List (E) -->
 
-		<!-- paging(S) 아직 안 됨 -->
+		<!-- paging(S) -->
 		<div class="paging" id="paging">
 			<input type="hidden" name="page" id="page"> 
 			<input type="hidden" id="memdept" name="memdept" value="${pdept}">
@@ -82,27 +82,28 @@
 			<c:choose>
 				<c:when test="${pageInfo.currentBlock eq 1}">&lt;&lt;</c:when>
 				<c:otherwise>
-					<a class="page-first" href="javascript:goPage(${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock },'memListPage')">&lt;&lt;</a>
+					<a class="page-first" href="javascript:goMemPage(${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock })">&lt;&lt;</a>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
 				<c:when test="${pageInfo.currentBlock ne pageInfo.totalBlocks}">
 					<c:forEach begin="1" end="${pageInfo.pagesPerBlock}" varStatus="num">
-						<a href="javascript:goPage(${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count },'memListPage')">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>
+						<a href="javascript:goMemPage(${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count })">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
 					<c:forEach begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}" end="${pageInfo.totalPages}" varStatus="num">
-						<a href="javascript:goPage(${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count },'memListPage')">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>
+						<a href="javascript:goMemPage(${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count })">${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
 				<c:when test="${pageInfo.currentBlock eq pageInfo.totalBlocks}">&gt;&gt;</c:when>
 				<c:otherwise>
-					<a class="page-last" href="javascript:goPage(${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 },'memListPage')">&gt;&gt;</a>
+					<a class="page-last" href="javascript:goMemPage(${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 })">&gt;&gt;</a>
 				</c:otherwise>
 			</c:choose>
+		</div>
 		</div>
 		<!-- paging(E) -->
 
@@ -154,7 +155,7 @@
 		var row;
 		
 		if(obj.checked){
-			var row = "<tr id='"+memnum+"'><td><input type='checkbox' name='chk2' id='chk2' value='"+
+			var row = "<tr id='t"+memnum+"'><td><input type='checkbox' name='chk2' id='chk2' value='"+
 			memnum+"'></td>"+"<td>"+memname+"</td>"+"<td>"+dename+"</td>"+"<td>"+memjob+"</td></tr>"
 			$("#attendeeList").append(row);
 		} else {
@@ -171,7 +172,7 @@
 		var chkArr = document.getElementsByName("chk2");
 		var members = [];
 		for(var i=0; i<chkArr.length; i++){
-			members.push(chkArr[i].parentNode.parentNode.id);
+			members.push(chkArr[i].value);
 		}
 		
 		$.ajax({
@@ -198,13 +199,35 @@
 		
 		for(var i=0; i<chkArr.length; i++){
 			var obj = chkArr[i];
-			console.log(obj);
+			// console.log(obj);
 			if(obj.checked){ // 체크된 행 삭제
-				console.log(obj.parentNode.parentNode);
-				obj.parentNode.parentNode.parentNode.removeChild(obj.parentNode.parentNode);
-				console.log("삭제");
+				console.log(document.getElementById("t"+chkArr[i].value));
+				document.getElementById("t"+chkArr[i].value).remove();
+// 				console.log("checked: "+obj);
+// 				console.log("삭제할 tr: ");
+// 				console.log(obj.parentNode.parentNode);
+				// obj.parentNode.parentNode.parentNode.removeChild(obj.parentNode.parentNode);
+				// console.log("삭제");
 			}
 		}
+	}
+	
+	// 멤버 리스트 페이지 처리
+	function goMemPage(page){
+		$("#page").attr("value",page);
+		
+		$.ajax({
+			type : "POST",
+			url : "saconfSearch",
+			data : {
+				memdept : $("#searchDept").val(),
+				memname : $("#searchName").val(),
+				page : $("#page").val()
+			},
+			success : function(result) {
+				$('#memSearchForm').html(result);
+			}
+		});
 	}
 </script>
 </html>

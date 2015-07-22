@@ -79,7 +79,6 @@ $(function(){
 			console.log("conf notification");
 			eventSource = new EventSource("saconfNotify?confmem=${v.memnum}");
 			eventSource.onmessage = function(event){
-				// console.log("conference notify: "+event.data);
 				Notify("Conference","회의에 초대되셨습니다.",event.data);
 			}
 		} else {
