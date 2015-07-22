@@ -38,6 +38,8 @@ public class LogAop {
 	public void outLog(JoinPoint jp){
 		System.out.println("로그아웃 기록을 남기자~");
 		MemberVO mv = (MemberVO) session.getAttribute("v");
-		logDao.outLog(mv.getMemnum());
+		if(mv!=null){
+			logDao.outLog(mv.getMemnum());
+		}
 	}
 }

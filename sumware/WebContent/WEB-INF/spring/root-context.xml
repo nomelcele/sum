@@ -29,7 +29,8 @@
 		<intercept-url pattern="/ad*" access="sumware"/>
 		<intercept-url pattern="/sa*" access="사원,팀장,부장,이사,대표이사,sumware"/>
 		<form-login login-page="/home" authentication-failure-url="/index?fail=true"
-			username-parameter="memnum" password-parameter="mempwd" default-target-url="/login"/>
+			username-parameter="memnum" password-parameter="mempwd" default-target-url="/login"
+			always-use-default-target="true"/>
 		<logout invalidate-session="true" logout-success-url="/" logout-url="/logoutgo"/>
 		<access-denied-handler error-page="/home"/>
 		<session-management invalid-session-url="/home">

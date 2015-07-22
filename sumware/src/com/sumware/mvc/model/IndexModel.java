@@ -55,6 +55,8 @@ public class IndexModel{
 		session.setAttribute("capCount", capCount);
 		return "home.index";
 	}
+	//login AuthenticationSuccessHandler를 사용해서 바꾸자.
+	//logout AuthenticationFailureHandler
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String indexForm(Principal principal,HttpSession session){
 		System.out.println(":::::::"+principal.getName());

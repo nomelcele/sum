@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,11 +74,8 @@ public class LoginModel{
 	}
 
 	@RequestMapping(value="/logout",method=RequestMethod.POST)
-	public String logout(int memnum,HttpSession session){
+	public String logout(HttpSession session){
 		System.out.println("로그아웃 컨트롤러");
-//		dao.outLog(memnum);
-		session.removeAttribute("v");
-		session.removeAttribute("teamNameList");
 		session.invalidate();
 		return "redirect:logoutgo";
 	}
