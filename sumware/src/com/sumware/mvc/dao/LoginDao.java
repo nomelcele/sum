@@ -20,9 +20,7 @@ public class LoginDao {
 	public String ckFirstLogin(int memnum){
 		String res="";
 		res = st.selectOne("login.ckFirstLogin",memnum);
-		if(res==null||res.equals("")){
-			res="0";
-		}else{
+		if(!res.equals("1")){
 			res=String.valueOf(memnum);
 		}
 		return res;
