@@ -73,14 +73,11 @@ public class SignModel {
 			map.put("begin", pMap.get("begin"));
 			map.put("end", pMap.get("end"));
 			
-			System.out.println("======================");
-			for(Map.Entry<String, Object> e:map.entrySet()){
-				System.out.println("key::"+e.getKey()+" value::"+e.getValue());
-			}
-			System.out.println("======================");
-			
 			List<SignatureVO> sgList=sgdao.getSignList(map);
 			List<SignFormVO> sfList = sgdao.getSfList();
+			
+			//각각의 문서 개수 scope에 저장.
+			setSignCount(request,map);
 			
 			request.setAttribute("signPage", request.getParameter("page"));
 			request.setAttribute("sfList", sfList);
@@ -138,21 +135,6 @@ public class SignModel {
 		
 		sgvo.setNowmemnum(Integer.parseInt(sgMgrList.get(0).get("stepmemnum")));
 		sgvo.setFinalmemnum(Integer.parseInt(map.get("sgMgr"+(sgMgrList.size()))));
-		
-		System.out.println("============");
-		System.out.println("문서번호: "+sgvo.getFormnum());
-		System.out.println("제목: "+sgvo.getStitle());
-		System.out.println("기안자: "+sgvo.getSgwriter());
-		System.out.println("시작날짜: "+sgvo.getStartdate());
-		System.out.println("끝나는날짜: "+sgvo.getEnddate());
-		System.out.println("현재결재자: "+sgvo.getNowmemnum());
-		System.out.println("최종결재자: "+sgvo.getFinalmemnum());
-		System.out.println("내용: "+sgvo.getScont());
-		System.out.println("사유: "+sgvo.getSreason());
-		System.out.println("장소: "+sgvo.getSplace());
-		System.out.println("특이사항: "+sgvo.getSps());
-		System.out.println("기간: "+sgvo.getSdate());
-		System.out.println("============");
 		
 		signService.insertSignService(sgvo, sgMgrList);
 		return "redirect:sagetSignList?page=1";
@@ -264,4 +246,11 @@ public class SignModel {
 		}
 		return sgMgrList;
 	}	
+	//각 해당 텝에 문서 개수 파악
+	private void setSignCount(HttpServletRequest request,Map<String, Object> map){
+		for(int i=0; i<5; i++){
+			map.put("signdiv", i);
+			request.setAttribute("signCount"+i,sgdao.getSignCount(map));
+		}
+	}
 }
