@@ -9,7 +9,7 @@
 		<input type="hidden" id="except" name="except">
 		
 	<!-- Search (S) -->
-		<div style="border: solid; margin-bottom: 15px; width: 800px">
+		<div style="border: solid; border-color:gray; margin-bottom: 15px; width: 800px">
 		<table>
 		<tr>
 		<td style="width: 651px;">
@@ -56,11 +56,11 @@
 		</table>
 		</div>
 		<div style="margin-bottom: 10px">
-			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signAll')" value="전체선택">&nbsp; &nbsp;
-			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signReceive')" value="수신 문서">&nbsp; &nbsp;
-			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signStandBy')" value="대기 문서">&nbsp; &nbsp;
-			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signComplete')" value="완료 문서">&nbsp; &nbsp;
-			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signReturn')" value="반려 문서">
+			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signAll')" value="전체선택(${signCount0 })">&nbsp; &nbsp;
+			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signReceive')" value="수신 문서(${signCount1 })">&nbsp; &nbsp;
+			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signStandBy')" value="대기 문서(${signCount2 })">&nbsp; &nbsp;
+			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signComplete')" value="완료 문서(${signCount3 })">&nbsp; &nbsp;
+			<input type="button" class="btn btn-default btn-sm" onclick="signMenu('signReturn')" value="반려 문서(${signCount4 })">
 		</div>
 	<!-- Search (E) -->
 	<div>
