@@ -1,10 +1,10 @@
 /**
- * 
+ * Auction - javascript function 
  */
 
 $(function(){
 	// productList.jsp 에서 상품등록 버튼 누르면 작동 되는 메소드.
-	$('#auctionBtn1 button').click(function(){
+	$('#auctionBtn1 #productWrite').click(function(){
 		$.ajax({
 			url : "sawriteForm",
 			type : "post",
@@ -59,6 +59,21 @@ function bidExe(){
 	$('#bidModal').modal('toggle');
 }
 
+// 입찰정보 버튼 눌렀을 때 동작.(productList.jsp)
+// bidpronum : 상품번호를 가지고.. 컨트롤러로 가서 입찰정보를 불러올 것임.
+function bidInformation(bidpronum){
+	$.ajax({
+		url:"bidInfo",
+		data : {bidpronum:bidpronum},
+		type:"post",
+		success:function(result){
+			$('#mTarget').html(result);
+			$('#bidInfoModal').modal('toggle');
+		}
+	});
+	
+	
+}
 
 
 

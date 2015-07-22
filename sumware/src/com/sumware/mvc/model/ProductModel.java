@@ -121,7 +121,14 @@ public class ProductModel {
 	
 	}	
 	
-	
+	// 상품목록에서 입찰정보 누르면 동작.
+	@RequestMapping(value="/bidInfo")
+	public String bidInfo(BidderVO bidvo,Model model){
+		// modal 페이지로 리스트의 주소값을 forward 한다.
+		System.out.println("bidInformation 메소드 동작 !!!!");
+		model.addAttribute("bidderList",pdao.bidInfo(bidvo));
+		return "product/promodal";
+	}
 	
 }
 

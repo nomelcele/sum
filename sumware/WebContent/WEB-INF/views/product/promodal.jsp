@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- 상품등록 Modal -->
+
+<!-- 상품등록 Modal(S) -->
 <div id="proRegister" class="modal fade" role="dialog">
 	<form action="sadone" method="post" id="doneForm" enctype="multipart/form-data">
 	<input type="hidden"  name="prowriter" value="${sessionScope.v.memnum }">
@@ -28,11 +29,13 @@
 						<!-- 가격(S) -->
 						<tr class="auc-price">
 							<th>가격</th>
-							<td><input type="number" placeholder="10,000" id="auc-price" step="1000" min="0" name="price"/> 원</td>
+							<td><input type="number" placeholder="10,000" id="auc-price" step="100" min="0" name="price"/> 원</td>
 						</tr>
 						<!-- 가격(E) -->
-						
-						
+						<tr class="auc-price">
+							<th>입찰단가</th>
+							<td><input type="number" step="100" min="100" name="prostep" placeholder="100"> 원</td>
+						</tr>
 						<!-- 경매기간(S) -->
 						<tr class="auc-date">
 							<th>종료일자</th>
@@ -44,7 +47,7 @@
 						<tr class="auc-pro-img">
 							<th>상품<br />상세 이미지</th>
 							<td>
-								<input type="file" onchange="preview(this)" name="proimg">
+								<input type="file" onchange="preview(this)" name="proimg" >
 								<span id="imgTarget"></span>
 							</td>
 						</tr>
@@ -68,8 +71,9 @@
 	</div>
 	</form>
 </div>
+<!-- 상품등록 Modal(E) -->
 
-<!-- 상품입찰 Modal -->
+<!-- 상품입찰 Modal(S) -->
 <div id="bidModal" class="modal fade" role="dialog">
 <form id="bidForm" action="bidInsert" method="post">
 <input type="hidden" name="bidpronum" value="${provo.pronum }">
@@ -94,10 +98,6 @@
 							<td>종료일</td>
 							<td>${provo.enddate }</td>
 						</tr>
-						<tr>
-							<td>구매가능수량</td>
-							<td>아 몰랑~ 100개</td>
-						</tr>
 					</table>
 				</div>
 				
@@ -110,12 +110,8 @@
 							<td>${provo.price}</td>
 						</tr>
 						<tr>
-							<td>입찰수량</td>
-							<td><input type="number" step="1" min="1"></td>
-						</tr>
-						<tr>
 							<td>입찰금액</td>
-							<td><input type="number" step="1000" name="bidprice" min="${price}" placeholder="${provo.price}"></td>
+							<td><input type="number" step="${provo.prostep }" name="bidprice" min="${price}" placeholder="${provo.price}"></td>
 						</tr>
 					</table>
 				</div>
@@ -129,4 +125,46 @@
 	</div>
 </form>
 </div>
+<!-- 상품입찰 Modal(E) -->
+
+<!-- 입찰정보 Modal(S) -->
+<div id="bidInfoModal" class="modal fade" role="dialog">
+<form id="bidForm" action="bidInsert" method="post">
+<input type="hidden" name="bidpronum" value="${provo.pronum }">
+<input type="hidden" name="bidmem"	 value="${sessionScope.v.memnum }">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">입찰정보</h4>
+			</div>
+			<!-- 입찰 정보 Table -->
+			<div class="modal-body auction">
+				<table class="table table-condensed table-hover">
+					<tbody>
+					<c:forEach var="bid" items="${bidderList }">
+						<tr>
+							<td class="col-lg-1" style="text-align: center;">${bid.bidmemname }</td>
+							<td class="col-lg-1" style="text-align: right;">${bid.bidprice }</td>
+							<td class="col-lg-1" style="text-align: right;">${bid.biddate }</td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer align-center">
+				<button type="button" class="btn btn-default" data-dismiss="modal">목록</button>
+			</div>
+		</div>
+	</div>
+</form>
+</div>
+<!-- 입찰정보 Modal(E) -->
+
+
+
+
+
+
 

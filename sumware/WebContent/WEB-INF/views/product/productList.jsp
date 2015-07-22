@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h2 class="heading-page">중고경매장터</h2>
 <div class="left" id="auctionBtn1">
-	<button type="button" class="btn btn-info btn-lg">상품등록</button> 
+	<button type="button" class="btn btn-info btn-lg" id="productWrite">상품등록</button> 
 <!-- 
 	<a href="" class="btn btn-info" >상품등록</a>
 -->
@@ -30,16 +30,14 @@
 				<td>${list.procount}</td>
 				<td>${list.memname}</td>
 				<td>${list.enddate}</td>
-				<td><button class="btn btn-default btn-sm">입찰정보</button></td>
-				<td><button class="btn btn-default btn-sm">장바구니</button></td>
+				<td><button type="button" class="btn btn-default btn-sm" id="bidInfo" onclick="bidInformation(${list.pronum})">입찰정보</button></td>
+				<td><button type="button" class="btn btn-default btn-sm">장바구니</button></td>
 			</tr>
 		</c:forEach>
 		</tbody>
 	</table>
 </div>
 </form>
-
-
 
 
 <!-- paging(S) -->

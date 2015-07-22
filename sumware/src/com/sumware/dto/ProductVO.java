@@ -9,11 +9,29 @@ public class ProductVO {
     procount NUMBER(3),-- 경매에 참여한 사람 수
     pronum NUMBER(5), -- 경매번호 pk
     zzim VARCHAR2(1) DEFAULT 'n', -- 찜한목록이면 y 아니면 n*/
-	private String product,proimg,zzim;
+	private String product,proimg;
 	private String startdate, enddate,procont,price,memname;
-	private int prowriter,procount,pronum;
+	private int prowriter,procount,pronum,begin,end,prostep;
 	
 	
+	public int getProstep() {
+		return prostep;
+	}
+	public void setProstep(int prostep) {
+		this.prostep = prostep;
+	}
+	public int getBegin() {
+		return begin;
+	}
+	public void setBegin(int begin) {
+		this.begin = begin;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
 	public String getPrice() {
 		return price;
 	}
@@ -55,12 +73,6 @@ public class ProductVO {
 	}
 	public void setProimg(String proimg) {
 		this.proimg = proimg;
-	}
-	public String getZzim() {
-		return zzim;
-	}
-	public void setZzim(String zzim) {
-		this.zzim = zzim;
 	}
 	public int getProwriter() {
 		return prowriter;
