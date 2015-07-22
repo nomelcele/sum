@@ -260,7 +260,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary" onclick="prFormSaveChange(${memvo.memnum})">변경</button>
+	        <button type="button" class="btn btn-primary" onclick="prFormSaveChange(${memvo.memnum},${memvo.memdept})">변경</button>
 	      </div>
 	    </div>
 	  </div>

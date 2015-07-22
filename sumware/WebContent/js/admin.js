@@ -355,7 +355,7 @@ function payManage(res,data){
 
 
 // 직급 변경, 부서 이동 처리
-function prFormSaveChange(memnum){
+function prFormSaveChange(memnum,memdept){
 	var newmemjob = $("#newmemjob").val();
 	var newmemdept = $("#newmemdept").val();
 	
@@ -391,7 +391,8 @@ function prFormSaveChange(memnum){
 						memnum: memnum,
 						memjob: $("#newmemjob").val(),
 						psalary: $("#newpsalary").val(),
-						memauth:memauthval
+						memauth:memauthval,
+						memdept:memdept
 					},
 					success: function(result){
 						console.log("모달 닫기");

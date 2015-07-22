@@ -42,7 +42,7 @@
 	<select id="getMemInfoList" parameterType="mvo" resultType="mvo">
 		select * from (select rownum r_num, a.* from 
 		(select m.memnum, m.memname, m.meminmail, m.membirth, m.memaddr, m.memauth,
-		d.dename, m.memjob, to_char(m.memhire, 'yyyy-mm-dd') memhire, p.pyearly, p.psalary from member m, dept d, pay p 
+		d.dename, m.memdept, m.memjob, to_char(m.memhire, 'yyyy-mm-dd') memhire, p.pyearly, p.psalary from member m, dept d, pay p 
 		where d.denum=m.memdept and p.pmem=m.memnum 
 			<if test="memdept != 0">
 				<!-- 부서만 입력 (해당 부서의 사원 목록)-->
@@ -113,7 +113,19 @@
 	
 	<!-- 진급 처리(직급 변경) -->
 	<update id="promoteMem" parameterType="mvo">
-		update member set memjob=#{memjob}, memauth=#{memauth} where memnum=#{memnum}
+		update member set memjob=#{memjob}, memauth=#{memauth}, memmgr=(select memnum from member where
+		<choose>
+			<when test="memjob == '이사'">
+				 memjob='대표이사')
+			</when>
+			<when test="memjob == '대표이사'">
+				 memjob='sumware')
+			</when>
+			<otherwise>
+				 memdept=#{memdept} and memauth=#{memauth}-1) 
+			</otherwise>
+		</choose> 
+		where memnum=#{memnum}
 	</update>
 	
 	<!-- 진급 처리(연봉 변경 & 연차 0으로) -->
