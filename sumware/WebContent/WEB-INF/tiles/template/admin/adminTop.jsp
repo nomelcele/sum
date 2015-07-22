@@ -4,7 +4,7 @@
 <nav class="navbar navbar">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="home"><img
+			<a class="navbar-brand" href="admin"><img
 				src="resources/img/sum.png" alt="SumWare"></a> <a
 				class="navbar-toggle" data-toggle="collapse"
 				data-target=".navbar-collapse"> <span
@@ -23,6 +23,16 @@
 			</c:when>
 			<c:otherwise>
 				<div class="nav navbar-right">
+				<form action="goFunc" method="post" id="adminform">
+						<input type="hidden" name="page" id="page" value="1"> 
+						<!-- navbar-nav(S) -->
+						<ul class="nav navbar-nav">
+							<li><a href="">Employee</a></li>
+							<li><a href="">Salary</a></li>
+							<li><a href="">Sign Form</a></li>
+							<li><a href="">Board(a)</a></li>
+						</ul>
+						<!-- navbar-nav(E) -->
 						<ul class="nav navbar-right navbar-nav user-name">
 						<c:if test="${!empty sessionScope.adminv.memname}">
 							<li>
@@ -33,7 +43,7 @@
 							</li>
 						</c:if>
 						</ul>
-<!-- 					</form> -->
+					</form>
 				</div>
 			</c:otherwise>
 		</c:choose>

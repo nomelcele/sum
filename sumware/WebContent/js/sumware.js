@@ -35,10 +35,6 @@ $(function() {
 			$("#div").attr("value", "");
 			$("#formff").attr("action","saboardList").submit();
 			break;
-		case ("admin"):
-			$("#model").attr("value", $pageName);
-			$("#formff").attr("action","saadmin").submit();
-			break;
 		case ("sign"):
 			$("#page").attr("value", "1");
 			$("#formff").attr("action","sagetSignList").submit();
@@ -51,6 +47,18 @@ $(function() {
 			break;
 		case ("conf"):
 			goConfForm();
+			break;
+		case("salary"):
+			$("#adminform").attr("action","adminSalaryPage").submit();
+			break;
+		case("employee"):
+			$("#adminform").attr("action","adminEmployeePage").submit();
+			break;
+		case("sign form"):
+			$("#adminform").attr("action","adminSignFormPage").submit();
+			break;
+		case("board(a)"):
+			$("#adminform").attr("action","adminBoardPage").submit();
 			break;
 		default:
 			openWin();

@@ -247,8 +247,6 @@
 		         chartauction();
 	      }
 	   }
-	
-	
 </script>
 
 <div class="container" style="position: center;" align="center">
@@ -262,7 +260,6 @@
 		onclick="javascript:showbigsize('todo')"></div>
 	</div>
 	
-	
 	<div class="wrap" >
 		<div id="auction"
 		style="width: 400px; height: 300px; float:left; margin-left:100px; margin-top:100px; cursor: zoom-in;"
@@ -271,5 +268,4 @@
 		style="width: 400px; height: 300px; float:left; margin-left: 100px;  margin-top:100px; cursor: zoom-in;"
 		onclick="javascript:showbigsize('sns')"></div>
 	</div>
-	
 </div>
