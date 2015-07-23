@@ -112,7 +112,7 @@
 						</tr>
 						<tr>
 							<td>입찰금액</td>
-							<td><input type="number" step="${provo.prostep }" id="bidprice" name="bidprice" min="${price}" ></td>
+							<td><input type="number" id="bidprice" name="bidprice" min="${price}"  onchange="javascript:parseIntMethod('${provo.prostep }')"></td>
 						</tr>
 					</table>
 				</div>
@@ -120,7 +120,7 @@
 			<!-- 상품에 대한 입찰 정보(E) -->
 			
 			<div class="modal-footer align-center">
-				<button type="button" id="doneBtn" class="btn btn-default" onclick="javascript:bidExe(${provo.prostep },${price})">입찰</button>
+				<button type="button" id="doneBtn" class="btn btn-default" onclick="javascript:bidExe('${provo.prostep }',${price})">입찰</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 			</div>
 		</div>

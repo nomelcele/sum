@@ -56,7 +56,8 @@ function bidBtn(){
 // 입찰 버튼 눌렀을 때 동작.(promodal.jsp)
 function bidExe(step,min){
 	var $bidprice = $('#bidprice').val();
-	if($bidprice < min){
+	// 받은값으로 검증 해야됨.
+	if($bidprice < min || $bidprice==min){
 		alert("현재 가격 보다 높은 금액을 입력하십시오.");
 	}else if(($bidprice-min)%step != 0){
 		alert("호가에 의거하여 입력 하십시오.")
@@ -82,6 +83,12 @@ function bidInformation(bidpronum){
 	
 }
 
+
+// String 을 int 형으로 변환 해주는 함수
+function parseIntMethod(data){
+	var $numberData = "" + data.replace(/(^\s*)|(\s*$)|,/g, ''); // trim, 콤마 제거
+	$('#bidprice').attr('step',$numberData);
+}
 
 
 

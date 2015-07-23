@@ -10,10 +10,16 @@ public class ProductVO {
     pronum NUMBER(5), -- 경매번호 pk
     zzim VARCHAR2(1) DEFAULT 'n', -- 찜한목록이면 y 아니면 n*/
 	private String product,proimg,status;
-	private String startdate, enddate,procont,price,memname,startprice;
-	private int prowriter,procount,pronum,begin,end,prostep;
+	private String startdate, enddate,procont,price,memname,startprice,prostep;
+	private int prowriter,procount,pronum,begin,end;
 	
 	
+	public String getProstep() {
+		return prostep;
+	}
+	public void setProstep(String prostep) {
+		this.prostep = prostep;
+	}
 	public String getStartprice() {
 		return startprice;
 	}
@@ -25,12 +31,6 @@ public class ProductVO {
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	public int getProstep() {
-		return prostep;
-	}
-	public void setProstep(int prostep) {
-		this.prostep = prostep;
 	}
 	public int getBegin() {
 		return begin;
