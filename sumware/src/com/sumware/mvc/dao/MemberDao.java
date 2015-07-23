@@ -7,7 +7,6 @@ import com.sumware.dto.MemberVO;
 import com.sumware.util.MakeXML;
 
 
-
 @Repository
 public class MemberDao {
 	//private static MemberDao dao;
@@ -23,10 +22,7 @@ public class MemberDao {
 	//메일 에서 사용??
 	public List<MemberVO> getNameMailList(){
 		return st.selectList("mem.getNameMailList");
-		
-	
-		
-	
+
 		//SqlSession ss = FactorySrevice.getFactory().openSession();
 		//List<MemberVO> list = ss.selectList("mem.getNameMailList");
 		//ss.close();

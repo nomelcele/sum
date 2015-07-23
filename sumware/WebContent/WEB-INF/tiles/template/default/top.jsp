@@ -78,7 +78,8 @@
 	<button type="button" class="modal fade" id="capBtn"
 		data-toggle="modal" data-target="#capModal"></button>
 	<div class='modal fade' id='capModal'>
-		<div class="modal-dialog">
+<!-- 	<form method="post"> -->
+		<div class="modal-dialog" style="height: 750px; margin-top:0px">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title">보안문자</h4>
@@ -88,6 +89,7 @@
 				</div>
 			</div>
 		</div>
+<!-- 	</form> -->
 	</div>
 </nav>
 
