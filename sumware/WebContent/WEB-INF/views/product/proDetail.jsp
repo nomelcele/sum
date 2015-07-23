@@ -5,6 +5,11 @@
 	<tr style="background-color: #F5F5F5; text-align: center">
 		<td colspan="3"><span style="font-weight: bold">상품 정보</span></td>
 	</tr>
+	<c:if test="${provo.status eq 'y'  }">
+		<tr>
+			<td colspan="3" style="text-align: center;"><h3 style="color: orange;">판매가 종료 된 상품입니다.</h3></td>
+		</tr>
+	</c:if>
 	<tr>
 		<td rowspan="5" class="col-lg-1" style="text-align: center"><img src="aucImg/${provo.proimg}" style="width: 200px;"></td>
 	</tr>
@@ -18,34 +23,23 @@
 	</tr>
 	<tr>
 		<td class="col-lg-1" style="font-weight: bold">종료일자</td>
-		<td class="col-lg-2"><span>${provo.enddate}</span></td>
+		<td class="col-lg-2"><span>${provo.enddate}</span><span style="float: right;"><button type="button" onclick="bidInformation(${provo.pronum})">입찰정보</button></span></td>
 	</tr>
 	<tr>
 		<td class="col-lg-1" style="font-weight: bold">호가</td>
 		<td class="col-lg-2"><span>${provo.prostep}</span> 원</td>
 	</tr>
+	<tr class="btn-position-right">
+		<td colspan="3">
+		<c:if test="${provo.status eq 'n' }">
+		<button type="button"  id="bidBtn" onclick="javascript:bidBtn()">입찰하기</button>
+		<button type="button" onclick="" id="bidListBtn">장바구니</button>
+		</c:if>
+		<button type="button" onclick="" id="bidListBtn">목록</button></td>
+	</tr>
 </table>
 <table class="table table-condensed table-hover">
 	<tbody>
-		<tr>
-			<td class="col-lg-1" style="font-weight: bold; background-color: #F5F5F5; text-align: center;">기본급</td>
-			<td class="col-lg-1" style="text-align: right;">${payvo.pmonthsalary}	만원</td>
-		</tr>
-		<tr>
-			<td class="col-lg-1"	style="font-weight: bold; background-color: #F5F5F5; text-align: center;">추가급</td>
-			<td class="col-lg-1" style="text-align: right;">총 ${comSum} 만원</td>
-		</tr>
-			<tr class="showComDetail">
-				<td class="col-lg-1" style="font-weight: bold; text-align: right;">${comvo.comdetail }</td>
-				<td class="col-lg-1" style="text-align: right;">${comvo.comamount} 만원</td>
-			</tr>
-		<tr>
-			<td class="col-lg-1"	style="font-weight: bold; background-color: #D5D5D5; text-align: center;">총	합계</td>
-			<td class="col-lg-1"	style="font-weight: bold; background-color: #EAEAEA; text-align: right;">${ totalSalary }만원</td>
-		</tr>
 	</tbody>
 </table>
-
-
-<button type="button" id="bidBtn" onclick="javascript:bidBtn()">입찰하기</button>
 <div id="bidTarget"></div>

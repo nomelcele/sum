@@ -92,6 +92,11 @@
 				</ul>
 				<!-- comment-list(E) -->
 				
+				
+				
+				
+				
+				
 				<!-- comment-write(S) -->
 			<form action="commIn" id="cform" method="post">
 				<input type="hidden" name="memnum" value="${sessionScope.v.memnum }">

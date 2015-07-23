@@ -73,7 +73,7 @@ public class ProductModel {
 			e.printStackTrace();
 		}
 		provo.put("proimg", realName);
-		
+		provo.put("price", provo.get("startprice"));
 		
 		pdao.proInsert(provo);
 		return "redirect:saproductList";

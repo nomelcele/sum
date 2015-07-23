@@ -4,9 +4,6 @@
 <h2 class="heading-page">중고경매장터</h2>
 <div class="left" id="auctionBtn1">
 	<button type="button" class="btn btn-info btn-lg" id="productWrite">상품등록</button> 
-<!-- 
-	<a href="" class="btn btn-info" >상품등록</a>
--->
 </div>
 <form action="sawriteForm" id="aucForm">
 <div style="margin-top: 10px;" class="auction">
@@ -15,23 +12,30 @@
 			<tr>
 				<th>상품이미지</th>
 				<th>상품명</th>
-				<th>가격</th>
+				<th>시작가</th>
+				<th>현재가격</th>
 				<th>입찰 횟수</th>
 				<th>판매자</th>
 				<th>종료일시</th>
-				<th>입찰정보</th>
-				<th>찜</th>
+				<th>판매상태</th>
 			</tr>
 		<c:forEach var="list" items="${plist}">
 			<tr>
 				<td><img src="aucImg/${list.proimg }" style="width: 40px; height: 40px; cursor: pointer;" id="proimg" onclick="detailGo(${list.pronum})"></td>
 				<td>${list.product}</td>
-				<td>${list.price}원</td>
+				<td>${list.startprice} 원</td>
+				<td>${list.price} 원</td>
 				<td>${list.procount}</td>
 				<td>${list.memname}</td>
 				<td>${list.enddate}</td>
-				<td><button type="button" class="btn btn-default btn-sm" id="bidInfo" onclick="bidInformation(${list.pronum})">입찰정보</button></td>
-				<td><button type="button" class="btn btn-default btn-sm">장바구니</button></td>
+				<c:choose>
+					<c:when test="${list.status eq 'n' }">
+						<td>판매중</td>
+					</c:when>
+					<c:otherwise>
+						<td>판매완료</td>
+					</c:otherwise>
+				</c:choose>
 			</tr>
 		</c:forEach>
 		</tbody>
