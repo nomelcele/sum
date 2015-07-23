@@ -14,11 +14,11 @@
 						<form class="form-horizontal" role="form" method="post"
 							action="samodify" id="myform" name="myform" >
 						<input type="hidden" name="memnum" value="${sessionScope.v.memnum}"> 
+						<input type="hidden" name="imgchange" id="imgchange" value="0">
 					</c:if>
 					<input type="hidden" name="memnum" value="${memnum}"> 
 					<input type="hidden" name="memaddr" id="address">
 					<input type="hidden" name="memprofile" id="memprofile">
-					
 					<header class="page-header">
 						<h1 class="page-title">Profile Modify</h1>
 					</header>
