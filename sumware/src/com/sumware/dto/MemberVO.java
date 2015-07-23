@@ -4,9 +4,15 @@ public class MemberVO {
 	private int memnum, memauth, memmgr, memdept,begin,end, salstprice, salenprice;
 	private String memname, memaddr, mempwd, memprofile, memjob, memmail, meminmail, dename, mgrname, 
 	memhire, memresign, membirth, memsignimg, pyearly, psalary, hiredstdate, hiredendate;
-
+	private String imgchange;//기존 회원이 이미지를 변경 했는지 판단
 	
 	
+	public String getImgchange() {
+		return imgchange;
+	}
+	public void setImgchange(String imgchange) {
+		this.imgchange = imgchange;
+	}
 	public int getSalstprice() {
 		return salstprice;
 	}
