@@ -91,7 +91,7 @@ public class LoginModel{
 	
 	// 비밀번호 찾기/////////////////////////////
 	// 인증번호 메일로 전송
-	@RequestMapping(value="/sasendCode", method = RequestMethod.POST)
+	@RequestMapping(value="/sendCode", method = RequestMethod.POST)
 	public String sendCode(MemberVO vo, Model model,HttpSession session) throws Exception{
 		
 		MemberVO mvo = dao.findPW(vo);
@@ -115,7 +115,7 @@ public class LoginModel{
 	}
 	
 	//인증번호 일치하는지 체크
-	@RequestMapping(value="/sacheckCode", method = RequestMethod.POST)
+	@RequestMapping(value="/checkCode", method = RequestMethod.POST)
 	public ModelAndView checkCode(int code, HttpSession session) throws Exception{
 		ModelAndView mav = new ModelAndView("join/enterCodeCallback");
 		int realcode = (int) session.getAttribute("code");

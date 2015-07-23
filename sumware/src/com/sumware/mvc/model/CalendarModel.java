@@ -73,12 +73,12 @@ public class CalendarModel{
 			
 			cavo.setCaldept(vo.getMemdept());
 			
-			res = "calList?&caldept="+vo.getMemdept()+"&cal=0";
+			res = "sacalList?&caldept="+vo.getMemdept()+"&cal=0";
 		}else{
 			
 			cavo.setCalmem(vo.getMemnum());
 			
-			res = "calList?&calmem="+vo.getMemnum()+"&cal=1";
+			res = "sacalList?&calmem="+vo.getMemnum()+"&cal=1";
 		}
 		//-----------------------
 		dao.calInsert(cavo);
