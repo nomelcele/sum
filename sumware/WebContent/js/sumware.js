@@ -65,6 +65,9 @@ $(function() {
 			break;
 		}
 	});
+	$("#capForm").submit(function(e){
+		e.preventDefault();
+	});
 });
 
 function logout(memnum) {
