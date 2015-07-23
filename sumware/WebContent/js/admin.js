@@ -355,7 +355,8 @@ function payManage(res,data){
 
 
 // 직급 변경, 부서 이동 처리
-function prFormSaveChange(memnum,memdept){
+function prFormSaveChange(memnum,memdept,memauth){
+	alert("현재 권한: "+memauth);
 	var newmemjob = $("#newmemjob").val();
 	var newmemdept = $("#newmemdept").val();
 	
@@ -372,27 +373,29 @@ function prFormSaveChange(memnum,memdept){
 			$("#prForm").modal('toggle');
 			setTimeout(function(){
 				// 직급에 따른 권한
-				var memauthval = ""
-					if($("#newmemjob").val() == '대표이사'){
-						memauthval = 1;
-					}else if($("#newmemjob").val() == '이사'){
-						memauthval = 2;
-					}else if($("#newmemjob").val() == '부장'){
-						memauthval = 3;
-					}else if($("#newmemjob").val() == '팀장'){
-						memauthval = 4;
-					}else if($("#newmemjob").val() == '사원'){
-						memauthval = 5;
-					}
+//				var memauthval = ""
+//					if($("#newmemjob").val() == '대표이사'){
+//						memauthval = 1;
+//					}else if($("#newmemjob").val() == '이사'){
+//						memauthval = 2;
+//					}else if($("#newmemjob").val() == '부장'){
+//						memauthval = 3;
+//					}else if($("#newmemjob").val() == '팀장'){
+//						memauthval = 4;
+//					}else if($("#newmemjob").val() == '사원'){
+//						memauthval = 5;
+//					}
+				
 				$.ajax({
 					type: "POST",
 					url: "adminPromoteMem",
 					data: {
 						memnum: memnum,
-						memjob: $("#newmemjob").val(),
+						memjob: $("#newmemjob option:selected").text(),
 						psalary: $("#newpsalary").val(),
-						memauth:memauthval,
-						memdept:memdept
+						memauth:$("#newmemjob").val(),
+						memdept:memdept,
+						memmgr:$("#newjobmgr").val()
 					},
 					success: function(result){
 						console.log("모달 닫기");
@@ -417,7 +420,9 @@ function prFormSaveChange(memnum,memdept){
 					url: "adminMoveDept",
 					data: {
 						memnum: memnum,
-						memdept: $("#newmemdept").val()
+						memauth: memauth,
+						memdept: $("#newmemdept").val(),
+						memmgr:$("#newdeptmgr").val()
 					},
 					success: function(result){
 						// 모달 꺼줘야 함

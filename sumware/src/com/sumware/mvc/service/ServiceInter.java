@@ -27,6 +27,7 @@ public interface ServiceInter {
 	//관리자
 	public void addNewMember(MemberVO vo, PayVO payvo) throws Exception ;
 	public void changeJobSalary(MemberVO mvo);
+	public void changeDeptMgr(MemberVO mvo);
 	
 	//전자결재 관리
 	//상급자 리스트 불러오기

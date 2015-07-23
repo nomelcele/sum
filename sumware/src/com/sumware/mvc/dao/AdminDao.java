@@ -85,6 +85,9 @@ public class AdminDao {
 	// 사원 진급 처리(직급 변경)
 	// 직급 변경 후 연봉도 변경해줘야 함(트랜잭션 처리)
 	public void promoteMem(MemberVO mvo){
+		System.out.println("변경할 직급: "+mvo.getMemjob());
+		System.out.println("변경할 권한: "+mvo.getMemauth());
+		System.out.println("사원 번호: "+mvo.getMemnum());
 		st.update("admin.promoteMem",mvo);
 	}
 	
@@ -158,4 +161,19 @@ public class AdminDao {
 		return st.selectOne("admin.getCommSum", comvo);	
 	}
 	
+	// 하급자 리스트
+	public List<MemberVO> getJuniors(int memnum){
+		return st.selectList("admin.getJuniors", memnum);
+	}
+	
+	// 지정할 상급자 리스트
+	public List<MemberVO> getMgrs(MemberVO mvo){
+		System.out.println("상급자 권한: "+mvo.getMemauth());
+		return st.selectList("admin.getMgr", mvo);
+	}
+	
+	// 상급자 변경
+	public void changeMgr(MemberVO mvo){
+		st.update("admin.changeMgr", mvo);
+	}
 }

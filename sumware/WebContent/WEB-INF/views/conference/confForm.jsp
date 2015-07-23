@@ -142,6 +142,9 @@
 		for (var i = 0; i < len; i++) {
 			if (obj.checked) {
 				chkArr[i].checked = true;
+				if(name=='chk'){
+					
+				}
 			} else {
 				chkArr[i].checked = false;
 			}
