@@ -13,7 +13,15 @@
     	update member set memaddr=#{memaddr}, mempwd=#{mempwd},memprofile=#{memprofile},meminmail=#{meminmail} where memnum=#{memnum}
    </update>
    <update id="modify" parameterType="mvo">
-   		update member set memaddr=#{memaddr}, mempwd=#{mempwd},memprofile=#{memprofile} where memnum=#{memnum}
+   	<choose>
+   		<when test="imgchange=='0'">
+   			update member set memaddr=#{memaddr}, mempwd=#{mempwd},memprofile=#{memprofile} where memnum=#{memnum}
+   		</when>
+   		<otherwise>
+   			update member set memaddr=#{memaddr}, mempwd=#{mempwd} where memnum=#{memnum}
+   		</otherwise>
+   	</choose>
+   		
    </update>
 
 </mapper>
