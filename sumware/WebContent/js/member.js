@@ -104,7 +104,12 @@ function fileUpload(){
 						alert("상세 주소를 입력해 주세요!");
 						$('#sample6_address2').focus();
 					}else{
-						fileUpload();
+						if($("#fileimg").val()!=""){
+							fileUpload();
+						}else{
+							alert("사원정보가 업데이트 되었습니다.");
+							myform.submit();
+						}
 					}					
 					
 				});
