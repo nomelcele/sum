@@ -175,6 +175,15 @@ public class AdminModel {
 			model.addAttribute("totalSalary", totalSal);
 
 		}
+		
+		// 직급,부서 변경 -> 하급자 목록
+		List<MemberVO> jList = adao.getJuniors(vo.getMemnum());
+		model.addAttribute("jList", jList);
+		
+		// 하급자들에게 지정해줄 상급자 목록
+		List<MemberVO> jMgrList = adao.getMgrs(mvo);
+		model.addAttribute("jMgrList", jMgrList);
+		
 		return "admin/modal";
 	}
 
@@ -191,7 +200,7 @@ public class AdminModel {
 	// 사원 부서 이동
 	@RequestMapping(value = "/adminMoveDept", method = RequestMethod.POST)
 	public String adminUpmoveDept(MemberVO mvo) {
-		adao.moveDept(mvo);
+		service.changeDeptMgr(mvo);
 		// 업데이트 후 사원 개인정보 리스트 보여줌
 		return "redirect:/adminMemList?page=1&memdept=0&memname=";
 	}
@@ -248,6 +257,28 @@ public class AdminModel {
 		model.addAttribute("mgrList", memmgrlist);
 		return "admin/getMgrListCallback";
 	}
+	
+	// 직급, 부서 변경 시 변경할 상급자 리스트
+	@RequestMapping(value="/admingetNewMgr",method=RequestMethod.POST)
+	public void getNewMgr(MemberVO mvo,HttpServletResponse resp) throws IOException{
+		mvo.setMemauth(mvo.getMemauth()-1);
+		List<MemberVO> newmgrlist = adao.getMgrs(mvo);
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("<option value='0'>상급자 선택</option>");
+
+		for (MemberVO e : newmgrlist) {
+			sb.append("<option value='").append(e.getMemnum()).append("'>")
+					.append(e.getMemname()).append("</option>");
+		}
+
+		PrintWriter pw = resp.getWriter();
+		pw.write(sb.toString());
+		pw.flush();
+		pw.close();
+		
+	}
+
 
 	// ////////////////////////사원 관리(E)///////////////////////////
 
@@ -412,7 +443,7 @@ public class AdminModel {
 
 	// 해당 부서의 게시판 목록 가져오기
 	@RequestMapping(value = "/admingetDeptBoards", method = RequestMethod.POST)
-	public void getDeptBoards(int bdeptno, HttpServletResponse resp)
+	public void getDeptBoards(int bdeptno, Model model, HttpServletResponse resp)
 			throws IOException {
 		List<BnameVO> bList = adao.getDeptBoards(bdeptno);
 		StringBuffer sb = new StringBuffer();
@@ -427,6 +458,7 @@ public class AdminModel {
 		pw.write(sb.toString());
 		pw.flush();
 		pw.close();
+		
 	}
 
 	// 선택한 게시판 열람

@@ -68,4 +68,10 @@ public class AbstractService implements ServiceInter{
 		return null;
 	}
 
+	@Override
+	public void changeDeptMgr(MemberVO mvo) {
+	}
+	
+	
+
 }

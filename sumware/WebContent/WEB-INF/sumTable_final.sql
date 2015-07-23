@@ -438,3 +438,8 @@ constraint conf_confmem_fk foreign key(confmem) references member(memnum) on del
 create sequence conf_seq
 increment by 1
 start with 1;
+
+-- 0723 관리자 전용 부서 추가
+insert into dept values(999,'관리자');
+update member set memdept=999 where memnum=1;
+commit;

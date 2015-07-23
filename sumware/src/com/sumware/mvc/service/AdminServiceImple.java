@@ -55,5 +55,17 @@ public class AdminServiceImple extends AbstractService {
 		// 사원 진급 처리
 		adao.promoteMem(mvo); // 직급 변경
 		adao.changeSalary(mvo); // 연봉 변경
+		adao.changeMgr(mvo);// 상급자 변경
+		// 현재 하급자의 상급자 지정
 	}
+
+	@Override
+	public void changeDeptMgr(MemberVO mvo) {
+		// 사원 부서 이동
+		adao.moveDept(mvo); // 부서 이동
+		adao.changeMgr(mvo);// 상급자 변경
+		// 현재 하급자의 상급자 지정
+	}
+	
+	
 }

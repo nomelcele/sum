@@ -212,28 +212,52 @@
 			        	<div class="form-group">
 			        		<label class="control-label">현재 직급</label> 
 							<input type="text" id="curmemjob" class="form-control" 
-							style="width: 120px" readonly="readonly" value="${memvo.memjob}">
+							style="width: 125px" readonly="readonly" value="${memvo.memjob}">
 			        	</div>
 			        	<div class="form-group">
 			        		<label class="control-label">현재 연봉(만원)</label> 
 							<input type="text" id="curpsalary" class="form-control" 
-							style="width: 120px" readonly="readonly" value="${memvo.psalary}">
+							style="width: 125px" readonly="readonly" value="${memvo.psalary}">
 			        	</div>
 			        	<div class="form-group">
 							<label class="control-label">변경할 직급</label> 
-							<select name="memjob" id="newmemjob" class="form-control" style="width: 120px">
+							<select name="memjob" id="newmemjob" class="form-control" style="width: 125px" 
+							onchange="getNewMgrList('job',${memvo.memdept},${memvo.memnum},${memvo.memauth})">
 											<option value="0">직급 선택</option>								
-											<option value="대표이사">대표이사</option>
-											<option value="이사">이사</option>
-											<option value="부장">부장</option>
-											<option value="팀장">팀장</option>
-											<option value="사원">사원</option>
+											<option value="1">대표이사</option>
+											<option value="2">이사</option>
+											<option value="3">부장</option>
+											<option value="4">팀장</option>
+											<option value="5">사원</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label class="control-label">변경할 연봉(만원)</label> 
 							<input type="number" id="newpsalary" class="form-control" 
-							style="width: 120px" step="100" value="${memvo.psalary}">
+							style="width: 125px" step="100" value="${memvo.psalary}">
+						</div>
+						<div class="form-group">
+							<label class="control-label">변경할 상급자</label> 
+							<select name="newjobmgr" id="newjobmgr" class="form-control" style="width: 125px">
+											<option value="0">상급자 선택</option>		
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="control-label">현재 하급자</label> 
+							<select name="jobjuniors" id="jobjuniors" multiple="multiple" class="form-control" style="width: 125px">
+								<c:forEach var="list" items="${jList}">
+									<option value="${list.memnum}">${list.memname}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="control-label">상급자 지정</label> 
+							<select name="jobjuniorsmgr" id="jobjuniorsmgr" class="form-control" style="width: 125px">
+								<option value="0">상급자 선택</option>	
+								<c:forEach var="list" items="${jMgrList}">
+									<option value="${list.memnum}">${list.memname}</option>
+								</c:forEach>	
+							</select>
 						</div>
 			        </div>
 			   
@@ -241,11 +265,12 @@
 			        	<div class="form-group">
 			        		<label class="control-label">현재 부서</label> 
 							<input type="text" id="curmemdept" class="form-control" 
-							style="width: 120px" readonly="readonly" value="${memvo.dename}">
+							style="width: 125px" readonly="readonly" value="${memvo.dename}">
 			        	</div>
 			        	<div class="form-group">
 							<label class="control-label">변경할 부서</label> 
-							<select name="memdept" id="newmemdept" class="form-control" style="width: 120px">
+							<select name="memdept" id="newmemdept" class="form-control" style="width: 125px"
+							onchange="getNewMgrList('dept',${memvo.memdept},${memvo.memnum},${memvo.memauth})">
 											<option value="0">부서 선택</option>								
 											<option value="100">인사부</option>
 											<option value="200">총무부</option>
@@ -254,13 +279,36 @@
 											<option value="500">기획부</option>
 							</select>
 						</div>
+						<div class="form-group">
+							<label class="control-label">변경할 상급자</label> 
+							<select name="newdeptmgr" id="newdeptmgr" class="form-control" style="width: 125px">
+											<option value="0">상급자 선택</option>		
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="control-label">현재 하급자</label> 
+							<select name="deptjuniors" id="deptjuniors" multiple="multiple" class="form-control" style="width: 125px">
+								<c:forEach var="list" items="${jList}">
+									<option value="${list.memnum}">${list.memname}</option>
+								</c:forEach>	
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="control-label">상급자 지정</label> 
+							<select name="deptjuniorsmgr" id="deptjuniorsmgr" class="form-control" style="width: 125px">
+								<option value="0">상급자 선택</option>	
+								<c:forEach var="list" items="${jMgrList}">
+									<option value="${list.memnum}">${list.memname}</option>
+								</c:forEach>
+							</select>
+						</div>
 			        </div>
 		        </div>
 		        </div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary" onclick="prFormSaveChange(${memvo.memnum},${memvo.memdept})">변경</button>
+	        <button type="button" class="btn btn-primary" onclick="prFormSaveChange(${memvo.memnum},${memvo.memdept},${memvo.memauth})">변경</button>
 	      </div>
 	    </div>
 	  </div>
@@ -268,5 +316,36 @@
 							
 		<!-- Modal (E) -->
 
-
+	<script>
+		function getNewMgrList(val,memdept,memnum,memauth){
+			// 직급 또는 부서 변경 시 지정할 상급자 목록
+			if(val=='job'){ // 직급 변경
+				$.ajax({
+					type: "POST",
+					url: "admingetNewMgr",
+					data: {
+						memauth: $("#newmemjob").val(),
+						memdept: memdept,
+						memnum: memnum
+					},
+					success: function(result){
+						$('#newjobmgr').html(result);
+					}
+				});
+			} else { // 부서 변경
+				$.ajax({
+					type: "POST",
+					url: "admingetNewMgr",
+					data: {
+						memauth: memauth,
+						memdept: $("#newmemdept").val(),
+						memnum: memnum
+					},
+					success: function(result){
+						$('#newdeptmgr').html(result);
+					}
+				});
+			}
+		}
+	</script>
 

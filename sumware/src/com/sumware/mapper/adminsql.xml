@@ -113,19 +113,7 @@
 	
 	<!-- 진급 처리(직급 변경) -->
 	<update id="promoteMem" parameterType="mvo">
-		update member set memjob=#{memjob}, memauth=#{memauth}, memmgr=(select memnum from member where
-		<choose>
-			<when test="memjob == '이사'">
-				 memjob='대표이사')
-			</when>
-			<when test="memjob == '대표이사'">
-				 memjob='sumware')
-			</when>
-			<otherwise>
-				 memdept=#{memdept} and memauth=#{memauth}-1) 
-			</otherwise>
-		</choose> 
-		where memnum=#{memnum}
+		update member set memjob=#{memjob}, memauth=#{memauth} where memnum=#{memnum}
 	</update>
 	
 	<!-- 진급 처리(연봉 변경 & 연차 0으로) -->
@@ -244,4 +232,32 @@
 	
 	<!-- 전체 사원 월급 지급 !!!!!(E) -->
 	
+	<!-- 하급자 리스트 -->
+	<select id="getJuniors" parameterType="int" resultType="mvo">
+		select memnum,memname from member where memmgr=#{memnum}
+	</select>
+	
+	<!-- 지정할 상급자 리스트 -->
+	<select id="getMgr" parameterType="mvo" resultType="mvo">
+		select memnum,memname from member 
+		<where>
+			<choose>
+				<when test="memauth == 0">
+					memname='sumware' 
+				</when>
+				<when test="memauth == 1">
+					memauth=#{memauth} and memname!='sumware'
+				</when>
+				<otherwise>
+					memauth=#{memauth} and memdept=#{memdept} 
+				</otherwise>
+			</choose>
+		</where>
+		and memnum!=#{memnum}
+	</select>
+	
+	<!-- 상급자 변경 -->
+	<update id="changeMgr" parameterType="mvo">
+		update member set memmgr=#{memmgr} where memnum=#{memnum}
+	</update>
 </mapper>
