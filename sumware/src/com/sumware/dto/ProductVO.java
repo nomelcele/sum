@@ -9,11 +9,23 @@ public class ProductVO {
     procount NUMBER(3),-- 경매에 참여한 사람 수
     pronum NUMBER(5), -- 경매번호 pk
     zzim VARCHAR2(1) DEFAULT 'n', -- 찜한목록이면 y 아니면 n*/
-	private String product,proimg;
-	private String startdate, enddate,procont,price,memname;
+	private String product,proimg,status;
+	private String startdate, enddate,procont,price,memname,startprice;
 	private int prowriter,procount,pronum,begin,end,prostep;
 	
 	
+	public String getStartprice() {
+		return startprice;
+	}
+	public void setStartprice(String startprice) {
+		this.startprice = startprice;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public int getProstep() {
 		return prostep;
 	}

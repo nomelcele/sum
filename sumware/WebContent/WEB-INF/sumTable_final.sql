@@ -363,7 +363,11 @@ CREATE TABLE product(
     price NUMBER(8) CONSTRAINT product_price_nn NOT NULL, -- 상품 금액
     procount NUMBER(3),-- 경매에 참여한 사람 수
     pronum NUMBER(5), -- 경매번호 pk
-    zzim VARCHAR2(1) DEFAULT 'n', -- 찜한목록이면 y 아니면 n 
+    enddate date, -- 경매 종료 일자
+    procont varchar(800), -- 상품 설명
+    prostep number(8), -- 경매 호가
+    status varchar2(1) default 'n', -- 제품 판매상태
+    lastbidder number(5), -- 현재 입찰자 fk. member(memnum)
     CONSTRAINT product_pronum_pk PRIMARY KEY(pronum),
     CONSTRAINT product_prowriter_fk FOREIGN KEY(prowriter) REFERENCES MEMBER(memnum) 
 );

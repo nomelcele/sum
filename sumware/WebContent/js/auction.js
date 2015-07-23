@@ -54,9 +54,16 @@ function bidBtn(){
 }
 
 // 입찰 버튼 눌렀을 때 동작.(promodal.jsp)
-function bidExe(){
-	$('#bidForm').submit();
-	$('#bidModal').modal('toggle');
+function bidExe(step,min){
+	var $bidprice = $('#bidprice').val();
+	if($bidprice < min){
+		alert("현재 가격 보다 높은 금액을 입력하십시오.");
+	}else if(($bidprice-min)%step != 0){
+		alert("호가에 의거하여 입력 하십시오.")
+	}else{
+		$('#bidForm').submit();
+		$('#bidModal').modal('toggle');
+	}
 }
 
 // 입찰정보 버튼 눌렀을 때 동작.(productList.jsp)
@@ -67,7 +74,7 @@ function bidInformation(bidpronum){
 		data : {bidpronum:bidpronum},
 		type:"post",
 		success:function(result){
-			$('#mTarget').html(result);
+			$('#bidTarget').html(result);
 			$('#bidInfoModal').modal('toggle');
 		}
 	});

@@ -14,21 +14,37 @@ ZZIM	VARCHAR2(1)
 -->
 	<!-- 상품 등록 -->
 	<insert id="proInsert" parameterType="map">
-		insert into product values
-		(#{product},#{proimg},#{prowriter},#{price},0
-		,product_seq.nextVal,sysdate,#{enddate},#{procont},#{prostep})
+		insert into 
+			product 
+			(product,proimg,prowriter,price,procount,pronum,enddate,procont,prostep,startprice)
+		values
+			(#{product},#{proimg},#{prowriter},#{price},0
+			,product_seq.nextVal,#{enddate},#{procont},#{prostep},#{startprice})
 	</insert>
 	
 	<!-- 상품 리스트 -->
 	<select id="proList" resultType="provo">
-		select p.procount,p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, to_char(p.enddate,'yyyy-MM-dd') enddate,p.pronum
-		from product p, member m where p.prowriter = m.memnum order by pronum desc
+		select 
+			to_char(p.startprice,'999,999,999') startprice,p.status,
+			p.procount,p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, 
+			to_char(p.enddate,'yyyy-MM-dd') enddate,p.pronum
+		from 
+			product p, member m 
+		where 
+			p.prowriter = m.memnum 
+		order by pronum desc
 	</select>	
 	
 	<!-- 상품 디테일 -->
 	<select id="proDetail" parameterType="int" resultType="provo">
-		select p.prostep,p.pronum,p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, to_char(p.enddate,'yyyy-MM-dd') enddate
-		from product p, member m where p.prowriter = m.memnum and p.pronum=#{pronum}
+		select 
+			to_char(p.status,'999,999,999') status,p.prostep,p.pronum,
+			p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, 
+			to_char(p.enddate,'yyyy-MM-dd') enddate
+		from 
+			product p, member m 
+		where 
+			p.prowriter = m.memnum and p.pronum=#{pronum}
 	</select>
 	
 	<!-- 입찰정보를 인서트 -->
@@ -55,11 +71,11 @@ ZZIM	VARCHAR2(1)
 	<!-- 상품에 대한 입찰정보 -->
 	<select id="bidInfo" parameterType="bidvo" resultType="bidvo">
 		select 
-		bidnum,bidmem,bidpronum,bidprice,m.memname bidmemname ,b.biddate
+			bidnum,bidmem,bidpronum,bidprice,m.memname bidmemname ,b.biddate
 		from 
-		bidder b, member m
+			bidder b, member m
 		where 
-		bidpronum=#{bidpronum} and b.bidmem = m.memnum
+			bidpronum=#{bidpronum} and b.bidmem = m.memnum
 		order by bidnum desc
 	</select>
 	

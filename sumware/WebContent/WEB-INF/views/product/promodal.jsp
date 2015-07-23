@@ -29,7 +29,7 @@
 						<!-- 가격(S) -->
 						<tr class="auc-price">
 							<th>가격</th>
-							<td><input type="number" placeholder="10,000" id="auc-price" step="100" min="0" name="price"/> 원</td>
+							<td><input type="number" placeholder="10,000" id="auc-price" step="100" min="0" name="startprice"/> 원</td>
 						</tr>
 						<!-- 가격(E) -->
 						<tr class="auc-price">
@@ -86,7 +86,7 @@
 				<h4 class="modal-title">상품정보</h4>
 			</div>
 			<div class="modal-body auction">
-			<!-- 입찰 할 상품에 대한 정보테이블 -->				
+			<!-- 입찰 할 상품에 대한 정보테이블(S) -->				
 				<div>
 				<h6>* 입찰 상품</h6>
 					<table>
@@ -100,25 +100,27 @@
 						</tr>
 					</table>
 				</div>
-				
-			<!-- 상품에 대한 입찰 정보 -->
+			<!-- 입찰 할 상품에 대한 정보테이블(E) -->				
+			
+			<!-- 상품에 대한 입찰 정보(S) -->
 				<div>
 				<h6>* 입찰 하기</h6>
 					<table>
 						<tr>
 							<td>현재가격</td>
-							<td>${provo.price}</td>
+							<td>${price}</td>
 						</tr>
 						<tr>
 							<td>입찰금액</td>
-							<td><input type="number" step="${provo.prostep }" name="bidprice" min="${price}" placeholder="${provo.price}"></td>
+							<td><input type="number" step="${provo.prostep }" id="bidprice" name="bidprice" min="${price}" ></td>
 						</tr>
 					</table>
 				</div>
 			</div>
+			<!-- 상품에 대한 입찰 정보(E) -->
 			
 			<div class="modal-footer align-center">
-				<button type="button" id="doneBtn" class="btn btn-default" onclick="javascript:bidExe()">입찰</button>
+				<button type="button" id="doneBtn" class="btn btn-default" onclick="javascript:bidExe(${provo.prostep },${price})">입찰</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 			</div>
 		</div>
