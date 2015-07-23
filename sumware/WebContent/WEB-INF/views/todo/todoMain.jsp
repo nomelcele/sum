@@ -85,7 +85,7 @@
 				<div class="panel-footer">
 					<div class="input-group">
 						<input id="btn-input" type="text" class="form-control input-sm"
-							placeholder="메시지를 입력해주세요" onkeydown="enterCheck(1)"> <span
+							placeholder="메시지를 입력해주세요" onkeydown="enterCheck(1,${sessionScope.v.memnum},${sessionScope.v.memdept})"> <span
 							class="input-group-btn">
 							<button class="btn btn-warning btn-sm" onclick="snsSend(${sessionScope.v.memnum},${sessionScope.v.memdept})"
 								id="send">Send</button>

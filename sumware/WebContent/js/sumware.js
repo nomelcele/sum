@@ -113,7 +113,7 @@ function enterCheck(res) {
 		var inputLength = $(this).length;
 		if (inputLength > 0) {
 			if (res == 1) {
-				snsSend();
+				snsSend(arguments[1],arguments[2]);
 			} else if (res == 2) {
 				snsInsertComm();
 			} else if (res == 3) {
