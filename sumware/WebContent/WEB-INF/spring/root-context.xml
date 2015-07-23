@@ -50,6 +50,8 @@
 	<!-- javascript, jQuery, css, image등을 사용하겟다. -->
 	<context:component-scan base-package="com.sumware.aop"/>
 	<context:component-scan base-package="com.sumware.mvc" />
+	<!-- valid -->
+	<context:component-scan base-package="com.sumware.valid"/>
 	<mvc:resources location="/resources/" mapping="/resources/**" />
 
 	<beans:bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
@@ -79,4 +81,5 @@
 		</websocket:handshake-interceptors>
 	</websocket:handlers>
 	<beans:bean id="myHandler" class="com.sumware.mvc.socket.MyHandler"></beans:bean>
+	
 </beans:beans>
