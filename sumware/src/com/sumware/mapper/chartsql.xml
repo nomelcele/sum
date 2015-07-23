@@ -32,8 +32,7 @@
   	
   	<select id="getAuctionCount" resultType="provo">
   		select rownum, p.product, p.procount, m.memname from
-(select * from product where to_char(startdate,'yyyy-mm')=to_char(sysdate,'yyyy-mm') 
-or to_char(enddate,'yyyy-mm')=to_char(sysdate,'yyyy-mm') order by procount desc) p, member m 
+(select * from product where to_char(enddate,'yyyy-mm')=to_char(sysdate,'yyyy-mm') order by procount desc) p, member m 
 where p.prowriter=m.memnum and rownum <![CDATA[<=]]> 5
   	</select>
 

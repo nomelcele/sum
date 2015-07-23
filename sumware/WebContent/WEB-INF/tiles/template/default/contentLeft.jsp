@@ -345,7 +345,6 @@
 					<td colspan="2"><a
 						href="samodifyProfile"
 						class="primary-font"><i class="fa fa-cog"></i> 내 정보</a></td>
-
 				</tr>
 				<tr>
 					<th><strong class="primary-font">MySign</strong></th>
@@ -357,12 +356,14 @@
 			</table>
 			<!-- profile-table(E) -->
 		</div>
-		<div id="MainMenu">
-  <div class="list-group panel">
-   <a href="javascript:signMenu('signWrite')" class="list-group-item">결제 문서 작성</a>
-  </div>
-</div>
+		</div>
+		
+		<div class="left-menu" id="left-menu">
+		<ul>
+			<li><a href="javascript:signMenu('signWrite')" >결재 문서 작성</a></li>
+		</ul>
 	</div>
+	
 	<!-- Modal(S) -->
 		<div class="modal fade" id="signModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">

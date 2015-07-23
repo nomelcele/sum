@@ -11,7 +11,7 @@
 			<label class="control-label">선택사항</label> 
 			<p><label class="checkbox-inline"> <input type="checkbox" onchange ="javascript:checkAllElement()" id="checkAll" value="전체선택"> 전체선택 </label> 
 			<p><label class="checkbox-inline"> <input type="checkbox" name="check" onchange ="javascript:manageForm('writerchk')" id="writerchk" value="기안자"> 기안자 </label> 
-			<p><label class="checkbox-inline"> <input type="checkbox" name="check"  onchange ="javascript:manageForm('stendatechk')" id="stendatechk" value="기안일"> 기안일 </label> 
+<!-- 			<p><label class="checkbox-inline"> <input type="checkbox" name="check"  onchange ="javascript:manageForm('stendatechk')" id="stendatechk" value="기안일"> 기안일 </label>  -->
 			<p><label class="checkbox-inline"> <input type="checkbox" name="check"  onchange ="javascript:manageForm('stitlechk')" id="stitlechk" value="제목"> 제목 </label>
 			<p><label class="checkbox-inline"> <input type="checkbox" name="check" onchange ="javascript:manageForm('sdatechk')" id="sdatechk" value="일시"> 일시 </label>
 			<p><label class="checkbox-inline"> <input type="checkbox" name="check"  onchange ="javascript:manageForm('splacechk')" id="splacechk" value="장소"> 장소 </label>
@@ -53,7 +53,8 @@
 							</td>
 						</tr>
 						<tr>
-							<td id="stendateTarget">
+							<td>
+								기안일: <input type='date' id='startdate' name='startdate'> ~ <input type='date' id='enddate' name='enddate'>
 							</td>
 						</tr>
 						<tr>

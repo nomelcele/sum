@@ -564,12 +564,6 @@ function prFormSaveChange(memnum,memdept){
 					// 체크 푸를때
 					$('#sgwriterTarget').html("");
 				}
-			case 'stendatechk':
-				if($('#stendatechk').attr("checked") == 'checked'){
-					$('#stendateTarget').html("기안일: <input type='date' id='startdate' name='startdate'> ~ <input type='date' id='enddate' name='enddate'>");
-				}else{
-					$('#stendateTarget').html("");
-				}
 			case 'stitlechk':
 				if($('#stitlechk').attr("checked") == 'checked'){
 					$('#stitleTarget').html("제목 : <input type='text' id='stitle' name='stitle' >");
