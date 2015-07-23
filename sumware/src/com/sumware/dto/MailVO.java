@@ -1,6 +1,7 @@
 package com.sumware.dto;
 
 
+
 public class MailVO {
 	private int mailnum, mailmem;
 	private int fromnum,tonum,mynum,trashnum;
