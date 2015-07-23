@@ -78,7 +78,7 @@
 	<button type="button" class="modal fade" id="capBtn"
 		data-toggle="modal" data-target="#capModal"></button>
 	<div class='modal fade' id='capModal'>
-	<form action="#">
+	<form id="capForm">
 		<div class="modal-dialog" style="height: 750px; margin-top:0px">
 			<div class="modal-content">
 				<div class="modal-header">

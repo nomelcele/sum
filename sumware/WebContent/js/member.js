@@ -108,6 +108,7 @@ function fileUpload(){
 							fileUpload();
 						}else{
 							alert("사원정보가 업데이트 되었습니다.");
+							document.getElementById("imgchange").value="1";
 							myform.submit();
 						}
 					}					
