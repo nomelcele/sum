@@ -38,7 +38,7 @@ ZZIM	VARCHAR2(1)
 	<!-- 상품 디테일 -->
 	<select id="proDetail" parameterType="int" resultType="provo">
 		select 
-			to_char(p.status,'999,999,999') status,p.prostep,p.pronum,
+			to_char(p.startprice,'999,999,999') startprice,p.status,to_char(p.prostep,'999,999,999') prostep,p.pronum,
 			p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, 
 			to_char(p.enddate,'yyyy-MM-dd') enddate
 		from 
