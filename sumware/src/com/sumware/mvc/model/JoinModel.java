@@ -49,7 +49,7 @@ public class JoinModel{
 		return "home.index";	
 	}
 	
-	@RequestMapping(value="/saviewCap",method=RequestMethod.POST)
+	@RequestMapping(value="/viewCap",method=RequestMethod.POST)
 	public String viewCap(HttpServletRequest request){
 		// Construct the captchas object
 		// Use same settings as in query.jsp
