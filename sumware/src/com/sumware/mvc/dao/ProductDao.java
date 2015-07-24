@@ -60,6 +60,16 @@ public class ProductDao {
 		return st.selectList("pro.bidInfo", bidvo);
 	}
 	
+	// 입찰종료 시간을 1511101833 의 형식으로 가져온다.년월일시분
+	public String enddate(int pronum){
+		String enddate =st.selectOne("pro.enddate",pronum);
+		return enddate;
+	}
+	
+	// 입찰종료 30분 전에 입찰이 일어날 경우 종료시간 1시간 연장 시켜준다.
+	public void enddateUpdate(int pronum){
+		st.update("pro.enddateUpdate",pronum);
+	}
 	
 }
 
