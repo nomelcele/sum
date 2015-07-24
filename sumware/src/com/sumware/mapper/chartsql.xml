@@ -17,6 +17,7 @@
 		order by s.scnt desc) res where rownum <![CDATA[<=]]> 5
   	</select>
   	
+  	<!-- 올해 업무 성취 순위 -->
   	<select id="getTodoKingDept" resultType="dvo">
   		select rownum, d.dename, d.denum, t.tcnt from (select count(*) tcnt, todept from todo 
 		where toconfirm='o' 
