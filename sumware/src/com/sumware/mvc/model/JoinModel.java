@@ -1,17 +1,22 @@
 package com.sumware.mvc.model;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+
 import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.sumware.dto.MemberVO;
 import com.sumware.mvc.dao.MemberDao;
 import com.sumware.util.CaptchasDotNet;
+import com.sumware.util.MakeXML;
 
 
 @Controller
@@ -44,6 +49,9 @@ public class JoinModel{
 	public String signup(MemberVO mvo, HttpSession session){
 	
 	    mdao.update(mvo);
+	    List<MemberVO> list = mdao.getNameMailList();
+	    // xml 파일 업데이트
+	    MakeXML.updateXML(list);
 	    //모든 세션 정보를 삭제함 ...
 		session.invalidate();	
 		return "home.index";	

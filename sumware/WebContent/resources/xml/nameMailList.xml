@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sumware>
  <member>
+  <name>sumware</name>
+  <inmail>sumware</inmail>
+ </member>
+ <member>
+  <name>김명준</name>
+  <inmail>mjkim</inmail>
+ </member>
+ <member>
+  <name>김주상</name>
+  <inmail>jskim</inmail>
+ </member>
+ <member>
   <name>홍명표</name>
   <inmail>mphong</inmail>
  </member>
@@ -21,11 +33,31 @@
   <inmail>jyan</inmail>
  </member>
  <member>
-  <name>김명준</name>
-  <inmail>mjkim</inmail>
+  <name>김영은</name>
+  <inmail>kimye</inmail>
  </member>
  <member>
-  <name>김주상</name>
-  <inmail>jskim</inmail>
+  <name>안영이</name>
+  <inmail>anyy</inmail>
+ </member>
+ <member>
+  <name>장그래</name>
+  <inmail>janggr</inmail>
+ </member>
+ <member>
+  <name>신민아</name>
+  <inmail>sinmin</inmail>
+ </member>
+ <member>
+  <name>김길동</name>
+  <inmail>gildong3</inmail>
+ </member>
+ <member>
+  <name>홍길동</name>
+  <inmail>honghong</inmail>
+ </member>
+ <member>
+  <name>정수정</name>
+  <inmail>krystal</inmail>
  </member>
 </sumware>

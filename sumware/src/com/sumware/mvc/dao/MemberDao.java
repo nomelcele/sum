@@ -49,7 +49,7 @@ public class MemberDao {
 		//ss.update("mem.update",map);
 				//ss.close();
 		//uSystem.out.println("xml �뙆�씪 �뾽�뜲�씠�듃");
-		new MakeXML().updateXML();
+		
 		
 		
 	}
