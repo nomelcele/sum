@@ -27,20 +27,16 @@
 			chkArr = document.getElementsByName("chk2");
 		}
 		var len = chkArr.length;
-
 		for (var i = 0; i < len; i++) {
 			if (obj.checked) {
-				chkArr[i].checked = true;
-				if(name=='chk'){
-					// 참석자 리스트로 올리기
-					
-				}
+//				chkArr[i].checked = true;
+				chkArr[i].click();
+				
 			} else {
-				chkArr[i].checked = false;
-				if(name=='chk'){
-					// 참석자 리스트에서 삭제
-				}
+//				chkArr[i].checked = false;
+				chkArr[i].click();
 			}
+
 		}
 		
 	}
@@ -67,7 +63,7 @@
 					$("#attendeeList").append(row);
 				}
 			} else {
-				row = document.getElementById(memnum);
+				row = document.getElementById("t"+memnum);
 				row.parentNode.removeChild(row);
 			}
 		
