@@ -143,10 +143,14 @@
 			if (obj.checked) {
 				chkArr[i].checked = true;
 				if(name=='chk'){
+					// 참석자 리스트로 올리기
 					
 				}
 			} else {
 				chkArr[i].checked = false;
+				if(name=='chk'){
+					// 참석자 리스트에서 삭제
+				}
 			}
 		}
 		
@@ -157,14 +161,27 @@
 		// 2. 검색 버튼 눌렀을 때 참석자 리스트는 초기화 안 되게 변경
 		var row;
 		
-		if(obj.checked){
-			var row = "<tr id='t"+memnum+"'><td><input type='checkbox' name='chk2' id='chk2' value='"+
-			memnum+"'></td>"+"<td>"+memname+"</td>"+"<td>"+dename+"</td>"+"<td>"+memjob+"</td></tr>"
-			$("#attendeeList").append(row);
-		} else {
-			row = document.getElementById(memnum);
-			row.parentNode.removeChild(row);
+		// 이미 id(memnum)가 같은 행이 있으면 추가되지 않아야 함
+		// -> 참석자 리스트의 id 조회
+		var chkArr = document.getElementsByName("chk2");
+		var res = 0;
+		for(var i=0; i<chkArr.length; i++){
+			if(memnum == chkArr[i].value){
+				res += 1;
+			}
 		}
+		
+			if(obj.checked){
+				if(res == 0){ // id가 같은 행이 존재하지 않는 경우
+					var row = "<tr id='t"+memnum+"'><td><input type='checkbox' name='chk2' id='chk2' value='"+
+					memnum+"'></td>"+"<td>"+memname+"</td>"+"<td>"+dename+"</td>"+"<td>"+memjob+"</td></tr>"
+					$("#attendeeList").append(row);
+				}
+			} else {
+				row = document.getElementById(memnum);
+				row.parentNode.removeChild(row);
+			}
+		
 	}
 	
 	// ajax 데이터로 배열을 보내기 위한 설정
@@ -198,22 +215,20 @@
 	}
 	
 	function deleteFromList(){
-		// *******
+		// 참석자 리스트에서 체크된 항목 삭제
 		var chkArr = document.getElementsByName("chk2");
+		var len = chkArr.length;
+		var delArr = [];
 		
-		for(var i=0; i<chkArr.length; i++){
-			console.log("배열 길이: "+chkArr.length);
+		for(var i=0; i<len; i++){
 			var obj = chkArr[i];
-			console.log(obj);
-			if(obj.checked){ // 체크된 행 삭제
-				console.log(document.getElementById("t"+chkArr[i].value));
-				document.getElementById("t"+chkArr[i].value).remove();
-// 				console.log("checked: "+obj);
-// 				console.log("삭제할 tr: ");
-// 				console.log(obj.parentNode.parentNode);
-				// obj.parentNode.parentNode.parentNode.removeChild(obj.parentNode.parentNode);
-				// console.log("삭제");
+			if(obj.checked){
+				delArr.push(obj);
 			}
+		}
+		
+		for(var j=0; j<delArr.length; j++){
+			document.getElementById("t"+delArr[j].value).remove();
 		}
 	}
 	
