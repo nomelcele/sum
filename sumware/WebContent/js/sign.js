@@ -4,6 +4,9 @@
 var size="";
 var memnum="";
 var signimg={};
+$(function(){
+	
+});
 function addSignDiv(){
 	var argslen = arguments.length;
 	switch(argslen){
@@ -198,4 +201,16 @@ function searchSignList(res){
 		$("#selectDay").val("month");
 	}
 	$('#searchSignForm').submit();
+}
+
+function searchReset(){
+	alert("리셋버튼");
+	$("#searchStartDay").val("");
+	$("#searchEndDay").val("");
+	$("#searchType").val("0");
+	$("#searchName").val("");
+	$("#searchDocDiv").val("0");
+	$("#searchDocState").val("0");
+	$("#searchDept").val("0");
+	
 }

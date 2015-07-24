@@ -15,7 +15,7 @@
 		<td style="width: 651px;">
 			<div>
 				<input value="검색 일자 : " style="border: 0px; width: 80px; margin-left: 20px;"readonly="readonly">
-				<input type="date" name="searchStartDay"> 부터 <input type="date" name="searchEndDay" style=" margin-top: 10px;margin-bottom: 10px">까지
+				<input type="date" id="searchStartDay" name="searchStartDay" value="${searchInfo.searchStartDay }"> 부터 <input type="date" id="searchEndDay" name="searchEndDay" value="${searchInfo.searchEndDay }" style=" margin-top: 10px;margin-bottom: 10px">까지
 				<input class="btn btn-default btn-sm" type="button" id="searchTodayBtn" value="오늘" onclick="javascript:searchSignList(this)">&nbsp;
 				<input class="btn btn-default btn-sm" type="button" id="searchWeekBtn" value="7일" onclick="javascript:searchSignList(this)">&nbsp;
 				<input class="btn btn-default btn-sm" type="button" id="searchMonthBtn" value="3개월" onclick="javascript:searchSignList(this)" style="margin-right: 5px"><br/>
@@ -23,33 +23,99 @@
 				<input value="문서 검색 : " style="border: 0px; width: 80px;margin-bottom: 10px;  margin-left: 20px;" readonly="readonly">
 				<select id="searchType" name="searchType">
 					<option value="0">전체</option>
-					<option value="1">문서번호</option>
-					<option value="2">제목</option>
-					<option value="3">기안자</option>
+					<c:choose>
+						<c:when test="${searchInfo.searchType eq '1'}">
+							<option value="1" selected="selected">문서번호</option>
+						</c:when>
+						<c:otherwise>
+							<option value="1">문서번호</option>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${searchInfo.searchType eq '2'}">
+							<option value="2" selected="selected">제목</option>
+						</c:when>
+						<c:otherwise>
+							<option value="2">제목</option>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${searchInfo.searchType eq '3'}">
+							<option value="3" selected="selected">기안자</option>
+						</c:when>
+						<c:otherwise>
+							<option value="3">기안자</option>
+						</c:otherwise>
+					</c:choose>
 				</select>&nbsp;
-				<input type="text" id="searchName"  name="searchName"><br/>
+				<input type="text" id="searchName"  name="searchName" value="${searchInfo.searchName }"><br/>
 				
 				<input value="문서 종류 : " style="border: 0px; width: 80px; ;margin-bottom: 10px;  margin-left: 20px;"readonly="readonly">
 				<select id="searchDocDiv" name="searchDocDiv">
 					<option value="0">전체</option>
 					<c:forEach var="sf" items="${sfList}">
-						<option value="${sf.sfnum }">${sf.sfname }</option>
+						<c:choose>
+							<c:when test="${searchInfo.searchDocDiv eq sf.sfnum }">
+								<option value="${sf.sfnum }" selected="selected">${sf.sfname }</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${sf.sfnum }">${sf.sfname }</option>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>				
 				</select><br/>
 				
-				<input value="문서 상태 : " style="border: 0px; width: 80px; margin-bottom: 10px;  margin-left: 20px;"readonly="readonly">
+				<input value="문서 상태 : " style="border: 0px; width: 80px; margin-bottom: 10px;  margin-left: 20px;"readonly="readonly"/>
 				<select id="searchDocState" name="searchDocState">
 					<option value="0">전체</option>
-					<option value="1">완료</option>
-					<option value="2">진행중</option>
-					<option value="3">반려</option>			
+					<c:choose>
+						<c:when test="${searchInfo.searchDocState eq '1'}">
+							<option value="1" selected="selected">완료</option>
+						</c:when>
+						<c:otherwise>
+							<option value="1">완료</option>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${searchInfo.searchDocState eq '2'}">
+							<option value="2" selected="selected">진행중</option>
+						</c:when>
+						<c:otherwise>
+							<option value="2">진행중</option>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${searchInfo.searchDocState eq '3'}">
+							<option value="3" selected="selected">반려</option>
+						</c:when>
+						<c:otherwise>
+							<option value="3">반려</option>
+						</c:otherwise>
+					</c:choose>
+				</select>
+				
+				<input value="부서 선택 : " style="border: 0px; width: 80px; margin-bottom: 10px;  margin-left: 20px;"readonly="readonly"/>
+				<select id="searchDept" name="searchDept">
+					<option value="0">전체</option>
+					<c:forEach var="dept" items="${deptList}">
+						<c:choose>
+							<c:when test="${searchInfo.searchDept eq dept.denum }">
+								<option value="${dept.denum }" selected="selected">${dept.dename }</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${dept.denum }">${dept.dename }</option>
+							</c:otherwise>
+						</c:choose>
+						
+					</c:forEach>	
 				</select> 
 			</div>
 			</td>
 			<td style="border-left: solid 1px; border-color: gray; text-align: center; width: 149px">
-					<div>
+					<div style="margin-top: 10px; margin-bottom: 10px">
 						<input type="button" class="btn btn-default btn-sm" value="검색" onclick="javascript:searchSignList(this)" style="width: 100px; height:40px;"><br/><br/>
-						<input type="button" class="btn btn-default btn-sm" value="제외" onclick="javascript:searchSignList(this)" style="width: 100px; height:40px;">
+						<input type="button" class="btn btn-default btn-sm" value="제외" onclick="javascript:searchSignList(this)" style="width: 100px; height:40px;"><br/><br/>
+						<input type="button" class="btn btn-default btn-sm" value="리셋" onclick="javascript:searchReset()" style="width: 100px; height:40px;">
 					</div>
 				</td>
 			</tr>
