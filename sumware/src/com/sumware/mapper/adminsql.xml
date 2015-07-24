@@ -256,6 +256,11 @@
 		select * from (select rownum r_num,  l.lonum, m.memname, d.dename, m.memjob, l.lostdate,l.loendate, m.memdept, m.memauth
 		from member m, dept d, (select lonum,lomem,locheck,loendate,lostdate from login order by lonum desc) l
 		where m.memnum=l.lomem and m.memdept=d.denum 
+		<if test="lomem != null">
+			<if test="lomem != 0">
+				and l.lomem=#{lomem}
+			</if>
+		</if>
 		<if test="memdept != null">
 			<if test="memdept != 0">
 				and m.memdept=#{memdept} 
@@ -278,7 +283,7 @@
 		</if>
 		<if test="loendate != null">
 			<if test="loendate != ''">
-				and l.loendate <![CDATA[<=]]> #{loendate}
+				and l.lostdate <![CDATA[<=]]> #{loendate}
 			</if>
 		</if>
 		)
@@ -289,10 +294,14 @@
 	<select id="getLoginHistoryCount" resultType="int" parameterType="lvo">
 		select count(*) from login l, dept d, member m
 		where m.memnum=l.lomem and m.memdept=d.denum
+		<if test="lomem != null">
+			<if test="lomem != 0">
+				and l.lomem=#{lomem}
+			</if>
+		</if>
 		<if test="memdept != null">
 			<if test="memdept != 0">
 				and m.memdept=#{memdept} 
-				<!-- 부서, 이름 모두 입력 -->
 			</if>
 		</if>
 		<if test="memname != null">
@@ -312,7 +321,7 @@
 		</if>
 		<if test="loendate != null">
 			<if test="loendate != ''">
-				and l.loendate <![CDATA[<=]]> #{loendate}
+				and l.lostdate <![CDATA[<=]]> #{loendate}
 			</if>
 		</if>
 	</select>

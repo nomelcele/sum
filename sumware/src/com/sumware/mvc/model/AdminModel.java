@@ -266,11 +266,7 @@ public class AdminModel {
 	// 로그인 기록 
 	@RequestMapping(value="/adminLoginHistory")
 	public String adminLoginHistory(LoginVO lvo, Model model, HttpServletRequest req){
-		System.out.println("dept =" + lvo.getMemdept());
-		System.out.println("name =" + lvo.getMemname());
-		System.out.println("auth =" + lvo.getMemauth());
-		System.out.println("enddate =" + lvo.getLoendate());
-		System.out.println("startdate =" + lvo.getLostdate());
+		
 		// 페이지 처리
 		int totalCount = adao.getLoginHistoryCount(lvo);
 		System.out.println("count ::::::::::::::: "+totalCount);
@@ -288,13 +284,6 @@ public class AdminModel {
 		model.addAttribute("pauth", lvo.getMemauth());
 		model.addAttribute("plostdate", lvo.getLostdate());
 		model.addAttribute("ploendate", lvo.getLoendate());
-		System.out.println("=====================");
-		System.out.println("pdept:"+ lvo.getMemdept());
-		System.out.println("pname:"+ lvo.getMemname());
-		System.out.println("pauth:"+lvo.getMemauth());
-		System.out.println("plostdate:"+ lvo.getLostdate());
-		System.out.println("ploendate:"+ lvo.getLoendate());
-		System.out.println("=====================");
 		
 		return "admin/loginHistory";
 	}
