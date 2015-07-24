@@ -138,7 +138,6 @@ $(function(){
 		}else {
 			$(".chat").html("해당 브라우저는 지원이 안됩니다.");
 		}
-		
 		if(typeof(EventSource)!="undefined"){
 			console.log("conf notification");
 			eventSourceConf = new EventSource("saconfNotify?confmem=${v.memnum}");
@@ -164,7 +163,7 @@ $(function(){
 			$('#targetimg').attr('src',"resources/profileImg/${sessionScope.v.memprofile}").css(
 					'width', '200').css('height', '200');
 		}
-//		<%--본래 비밀번호 비밀번호 수정시 버튼 --%>
+		<%--본래 비밀번호 비밀번호 수정시 버튼 --%>
 
 		$('#chbtn').click(function() {
 			if($('#mempwd').val() == "${mempwd}" && "${sessionScope.v.mempwd }" == ""){

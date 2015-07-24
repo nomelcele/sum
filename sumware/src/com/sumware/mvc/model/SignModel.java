@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sumware.dto.DeptVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.SignFormVO;
 import com.sumware.dto.SignStepVO;
@@ -54,7 +55,7 @@ public class SignModel {
 				div="0";
 			}
 		
-		
+			
 			map.put("signdiv",Integer.parseInt(div));
 			map.put("sgdept", mvo.getMemdept());
 			map.put("nowmemnum", mvo.getMemnum());
@@ -67,6 +68,8 @@ public class SignModel {
 			map.put("searchDocState", request.getParameter("searchDocState"));
 			map.put("selectDay", request.getParameter("selectDay"));
 			map.put("except", request.getParameter("except"));
+			System.out.println("searchDept::"+request.getParameter("searchDept"));
+			map.put("searchDept", request.getParameter("searchDept"));
 			
 			int totalCount = sgdao.getSignCount(map);
 			Map<String,Integer> pMap = MyPage.getMp().pageProcess(request, 5, 5, 0, totalCount, 0);
@@ -75,7 +78,7 @@ public class SignModel {
 			
 			List<SignatureVO> sgList=sgdao.getSignList(map);
 			List<SignFormVO> sfList = sgdao.getSfList();
-			
+			List<DeptVO> deptList = sgdao.getDeptList();
 			//각각의 문서 개수 scope에 저장.
 			setSignCount(request,map);
 			
@@ -83,6 +86,8 @@ public class SignModel {
 			request.setAttribute("sfList", sfList);
 			request.setAttribute("sgList", sgList);
 			request.setAttribute("signdiv", div);
+			request.setAttribute("deptList", deptList);
+			request.setAttribute("searchInfo", map);
 		}
 		return "sign.signList";
 	}

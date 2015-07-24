@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sumware.dto.DeptVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.SignFormVO;
 import com.sumware.dto.SignStepVO;
@@ -75,5 +76,9 @@ public class SignDao {
 	//signcount
 	public int getSignCount(Map<String,Object> map){
 		return st.selectOne("sign.getSignCount", map);
+	}
+	//부서 목록 불러오기 (다른곳에 같은 역활을 하는것이 있을시에 대체하면됨)
+	public List<DeptVO> getDeptList(){
+		return st.selectList("sign.getDept");
 	}
 }
