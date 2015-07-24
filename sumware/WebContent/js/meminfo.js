@@ -22,8 +22,18 @@ function memInfoSelectMenu(res, data) {
 				$('.contents').html(result);
 			}
 		});
-	} else if (res == 'commute') {
-
+	} else if (res == 'memLoginHistory') {
+		$.ajax({
+			type : "post",
+			url : "samemLoginHistory",
+			data : {
+				lomem : data,
+				page : 1
+			},
+			success : function(result) {
+				$('.contents').html(result);
+			}
+		});
 	}
 }
 

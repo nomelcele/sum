@@ -3,6 +3,8 @@ package com.sumware.mvc.model;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sumware.dto.LoginVO;
 import com.sumware.dto.MemberVO;
+import com.sumware.mvc.dao.AdminDao;
 import com.sumware.mvc.dao.LoginDao;
+import com.sumware.util.MyPage;
 import com.sumware.util.SendEmail;
 
 
@@ -25,6 +30,9 @@ import com.sumware.util.SendEmail;
 public class LoginModel{
 	@Autowired
 	private LoginDao dao;
+	
+	@Autowired
+	private AdminDao adao;
 
 //	@RequestMapping(value="/salogin",method=RequestMethod.POST)
 //	public void login(MemberVO mvo,HttpSession session,HttpServletResponse response) throws IOException{
@@ -132,5 +140,27 @@ public class LoginModel{
 	public String changePW(MemberVO mvo){
 		dao.changePW(mvo);
 		return "join/enterCodeCallback";
+	}
+	
+	// 사원의 로그인 히스토리
+	@RequestMapping(value="/samemLoginHistory")
+public String memLoginHistory(LoginVO lvo, Model model, HttpServletRequest req){
+		
+		// 페이지 처리
+		int totalCount = adao.getLoginHistoryCount(lvo);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
+		lvo.setBegin(pmap.get("begin"));
+		lvo.setEnd(pmap.get("end"));
+		System.out.println("begin :: "+pmap.get("begin"));
+		System.out.println("end::::"+pmap.get("end"));
+		
+		List<LoginVO> lgList =  adao.getLoginHistory(lvo);
+		
+		model.addAttribute("lgList", lgList);
+		model.addAttribute("plomem", lvo.getLomem());
+		model.addAttribute("plostdate", lvo.getLostdate());
+		model.addAttribute("ploendate", lvo.getLoendate());
+		
+		return "meminfo/memLoginHistory";
 	}
 }

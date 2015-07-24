@@ -181,6 +181,20 @@ function adminSelectMenu(res) {
 				$('.contents').html(result);
 			}
 		});
+	} else if(res == 'saloginHistory'){
+		$.ajax({
+			type : "POST",
+			url : "samemLoginHistory",
+			data:{
+				lomem : $("#plomem").val(),
+				lostdate : $("#lostdate").val(),
+				loendate : $("#loendate").val(),
+				page:1
+			},
+			success : function(result) {
+				$('.contents').html(result);
+			}
+		});
 	}
 }
 
@@ -600,6 +614,21 @@ function prFormSaveChange(memnum,memdept,memauth){
 						$('.contents').html(result);
 					}
 				});
+			} else if(fname=='saLoginHistory'){
+				$.ajax({
+					type : "POST",
+					url : "samemLoginHistory",
+					data : {
+						lomem : $("#plomem").val(),
+						lostdate : $("#plostdate").val(),
+						loendate : $("#ploendate").val(),
+						page: $("#page").val()
+					},
+					success : function(result) {
+						$('.contents').html(result);
+					}
+				});
+				
 			}
 		}
 		

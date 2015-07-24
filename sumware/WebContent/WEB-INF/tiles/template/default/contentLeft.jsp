@@ -292,6 +292,7 @@
 		<ul>
 			<li><a href="javascript:memInfoSelectMenu('modifyProfile','')">정보 수정</a></li>
 			<li><a href="javascript:memInfoSelectMenu('payInfo',${sessionScope.v.memnum })">급여내역조회</a></li>
+			<li><a href="javascript:memInfoSelectMenu('memLoginHistory',${sessionScope.v.memnum })">로그인기록조회</a></li>
 		</ul>
 	</div>
 	<!-- left-menu(E) -->
