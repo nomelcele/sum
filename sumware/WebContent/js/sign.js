@@ -36,6 +36,9 @@ function addSignDiv(){
 				sgHtml+="<input type='hidden' name='"+id[index]+"'>";
 			}
 		}
+		if($("#scont").length<=0){
+			sgHtml+="<input type='hidden' name='scont'>";
+		}
 		if($('#sreason').length<=0){
 			sgHtml+="<input type='hidden' name='sreason'>";
 		}
