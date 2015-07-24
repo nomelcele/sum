@@ -2,6 +2,10 @@ package com.sumware.mvc.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.Filter;
@@ -55,7 +59,7 @@ public class ProductModel {
 	@RequestMapping(value="/sadone")
 	public String proInsert(@RequestParam Map<String,String> provo, @RequestParam MultipartFile proimg,HttpSession ses){
 		System.out.println("옥션 done !!!!!");
-		
+		System.out.println("enddate 는 ? :::::" + provo.get("enddate"));
 		// 상품 이미지 업로드
 		String rPath = ses.getServletContext().getRealPath("/");
 		String realName = proimg.getOriginalFilename();
@@ -112,11 +116,40 @@ public class ProductModel {
 	public String bidInsert(BidderVO bidvo){
 		// bidder 테이블에 입찰 정보가 입력 되어야 하고,
 		// product 의 price 가 업데이트 되어야 한다.
+		System.out.println("bidInsert() 실행!");
 		System.out.println("입찰한 상품 번호?:::::: "+bidvo.getBidpronum());
 		System.out.println("입찰한 상품 가격?:::::: "+bidvo.getBidprice());
 		pdao.bidInsert(bidvo);
 		pdao.bidUpdate(bidvo);
 		pdao.bidCount(bidvo);
+		// 현재 시간과 해당 상품 판매 종료시간을 비교하여 10분전인지 아닌지 판별 한다.
+		String enddate = pdao.enddate(bidvo.getBidpronum());
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm");
+		// new ParsePosition 스트링을 여러가지 타입으로 파싱 해주는 클래스
+		// 여기서는 스트링 문자를 Date 형식으로 파싱 해준다. 인자값 0 은 
+		// 시작 인덱스를 의미함.	
+		Date eDate = sdf.parse(enddate, new ParsePosition(0));
+		// 입찰 종료 시간.
+		long e = eDate.getTime();
+		System.out.println("이것은 현재 db 에 저장된 이 상품의 경매 종료 시간 :  "+e);
+		
+		// 입찰이 일어난 현재 시간.
+		Calendar cal = Calendar.getInstance();
+		Date sDate = cal.getTime();
+		long s = sDate.getTime();
+		System.out.println("이것은 현재 이 상품의 입찰 시도 시간 :  "+s);
+		
+		// 두 시각의 차이를 계산.
+		long mills = e-s;
+		
+		// mills 를 분으로 치환
+		long min = mills/60000;
+		System.out.println("!!!!!! 입찰 종료까지 남은 시간 :::::: "+min+" 분 이다.");
+		if(min <= 10){
+			System.out.println("입찰종료 시간이 1 시간 늘어 납니다.");
+			pdao.enddateUpdate(bidvo.getBidpronum());
+		}
+		
 		return "redirect:/saproDetail?pronum="+bidvo.getBidpronum();
 	
 	}	

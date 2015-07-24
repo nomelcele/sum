@@ -52,8 +52,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
 			<version>3.3.0</version>
+			<artifactId>mybatis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -141,10 +141,25 @@
 			<artifactId>spring-security-web</artifactId>
 			<version>3.2.3.RELEASE</version>
 		</dependency>
-			<dependency>
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>3.0.5.RELEASE</version>
 		</dependency>
+<!-- java quartz 를 사용 하기 위한 dependency 추가(S) -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<!-- 여러가지 버전이 있지만 다른 jar 파일의 버전과 맞는 4.1.6 버전 선택 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.1.6.RELEASE</version>
+		</dependency>
+<!-- java quartz 를 사용 하기 위한 dependency 추가(E) -->
+
+
 	</dependencies>
 </project>

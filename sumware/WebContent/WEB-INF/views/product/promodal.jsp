@@ -39,7 +39,15 @@
 						<!-- 경매기간(S) -->
 						<tr class="auc-date">
 							<th>종료일자</th>
-							<td><input type="date" name="enddate"/></td>
+							<td>
+								<select name="enddate">
+									<option value="1">1일 후</option>
+									<option value="2">2일 후</option>
+									<option value="3">3일 후</option>
+									<option value="7">1주일일 후</option>
+									<option value="30">30일 후</option>
+								</select>
+							</td>
 						</tr>
 						<!-- 경매기간(E) -->
 						
