@@ -67,6 +67,12 @@ function bidExe(step,min){
 	}
 }
 
+//String 을 int 형으로 변환 해주는 함수
+function parseIntMethod(data){
+	var $numberData = "" + data.replace(/(^\s*)|(\s*$)|,/g, ''); // trim, 콤마 제거
+	$('#bidprice').attr('step',$numberData);
+}
+
 // 입찰정보 버튼 눌렀을 때 동작.(productList.jsp)
 // bidpronum : 상품번호를 가지고.. 컨트롤러로 가서 입찰정보를 불러올 것임.
 function bidInformation(bidpronum){
@@ -79,16 +85,10 @@ function bidInformation(bidpronum){
 			$('#bidInfoModal').modal('toggle');
 		}
 	});
-	
-	
 }
 
 
-// String 을 int 형으로 변환 해주는 함수
-function parseIntMethod(data){
-	var $numberData = "" + data.replace(/(^\s*)|(\s*$)|,/g, ''); // trim, 콤마 제거
-	$('#bidprice').attr('step',$numberData);
-}
+
 
 
 

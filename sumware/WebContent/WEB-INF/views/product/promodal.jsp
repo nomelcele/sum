@@ -111,6 +111,10 @@
 							<td>${price}</td>
 						</tr>
 						<tr>
+							<td>호가</td>
+							<td>${provo.prostep}</td>
+						</tr>
+						<tr>
 							<td>입찰금액</td>
 							<td><input type="number" id="bidprice" name="bidprice" min="${price}"  onchange="javascript:parseIntMethod('${provo.prostep }')"></td>
 						</tr>
