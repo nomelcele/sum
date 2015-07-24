@@ -21,6 +21,7 @@ public class MemberDao {
 
 	//메일 에서 사용??
 	public List<MemberVO> getNameMailList(){
+		System.out.println("들어오니?");
 		return st.selectList("mem.getNameMailList");
 
 		//SqlSession ss = FactorySrevice.getFactory().openSession();
@@ -48,7 +49,7 @@ public class MemberDao {
 		//ss.update("mem.update",map);
 				//ss.close();
 		//uSystem.out.println("xml �뙆�씪 �뾽�뜲�씠�듃");
-		MakeXML.updateXML(); 
+		new MakeXML().updateXML();
 		
 		
 	}
