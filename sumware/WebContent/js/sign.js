@@ -71,12 +71,8 @@ function addSignDiv(){
 					sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'><img src='resources/signImg/"+signimg[m]+"' id='targetSignImg"+mgrs[m]+"' draggable='false'	ondragstart='signDrag(event)' width='79' height='79'></div></td>";
 				}else{
 					if(memnum==mgrs[m]){
-						if(m==1){
-							if(status[m+1]=='y'||status[m+1]==undefined){
-								sgHtml+="<td><div ondrop='signDrop(event)' ondragover='signAllowDrop(event)' id='signImg"+m+"' style='width: 80px; height: 80px;'></div></td>";
-							}else{
-								sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'></div></td>";
-							}
+						if(status[m+1]=='y'||status[m+1]==undefined){
+							sgHtml+="<td><div ondrop='signDrop(event)' ondragover='signAllowDrop(event)' id='signImg"+m+"' style='width: 80px; height: 80px;'></div></td>";
 						}else{
 							sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'></div></td>";
 						}
