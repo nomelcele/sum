@@ -174,27 +174,45 @@
 	
 	<!-- 사원 수 카운트 -->
 	<select id="getMemCount" parameterType="mvo" resultType="int">
-		select count(*) cnt from member 
-		<where>
-			<choose>
-				<when test="memdept != 0">
-					<!-- 부서만 입력 (해당 부서의 사원 목록)-->
-					and memdept=#{memdept} 
-					<!-- 부서, 이름 모두 입력 -->
-					<if test="memname != null">
-						and memname like '%'||#{memname}||'%' 
-					</if>
-				</when>
-				<otherwise>
-					<!-- 부서 0(기본값), 이름 입력 -->
-					<if test="memname != null">
-						and memname like '%'||#{memname}||'%' 
-					</if>
-					<!-- 부서 0, 이름 입력 안 한 경우(전체 사원 목록) -->
-				</otherwise>
-			</choose>
-			and memname not in('sumware') and memresign is null
-		</where>
+		select count(*) cnt from member m, pay p
+		where m.memnum = p.pmem
+				<if test="memdept != 0">
+				<!-- 부서만 입력 (해당 부서의 사원 목록)-->
+				and m.memdept=#{memdept} 
+				<!-- 부서, 이름 모두 입력 -->
+				<if test="memname != null">
+					and m.memname like '%'||#{memname}||'%' 
+				</if>
+			</if>
+			<if test="memdept == 0">
+				<!-- 부서 0(기본값), 이름 입력 -->
+				<if test="memname != null">
+					and m.memname like '%'||#{memname}||'%' 
+				</if>
+				<!-- 부서 0, 이름 입력 안 한 경우(전체 사원 목록) -->
+			</if>
+			<if test="memauth != null">				
+				<if test="memauth != 0">
+					and m.memauth=#{memauth}
+				</if>
+			</if>
+			<if test="hiredstdate != null">
+				<if test="hiredstdate != ''">
+				and m.memhire >= #{hiredstdate}
+				</if>
+			</if>
+			<if test="hiredendate != null">
+				<if test="hiredendate != ''">
+				and m.memhire <![CDATA[<=]]> #{hiredendate}
+				</if>
+			</if>
+			<if test="salstprice != 0">
+				and p.psalary >= #{salstprice}
+			</if>
+			<if test="salenprice != 0">
+				and p.psalary <![CDATA[<=]]> #{salenprice}
+			</if>
+			and m.memname not in('sumware') and m.memresign is null
 	</select>
 	
 	<!-- 제작한 양식 추가 -->
@@ -232,6 +250,74 @@
 	
 	<!-- 전체 사원 월급 지급 !!!!!(E) -->
 	
+
+	<!-- 사원의 로그인 히스토리 -->
+	<select id="getLoginHistory" resultType="lvo" parameterType="lvo">
+		select * from (select rownum r_num,  l.lonum, m.memname, d.dename, m.memjob, l.lostdate,l.loendate, m.memdept, m.memauth
+		from member m, dept d, (select lonum,lomem,locheck,loendate,lostdate from login order by lonum desc) l
+		where m.memnum=l.lomem and m.memdept=d.denum 
+		<if test="memdept != null">
+			<if test="memdept != 0">
+				and m.memdept=#{memdept} 
+			</if>
+		</if>
+		<if test="memname != null">
+			<if test="memname !=''">
+			and m.memname like '%'||#{memname}||'%' 
+			</if>
+		</if>
+		<if test="memauth != null">				
+			<if test="memauth != 0">
+				and m.memauth=#{memauth}
+			</if>
+		</if>
+		<if test="lostdate != null">
+			<if test="lostdate != ''">
+				and l.lostdate >= #{lostdate}
+			</if>
+		</if>
+		<if test="loendate != null">
+			<if test="loendate != ''">
+				and l.loendate <![CDATA[<=]]> #{loendate}
+			</if>
+		</if>
+		)
+		where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 사원의 로그인 히스토리 카운트 -->
+	<select id="getLoginHistoryCount" resultType="int" parameterType="lvo">
+		select count(*) from login l, dept d, member m
+		where m.memnum=l.lomem and m.memdept=d.denum
+		<if test="memdept != null">
+			<if test="memdept != 0">
+				and m.memdept=#{memdept} 
+				<!-- 부서, 이름 모두 입력 -->
+			</if>
+		</if>
+		<if test="memname != null">
+			<if test="memname !=''">
+			and m.memname like '%'||#{memname}||'%' 
+			</if>
+		</if>
+		<if test="memauth != null">				
+			<if test="memauth != 0">
+				and m.memauth=#{memauth}
+			</if>
+		</if>
+		<if test="lostdate != null">
+			<if test="lostdate != ''">
+				and l.lostdate >= #{lostdate}
+			</if>
+		</if>
+		<if test="loendate != null">
+			<if test="loendate != ''">
+				and l.loendate <![CDATA[<=]]> #{loendate}
+			</if>
+		</if>
+	</select>
+	
+
 	<!-- 하급자 리스트 -->
 	<select id="getJuniors" parameterType="int" resultType="mvo">
 		select memnum,memname from member where memmgr=#{memnum}
@@ -260,4 +346,5 @@
 	<update id="changeMgr" parameterType="mvo">
 		update member set memmgr=#{memmgr} where memnum=#{memnum}
 	</update>
+
 </mapper>

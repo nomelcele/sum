@@ -165,6 +165,22 @@ function adminSelectMenu(res) {
 				$('.contents').html(result);
 			}
 		});
+	} else if(res =='loginHistory'){
+		$.ajax({
+			type : "POST",
+			url : "adminLoginHistory",
+			data:{
+				memdept : $("#searchDept").val(),
+				memname : $("#searchName").val(),
+				memauth : $("#searchJob").val(),
+				lostdate : $("#lostdate").val(),
+				loendate : $("#loendate").val(),
+				page:1
+			},
+			success : function(result) {
+				$('.contents').html(result);
+			}
+		});
 	}
 }
 
@@ -505,6 +521,9 @@ function prFormSaveChange(memnum,memdept,memauth){
 					data : {
 						memdept : $("#memdept").val(),
 						memname : $("#memname").val(),
+						memauth:$('#memauth').val(),
+						hiredstdate:$('#phiredstdate').val(),
+						hiredendate:$('#phiredendate').val(),
 						page: $("#page").val()
 					},
 					success : function(result) {
@@ -518,19 +537,25 @@ function prFormSaveChange(memnum,memdept,memauth){
 					data : {
 						memdept : $("#memdept").val(),
 						memname : $("#memname").val(),
+						memauth : $("#pmemauth").val(),
+						salstprice : $("#psalstprice").val(),
+						salenprice : $("#psalenprice").val(),
 						page: $("#page").val()
 					},
 					success : function(result) {
 						$('.contents').html(result);
 					}
 				});
-			}else if(fname='payManagementPage'){
+			}else if(fname=='payManagementPage'){
 				$.ajax({
 					type : "POST",
 					url : "adminPayManagement",
 					data : {
 						memdept : $("#memdept").val(),
 						memname : $("#memname").val(),
+						memauth:$('#memauth').val(),
+						salstprice:$('#psalstprice').val(),
+						salenprice:$('#psalenprice').val(),
 						page: $("#page").val()
 					},
 					success : function(result) {
@@ -553,7 +578,23 @@ function prFormSaveChange(memnum,memdept,memauth){
 						$('#deptBoard').html(result);
 					}
 				});
-			} 
+			} else if(fname=='loginHistoryPage'){
+				$.ajax({
+					type : "POST",
+					url : "adminLoginHistory",
+					data : {
+						memdept : $("#memdept").val(),
+						memname : $("#memname").val(),
+						memauth : $("#pmemauth").val(),
+						lostdate : $("#plostdate").val(),
+						loendate : $("#ploendate").val(),
+						page: $("#page").val()
+					},
+					success : function(result) {
+						$('.contents').html(result);
+					}
+				});
+			}
 		}
 		
 		// 문서 양식 커스터마이징

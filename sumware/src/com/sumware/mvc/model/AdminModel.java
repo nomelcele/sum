@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sumware.dto.BnameVO;
 import com.sumware.dto.CommissionVO;
+import com.sumware.dto.LoginVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.PayHistoryVO;
 import com.sumware.dto.PayVO;
@@ -217,7 +218,7 @@ public class AdminModel {
 	public String getMemInfoList(MemberVO mvo, Model model, HttpServletRequest req, HttpSession session) {
 		// 페이지 처리
 		int totalCount = adao.getMemCount(mvo);
-		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req,10, 5, 0,totalCount, 0);
 		mvo.setBegin(pmap.get("begin"));
 		mvo.setEnd(pmap.get("end"));
 
@@ -226,6 +227,10 @@ public class AdminModel {
 		model.addAttribute("list", memList);
 		model.addAttribute("pdept", mvo.getMemdept());
 		model.addAttribute("pname", mvo.getMemname());
+		model.addAttribute("pauth", mvo.getMemauth());
+		model.addAttribute("phiredstdate", mvo.getHiredstdate());
+		model.addAttribute("phiredendate", mvo.getHiredendate());
+		
 
 		return "admin/memInfoList";
 
@@ -258,6 +263,43 @@ public class AdminModel {
 		return "admin/getMgrListCallback";
 	}
 	
+	// 로그인 기록 
+	@RequestMapping(value="/adminLoginHistory")
+	public String adminLoginHistory(LoginVO lvo, Model model, HttpServletRequest req){
+		System.out.println("dept =" + lvo.getMemdept());
+		System.out.println("name =" + lvo.getMemname());
+		System.out.println("auth =" + lvo.getMemauth());
+		System.out.println("enddate =" + lvo.getLoendate());
+		System.out.println("startdate =" + lvo.getLostdate());
+		// 페이지 처리
+		int totalCount = adao.getLoginHistoryCount(lvo);
+		System.out.println("count ::::::::::::::: "+totalCount);
+		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
+		lvo.setBegin(pmap.get("begin"));
+		lvo.setEnd(pmap.get("end"));
+		System.out.println("begin :: "+pmap.get("begin"));
+		System.out.println("end::::"+pmap.get("end"));
+		
+		List<LoginVO> lgList =  adao.getLoginHistory(lvo);
+		
+		model.addAttribute("lgList", lgList);
+		model.addAttribute("pdept", lvo.getMemdept());
+		model.addAttribute("pname", lvo.getMemname());
+		model.addAttribute("pauth", lvo.getMemauth());
+		model.addAttribute("plostdate", lvo.getLostdate());
+		model.addAttribute("ploendate", lvo.getLoendate());
+		System.out.println("=====================");
+		System.out.println("pdept:"+ lvo.getMemdept());
+		System.out.println("pname:"+ lvo.getMemname());
+		System.out.println("pauth:"+lvo.getMemauth());
+		System.out.println("plostdate:"+ lvo.getLostdate());
+		System.out.println("ploendate:"+ lvo.getLoendate());
+		System.out.println("=====================");
+		
+		return "admin/loginHistory";
+	}
+
+	
 	// 직급, 부서 변경 시 변경할 상급자 리스트
 	@RequestMapping(value="/admingetNewMgr",method=RequestMethod.POST)
 	public void getNewMgr(MemberVO mvo,HttpServletResponse resp) throws IOException{
@@ -266,6 +308,7 @@ public class AdminModel {
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("<option value='0'>상급자 선택</option>");
+
 
 		for (MemberVO e : newmgrlist) {
 			sb.append("<option value='").append(e.getMemnum()).append("'>")
@@ -315,6 +358,10 @@ public class AdminModel {
 		model.addAttribute("list", memList);
 		model.addAttribute("pdept", mvo.getMemdept());
 		model.addAttribute("pname", mvo.getMemname());
+		model.addAttribute("pauth", mvo.getMemauth());
+		model.addAttribute("psalstprice", mvo.getSalstprice());
+		model.addAttribute("psalenprice", mvo.getSalenprice());
+
 		return "admin/payInfoList";
 	}
 
@@ -332,6 +379,9 @@ public class AdminModel {
 		model.addAttribute("list", memList);
 		model.addAttribute("pdept", mvo.getMemdept());
 		model.addAttribute("pname", mvo.getMemname());
+		model.addAttribute("pauth", mvo.getMemauth());
+		model.addAttribute("psalstprice", mvo.getSalstprice());
+		model.addAttribute("psalenprice", mvo.getSalenprice());
 		return "admin/payManagement";
 	}
 
