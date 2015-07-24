@@ -141,8 +141,8 @@ $(function(){
 		
 		if(typeof(EventSource)!="undefined"){
 			console.log("conf notification");
-			eventSource = new EventSource("saconfNotify?confmem=${v.memnum}");
-			eventSource.onmessage = function(event){
+			eventSourceConf = new EventSource("saconfNotify?confmem=${v.memnum}");
+			eventSourceConf.onmessage = function(event){
 				Notify("Conference","회의에 초대되셨습니다.",event.data);
 			}
 		} else {
