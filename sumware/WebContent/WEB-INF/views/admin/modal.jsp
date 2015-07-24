@@ -316,36 +316,3 @@
 							
 		<!-- Modal (E) -->
 
-	<script>
-		function getNewMgrList(val,memdept,memnum,memauth){
-			// 직급 또는 부서 변경 시 지정할 상급자 목록
-			if(val=='job'){ // 직급 변경
-				$.ajax({
-					type: "POST",
-					url: "admingetNewMgr",
-					data: {
-						memauth: $("#newmemjob").val(),
-						memdept: memdept,
-						memnum: memnum
-					},
-					success: function(result){
-						$('#newjobmgr').html(result);
-					}
-				});
-			} else { // 부서 변경
-				$.ajax({
-					type: "POST",
-					url: "admingetNewMgr",
-					data: {
-						memauth: memauth,
-						memdept: $("#newmemdept").val(),
-						memnum: memnum
-					},
-					success: function(result){
-						$('#newdeptmgr').html(result);
-					}
-				});
-			}
-		}
-	</script>
-
