@@ -105,6 +105,7 @@ function fileUpload(){
 						$('#sample6_address2').focus();
 					}else{
 						if($("#fileimg").val()!=""){
+							document.getElementById("imgchange").value="0";
 							fileUpload();
 						}else{
 							alert("사원정보가 업데이트 되었습니다.");

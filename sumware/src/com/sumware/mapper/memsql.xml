@@ -14,7 +14,7 @@
    </update>
    <update id="modify" parameterType="mvo">
    	<choose>
-   		<when test="imgchange=='0'">
+   		<when test="imgchange==0">
    			update member set memaddr=#{memaddr}, mempwd=#{mempwd},memprofile=#{memprofile} where memnum=#{memnum}
    		</when>
    		<otherwise>
