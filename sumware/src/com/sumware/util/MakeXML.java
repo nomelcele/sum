@@ -22,22 +22,11 @@ import com.sumware.mvc.dao.MemberDao;
 
 import conn.ConUtil;
 
-@Component
 public class MakeXML {
 	// db를 읽어서 xml 파일로 생성하는 클래스
 	// db는 계속 갱신될 수 있기 때문에 새로운 회원이 추가되면 xml 파일에도 적용되어야 한다.
 	
-	@Autowired
-	private MemberDao dao;
-	
-	public void updateXML(){
-		//  autowired
-		// dao = new MemberDao();
-		System.out.println("null????????????");
-		System.out.println(dao.getNameMailList());
-		
-		List<MemberVO> list = dao.getNameMailList();
-
+	public static void updateXML(List<MemberVO> list){
 		// 사원 이름, 내부 메일 주소(아이디)가 저장된 리스트를 읽어서 
 		// root의 자식 엘리먼트로 설정
 		Element root = new Element("sumware");
@@ -80,7 +69,7 @@ public class MakeXML {
 		
 		try {
 			xo.output(doc, System.out);
-			xo.output(doc, new FileOutputStream("C:\\sumware\\project\\ws\\sumware\\WebContent\\xml\\nameMailList.xml"));
+			xo.output(doc, new FileOutputStream("C:\\sumware\\project\\ws\\sumware\\WebContent\\resources\\xml\\nameMailList.xml"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
