@@ -66,37 +66,42 @@
 				row = document.getElementById("t"+memnum);
 				row.parentNode.removeChild(row);
 			}
-		
+					
 	}
 	
 	// ajax 데이터로 배열을 보내기 위한 설정
 	jQuery.ajaxSettings.traditional = true;
 
 	function moveConfRoom(){
-		// 로컬 ip
-		var roomUrl = "http://192.168.7.124:8001?"+$("#confTitle").val();
-		var chkArr = document.getElementsByName("chk2");
-		var members = [];
-		for(var i=0; i<chkArr.length; i++){
-			members.push(chkArr[i].value);
-		}
-		
-		$.ajax({
-			type : "POST",
-			url : "saconfMemAdd",
-			data : {
-				confurl: roomUrl,
-				confmems: members
-			},
-			success : function(result) {
-				// $('#memSearchForm').html(result);
+		if($("#attendeeList tr").length==1){
+			// 참석자를 선택하지 않았을 경우
+			alert("참석자를 지정해주세요.");
+		} else {
+			// 로컬 ip
+			var roomUrl = "http://192.168.7.124:8001?"+$("#confTitle").val();
+			var chkArr = document.getElementsByName("chk2");
+			var members = [];
+			for(var i=0; i<chkArr.length; i++){
+				members.push(chkArr[i].value);
 			}
-		});
-		
-		var option = "width=600, height=500, scrollbars=yes";
-		window.open(roomUrl,"Video Conference",option);
-		// 화상회의 페이지 띄우기
-		// 로컬 영역 ip
+			
+			$.ajax({
+				type : "POST",
+				url : "saconfMemAdd",
+				data : {
+					confurl: roomUrl,
+					confmems: members
+				},
+				success : function(result) {
+					// $('#memSearchForm').html(result);
+				}
+			});
+			
+			var option = "width=1200, height=550, scrollbars=yes";
+			window.open(roomUrl,"Video Conference",option);
+			// 화상회의 페이지 띄우기
+			// 로컬 영역 ip
+		}
 	}
 	
 	function deleteFromList(){

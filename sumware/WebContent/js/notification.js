@@ -27,7 +27,7 @@ function Notify(titleText, bodyText,link)
     noty.onclick = function () {
     	if(titleText == 'Conference'){
     		// 화상 회의 -> 새 창 띄우기
-    		window.open(link,'Video Conference','width=600, height=500, scrollbars=yes');
+    		window.open(link,'Video Conference','width=1200, height=550, scrollbars=yes');
     	} else {
     		window.location.href = link;
     	}

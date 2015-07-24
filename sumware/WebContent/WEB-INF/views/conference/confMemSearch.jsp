@@ -29,7 +29,7 @@
 			
 			
 					<!-- paging(S) -->
-		<div class="paging" id="paging">
+		<div id="paging" style="text-align:center;">
 			<input type="hidden" name="page" id="page"> 
 			<input type="hidden" id="memdept" name="memdept" value="${pdept}">
 			<input type="hidden" id="memname" name="memname" value="${pname}">

@@ -208,6 +208,6 @@ function findPassWord(res){
 
 //회의방 만들기
 function goConfForm(){
-	var option = "width=1200, height=600, scrollbars=yes";
+	var option = "width=1200, height=550, scrollbars=yes";
 	window.open("saconfForm?memdept=0&memname=&page=1","Video Conference",option);
 }
