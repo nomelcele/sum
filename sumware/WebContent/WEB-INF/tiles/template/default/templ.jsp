@@ -138,6 +138,16 @@ $(function(){
 		}else {
 			$(".chat").html("해당 브라우저는 지원이 안됩니다.");
 		}
+		
+		if(typeof(EventSource)!="undefined"){
+			console.log("conf notification");
+			eventSource = new EventSource("saconfNotify?confmem=${v.memnum}");
+			eventSource.onmessage = function(event){
+				Notify("Conference","회의에 초대되셨습니다.",event.data);
+			}
+		} else {
+			$(".chat").html("해당 브라우저는 지원이 안됩니다.");
+		}
 	}
 	
 	

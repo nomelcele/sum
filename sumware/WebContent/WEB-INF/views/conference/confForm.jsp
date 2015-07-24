@@ -171,6 +171,7 @@
 	jQuery.ajaxSettings.traditional = true;
 
 	function moveConfRoom(){
+		// 로컬 ip
 		var roomUrl = "http://192.168.7.124:8001?"+$("#confTitle").val();
 		var chkArr = document.getElementsByName("chk2");
 		var members = [];
@@ -201,8 +202,9 @@
 		var chkArr = document.getElementsByName("chk2");
 		
 		for(var i=0; i<chkArr.length; i++){
+			console.log("배열 길이: "+chkArr.length);
 			var obj = chkArr[i];
-			// console.log(obj);
+			console.log(obj);
 			if(obj.checked){ // 체크된 행 삭제
 				console.log(document.getElementById("t"+chkArr[i].value));
 				document.getElementById("t"+chkArr[i].value).remove();
