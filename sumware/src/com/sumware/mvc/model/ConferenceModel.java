@@ -26,9 +26,6 @@ public class ConferenceModel {
 
 	@RequestMapping(value = "/saconfForm")
 	public String vcForm(MemberVO mvo, Model model, HttpServletRequest req) {
-		// 회의방 만들기 폼으로 이동
-		// 일단 admindao에서 사원 리스트 불러오는 메서드 이용
-		// -> 따로 만들어야 되나?
 		// 페이지 처리
 		int totalCount = adao.getMemCount(mvo);
 		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0, totalCount, 0);
