@@ -30,7 +30,7 @@
 							<li><a href="">Employee</a></li>
 							<li><a href="">Salary</a></li>
 							<li><a href="">Sign Form</a></li>
-							<li><a href="">Board(a)</a></li>
+							<li><a href="">Board(A)</a></li>
 						</ul>
 						<!-- navbar-nav(E) -->
 						<ul class="nav navbar-right navbar-nav user-name">
