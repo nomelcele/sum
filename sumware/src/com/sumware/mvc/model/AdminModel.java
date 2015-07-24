@@ -192,16 +192,16 @@ public class AdminModel {
 
 	// 사원 진급 처리
 	@RequestMapping(value = "/adminPromoteMem", method = RequestMethod.POST)
-	public String adminUppromoteMem(MemberVO mvo) {
-		service.changeJobSalary(mvo);
+	public String adminUppromoteMem(MemberVO mvo,int[] juniors) {
+		service.changeJobSalary(mvo,juniors);
 		// 업데이트 후 사원 개인정보 리스트 보여줌
 		return "redirect:/adminMemList?page=1&memdept=0&memname=";
 	}
 
 	// 사원 부서 이동
 	@RequestMapping(value = "/adminMoveDept", method = RequestMethod.POST)
-	public String adminUpmoveDept(MemberVO mvo) {
-		service.changeDeptMgr(mvo);
+	public String adminUpmoveDept(MemberVO mvo,int[] juniors) {
+		service.changeDeptMgr(mvo,juniors);
 		// 업데이트 후 사원 개인정보 리스트 보여줌
 		return "redirect:/adminMemList?page=1&memdept=0&memname=";
 	}

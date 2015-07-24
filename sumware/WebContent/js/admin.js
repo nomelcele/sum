@@ -372,7 +372,9 @@ function payManage(res,data){
 
 // 직급 변경, 부서 이동 처리
 function prFormSaveChange(memnum,memdept,memauth){
-	alert("현재 권한: "+memauth);
+	// ajax 데이터로 배열을 보내기 위한 설정
+	jQuery.ajaxSettings.traditional = true;
+
 	var newmemjob = $("#newmemjob").val();
 	var newmemdept = $("#newmemdept").val();
 	
@@ -411,7 +413,9 @@ function prFormSaveChange(memnum,memdept,memauth){
 						psalary: $("#newpsalary").val(),
 						memauth:$("#newmemjob").val(),
 						memdept:memdept,
-						memmgr:$("#newjobmgr").val()
+						memmgr:$("#newjobmgr").val(),
+						juniors: $("#jobjuniors").val(),
+						memjmgr:$("#jobjuniorsmgr").val()
 					},
 					success: function(result){
 						console.log("모달 닫기");
@@ -438,7 +442,9 @@ function prFormSaveChange(memnum,memdept,memauth){
 						memnum: memnum,
 						memauth: memauth,
 						memdept: $("#newmemdept").val(),
-						memmgr:$("#newdeptmgr").val()
+						memmgr:$("#newdeptmgr").val(),
+						juniors: $("#deptjuniors").val(),
+						memjmgr:$("#deptjuniorsmgr").val()
 					},
 					success: function(result){
 						// 모달 꺼줘야 함

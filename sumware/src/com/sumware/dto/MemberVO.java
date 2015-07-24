@@ -1,12 +1,17 @@
 package com.sumware.dto;
 
 public class MemberVO {
-	private int memnum, memauth, memmgr, memdept,begin,end, salstprice, salenprice;
+	private int memnum, memauth, memmgr, memdept,begin,end, salstprice, salenprice,memjmgr;
 	private String memname, memaddr, mempwd, memprofile, memjob, memmail, meminmail, dename, mgrname, 
 	memhire, memresign, membirth, memsignimg, pyearly, psalary, hiredstdate, hiredendate;
 	private String imgchange;//기존 회원이 이미지를 변경 했는지 판단
 	
-	
+	public int getMemjmgr() {
+		return memjmgr;
+	}
+	public void setMemjmgr(int memjmgr) {
+		this.memjmgr = memjmgr;
+	}
 	public String getImgchange() {
 		return imgchange;
 	}

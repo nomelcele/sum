@@ -15,21 +15,26 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.jdom2.output.Format.TextMode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.sumware.dto.MemberVO;
 import com.sumware.mvc.dao.MemberDao;
 
 import conn.ConUtil;
 
+@Component
 public class MakeXML {
 	// db를 읽어서 xml 파일로 생성하는 클래스
 	// db는 계속 갱신될 수 있기 때문에 새로운 회원이 추가되면 xml 파일에도 적용되어야 한다.
 	
-	private static MemberDao dao;
+	@Autowired
+	private MemberDao dao;
 	
-	public static void updateXML(){
+	public void updateXML(){
 		//  autowired
-		dao = new MemberDao();
+		// dao = new MemberDao();
+		System.out.println("null????????????");
+		System.out.println(dao.getNameMailList());
 		
 		List<MemberVO> list = dao.getNameMailList();
 
