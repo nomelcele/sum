@@ -14,7 +14,6 @@
 </head>
 <body>
 	<div class="panel-body">
-		
 		<label class="control-label">제목</label> 
 		<br/>
 		<input type="text" id="confTitle" name="confTitle" class="form-control" style="width: 250px; display:inline;">
