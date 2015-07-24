@@ -19,7 +19,6 @@
 		<input type="text" id="confTitle" name="confTitle" class="form-control" style="width: 250px; display:inline;">
 		<input type="button" id="moveBtn" onclick="moveConfRoom()" class="btn btn-default btn-sm" value="방 만들기">
 		<br/><br/>
-		
 		<div style="display:inline; float:left; width:550px; margin-right:25px;">
 			<label class="control-label">참석자</label>
 			<input type="button" class="btn btn-default btn-sm" value="삭제" onclick="deleteFromList()" style="float: right;">
