@@ -73,6 +73,9 @@
 		<input type="hidden" name="page" id="page">
 		<input type="hidden" id="memdept" name="memdept" value="${pdept}">
 		<input type="hidden" id="memname" name="memname" value="${pname}">
+		<input type="hidden" id="pmemauth" name="pmemauth" value="${pauth}">
+		<input type="hidden" id="psalstprice" name="psalstprice" value="${psalstprice}">
+		<input type="hidden" id="psalenprice" name="psalenprice" value="${psalenprice}">
 			<c:choose>
 				<c:when test="${pageInfo.currentBlock eq 1}">&lt;&lt;</c:when>
 				<c:otherwise>

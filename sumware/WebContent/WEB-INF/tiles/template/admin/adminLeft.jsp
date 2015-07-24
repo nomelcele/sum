@@ -6,6 +6,7 @@
 	<c:if test="${sessionScope.adminModel eq 'employee' }">
   		<a href="javascript:adminSelectMenu('adminMemList')" class="list-group-item">&nbsp; &nbsp; 사원 조회</a>
       <a href="javascript:adminSelectMenu('addMem')" class="list-group-item">&nbsp; &nbsp; 사원 입사 처리</a>
+      <a href="javascript:adminSelectMenu('loginHistory')" class="list-group-item">&nbsp; &nbsp; 사원 로그인 기록</a>
 	</c:if>
 	<c:if test="${sessionScope.adminModel eq 'salary' }">
 	  <a href="javascript:adminSelectMenu('adminPayInfoList')" class="list-group-item">&nbsp; &nbsp; 급여 조회</a>

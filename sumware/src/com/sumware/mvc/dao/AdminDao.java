@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sumware.dto.BnameVO;
 import com.sumware.dto.CommissionVO;
+import com.sumware.dto.LoginVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.PayHistoryVO;
 import com.sumware.dto.PayVO;
@@ -161,6 +162,16 @@ public class AdminDao {
 		return st.selectOne("admin.getCommSum", comvo);	
 	}
 	
+	// 사원 로그인 히스토리
+	public List<LoginVO> getLoginHistory(LoginVO lvo){
+		return st.selectList("admin.getLoginHistory", lvo);
+	}
+	
+	// 사원 히스토리 페이징 처리위한 카운트
+	public int getLoginHistoryCount(LoginVO lvo){
+		return st.selectOne("admin.getLoginHistoryCount", lvo);
+	}
+
 	// 하급자 리스트
 	public List<MemberVO> getJuniors(int memnum){
 		return st.selectList("admin.getJuniors", memnum);
@@ -176,4 +187,5 @@ public class AdminDao {
 	public void changeMgr(MemberVO mvo){
 		st.update("admin.changeMgr", mvo);
 	}
+
 }
