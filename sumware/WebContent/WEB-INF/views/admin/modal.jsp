@@ -209,17 +209,21 @@
 		        
 		        	<br/>
 			        <div class="tab-pane active" id="tab1"> 
-			        	<div class="form-group">
+			        <div style="margin-bottom:20px;">
+			        	<div style="display:inline; float:left; margin-right:20px;">
 			        		<label class="control-label">현재 직급</label> 
 							<input type="text" id="curmemjob" class="form-control" 
 							style="width: 125px" readonly="readonly" value="${memvo.memjob}">
 			        	</div>
-			        	<div class="form-group">
+			        	<div>
 			        		<label class="control-label">현재 연봉(만원)</label> 
 							<input type="text" id="curpsalary" class="form-control" 
 							style="width: 125px" readonly="readonly" value="${memvo.psalary}">
 			        	</div>
-			        	<div class="form-group">
+			        </div>	
+			        
+			       	<div style="margin-bottom:20px;">
+			        	<div style="display:inline; float:left; margin-right:20px;">
 							<label class="control-label">변경할 직급</label> 
 							<select name="memjob" id="newmemjob" class="form-control" style="width: 125px" 
 							onchange="getNewMgrList('job',${memvo.memdept},${memvo.memnum},${memvo.memauth})">
@@ -231,76 +235,93 @@
 											<option value="5">사원</option>
 							</select>
 						</div>
-						<div class="form-group">
+						<div style="display:inline; float:left; margin-right:20px;">
 							<label class="control-label">변경할 연봉(만원)</label> 
 							<input type="number" id="newpsalary" class="form-control" 
 							style="width: 125px" step="100" value="${memvo.psalary}">
 						</div>
-						<div class="form-group">
+						<div>
 							<label class="control-label">변경할 상급자</label> 
 							<select name="newjobmgr" id="newjobmgr" class="form-control" style="width: 125px">
 											<option value="0">상급자 선택</option>		
 							</select>
 						</div>
-						<div class="form-group">
-							<label class="control-label">현재 하급자</label> 
-							<select name="jobjuniors" id="jobjuniors" multiple="multiple" class="form-control" style="width: 125px">
-								<c:forEach var="list" items="${jList}">
-									<option value="${list.memnum}">${list.memname}</option>
-								</c:forEach>
-							</select>
-						</div>
-						<div class="form-group">
-							<label class="control-label">상급자 지정</label> 
-							<select name="jobjuniorsmgr" id="jobjuniorsmgr" class="form-control" style="width: 125px">
-								<option value="0">상급자 선택</option>	
-								<c:forEach var="list" items="${jMgrList}">
-									<option value="${list.memnum}">${list.memname}</option>
-								</c:forEach>	
-							</select>
+					</div>
+					
+					
+						<hr/>
+						<div style="margin-bottom:60px;">
+							<div style="display:inline; float:left; margin-right:20px;">
+								<label class="control-label">현재 하급자</label> 
+								<select name="jobjuniors" id="jobjuniors" multiple="multiple" class="form-control" style="width: 125px">
+									<c:forEach var="list" items="${jList}">
+										<option value="${list.memnum}">${list.memname}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div>
+								<label class="control-label">상급자 지정</label> 
+								<select name="jobjuniorsmgr" id="jobjuniorsmgr" class="form-control" style="width: 125px">
+									<option value="0">상급자 선택</option>	
+									<c:forEach var="list" items="${jMgrList}">
+										<option value="${list.memnum}">${list.memname}</option>
+									</c:forEach>	
+								</select>
+							</div>
 						</div>
 			        </div>
 			   
+			   
+			   
 			        <div class="tab-pane" id="tab2">
-			        	<div class="form-group">
-			        		<label class="control-label">현재 부서</label> 
-							<input type="text" id="curmemdept" class="form-control" 
-							style="width: 125px" readonly="readonly" value="${memvo.dename}">
-			        	</div>
-			        	<div class="form-group">
-							<label class="control-label">변경할 부서</label> 
-							<select name="memdept" id="newmemdept" class="form-control" style="width: 125px"
-							onchange="getNewMgrList('dept',${memvo.memdept},${memvo.memnum},${memvo.memauth})">
-											<option value="0">부서 선택</option>								
-											<option value="100">인사부</option>
-											<option value="200">총무부</option>
-											<option value="300">영업부</option>
-											<option value="400">전산부</option>
-											<option value="500">기획부</option>
-							</select>
+				        <div style="margin-bottom:20px;">
+				        	<div>
+				        		<label class="control-label">현재 부서</label> 
+								<input type="text" id="curmemdept" class="form-control" 
+								style="width: 125px" readonly="readonly" value="${memvo.dename}">
+				        	</div>
+				        </div>
+				        <div style="margin-bottom:20px;">
+				        	<div style="display:inline; float:left; margin-right:20px;">
+								<label class="control-label">변경할 부서</label> 
+								<select name="memdept" id="newmemdept" class="form-control" style="width: 125px"
+								onchange="getNewMgrList('dept',${memvo.memdept},${memvo.memnum},${memvo.memauth})">
+												<option value="0">부서 선택</option>								
+												<option value="100">인사부</option>
+												<option value="200">총무부</option>
+												<option value="300">영업부</option>
+												<option value="400">전산부</option>
+												<option value="500">기획부</option>
+								</select>
+							</div>
+							<div>
+								<label class="control-label">변경할 상급자</label> 
+								<select name="newdeptmgr" id="newdeptmgr" class="form-control" style="width: 125px">
+												<option value="0">상급자 선택</option>		
+								</select>
+							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label">변경할 상급자</label> 
-							<select name="newdeptmgr" id="newdeptmgr" class="form-control" style="width: 125px">
-											<option value="0">상급자 선택</option>		
-							</select>
-						</div>
-						<div class="form-group">
-							<label class="control-label">현재 하급자</label> 
-							<select name="deptjuniors" id="deptjuniors" multiple="multiple" class="form-control" style="width: 125px">
-								<c:forEach var="list" items="${jList}">
-									<option value="${list.memnum}">${list.memname}</option>
-								</c:forEach>	
-							</select>
-						</div>
-						<div class="form-group">
-							<label class="control-label">상급자 지정</label> 
-							<select name="deptjuniorsmgr" id="deptjuniorsmgr" class="form-control" style="width: 125px">
-								<option value="0">상급자 선택</option>	
-								<c:forEach var="list" items="${jMgrList}">
-									<option value="${list.memnum}">${list.memname}</option>
-								</c:forEach>
-							</select>
+						
+						
+						<hr/>
+						<div style="margin-bottom:60px;">
+							<div style="display:inline; float:left; margin-right:20px;">
+								<label class="control-label">현재 하급자</label> 
+								<select name="deptjuniors" id="deptjuniors" multiple="multiple" class="form-control" style="width: 125px">
+									<c:forEach var="list" items="${jList}">
+										<option value="${list.memnum}">${list.memname}</option>
+									</c:forEach>	
+								</select>
+							</div>
+							<div>
+								<label class="control-label">상급자 지정</label> 
+								<select name="deptjuniorsmgr" id="deptjuniorsmgr" class="form-control" style="width: 125px">
+									<option value="0">상급자 선택</option>	
+									<c:forEach var="list" items="${jMgrList}">
+										<option value="${list.memnum}">${list.memname}</option>
+									</c:forEach>
+								</select>
+							</div>
 						</div>
 			        </div>
 		        </div>
