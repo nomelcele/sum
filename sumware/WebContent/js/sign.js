@@ -76,6 +76,7 @@ function addSignDiv(){
 						}else{
 							sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'></div></td>";
 						}
+						
 						$('#sgReturnBtn').attr("type","button");
 						$('#sgDocBtn').attr("type","hidden");
 					}else{
