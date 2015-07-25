@@ -96,14 +96,16 @@
 			<div class="modal-body auction">
 			<!-- 입찰 할 상품에 대한 정보테이블(S) -->				
 				<div>
-				<h6>* 입찰 상품</h6>
-					<table>
-						<tr>
-							<td>상품명</td>
-							<td>${provo.product }</td>
+<!-- 				<h6>* 입찰 상품</h6> -->
+<!-- <i class="fa fa-gift"></i> -->
+				<label class="control-label" for="inputSuccess"> 입찰 상품 <i class="fa fa-gift"></i></label>
+					<table class="table table-condensed table-hover">
+						<tr style="background-color: #F5F5F5; text-align: center">
+							<td class="col-lg-1" style="background-color: #F5F5F5; font-weight: bold">상품명</td>
+							<td class="col-lg-1">${provo.product }</td>
 						</tr>
 						<tr>
-							<td>종료일</td>
+							<td style="background-color: #F5F5F5; font-weight: bold">종료일</td>
 							<td>${provo.enddate }</td>
 						</tr>
 					</table>
@@ -112,19 +114,21 @@
 			
 			<!-- 상품에 대한 입찰 정보(S) -->
 				<div>
-				<h6>* 입찰 하기</h6>
-					<table>
+<!-- 				<h6>* 입찰 하기</h6> -->
+<!-- <i class="fa fa-money"></i> -->
+				<label class="control-label" for="inputSuccess"> 입찰 하기</label>
+					<table class="table table-condensed table-hover">
 						<tr>
-							<td>현재가격</td>
-							<td>${price}</td>
+							<td class="col-lg-1"  style="background-color: #F5F5F5; font-weight: bold">현재가격</td>
+							<td class="col-lg-1"  style="text-align: right; padding-right: 100px"><i class="fa fa-krw"></i> ${price}</td>
 						</tr>
 						<tr>
-							<td>호가</td>
-							<td>${provo.prostep}</td>
+							<td style="background-color: #F5F5F5; font-weight: bold">호 가</td>
+							<td style="text-align: right; padding-right: 100px"><i class="fa fa-krw" ></i> ${provo.prostep}</td>
 						</tr>
 						<tr>
-							<td>입찰금액</td>
-							<td><input type="number" id="bidprice" name="bidprice" min="${price}"  onchange="javascript:parseIntMethod('${provo.prostep }')"></td>
+							<td style="background-color: #F5F5F5; font-weight: bold">입찰금액</td>
+							<td><input type="number" id="bidprice" name="bidprice" min="${price}"  onchange="javascript:parseIntMethod('${provo.prostep }')" value="${price}"></td>
 						</tr>
 					</table>
 				</div>
@@ -159,9 +163,9 @@
 					<tbody>
 					<c:forEach var="bid" items="${bidderList }">
 						<tr>
-							<td class="col-lg-1" style="text-align: center;">${bid.bidmemname }</td>
-							<td class="col-lg-1" style="text-align: right;">${bid.bidprice }</td>
-							<td class="col-lg-1" style="text-align: right;">${bid.biddate }</td>
+							<td class="col-lg-1" style="text-align: center;"><i class="fa fa-user"></i> ${bid.bidmemname }</td>
+							<td class="col-lg-1" style="text-align: right;"><i class="fa fa-krw" ></i> ${bid.bidprice }</td>
+							<td class="col-lg-1" style="text-align: right;"><i class="fa fa-clock-o"></i> ${bid.biddate }</td>
 						</tr>
 					</c:forEach>
 					</tbody>

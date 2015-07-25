@@ -30,10 +30,10 @@
 				<td>${list.enddate}</td>
 				<c:choose>
 					<c:when test="${list.status eq 'n' }">
-						<td>판매중</td>
+						<td><button type="button" class="btn btn-theme btn-xs" style="width:76px" onclick="detailGo(${list.pronum})">판매중</button></td>
 					</c:when>
 					<c:otherwise>
-						<td>판매완료</td>
+						<td><button type="button" class="btn btn-theme04 btn-xs" style="width:76px">판매완료</button></td>
 					</c:otherwise>
 				</c:choose>
 			</tr>
