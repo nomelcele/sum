@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sumware.dto.CommissionVO;
 import com.sumware.dto.MemberVO;
 import com.sumware.dto.PayHistoryVO;
 import com.sumware.dto.PayVO;
@@ -81,6 +82,33 @@ public class MemInfoModel {
 
 		return "meminfo/memPayInfo";
 	}
+	
+	
+	
+	//달의 추가급여 디테일
+		@RequestMapping(value = "/sagetPaymentDetail", method = RequestMethod.POST)
+		public String getPaymentDetail(CommissionVO comvo, Model model) {
+			// member pay 정보 가져옴
+			PayVO payvo = adao.getPayInfo(comvo.getCommem());
+			model.addAttribute("payvo", payvo);
+
+			// commission 정보들 가져옴
+			// 달에 해당하는 추가급들 다 가져옴
+			List<CommissionVO> comvos = adao.getComInfo(comvo);
+			model.addAttribute("comList", comvos);
+
+			// commission 총 합계 계산
+			int comsum = 0;
+			for (CommissionVO e : comvos) {
+				comsum += e.getComamount();
+			}
+			model.addAttribute("comSum", comsum);
+			// 총 지급 된 급여!!!!
+			int totalSal = comsum + payvo.getPmonthsalary();
+			model.addAttribute("totalSalary", totalSal);
+
+			return "admin/modal";
+		}
 	
 	
 }

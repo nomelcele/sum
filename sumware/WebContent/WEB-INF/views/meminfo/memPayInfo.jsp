@@ -45,7 +45,7 @@
 				<tr>
 				<td class="col-lg-1" style="text-align: center;">${phvo.hisdate}</td>
 				<td class="col-lg-1" style="text-align: center;">${phvo.hisamount} 만원</td>
-				<td class="col-lg-1"><input type="button" class="btn btn-default btn-sm"  onclick="javascript:getPaymentDetail(${memvo.memnum},'${phvo.hisdate}')" value="상세보기"></td>
+				<td class="col-lg-1"><input type="button" class="btn btn-default btn-sm"  onclick="javascript:getMemPaymentDetail(${memvo.memnum},'${phvo.hisdate}')" value="상세보기"></td>
 				</tr>
 			</c:forEach>
 			
