@@ -118,6 +118,18 @@
 	text-align: left;
 }
 
+.btn-theme {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #5bc0de;
+}
+
+.btn-theme04 {
+  color: #fff;
+  background-color: #da4453;
+  border-color: #da4453;
+}
+
 
 
 
