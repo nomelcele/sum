@@ -227,12 +227,19 @@
 							<label class="control-label">변경할 직급</label> 
 							<select name="memjob" id="newmemjob" class="form-control" style="width: 125px" 
 							onchange="getNewMgrList('job',${memvo.memdept},${memvo.memnum},${memvo.memauth})">
-											<option value="0">직급 선택</option>								
-											<option value="1">대표이사</option>
-											<option value="2">이사</option>
-											<option value="3">부장</option>
-											<option value="4">팀장</option>
-											<option value="5">사원</option>
+											<option value="0">직급 선택</option>
+											<c:if test="${memvo.memauth ne 1}">								
+												<option value="1">대표이사</option>
+											</c:if>
+											<c:if test="${memvo.memauth eq 5 || memvo.memauth eq 4 || memvo.memauth eq 3}">
+												<option value="2">이사</option>
+											</c:if>
+											<c:if test="${memvo.memauth eq 5 || memvo.memauth eq 4}">
+												<option value="3">부장</option>
+											</c:if>
+											<c:if test="${memvo.memauth eq 5}">
+												<option value="4">팀장</option>
+											</c:if>
 							</select>
 						</div>
 						<div style="display:inline; float:left; margin-right:20px;">
@@ -286,12 +293,22 @@
 								<label class="control-label">변경할 부서</label> 
 								<select name="memdept" id="newmemdept" class="form-control" style="width: 125px"
 								onchange="getNewMgrList('dept',${memvo.memdept},${memvo.memnum},${memvo.memauth})">
-												<option value="0">부서 선택</option>								
-												<option value="100">인사부</option>
-												<option value="200">총무부</option>
-												<option value="300">영업부</option>
-												<option value="400">전산부</option>
-												<option value="500">기획부</option>
+												<option value="0">부서 선택</option>	
+												<c:if test="${memvo.memdept ne 100}">							
+													<option value="100">인사부</option>
+												</c:if>
+												<c:if test="${memvo.memdept ne 200}">	
+													<option value="200">총무부</option>
+												</c:if>
+												<c:if test="${memvo.memdept ne 300}">
+													<option value="300">영업부</option>
+												</c:if>
+												<c:if test="${memvo.memdept ne 400}">
+													<option value="400">전산부</option>
+												</c:if>
+												<c:if test="${memvo.memdept ne 500}">
+													<option value="500">기획부</option>
+												</c:if>
 								</select>
 							</div>
 							<div>
