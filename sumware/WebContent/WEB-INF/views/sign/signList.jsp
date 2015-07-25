@@ -9,10 +9,10 @@
 		<input type="hidden" id="except" name="except">
 		
 	<!-- Search (S) -->
-		<div style="border: solid; border-color:gray; margin-bottom: 15px; width: 800px">
+		<div style="border: solid; border-color:gray; margin-bottom: 15px; width: 90%">
 		<table>
 		<tr>
-		<td style="width: 651px;">
+		<td style="width: 82%;">
 			<div>
 				<input value="검색 일자 : " style="border: 0px; width: 80px; margin-left: 20px;"readonly="readonly">
 				<input type="date" id="searchStartDay" name="searchStartDay" value="${searchInfo.searchStartDay }"> 부터 <input type="date" id="searchEndDay" name="searchEndDay" value="${searchInfo.searchEndDay }" style=" margin-top: 10px;margin-bottom: 10px">까지
