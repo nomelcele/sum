@@ -77,9 +77,13 @@
 	jQuery.ajaxSettings.traditional = true;
 
 	function moveConfRoom(){
+		var confTitle = $("#confTitle").val();
 		if($("#attendeeList tr").length==1){
 			// 참석자를 선택하지 않았을 경우
 			alert("참석자를 지정해주세요.");
+		} if($.trim(confTitle)==""){
+			console.log("공백 검사");
+			alert("제목을 입력해주세요.");
 		} else {
 			// 로컬 ip
 			var roomUrl = "http://192.168.7.124:8001?"+$("#confTitle").val();

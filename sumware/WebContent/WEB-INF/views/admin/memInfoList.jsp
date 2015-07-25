@@ -41,7 +41,7 @@
 					<tr style="background-color: #F5F5F5;">
 						<td class="col-lg-1"><span>이름</span></td>
 						<td class="col-lg-1"><span>ID</span></td>
-						<td class="col-lg-2"><span>주소</span></td>
+						<td class="col-lg-4"><span>주소</span></td>
 						<td class="col-lg-1"><span>부서</span></td>
 						<td class="col-lg-1"><span>직급</span></td>
 						<td class="col-lg-1"><span>입사일</span></td>
