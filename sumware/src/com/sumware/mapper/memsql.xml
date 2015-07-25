@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="mem">
   <select id="getNameMailList" resultType="mvo">
-  	select memname,meminmail from member
+  	select memname,meminmail from member where memresign is null
   </select>
   <select id="ckid" parameterType="String" resultType="int">
   	select count(*) cnt from member where meminmail=#{meminmail}

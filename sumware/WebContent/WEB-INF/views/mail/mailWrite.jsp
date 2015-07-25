@@ -15,7 +15,7 @@
 				        <div class="col-sm-10">
 				            <form:input cssClass="form-control" id="mailreceiver" 
 				            path="mailreceiver" onkeydown="startSuggest()" value="${mailreceiver }"/>
-				            <div id="view" style="position:absolute; z-index:1;">
+				            <div id="view" style="position:absolute; z-index:1; background-color:#ffffff;">
 				            </div>
 				            <form:errors path="mailreceiver" cssClass="error"/>
 				        </div>
@@ -23,7 +23,7 @@
 				    <div class="form-group">
 				        <label for="title" class="col-sm-2 control-label">제목</label>
 				        <div class="col-sm-10">
-				            <input  class="form-control"  name="mailtitle" id="mailtitle" value="${mailtitle}"/>
+				            <input class="form-control"  name="mailtitle" id="mailtitle" value="${mailtitle}"/>
 				       		<form:errors path="mailtitle" cssClass="error"/>
 				        </div>
 				         
