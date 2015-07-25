@@ -30,11 +30,15 @@
 		for (var i = 0; i < len; i++) {
 			if (obj.checked) {
 //				chkArr[i].checked = true;
-				chkArr[i].click();
+				if(!chkArr[i].checked){
+					chkArr[i].click();
+				}
 				
 			} else {
 //				chkArr[i].checked = false;
-				chkArr[i].click();
+				if(chkArr[i].checked){
+					chkArr[i].click();
+				}
 			}
 
 		}
