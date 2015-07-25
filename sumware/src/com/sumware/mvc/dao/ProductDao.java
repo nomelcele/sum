@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -70,6 +71,9 @@ public class ProductDao {
 	public void enddateUpdate(int pronum){
 		st.update("pro.enddateUpdate",pronum);
 	}
+
+	
+	
 	
 }
 

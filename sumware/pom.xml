@@ -37,6 +37,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>4.1.6.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
 			<version>4.1.6.RELEASE</version>
 		</dependency>
@@ -146,7 +151,7 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>3.0.5.RELEASE</version>
 		</dependency>
-<!-- java quartz 를 사용 하기 위한 dependency 추가(S) -->
+		<!-- java quartz 를 사용 하기 위한 dependency 추가(S) -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
@@ -158,7 +163,7 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>4.1.6.RELEASE</version>
 		</dependency>
-<!-- java quartz 를 사용 하기 위한 dependency 추가(E) -->
+		<!-- java quartz 를 사용 하기 위한 dependency 추가(E) -->
 
 
 	</dependencies>

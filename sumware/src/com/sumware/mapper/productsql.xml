@@ -83,6 +83,21 @@
 		order by bidnum desc
 	</select>
 	
+	<!-- 엔드데이트를 불러오는 메소드. -->
+	<select id="getEnddate" resultType="provo">
+		SELECT 
+			TO_CHAR(enddate,'yyMMddhh24mi')enddate, pronum 
+		FROM 
+			PRODUCT 
+		WHERE 
+			status='n' ORDER BY pronum DESC
+	</select>
+	
+	<!-- 해당 상품의 판매 상태 업데이트 -->
+	<update id="statusUpdate" parameterType="int">
+		update product set status='y' where pronum=#{pronum}
+	</update>
+	
 </mapper>
 
 
