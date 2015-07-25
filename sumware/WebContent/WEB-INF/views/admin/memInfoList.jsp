@@ -41,7 +41,6 @@
 					<tr style="background-color: #F5F5F5;">
 						<td class="col-lg-1"><span>이름</span></td>
 						<td class="col-lg-1"><span>ID</span></td>
-						<td class="col-lg-1"><span>생년월일</span></td>
 						<td class="col-lg-2"><span>주소</span></td>
 						<td class="col-lg-1"><span>부서</span></td>
 						<td class="col-lg-1"><span>직급</span></td>
@@ -53,7 +52,6 @@
 						<tr>
 							<td>${mList.memname}</td>
 							<td>${mList.meminmail}</td>
-							<td>${mList.membirth}</td>
 							<td>${mList.memaddr}</td>
 							<td>${mList.dename}</td>
 							<td>${mList.memjob}</td>

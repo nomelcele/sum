@@ -24,7 +24,9 @@ import com.sumware.dto.PayHistoryVO;
 import com.sumware.dto.PayVO;
 import com.sumware.dto.SignFormVO;
 import com.sumware.mvc.dao.AdminDao;
+import com.sumware.mvc.dao.MemberDao;
 import com.sumware.mvc.service.ServiceInter;
+import com.sumware.util.MakeXML;
 import com.sumware.util.MyPage;
 import com.sumware.util.SendEmail;
 
@@ -33,6 +35,8 @@ public class AdminModel {
 
 	@Autowired
 	private AdminDao adao;
+	@Autowired
+	private MemberDao mdao;
 
 	@Autowired
 	@Qualifier(value = "admin")
@@ -209,7 +213,12 @@ public class AdminModel {
 	// 사원 퇴사 처리
 	@RequestMapping(value = "/adminResignMem")
 	public String adminUpresignMem(int memnum) {
-		adao.resignMem(memnum);
+		adao.resignMem(memnum); // 퇴사 처리
+		System.out.println("퇴사 처리");
+		// xml 파일 업데이트
+		List<MemberVO> list = mdao.getNameMailList();
+		System.out.println("사원 수: "+list.size());
+	    MakeXML.updateXML(list);
 		return "redirect:/adminMemList?page=1&memdept=0&memname=";
 	}
 
