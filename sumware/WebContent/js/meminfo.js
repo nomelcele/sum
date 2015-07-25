@@ -51,3 +51,19 @@ function memchangeyear(memnum) {
 		}
 	});
 }
+
+
+function getMemPaymentDetail(memnum, hisdate){
+	$.ajax({
+		type: "POST",
+		url: "sagetPaymentDetail",
+		data: {
+			commem: memnum,
+			comdate:hisdate
+		},
+		success: function(result){
+			$('#modalTarget').html(result);
+			$('#paymentDetail').modal('toggle');
+		}
+	});
+}
