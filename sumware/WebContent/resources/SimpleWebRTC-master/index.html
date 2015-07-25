@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>SimpleWebRTC Demo</title>
+        <title>Video Conference</title>
     </head>
     <body>
-        <h3 id="title"></h3>
+        <h3 id="title" style="margin-left:15px;"></h3>
         <style>
             .videoContainer {
                 position: relative;
-                width: 320px;
-                height: 240px;
+                width: 280px;
+                height: 210px;
                 display: -webkit-inline-box;
                 margin:15px;
                 border:5px solid black;
@@ -34,8 +34,8 @@
 <!--             <input id="sessionInput"/> -->
 <!--             <button type="submit">Create it!</button> -->
 <!--         </form> -->
-        <div class="videoContainer" style="width:200px; height: 150px;">
-            <video id="localVideo" style="width:200px; height: 150px;" oncontextmenu="return false;"></video>
+        <div class="videoContainer" style="width:140px; height: 105px;">
+            <video id="localVideo" style="width:140px; height: 105px;" oncontextmenu="return false;"></video>
 <!--             <div id="localVolume" class="volume_bar"></div> -->
         </div>
         <div id="remotes"></div>
