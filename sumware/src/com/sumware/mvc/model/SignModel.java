@@ -196,11 +196,6 @@ public class SignModel {
 		sgdao.signReturn(map);
 		return "redirect:sagetSignList?page=1";
 	}
-	// 결재 문서를 조건에 맞게 검색(결과 내 검색)
-	@RequestMapping(value="/sasignSearch")
-	public String signSearch(SignatureVO sgvo){
-		return null;
-	}
 	
 	// 사용자가 요청하는 문서를 출력 해주는 메쏘오드!
 	@RequestMapping(value="/sagetDoc",method=RequestMethod.POST)
