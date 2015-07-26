@@ -130,7 +130,7 @@ public class SignModel {
 	
 	// 선택된 문서를 작성 함.
 	@RequestMapping(value="/sawriteSign",method=RequestMethod.POST)
-	public String writeSignForm(SignatureVO sgvo,@RequestParam Map<String,String> map){
+	public String writeSign(SignatureVO sgvo,@RequestParam Map<String,String> map){
 		System.out.println("작성합시다.");
 		for(Map.Entry<String, String> m : map.entrySet()){
 			System.out.println(m.getKey()+" :: "+m.getValue());
