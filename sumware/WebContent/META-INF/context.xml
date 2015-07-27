@@ -5,7 +5,7 @@
    type="oracle.jdbc.pool.OracleDataSource"
    driverClassName="oracle.jdbc.driver.OracleDriver"
    factory="oracle.jdbc.pool.OracleDataSourceFactory"
-   url="jdbc:oracle:thin:@192.168.7.170:1521:xe"
+   url="jdbc:oracle:thin:@192.168.7.162:1521:xe"
    user="sum"
    password="kostateamb"
    maxActive="20"
