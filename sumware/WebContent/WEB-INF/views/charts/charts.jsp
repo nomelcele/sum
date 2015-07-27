@@ -32,11 +32,14 @@
 					},
 
 					title : {
-						text : '전 월 추가급여 순위'
+						text : '전 월 추가급여 순위',
 					},
 
 					xAxis : {
-						categories : comnames
+						categories : comnames,
+						style:{
+							fontWeight : "bold"
+						}
 					},
 
 					yAxis : {
@@ -65,7 +68,7 @@
 					series : [ {
 						name : '성과금',
 						data : comsums,
-						color: Highcharts.getOptions().colors[7],
+						color: "#EDA0E3",
 					} ]
 				});
 	}
@@ -78,7 +81,10 @@
 				type : 'column'
 			},
 			title : {
-				text : 'SNS 활동 순위'
+				text : 'SNS 활동 순위',
+				style: {
+					fontWeight : "bold"
+				}
 			},
 			subtitle : {
 				text : ''
@@ -89,7 +95,8 @@
 					rotation : -45,
 					style : {
 						fontSize : '13px',
-						fontFamily : 'Verdana, sans-serif'
+						fontFamily : 'Verdana, sans-serif',
+						fontWeight : "bold"
 					}
 				}
 			},
@@ -108,7 +115,7 @@
 			series : [ {
 				name : '게시글',
 				data : snschart,
-				color: Highcharts.getOptions().colors[6],
+				color: "#5853EB",
 				dataLabels : {
 					enabled : true,
 					rotation : -90,
@@ -132,7 +139,10 @@
 	            type: 'pie'
 	        },
 	        title: {
-	            text: '부서별 업무'
+	            text: '부서별 업무',
+	            	style: {
+						fontWeight : "bold"
+					}
 	        },
 	        plotOptions: {
 	            series: {
@@ -165,7 +175,10 @@
 				type : 'column'
 			},
 			title : {
-				text : '경매 입찰 순위'
+				text : '경매 입찰 순위',
+				style: {
+					fontWeight : "bold"
+				}
 			},
 			subtitle : {
 				text : ''
@@ -176,7 +189,8 @@
 					rotation : -45,
 					style : {
 						fontSize : '13px',
-						fontFamily : 'Verdana, sans-serif'
+						fontFamily : 'Verdana, sans-serif',
+						fontWeight : "bold"
 					}
 				}
 			},
