@@ -350,7 +350,7 @@
 				<tr>
 					<th><strong class="primary-font">MySign</strong></th>
 					<td><div id="mySignDiv" ondrop="signDrop(event)" ondragover="signAllowDrop(event)">
-						<img src="resources/signImg/1.JPG" id="mySignImg" draggable="true" 
+						<img src="resources/signImg/${sessionScope.v.memsignimg}" id="mySignImg" draggable="true" 
 						ondragstart="signDrag(event)" width="79" height="79">
 					</div></td>
 				</tr>
