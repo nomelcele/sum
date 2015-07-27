@@ -178,7 +178,7 @@
 		sg.sgwriter,sg.sdate,sg.splace,sg.sps,m.memname from signature sg,member m where m.memnum=sg.sgwriter and snum = #{snum}
 	</select>
 	<select id="getSignStep" parameterType="int" resultType="ssvo">
-		select * from signstep where stepsnum = #{stepsnum} order by stepnum desc
+		select st.*,(select memsignimg from member where memnum = stepmemnum) memsignimg from signstep st where stepsnum = #{stepsnum} order by stepnum desc
 	</select>
 	<!-- / -->
 	<!-- 결재저장. -->

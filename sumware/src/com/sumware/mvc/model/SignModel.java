@@ -157,6 +157,7 @@ public class SignModel {
 		for(int i =0; i<ssMem.length; i++){
 			ssMem[i]=String.valueOf(ssList.get(i).getStepmemnum());
 		}
+		
 		String[] signNames=signService.getMgrNames(ssMem);
 		request.setAttribute("sgvo", sgvo);
 		request.setAttribute("sf", sfvo);

@@ -90,10 +90,9 @@ public class IndexModel{
 					//login 기록 저장.
 	//				dao.inLog(mvo.getMemnum());	
 					if(mvo.getMemresign() != null){
-						System.out.println("퇴사 로그인");
 						// 퇴사일 컬럼에 값이 있을 경우(퇴사한 사원이 로그인했을 경우)
 						// 로그인하지 못하게 함
-						session.invalidate();
+						session.setAttribute("first", "0");
 					}
 				}else{
 					session.setAttribute("first", "0");
