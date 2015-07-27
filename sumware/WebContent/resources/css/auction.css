@@ -10,10 +10,14 @@
 	height: 30px;
 	text-align : center;
 }
+.auction table tbody tr{
+	border-top:1px solid #e2e1e1;
+}
 .auction table tbody td {
 	background-color: white;
 	height: 30px;
 	text-align : center;
+	padding: 5px;
 }
 
 /* 옥션 테이블 공통  */

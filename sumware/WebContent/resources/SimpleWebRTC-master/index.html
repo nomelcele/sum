@@ -114,7 +114,8 @@
             // Since we use this twice we put it here
             function setRoom(name) {
                 $('form').remove();
-                $('h3').text(name);
+                var nameArr = name.split('-');
+                $('h3').text(nameArr[0]);
                 // $('#subTitle').text('Link to join: ' + location.href);
                 $('body').addClass('active');
             }

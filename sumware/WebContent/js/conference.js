@@ -85,8 +85,8 @@
 			console.log("공백 검사");
 			alert("제목을 입력해주세요.");
 		} else {
-			// 로컬 ip
-			var roomUrl = "http://192.168.7.124:8001?"+$("#confTitle").val();
+			// 로컬 ip) 192.168.7.162
+			var roomUrl = "http://192.168.7.124:8001?"+$("#confTitle").val()+"-"+makeid();
 			var chkArr = document.getElementsByName("chk2");
 			var members = [];
 			for(var i=0; i<chkArr.length; i++){
@@ -110,6 +110,17 @@
 			// 화상회의 페이지 띄우기
 			// 로컬 영역 ip
 		}
+	}
+	
+	function makeid()
+	{
+	    var text = "";
+	    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+	    for( var i=0; i < 10; i++ )
+	        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+	    return text;
 	}
 	
 	function deleteFromList(){
