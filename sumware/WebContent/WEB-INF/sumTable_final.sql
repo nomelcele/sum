@@ -46,11 +46,7 @@ CREATE TABLE dept(
     dename VARCHAR2(20) CONSTRAINT dept_dename_nn NOT NULL,
     CONSTRAINT dept_denum_pk PRIMARY KEY(denum)
 );
-INSERT INTO DEPT VALUES(100,'인사부');
-INSERT INTO DEPT VALUES(200,'총무부');
-INSERT INTO DEPT VALUES(300,'영업부');
-INSERT INTO DEPT VALUES(400,'전산부');
-INSERT INTO DEPT VALUES(500,'기획부');
+
 CREATE TABLE member(
   memnum NUMBER(5), -- 사원번호 pk
     memname VARCHAR2(30), -- 사원이름 nn
@@ -74,22 +70,6 @@ CREATE TABLE member(
 );
 
 create sequence member_seq increment by 1 start with 10000;
-insert into member values
-(1, 'sumware', '판교', '1004', 'sumware.jpg', 'sumware', 1,'sumware@naver.com','sumware', null, 100,SYSDATE,NULL,NULL,null);
-INSERT INTO MEMBER VALUES
-(member_seq.nextVal,'김명준', '서울','1004','kmj.jpg','대표이사',1,'kmj85skier@naver.com','mjkim',1,100,SYSDATE,NULL,NULL,null);
-INSERT INTO MEMBER VALUES
-(member_seq.nextVal,'김주상', '경기','1004','kjs.jpg','이사',2,'kjs@naver.com','jskim',10000,100,SYSDATE,NULL,NULL,null);
-INSERT INTO MEMBER VALUES
-(member_seq.nextVal,'홍명표', '성남','1004','hmp.jpg','부장',3,'hmp@naver.com','mphong',10001,100,SYSDATE,NULL,NULL,null);
-INSERT INTO MEMBER VALUES
-(member_seq.nextVal,'김성호', '대구','1004','ksh.jpg','팀장',4,'ksh@naver.com','shkim',10002,100,SYSDATE,NULL,NULL,null);
-INSERT INTO MEMBER VALUES
-(member_seq.nextVal,'모하람', '대전','1004','mhr.jpg','사원',5,'mhr@naver.com','hrmo',10000,200,SYSDATE,NULL,NULL,null);
-INSERT INTO MEMBER VALUES
-(member_seq.nextVal,'김영은', '부산','1004','kye.jpg','사원',5,'kye@naver.com','yekim',10000,300,SYSDATE,NULL,NULL,null);
-INSERT INTO MEMBER VALUES
-(member_seq.nextVal,'안지영', '목성','1004','ajy.jpg','사원',5,'ajy@naver.com','jyan',10003,100,SYSDATE,NULL,NULL,null);
 
 CREATE TABLE calendar(
  calnum NUMBER(11), -- 일정번호 pk
@@ -113,7 +93,6 @@ create table bname(
  constraint bname_bgnum_pk primary key(bgnum),
  constraint bname_bdeptno_fk foreign key(bdeptno) references dept(denum)
 );
-INSERT INTO BNAME VALUES('테스트게시판',1,100);
 
 CREATE TABLE board(
  bnum number(11), -- 글번호
@@ -132,8 +111,6 @@ CREATE TABLE board(
 );
 --0529 테이블 추가
 
-
-INSERT INTO bname VALUES('공지사항',0,100);
 
 
 create sequence bname_seq increment by 1 start with 1;
@@ -417,16 +394,6 @@ alter table signature add(sgreturncomm varchar2(300));
 alter table signature add (sdate varchar2(50),splace varchar2(50),sps varchar2(200));
 COMMIT;
 
---0718 pay테이블에 기본 사원들 정보 추가
-insert into pay values(10000,2,7000);
-insert into pay values(10001,2,7000);
-insert into pay values(10002,2,7000);
-insert into pay values(10003,2,7000);
-insert into pay values(10004,2,7000);
-insert into pay values(10005,2,7000);
-insert into pay values(10006,2,7000);
-commit;
-
 -- 0721 테이블 추가
 -- 화상회의 알림 보내기 위한 테이블
 create table conf(
@@ -438,8 +405,3 @@ constraint conf_confmem_fk foreign key(confmem) references member(memnum) on del
 create sequence conf_seq
 increment by 1
 start with 1;
-
--- 0723 관리자 전용 부서 추가
-insert into dept values(999,'관리자');
-update member set memdept=999 where memnum=1;
-commit;
