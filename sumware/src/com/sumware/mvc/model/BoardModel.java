@@ -67,6 +67,7 @@ public class BoardModel {
 			int begin = pMap.get("begin");
 			int end = pMap.get("end");
 			this.page = pMap.get("page");
+			ses.setAttribute("boardPage", this.page);
 			bvo.setBegin(begin);
 			bvo.setEnd(end);
 			

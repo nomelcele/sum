@@ -20,22 +20,15 @@ public class BidQuartzJob extends QuartzJobBean{
 	@Override
 	protected void executeInternal(JobExecutionContext arg0)throws JobExecutionException {
 		System.out.println("쿼츠가 1분단위로 작동 합니다.");
+		int now = Integer.parseInt(sdf.format(new Date()));
 		// 종료날짜를 리스트로 불러온다. 혹시 몰라서 상품 번호까지 같이 불러옴.
-		System.out.println("여긴 오나?");
-		System.out.println("으잉?");
-		System.out.println("리스트가 문제인가?");
-		
-		String now = sdf.format(new Date());
-		System.out.println("new Date() 가 문제인가?");
-		String end = "";
-		System.out.println("제발 for문좀 들어가라!!!!");
 		endList = qdao.getEnddate();
 		for(ProductVO provo : endList){
-			System.out.println("쿼츠의 for 문 입니다.");
-			end = provo.getEnddate().trim();
-			if(end.equals(now)){
-				System.out.println("종료 시점 : "+end);
-				System.out.println("현재 시점 : "+now);
+//			System.out.println("쿼츠의 for 문 입니다.");
+			int	end = Integer.parseInt(provo.getEnddate().trim());
+			if(now >= end){
+//				System.out.println("종료 시점 : "+end);
+//				System.out.println("현재 시점 : "+now);
 				// 업데이트 구문.
 				qdao.statusUpdate(provo.getPronum());
 			}

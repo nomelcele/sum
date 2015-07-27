@@ -14,6 +14,12 @@ $(function(){
 			}
 		});
 	});
+	$("#auctionPaging a").click(function(e){
+		e.preventDefault();
+		var $page = $(this).text();
+		$("#auctionPaging form #propage").attr("value",$page);
+		$("#productList").submit();
+	});
 });
 
 // 상품 목록 클릭시(이미지를 클릭하면 작동)

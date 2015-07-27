@@ -15,16 +15,16 @@
 	</insert>
 	
 <!-- 상품 리스트 -->
-	<select id="proList" resultType="provo">
+	<select id="proList" resultType="provo" parameterType="map">
 		select 
-			to_char(p.startprice,'999,999,999') startprice,p.status,
+			rnum,to_char(p.startprice,'999,999,999') startprice,p.status,
 			p.procount,p.product, p.proimg, m.memname, to_char(p.price,'999,999,999') price, 
 			to_char(p.enddate,'yy/MM/dd hh24:mi') enddate,p.pronum
 		from 
-			product p, member m 
+			(SELECT ROWNUM rnum, p.* FROM PRODUCT p ORDER BY pronum DESC) p, member m 
 		where 
-			p.prowriter = m.memnum 
-		order by pronum desc
+			p.prowriter = m.memnum AND rnum BETWEEN #{begin} AND #{end}
+        ORDER BY rnum asc
 	</select>	
 	
 <!-- 상품 디테일 -->
@@ -68,7 +68,7 @@
 	</update>
 	
 <!-- 상품의 총 갯수 -->
-	<select id="proTotalCount">
+	<select id="proTotalCount" resultType="int">
 		select count(*) from product
 	</select>
 	

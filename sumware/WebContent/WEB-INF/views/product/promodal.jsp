@@ -128,7 +128,7 @@
 						</tr>
 						<tr>
 							<td style="background-color: #F5F5F5; font-weight: bold">입찰금액</td>
-							<td><input type="number" id="bidprice" name="bidprice" min="${price}"  onchange="javascript:parseIntMethod('${provo.prostep }')" value="${price}"></td>
+							<td><input type="number" id="bidprice" name="bidprice" min="${price}"  onchange="javascript:parseIntMethod('${provo.prostep }')"></td>
 						</tr>
 					</table>
 				</div>

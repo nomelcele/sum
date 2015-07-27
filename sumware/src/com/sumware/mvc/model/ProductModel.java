@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.Filter;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sumware.dto.BidderVO;
 import com.sumware.dto.ProductVO;
 import com.sumware.mvc.dao.ProductDao;
+import com.sumware.util.MyPage;
 
 @Controller
 public class ProductModel {
@@ -33,7 +35,7 @@ public class ProductModel {
 	
 	// 상단 메뉴 탭 눌렀을 경우 보여지는 첫 페이지.
 	@RequestMapping(value="/saproductList")
-	public ModelAndView productList(HttpSession ses){
+	public ModelAndView productList(Map<String,Integer> map, HttpSession ses,HttpServletRequest req){
 		ModelAndView mav = new ModelAndView();
 		// 시큐리티 관련 되어서 멤버 세션을 저장하는데...필요해서.. 추후 홍코더 한테 다시 물어 보자.
 		String first = (String) ses.getAttribute("first");
@@ -44,8 +46,10 @@ public class ProductModel {
 			mav.setViewName("home");
 		}else{
 			ses.setAttribute("model", "auction");
+			map = MyPage.getMp().pageProcess(req, 10, 5, 0, pdao.proTotalCount(), 0);
 			mav.setViewName("product.productList");
-			mav.addObject("plist",pdao.proList());
+			ses.setAttribute("sesPage",map.get("page"));
+			mav.addObject("plist",pdao.proList(map));
 		}
 		return mav;
 	}

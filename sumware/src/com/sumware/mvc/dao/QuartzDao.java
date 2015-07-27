@@ -17,7 +17,6 @@ public class QuartzDao {
 	// 쿼츠가 1분단위로 호출 하는 메서드
 		// 경매시간의 종료 여부를 알수 있다.
 		public List<ProductVO> getEnddate(){
-			System.out.println("실행 되나?");
 			List<ProductVO> list = st.selectList("pro.getEnddate"); 
 			return list;
 		}
