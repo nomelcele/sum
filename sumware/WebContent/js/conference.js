@@ -86,7 +86,7 @@
 			alert("제목을 입력해주세요.");
 		} else {
 			// 로컬 ip) 192.168.7.162
-			var roomUrl = "http://192.168.7.124:8001?"+$("#confTitle").val()+"-"+makeid();
+			var roomUrl = "http://192.168.7.162:8001?"+$("#confTitle").val()+"-"+makeid();
 			var chkArr = document.getElementsByName("chk2");
 			var members = [];
 			for(var i=0; i<chkArr.length; i++){
