@@ -11,9 +11,17 @@
 	<select id="getList" parameterType="bvo" resultType="bvo">
 		<choose>
 			<when test="bgnum!=0 and bdeptno!=999">
-					select bnum,btitle,writer bwriter,bdate,bhit from(select rownum	r_num,b.* from(select tn.bnum,tn.bcont,tn.btitle,tn.writer,tn.bdate,tn.bhit,tn.bmem
-				from(select	b.bnum,b.bcont,b.btitle, m.memname writer,to_char(b.bdate,'yy-MM-DD') bdate, b.bhit,b.bmem	from board b, member m
-				where b.bmem = m.memnum and b.bgnum=#{bgnum} and b.bdeptno=#{bdeptno} order by b.bnum desc) tn) b
+					select bnum,btitle,writer bwriter,bdate,bhit 
+					from
+						(select rownum	r_num,b.* 
+						from
+							(select tn.bnum,tn.bcont,tn.btitle,tn.writer,tn.bdate,tn.bhit,tn.bmem
+							from
+									(select	b.bnum,b.bcont,b.btitle, m.memname writer,to_char(b.bdate,'yy-MM-DD') bdate, b.bhit,b.bmem	
+									from board b, member m
+									where b.bmem = m.memnum and b.bgnum=#{bgnum} and b.bdeptno=#{bdeptno} order by b.bnum desc
+									) tn
+							) b
 					<choose>
 					<when test="div!=''">
 						<where>

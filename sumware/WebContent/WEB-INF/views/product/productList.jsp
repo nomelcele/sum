@@ -45,15 +45,10 @@
 
 
 <!-- paging(S) -->
-<div class="paging" id="paging">
-	<form action="saboardList" method="post" id="plist">
-		<input type="hidden" name="model" value="board"> <input
-			type="hidden" name="bgnum" value="${sessionScope.bbbgnum}"> <input
-			type="hidden" name="bname" value="${sessionScope.bname }"> <input
-			type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
-		<input type="hidden" name="page" id="page"> <input
-			type="hidden" name="bsearch" value="${sessionScope.boardSearch}">
-		<input type="hidden" name="div" value="${sessionScope.boardDiv }">
+<div class="paging" id="auctionPaging">
+	<form action="saproductList" method="post" id="productList">
+		<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
+		<input type="hidden" name="page" id="propage"> 
 		<!-- 이전 페이지로 보내주는 화살표 -->
 		<c:choose>
 			<c:when test="${pageInfo.currentBlock eq 1}">&lt;&lt;</c:when>

@@ -24,8 +24,8 @@ public class ProductDao {
 	}
 
 	// 제품 목록 셀렉트 리스트
-	public List<ProductVO> proList(){
-		return st.selectList("pro.proList");
+	public List<ProductVO> proList(Map<String,Integer> map){
+		return st.selectList("pro.proList",map);
 	}
 	
 	// 제품 상세정보 셀렉트 원

@@ -35,7 +35,7 @@
 		<c:if test="${provo.status eq 'n' }">
 		<button type="button"  class="btn btn-default" id="bidBtn" onclick="javascript:bidBtn()">입찰하기</button>
 		</c:if>
-		<button type="button" class="btn btn-default" onclick="location='saproductList?'" id="bidListBtn">목록</button></td>
+		<button type="button" class="btn btn-default" onclick="location='saproductList?page=${sesPage}'" id="bidListBtn">목록</button></td>
 	</tr>
 </table>
 <table class="table table-condensed table-hover">

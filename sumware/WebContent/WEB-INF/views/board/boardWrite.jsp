@@ -55,7 +55,7 @@
 		</div>
 <form action="saboardList" method="post" id="listForm">
 				<input type="hidden" name="model" value="board">
-				<input type="hidden" name="page" value="1">
+				<input type="hidden" name="page" value="${boardPage }">
 				<input type="hidden" name="bgnum" value="${sessionScope.bbbgnum }">
 				<input type="hidden" name="bdeptno" value="${sessionScope.v.memdept }">
 				<input type="hidden" name="bname" value="${sessionScope.bname }">
