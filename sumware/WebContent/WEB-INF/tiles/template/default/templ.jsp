@@ -64,7 +64,7 @@
 					mgrs['${index.count}']='${ss.stepmemnum}';
 					status['${index.count}']='${ss.stepconfirm}';
 					size='${index.count}';
-					signimg['${index.count}']='${sessionScope.v.memsignimg}';
+					signimg['${index.count}']='${ss.memsignimg}';
 				"</c:forEach>";
 				
 				if("${!empty sgvo.scont}"=="true"){

@@ -57,12 +57,7 @@
 				 <br />
 			</div>
 			<!-- Search (E) -->
-			
-			
-	
-	
-	
-	
+
 			<!-- List (S) -->
 			<div id="memSearchForm">
 				<table class="table table-condensed table-hover" id="memberList">
