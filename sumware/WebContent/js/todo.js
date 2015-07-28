@@ -218,7 +218,6 @@ function todoConfirm(res) {
 
 function todoFormGo(res) {
 	//$('#model').attr("value", "todo");
-	alert($('#tocont').val())
 	if (res == 'approveTodo') {
 		// 팀장업무관리에서 승인버튼
 		$('#okForm').submit();
