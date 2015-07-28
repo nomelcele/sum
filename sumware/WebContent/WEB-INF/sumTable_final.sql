@@ -16,13 +16,11 @@ DROP TABLE signstep;
 DROP TABLE signature;
 DROP TABLE signform;
 DROP TABLE commission;
-drop table zzim;
 DROP TABLE product;
 DROP TABLE SNS;
 DROP TABLE MEMBER;
 DROP TABLE DEPT;
 DROP SEQUENCE TODO_SEQ;
-DROP SEQUENCE zzim_SEQ;
 DROP SEQUENCE todojob_seq;
 DROP SEQUENCE SNS_SEQ;
 DROP SEQUENCE MESCONTENT_SEQ;
@@ -372,18 +370,6 @@ CREATE SEQUENCE bidder_seq INCREMENT BY 1 START WITH 1;
 ALTER TABLE PRODUCT ADD(startdate DATE, enddate date);
 alter table product add(procont varchar(800));
 
-CREATE TABLE zzim(
-	zzimnum number, -- pk
-	zdeptno NUMBER(5), -- 품목을 찜한 사번의 사번. fk member(memnum)
-    zproduct NUMBER(5), -- 상품번호. fk product(pronum)
-    soldout VARCHAR2(1) DEFAULT 'n',
-    CONSTRAINT zzim_zzimnum_pk PRIMARY KEY(zzimnum),
-    CONSTRAINT zzim_zdeptno_fk FOREIGN KEY(zdeptno)
-    REFERENCES MEMBER(memnum) ON DELETE CASCADE,
-    CONSTRAINT zzim_zproduct_fk FOREIGN KEY(zproduct) 
-    REFERENCES PRODUCT(pronum) ON DELETE cascade
-);
-CREATE SEQUENCE zzim_seq INCREMENT BY 1 START WITH 1;
 
 COMMIT;
 
