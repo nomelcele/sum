@@ -31,6 +31,7 @@ public class LoginModel{
 	private AdminDao adao;
 	private int capCount;
 	
+	//시큐리티
 	@RequestMapping(value="/login")
 	public void login(HttpServletRequest request, Model model){
 	}
