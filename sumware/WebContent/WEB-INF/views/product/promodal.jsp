@@ -31,6 +31,10 @@
 							<th>가격</th>
 							<td><input type="number" placeholder="10,000" id="auc-price" step="100" min="0" name="startprice"/> 원</td>
 						</tr>
+						<tr class="auc-price">
+							<th>즉시구매가격</th>
+							<td><input type="number" placeholder="10,000" id="auc-price" step="100" min="0" name="nowget"/> 원</td>
+						</tr>
 						<!-- 가격(E) -->
 						<tr class="auc-price">
 							<th>입찰단가</th>

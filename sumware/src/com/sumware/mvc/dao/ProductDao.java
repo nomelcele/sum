@@ -38,15 +38,23 @@ public class ProductDao {
 	// 제품 입찰정보 인서트
 	public void bidInsert(BidderVO bidvo){
 		st.insert("pro.bidInsert", bidvo);
+		bidUpdate(bidvo);
+		bidCount(bidvo);
+		lastBidder(bidvo);
+	}
+	
+	// 마지막 입찰자를 product 테이블에 업데이트
+	private void lastBidder(BidderVO bidvo){
+		st.update("pro.lastBidder",bidvo);
 	}
 	
 	// 입찰시에 제품의 가격 업데이트
-	public void bidUpdate(BidderVO bidvo){
+	private void bidUpdate(BidderVO bidvo){
 		st.update("pro.proUpdate", bidvo);
 	}
 	
 	// 입찰시에 제품의 입찰 횟수 업데이트
-	public void bidCount(BidderVO bidvo){
+	private void bidCount(BidderVO bidvo){
 		st.update("pro.proCount",bidvo);
 	}
 	/* /나중에 트랜잭션 처리 해보자                              */
@@ -71,9 +79,16 @@ public class ProductDao {
 	public void enddateUpdate(int pronum){
 		st.update("pro.enddateUpdate",pronum);
 	}
-
 	
+	// 현재 상품의 즉시구매가를 가져오는 메소등
+	public int nowget(int bidpronum){
+		return st.selectOne("pro.nowget",bidpronum);
+	}
 	
+	// 상품의 판매 상태 업데이트
+	public void status(int pronum){
+		st.update("pro.statusUpdate",pronum);
+	}
 	
 }
 

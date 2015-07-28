@@ -12,20 +12,41 @@
 		</tr>
 	</c:if>
 	<tr>
-		<td rowspan="5" class="col-lg-1" style="text-align: center"><img src="aucImg/${provo.proimg}" style="width: 200px;"></td>
+		<td rowspan="7" class="col-lg-1" style="text-align: center"><img src="aucImg/${provo.proimg}" style="width: 200px;"></td>
 	</tr>
 	<tr>
 		<td class="col-lg-1" style="font-weight: bold">상품명</td>
 		<td class="col-lg-2"><span>${provo.product }</span></td>
 	</tr>
 	<tr>
+		<td class="col-lg-1" style="font-weight: bold">즉시구매가격</td>
+		<c:choose>
+			<c:when test="${provo.nowget eq '0'}">
+				<td class="col-lg-2">없음</td>
+			</c:when>
+			<c:otherwise>
+				<td class="col-lg-2"><span>${provo.nowget}</span> 원</td>
+			</c:otherwise>
+		</c:choose>
+	</tr>
+	<tr>
 		<td class="col-lg-1" style="font-weight: bold">현재가격</td>
 		<td class="col-lg-2"><span>${provo.price}</span> 원</td>
 	</tr>
-	<tr>
-		<td class="col-lg-1" style="font-weight: bold">종료일자</td>
-		<td class="col-lg-2"><span>${provo.enddate}</span><span style="float: right;"><button type="button" class="btn btn-default" onclick="bidInformation(${provo.pronum})">입찰정보</button></span></td>
-	</tr>
+<c:choose>
+	<c:when test="${provo.status eq 'y'  }">
+		<tr>
+			<td class="col-lg-1" style="font-weight: bold">낙찰자</td>
+			<td class="col-lg-2"><span>${provo.lastbidder }</span><span style="float: right;"><button type="button" class="btn btn-default" onclick="bidInformation(${provo.pronum})">입찰정보</button></span></td>
+		</tr>
+	</c:when>
+	<c:otherwise>
+		<tr>
+			<td class="col-lg-1" style="font-weight: bold">종료일자</td>
+			<td class="col-lg-2"><span>${provo.enddate}</span><span style="float: right;"><button type="button" class="btn btn-default" onclick="bidInformation(${provo.pronum})">입찰정보</button></span></td>
+		</tr>
+	</c:otherwise>
+</c:choose>
 	<tr>
 		<td class="col-lg-1" style="font-weight: bold">호가</td>
 		<td class="col-lg-2"><span>${provo.prostep}</span> 원</td>
