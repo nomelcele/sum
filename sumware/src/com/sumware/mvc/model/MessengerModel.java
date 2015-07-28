@@ -30,7 +30,7 @@ public class MessengerModel{
 	
 	@Autowired
 	@Qualifier(value="messenger")
-	private ServiceInter service;
+	private ServiceInter mesService;
 
 	// 메신저 폼
 	@RequestMapping(value = "/samessengerForm")
@@ -96,7 +96,7 @@ public class MessengerModel{
 
 		}
 
-		int keynum = service.insertCreateRoomService(list, mrvo, mesendNum);
+		int keynum = mesService.insertCreateRoomService(list, mrvo, mesendNum);
 		System.out.println("keynum :" + keynum);
 
 //		// 친구찾기 기능을 위해 List 객체를 가져옴
@@ -124,7 +124,7 @@ public class MessengerModel{
 
 	}
 	
-
+	
 	@RequestMapping(value="/samsgReceieve",method=RequestMethod.POST)
 	public String msgReceieve(HttpServletRequest request,Model model){
 		String struserNum = request.getParameter("userNum2");
@@ -180,7 +180,7 @@ public class MessengerModel{
 		
 		 mevo.setMesmember(userNum);
 		 mevo.setMesnum(roomkey);
-		 service.closeRoomService(mevo);
+		 mesService.closeRoomService(mevo);
 		
 		 // 창을 닫기 때문에 url 주소는 없어도 무관함
 		 return "redirect:samessengerForm";
@@ -209,7 +209,7 @@ public class MessengerModel{
 		 mevo.setMesmember(reciuserNum);
 		 mevo.setMesnum(keyNum);
 		 mevo.setResState(mainstate);
-		 service.closeRoomService(mevo);
+		 mesService.closeRoomService(mevo);
 		
 		 request.setAttribute("key", keyNum);
 		 request.setAttribute("userNum", reciuserNum);
