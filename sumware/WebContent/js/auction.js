@@ -41,9 +41,9 @@ function preview(input){
 
 // 상품등록 모달에서 완료 버튼 클릭시 (Done)
 function doneClick(){
-	// 종료 일자유무 판단 후 검증 처리.
-	$('#doneForm').submit();
-	$('#proRegister').modal('toggle');
+	// 입력 받은 값이 호가에 나누어 떨어지는 경우에만 서브밋.
+		$('#doneForm').submit();
+		$('#proRegister').modal('toggle');
 }
 
 
@@ -60,14 +60,17 @@ function bidBtn(){
 }
 
 // 입찰 버튼 눌렀을 때 동작.(promodal.jsp)
-function bidExe(step,min){
+function bidExe(step,min,nowget){
+	var $nowget = parseInt(nowget.replace(/(^\s*)|(\s*$)|,/g, ''),10);
 	var $bidprice = parseInt($('#bidprice').val(),10);
 	var $bidstep = parseInt(step.replace(/(^\s*)|(\s*$)|,/g, ''),10);
 	// 받은값으로 검증 해야됨.
-	if($bidprice < min || $bidprice==min){
+	if($bidprice <= min ){
 		alert("현재 가격 보다 높은 금액을 입력하십시오.");
 	}else if(($bidprice-min)%$bidstep != 0){
 		alert("호가에 의거하여 입력 하십시오.")
+	}else if($bidprice >= $nowget){
+		nowgetBtn(nowget);
 	}else{
 		$('#bidForm').submit();
 		$('#bidModal').modal('toggle');
@@ -92,6 +95,14 @@ function bidInformation(bidpronum){
 			$('#bidInfoModal').modal('toggle');
 		}
 	});
+}
+
+// 즉시구매 버튼 눌렀을 경우에 작동.(promodal.jsp)
+function nowgetBtn(nowget){
+	var $nowget = nowget.replace(/(^\s*)|(\s*$)|,/g, '');
+	$('#bidprice').attr('value',$nowget);
+	$('#bidForm').submit();
+	$('#bidModal').modal('toggle');
 }
 
 

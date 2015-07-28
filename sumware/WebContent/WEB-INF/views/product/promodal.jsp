@@ -29,16 +29,16 @@
 						<!-- 가격(S) -->
 						<tr class="auc-price">
 							<th>가격</th>
-							<td><input type="number" placeholder="10,000" id="auc-price" step="100" min="0" name="startprice"/> 원</td>
-						</tr>
-						<tr class="auc-price">
-							<th>즉시구매가격</th>
-							<td><input type="number" placeholder="10,000" id="auc-price" step="100" min="0" name="nowget"/> 원</td>
+							<td><input type="number" placeholder="10,000" id="startprice" step="100" min="0" name="startprice"/> 원</td>
 						</tr>
 						<!-- 가격(E) -->
 						<tr class="auc-price">
 							<th>입찰단가</th>
-							<td><input type="number" step="100" min="100" name="prostep" placeholder="100"> 원</td>
+							<td><input id="prostep" type="number" step="100" min="100" name="prostep" placeholder="100"> 원</td>
+						</tr>
+						<tr class="auc-price">
+							<th>즉시구매가격</th>
+							<td><input type="number" placeholder="10,000" id="auc-price" step="100" min="0" name="nowget" id="nowget"/> 원</td>
 						</tr>
 						<!-- 경매기간(S) -->
 						<tr class="auc-date">
@@ -127,6 +127,10 @@
 							<td class="col-lg-1"  style="text-align: right; padding-right: 100px"><i class="fa fa-krw"></i> ${price}</td>
 						</tr>
 						<tr>
+							<td class="col-lg-1"  style="background-color: #F5F5F5; font-weight: bold">즉시구매가격</td>
+							<td class="col-lg-1"  style="text-align: right; padding-right: 100px"><i class="fa fa-krw"></i> ${provo.nowget}</td>
+						</tr>
+						<tr>
 							<td style="background-color: #F5F5F5; font-weight: bold">호 가</td>
 							<td style="text-align: right; padding-right: 100px"><i class="fa fa-krw" ></i> ${provo.prostep}</td>
 						</tr>
@@ -140,7 +144,8 @@
 			<!-- 상품에 대한 입찰 정보(E) -->
 			
 			<div class="modal-footer align-center">
-				<button type="button" id="doneBtn" class="btn btn-default" onclick="javascript:bidExe('${provo.prostep }',${price})">입찰</button>
+			<button type="button" class="btn btn-default" onclick="nowgetBtn('${provo.nowget}')">즉시구매</button>
+				<button type="button" id="doneBtn" class="btn btn-default" onclick="javascript:bidExe('${provo.prostep }',${price},'${provo.nowget}')">입찰</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 			</div>
 		</div>
