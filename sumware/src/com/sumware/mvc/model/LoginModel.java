@@ -34,6 +34,7 @@ public class LoginModel{
 	@RequestMapping(value="/login")
 	public void login(HttpServletRequest request, Model model){
 	}
+	//로그인 실패시 이동할페이지 ( 시큐리티)
 	@RequestMapping(value="index",method=RequestMethod.GET)
 	public String indexForm(HttpSession session){
 		capCount++;
