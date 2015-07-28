@@ -107,9 +107,12 @@ public class TodoModel {
 		System.out.println(session.getServletContext().getRealPath("/"));
 		StringBuffer path = new StringBuffer();
 		path.append(session.getServletContext().getRealPath("/"))
-				.append("/upload/").append(tvo.getMfile().getOriginalFilename());
+				.append("upload/").append(tvo.getMfile().getOriginalFilename());
 
 		File f = new File(path.toString());
+		if(!f.exists()){
+			f.mkdirs();
+		}
 		try {
 			tvo.getMfile().transferTo(f);
 		} catch (IllegalStateException | IOException e) {
