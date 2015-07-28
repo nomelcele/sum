@@ -69,7 +69,7 @@ public class MailModel{
 			String r_path = session.getServletContext().getRealPath("/");
 			String oriFn = mailfile.getOriginalFilename();
 			StringBuffer path = new StringBuffer();
-			path.append(r_path).append("\\upload\\").append(oriFn);
+			path.append(r_path).append("upload\\").append(oriFn);
 			System.out.println("File Upload Path: "+path.toString());
 			
 			File file = new File(path.toString());
