@@ -2,8 +2,6 @@ package com.sumware.mvc.model;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.Principal;
-import java.sql.SQLException;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,11 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sumware.dto.ConferenceVO;
-import com.sumware.dto.MemberVO;
-import com.sumware.mvc.dao.AdminDao;
-import com.sumware.mvc.dao.ConferenceDao;
-import com.sumware.mvc.dao.LoginDao;
 import com.sumware.mvc.dao.MailDao;
 import com.sumware.mvc.dao.TodoDao;
 import com.sumware.mvc.service.ServiceInter;
@@ -31,82 +24,14 @@ public class IndexModel{
 	@Autowired
 	private TodoDao tdao;
 	@Autowired
-	private LoginDao ldao;
-	@Autowired
-	AdminDao adao;
-	@Autowired
-	private ConferenceDao cdao;
-	@Autowired
 	@Qualifier(value="index")
 	private ServiceInter service;
+	
 	// 요청이 home 이거나, 아무 요청이 없을 경우 
 	// 작동 됨.
-	private int capCount;
-	
-
 	@RequestMapping(value={"/home","/"},method=RequestMethod.GET)
 	public String indexForm(Model model){
 		return "home.index";
-	}
-	@RequestMapping(value="index",method=RequestMethod.GET)
-	public String indexForm(HttpSession session){
-		capCount++;
-		System.out.println("들어옴:"+capCount);
-		session.setAttribute("capCount", capCount);
-		return "home.index";
-	}
-	//login AuthenticationSuccessHandler를 사용해서 바꾸자.
-	//logout AuthenticationFailureHandler
-	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public String indexForm(Principal principal,HttpSession session){
-		System.out.println(":::::::"+principal.getName());
-		capCount=0;
-		int memnum = Integer.parseInt(principal.getName());
-		String str ="";
-		if(memnum !=1){
-			str= "home.index";
-			try {
-				String res = ldao.ckFirstLogin(memnum);
-	
-				System.out.println("res:::"+res);		
-				if (res.equals("1")) {
-					
-					System.out.println("첫번째 이용자다!!!!");
-					session.setAttribute("memnum", memnum);
-					session.setAttribute("mempwd",ldao.firstPwd(memnum));
-					
-					session.setAttribute("first", "1");
-					//회원정보입력창으로 이동.
-					//이동후에 memnum입력란에 자동으로 입력시켜주고
-					//mempwd는 유효성검사 할때 쓰기위하여 보냄.
-					str="redirect:safirstLoginForm";
-				} else if(!res.equals("1")&&!res.equals("0")){
-					System.out.println("ddddddddd");
-					session.setAttribute("first", "2");
-					MemberVO mvo = ldao.login(memnum);
-					session.setAttribute("model", "join");
-					// sessionScope에 아이디를 저장
-					session.setAttribute("v", mvo);
-					//login 기록 저장.
-	//				dao.inLog(mvo.getMemnum());	
-					if(mvo.getMemresign() != null){
-						// 퇴사일 컬럼에 값이 있을 경우(퇴사한 사원이 로그인했을 경우)
-						// 로그인하지 못하게 함
-						session.setAttribute("first", "0");
-					}
-				}else{
-					session.setAttribute("first", "0");
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}else{
-			session.setAttribute("first", "2");
-			MemberVO adminVo = adao.adminLogin(memnum);
-			session.setAttribute("adminv", adminVo);
-			str= "admin.adminMain";
-		}
-		return str;
 	}
 	
 	//Notification
