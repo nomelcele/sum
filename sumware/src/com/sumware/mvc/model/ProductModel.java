@@ -46,7 +46,7 @@ public class ProductModel {
 			mav.setViewName("home");
 		}else{
 			ses.setAttribute("model", "auction");
-			map = MyPage.getMp().pageProcess(req, 10, 5, 0, pdao.proTotalCount(), 0);
+			map = MyPage.getMp().pageProcess(req, 7, 5, 0, pdao.proTotalCount(), 0);
 			mav.setViewName("product.productList");
 			ses.setAttribute("sesPage",map.get("page"));
 			mav.addObject("plist",pdao.proList(map));
@@ -85,7 +85,7 @@ public class ProductModel {
 		provo.put("price", provo.get("startprice"));
 		
 		pdao.proInsert(provo);
-		return "redirect:saproductList";
+		return "redirect:saproductList?page=1";
 	}
 	
 	// 상품 디테일 보여주는 메서드.
@@ -95,6 +95,7 @@ public class ProductModel {
 		// 입찰가격이 변경 된다면 detail 페이지에서도 현재 가격이 변동 되어야 함으로
 		// session 에 저장 해서 관리 한다.
 		ProductVO provo = pdao.proDetail(vo.getPronum());
+		provo.setNowget(provo.getNowget().trim());
 		ses.setAttribute("provo", provo);
 		System.out.println("상품의 가격은 제대로 ? : "+provo.getPrice());
 		// promodal.jsp 에서 숫자값이 필요 하기 때문에 가공 하는 로직.
@@ -125,8 +126,9 @@ public class ProductModel {
 		System.out.println("입찰한 상품 번호?:::::: "+bidvo.getBidpronum());
 		System.out.println("입찰한 상품 가격?:::::: "+bidvo.getBidprice());
 		pdao.bidInsert(bidvo);
-		pdao.bidUpdate(bidvo);
-		pdao.bidCount(bidvo);
+		if(bidvo.getBidprice()==pdao.nowget(bidvo.getBidpronum())){
+			pdao.status(bidvo.getBidpronum());
+		}
 		// 현재 시간과 해당 상품 판매 종료시간을 비교하여 10분전인지 아닌지 판별 한다.
 		String enddate = pdao.enddate(bidvo.getBidpronum());
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm");

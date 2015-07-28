@@ -8,10 +8,12 @@
 	<insert id="proInsert" parameterType="map">
 		insert into 
 			product 
-			(product,proimg,prowriter,price,procount,pronum,enddate,procont,prostep,startprice)
+			(product,proimg,prowriter,price,procount,
+			pronum,enddate,procont,prostep,startprice,nowget)
 		values
 			(#{product},#{proimg},#{prowriter},#{price},0
-			,product_seq.nextVal,sysdate+#{enddate},#{procont},#{prostep},#{startprice})
+			,product_seq.nextVal,sysdate+#{enddate},#{procont},
+			#{prostep},#{startprice},#{nowget})
 	</insert>
 	
 <!-- 상품 리스트 -->
@@ -30,7 +32,8 @@
 <!-- 상품 디테일 -->
 	<select id="proDetail" parameterType="int" resultType="provo">
 		select 
-			to_char(p.startprice,'999,999,999') startprice,  p.status,
+			(SELECT memname FROM MEMBER WHERE memnum=lastbidder) lastbidder,
+			to_char(nvl(p.nowget,'0'),'999,999,999') nowget,to_char(p.startprice,'999,999,999') startprice,  p.status,
 			to_char(p.prostep,'999,999,999') prostep,  p.pronum,
 			p.product, p.proimg,   m.memname,   to_char(p.price,'999,999,999') price, 
 			to_char(p.enddate,'yy/MM/dd hh24:mi') enddate
@@ -93,11 +96,20 @@
 			status='n' ORDER BY pronum DESC
 	</select>
 	
-	<!-- 해당 상품의 판매 상태 업데이트 -->
+	<!-- 해당 상품의 판매 상태를 판매종료로 업데이트 -->
 	<update id="statusUpdate" parameterType="int">
 		update product set status='y' where pronum=#{pronum}
 	</update>
 	
+	<!-- 해당 상품의 즉시 구매가격을 조회 -->
+	<select parameterType="int" resultType="int" id="nowget">
+		select nvl(nowget,0) nowget from product where pronum=#{bidpronum}
+	</select>
+	
+	<!-- 마지막 입찰자 업뎃. -->
+	<update id="lastBidder" parameterType="bidvo">
+		update product set lastbidder=#{bidmem} where pronum=#{bidpronum}
+	</update>
 </mapper>
 
 

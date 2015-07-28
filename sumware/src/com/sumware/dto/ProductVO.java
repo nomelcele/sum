@@ -10,10 +10,24 @@ public class ProductVO {
     pronum NUMBER(5), -- 경매번호 pk
     zzim VARCHAR2(1) DEFAULT 'n', -- 찜한목록이면 y 아니면 n*/
 	private String product,proimg,status;
-	private String startdate, enddate,procont,price,memname,startprice,prostep;
+	private String startdate, enddate,procont,price,memname,startprice,prostep,nowget;
 	private int prowriter,procount,pronum,begin,end;
 	
+	private String lastbidder;
 	
+	
+	public String getLastbidder() {
+		return lastbidder;
+	}
+	public void setLastbidder(String lastbidder) {
+		this.lastbidder = lastbidder;
+	}
+	public String getNowget() {
+		return nowget;
+	}
+	public void setNowget(String nowget) {
+		this.nowget = nowget;
+	}
 	public String getProstep() {
 		return prostep;
 	}

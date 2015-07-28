@@ -405,3 +405,6 @@ constraint conf_confmem_fk foreign key(confmem) references member(memnum) on del
 create sequence conf_seq
 increment by 1
 start with 1;
+
+-----------------------------------------------
+ALTER TABLE PRODUCT ADD(nowget number(8));
