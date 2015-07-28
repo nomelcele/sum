@@ -408,3 +408,4 @@ start with 1;
 
 -----------------------------------------------
 ALTER TABLE PRODUCT ADD(nowget number(8));
+alter table bidder add(biddate date);
