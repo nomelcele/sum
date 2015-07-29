@@ -74,6 +74,7 @@
 	}
 	
 	function chartsns(){
+		// 컨트롤러에서 받은 데이터를 JSON으로 변환
 		var snschart = JSON.parse('${snschart}'.trim());
 		// SNS 활동 순위
 		$('#sns').highcharts({
