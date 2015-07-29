@@ -26,9 +26,9 @@ public class LogAop {
 	private HttpSession session;
 	@AfterReturning(pointcut="execution(* com.sumware.mvc.dao.Lo*.ckFirstLogin(..))",returning="ret")
 	public void inLog(JoinPoint jp,Object ret){
-		System.out.println("로그인 기록을 남기자~!");
+//		System.out.println("로그인 기록을 남기자~!");
 		String res = String.valueOf(ret);
-		System.out.println(res);
+//		System.out.println(res);
 		if(!res.equals("1")&&!res.equals("0")){
 		int memnum = Integer.parseInt(res);
 		logDao.inLog(memnum);
@@ -36,7 +36,7 @@ public class LogAop {
 	}
 	@Before("execution(* com.sumware.mvc.model.Lo*.logout(..))")
 	public void outLog(JoinPoint jp){
-		System.out.println("로그아웃 기록을 남기자~");
+//		System.out.println("로그아웃 기록을 남기자~");
 		MemberVO mv = (MemberVO) session.getAttribute("v");
 		if(mv!=null){
 			logDao.outLog(mv.getMemnum());
