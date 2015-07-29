@@ -19,7 +19,7 @@ public class BidQuartzJob extends QuartzJobBean{
 
 	@Override
 	protected void executeInternal(JobExecutionContext arg0)throws JobExecutionException {
-		System.out.println("쿼츠가 1분단위로 작동 합니다.");
+//		System.out.println("쿼츠가 1분단위로 작동 합니다.");
 		int now = Integer.parseInt(sdf.format(new Date()));
 		// 종료날짜를 리스트로 불러온다. 혹시 몰라서 상품 번호까지 같이 불러옴.
 		endList = qdao.getEnddate();
