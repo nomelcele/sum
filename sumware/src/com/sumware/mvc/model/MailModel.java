@@ -59,7 +59,7 @@ public class MailModel{
 	public ModelAndView mailWrite(@Valid @ModelAttribute("writeForm") ValidMailVO vmavo,BindingResult result ,@RequestParam HashMap<String, String> map,
 			@RequestParam("mailfile")MultipartFile mailfile,HttpSession session){
 		
-		System.out.println("Mail Controller: mailWrite");
+//		System.out.println("Mail Controller: mailWrite");
 		ModelAndView mav = new ModelAndView();
 		if(result.hasErrors()){
 			System.out.println("에러다");
@@ -95,9 +95,9 @@ public class MailModel{
 			int startidx = mailreceiver.indexOf("<")+1;
 			int endidx = mailreceiver.indexOf("@");
 			map.put("mailreceiver",mailreceiver.substring(startidx, endidx));
-			System.out.println("첨부파일 이름: "+oriFn);
-			System.out.println("발신자: "+map.get("mailmem"));
-			System.out.println("수신자: "+map.get("mailreceiver"));
+//			System.out.println("첨부파일 이름: "+oriFn);
+//			System.out.println("발신자: "+map.get("mailmem"));
+//			System.out.println("수신자: "+map.get("mailreceiver"));
 			mdao.addMail(map);
 			
 			mav.setViewName("mail.mailSend"); // 메일 전송 완료 화면
@@ -108,11 +108,11 @@ public class MailModel{
 	// suggest(mailSug)
 	@RequestMapping(value="/samailSug")
 	public void mailSug(String key,HttpServletResponse response) throws IOException{
-		System.out.println("Mail Controller: mailSug");
+//		System.out.println("Mail Controller: mailSug");
 		// 5) 필요한 데이터 검색 후 배열 형태로 해당 데이터를 리턴해주는 메서드 호출
 		String[] suggests = Suggest.getSuggest().getSuggest(key);
 		
-		System.out.println("Key: "+key);
+//		System.out.println("Key: "+key);
 		for(String e:suggests){
 			System.out.println("배열: "+e);
 		}
@@ -143,7 +143,7 @@ public class MailModel{
 	// 받은 메일함 이동
 	@RequestMapping(value="/samailFromList")
 	public ModelAndView mailFromList(HttpServletRequest request,HttpSession session){
-		System.out.println("Mail Controller: mailFromList");
+//		System.out.println("Mail Controller: mailFromList");
 		
 		ModelAndView mav = new ModelAndView();
 		String first = (String) session.getAttribute("first");
@@ -154,8 +154,8 @@ public class MailModel{
 			mav.setViewName("home");
 		}else{
 			MemberVO mvo = (MemberVO) session.getAttribute("v");
-			System.out.println("userid::"+mvo.getMeminmail());
-			System.out.println("usernum::"+mvo.getMemnum());
+//			System.out.println("userid::"+mvo.getMeminmail());
+//			System.out.println("usernum::"+mvo.getMemnum());
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("userid", mvo.getMeminmail());
 			map.put("usernum", String.valueOf(mvo.getMemnum()));
@@ -183,7 +183,7 @@ public class MailModel{
 	// 보낸 메일함 이동
 	@RequestMapping(value="/samailToList")
 	public ModelAndView mailToList(HttpServletRequest request,HttpSession session){
-		System.out.println("Mail Controller: mailToList");
+//		System.out.println("Mail Controller: mailToList");
 		ModelAndView mav = new ModelAndView();
 		
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
@@ -193,7 +193,7 @@ public class MailModel{
 		
 		// 보낸 메일함에 있는 메일 갯수 얻어오기
 		int totalCount = mdao.getListNum(map)[1];
-		System.out.println("보낸 메일함 메일 갯수: "+totalCount);
+//		System.out.println("보낸 메일함 메일 갯수: "+totalCount);
 		
 		// 페이지 정보를 가져오기 위한 map
 		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
@@ -212,7 +212,7 @@ public class MailModel{
 	// 내게 쓴 메일함 이동
 	@RequestMapping(value="/samailMyList")
 	public ModelAndView mailMyList(HttpServletRequest request,HttpSession session){
-		System.out.println("Mail Controller: mailMyList");
+//		System.out.println("Mail Controller: mailMyList");
 		ModelAndView mav = new ModelAndView();
 		
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
@@ -222,7 +222,7 @@ public class MailModel{
 		
 		// 내게 쓴 메일함에 있는 메일 갯수 얻어오기
 		int totalCount = mdao.getListNum(map)[2];
-		System.out.println("내게 쓴 메일함 메일 갯수: "+totalCount);
+//		System.out.println("내게 쓴 메일함 메일 갯수: "+totalCount);
 		
 		// 페이지 정보를 가져오기 위한 map
 		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
@@ -241,7 +241,7 @@ public class MailModel{
 	// 휴지통 이동
 	@RequestMapping(value="/samailTrashcan")
 	public ModelAndView mailTrashcan(HttpServletRequest request,HttpSession session){
-		System.out.println("Mail Controller: mailTrashcan");
+//		System.out.println("Mail Controller: mailTrashcan");
 		ModelAndView mav = new ModelAndView();
 		
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
@@ -251,7 +251,7 @@ public class MailModel{
 		
 		// 휴지통에 있는 메일 갯수 얻어오기
 		int totalCount = mdao.getListNum(map)[3];
-		System.out.println("휴지통 메일 갯수: "+totalCount);
+//		System.out.println("휴지통 메일 갯수: "+totalCount);
 		
 		// 페이지 정보를 가져오기 위한 map
 		Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
@@ -270,7 +270,7 @@ public class MailModel{
 	// 메일 상세 보기
 	@RequestMapping(value="/samailDetail",method=RequestMethod.POST)
 	public ModelAndView mailDetail(@RequestParam("mailnum")int mailnum){
-		System.out.println("Mail Controller: mailDetail");
+//		System.out.println("Mail Controller: mailDetail");
 		ModelAndView mav = new ModelAndView();
 		
 		MailVO detail = service.getDetailUpdate(mailnum);
@@ -286,11 +286,11 @@ public class MailModel{
 	@RequestMapping(value="/samailSetDel",method=RequestMethod.POST)
 	public String mailSetDel(@RequestParam("chk")String[] mailnums,
 			@RequestParam HashMap<String,String> map,HttpSession session){
-		System.out.println("Mail Controller: mailSetDel");
-		for(String e:mailnums){
-			// 체크된 메일의 번호들
-			System.out.println("선택된 메일 번호: "+e);
-		}
+//		System.out.println("Mail Controller: mailSetDel");
+//		for(String e:mailnums){
+//			// 체크된 메일의 번호들
+//			System.out.println("선택된 메일 번호: "+e);
+//		}
 		
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
 		map.put("usernum", String.valueOf(mvo.getMemnum()));
