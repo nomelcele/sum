@@ -50,7 +50,10 @@ public class IndexModel{
 		Integer mCount = (Integer) session.getAttribute("mailCount");
 		StringBuffer res = new StringBuffer();
 		res.setLength(0);
+		// 메일 또는 todo 에 새로운 업무가 왔을 때 푸쉬를 해주는데 
+		// 그 때 푸쉬 해주는 간격을 설정 해주는 로직.
 		res.append("retry:5000\n");
+		// 푸쉬를 받을 때 예약어로 data 가 날아가야 javascript 가 받아줌.
 		res.append("data:");
 		// 처음 저장했던 메일,업무 수와 현재 디비의 입력되어있는 수를 비교하여
 		// 디비의 수가 크다면 res에 't' 또는 'm'을 추가한다.

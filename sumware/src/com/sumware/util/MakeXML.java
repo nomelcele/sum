@@ -2,25 +2,15 @@ package com.sumware.util;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
 import org.jdom2.output.Format.TextMode;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.jdom2.output.XMLOutputter;
 
 import com.sumware.dto.MemberVO;
-import com.sumware.mvc.dao.MemberDao;
-
-import conn.ConUtil;
 
 public class MakeXML {
 	// db를 읽어서 xml 파일로 생성하는 클래스
