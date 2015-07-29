@@ -119,12 +119,14 @@ public class LoginModel{
 	public String sendCode(MemberVO vo, Model model,HttpSession session) throws Exception{
 		
 		MemberVO mvo = ldao.findPW(vo);
-		// 인증번호 6자리 생성
+		// 인증번호 6자리 무작위로 생성
 		int code = (int)((Math.random()*900000)+100000);
 		System.out.println("code : "+code);
 		if(mvo != null){
 			String mailsubject = "[비밀번호 찾기] 인증번호 메일입니다.";
-			String mailcont = mvo.getMemname()+"님, 인증번호는 "+code+" 입니다. 입력 후 비밀번호를 변경 해 주세요.";
+			String mailcont = mvo.getMemname()+"님, 인증번호는 "+code+
+					" 입니다. 입력 후 비밀번호를 변경 해 주세요.";
+			// java Mail API를 이용하여 인증번호 외부메일로 전송
 			int res = SendEmail.getSendemail().sendEmailToMem(mvo, mailsubject, mailcont);
 			if (res == 0) {
 				throw new Exception("인증번호 전송 실패");

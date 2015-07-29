@@ -298,8 +298,6 @@ function pageScoll() {
 function snsSend(memnum, memdept) {
 	$(".chat").scrollTop(0);
 	var fdata = {
-//			smem : "${v.memnum}",
-//			sdept : "${v.memdept}",
 		smem : memnum,
 		sdept : memdept,
 		scont : $("#btn-input").val()

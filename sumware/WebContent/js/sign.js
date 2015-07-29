@@ -8,8 +8,11 @@ $(function(){
 	
 });
 function addSignDiv(){
+	// 메서드의 Overloading 기능을 구현하기 위해
+	// 인자값의 갯수에 따라 구분
 	var argslen = arguments.length;
 	switch(argslen){
+	// 인자값이 3개인 경우
 	case 3:
 		var mgrs=arguments[0];
 		var names=arguments[1];
@@ -47,6 +50,8 @@ function addSignDiv(){
 		}
 		$('#signImg').html(sgHtml);
 		break;
+		
+	// 인자값이 5개인 경우
 	case 5:
 		var mgrs=arguments[0];
 		var names=arguments[1];
