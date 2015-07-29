@@ -36,7 +36,7 @@ public class SnsModel{
 	public void pushSns(Model model,HttpServletRequest request,HttpServletResponse response) throws IOException{
 		int rowsPerPage=Integer.parseInt(request.getParameter("rowsPerPage"));
 		int pagesPerBlock=1;
-		System.out.println("rowperpage::::::::::"+rowsPerPage);
+//		System.out.println("rowperpage::::::::::"+rowsPerPage);
 		int totalCount=0;
 		int etc = 0;
 		int commTotalCount=0;
@@ -85,7 +85,7 @@ public class SnsModel{
 	}
 	@RequestMapping(value="/sasnsComm",method=RequestMethod.POST)
 	public ModelAndView snsComm(HttpServletRequest request,Model model){
-		System.out.println("댓글 보기");
+//		System.out.println("댓글 보기");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("todo/modal/snsComm");
 		showCommList(request,mav);
@@ -93,7 +93,7 @@ public class SnsModel{
 	}
 	@RequestMapping(value="/sasnsCommInsert",method=RequestMethod.POST)
 	public ModelAndView snsCommInsert(HttpServletRequest request){
-		System.out.println("댓글 입력!");
+//		System.out.println("댓글 입력!");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("todo/modal/snsComm");
 		Map<String, String> map = MyMap.getMaps().getMapList(request);
@@ -104,7 +104,7 @@ public class SnsModel{
 	}
 	@RequestMapping(value="/sasnsCommDelete",method=RequestMethod.POST)
 	public ModelAndView snsCommDelete(HttpServletRequest request){
-		System.out.println("댓글 삭제");
+//		System.out.println("댓글 삭제");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("todo/modal/snsComm");
 		dao.snsCommDelete(Integer.parseInt(request.getParameter("conum")));
