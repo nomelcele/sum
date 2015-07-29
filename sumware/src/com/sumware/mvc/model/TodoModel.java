@@ -90,8 +90,7 @@ public class TodoModel {
 	// 업무추가 폼 //ok
 	@RequestMapping(value = "/saaddtodoForm", method = RequestMethod.POST)
 	public String addtodoForm(MemberVO mvo,Model model) {
-		
-		System.out.println("memnum : "+mvo.getMemnum());
+
 		List<MemberVO> list = tdao.getTomem(mvo.getMemnum());
 
 		model.addAttribute("teamNameList", list);
@@ -104,7 +103,6 @@ public class TodoModel {
 		 HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/saafterAddTodo");
-		System.out.println(session.getServletContext().getRealPath("/"));
 		StringBuffer path = new StringBuffer();
 		path.append(session.getServletContext().getRealPath("/"))
 				.append("upload/").append(tvo.getMfile().getOriginalFilename());
@@ -259,7 +257,6 @@ public class TodoModel {
 	// 업무 완료 처리  // ok
 	@RequestMapping(value = "/sasuccessJob", method = RequestMethod.POST)
 	public String successJob(Model model, TodoVO tvo, HttpSession session) {
-		System.out.println("업무 완료 처리 들어옴");
 		tdao.confirmTodo(tvo, "o");
 		
 		MemberVO mvo = (MemberVO) session.getAttribute("v");

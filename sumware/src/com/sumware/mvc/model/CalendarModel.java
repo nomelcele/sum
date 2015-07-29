@@ -43,7 +43,6 @@ public class CalendarModel{
 		if(cavo.getCal()==null||cavo.getCal().equals("0")){
 			//리스트를 불러와서 json형식으로 바꿈
 			List<CalendarVO> list =dao.getCalList(cavo);
-			System.out.println("listsize::"+list.size());
 			String json = dao.makeJson(list);
 	
 			model.addAttribute("calJson", json);
@@ -62,7 +61,6 @@ public class CalendarModel{
 	@RequestMapping(value="/sacalInsert",method=RequestMethod.POST)
 	public void calInsert(String title,CalendarVO cavo,Model model,HttpSession session,
 			HttpServletResponse response) throws IOException{
-		System.out.println("일정 등록!");
 		cavo.setCalcont(URLDecoder.decode(title,"UTF-8"));
 		MemberVO vo = (MemberVO) session.getAttribute("v");
 		//url 저장.

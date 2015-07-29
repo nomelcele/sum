@@ -44,7 +44,6 @@ public class ChartModel {
 			}
 		}
 		comnamesf.append("]");
-		System.out.println("json : "+comnamesf.toString());	
 		model.addAttribute("comnames", comnamesf.toString());
 		
 		// 추가금액
@@ -59,7 +58,6 @@ public class ChartModel {
 					}
 				}
 				comsumsf.append("]");
-				System.out.println("json : "+comsumsf.toString());	
 				model.addAttribute("comsums", comsumsf.toString());
 				
 				
@@ -82,7 +80,6 @@ public class ChartModel {
 					}
 				}
 				snssf.append("]");
-				System.out.println("json3 : "+snssf.toString());	
 				model.addAttribute("snschart", snssf.toString());
 				
 				//[{name: "인사부",y: 12,drilldown: "인사부"}, 
@@ -108,7 +105,6 @@ public class ChartModel {
 					}
 				}
 				todosf.append("]");
-				System.out.println("json4 : "+todosf.toString());	
 				model.addAttribute("tododept", todosf.toString());
 				
 				// 부서의 팀장별 업무수
@@ -143,13 +139,11 @@ public class ChartModel {
 					}
 				}
 				teamtodosf.append("]");
-				System.out.println("tododetailjson:::"+teamtodosf.toString());
 				model.addAttribute("todoteam", teamtodosf.toString());
 				
 				
 				// 경매 입찰 순위
 				List<ProductVO> provolist = cdao.getAuctionCount();
-				System.out.println(" 최고 입찰 수 "+provolist.get(0).getProcount());
 				//
 				StringBuffer aucsf = new StringBuffer();
 				aucsf.append("[");
@@ -169,7 +163,6 @@ public class ChartModel {
 					}
 				}
 				aucsf.append("]");
-				System.out.println("aucsf : " + aucsf.toString());
 				model.addAttribute("auctionchart", aucsf.toString());
 
 		return "charts.charts";

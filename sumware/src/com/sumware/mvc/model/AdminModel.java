@@ -42,48 +42,6 @@ public class AdminModel {
 	@Qualifier(value = "admin")
 	private ServiceInter service;
 
-//	// 관리자페이지 진입
-//	@RequestMapping(value = "/admin")
-//	public String adminForm(HttpSession session, String model) {
-//		session.setAttribute("model", model);
-//		return "admin.adminMain";
-//	}
-
-	// 관리자 로그인
-//	@RequestMapping(value = "/adminLogin")
-//	public void adminLogin(MemberVO mvo, HttpSession session,
-//			HttpServletResponse response) throws IOException {
-//		MemberVO adminVo = adao.adminLogin(mvo);
-//		String result = "admin.adminMain";
-//		if (adminVo == null) {
-//			// 로그인 실패 시
-//			System.out.println("로그인실패");
-//			result = "0";
-//		} else {
-//			// 관리자에 대한 정보
-//			System.out.println("로그인성공");
-//			session.setAttribute("adminv", adminVo);
-//		}
-//		PrintWriter pw = response.getWriter();
-//		pw.print(result);
-//		pw.flush();
-//		pw.close();
-//
-//
-//	}
-//
-//	// 관리자 로그아웃
-//	@RequestMapping(value = "adminLogout")
-//	public void adminLogout(int memnum, HttpSession session,
-//			HttpServletResponse response) throws IOException {
-//		System.out.println("로그아웃 컨트롤러");
-//		session.removeAttribute("adminv");
-//		session.invalidate();
-//		PrintWriter pw = response.getWriter();
-//		pw.write("success");
-//		pw.flush();
-//		pw.close();
-//	}
 	/////////////////////////TOP 메뉴 선택하여 페이지 첫 진입(S)///////////////////////
 	
 	// 관리자페이지 진입
@@ -214,10 +172,8 @@ public class AdminModel {
 	@RequestMapping(value = "/adminResignMem")
 	public String adminUpresignMem(int memnum) {
 		adao.resignMem(memnum); // 퇴사 처리
-		System.out.println("퇴사 처리");
 		// xml 파일 업데이트
 		List<MemberVO> list = mdao.getNameMailList();
-		System.out.println("사원 수: "+list.size());
 	    MakeXML.updateXML(list);
 		return "redirect:/adminMemList?page=1&memdept=0&memname=";
 	}
@@ -255,7 +211,6 @@ public class AdminModel {
 	@RequestMapping(value = "/adminaddMember", method = RequestMethod.POST)
 	public String adminUpaddMember(MemberVO mvo, PayVO payvo, Model model,
 			HttpSession session) throws Exception {
-		System.out.println("사원 추가버튼 클릭!!!" + mvo.getMemmgr());
 		
 		// 사원을 디비에 저장하고 부여받은 사번과 정보들로 사원에게 메일을 전송해 준다
 		//실패 시 DB에 저장되었던 사원정보를 다시 삭제하고, 성공 시 pay테이블에 연봉 정보를 입력한다.
@@ -278,12 +233,9 @@ public class AdminModel {
 		
 		// 페이지 처리
 		int totalCount = adao.getLoginHistoryCount(lvo);
-		System.out.println("count ::::::::::::::: "+totalCount);
 		Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
 		lvo.setBegin(pmap.get("begin"));
 		lvo.setEnd(pmap.get("end"));
-		System.out.println("begin :: "+pmap.get("begin"));
-		System.out.println("end::::"+pmap.get("end"));
 		
 		List<LoginVO> lgList =  adao.getLoginHistory(lvo);
 		
@@ -334,8 +286,6 @@ public class AdminModel {
 	// 월 급여 지급
 	@RequestMapping(value = "/admingiveSalary", method = RequestMethod.POST)
 	public String adminUpgiveSalary(PayHistoryVO phvo) {
-		System.out.println("aa:" + phvo.getHisamount());
-		System.out.println("bb : " + phvo.getHismem());
 		adao.giveSalary(phvo);
 
 		return "redirect:/adminPayManagement?page=1";
@@ -386,7 +336,6 @@ public class AdminModel {
 	// 사원의 급여 디테일
 	@RequestMapping(value = "/adminPayInfoDetail", method = RequestMethod.POST)
 	public String adminPayInfoDetail(MemberVO vo, String hisdate, Model model) {
-		System.out.println("memnum ::" + vo.getMemnum());
 
 		// member 정보 가져옴
 		MemberVO mvo = adao.getMemInfo(vo);
@@ -448,8 +397,6 @@ public class AdminModel {
 			int comsum = adao.getCommSum(comvo);
 			// 지급받을 급여
 			int monthtotal = payvo.getPmonthsalary()+comsum;
-			System.out.println("지급 급여1!! = "+monthtotal);
-			System.out.println("받는 사람 =="+mv.getMemnum());
 			PayHistoryVO phvo = new PayHistoryVO();
 			phvo.setHisamount(monthtotal);
 			phvo.setHismem(mv.getMemnum());
@@ -571,7 +518,6 @@ public class AdminModel {
 	public String adminauthentication(MemberVO mvo, HttpSession session) throws Exception{
 		MemberVO adminvo = (MemberVO) session.getAttribute("adminv");
 		mvo.setMemnum(adminvo.getMemnum());
-		System.out.println("memnum:"+mvo.getMemnum()+"mempwd:"+mvo.getMempwd());
 		MemberVO adminv = adao.adminLogin(mvo.getMemnum());
 		if(adminv==null){
 
