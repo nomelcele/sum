@@ -640,14 +640,16 @@ function prFormSaveChange(memnum,memdept,memauth){
 			case 'writerchk':
 				if($('#writerchk').attr("checked") == 'checked'){
 					// 체크 햇을때
-					$('#sgwriterTarget').html("기안자: <input type='text' id='sgwriter' readonly='readonly'>");
+					$('#sgwriterTarget')
+					.html("기안자: <input type='text' id='sgwriter' readonly='readonly'>");
 				}else{
 					// 체크 푸를때
 					$('#sgwriterTarget').html("");
 				}
 			case 'stitlechk':
 				if($('#stitlechk').attr("checked") == 'checked'){
-					$('#stitleTarget').html("제목 : <input type='text' id='stitle' name='stitle' >");
+					$('#stitleTarget')
+					.html("제목 : <input type='text' id='stitle' name='stitle' >");
 				}else{
 					$('#stitleTarget').html("");
 				}

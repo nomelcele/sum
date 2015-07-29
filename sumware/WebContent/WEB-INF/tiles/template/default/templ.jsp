@@ -57,7 +57,9 @@
 					size='${index.count}';
 				"</c:forEach>";
 				$('#sgwriter').val("${sessionScope.v.memname}");
+				
 				addSignDiv(mgrs,names,"${sessionScope.v.memdept}");
+				
 			}else if(signMode='detail'){
 				var signimg={};
 				"<c:forEach var='ss' items='${ssList}' varStatus='index'>";
@@ -87,7 +89,10 @@
 				if("${sgvo.ycount eq sgvo.count}"){
 					$("#sgDocBtn").attr("type","button");
 				}
+				
 				addSignDiv(mgrs,names,status,signimg,"${sgvo.sgreturn}");
+				
+				
 				if("${!empty sgvo.sgreturncomm}"=="true"){
 					var signComm="<table style='margin-left:20px'><tr><td><h4 style='font-weight:bold'><i class='fa fa-thumb-tack'style='color:#5D5D5D'></i> Comment</h4></td></tr><tr><td><textarea class='form-control' readonly='readonly' rows='3' cols='50' style='resize:none;' readonly='readonly'>${sgvo.sgreturncomm}</textarea></td></tr>";
 					$('#signCommDiv').html(signComm);

@@ -149,7 +149,7 @@ function findPassWord(res){
 	if(res=='sendNumber'){
 		$.ajax({
 			type: "POST",
-			url: "sasendCode",
+			url: "sendCode",
 			data: {
 				memnum: $('#findpwmemnum').val(),
 				memmail: $('#findpwmemmail').val()
@@ -166,7 +166,7 @@ function findPassWord(res){
 	}else if(res=='checkCode'){
 		$.ajax({
 			type: "POST",
-			url: "sacheckCode",
+			url: "checkCode",
 			data: {
 				code: $('#mycode').val(),
 			},
@@ -189,10 +189,10 @@ function findPassWord(res){
 			$('#changeBtn').attr("disabled",true);
 		}
 	}else{
-		alert(res+"  "+$('#checknewpw').val())
+
 		$.ajax({
 			type: "POST",
-			url: "sachangePW",
+			url: "changePW",
 			data: {
 				memnum: res,
 				mempwd: $('#checknewpw').val()
