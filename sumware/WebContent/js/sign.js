@@ -52,41 +52,13 @@ function addSignDiv(){
 		break;
 		
 	// 인자값이 5개인 경우
-	case 5:
+	case 6:
 		var mgrs=arguments[0];
 		var names=arguments[1];
 		var status=arguments[2];
 		var signimg=arguments[3];
 		var sgreturn=arguments[4];
-		
-		//기안일이 지난 문서 인지 구분하기 위함
-		var dt = new Date();
-		var month = dt.getMonth()+1;
-		if(month<10){
-			month="0"+month;
-		}
-		compDay= [dt.getFullYear(),month,dt.getDate(),];
-		var endDate = val[3];
-		var flag = "true";
-		end=endDate.split("-");
-		for(var k=0; k<end.length; k++){
-			if(end[0]!=''){
-				if(parseInt(compDay[k],10)<=parseInt(end[k],10)){
-					if(parseInt(compDay[k],10)<parseInt(end[k],10)){
-						flag="true";
-						break;
-					}else{
-						flag="true";
-					}
-				}else{
-					flag="false";
-					break;
-				}
-			}else{
-				break;
-			}
-		}
-		
+		var expired=arguments[5];
 		
 		$('#signImg').html("");
 		var sgHtml="";
@@ -99,8 +71,10 @@ function addSignDiv(){
 			sgHtml+="<td style='border: 1px solid;'>"+names[n]+"</td>";
 		}
 		sgHtml=sgHtml+"</tr><tr>";
+		var exflag=false;
 		for(var m=1; m<=size; m++){
-			if(sgreturn=='0'&&flag=="true"){
+			//sgreturn 값이 1이면 반려 된상태 expired값이 1이면 진행중 상태
+			if(sgreturn=='0'&&expired=="1"){
 				if(status[m]=='y'){
 					sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'><img src='resources/signImg/"+signimg[m]+"' id='targetSignImg"+mgrs[m]+"' draggable='false'	ondragstart='signDrag(event)' width='79' height='79'></div></td>";
 				}else{
@@ -121,16 +95,16 @@ function addSignDiv(){
 			}else{
 				if(status[m]=='y'){
 					sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'><img src='resources/signImg/"+signimg[m]+"' id='targetSignImg"+mgrs[m]+"' draggable='false'	ondragstart='signDrag(event)' width='79' height='79'></div></td>";
-					flag=="true";
 				}else{
 					sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'></div></td>";
 					$('#sgDocBtn').attr("type","hidden");
-					flag=="false";
+					exflag=true;
 				}
 			}
 		}
-		if(sgreturn!='0'&&flag=="false"){
-			alert("기안일이 지난 결재 문서입니다!!!");
+		
+		if(expired=="0"&&sgreturn=='0'&&exflag){
+			alert("기안일이 지난 문서입니다!!!");
 		}
 		
 		sgHtml+="</tr></table>";

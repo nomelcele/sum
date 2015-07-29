@@ -7,32 +7,32 @@
 	<select id="getSgList" parameterType="map" resultType="sgvo">
 		<choose>
 			<when test="signdiv==1">
-				select res2.* from (select rownum row_n , res.* from (select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,nvl(sg.stitle,'제목없음') stitle,sg.scont,sg.sreason,sg.sgreturncomm,
+				select res2.*,nvl((select 1 from dual where to_date(res2.enddate)>sysdate),0) expired from (select rownum row_n , res.* from (select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,nvl(sg.stitle,'제목없음') stitle,sg.scont,sg.sreason,sg.sgreturncomm,
 				to_char(sg.startdate,'yy-mm-dd') startdate,to_char(sg.enddate,'yy-mm-dd') enddate,sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
 				from signature sg,signform sf,member m where sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nowmemnum=#{nowmemnum} and nvl(sg.sgreturncomm,'0')='0' order by snum desc) res 
 			</when>
 			
 			<when test="signdiv==2">
-				select res2.* from (select rownum row_n , res.* from (select st.* from(select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,nvl(sg.stitle,'제목없음') stitle,sg.scont,sg.sreason,sg.sgreturncomm,
+				select res2.*,nvl((select 1 from dual where to_date(res2.enddate)>sysdate),0) expired from (select rownum row_n , res.* from (select st.* from(select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,nvl(sg.stitle,'제목없음') stitle,sg.scont,sg.sreason,sg.sgreturncomm,
 				to_char(sg.startdate,'yy-mm-dd') startdate,to_char(sg.enddate,'yy-mm-dd') enddate,sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
 				from signature sg,signform sf,member m where sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nvl(sg.sgreturncomm,'0')='0' order by snum desc) st where ycount != count) res 
 			</when>
 			<when test="signdiv==3">
-				select res2.* from (select rownum row_n , res.* from (select st.* from(select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,nvl(sg.stitle,'제목없음') stitle,sg.scont,sg.sreason,sg.sgreturncomm,
+				select res2.*,nvl((select 1 from dual where to_date(res2.enddate)>sysdate),0) expired from (select rownum row_n , res.* from (select st.* from(select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,nvl(sg.stitle,'제목없음') stitle,sg.scont,sg.sreason,sg.sgreturncomm,
 				to_char(sg.startdate,'yy-mm-dd') startdate,to_char(sg.enddate,'yy-mm-dd') enddate,sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
 				from signature sg,signform sf,member m where sg.formnum=sf.sfnum and m.memnum=sg.sgwriter order by snum desc) st where ycount = count) res 
 			</when>
 			<when test="signdiv==4">
-				select res2.* from (select rownum row_n , res.* from (select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,nvl(sg.stitle,'제목없음') stitle,sg.scont,sg.sreason,sg.sgreturncomm,
+				select res2.*,nvl((select 1 from dual where to_date(res2.enddate)>sysdate),0) expired from (select rownum row_n , res.* from (select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,nvl(sg.stitle,'제목없음') stitle,sg.scont,sg.sreason,sg.sgreturncomm,
 				to_char(sg.startdate,'yy-mm-dd') startdate,to_char(sg.enddate,'yy-mm-dd') enddate,sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
 				from signature sg,signform sf,member m where sg.formnum=sf.sfnum and m.memnum=sg.sgwriter and nvl(sg.sgreturncomm,'0')!='0' order by snum desc) res 
 			</when>
 			<otherwise>
-				select res2.* from (select rownum row_n , res.* from (select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,nvl(sg.stitle,'제목없음') stitle,sg.scont,sg.sreason,sg.sgreturncomm,
+				select res2.*,nvl((select 1 from dual where to_date(res2.enddate)>sysdate),0) expired from (select rownum row_n , res.* from (select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,nvl(sg.stitle,'제목없음') stitle,sg.scont,sg.sreason,sg.sgreturncomm,
 				to_char(sg.startdate,'yy-mm-dd') startdate,to_char(sg.enddate,'yy-mm-dd') enddate,sg.sgwriter,sg.sgdept,sf.sfname,(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
 				(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname
 				from signature sg,signform sf,member m where sg.formnum=sf.sfnum and m.memnum=sg.sgwriter order by snum desc) res 
@@ -171,11 +171,10 @@
 	<!-- / -->
 	<!-- detail -->
 	<select id="signDetail" parameterType="int" resultType="sgvo">
-		select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,nvl(sg.stitle,'제목없음') stitle,sg.scont,sg.sreason,sg.sgreturncomm,
+	select sg.snum,sg.formnum,sg.finalmemnum,sg.nowmemnum,nvl(sg.stitle,'제목없음') stitle,sg.scont,sg.sreason,sg.sgreturncomm,
 		to_char(sg.startdate,'yyyy-MM-dd') startdate,to_char(sg.enddate,'yyyy-MM-dd') enddate,
-		(select count(stepconfirm) ycount from signstep where stepconfirm='y' and signstep.STEPSNUM=sg.snum) ycount,
-		(select count(stepconfirm) ncount from signstep where  signstep.STEPSNUM=sg.snum) count,m.memname,
-		sg.sgwriter,sg.sdate,sg.splace,sg.sps,m.memname from signature sg,member m where m.memnum=sg.sgwriter and snum = #{snum}
+		nvl((select length(sgreturncomm) from signature where snum=#{snum}),0) sgreturn,m.memname,
+		sg.sgwriter,sg.sdate,sg.splace,sg.sps,m.memname from signature sg,member m where m.memnum=sg.sgwriter and snum =#{snum}
 	</select>
 	<select id="getSignStep" parameterType="int" resultType="ssvo">
 		select st.*,(select memsignimg from member where memnum = stepmemnum) memsignimg from signstep st where stepsnum = #{stepsnum} order by stepnum desc

@@ -144,7 +144,7 @@
 					<tr>
 						<td class="col-lg-1"><span>${sg.snum}</span></td>
 						<td class="col-lg-2"><span>${sg.sfname }</span></td>
-						<td class="col-lg-3"><span><a href="sasignDetail?snum=${sg.snum }">${sg.stitle }</span></td>
+						<td class="col-lg-3"><span><a href="sasignDetail?snum=${sg.snum }&expired=${sg.expired}">${sg.stitle }</span></td>
 						<td class="col-lg-1"><span>${sg.memname }</span></td>
 						<td class="col-lg-3"><span>${sg.startdate } ~ ${sg.enddate}</span></td>
 						<c:choose>
@@ -152,7 +152,15 @@
 								<td class="col-lg-2"><span>반려문서</span></td>
 							</c:when>
 							<c:when test="${sg.ycount ne sg.count }">
-								<td class="col-lg-2"><span>진행중(${sg.ycount }/${sg.count })</span></td>	
+								<c:choose>
+									<c:when test="${sg.expired eq '1'}">
+										<td class="col-lg-2"><span>진행중(${sg.ycount }/${sg.count })</span></td>	
+									</c:when>
+									<c:otherwise>
+										<td class="col-lg-2"><span>기안일 지남</span></td>
+									</c:otherwise>
+								</c:choose>
+								
 							</c:when>
 							<c:otherwise>
 								<td class="col-lg-2"><span>완료</span></td>
