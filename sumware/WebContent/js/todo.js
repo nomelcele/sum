@@ -224,7 +224,7 @@ function todoFormGo(res) {
 	} else if (res == 'rejectTodo') {
 		// 팀장업무관리에서 거절버튼
 		$('#rejectForm').submit();
-		alert("거절 완료");
+
 	} else if (res == 'addTodo') {
 		if($('#tostdate').val() > $('#toendate').val()){
 			alert("업무 기간을 다시 설정 해주세요.");

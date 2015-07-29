@@ -206,7 +206,6 @@ function searchSignList(res){
 }
 
 function searchReset(){
-	alert("리셋버튼");
 	$("#searchStartDay").val("");
 	$("#searchEndDay").val("");
 	$("#searchType").val("0");
