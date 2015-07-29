@@ -63,7 +63,7 @@ public class ChartModel {
 				
 			//  sns 게시왕
 				List<SnsVO> svo = cdao.getSnsKing();
-				//
+				// 데이타를 JSON 형식으로 만들어 줌
 				StringBuffer snssf = new StringBuffer();
 				snssf.append("[");
 				if(svo != null){
@@ -80,6 +80,7 @@ public class ChartModel {
 					}
 				}
 				snssf.append("]");
+				System.out.println("SNS Chart data : "+snssf.toString());
 				model.addAttribute("snschart", snssf.toString());
 				
 				//[{name: "인사부",y: 12,drilldown: "인사부"}, 
