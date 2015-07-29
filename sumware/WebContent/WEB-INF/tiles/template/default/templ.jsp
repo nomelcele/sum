@@ -285,7 +285,6 @@ $(function(){
 	              },
 	              dataType: "html",
 	              success: function(res) {
-	            	alert("success::"+res);
 					location=res;		            	 
 	              },
 	              error: function(a, b) {
