@@ -41,6 +41,7 @@ public class IndexModel{
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("userid", mailreceiver);
 		map.put("usernum",String.valueOf(memnum));
+		//세션이 저장되어있지 않다면 새로 세션을 저장한다.=>처음 로그인시
 		if(session.getAttribute("mailCount")==null||session.getAttribute("todoCount")==null){
 			session.setAttribute("mailCount", mdao.getListNum(map)[0]);
 			session.setAttribute("todoCount",tdao.getTodoCount(map));
@@ -51,6 +52,9 @@ public class IndexModel{
 		res.setLength(0);
 		res.append("retry:5000\n");
 		res.append("data:");
+		// 처음 저장했던 메일,업무 수와 현재 디비의 입력되어있는 수를 비교하여
+		// 디비의 수가 크다면 res에 't' 또는 'm'을 추가한다.
+		// 그 뒤에 현 세션을 다시 업데이트 시킨다. 
 		if(tCount<tdao.getTodoCount(map)){
 			res.append("t");
 			session.setAttribute("todoCount",tdao.getTodoCount(map));
