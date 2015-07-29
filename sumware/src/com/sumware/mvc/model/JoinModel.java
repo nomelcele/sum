@@ -33,7 +33,7 @@ public class JoinModel{
 	@RequestMapping(value="/sajoinck")
 	public void joinCk(String meminmail,HttpServletResponse response) throws IOException{
 		int res = mdao.ckid(meminmail);
-		System.out.println("아이디중복검사");
+//		System.out.println("아이디중복검사");
 		PrintWriter pw = response.getWriter();
 		if(res==1){
 			pw.write("<p>사용 불가능한 아이디입니다.</p>");
