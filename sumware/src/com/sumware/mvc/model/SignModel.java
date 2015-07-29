@@ -148,6 +148,7 @@ public class SignModel {
 	@RequestMapping(value="/sasignDetail",method=RequestMethod.GET)
 	public String signDetail(HttpServletRequest request){
 		int snum = Integer.parseInt(request.getParameter("snum"));
+		String expired = request.getParameter("expired");
 		String page = request.getParameter("page");
 		SignatureVO sgvo= sgdao.signDetail(snum);
 		List<SignStepVO> ssList=sgdao.getSignStep(snum);
@@ -163,6 +164,7 @@ public class SignModel {
 		request.setAttribute("sf", sfvo);
 		request.setAttribute("ssList", ssList);
 		request.setAttribute("sgNames", signNames);
+		request.setAttribute("expired", expired);
 		request.setAttribute("signMode", "detail");
 		request.setAttribute("page", page);
 		return "sign.signDetail";

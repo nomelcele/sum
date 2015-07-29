@@ -16,7 +16,15 @@ public class SignatureVO {
 	private int formnum,snum,finalmemnum,nowmemnum,sgdept,sgreturn;
 	private int count,ycount;//결재 상태
 	private int begin,end;
+	private String expired;
 	
+	
+	public String getExpired() {
+		return expired;
+	}
+	public void setExpired(String expired) {
+		this.expired = expired;
+	}
 	public int getBegin() {
 		return begin;
 	}
