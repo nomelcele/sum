@@ -29,9 +29,9 @@ public class MailAop {
 		map.put("usernum",String.valueOf(mvo.getMemnum()));
 		map.put("userid", mvo.getMeminmail());
 		int[] numArr = mailDao.getListNum(map);
-	 	for(int e:numArr){
-	 		System.out.println("메일 갯수: "+e);
-	 	}
+//	 	for(int e:numArr){
+//	 		System.out.println("메일 갯수: "+e);
+//	 	}
 	 	request.setAttribute("numArr", numArr);
 	}
 }
