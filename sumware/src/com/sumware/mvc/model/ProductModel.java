@@ -63,8 +63,8 @@ public class ProductModel {
 	// promodal.jsp 에서 Done 버튼 눌렀을 경우에 인서트 되고 리스트 다시 불러온다.
 	@RequestMapping(value="/sadone")
 	public String proInsert(@RequestParam Map<String,String> provo, @RequestParam MultipartFile proimg,HttpSession ses){
-		System.out.println("옥션 done !!!!!");
-		System.out.println("enddate 는 ? :::::" + provo.get("enddate"));
+//		System.out.println("옥션 done !!!!!");
+//		System.out.println("enddate 는 ? :::::" + provo.get("enddate"));
 		// 상품 이미지 업로드
 		String rPath = ses.getServletContext().getRealPath("/");
 		String realName = proimg.getOriginalFilename();
@@ -91,13 +91,13 @@ public class ProductModel {
 	// 상품 디테일 보여주는 메서드.
 	@RequestMapping(value="/saproDetail")
 	public String proDetail(ProductVO vo,HttpSession ses){
-		System.out.println("proDetail 메소드!");		
+//		System.out.println("proDetail 메소드!");		
 		// 입찰가격이 변경 된다면 detail 페이지에서도 현재 가격이 변동 되어야 함으로
 		// session 에 저장 해서 관리 한다.
 		ProductVO provo = pdao.proDetail(vo.getPronum());
 		provo.setNowget(provo.getNowget().trim());
 		ses.setAttribute("provo", provo);
-		System.out.println("상품의 가격은 제대로 ? : "+provo.getPrice());
+//		System.out.println("상품의 가격은 제대로 ? : "+provo.getPrice());
 		// promodal.jsp 에서 숫자값이 필요 하기 때문에 가공 하는 로직.
 		StringBuffer sb = new StringBuffer(); 
 		String[] price = provo.getPrice().trim().split(",");
@@ -113,7 +113,7 @@ public class ProductModel {
 	// 상품 디테일 화면에서 입찰하기 폼으로 이동.(modal 폼)
 	@RequestMapping(value="/saproBid")
 	public String proBid(){
-		System.out.println("proBid() 실행!");
+//		System.out.println("proBid() 실행!");
 		return "product/promodal";
 	}
 	
@@ -122,9 +122,9 @@ public class ProductModel {
 	public String bidInsert(BidderVO bidvo){
 		// bidder 테이블에 입찰 정보가 입력 되어야 하고,
 		// product 의 price 가 업데이트 되어야 한다.
-		System.out.println("bidInsert() 실행!");
-		System.out.println("입찰한 상품 번호?:::::: "+bidvo.getBidpronum());
-		System.out.println("입찰한 상품 가격?:::::: "+bidvo.getBidprice());
+//		System.out.println("bidInsert() 실행!");
+//		System.out.println("입찰한 상품 번호?:::::: "+bidvo.getBidpronum());
+//		System.out.println("입찰한 상품 가격?:::::: "+bidvo.getBidprice());
 		pdao.bidInsert(bidvo);
 		if(bidvo.getBidprice()==pdao.nowget(bidvo.getBidpronum())){
 			pdao.status(bidvo.getBidpronum());
@@ -138,22 +138,22 @@ public class ProductModel {
 		Date eDate = sdf.parse(enddate, new ParsePosition(0));
 		// 입찰 종료 시간.
 		long e = eDate.getTime();
-		System.out.println("이것은 현재 db 에 저장된 이 상품의 경매 종료 시간 :  "+e);
+//		System.out.println("이것은 현재 db 에 저장된 이 상품의 경매 종료 시간 :  "+e);
 		
 		// 입찰이 일어난 현재 시간.
 		Calendar cal = Calendar.getInstance();
 		Date sDate = cal.getTime();
 		long s = sDate.getTime();
-		System.out.println("이것은 현재 이 상품의 입찰 시도 시간 :  "+s);
+//		System.out.println("이것은 현재 이 상품의 입찰 시도 시간 :  "+s);
 		
 		// 두 시각의 차이를 계산.
 		long mills = e-s;
 		
 		// mills 를 분으로 치환
 		long min = mills/60000;
-		System.out.println("!!!!!! 입찰 종료까지 남은 시간 :::::: "+min+" 분 이다.");
+//		System.out.println("!!!!!! 입찰 종료까지 남은 시간 :::::: "+min+" 분 이다.");
 		if(min <= 10){
-			System.out.println("입찰종료 시간이 1 시간 늘어 납니다.");
+//			System.out.println("입찰종료 시간이 1 시간 늘어 납니다.");
 			pdao.enddateUpdate(bidvo.getBidpronum());
 		}
 		
@@ -165,7 +165,7 @@ public class ProductModel {
 	@RequestMapping(value="/bidInfo")
 	public String bidInfo(BidderVO bidvo,Model model){
 		// modal 페이지로 리스트의 주소값을 forward 한다.
-		System.out.println("bidInformation 메소드 동작 !!!!");
+//		System.out.println("bidInformation 메소드 동작 !!!!");
 		model.addAttribute("bidderList",pdao.bidInfo(bidvo));
 		return "product/promodal";
 	}
