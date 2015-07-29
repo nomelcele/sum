@@ -817,6 +817,7 @@ function prFormSaveChange(memnum,memdept,memauth){
 									success : function(result) {
 										alert("삭제가 완료되었습니다.")
 										$('.contents').html(result);
+										$("#authpwd").val("");
 									}
 								});
 						}else if(job=='deleteMem'){
@@ -829,6 +830,7 @@ function prFormSaveChange(memnum,memdept,memauth){
 									success: function(result){
 										alert("퇴사 처리가 완료되었습니다.")
 										$('.contents').html(result);
+										$("#authpwd").val("");
 									}
 								});
 						}			

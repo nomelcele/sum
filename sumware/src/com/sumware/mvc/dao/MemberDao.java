@@ -21,7 +21,6 @@ public class MemberDao {
 
 	//메일 에서 사용??
 	public List<MemberVO> getNameMailList(){
-		System.out.println("들어오니?");
 		return st.selectList("mem.getNameMailList");
 
 		//SqlSession ss = FactorySrevice.getFactory().openSession();

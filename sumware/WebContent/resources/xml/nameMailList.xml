@@ -57,24 +57,8 @@
   <inmail>krystal</inmail>
  </member>
  <member>
-  <name>도하진</name>
-  <inmail>member1</inmail>
- </member>
- <member>
-  <name>윤홍기</name>
-  <inmail>member2</inmail>
- </member>
- <member>
-  <name>윤성현</name>
-  <inmail>member3</inmail>
- </member>
- <member>
   <name>박경찬</name>
   <inmail>member4</inmail>
- </member>
- <member>
-  <name>강지석</name>
-  <inmail>member5</inmail>
  </member>
  <member>
   <name>경재욱</name>
@@ -85,40 +69,12 @@
   <inmail>member7</inmail>
  </member>
  <member>
-  <name>김남혁</name>
-  <inmail>member8</inmail>
- </member>
- <member>
-  <name>서경연</name>
-  <inmail>member9</inmail>
- </member>
- <member>
-  <name>양주호</name>
-  <inmail>member10</inmail>
- </member>
- <member>
   <name>엄성렬</name>
   <inmail>member11</inmail>
  </member>
  <member>
   <name>임현지</name>
   <inmail>member12</inmail>
- </member>
- <member>
-  <name>윤여환</name>
-  <inmail>member13</inmail>
- </member>
- <member>
-  <name>이인의</name>
-  <inmail>member14</inmail>
- </member>
- <member>
-  <name>이재흥</name>
-  <inmail>member15</inmail>
- </member>
- <member>
-  <name>전영권</name>
-  <inmail>member16</inmail>
  </member>
  <member>
   <name>조민영</name>
@@ -137,11 +93,55 @@
   <inmail>member20</inmail>
  </member>
  <member>
+  <name>도하진</name>
+  <inmail>member1</inmail>
+ </member>
+ <member>
+  <name>윤홍기</name>
+  <inmail>member2</inmail>
+ </member>
+ <member>
+  <name>윤성현</name>
+  <inmail>member3</inmail>
+ </member>
+ <member>
+  <name>서경연</name>
+  <inmail>member9</inmail>
+ </member>
+ <member>
+  <name>윤여환</name>
+  <inmail>member13</inmail>
+ </member>
+ <member>
+  <name>이인의</name>
+  <inmail>member14</inmail>
+ </member>
+ <member>
+  <name>이재흥</name>
+  <inmail>member15</inmail>
+ </member>
+ <member>
+  <name>전영권</name>
+  <inmail>member16</inmail>
+ </member>
+ <member>
   <name>이수인</name>
   <inmail>member21</inmail>
  </member>
  <member>
   <name>이경석</name>
   <inmail>member22</inmail>
+ </member>
+ <member>
+  <name>강지석</name>
+  <inmail>member5</inmail>
+ </member>
+ <member>
+  <name>김남혁</name>
+  <inmail>member8</inmail>
+ </member>
+ <member>
+  <name>양주호</name>
+  <inmail>member10</inmail>
  </member>
 </sumware>
