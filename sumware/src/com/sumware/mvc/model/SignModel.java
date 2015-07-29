@@ -109,11 +109,11 @@ public class SignModel {
 	// 결재문서의 종류 중 하나를 택해서 가져옴.
 	@RequestMapping(value="/sagetSignForm",method=RequestMethod.POST)
 	public String getSignForm(HttpServletRequest request){
-		System.out.println("결재문서 선택");
+//		System.out.println("결재문서 선택");
 		int formnum = Integer.parseInt(request.getParameter("formnum"));
 		String[] signMgrs = request.getParameterValues("signMgrs");
 		
-		System.out.println("formnum::"+formnum);
+//		System.out.println("formnum::"+formnum);
 		for(String e: signMgrs){
 			System.out.println("signMgr::"+e);
 		}
@@ -131,10 +131,10 @@ public class SignModel {
 	// 선택된 문서를 작성 함.
 	@RequestMapping(value="/sawriteSign",method=RequestMethod.POST)
 	public String writeSign(SignatureVO sgvo,@RequestParam Map<String,String> map){
-		System.out.println("작성합시다.");
-		for(Map.Entry<String, String> m : map.entrySet()){
-			System.out.println(m.getKey()+" :: "+m.getValue());
-		}
+//		System.out.println("작성합시다.");
+//		for(Map.Entry<String, String> m : map.entrySet()){
+//			System.out.println(m.getKey()+" :: "+m.getValue());
+//		}
 		
 		ArrayList<HashMap<String, String>> sgMgrList=setSignStep(map);
 		
@@ -170,14 +170,14 @@ public class SignModel {
 	// 결재권자가 올라온 문서를 결재 할때 사용 되는 메서드
 	@RequestMapping(value="/saconfirm",method=RequestMethod.POST)
 	public String confirm(@RequestParam Map<String,String> map){
-		System.out.println("결재를 하자");
-		for(Map.Entry<String, String> m : map.entrySet()){
-			System.out.println(m.getKey()+" :: "+m.getValue());
-		}
+//		System.out.println("결재를 하자");
+//		for(Map.Entry<String, String> m : map.entrySet()){
+//			System.out.println(m.getKey()+" :: "+m.getValue());
+//		}
 		ArrayList<HashMap<String, String>> stepList =setSignStep(map);
 		for(HashMap<String, String> step : stepList){
 			if(step.get("stepnum")!=null){
-				System.out.println("if in stepnum::"+step.get("stepnum"));
+//				System.out.println("if in stepnum::"+step.get("stepnum"));
 				sgdao.updateSignStep(step);
 			}
 		}
@@ -187,7 +187,7 @@ public class SignModel {
 	}
 	@RequestMapping(value="/sasignReturn",method=RequestMethod.POST)
 	public String signReturn(int snum,String sgreturncomm,HttpSession session){
-		System.out.println("반려!");
+//		System.out.println("반려!");
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("sgreturn", String.valueOf(mvo.getMemnum()));
@@ -201,11 +201,11 @@ public class SignModel {
 	// 사용자가 요청하는 문서를 출력 해주는 메쏘오드!
 	@RequestMapping(value="/sagetDoc",method=RequestMethod.POST)
 	public ModelAndView getDoc(@RequestParam Map<String, String> map){
-		System.out.println("문서출력");
+//		System.out.println("문서출력");
 		ArrayList<MemberVO> mgrList = new ArrayList<MemberVO>();
 		for(int i =1; i<map.size(); i++){
 			if(map.get("sgMgr"+i)!=""&&map.get("sgMgr"+i)!=null){
-				System.out.println(map.get("sgMgr"+i));
+//				System.out.println(map.get("sgMgr"+i));
 				mgrList.add(sgdao.getSignImg(Integer.parseInt(map.get("sgMgr"+i))));
 			}else{
 				break;
