@@ -59,6 +59,35 @@ function addSignDiv(){
 		var signimg=arguments[3];
 		var sgreturn=arguments[4];
 		
+		//기안일이 지난 문서 인지 구분하기 위함
+		var dt = new Date();
+		var month = dt.getMonth()+1;
+		if(month<10){
+			month="0"+month;
+		}
+		compDay= [dt.getFullYear(),month,dt.getDate(),];
+		var endDate = val[3];
+		var flag = "true";
+		end=endDate.split("-");
+		for(var k=0; k<end.length; k++){
+			if(end[0]!=''){
+				if(parseInt(compDay[k],10)<=parseInt(end[k],10)){
+					if(parseInt(compDay[k],10)<parseInt(end[k],10)){
+						flag="true";
+						break;
+					}else{
+						flag="true";
+					}
+				}else{
+					flag="false";
+					break;
+				}
+			}else{
+				break;
+			}
+		}
+		
+		
 		$('#signImg').html("");
 		var sgHtml="";
 		for(var h=1; h<=size; h++){
@@ -71,7 +100,7 @@ function addSignDiv(){
 		}
 		sgHtml=sgHtml+"</tr><tr>";
 		for(var m=1; m<=size; m++){
-			if(sgreturn=='0'){
+			if(sgreturn=='0'&&flag=="true"){
 				if(status[m]=='y'){
 					sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'><img src='resources/signImg/"+signimg[m]+"' id='targetSignImg"+mgrs[m]+"' draggable='false'	ondragstart='signDrag(event)' width='79' height='79'></div></td>";
 				}else{
@@ -92,10 +121,16 @@ function addSignDiv(){
 			}else{
 				if(status[m]=='y'){
 					sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'><img src='resources/signImg/"+signimg[m]+"' id='targetSignImg"+mgrs[m]+"' draggable='false'	ondragstart='signDrag(event)' width='79' height='79'></div></td>";
+					flag=="true";
 				}else{
-						sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'></div></td>";
+					sgHtml+="<td><div id='signImg"+m+"' style='width: 80px; height: 80px;'></div></td>";
+					$('#sgDocBtn').attr("type","hidden");
+					flag=="false";
 				}
 			}
+		}
+		if(sgreturn!='0'&&flag=="false"){
+			alert("기안일이 지난 결재 문서입니다!!!");
 		}
 		
 		sgHtml+="</tr></table>";
