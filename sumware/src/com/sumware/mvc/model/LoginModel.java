@@ -39,7 +39,6 @@ public class LoginModel{
 	@RequestMapping(value="index",method=RequestMethod.GET)
 	public String indexForm(HttpSession session){
 		capCount++;
-		System.out.println("들어옴:"+capCount);
 		session.setAttribute("capCount", capCount);
 		return "home.index";
 	}
@@ -47,7 +46,6 @@ public class LoginModel{
 	//logout AuthenticationFailureHandler
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String indexForm(Principal principal,HttpSession session){
-		System.out.println(":::::::"+principal.getName());
 		capCount=0;
 		int memnum = Integer.parseInt(principal.getName());
 		String str ="";
@@ -56,10 +54,8 @@ public class LoginModel{
 			try {
 				String res = ldao.ckFirstLogin(memnum);
 	
-				System.out.println("res:::"+res);		
 				if (res.equals("1")) {
 					
-					System.out.println("첫번째 이용자다!!!!");
 					session.setAttribute("memnum", memnum);
 					session.setAttribute("mempwd",ldao.firstPwd(memnum));
 					
@@ -69,7 +65,6 @@ public class LoginModel{
 					//mempwd는 유효성검사 할때 쓰기위하여 보냄.
 					str="redirect:safirstLoginForm";
 				} else if(!res.equals("1")&&!res.equals("0")){
-					System.out.println("ddddddddd");
 					session.setAttribute("first", "2");
 					MemberVO mvo = ldao.login(memnum);
 					session.setAttribute("model", "join");
@@ -99,7 +94,6 @@ public class LoginModel{
 	
 	@RequestMapping(value="/logout",method=RequestMethod.POST)
 	public String logout(HttpSession session){
-		System.out.println("로그아웃 컨트롤러");
 		session.invalidate();
 		return "redirect:logoutgo";
 	}
@@ -108,7 +102,6 @@ public class LoginModel{
 	}
 	@RequestMapping(value="/safirstLoginForm")
 	public String firstLoginForm(HttpSession session){
-		System.out.println("첫번째 이용자!! 정보를 입력해볼까??");
 		session.setAttribute("model", "memjoin");
 		return "join.member";
 	}
@@ -121,7 +114,6 @@ public class LoginModel{
 		MemberVO mvo = ldao.findPW(vo);
 		// 인증번호 6자리 무작위로 생성
 		int code = (int)((Math.random()*900000)+100000);
-		System.out.println("code : "+code);
 		if(mvo != null){
 			String mailsubject = "[비밀번호 찾기] 인증번호 메일입니다.";
 			String mailcont = mvo.getMemname()+"님, 인증번호는 "+code+
@@ -145,7 +137,7 @@ public class LoginModel{
 	public ModelAndView checkCode(int code, HttpSession session) throws Exception{
 		ModelAndView mav = new ModelAndView("join/enterCodeCallback");
 		int realcode = (int) session.getAttribute("code");
-		System.out.println("mycode : "+code+",, realcode : "+realcode);
+
 		if(realcode == code){
 			return mav;
 		}else{
@@ -169,8 +161,7 @@ public class LoginModel{
 			Map<String, Integer> pmap = MyPage.getMp().pageProcess(req, 10, 5, 0,totalCount, 0);
 			lvo.setBegin(pmap.get("begin"));
 			lvo.setEnd(pmap.get("end"));
-			System.out.println("begin :: "+pmap.get("begin"));
-			System.out.println("end::::"+pmap.get("end"));
+
 			
 			List<LoginVO> lgList =  adao.getLoginHistory(lvo);
 			

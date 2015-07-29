@@ -32,9 +32,7 @@ public class ConferenceModel {
 		mvo.setBegin(pmap.get("begin"));
 		mvo.setEnd(pmap.get("end"));
 
-		System.out.println("Conference Controller");
 		List<MemberVO> list = adao.getMemInfoList(mvo);
-		System.out.println("사원 수: " + list.size());
 		model.addAttribute("list", list);
 		return "conference/confForm";
 	}
@@ -55,7 +53,6 @@ public class ConferenceModel {
 	@RequestMapping(value = "/saconfMemAdd")
 	public void vcNotify(String confurl, int[] confmems) {
 		for(int e:confmems){
-			System.out.println("알림 보낼 사원 번호: "+e);
 			ConferenceVO confvo = new ConferenceVO();
 			confvo.setConfurl(confurl);
 			confvo.setConfmem(e);
