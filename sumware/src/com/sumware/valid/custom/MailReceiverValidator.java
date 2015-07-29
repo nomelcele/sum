@@ -17,18 +17,22 @@ public class MailReceiverValidator implements ConstraintValidator<MailReceiver, 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		boolean result;
-		if(value == null){
+		if(value == null){ // 값이 비어있을 경우 false 리턴
 			result = false;
 		}
+		
 		value = value.replaceAll("<", "");
 		value = value.replaceAll(">", "");
 		value = value.replaceAll(" ", "");
 		
+		// 한글이 포함되어 있는지 판별
 		Matcher matcher = Pattern.compile("[ㄱ-힣]+").matcher(value);
+		// 조건을 만족하면 true 리턴
 		boolean moon = matcher.find();
+		// 메일 주소 형식으로 되어 있는지 판별
 		matcher = Pattern.compile("(?:\\w+\\.?)*\\w+@(?:\\w+\\.)+\\w+$").matcher(value);
 		boolean mail = matcher.find();
-		if(moon && mail){
+		if(moon && mail){ // 두 조건을 모두 만족시킬 경우에만 true 리턴
 			result = true;
 		}else{
 			result = false;
