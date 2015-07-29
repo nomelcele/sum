@@ -24,7 +24,7 @@
 	var i = 0;
 	function mesgoUrl(res){
 		// 새창이름 1씩 증가
-		alert("${sessionScope.v.memnum}");
+// 		alert("${sessionScope.v.memnum}");
 		i++;
 		var resNum = res;
 		var opt="width=500, height=600, scrollbars=no";
