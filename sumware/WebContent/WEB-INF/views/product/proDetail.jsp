@@ -53,7 +53,7 @@
 	</tr>
 	<tr class="btn-position-right">
 		<td colspan="3">
-		<c:if test="${provo.status eq 'n' }">
+		<c:if test="${provo.status eq 'n' and provo.prowriter ne sessionScope.v.memnum}">
 		<button type="button"  class="btn btn-default" id="bidBtn" onclick="javascript:bidBtn()">입찰하기</button>
 		</c:if>
 		<button type="button" class="btn btn-default" onclick="location='saproductList?page=${sesPage}'" id="bidListBtn">목록</button></td>

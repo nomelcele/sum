@@ -32,7 +32,7 @@
 <!-- 상품 디테일 -->
 	<select id="proDetail" parameterType="int" resultType="provo">
 		select 
-			(SELECT memname FROM MEMBER WHERE memnum=lastbidder) lastbidder,
+			p.prowriter,(SELECT memname FROM MEMBER WHERE memnum=lastbidder) lastbidder,
 			to_char(nvl(p.nowget,'0'),'999,999,999') nowget,to_char(p.startprice,'999,999,999') startprice,  p.status,
 			to_char(p.prostep,'999,999,999') prostep,  p.pronum,
 			p.product, p.proimg,   m.memname,   to_char(p.price,'999,999,999') price, 
