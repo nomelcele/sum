@@ -391,19 +391,22 @@ public class AdminModel {
 		List<MemberVO> mvo = adao.getAllMemInfo();
 		
 		for(MemberVO mv : mvo){
-			PayVO payvo =adao.getPayInfo(mv.getMemnum());
-			CommissionVO comvo = new CommissionVO();
-			comvo.setCommem(mv.getMemnum());
-			int comsum = adao.getCommSum(comvo);
-			System.out.println("comsum : "+comsum);
-			// 지급받을 급여
-			int monthtotal = payvo.getPmonthsalary()+comsum;
-			PayHistoryVO phvo = new PayHistoryVO();
-			phvo.setHisamount(monthtotal);
-			phvo.setHismem(mv.getMemnum());
 			try{
+				PayVO payvo =adao.getPayInfo(mv.getMemnum());
+				CommissionVO comvo = new CommissionVO();
+				comvo.setCommem(mv.getMemnum());
+				int comsum = adao.getCommSum(comvo);
+				System.out.println("comsum : "+comsum);
+				// 지급받을 급여
+				int monthtotal = payvo.getPmonthsalary()+comsum;
+				PayHistoryVO phvo = new PayHistoryVO();
+				phvo.setHisamount(monthtotal);
+				phvo.setHismem(mv.getMemnum());
+				
+				
 				adao.giveSalary(phvo);
 				System.out.println("지급완료");
+				Thread.sleep(50);
 			}catch(Exception e){
 				System.out.println(mv.getMemnum()+"는 이미 지급된 사원");
 				continue;
