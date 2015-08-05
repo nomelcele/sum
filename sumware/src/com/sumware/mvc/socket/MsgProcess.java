@@ -19,14 +19,15 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
-
+//spring에서의 websoket환경을 위하여
+//@configuration,@EnableWebSocket를 달아준다.
 @Configuration
 @EnableWebSocket
-@ServerEndpoint("/samsgSocket/{auth_key}")
+@ServerEndpoint("/samsgSocket/{auth_key}")// 클라이언트에서 접속할 서버 주소 {}<--이렇게 하면 그뒤의 파라미터 값을 auth_key로 얻어옴. (추측)
 public class MsgProcess {
 	
 	static Map<String, List<Session>> msgSessionMap = Collections.synchronizedMap(new HashMap<String, List<Session>>());
-	
+	//클라이언트에서 접속할떄의 처리
 	@OnOpen
 	public void join(@PathParam("auth_key") String sessionKey, Session session) {
 		
@@ -37,7 +38,7 @@ public class MsgProcess {
 		}
 		msgSessionMap.get(sessionKey).add(session);
 	}
-	
+	//메시지 처리
 	@OnMessage
 	public void message(@PathParam("auth_key") String sessionKey, String message, Session session) {
 		
@@ -63,7 +64,7 @@ public class MsgProcess {
 			}
 		}
 	}
-	
+	//클라이언트와 접속이 끈어졌을떄의 처리
 	@OnClose
 	public void close(@PathParam("auth_key") String sessionKey, Session session, CloseReason close) {
 		
@@ -80,7 +81,7 @@ public class MsgProcess {
 			msgSessionMap.remove(sessionKey);
 		}
 	}
-	
+	//에러처리
 	@OnError
 	public void error(@PathParam("auth_key") String sessionKey, Session session, Throwable t) {
 		

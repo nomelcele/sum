@@ -8,7 +8,9 @@
 </head>
 <body>
 <script>
-	
+	//컨트롤러에서 넘어온 키값을 통하여 웹소켓을 생성한다. 
+	//포트 번호는 80번이고 프로젝트 이름은 sumware이다.
+	//이때 서버에서 웹 소켓 자바 소스의 @ServerEndpoint 어노테이션이 samsgSocket/${key} 를 호출 
 	var sessionKey = "${key}";
 	var msgSocket = new WebSocket("ws://192.168.7.93:80/sumware/samsgSocket/"+sessionKey);
 	
