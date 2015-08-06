@@ -1,7 +1,5 @@
 // require: 모듈을 로딩하는 함수
-var fs = require('fs'), 
-	// 파일 처리와 관련된 모듈
-    express = require('express'), 
+var express = require('express'), 
     // 서버 사이드 웹 프레임워크. 자바스크립트로 서버 사이드 작성 가능
     http = require('http');
 	// http 서버 생성 시 필요한 모듈
