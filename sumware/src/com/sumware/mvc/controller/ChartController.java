@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import com.sumware.dto.SnsVO;
 import com.sumware.mvc.dao.ChartDao;
 
 @Controller
-public class ChartModel {
+public class ChartController {
 
 	@Autowired
 	private ChartDao cdao;

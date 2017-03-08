@@ -5,6 +5,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.sumware.valid.custom.MailReceiver;
 
 public class ValidMailVO {
+	// 메일 작성 form에서 입력한 데이터 중 유효성 검사 대상이 되는 데이터들(받는 사람, 제목)
+	
+	// @NotEmpty: 해당 값이 비어 있는지를 확인
+	// @MailReceiver: 커스터마이징한 어노테이션
 	@NotEmpty
 	@MailReceiver
 	private String mailreceiver;

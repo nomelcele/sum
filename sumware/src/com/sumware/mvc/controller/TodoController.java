@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +24,7 @@ import com.sumware.mvc.dao.CalendarDAO;
 import com.sumware.mvc.dao.TodoDao;
 
 @Controller
-public class TodoModel {
+public class TodoController {
 	@Autowired
 	private TodoDao tdao;
 	@Autowired

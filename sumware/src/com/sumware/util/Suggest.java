@@ -36,6 +36,7 @@ public class Suggest {
 	public String[] getSuggest(String key){
 		ArrayList<String> sugList = new ArrayList<String>();
 		
+		// xml 파일에서 member 태그들을 모두 읽어서 List로 추출
 		List<Element> list = root.getChildren("member");
 		Iterator<Element> it = list.iterator();
 		

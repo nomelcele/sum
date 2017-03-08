@@ -22,7 +22,7 @@ public class MailAop {
 	private HttpServletRequest request;
 	@Autowired
 	private MailDao mailDao;
-	@Before("execution(* com.sumware.mvc.model.Ma*.*(..))")
+	@Before("execution(* com.sumware.mvc.controller.Ma*.*(..))")
 	public void mail(){
 		MemberVO mvo = (MemberVO) session.getAttribute("v");
 		HashMap<String, String> map = new HashMap<String, String>();

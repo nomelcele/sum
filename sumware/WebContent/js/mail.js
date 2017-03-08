@@ -182,12 +182,13 @@ function sendKeyword() {
 	if (key == '' || key == '  ') {
 		// 3-1) 빈 값이나 공백이 있을 경우
 		lastKey = '';
-		// name이 view인 div를 보이지 않게 한다.
-		// key값을 가지고 xml 파일에 있는 데이터를 검색한 후
-		// 검색한 데이터들을 view에 나타나게 한다.
+		// name이 view인 div(자동 완성 영역)를 보이지 않게 한다.
+		// 입력 값이 없으므로 표시할 것이 없기 때문
 		document.getElementById("view").style.display = "none";
 	} else if (key != lastKey) {
 		// 3-2) 사용자가 입력한 값이 있을 경우
+		// key값을 가지고 xml 파일에 있는 데이터를 검색한 후
+		// 검색한 데이터들을 view에 나타나게 한다.
 		lastKey = key;
 		// 파라미터로 사용자가 입력한 문자열을 보낸다.
 		var param = "key=" + key;

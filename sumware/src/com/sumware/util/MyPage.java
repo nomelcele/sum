@@ -36,7 +36,7 @@ public class MyPage {
 		}else{
 			currentBlock = currentPage / pagesPerBlock + 1;
 		}
-		//현재 블록과 페이지를 구한 다음 시작페잊와 마지막페이지 : 한블록 안에 한페이지당
+		//현재 블록과 페이지를 구한 다음 시작페이지와 마지막페이지 : 한블록 안에 한페이지당
 		//보여질 첫번째 행과 마지막 행
 		int startRow = (currentPage - 1) * rowsPerPage + 1;
 		int endRow = currentPage * rowsPerPage;

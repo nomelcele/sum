@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +24,7 @@ import com.sumware.mvc.service.ServiceInter;
 import com.sumware.util.SearchMem;
 
 @Controller
-public class MessengerModel{
+public class MessengerController{
 	@Autowired
 	private MessengerDao medao;
 	

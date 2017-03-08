@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +21,7 @@ import com.sumware.mvc.dao.SnsDao;
 import com.sumware.util.MyMap;
 import com.sumware.util.MyPage;
 @Controller
-public class SnsModel{
+public class SnsController{
 	@Autowired
 	SnsDao dao;
 	@RequestMapping(value="/sasnsForm")

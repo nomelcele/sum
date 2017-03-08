@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +34,7 @@ import com.sumware.util.MyPage;
 import com.sumware.util.Suggest;
 
 @Controller
-public class MailModel{
+public class MailController{
 	@Autowired
 	private MailDao mdao;
 	@Autowired
@@ -58,10 +58,13 @@ public class MailModel{
 	@RequestMapping(value="/samailWrite",method=RequestMethod.POST)
 	public ModelAndView mailWrite(@Valid @ModelAttribute("writeForm") ValidMailVO vmavo,BindingResult result ,@RequestParam HashMap<String, String> map,
 			@RequestParam("mailfile")MultipartFile mailfile,HttpSession session){
-		
-//		System.out.println("Mail Controller: mailWrite");
+		// 메일 작성 form에서 전송 버튼을 클릭하면 이 메서드에서 요청을 처리한다.
+		// vmavo에는 form에서 입력했던 받는 사람과 제목의 데이터가 들어간다.
+		// @Valid 어노테이션이 붙어 있기 때문에, vmavo는 유효성 검사의 대상이 된다.
 		ModelAndView mav = new ModelAndView();
 		if(result.hasErrors()){
+			// 유효성 검사에서 에러가 발생할 경우
+			// 메일을 전송하지 않고 다시 작성 form으로 돌아가서 에러 메시지를 보여준다.
 			System.out.println("에러다");
 			mav.setViewName("mail.mailWrite");
 		}else{
@@ -146,10 +149,13 @@ public class MailModel{
 //		System.out.println("Mail Controller: mailFromList");
 		
 		ModelAndView mav = new ModelAndView();
+		// 메뉴에서 메일을 클릭했을 때 처음 진입하는 페이지가 받은 메일함
 		String first = (String) session.getAttribute("first");
 		if(first.equals("1")){
+			// 가입 후 회원 정보 입력을 하지 않은 경우, 회원 정보 입력 폼으로 이동
 			mav.setViewName("safirstLoginForm");
 		}else if(first.equals("0")){
+			// 퇴사한 사원의 경우 메일 서비스를 이용할 수 없음
 			session.invalidate();
 			mav.setViewName("home");
 		}else{
@@ -165,6 +171,7 @@ public class MailModel{
 			System.out.println("받은 메일함 메일 갯수: "+totalCount);
 			
 			// 페이지 정보를 가져오기 위한 map
+			// 한 페이지당 항목 15개, 5페이지씩 표시
 			Map<String,Integer> pmap = MyPage.getMp().pageProcess(request, 15, 5, 0, totalCount, 0);
 			map.put("begin", pmap.get("begin").toString()); // 시작할 페이지
 			map.put("end", pmap.get("end").toString()); // 마지막 페이지
@@ -172,6 +179,9 @@ public class MailModel{
 			// 받은 메일함에 들어갈 메일 리스트 가져오기
 			List<MailVO> fromlist = mdao.getFromMailList(map);
 			mav.addObject("list", fromlist);
+			// tofrom: 현재 페이지가 어떤 메일함인지, 메일함의 유형 표시
+			// 받은 메일함/보낸 메일함/.. 모두 한 JSP를 활용해서 view 페이지를 표시하기 때문에
+			// 메일함의 유형을 알고 있어야 view 페이지에서 페이지 전환을 할 때 적절한 요청을 보낼 수 있음
 			mav.addObject("tofrom", 1);
 			mav.setViewName("mail.mailList");
 			session.setAttribute("model", "mail");

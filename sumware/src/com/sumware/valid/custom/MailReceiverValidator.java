@@ -9,7 +9,8 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.stereotype.Component;
 @Component
 public class MailReceiverValidator implements ConstraintValidator<MailReceiver, String>{
-
+	// 유효성 검사를 실시하는 Validator 클래스
+	
 	@Override
 	public void initialize(MailReceiver constraintAnnotation) {
 	}

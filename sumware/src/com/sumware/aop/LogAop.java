@@ -34,7 +34,7 @@ public class LogAop {
 		logDao.inLog(memnum);
 		}
 	}
-	@Before("execution(* com.sumware.mvc.model.Lo*.logout(..))")
+	@Before("execution(* com.sumware.mvc.controller.Lo*.logout(..))")
 	public void outLog(JoinPoint jp){
 //		System.out.println("로그아웃 기록을 남기자~");
 		MemberVO mv = (MemberVO) session.getAttribute("v");

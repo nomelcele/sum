@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.security.Principal;
 import java.sql.SQLException;
@@ -24,7 +24,7 @@ import com.sumware.util.SendEmail;
 
 
 @Controller
-public class LoginModel{
+public class LoginController{
 	@Autowired
 	private LoginDao ldao;
 	@Autowired

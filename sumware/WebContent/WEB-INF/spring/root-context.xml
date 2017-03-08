@@ -47,7 +47,7 @@
 	
 	<!-- security(E) -->
 	
-	<!-- javascript, jQuery, css, image등을 사용하겟다. -->
+	<!-- 해당 패키지에 속한 클래스 중 어노테이션(Controller, Service, Repository, Component)이 붙은 클래스를 빈으로 등록 -->
 	<context:component-scan base-package="com.sumware.aop"/>
 	<context:component-scan base-package="com.sumware.mvc" />
 	<!-- valid -->

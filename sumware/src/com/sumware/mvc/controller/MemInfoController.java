@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import com.sumware.mvc.dao.AdminDao;
 import com.sumware.mvc.dao.MemberDao;
 
 @Controller
-public class MemInfoModel {
+public class MemInfoController {
 
 	@Autowired
 	private MemberDao mdao;

@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import com.sumware.mvc.dao.ProductDao;
 import com.sumware.util.MyPage;
 
 @Controller
-public class ProductModel {
+public class ProductController {
 	
 	@Autowired
 	private ProductDao pdao;

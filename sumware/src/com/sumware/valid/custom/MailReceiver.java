@@ -11,7 +11,7 @@ import javax.validation.Payload;
 import org.hibernate.validator.constraints.CompositionType;
 import org.hibernate.validator.constraints.ConstraintComposition;
 
-// 유효성 검사에 이용할 custom constraint 정의
+// 유효성 검사에 이용할 custom constraint(제약 조건) 정의
 
 // @ConstraintComposition: 제약 조건들의 type 지정
 // => AND: 모든 제약 조건들이 true를 반환해야 유효성 검사 통과
@@ -26,7 +26,8 @@ import org.hibernate.validator.constraints.ConstraintComposition;
 @Constraint(validatedBy = MailReceiverValidator.class)
 public @interface MailReceiver {
 	 // 1. message: 유효성 검사에서 오류가 발생했을 경우 보여질 메시지 정의
-     // msg.properties 파일에 정의되어 있다.
+     // msg.properties 파일에 정의되어 있다(유니코드).
+	 // msg.properties 파일은 bean으로 등록되어 있다.
 	 public abstract String message() default "{MailReceiver.message}";
 	 // 2. groups: 제약 조건의 그룹 정보를 정의하는 데에 사용
 	 // 일부 제약 조건에 대해 동일한 그룹을 부여할 경우, 특정 그룹에 대해서만 유효성 검사를 실시할 수 있다.

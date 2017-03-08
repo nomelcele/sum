@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +18,7 @@ import com.sumware.mvc.dao.MailDao;
 import com.sumware.mvc.dao.TodoDao;
 import com.sumware.mvc.service.ServiceInter;
 @Controller
-public class IndexModel{
+public class IndexController{
 	@Autowired
 	private MailDao mdao;
 	@Autowired

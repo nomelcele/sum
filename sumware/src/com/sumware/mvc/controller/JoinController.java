@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,7 +20,7 @@ import com.sumware.util.MakeXML;
 
 
 @Controller
-public class JoinModel{
+public class JoinController{
 	
 	@Autowired
 	private MemberDao mdao;

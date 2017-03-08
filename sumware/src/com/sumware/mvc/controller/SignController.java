@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +27,7 @@ import com.sumware.mvc.service.ServiceInter;
 import com.sumware.util.MyPage;
 
 @Controller
-public class SignModel {
+public class SignController {
 	@Autowired
 	private SignDao sgdao;
 	@Autowired

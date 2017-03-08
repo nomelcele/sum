@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +20,7 @@ import com.sumware.mvc.dao.CalendarDAO;
 
 
 @Controller
-public class CalendarModel{
+public class CalendarController{
 	
 	@Autowired
 	CalendarDAO dao;

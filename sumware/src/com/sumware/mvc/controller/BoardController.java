@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +24,7 @@ import com.sumware.mvc.dao.BoardDao;
 import com.sumware.util.MyPage;
 
 @Controller
-public class BoardModel {
+public class BoardController {
 	@Autowired
 	private BoardDao dao;
 	private int page;

@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +31,7 @@ import com.sumware.util.MyPage;
 import com.sumware.util.SendEmail;
 
 @Controller
-public class AdminModel {
+public class AdminController {
 
 	@Autowired
 	private AdminDao adao;

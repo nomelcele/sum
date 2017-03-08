@@ -1,4 +1,4 @@
-package com.sumware.mvc.model;
+package com.sumware.mvc.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,7 @@ import com.sumware.mvc.dao.ConferenceDao;
 import com.sumware.util.MyPage;
 
 @Controller
-public class ConferenceModel {
+public class ConferenceController {
 	@Autowired
 	private AdminDao adao;
 	@Autowired
