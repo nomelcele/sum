@@ -40,6 +40,8 @@ public class MailController{
 	@Autowired
 	@Qualifier(value="mail")
 	private ServiceInter service;
+	
+	// Before Advice 적용
 
 	// 메일 작성 form 이동
 	@RequestMapping(value="/samailWriteForm",method=RequestMethod.POST)
@@ -49,7 +51,11 @@ public class MailController{
 			@ModelAttribute("mailtitle")String mailtitle,
 			@ModelAttribute("orimail")String oriMail){
 		System.out.println("Mail Controller: mailWriteForm");
+		// 답장 클릭했을 경우: 원래 메일 제목, 원래 메일 내용 표시
+		// 제목: RE: 원래 메일 제목
+		// 메일 내용: -- orginal message --
 		ValidMailVO vmavo = new ValidMailVO();
+		// 메일 제목, 메일 받을 사람 부분에 유효성 검사 할 수 있도록
 		model.addAttribute("writeForm", vmavo);
 		return "mail.mailWrite";
 	}
@@ -72,15 +78,18 @@ public class MailController{
 			String r_path = session.getServletContext().getRealPath("/");
 			String oriFn = mailfile.getOriginalFilename();
 			StringBuffer path = new StringBuffer();
+			// 파일이 업로드될 경로
 			path.append(r_path).append("upload\\").append(oriFn);
 			System.out.println("File Upload Path: "+path.toString());
 			
+			// 새로운 파일 객체 생성
 			File file = new File(path.toString());
 			if(!file.exists()){
 				file.mkdirs();
 			}
 			
 			try {
+				// mailFile의 내용 복사
 				mailfile.transferTo(file);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -88,6 +97,7 @@ public class MailController{
 			
 			// 메일 정보 db에 추가
 			MemberVO mvo = (MemberVO) session.getAttribute("v");
+			// 로그인한 회원 정보
 			int usernum = mvo.getMemnum();
 			String userid = mvo.getMeminmail();
 			
@@ -306,6 +316,7 @@ public class MailController{
 		map.put("usernum", String.valueOf(mvo.getMemnum()));
 		map.put("userid", mvo.getMeminmail());
 		
+		// 트랜잭션 처리
 		service.setDeleteAttrService(mailnums, map);
 		
 		int tofrom = Integer.parseInt(map.get("tofrom"));

@@ -194,7 +194,7 @@ function sendKeyword() {
 		var param = "key=" + key;
 		// alert("key: "+param);
 		// 4) 비동기식으로 요청을 보낸다.
-		// url, 파라미터, 콜백함수, 보낼 방식
+		// 요청명, 파라미터, 콜백함수, 보낼 방식
 		sendRequest("samailSug", param, res, "post");
 	}
 

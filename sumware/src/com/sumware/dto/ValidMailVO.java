@@ -9,6 +9,7 @@ public class ValidMailVO {
 	
 	// @NotEmpty: 해당 값이 비어 있는지를 확인
 	// @MailReceiver: 커스터마이징한 어노테이션
+	// 메일 작성 시 받는 사람: 사원 이름<아이디@sumware.com>
 	@NotEmpty
 	@MailReceiver
 	private String mailreceiver;

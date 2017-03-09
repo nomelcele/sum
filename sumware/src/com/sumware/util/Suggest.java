@@ -25,7 +25,9 @@ public class Suggest {
 		// xml 파일의 경로
 		String path = "C:\\sumware\\project\\ws\\sumware\\WebContent\\resources\\xml\\nameMailList.xml"; 
 		try {
+			// JDOM 라이브러리를 활용하여 XML 파일을 읽어들임
 			doc = sb.build(path);
+			// 최상단에 있는 태그 root
 			root = doc.getRootElement();
 		} catch (Exception e) {
 			e.printStackTrace();
