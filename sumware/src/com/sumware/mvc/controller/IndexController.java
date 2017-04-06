@@ -37,27 +37,25 @@ public class IndexController{
 	//Notification
 	@RequestMapping(value="/satmCount")
 	public void noti(String mailreceiver,int memnum,HttpSession session,HttpServletResponse response) throws IOException{
-//		System.out.println("새로운것이 왔나??");
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("userid", mailreceiver);
 		map.put("usernum",String.valueOf(memnum));
-		//세션이 저장되어있지 않다면 새로 세션을 저장한다.=>처음 로그인시
+		// 세션이 저장되어 있지 않다면 새로 세션을 저장한다. => 처음 로그인 시
 		if(session.getAttribute("mailCount")==null||session.getAttribute("todoCount")==null){
-			session.setAttribute("mailCount", mdao.getListNum(map)[0]);
-			session.setAttribute("todoCount",tdao.getTodoCount(map));
+			session.setAttribute("mailCount", mdao.getListNum(map)[0]); // 받은 메일 개수
+			session.setAttribute("todoCount",tdao.getTodoCount(map)); // 할당된 업무 개수
 		}
 		Integer tCount = (Integer) session.getAttribute("todoCount");
 		Integer mCount = (Integer) session.getAttribute("mailCount");
 		StringBuffer res = new StringBuffer();
 		res.setLength(0);
-		// 메일 또는 todo 에 새로운 업무가 왔을 때 푸쉬를 해주는데 
-		// 그 때 푸쉬 해주는 간격을 설정 해주는 로직.
+		// retry: 메일 또는 todo에 새로운 업무가 왔을 때  푸쉬 해주는 간격을 설정(5초에 한 번씩)
 		res.append("retry:5000\n");
-		// 푸쉬를 받을 때 예약어로 data 가 날아가야 javascript 가 받아줌.
+		// data: 서버가 전달할 데이터
 		res.append("data:");
-		// 처음 저장했던 메일,업무 수와 현재 디비의 입력되어있는 수를 비교하여
-		// 디비의 수가 크다면 res에 't' 또는 'm'을 추가한다.
-		// 그 뒤에 현 세션을 다시 업데이트 시킨다. 
+		// 처음 세션에 저장했던 메일,업무 수와 현재 디비에서 조회한  메일, 업무 수를 비교하여
+		// 디비에 있는 수가 더 크다면(새로운 메일이나 업무가 있다면) res에 't' 또는 'm'을 추가
+		// 그 뒤에 현 세션을 다시 업데이트 
 		if(tCount<tdao.getTodoCount(map)){
 			res.append("t");
 			session.setAttribute("todoCount",tdao.getTodoCount(map));
@@ -69,7 +67,6 @@ public class IndexController{
 			res.append("x");
 		}
 		res.append("\n\n");
-//		System.out.println("으음???~~:"+res.toString());
 		response.setHeader("cache-control", "no-cache");
 		response.setContentType("text/event-stream");
 		PrintWriter pw = response.getWriter();

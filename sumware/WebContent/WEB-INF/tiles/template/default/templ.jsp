@@ -12,13 +12,15 @@
 <title>SumWare</title>
 <!-- CSS 라이브러리(S)  -->
 <spring:url value="resources/css/common.css" var="css" />
-<spring:url value="resources/font-awesome/css/font-awesome.css" var="font" />
-<spring:url value="resources/font-awesome/css/font-awesome.min.css" var="font2" />
+<spring:url value="resources/font-awesome/css/font-awesome.css"
+	var="font" />
+<spring:url value="resources/font-awesome/css/font-awesome.min.css"
+	var="font2" />
 <spring:url value="resources/css/bootstrap.min.css" var="boot" />
-<spring:url value="resources/css/signForm.css" var="sign"/>
-<spring:url value="resources/css/auction.css" var="auction"/>
-<link rel="stylesheet" type="text/css" href="${auction}"/>
-<link rel="stylesheet" type="text/css" href="${sign }"/>
+<spring:url value="resources/css/signForm.css" var="sign" />
+<spring:url value="resources/css/auction.css" var="auction" />
+<link rel="stylesheet" type="text/css" href="${auction}" />
+<link rel="stylesheet" type="text/css" href="${sign }" />
 <link rel="stylesheet" type="text/css" href="${css }" />
 <link rel="stylesheet" type="text/css" href="${font }" />
 <link rel="stylesheet" type="text/css" href="${font2}" />
@@ -119,20 +121,23 @@ $(function(){
 		}
 		// The user needs to allow this
 		console.log("meminmail:::${v.meminmail}");
+		// push를 받을 수 있는 브라우저
 		if (typeof (EventSource) != "undefined") {
-			// push를 받을수 있는 브라우져인지 판단.
+			// EventSource 객체를 생성하면 파라미터로 들어간 URL로 계속 요청이 감
 			eventSourceCount = new EventSource(
 					"satmCount?mailreceiver=${v.meminmail}&memnum=${v.memnum}");
+			// 서버로부터 응답을 받을 경우 실행될 이벤트 리스너 설정
 			eventSourceCount.onmessage = function(event) {
-				var data = event.data;
+				var data = event.data; // 서버에서 data 필드에 담아 전송한 데이터
 				console.log("notification::"+data);
-				if(data=="tx"){
+				if(data=="tx"){ // 새로운 업무가 등록됐을 때
 					console.log("todo");
+					// 알림 띄움
 					Notify("todo","새로운 업무가 등록되었습니다.","safirsttodoForm?model=todo");
-				}else if(data=="m"){
+				}else if(data=="m"){ // 새로 온 메일이 있을 때
 					console.log("mail");
 					Notify("mail","새로운 메일이 도착하였습니다.","samailFromList?model=mail&page=1");
-				}else if(data=="tm"){
+				}else if(data=="tm"){ // 새로운 업무, 메일이 있을 때
 					console.log("todo&mail");
 					Notify("todo","새로운 업무가 등록되었습니다.","safirsttodoForm?model=todo");
 					setTimeout(function(){
@@ -157,10 +162,11 @@ $(function(){
 	
 });
 </script>
-<c:if test="${sessionScope.model eq 'join' || sessionScope.model eq 'memjoin' }">
-<%--우편번호 다음 링크 --%>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
+<c:if
+	test="${sessionScope.model eq 'join' || sessionScope.model eq 'memjoin' }">
+	<%--우편번호 다음 링크 --%>
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script>
 	$(function(){
 		if("${!empty sessionScope.v.memprofile}"=="true"){
 			// 프로필 수정 시 지정해준 사진값(memprofile)이 없으므로 프로필 사진을등록해달라고 함!
@@ -189,12 +195,12 @@ $(function(){
 	});
 	});
 </script>
-<script src="js/member.js"></script>
+	<script src="js/member.js"></script>
 </c:if>
 <c:if test="${sessionScope.model eq 'board' }">
-<spring:url value="resources/css/boardCSS.css" var="boardCss" />
-<link rel="stylesheet" type="text/css" href="${boardCss }" />
-<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+	<spring:url value="resources/css/boardCSS.css" var="boardCss" />
+	<link rel="stylesheet" type="text/css" href="${boardCss }" />
+	<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
 	<script src="js/myckeditor.js"></script>
 	<script type="text/javascript">
 		$(function() {
@@ -308,7 +314,7 @@ $(function(){
 </c:if>
 <!-- Todo - SNS(S) -->
 <c:if test="${sessionScope.model eq 'todo' }">
-<script>
+	<script>
 //push Client 설정 (받는쪽)
 var rowsPerPage = 8; // sns에 쓸 행수
 var eventSource;
